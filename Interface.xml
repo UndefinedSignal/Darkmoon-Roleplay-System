@@ -1,0 +1,1154 @@
+ 
+<Ui
+    xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Script file="Scroller.lua"/>
+    <Frame name="RPS_MainFrame" inherits="RPS_FrameTemplate" movable="true" hidden="true">
+        <Anchors>
+            <Anchor point="CENTER" x="-400" y="0"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                <!--Interface\BankFrame\Bank-Background-->
+                <!--Interface\Collections\CollectionsBackgroundTile-->
+                <!--Interface\GuildBankFrame\GuildVaultBG-->
+                <Texture file="Interface\BlackMarket\BlackMarketBackground-Tile">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" x="-5" y="-3"/>
+                        <Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+                        <Anchor point="LEFT" x="5" y="0"/>
+                    </Anchors>
+                </Texture>
+
+            </Layer>
+            <Layer level="ARTWORK">
+                <Texture file="Interface\AchievementFrame\UI-Achievement-Parchment">
+                    <Size x="195" y="0"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="22" y="-20"/>
+                        <Anchor point="BOTTOMLEFT" x="20" y="23"/>
+                    </Anchors>
+                    <TexCoords left="0" right="0.5" top="0" bottom="1"/>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame name="RPS_MainFrameBackground1">
+                <Size x="175" y="0"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="20" y="-23"/>
+                    <Anchor point="BOTTOM" x="0" y="20"/>
+                </Anchors>
+            </Frame>
+            <!-- RIGHT PART : Place for content -->
+            <Frame name="RPS_MainFramePageContainer">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="-20" y="-20"/>
+                    <Anchor point="BOTTOMRIGHT" x="-20" y="17"/>
+                    <Anchor point="LEFT" x="215" y="0"/>
+                </Anchors>
+                <Frames>
+                    <Frame name="DarkmoonInfoFrame" hidden="false">
+                        <Size x="540" y="455"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
+                        </Anchors>
+
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\Artifacts\ArtifactUIWarlock">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" x="3" y="-2"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-10" y="-2"/>
+
+                                    </Anchors>
+                                    <TexCoords left="0" right="0.7" top="0.10" bottom="0"/>
+                                </Texture>
+                            </Layer>
+
+                            <Layer level="ARTWORK">
+                                <Texture file="Interface\AddOns\RPSDarkmoon\resources\darkmoonmainlogo">
+                                    <Size x="525" y="125"/>
+                                    <Anchors>
+                                        <Anchor point="TOP" x="-2" y="-2"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+
+                        <Frames>
+                            <Frame name="InfoFrameBorders" inherits="RPS_FieldSetFrame">
+                                <Size x="500" y="310"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonInfoFrame" x="20" y="-135" relativePoint="TOPLEFT"/>
+                                </Anchors>
+
+
+                                <Frames>
+        		                    <ScrollFrame name="RPS_DarkmoonInfoFrameScroll" inherits="UIPanelScrollFrameTemplate">
+        		                        <Anchors>
+        		                            <Anchor point="TOPLEFT" x="10" y="-5"/>
+        		                            <Anchor point="BOTTOMRIGHT" x="-25" y="5"/>
+        		                        </Anchors>
+        		                        <ScrollChild>
+        		                            <Frame>
+        		                                <Size x="10" y="10"/>
+        		                                <Frames>
+        		                                    <SimpleHTML name="RPS_DarkmoonInfoFrameContent">
+        		                                    	<Size x="460" y="290"/>
+        		                                        <Anchors>
+        		                                            <Anchor point="TOPLEFT" x="0" y="0"/>
+        		                                        </Anchors>
+        		                                    </SimpleHTML>
+        		                                </Frames>
+        		                            </Frame>
+        		                        </ScrollChild>
+        		                    </ScrollFrame>
+                                </Frames>
+                                <Scripts>
+                                    <OnShow>
+                                        InfoFrameBordersCaptionPanel:Hide()
+                                    </OnShow>
+                                </Scripts>
+                            </Frame>
+                        </Frames>
+                    </Frame>
+                    <Frame name="DarkmoonCharStatsFrame" hidden="true">
+                        <Size x="525" y="450"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="5" y="-5" relativePoint="TOPLEFT"/>
+                        </Anchors>
+
+
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="16"/>
+                        </Backdrop>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="-10" y="-30" />
+                            <Anchor point="TOPRIGHT" x="12" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="-10" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="12" y="2" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\ACHIEVEMENTFRAME\UI-GuildAchievement-Parchment-Horizontal-Desaturated">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-3"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+
+
+                        <Frames>
+                            <Frame name="DarkmoonCharStatsInfo">
+                                <Size x="525" y="450"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonCharStatsFrame" x="50" y="15" relativePoint="TOPLEFT"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                        <!--Interface\BankFrame\Bank-Background-->
+                                        <!--Interface\Collections\CollectionsBackgroundTile-->
+                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                        <FontString name="$parentFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="Свободные очки:" justifyH="LEFT" justifyV="TOP">
+                                            <FontHeight val="15"/>
+                                            <Anchors>
+                                                <Anchor point="CENTER" x="-50" y="-182" />
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="1" y="1" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                    <Frame name="Strength" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-13" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Agility" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-59" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Intellect" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-105" />
+                                        </Anchors>
+                                    </Frame>
+									
+									<Frame name="CriticalChance" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-151" />
+                                        </Anchors>
+                                    </Frame>									
+                                    <Frame name="Spirit" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-197" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Endurance" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-243" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Dexterity" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-289" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Will" inherits="RPS_Skill">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="35" y="-335" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Button name="$parentSubmit" inherits="UIPanelButtonTemplate" text="Выучить">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor point="CENTER" x="-156" y="-210"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentReset" inherits="UIPanelButtonTemplate" text="Сброс">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor point="CENTER" x="-50" y="-210"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentUnlearn" inherits="UIPanelButtonTemplate" text="Разучить">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor point="CENTER" x="56" y="-210"/>
+                                        </Anchors>
+                                    </Button>
+
+                                    -- Tab buttons
+
+                                    <Button name="RPS_STATSBTN1" inherits="RPS_TabBar_Tab" text="Информация" hidden="true">
+                                        <Size x="128" y="24"/>
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="-53" y="7"/> -- *1.1
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnClick>
+                                                ---
+                                          </OnClick>
+                                        </Scripts>
+                                    </Button>
+
+                                    <Button name="RPS_STATSBTN2" inherits="RPS_TabBar_Tab" text="Улучшение" hidden="true">
+                                        <Size x="128" y="24"/>
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="62" y="7"/> -- *1.1
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnClick>
+                                                ---
+                                          </OnClick>
+                                        </Scripts>
+                                    </Button>
+
+                                </Frames>
+                            </Frame>
+                        </Frames>
+                    </Frame>
+                    <Frame name="DarkmoonRulesFrame" inherits="RPS_InnerFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Frames>
+		                    <ScrollFrame name="RPS_RulesScroll" inherits="UIPanelScrollFrameTemplate">
+		                        <Anchors>
+		                            <Anchor point="TOPLEFT" x="15" y="-5"/>
+		                            <Anchor point="BOTTOMRIGHT" x="-22" y="0"/>
+		                        </Anchors>
+		                        <ScrollChild>
+		                            <Frame>
+		                                <Size x="10" y="10"/>
+		                                <Frames>
+		                                    <SimpleHTML name="RPS_RulesScrollContent">
+		                                    	<Size x="480" y="430"/>
+		                                        <Anchors>
+		                                            <Anchor point="TOPLEFT" x="0" y="-5"/>
+		                                        </Anchors>
+		                                    </SimpleHTML>
+		                                </Frames>
+		                            </Frame>
+		                        </ScrollChild>
+		                    </ScrollFrame>
+                        </Frames>
+                    </Frame>
+                    <Frame name="DarkmoonFightSystemFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Frames>
+                            <Frame name="DarkmoonFightSystemBackground" inherits="RPS_InnerFrame">
+                                <Size x="500" y="406"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonFightSystemFrame" x="0" y="-24" relativePoint="TOPLEFT"/>
+                                </Anchors>
+                            </Frame>
+
+		                    <ScrollFrame name="RPS_DashboardBottomScroll" inherits="UIPanelScrollFrameTemplate">
+		                        <Anchors>
+		                            <Anchor point="TOPLEFT" x="10" y="-30"/>
+		                            <Anchor point="BOTTOMRIGHT" x="-22" y="3"/>
+		                        </Anchors>
+		                        <ScrollChild>
+		                            <Frame>
+		                                <Size x="10" y="10"/>
+		                                <Frames>
+		                                    <SimpleHTML name="RPS_DashboardBottomContent">
+		                                    	<Size x="470" y="430"/>
+		                                        <Anchors>
+		                                            <Anchor point="TOPLEFT" x="0" y="-5"/>
+		                                        </Anchors>
+		                                    </SimpleHTML>
+		                                </Frames>
+		                            </Frame>
+		                        </ScrollChild>
+		                    </ScrollFrame>
+
+                            <Button name="RPS_FSBTN1" inherits="TabButtonTemplate" text="Мера силы">
+					        --
+                                <Size x="158" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonFightSystemFrame" relativePoint="TOPLEFT" x="0" y="0"/> -- *1.1
+					        
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+    					        		RPSCoreFramework:OnClickCosmeticTabs(self);
+    									RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
+					        	  </OnClick>
+                                </Scripts>
+                            </Button>
+                            <Button name="RPS_FSBTN2" inherits="TabButtonTemplate" text="Система боя">
+					        --
+                                <Size x="158" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonFightSystemFrame" relativePoint="TOPLEFT" x="88" y="0"/> -- *1.1
+					        
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+						        		RPSCoreFramework:OnClickCosmeticTabs(self);
+						        		RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.BattleSystem);
+						        		RPS_DashboardBottomContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
+										RPS_DashboardBottomContent:SetFontObject("p", GameFontNormal);
+										RPS_DashboardBottomContent:SetFontObject("h1", GameFontNormalHuge3);
+										RPS_DashboardBottomContent:SetFontObject("h2", GameFontNormalHuge);
+										RPS_DashboardBottomContent:SetFontObject("h3", GameFontNormalLarge);
+					        		</OnClick>
+                                </Scripts>
+                            </Button>
+                            <Button name="RPS_FSBTN3" inherits="TabButtonTemplate" text="Воскрешение">
+					        --
+                                <Size x="158" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonFightSystemFrame" relativePoint="TOPLEFT" x="183" y="0"/> -- *1.1
+					        
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+						        		RPSCoreFramework:OnClickCosmeticTabs(self);
+						        		RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharRessurection);
+					        		</OnClick>
+                                </Scripts>
+                            </Button>
+                            <Button name="RPS_FSBTN4" inherits="TabButtonTemplate" text="Сброс характеристик">
+					        --
+                                <Size x="158" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonFightSystemFrame" relativePoint="TOPLEFT" x="285" y="0"/> -- *1.1
+					        
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+						        		RPSCoreFramework:OnClickCosmeticTabs(self);
+						        		RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.StatsDrop);
+					        		</OnClick>
+                                </Scripts>
+                            </Button>
+                        </Frames>
+                    </Frame>
+                    <Frame name="DarkmoonCharacterFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
+                        </Anchors>
+
+                        <Frames>
+                            <Frame name="DrakmoonCharacterFrameMain" inherits="RPS_InnerFrame">
+                                <Size x="350" y="375" />
+                                <Anchors>
+                                    <Anchor point="CENTER" x="0" y="0"/>
+                                </Anchors>
+
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                        <!--Interface\BankFrame\Bank-Background-->
+                                        <!--Interface\Collections\CollectionsBackgroundTile-->
+                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                        <Texture name="DarkmoonCharacterBackground" horizTile="true" vertTile="true">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="0" y="0"/>
+                                                <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+
+                                <Frames>
+                                    <Slider name="RPS_CharScaleSlider" inherits="OptionsSliderTemplate">
+                                        <Size x="20" y="350"/>
+                                        <Anchors>
+                                             <Anchor point="TOPLEFT" x="-35" y="-14"/>
+                                        </Anchors>
+
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="ScaleLarge" font="Fonts\FRIZQT___CYR.TTF" text="Огромный" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-70" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleHigh" font="Fonts\FRIZQT___CYR.TTF" text="Высокий" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-130" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleNormal" font="Fonts\FRIZQT___CYR.TTF" text="Нормальный" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-226" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleTall" font="Fonts\FRIZQT___CYR.TTF" text="Невысокий" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-324" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleSmall" font="Fonts\FRIZQT___CYR.TTF" text="Низкий" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-386" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                if RPSCoreFramework.MyScale == -1 then
+                                                    self:Disable()
+                                                end
+                                            </OnShow>
+                                        </Scripts>
+                                    </Slider>
+
+                                    <PlayerModel name="DarkmoonPlayerModel" inherits="ModelWithControlsTemplate">
+                                        <Size x="150" y="60"/>
+                                        <Scripts>
+                                            <OnEnter>
+                                                self:SetAnimation(66)
+                                            </OnEnter>
+                                            <OnLeave>
+                                                self:SetAnimation(0)
+                                            </OnLeave>
+                                            <OnShow>
+                                                DarkmoonPlayerModel:SetUnit("player")
+                                                DarkmoonPlayerModel:SetAllPoints()
+                                            </OnShow>
+                                            <OnMouseUp>
+                                                self.onMouseUpFunc(self, button);
+                                            </OnMouseUp>
+                                            <OnMouseDown>
+                                                Model_OnMouseDown(self, button);
+                                            </OnMouseDown>
+                                            <OnMouseWheel function="nil"/>
+                                        </Scripts>
+                                    </PlayerModel>
+
+                                    <Button name="RPS_BTNAcceptScale" inherits="UIPanelButtonTemplate" text=" ">
+                                        <Size x="114" y="28"/>
+                                        <Anchors>
+                                            <Anchor relativeTo="DarkmoonCharacterFrame" relativePoint="CENTER" x="-102" y="-150"/>
+                                        </Anchors>
+                                        <NormalFont style="GameFontNormal"/>
+
+                                        <Scripts>
+                                            <OnLoad>
+                                                self:SetFrameStrata("DIALOG")
+                                                self:SetText("Применить")
+                                            </OnLoad>
+
+                                            <OnShow>
+                                                RPSCoreFramework:UpdateScaleApplyButton()
+                                            </OnShow>
+
+                                            <OnClick>
+                                                -- hookskript
+                                            </OnClick>
+                                        </Scripts>
+                                    </Button>
+
+                                    <Button name="RPS_BTNReScale" inherits="UIPanelButtonTemplate" text=" ">
+                                        <Size x="122" y="28"/>
+                                        <Anchors>
+                                            <Anchor relativeTo="DarkmoonCharacterFrame" relativePoint="CENTER" x="15" y="-150"/>
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnLoad>
+                                                self:SetFrameStrata("DIALOG")
+                                                self:SetText("Сброс "..GetCoinTextureString(500000))
+                                            </OnLoad>
+
+                                            <OnShow>
+                                                RPSCoreFramework:UpdateScaleReset()
+                                            </OnShow>
+
+                                            <OnClick>
+                                                -- hookskript
+                                            </OnClick>
+                                        </Scripts>
+                                    </Button>
+
+                                </Frames>
+                            </Frame>
+
+                            <Frame name="DrakmoonCharacterFrameSettings" inherits="RPS_InnerFrame" hidden="true">
+                                <Size x="350" y="375" />
+                                <Anchors>
+                                    <Anchor point="CENTER" x="0" y="0"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="SettingsBackground" file="Interface\Artifacts\ArtifactUIPriestShadow">
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT" x="-2" y="-4"/>
+                                                <Anchor point="BOTTOMRIGHT" x="-2" y="4"/>
+                                                <Anchor point="LEFT" x="2" y="0"/>
+                                            </Anchors>
+                                            <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+
+                                <Frames>
+                                    <CheckButton name="RPS_RTXCheckBox" inherits="OptionsCheckButtonTemplate" checked="true">
+                                        <Anchors>
+                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-125"/> -- *1.1
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="RTX_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Darkmoon RTX " justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_RTXCheckBox" x="-90" y="-8" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                            <Layer>
+                                                <FontString name="RTX_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(В разработке)" justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_RTXCheckBox" x="25" y="-7" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnLoad>
+                                                self:Disable()
+                                            </OnLoad>
+                                        </Scripts>
+                                    </CheckButton>
+
+                                    <CheckButton name="RPS_ACTIONCAMCheckBox" inherits="OptionsCheckButtonTemplate">
+                                        <Anchors>
+                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-165"/> -- *1.1
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Action Camera " justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_ACTIONCAMCheckBox" x="-90" y="-5" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(Disabled)" justifyH="CENTER" justifyV="TOP" hidden="true">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_ACTIONCAMCheckBox" x="25" y="-7" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                if RPSCoreActionCam then
+                                                    RPS_ACTIONCAMCheckBox:SetChecked(true)
+                                                    SetCVar("test_cameraDynamicPitch", 1)
+                                                    SetCVar("test_cameraOverShoulder", 1)
+                                                else
+                                                    RPS_ACTIONCAMCheckBox:SetChecked(false)
+                                                    SetCVar("test_cameraDynamicPitch", 0)
+                                                    SetCVar("test_cameraOverShoulder", 0)
+                                                end
+                                            </OnShow>
+                                            <OnClick>
+                                                if self:GetChecked() then
+                                                    RPSCoreActionCam = true
+                                                    SetCVar("test_cameraDynamicPitch", 1)
+                                                    SetCVar("test_cameraOverShoulder", 1)
+                                                else
+                                                    RPSCoreActionCam = false
+                                                    SetCVar("test_cameraDynamicPitch", 0)
+                                                    SetCVar("test_cameraOverShoulder", 0)
+                                                end
+                                            </OnClick>
+                                        </Scripts>
+                                    </CheckButton>
+
+                                    <Button name="RPS_BARBERSHOPBUTTON" inherits="GameMenuButtonTemplate" text="Парикмахерская">
+                                        <Size x="120" y="34"/>
+                                        <Anchors>
+                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="CENTER" x="-60" y="-50"/> -- *1.1
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnClick>
+                                                SendAddonMessage(".rps act barber", "WHISPER", UnitName("player"))
+                                                PlaySound(624, "SFX")
+                                            </OnClick>
+                                        </Scripts>
+                                        <Frames>
+                                            <SimpleHTML name="RPS_DarkmoonBARBERSHOPBUTTONText">
+                                                <Size x="280" y="200"/>
+                                                <Anchors>
+                                                    <Anchor relativeTo="RPS_BARBERSHOPBUTTON" relativePoint="BOTTOM" x="-125" y="-10"/>
+                                                </Anchors>
+                                            </SimpleHTML>
+                                        </Frames>
+                                    </Button>
+                                </Frames>
+                            </Frame>
+
+                            <Button name="RPS_CHRBTN1" inherits="RPS_TabBar_Tab" text="Рост">
+                                <Size x="100" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-98" y="24"/> -- *1.1
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        DrakmoonCharacterFrameMain:Show()
+                                        DrakmoonCharacterFrameSettings:Hide()
+                                        self:LockHighlight()
+                                        RPS_CHRBTN2:UnlockHighlight()
+                                        PlaySound(21968, "SFX")
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+
+                            <Button name="RPS_CHRBTN2" inherits="RPS_TabBar_Tab" text="Настройки">
+                                <Size x="108" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-10" y="24"/> -- *1.1
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        DrakmoonCharacterFrameMain:Hide()
+                                        DrakmoonCharacterFrameSettings:Show()
+                                        self:LockHighlight()
+                                        RPS_CHRBTN1:UnlockHighlight()
+                                        PlaySound(21968, "SFX")
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+
+                        </Frames>
+                    </Frame>
+
+                    <Frame name="DarkmoonAurasFrame" hidden="true">
+                        <Size x="500" y="450"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-5" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="-30" />
+                            <Anchor point="TOPRIGHT" x="2" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\ACHIEVEMENTFRAME\UI-Achievement-StatsBackground">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-3"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+
+                            <Layer>
+                                <FontString name="ActiveAuraText" font="Fonts\FRIZQT___CYR.TTF" text="Активных аур: " justifyH="LEFT" justifyV="TOP">
+                                    <Color r="1" g="1" b="1" a="1"/>
+                                    <FontHeight val="18"/>
+                                    <Anchors>
+                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="-12" y="17" />
+                                    </Anchors>
+                                    <Shadow>
+                                        <Offset x="1" y="1" />
+                                        <Color r="0" g="0" b="0"/>
+                                    </Shadow>
+                                </FontString>
+                            </Layer>
+
+                            <Layer>
+                                <FontString name="ActiveAura" font="Fonts\FRIZQT___CYR.TTF" text="0" justifyH="LEFT" justifyV="TOP">
+                                    <Color r="1" g="1" b="1" a="1"/>
+                                    <FontHeight val="18"/>
+                                    <Anchors>
+                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="60" y="15" />
+                                    </Anchors>
+                                    <Shadow>
+                                        <Offset x="1" y="1" />
+                                        <Color r="0" g="0" b="0"/>
+                                    </Shadow>
+                                </FontString>
+                            </Layer>
+
+                            <Layer>
+                                <FontString name="MaxAuraText" font="Fonts\FRIZQT___CYR.TTF" text="(Максимум 3)" justifyH="LEFT" justifyV="TOP">
+                                    <Color r="1" g="1" b="0" a="1"/>
+                                    <FontHeight val="12"/>
+                                    <Anchors>
+                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="120" y="17" />
+                                    </Anchors>
+                                    <Shadow>
+                                        <Offset x="1" y="1" />
+                                        <Color r="0" g="0" b="0"/>
+                                    </Shadow>
+                                </FontString>
+                            </Layer>
+
+
+                        </Layers>
+
+                        <Frames>
+                            <ScrollFrame name="DarkmoonAurasScrollFrame" inherits="FauxScrollFrameTemplate">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" x="18" y="-7"/>
+                                    <Anchor point="BOTTOM" x="-5" y="7"/>
+                                </Anchors>
+                                <Scripts>
+                                    <OnVerticalScroll>
+                                        FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                        FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                    </OnVerticalScroll>
+                                    <OnShow>
+                                        RPSCoreFramework.Interface.Auras.Initialized = true
+                                        RPSCoreFramework:GenerateScrollMenu()
+                                    </OnShow>
+                                </Scripts>
+                            </ScrollFrame>
+                            <Button name="RPS_AuraButton1" inherits="RPS_CampaignButtonTemplate">
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-17"/></Anchors>
+                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 1);</OnClick>
+                                <OnEnter>
+                                    RPSCoreFramework:GenerateTooltipForFrame(RPS_AuraButton1)
+                                </OnEnter>
+                                </Scripts>
+                            </Button>
+                            <Button name="RPS_AuraButton2" inherits="RPS_CampaignButtonTemplate">
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-82"/></Anchors>
+                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 2)</OnClick></Scripts>
+                            </Button>
+                            <Button name="RPS_AuraButton3" inherits="RPS_CampaignButtonTemplate">
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-147"/></Anchors>
+                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 3)</OnClick></Scripts>
+                            </Button>
+                            <Button name="RPS_AuraButton4" inherits="RPS_CampaignButtonTemplate">
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-212"/></Anchors>
+                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 4)</OnClick></Scripts>
+                            </Button>
+                            <Button name="RPS_AuraButton5" inherits="RPS_CampaignButtonTemplate">
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-277"/></Anchors>
+                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 5)</OnClick></Scripts>
+                            </Button>
+                            <Button name="RPS_AuraButton6" inherits="RPS_CampaignButtonTemplate">
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-342"/></Anchors>
+                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 6)</OnClick></Scripts>
+                            </Button>
+                        </Frames>
+                    </Frame>
+
+                    <Frame name="DarkmoonDisplayInfoFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="-30" />
+                            <Anchor point="TOPRIGHT" x="2" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\Artifacts\ArtifactUIRogue">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                    <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                </Texture>
+                            </Layer>
+
+                            <Layer>
+                                <FontString name="DisplayInfoTitle" font="Fonts\FRIZQT___CYR.TTF" text="Display Info" justifyH="CENTER" justifyV="TOP">
+                                    <Color r="1" g="1" b="1" a="1"/>
+                                    <FontHeight val="24"/>
+                                    <Anchors>
+                                        <Anchor point="TOP" relativeTo="DarkmoonDisplayInfoFrame" x="0" y="-40" />
+                                    </Anchors>
+                                    <Shadow>
+                                        <Offset x="1" y="1" />
+                                        <Color r="0" g="0" b="0"/>
+                                    </Shadow>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+                            <SimpleHTML name="RPS_DarkmoonDispFrameContent">
+                                <Size x="460" y="340"/>
+                                <Anchors>
+                                    <Anchor point="TOP" x="0" y="-80"/>
+                                </Anchors>
+                            </SimpleHTML>
+
+                            <Frame name="RPS_TextMacros" inherits="RPS_TextArea">
+                                <Size x="455" y="240"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonDisplayInfoFrame" x="25" y="-130" relativePoint="TOPLEFT"/>
+                                </Anchors>
+                                <Scripts>
+                                    <OnShow>
+                                        local dispstring = ""
+                                        for i=1, #RPSCoreFramework.Display.Scroll do
+                                            if tonumber(RPSCoreFramework.Display.Scroll[i][2]) ~= -1 then
+                                                dispstring = dispstring .. RPSCoreFramework.Display.Scroll[i][1]..RPSCoreFramework.Display.Scroll[i][2].." "..RPSCoreFramework.Display.Scroll[i][3].."|n"
+                                            end
+                                        end
+                                        RPS_TextMacrosScrollText:SetText(tostring(dispstring))
+                                    </OnShow>
+                                </Scripts>
+                            </Frame>
+
+                            <Button name="RPS_DispUpdateButton" inherits="UIPanelButtonTemplate" text="Обновить">
+                                <Size x="114" y="28"/>
+                                <Anchors><Anchor relativeTo="DarkmoonDisplayInfoFrame" point="BOTTOM" x="-70" y="21"/></Anchors>
+                                <NormalFont style="GameFontNormal"/>
+
+                                <Scripts>
+                                    <OnClick>
+                                        SendAddonMessage(".disp list", "WHISPER", UnitName("player"))
+                                        RPS_DispUpdateButton:Disable()
+                                        RPSCoreFramework:ScheduleTimer("ReloadDispList", 2)
+                                        PlaySound(624, "SFX")
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+
+                            <Button inherits="UIPanelButtonTemplate" text="Создать макрос">
+                                <Size x="114" y="28"/>
+                                <Anchors><Anchor relativeTo="DarkmoonDisplayInfoFrame" point="BOTTOM" x="70" y="21"/></Anchors>
+                                <NormalFont style="GameFontNormal"/>
+
+                                <Scripts>
+                                    <OnClick>
+                                        RPSCoreFramework:CreateDispMacro()
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+
+                        </Frames>
+                    </Frame>
+                </Frames>
+            </Frame>
+            <!-- LEFT PART : Menu -->
+            <ScrollFrame name="RPS_MainFrameMenuScroll" inherits="UIPanelScrollFrameTemplate">
+                <Size x="175" y="0"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="20" y="-23"/>
+                    <Anchor point="BOTTOM" x="0" y="20"/>
+                </Anchors>
+                <ScrollChild>
+                    <Frame name="RPS_MainFrameMenuContainer">
+                        <Size x="195" y="10"/>
+                    </Frame>
+                </ScrollChild>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture file="Interface\AddOns\RPSDarkmoon\resources\logo2">
+                            <Size x="150" y="42"/>
+                            <Anchors>
+                                <Anchor point="TOP" x="5" y="-5"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Frames>
+                    <Button name="RPS_DarkmoonInfo" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-50"/>
+                        </Anchors>
+                        <NormalFont style="GameFontNormal"/>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Информация">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+			        		RPSCoreFramework:OnClickCosmetic(self)
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonInfoFrame)
+			        	</OnClick>
+                        </Scripts>
+                    </Button>
+                    <Button name="RPS_RulesInfo" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-76"/> -- *1.1
+			        
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Правила">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+			        		RPSCoreFramework:OnClickCosmetic(self)
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonRulesFrame)
+			        	</OnClick>
+                        </Scripts>
+                    </Button>
+                    <Button name="RPS_BattleSystemInfo" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-102"/> -- *1.1
+			        
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Система боя">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+			        		RPSCoreFramework:OnClickCosmetic(self)
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonFightSystemFrame)
+			        	</OnClick>
+                        </Scripts>
+                    </Button>
+                    <Button name="RPS_StatsInfo" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-158"/> -- *1.1
+			        
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Характеристики">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+			        		RPSCoreFramework:OnClickCosmetic(self)
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharStatsFrame)
+			        	</OnClick>
+                        </Scripts>
+                    </Button>
+                    <Button name="RPS_ScaleInfo" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-184"/> -- *1.1
+			        
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Персонаж">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+				        		RPSCoreFramework:OnClickCosmetic(self)
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharacterFrame)	    						
+			        		</OnClick>
+                        </Scripts>
+                    </Button>
+                    <Button name="RPS_AurasInfo" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-210"/> -- *1.1
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Ауры">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+                                RPSCoreFramework.Interface.Auras.Initialized = true
+				        		RPSCoreFramework:OnClickCosmetic(self)
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonAurasFrame)
+			        		</OnClick>
+                        </Scripts>
+                    </Button>
+
+                    <Button name="RPS_DisplayInfo" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-236"/> -- *1.1
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Display">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+                                RPSCoreFramework:OnClickCosmetic(self)
+                                RPSCoreFramework:OnClickFrameShowing(DarkmoonDisplayInfoFrame)
+                            </OnClick>
+                        </Scripts>
+                    </Button>
+                </Frames>
+            </ScrollFrame>
+        </Frames>
+    </Frame>
+</Ui>

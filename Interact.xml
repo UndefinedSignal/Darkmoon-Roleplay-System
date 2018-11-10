@@ -1,0 +1,185 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+	<Frame name="RPS_InteractFrameTemplate" toplevel="true" parent="UIParent" frameStrata="MEDIUM" enableMouse="true" clampedToScreen="true" virtual="true">
+		<Size x="416" y="112"/>
+		<Backdrop edgeFile="Interface\AchievementFrame\UI-Achievement-WoodBorder" tile="true">
+			<EdgeSize>
+				<AbsValue val="64"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="5" right="5" top="5" bottom="5"/>
+			</BackgroundInsets>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Left">
+					<Size x="16" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="14" y="0"/>
+						<Anchor point="BOTTOMLEFT" x="14" y="10"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom=".87"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Left">
+					<Size x="16" y="0"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="-13" y="-10"/>
+						<Anchor point="BOTTOMRIGHT" x="-13" y="10"/>
+					</Anchors>
+					<TexCoords left="1" right="0" top=".87" bottom="0"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Top">
+					<Size x="450" y="16"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="28" y="13"/>
+						<Anchor point="BOTTOMRIGHT" x="-28" y="13"/>
+					</Anchors>
+					<TexCoords left="0" right=".87" top="1.0" bottom="0"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Top">
+					<Size x="450" y="16"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="28" y="-12"/>
+						<Anchor point="TOPRIGHT" x="-28" y="-12"/>
+					</Anchors>
+					<TexCoords left=".87" right="0" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="1">
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="9" y="-7"/>
+					</Anchors>
+					<TexCoords left="1" right="0" top="1" bottom="0"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="-8" y="-7"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="1" bottom="0"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="9" y="8"/>
+					</Anchors>
+					<TexCoords left="1" right="0" top="0" bottom="1"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+					<Size x="32" y="32"/>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="-8" y="8"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="1"/>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+					<Size x="64" y="64"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="4" y="-2"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="0" bottom="1"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+					<Size x="64" y="64"/>
+					<Anchors>
+						<Anchor point="TOPRIGHT" x="-4" y="-2"/>
+					</Anchors>
+					<TexCoords left="1" right="0" top="0" bottom="1"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+					<Size x="64" y="64"/>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" x="4" y="3"/>
+					</Anchors>
+					<TexCoords left="0" right="1" top="1" bottom="0"/>
+				</Texture>
+				<Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+					<Size x="64" y="64"/>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT" x="-4" y="3"/>
+					</Anchors>
+					<TexCoords left="1" right="0" top="1" bottom="0"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+	
+    <Frame name="RPS_InteractFrame" inherits="RPS_InteractFrameTemplate" hidden="true" movable="true">
+		<Anchors>
+			<Anchor point="BOTTOM" x="0" y="0"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+				<!--Interface\BankFrame\Bank-Background-->
+				<!--Interface\Collections\CollectionsBackgroundTile-->
+				<!--Interface\GuildBankFrame\GuildVaultBG-->
+
+				<Texture file="Interface\Collections\CollectionsBackgroundTile" horizTile="true" vertTile="true">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="16" y="-16"/>
+						<Anchor point="BOTTOMRIGHT" x="-16" y="16"/>
+					</Anchors>
+				</Texture>	
+			<FontString name="$parentInteractText" font="Fonts\FRIZQT___CYR.TTF" text="Выберите действие" justifyH="LEFT" justifyV="TOP">
+				<FontHeight val="14"/>
+				<Anchors>
+					<Anchor point="CENTER" x="0" y="20" />
+				</Anchors>
+				<Shadow>
+					<Offset x="1" y="1" />
+					<Color r="0" g="0" b="0"/>
+				</Shadow>
+			</FontString>			
+			</Layer>
+		</Layers>
+
+		<Frames>
+			<PlayerModel name="$parentSelfModel">
+				<Size x="64" y="64"/>
+				<Anchors>
+					<Anchor point="CENTER" x="-144" y="8"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetPortraitZoom(1)
+					</OnLoad>
+                </Scripts>
+			</PlayerModel>
+			<PlayerModel name="$parentTargetModel">
+				<Size x="64" y="64"/>
+				<Anchors>
+					<Anchor point="CENTER" x="144" y="8"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetPortraitZoom(1)
+						self:SetRotation(-0.7853981634)
+					</OnLoad>
+                </Scripts>
+			</PlayerModel>
+			
+			<Button name="$parentHelp" inherits="UIPanelButtonTemplate" text="Помочь">
+				 <Size x="72" y="24"/>
+				 <Anchors>
+					<Anchor point="CENTER" x="-54" y="-16"/>
+				 </Anchors>
+			</Button>
+			<Button name="$parentKill" inherits="UIPanelButtonTemplate" text="Добить">
+				 <Size x="72" y="24"/>
+				 <Anchors>
+					<Anchor point="CENTER" x="54" y="-16"/>
+				 </Anchors>
+			</Button>			
+		</Frames>
+	</Frame>
+</Ui>
