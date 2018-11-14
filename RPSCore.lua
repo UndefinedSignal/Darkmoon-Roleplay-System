@@ -1,4 +1,5 @@
 RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0" )
+RegisterAddonMessagePrefix("DRPS");
 RPSCoreFramework.TargetAura = 1000012;
 RPSCoreFramework.TimerID = false;
 RPSCoreFramework.ShowMain = false;

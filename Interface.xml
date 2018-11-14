@@ -697,7 +697,7 @@
                                         </Anchors>
                                         <Scripts>
                                             <OnClick>
-                                                SendAddonMessage(".rps act barber", "WHISPER", UnitName("player"))
+                                                SendAddonMessage("DRPS", ".rps act barber", "WHISPER", UnitName("player"))
                                                 PlaySound(624, "SFX")
                                             </OnClick>
                                         </Scripts>
@@ -939,7 +939,7 @@
 
                                 <Scripts>
                                     <OnClick>
-                                        SendAddonMessage(".disp list", "WHISPER", UnitName("player"))
+                                        SendAddonMessage("DRPS", ".disp list", "WHISPER", UnitName("player"))
                                         RPS_DispUpdateButton:Disable()
                                         RPSCoreFramework:ScheduleTimer("ReloadDispList", 2)
                                         PlaySound(624, "SFX")

@@ -316,15 +316,15 @@ function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 end
 
 function RPSCoreFramework:OneShotUpdater()
-	SendAddonMessage(".disp list", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action scale info", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action aura list active", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".disp list", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".rps action aura list known", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"))
 end
 
 function RPSCoreFramework:PeriodicallyAurasUpdate()
-	SendAddonMessage(".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action aura list active", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".rps action aura list known", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"))
 end
 
 function RPSCoreFramework:GhostClickUpdater()
@@ -382,7 +382,7 @@ function RPSCoreFramework:HideEffectAuraButtons()
 end
 
 function RPSCoreFramework:LearnMyAuras(button, arg1)
-	SendAddonMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
 	_G[button:GetName().."Price"]:Hide()
     _G[button:GetName().."Macros"]:Show()
 	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][4] = 1
@@ -395,7 +395,7 @@ function RPSCoreFramework:MaxToggledAuras(button, arg1)
 		RPSCoreFramework.Interface.Auras[i][5] = 0
 	end
 	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1
-	SendAddonMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
 	RPSCoreFramework:HideEffectAuraButtons()
 	_G[button:GetName().."Completed"]:Show()
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
@@ -437,14 +437,14 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 	local id = RPSCoreFramework.Interface.Auras.Message[arg1][2]
 	if RPSCoreFramework:KnownAura(id) then -- if we know
 		if RPSCoreFramework:UpdateActiveAurasCounter() and RPSCoreFramework:isAuraActive(id) then
-			SendAddonMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+			SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
 			-- TODO counter
 			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter - 1
 			RPSCoreFramework.Interface.Auras[id][5] = 0 -- turn it off
 			_G[button:GetName().."Completed"]:Hide()
 		else
 			if tonumber(RPSCoreFramework.Interface.ActiveAuraCounter) < 3 then
-				SendAddonMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+				SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
 				-- TODO counter
 				RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
 				RPSCoreFramework.Interface.Auras[id][5] = 1 -- turn it on
