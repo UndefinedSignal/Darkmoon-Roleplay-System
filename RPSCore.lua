@@ -6,7 +6,7 @@ RPSCoreFramework.RequestUnlearn = 50000;
 RPSCoreFramework.RequestRescale = 500000;
 RPSCoreFramework.GetLastClickedSlot = "chest";
 RPSCoreFramework.StatsLevel = 40;
-RegisterAddonMessagePrefix("DRPS")
+RegisterAddonMessagePrefix("DRPS");
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -132,12 +132,12 @@ function RPSCoreFramework:UpdateTypingStatus(editbox)
 	if (editbox:IsShown() and text:len() > 0 and firstChar ~= "/" and firstChar ~= "." and firstChar ~= "!" and firstChar ~= "#" and (chatType == "SAY" or chatType == "YELL" or chatType == "EMOTE")) then
 		if not self.isTypingMessage then
 			self.isTypingMessage = true
-			SendAddonMessage("DRPS", ".typing on", "WHISPER", UnitName("player"))
+			SendAddonMessage("DRPS", ".typing on", "WHISPER", UnitName("player"));
 		end
 	else
 		if self.isTypingMessage then
 			self.isTypingMessage = false
-			SendAddonMessage("DRPS", ".typing off", "WHISPER", UnitName("player"))
+			SendAddonMessage("DRPS", ".typing off", "WHISPER", UnitName("player"));
 		end
 	end
 end
@@ -840,10 +840,10 @@ function RPSCoreFramework:OnInitialize()
 
 	-- Disp & Scale
 
-	SendAddonMessage("DRPS", ".disp list", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".disp list", "WHISPER", UnitName("player"));
+	SendAddonMessage("DRPS", ".rps action aura list known", "WHISPER", UnitName("player"));
+	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"));
+	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"));
 
 	-- Minimap icon
 	
@@ -1166,7 +1166,7 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 		end,
 		OnAccept = function (self, data, data2)
 			displayMessage = displayMessage .. self.editBox:GetText()
-			SendAddonMessage("DRPS", displayMessage, "WHISPER", UnitName("player"))
+			SendAddonMessage("DRPS", displayMessage, "WHISPER", UnitName("player"));
 		end,
 	  	OnCancel = function (_,reason)
 	--		Nope
@@ -1182,8 +1182,8 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 end
 
 function RPSCoreFramework:PeriodicallyUpdater()
-	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"))
+	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"));
+	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"));
 	RPSCoreFramework:UpdateScaleReset()
 
 	-- Action Camera
