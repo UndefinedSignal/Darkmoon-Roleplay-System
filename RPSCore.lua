@@ -1,5 +1,4 @@
 RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0" )
-RegisterAddonMessagePrefix("DRPS");
 RPSCoreFramework.TargetAura = 1000012;
 RPSCoreFramework.TimerID = false;
 RPSCoreFramework.ShowMain = false;
@@ -7,6 +6,7 @@ RPSCoreFramework.RequestUnlearn = 50000;
 RPSCoreFramework.RequestRescale = 500000;
 RPSCoreFramework.GetLastClickedSlot = "chest";
 RPSCoreFramework.StatsLevel = 40;
+RegisterAddonMessagePrefix("DRPS")
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -557,7 +557,7 @@ function RPSCoreFramework:SubmitDiff()
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
 	
-	SendAddonMessage("DRPS", ".rps stat self", "WHISPER", UnitName("player"));
+	SendAddonMessage("DRPS", ".rps stat self", "WHISPER", UnitName("player"))
 end
 
 function RPSCoreFramework:UpdateScaleInfo(str)
@@ -565,7 +565,6 @@ function RPSCoreFramework:UpdateScaleInfo(str)
 	RPSCoreFramework.MyScale = tonumber(str)
 	--print(str)
 	RPSCoreFramework:UpdateScaleReset()
-	print("Meme")
 end
 
 function RPSCoreFramework:UpdateAuraKnownInfo(str)
