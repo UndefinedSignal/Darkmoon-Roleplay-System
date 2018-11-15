@@ -311,38 +311,38 @@ end
 
 function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 	if RPSCoreFramework.Interface.Auras.Initialized then
-		RPSCoreFramework:ScrollMenuUpdater()
+		RPSCoreFramework:ScrollMenuUpdater();
 	end
 end
 
 function RPSCoreFramework:OneShotUpdater()
-	SendAddonMessage("DRPS", ".disp list", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"))
+	self:SendCoreMessage(".disp list");
+	self:SendCoreMessage(".rps action scale info");
+	self:SendCoreMessage(".rps action aura list known");
+	self:SendCoreMessage(".rps action aura list active");
 end
 
 function RPSCoreFramework:PeriodicallyAurasUpdate()
-	SendAddonMessage("DRPS", ".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"))
+	self:SendCoreMessage(".rps action aura list known");
+	self:SendCoreMessage(".rps action aura list active");
 end
 
 function RPSCoreFramework:GhostClickUpdater()
-	RPSCoreFramework.Interface.Auras.GhostClick = false
+	RPSCoreFramework.Interface.Auras.GhostClick = false;
 end
 
 function RPSCoreFramework:KnownAura(arg)
 	if RPSCoreFramework.Interface.Auras[arg][4] > 0 then
-		return true
+		return true;
 	end
-	return false
+	return false;
 end
 
 function RPSCoreFramework:isAuraActive(arg)
 	if RPSCoreFramework.Interface.Auras[arg][5] > 0 then
-		return true
+		return true;
 	end
-	return false
+	return false;
 end
 
 function RPSCoreFramework:ThreeTimesUpdate()
@@ -382,10 +382,10 @@ function RPSCoreFramework:HideEffectAuraButtons()
 end
 
 function RPSCoreFramework:LearnMyAuras(button, arg1)
-	SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+	self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 	_G[button:GetName().."Price"]:Hide()
     _G[button:GetName().."Macros"]:Show()
-	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][4] = 1
+	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][4] = 1;
 	RPSCoreFramework.Interface.Auras.Message[arg1][1] = ".rps action aura toggle ".. RPSCoreFramework.Interface.Auras.Message[arg1][2]
 end
 
@@ -394,8 +394,8 @@ function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	for i = 1, #RPSCoreFramework.Interface.Auras do
 		RPSCoreFramework.Interface.Auras[i][5] = 0
 	end
-	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1
-	SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1;
+	self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 	RPSCoreFramework:HideEffectAuraButtons()
 	_G[button:GetName().."Completed"]:Show()
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
@@ -437,14 +437,14 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 	local id = RPSCoreFramework.Interface.Auras.Message[arg1][2]
 	if RPSCoreFramework:KnownAura(id) then -- if we know
 		if RPSCoreFramework:UpdateActiveAurasCounter() and RPSCoreFramework:isAuraActive(id) then
-			SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+			self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 			-- TODO counter
 			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter - 1
 			RPSCoreFramework.Interface.Auras[id][5] = 0 -- turn it off
 			_G[button:GetName().."Completed"]:Hide()
 		else
 			if tonumber(RPSCoreFramework.Interface.ActiveAuraCounter) < 3 then
-				SendAddonMessage("DRPS", RPSCoreFramework.Interface.Auras.Message[arg1][1], "WHISPER", UnitName("player"))
+				self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 				-- TODO counter
 				RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
 				RPSCoreFramework.Interface.Auras[id][5] = 1 -- turn it on

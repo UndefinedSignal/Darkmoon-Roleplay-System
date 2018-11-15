@@ -1,8 +1,5 @@
-if (RPSCoreFramework) then
-	RPSCoreFramework = nil;
-end;
-
 RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0" )
+RegisterAddonMessagePrefix("DRPS");
 RPSCoreFramework.TargetAura = 1000012;
 RPSCoreFramework.TimerID = false;
 RPSCoreFramework.ShowMain = false;
@@ -10,7 +7,6 @@ RPSCoreFramework.RequestUnlearn = 50000;
 RPSCoreFramework.RequestRescale = 500000;
 RPSCoreFramework.GetLastClickedSlot = "chest";
 RPSCoreFramework.StatsLevel = 40;
-RegisterAddonMessagePrefix("DRPS");
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -130,21 +126,25 @@ function RPSCoreFramework:AuraCheckTimer()
 end
 
 function RPSCoreFramework:UpdateTypingStatus(editbox)
-	local chatType = editbox:GetAttribute("chatType")
-	local text = editbox:GetText()
-	local firstChar = text:sub(1, 1)
+	local chatType = editbox:GetAttribute("chatType");
+	local text = editbox:GetText();
+	local firstChar = text:sub(1, 1);
 	if (editbox:IsShown() and text:len() > 0 and firstChar ~= "/" and firstChar ~= "." and firstChar ~= "!" and firstChar ~= "#" and (chatType == "SAY" or chatType == "YELL" or chatType == "EMOTE")) then
 		if not self.isTypingMessage then
-			self.isTypingMessage = true
-			SendAddonMessage("DRPS", ".typing on", "WHISPER", UnitName("player"));
+			self.isTypingMessage = true;
+			self:SendCoreMessage(".typing on");
 		end
 	else
 		if self.isTypingMessage then
-			self.isTypingMessage = false
-			SendAddonMessage("DRPS", ".typing off", "WHISPER", UnitName("player"));
+			self.isTypingMessage = false;
+			self:SendCoreMessage(".typing off");
 		end
 	end
 end
+
+function RPSCoreFramework:SendCoreMessage(msg)
+	SendAddonMessage("DRPS", msg, "WHISPER", UnitName("player"));
+end;
 
 local function switchMainFrame()
 	if RPS_MainFrame:IsVisible() then
@@ -525,28 +525,28 @@ end
 
 function RPSCoreFramework:SubmitDiff()
 	if (self.StatsDiff.Strength>0) then
-		SendAddonMessage("DRPS", ".rps stat submit strength "..self.StatsDiff.Strength, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit strength "..self.StatsDiff.Strength);
 	end
 	if (self.StatsDiff.Agility>0) then
-		SendAddonMessage("DRPS", ".rps stat submit agility "..self.StatsDiff.Agility, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit agility "..self.StatsDiff.Agility);
 	end
 	if (self.StatsDiff.Intellect>0) then
-		SendAddonMessage("DRPS", ".rps stat submit intellect "..self.StatsDiff.Intellect, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit intellect "..self.StatsDiff.Intellect);
 	end
 	if (self.StatsDiff.CriticalChance>0) then
-		SendAddonMessage("DRPS", ".rps stat submit criticalchance "..self.StatsDiff.CriticalChance, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit criticalchance "..self.StatsDiff.CriticalChance);
 	end
 	if (self.StatsDiff.Spirit>0) then
-		SendAddonMessage("DRPS", ".rps stat submit spirit "..self.StatsDiff.Spirit, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit spirit "..self.StatsDiff.Spirit);
 	end
 	if (self.StatsDiff.Endurance>0) then
-		SendAddonMessage("DRPS", ".rps stat submit endurance "..self.StatsDiff.Endurance, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit endurance "..self.StatsDiff.Endurance);
 	end
 	if (self.StatsDiff.Dexterity>0) then
-		SendAddonMessage("DRPS", ".rps stat submit dexterity "..self.StatsDiff.Dexterity, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit dexterity "..self.StatsDiff.Dexterity);
 	end
 	if (self.StatsDiff.Will>0) then
-		SendAddonMessage("DRPS", ".rps stat submit will "..self.StatsDiff.Will, "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat submit will "..self.StatsDiff.Will);
 	end
 	
 	self.StatsDiff.Strength = 0;
@@ -561,7 +561,7 @@ function RPSCoreFramework:SubmitDiff()
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
 	
-	SendAddonMessage("DRPS", ".rps stat self", "WHISPER", UnitName("player"))
+	self:SendCoreMessage(".rps stat self");
 end
 
 function RPSCoreFramework:UpdateScaleInfo(str)
@@ -844,10 +844,10 @@ function RPSCoreFramework:OnInitialize()
 
 	-- Disp & Scale
 
-	SendAddonMessage("DRPS", ".disp list", "WHISPER", UnitName("player"));
-	SendAddonMessage("DRPS", ".rps action aura list known", "WHISPER", UnitName("player"));
-	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"));
-	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"));
+	self:SendCoreMessage(".disp list");
+	self:SendCoreMessage(".rps action aura list known");
+	self:SendCoreMessage(".rps action aura list active");
+	self:SendCoreMessage(".rps action scale info");
 
 	-- Minimap icon
 	
@@ -914,8 +914,8 @@ function RPSCoreFramework:OnInitialize()
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
 	
-	RPS_InteractFrameHelp:SetScript("OnClick", function() SendAddonMessage("DRPS", ".rps action help %t", "WHISPER", UnitName("player")) end);
-	RPS_InteractFrameKill:SetScript("OnClick", function() SendAddonMessage("DRPS", ".rps action kill %t", "WHISPER", UnitName("player")) end);
+	RPS_InteractFrameHelp:SetScript("OnClick", function() self:SendCoreMessage(".rps action help %t") end);
+	RPS_InteractFrameKill:SetScript("OnClick", function() self:SendCoreMessage(".rps action kill %t") end);
 	
 	StrengthMinus:SetScript("OnClick", function() RPSCoreFramework:DecStrength() end);
 	AgilityMinus:SetScript("OnClick", function() RPSCoreFramework:DecAgility() end);
@@ -1026,7 +1026,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете разучить все ваши характеристики? Стоимость: 5 |cff00ff00|TInterface\\MoneyFrame\\UI-GoldIcon:16|t|r",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage("DRPS", ".rps stat reset", "WHISPER", UnitName("player")); end,
+		OnAccept = function() self:SendCoreMessage(".rps stat reset"); end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
@@ -1054,7 +1054,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете сбросить рост?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage("DRPS", ".rps action scale reset", "WHISPER", UnitName("player"));	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable() end,
+		OnAccept = function() self:SendCoreMessage(".rps action scale reset");	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable() end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
@@ -1068,7 +1068,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно уверены в выбранном росте?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage("DRPS", ".rps action scale apply "..RPSCoreFramework.ChoosedScale, "WHISPER", UnitName("player"));	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable() end,
+		OnAccept = function() self:SendCoreMessage(".rps action scale apply "..RPSCoreFramework.ChoosedScale);	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable() end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
@@ -1131,7 +1131,7 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 		text = menuTitle,
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage("DRPS", removeDispSlot, "WHISPER", UnitName("player")) end,
+		OnAccept = function() self:SendCoreMessage(removeDispSlot) end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
@@ -1169,8 +1169,8 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 
 		end,
 		OnAccept = function (self, data, data2)
-			displayMessage = displayMessage .. self.editBox:GetText()
-			SendAddonMessage("DRPS", displayMessage, "WHISPER", UnitName("player"));
+			displayMessage = displayMessage .. self.editBox:GetText();
+			self:SendCoreMessage(displayMessage);
 		end,
 	  	OnCancel = function (_,reason)
 	--		Nope
@@ -1186,19 +1186,19 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 end
 
 function RPSCoreFramework:PeriodicallyUpdater()
-	SendAddonMessage("DRPS", ".rps action scale info", "WHISPER", UnitName("player"));
-	SendAddonMessage("DRPS", ".rps action aura list active", "WHISPER", UnitName("player"));
-	RPSCoreFramework:UpdateScaleReset()
+	self:SendCoreMessage(".rps action scale info");
+	self:SendCoreMessage(".rps action aura list active");
+	RPSCoreFramework:UpdateScaleReset();
 
 	-- Action Camera
     if RPSCoreActionCam then
         RPSCoreActionCam = true
-        SetCVar("test_cameraDynamicPitch", 1)
-        SetCVar("test_cameraOverShoulder", 1)
+        SetCVar("test_cameraDynamicPitch", 1);
+        SetCVar("test_cameraOverShoulder", 1);
     else
         RPSCoreActionCam = false
-        SetCVar("test_cameraDynamicPitch", 0)
-        SetCVar("test_cameraOverShoulder", 0)
+        SetCVar("test_cameraDynamicPitch", 0);
+        SetCVar("test_cameraOverShoulder", 0);
     end
 end
 
@@ -1232,11 +1232,11 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", sysMsg)
 function RPSCoreFramework:OnEventFrame(self, event, ...)
 	if (event == "PLAYER_TARGET_CHANGED") then
 		self.TimerID = self:ScheduleRepeatingTimer("AuraCheckTimer", 0.5)
-		self:UpdatePlayerModel()
-		self:UpdateInteractionFrame()
+		self:UpdatePlayerModel();
+		self:UpdateInteractionFrame();
 	elseif (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LEVEL_UP" or event == "PLAYER_EQUIPMENT_CHANGED") then
-		SendAddonMessage("DRPS", ".rps stat self", "WHISPER", UnitName("player"));
+		self:SendCoreMessage(".rps stat self");
 	elseif (event == "PLAYER_MONEY") then
-		self:UpdateUnlearn()
+		self:UpdateUnlearn();
 	end
 end
