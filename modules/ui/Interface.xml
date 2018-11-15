@@ -351,11 +351,6 @@
                                     <OnClick>
 						        		RPSCoreFramework:OnClickCosmeticTabs(self);
 						        		RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.BattleSystem);
-						        		RPS_DashboardBottomContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
-										RPS_DashboardBottomContent:SetFontObject("p", GameFontNormal);
-										RPS_DashboardBottomContent:SetFontObject("h1", GameFontNormalHuge3);
-										RPS_DashboardBottomContent:SetFontObject("h2", GameFontNormalHuge);
-										RPS_DashboardBottomContent:SetFontObject("h3", GameFontNormalLarge);
 					        		</OnClick>
                                 </Scripts>
                             </Button>
@@ -697,7 +692,7 @@
                                         </Anchors>
                                         <Scripts>
                                             <OnClick>
-                                                SendAddonMessage("DRPS", ".rps act barber", "WHISPER", UnitName("player"))
+                                                SendAddonMessage(RPSCoreFramework.Prefix, ".rps act barber", "WHISPER", UnitName("player"))
                                                 PlaySound(624, "SFX")
                                             </OnClick>
                                         </Scripts>
@@ -939,7 +934,7 @@
 
                                 <Scripts>
                                     <OnClick>
-                                        SendAddonMessage("DRPS", ".disp list", "WHISPER", UnitName("player"))
+                                        SendAddonMessage(RPSCoreFramework.Prefix,".disp list", "WHISPER", UnitName("player"))
                                         RPS_DispUpdateButton:Disable()
                                         RPSCoreFramework:ScheduleTimer("ReloadDispList", 2)
                                         PlaySound(624, "SFX")

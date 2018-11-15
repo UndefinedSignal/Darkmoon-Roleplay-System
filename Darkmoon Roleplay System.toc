@@ -1,7 +1,7 @@
 ## Interface: 70300
-## Title: RPSDarkmoon
+## Title: Darkmoon Roleplay System
 ## Author: TestUnit, -SeMGa!
-## Version: 1.01
+## Version: 1.05
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam
@@ -16,10 +16,22 @@ libs\LibCallbackHandler.lua
 libs\LibDataBroker.lua
 libs\LibDBIcon.lua
 
-RPSCore.lua
+DataSheets.lua
+Literature.lua
 Scroller.lua
-RPSLiterature.lua
-Miscellaneous.lua
-Templates.xml
-Interface.xml
-Interact.xml
+Updater.lua
+Interact.lua
+Interface.lua
+Stats.lua
+Misc.lua
+Init.lua
+Chat.lua
+Hooks.lua
+Macros.lua
+
+
+
+
+modules\ui\Templates.xml
+modules\ui\Interact.xml
+modules\ui\Interface.xml
