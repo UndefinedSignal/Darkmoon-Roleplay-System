@@ -1,3 +1,7 @@
+if (RPSCoreFramework) then
+	RPSCoreFramework = nil;
+end;
+
 RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0" )
 RPSCoreFramework.TargetAura = 1000012;
 RPSCoreFramework.TimerID = false;
