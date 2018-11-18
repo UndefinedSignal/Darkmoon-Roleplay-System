@@ -2,7 +2,7 @@ function RPSCoreFramework:OnEnable()
 	self:ScheduleTimer("OneShotUpdater", 5)
 	self:ScheduleTimer("UpdateScrollerPosition", 7)
 	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5)
-	self:ScheduleRepeatingTimer("PeriodicallyUpdater", 10)
+--	self:ScheduleRepeatingTimer("PeriodicallyUpdater", 10)
 	if (not RPSCoreShouldFirstTime) then
 		RPSCoreFramework:switchMainFrame();
 		RPSCoreShouldFirstTime = true;
@@ -10,6 +10,7 @@ function RPSCoreFramework:OnEnable()
 end
 
 function RPSCoreFramework:OnInitialize()
+	RPSCoreFramework:BadAddonProtection()
 	LoggingChat(1)
 	SetCVar("autoClearAFK", 0)
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
@@ -46,47 +47,9 @@ function RPSCoreFramework:OnInitialize()
 	RPSCoreFramework:EnableDrag(RPS_InteractFrame);
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
 
-	-- Paperdoll disp menu
-
-	RPSCoreFramework:HookScript(_G["CharacterHeadSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "head"
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HEAD)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterShoulderSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shoulder";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_SHOULDER)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterBackSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "back";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_BACK)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterChestSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "chest";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_CHEST)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterShirtSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shirt";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_BODY)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterTabardSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "tabard";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_TABARD)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterWristSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "wrist";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_WRIST)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterHandsSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "hands";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HAND)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterWaistSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "waist";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_WAIST)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterLegsSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "legs";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_LEGS)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterFeetSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "feet";
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_FEET)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterMainHandSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "mainhand"
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_MAINHAND)
-	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterSecondaryHandSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "offhand"
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND)
-	 end end)
+	RPSCoreFramework:PaperdollDispInit()
+	RPSCoreFramework:AddMinimapIcon()
+	RPSCoreFramework:ChangeDefaultWords()
 
 	-- Disp & Scale
 
@@ -95,44 +58,6 @@ function RPSCoreFramework:OnInitialize()
 	SendAddonMessage(RPSCoreFramework.Prefix, ".rps action aura list active", "WHISPER", UnitName("player"))
 	SendAddonMessage(RPSCoreFramework.Prefix, ".rps action scale info", "WHISPER", UnitName("player"))
 
-	-- Minimap icon
-	
-	LDBObject = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("RPSCoreFramework", {
-		type = "data source",
-		icon = "Interface\\AddOns\\RPSDarkmoon\\resources\\darkmoon.tga",
-		tocname = "rpscoreframework",
-		OnClick = function(_, button)
-			RPSCoreFramework:switchMainFrame();
-		end,
-		OnTooltipShow = function(tooltip)
-			tooltip:AddLine("|cffCD661DDarkmoon|r");
-			--tooltip:AddLine("|cffFFC125Ролевая система|r");
-			tooltip:AddLine("|cffffcc00ПКМ\\ЛКМ: |cffFFC125открыть\\закрыть меню Darkmoon|r");
-		end,
-	})
-
-	if (RPSCoreIconData == nil) then
-		RPSCoreIconData = { hide = false }	
-	end
-
-	icon = LibStub("LibDBIcon-1.0");
-	icon:Register("RPSDarkmoonIcon", LDBObject, RPSCoreIconData);
-	icon:Show("RPSDarkmoonIcon");
-	
-	-- Text
-	AFK = "Вне роли";
-	CHAT_AFK_GET = "%s <Вне роли>:\32";
-	CLEAR_AFK = "Автоматическая отмена режима \"Вне роли\"";
-	OPTION_TOOLTIP_CLEAR_AFK = "Автоматический выход из режима \"Вне роли\"\nпри движении персонажа или начале разговора.";
-	CLEARED_AFK = "Вы вышли из режима \"Вне роли\".";
-	MARKED_AFK = "Вы находитесь вне роли.";
-	MARKED_AFK_MESSAGE = "Вы вне роли, оставив сообщение: \"%s\".";
-	CHAT_FLAG_AFK = "<Вне роли>";
-	CHAT_MSG_AFK = "Вне роли";
-	DEFAULT_AFK_MESSAGE = "Вне роли";	
-	GM_EMAIL_NAME  = "Darkmoon";
-	FRIENDS_LIST_AWAY = "Вне роли";
-	
 	-- Stats
 
 	RPSCoreFramework:UpdateDiff()
@@ -163,23 +88,7 @@ function RPSCoreFramework:OnInitialize()
 	RPS_InteractFrameHelp:SetScript("OnClick", function() SendAddonMessage(RPSCoreFramework.Prefix, ".rps action help %t", "WHISPER", UnitName("player")) end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() SendAddonMessage(RPSCoreFramework.Prefix, ".rps action kill %t", "WHISPER", UnitName("player")) end);
 	
-	StrengthMinus:SetScript("OnClick", function() RPSCoreFramework:DecStrength() end);
-	AgilityMinus:SetScript("OnClick", function() RPSCoreFramework:DecAgility() end);
-	IntellectMinus:SetScript("OnClick", function() RPSCoreFramework:DecIntellect() end);
-	SpiritMinus:SetScript("OnClick", function() RPSCoreFramework:DecSpirit() end);
-	CriticalChanceMinus:SetScript("OnClick", function() RPSCoreFramework:DecCriticalChance() end);
-	EnduranceMinus:SetScript("OnClick", function() RPSCoreFramework:DecEndurance() end);
-	DexterityMinus:SetScript("OnClick", function() RPSCoreFramework:DecDexterity() end);
-	WillMinus:SetScript("OnClick", function() RPSCoreFramework:DecWill() end);
-		
-	StrengthPlus:SetScript("OnClick", function() RPSCoreFramework:IncStrength() end);
-	AgilityPlus:SetScript("OnClick", function() RPSCoreFramework:IncAgility() end);
-	IntellectPlus:SetScript("OnClick", function() RPSCoreFramework:IncIntellect() end);
-	CriticalChancePlus:SetScript("OnClick", function() RPSCoreFramework:IncCriticalChance() end);
-	SpiritPlus:SetScript("OnClick", function() RPSCoreFramework:IncSpirit() end);
-	EndurancePlus:SetScript("OnClick", function() RPSCoreFramework:IncEndurance() end);
-	DexterityPlus:SetScript("OnClick", function() RPSCoreFramework:IncDexterity() end);
-	WillPlus:SetScript("OnClick", function() RPSCoreFramework:IncWill() end);
+	RPSCoreFramework:StatsIncDecFunc()
 	
 	StrengthIcon:SetTexture("Interface\\ICONS\\achievement_bg_most_damage_killingblow_dieleast")
     AgilityIcon:SetTexture("Interface\\ICONS\\ability_rogue_quickrecovery")
@@ -251,7 +160,6 @@ function RPSCoreFramework:OnInitialize()
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3)
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN4)
 	
-
 	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonInfoFrame)
 	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonRulesFrame)
 	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonFightSystemFrame)

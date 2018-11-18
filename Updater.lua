@@ -105,6 +105,11 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	end
 end
 
+function RPSCoreFramework:RefreshActiveAuras(str)
+	str = string.gsub(str, "RPS.AuraRefresh ", "") -- 5
+	local values = {strsplit(' ', str)}
+end
+
 function RPSCoreFramework:UpdateInfo(str)
 	str = string.gsub(str, "RPS.StatMe ", "");
 	local values = {strsplit(' ', str)};

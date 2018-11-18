@@ -31,6 +31,9 @@ function sysMsg(self, event, msg, author, ...)
 	elseif (string.find(msg, "RPS.Display")) then
 		RPSCoreFramework:UpdateDisplayMacrosInfo(msg);
 		return true;
+	elseif (string.find(msg, "RPS.AuraRefresh")) then
+		RPSCoreFramework:RefreshActiveAuras(msg);
+		return true;
 	end
 end
 

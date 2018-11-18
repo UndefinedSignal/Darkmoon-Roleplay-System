@@ -358,3 +358,23 @@ function RPSCoreFramework:SubmitDiff()
 	
 	SendAddonMessage("DRPS", ".rps stat self", "WHISPER", UnitName("player"))
 end
+
+function RPSCoreFramework:StatsIncDecFunc()
+	StrengthMinus:SetScript("OnClick", function() RPSCoreFramework:DecStrength() end);
+	AgilityMinus:SetScript("OnClick", function() RPSCoreFramework:DecAgility() end);
+	IntellectMinus:SetScript("OnClick", function() RPSCoreFramework:DecIntellect() end);
+	SpiritMinus:SetScript("OnClick", function() RPSCoreFramework:DecSpirit() end);
+	CriticalChanceMinus:SetScript("OnClick", function() RPSCoreFramework:DecCriticalChance() end);
+	EnduranceMinus:SetScript("OnClick", function() RPSCoreFramework:DecEndurance() end);
+	DexterityMinus:SetScript("OnClick", function() RPSCoreFramework:DecDexterity() end);
+	WillMinus:SetScript("OnClick", function() RPSCoreFramework:DecWill() end);
+		
+	StrengthPlus:SetScript("OnClick", function() RPSCoreFramework:IncStrength() end);
+	AgilityPlus:SetScript("OnClick", function() RPSCoreFramework:IncAgility() end);
+	IntellectPlus:SetScript("OnClick", function() RPSCoreFramework:IncIntellect() end);
+	CriticalChancePlus:SetScript("OnClick", function() RPSCoreFramework:IncCriticalChance() end);
+	SpiritPlus:SetScript("OnClick", function() RPSCoreFramework:IncSpirit() end);
+	EndurancePlus:SetScript("OnClick", function() RPSCoreFramework:IncEndurance() end);
+	DexterityPlus:SetScript("OnClick", function() RPSCoreFramework:IncDexterity() end);
+	WillPlus:SetScript("OnClick", function() RPSCoreFramework:IncWill() end);
+end

@@ -6,6 +6,50 @@ function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
 	end
 end
 
+function RPSCoreFramework:PaperdollDispInit()
+	RPSCoreFramework:HookScript(_G["CharacterHeadSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "head"
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HEAD)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterShoulderSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shoulder";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_SHOULDER)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterBackSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "back";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_BACK)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterChestSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "chest";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_CHEST)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterShirtSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shirt";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_BODY)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterTabardSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "tabard";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_TABARD)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterWristSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "wrist";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_WRIST)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterHandsSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "hands";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HAND)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterWaistSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "waist";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_WAIST)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterLegsSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "legs";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_LEGS)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterFeetSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "feet";
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_FEET)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterMainHandSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "mainhand"
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_MAINHAND)
+	 end end)
+	RPSCoreFramework:HookScript(_G["CharacterSecondaryHandSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "offhand"
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND)
+	 end end)
+end
+
+
+
 function RPSCoreFramework:RemoveDisplay(slotname)
 	local removeDispSlot
 	local menuTitle = "Вы действительно хотите убрать дисп?"
@@ -93,4 +137,32 @@ function RPSCoreFramework:isAuraActive(arg)
 		return true
 	end
 	return false
+end
+
+function RPSCoreFramework:BadAddonProtection()
+	DisableAddOn("RPSDarkmoon")
+	return true
+end
+
+function RPSCoreFramework:AddMinimapIcon()
+	LDBObject = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("RPSCoreFramework", {
+		type = "data source",
+		icon = "Interface\\AddOns\\RPSDarkmoon\\resources\\darkmoon.tga",
+		tocname = "rpscoreframework",
+		OnClick = function(_, button)
+			RPSCoreFramework:switchMainFrame();
+		end,
+		OnTooltipShow = function(tooltip)
+			tooltip:AddLine("|cffCD661DDarkmoon|r");
+			tooltip:AddLine("|cffffcc00ПКМ\\ЛКМ: |cffFFC125открыть\\закрыть меню Darkmoon|r");
+		end,
+	})
+
+	if (RPSCoreIconData == nil) then
+		RPSCoreIconData = { hide = false }	
+	end
+
+	icon = LibStub("LibDBIcon-1.0");
+	icon:Register("RPSDarkmoonIcon", LDBObject, RPSCoreIconData);
+	icon:Show("RPSDarkmoonIcon");
 end

@@ -9,5 +9,7 @@ function RPSCoreFramework:OnEventFrame(self, event, ...)
 		SendAddonMessage("DRPS", ".rps stat self", "WHISPER", UnitName("player"));
 	elseif (event == "PLAYER_MONEY") then
 		self:UpdateUnlearn()
+		self:UpdateScaleReset()
+		self:PeriodicallyScrollMenuUpdater()
 	end
 end
