@@ -71,7 +71,7 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 		text = menuTitle,
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage("DRPS", removeDispSlot, "WHISPER", UnitName("player")) end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(removeDispSlot) end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
@@ -110,7 +110,7 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 		end,
 		OnAccept = function (self, data, data2)
 			displayMessage = displayMessage .. self.editBox:GetText()
-			SendAddonMessage("DRPS", displayMessage, "WHISPER", UnitName("player"))
+			RPSCoreFramework:SendCoreMessage(displayMessage)
 		end,
 	  	OnCancel = function (_,reason)
 	--		Nope

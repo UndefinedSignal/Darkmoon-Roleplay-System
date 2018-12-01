@@ -5,12 +5,12 @@ function RPSCoreFramework:UpdateTypingStatus(editbox)
 	if (editbox:IsShown() and text:len() > 0 and firstChar ~= "/" and firstChar ~= "." and firstChar ~= "!" and firstChar ~= "#" and (chatType == "SAY" or chatType == "YELL" or chatType == "EMOTE")) then
 		if not self.isTypingMessage then
 			self.isTypingMessage = true
-			SendAddonMessage("DRPS", ".typing on", "WHISPER", UnitName("player"))
+			RPSCoreFramework:SendCoreMessage(".typing on")
 		end
 	else
 		if self.isTypingMessage then
 			self.isTypingMessage = false
-			SendAddonMessage("DRPS", ".typing off", "WHISPER", UnitName("player"))
+			RPSCoreFramework:SendCoreMessage(".typing off")
 		end
 	end
 end
@@ -36,5 +36,10 @@ function sysMsg(self, event, msg, author, ...)
 		return true;
 	end
 end
+
+function RPSCoreFramework:SendCoreMessage(msg)
+	SendAddonMessage("DRPS", msg, "WHISPER", UnitName("player"));
+end;
+
 
 ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", sysMsg)

@@ -41,8 +41,8 @@ function RPSCoreFramework:UpdateScrollerPosition()
 end
 
 function RPSCoreFramework:PeriodicallyUpdater()
-	SendAddonMessage(RPSCoreFramework.Prefix, ".rps action scale info", "WHISPER", UnitName("player"))
-	SendAddonMessage(RPSCoreFramework.Prefix, ".rps action aura list active", "WHISPER", UnitName("player"))
+	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Prefix, ".rps action scale info")
+	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Prefix, ".rps action aura list active")
 	RPSCoreFramework:UpdateScaleReset()
 
 	-- Action Camera
@@ -146,15 +146,15 @@ function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 end
 
 function RPSCoreFramework:OneShotUpdater()
-	SendAddonMessage(".disp list", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action scale info", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action aura list active", "WHISPER", UnitName("player"))
+	RPSCoreFramework:SendCoreMessage(".disp list")
+	RPSCoreFramework:SendCoreMessage(".rps action scale info")
+	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
+	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
 end
 
 function RPSCoreFramework:PeriodicallyAurasUpdate()
-	SendAddonMessage(".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage(".rps action aura list active", "WHISPER", UnitName("player"))
+	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
+	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
 end
 
 function RPSCoreFramework:UpdateActiveAurasCounter()

@@ -53,10 +53,10 @@ function RPSCoreFramework:OnInitialize()
 
 	-- Disp & Scale
 
-	SendAddonMessage(RPSCoreFramework.Prefix, ".disp list", "WHISPER", UnitName("player"))
-	SendAddonMessage(RPSCoreFramework.Prefix, ".rps action aura list known", "WHISPER", UnitName("player"))
-	SendAddonMessage(RPSCoreFramework.Prefix, ".rps action aura list active", "WHISPER", UnitName("player"))
-	SendAddonMessage(RPSCoreFramework.Prefix, ".rps action scale info", "WHISPER", UnitName("player"))
+	RPSCoreFramework:SendCoreMessage(".disp list")
+	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
+	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
+	RPSCoreFramework:SendCoreMessage(".rps action scale info")
 
 	-- Stats
 
@@ -85,8 +85,8 @@ function RPSCoreFramework:OnInitialize()
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
 	
-	RPS_InteractFrameHelp:SetScript("OnClick", function() SendAddonMessage(RPSCoreFramework.Prefix, ".rps action help %t", "WHISPER", UnitName("player")) end);
-	RPS_InteractFrameKill:SetScript("OnClick", function() SendAddonMessage(RPSCoreFramework.Prefix, ".rps action kill %t", "WHISPER", UnitName("player")) end);
+	RPS_InteractFrameHelp:SetScript("OnClick", function() RPSCoreFramework:SendCoreMessage(".rps action help %t") end);
+	RPS_InteractFrameKill:SetScript("OnClick", function() RPSCoreFramework:SendCoreMessage(".rps action kill %t") end);
 	
 	RPSCoreFramework:StatsIncDecFunc()
 	
@@ -178,7 +178,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете разучить все ваши характеристики? Стоимость: 5 |cff00ff00|TInterface\\MoneyFrame\\UI-GoldIcon:16|t|r",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage(RPSCoreFramework.Prefix, ".rps stat reset", "WHISPER", UnitName("player")); end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps stat reset"); end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
@@ -206,7 +206,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете сбросить рост?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage(RPSCoreFramework.Prefix, ".rps action scale reset", "WHISPER", UnitName("player"));	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable() end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale reset");	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable() end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
@@ -220,7 +220,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно уверены в выбранном росте?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() SendAddonMessage(RPSCoreFramework.Prefix, ".rps action scale apply "..RPSCoreFramework.ChoosedScale, "WHISPER", UnitName("player"));	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable() end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale apply "..RPSCoreFramework.ChoosedScale);	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable() end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,

@@ -320,28 +320,28 @@ end
 
 function RPSCoreFramework:SubmitDiff()
 	if (self.StatsDiff.Strength>0) then
-		SendAddonMessage("DRPS", ".rps stat submit strength "..self.StatsDiff.Strength, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit strength "..self.StatsDiff.Strength);
 	end
 	if (self.StatsDiff.Agility>0) then
-		SendAddonMessage("DRPS", ".rps stat submit agility "..self.StatsDiff.Agility, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit agility "..self.StatsDiff.Agility);
 	end
 	if (self.StatsDiff.Intellect>0) then
-		SendAddonMessage("DRPS", ".rps stat submit intellect "..self.StatsDiff.Intellect, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit intellect "..self.StatsDiff.Intellect);
 	end
 	if (self.StatsDiff.CriticalChance>0) then
-		SendAddonMessage("DRPS", ".rps stat submit criticalchance "..self.StatsDiff.CriticalChance, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit criticalchance "..self.StatsDiff.CriticalChance);
 	end
 	if (self.StatsDiff.Spirit>0) then
-		SendAddonMessage("DRPS", ".rps stat submit spirit "..self.StatsDiff.Spirit, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit spirit "..self.StatsDiff.Spirit);
 	end
 	if (self.StatsDiff.Endurance>0) then
-		SendAddonMessage("DRPS", ".rps stat submit endurance "..self.StatsDiff.Endurance, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit endurance "..self.StatsDiff.Endurance);
 	end
 	if (self.StatsDiff.Dexterity>0) then
-		SendAddonMessage("DRPS", ".rps stat submit dexterity "..self.StatsDiff.Dexterity, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit dexterity "..self.StatsDiff.Dexterity);
 	end
 	if (self.StatsDiff.Will>0) then
-		SendAddonMessage("DRPS", ".rps stat submit will "..self.StatsDiff.Will, "WHISPER", UnitName("player"));
+		RPSCoreFramework:SendCoreMessage(".rps stat submit will "..self.StatsDiff.Will);
 	end
 	
 	self.StatsDiff.Strength = 0;
@@ -356,7 +356,7 @@ function RPSCoreFramework:SubmitDiff()
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
 	
-	SendAddonMessage("DRPS", ".rps stat self", "WHISPER", UnitName("player"))
+	RPSCoreFramework:SendCoreMessage(".rps stat self")
 end
 
 function RPSCoreFramework:StatsIncDecFunc()
