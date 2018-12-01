@@ -7,14 +7,16 @@
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam
 ## SavedVariablesPerCharacter: RPSCoreShouldFirstTime
 
-libs\LibStub.lua
 libs\AceAddon.lua
+libs\AceTimer.lua
 libs\AceHook.lua
 libs\AceDB.lua
-libs\AceTimer.lua
+libs\LibStub.lua
 libs\LibCallbackHandler.lua
 libs\LibDataBroker.lua
 libs\LibDBIcon.lua
+libs\HereBeDragons-1.0.lua
+libs\HereBeDragons-Pins-1.0.lua
 
 DataSheets.lua
 Literature.lua
@@ -28,8 +30,7 @@ Init.lua
 Chat.lua
 Hooks.lua
 Macros.lua
-
-
+POI.lua
 
 
 modules\ui\Templates.xml

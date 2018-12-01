@@ -1,4 +1,6 @@
-RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0" )
+RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0")
+RPSCoreFramework.HDB = LibStub("HereBeDragons-1.0")
+RPSCoreFramework.HDB.Pins = LibStub("HereBeDragons-Pins-1.0")
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.Scroller = {};
 RPSCoreFramework.Display = {};
