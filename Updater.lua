@@ -97,7 +97,7 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	str = string.gsub(str, "RPS.Display ", "") -- 5
 	local values = {strsplit(' ', str)}
 	local j = 1
-	for i = 1, 18 do
+	for i = 1, 19 do
 		RPSCoreFramework.Display.Scroll[i][2] = values[j]
 		j = j + 1
 		RPSCoreFramework.Display.Scroll[i][3] = values[j]
