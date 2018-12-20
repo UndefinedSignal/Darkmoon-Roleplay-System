@@ -155,7 +155,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 			end
 		end
 	else
-		if (GetMoney() > tonumber(RPSCoreFramework.Interface.Auras[id][3])) then
+		if (GetMoney() >= tonumber(RPSCoreFramework.Interface.Auras[id][3])) then
 			StaticPopup_Show("LearnAura")
 		end
 	end
