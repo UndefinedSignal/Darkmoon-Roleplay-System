@@ -85,8 +85,8 @@ function RPSCoreFramework:OnInitialize()
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
 	
-	RPS_InteractFrameHelp:SetScript("OnClick", function() RPSCoreFramework:SendCoreMessage(".rps action help %t") end);
-	RPS_InteractFrameKill:SetScript("OnClick", function() RPSCoreFramework:SendCoreMessage(".rps action kill %t") end);
+	RPS_InteractFrameHelp:SetScript("OnClick", function()	local msg = ".rps action help "..GetUnitName("target")	RPSCoreFramework:SendCoreMessage(msg) end);
+	RPS_InteractFrameKill:SetScript("OnClick", function()	local msg = ".rps action kill "..GetUnitName("target")	RPSCoreFramework:SendCoreMessage(msg) end);
 	
 	RPSCoreFramework:StatsIncDecFunc()
 	
