@@ -10,7 +10,7 @@ function RPSCoreFramework:OnEnable()
 end
 
 function RPSCoreFramework:OnInitialize()
-	RPSCoreFramework:BadAddonProtection()
+--	RPSCoreFramework:BadAddonProtection()
 	LoggingChat(1)
 	SetCVar("autoClearAFK", 0)
 	self:RegisterEvent("PLAYER_TARGET_CHANGED")
