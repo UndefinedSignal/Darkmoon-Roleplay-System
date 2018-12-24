@@ -2,7 +2,11 @@ function RPSCoreFramework:ReloadDispList()
 	local dispstring = ""
 	for i=1, #RPSCoreFramework.Display.Scroll do
 	    if tonumber(RPSCoreFramework.Display.Scroll[i][2]) ~= -1 then
-	        dispstring = dispstring .. RPSCoreFramework.Display.Scroll[i][1]..RPSCoreFramework.Display.Scroll[i][2].." "..RPSCoreFramework.Display.Scroll[i][3].."\n"
+	    	if tonumber(RPSCoreFramework.Display.Scroll[i][3] ~= 0) then
+	        	dispstring = dispstring .. RPSCoreFramework.Display.Scroll[i][1]..RPSCoreFramework.Display.Scroll[i][2].." "..RPSCoreFramework.Display.Scroll[i][3].."\n"
+	        else
+	        	dispstring = dispstring .. RPSCoreFramework.Display.Scroll[i][1]..RPSCoreFramework.Display.Scroll[i][2].."\n"
+	        end
 	    end
 	end
 	RPS_TextMacrosScrollText:SetText(dispstring)
