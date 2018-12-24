@@ -351,11 +351,6 @@
                                     <OnClick>
 						        		RPSCoreFramework:OnClickCosmeticTabs(self);
 						        		RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.BattleSystem);
-						        		RPS_DashboardBottomContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
-										RPS_DashboardBottomContent:SetFontObject("p", GameFontNormal);
-										RPS_DashboardBottomContent:SetFontObject("h1", GameFontNormalHuge3);
-										RPS_DashboardBottomContent:SetFontObject("h2", GameFontNormalHuge);
-										RPS_DashboardBottomContent:SetFontObject("h3", GameFontNormalLarge);
 					        		</OnClick>
                                 </Scripts>
                             </Button>

@@ -1,25 +1,38 @@
 ## Interface: 70300
 ## Title: RPSDarkmoon
 ## Author: TestUnit, -SeMGa!
-## Version: 1.01
+## Version: 1.10
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam
 ## SavedVariablesPerCharacter: RPSCoreShouldFirstTime
 
-libs\LibStub.lua
 libs\AceAddon.lua
+libs\AceTimer.lua
 libs\AceHook.lua
 libs\AceDB.lua
-libs\AceTimer.lua
+libs\LibStub.lua
 libs\LibCallbackHandler.lua
 libs\LibDataBroker.lua
 libs\LibDBIcon.lua
+libs\HereBeDragons-1.0.lua
+libs\HereBeDragons-Pins-1.0.lua
 
-RPSCore.lua
+DataSheets.lua
+Literature.lua
 Scroller.lua
-RPSLiterature.lua
-Miscellaneous.lua
-Templates.xml
-Interface.xml
-Interact.xml
+Updater.lua
+Interact.lua
+Interface.lua
+Stats.lua
+Misc.lua
+Init.lua
+Chat.lua
+Hooks.lua
+Macros.lua
+POI.lua
+
+
+modules\ui\Templates.xml
+modules\ui\Interact.xml
+modules\ui\Interface.xml

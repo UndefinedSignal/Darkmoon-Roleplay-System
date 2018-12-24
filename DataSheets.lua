@@ -1,28 +1,136 @@
---RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0" )
+RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0")
+RPSCoreFramework.HDB = LibStub("HereBeDragons-1.0")
+RPSCoreFramework.HDB.Pins = LibStub("HereBeDragons-Pins-1.0")
+RPSCoreFramework.Literature = {};
+RPSCoreFramework.Scroller = {};
+RPSCoreFramework.Display = {};
+RPSCoreFramework.Interface = {};
+RPSCoreFramework.DB = {};
+RPSCoreFramework.DB.Pins = {}
+RPSCoreFramework.Map = {}
+RPSCoreFramework.Map.Icons = {}
+RPSCoreFramework.Map.PinButtons = {}
+
+RPSCoreFramework.DifficultRaces = {
+	"Void Elf",
+	"Highmountain Tauren",
+	"Blood Elf",
+	"Draenei",
+	"Lightforgen Draenei",
+	"Pandaren",
+	"Night Elf"
+}
+
+RPSCoreFramework.DifficultClases = {
+	"Daemon hunter",
+	"Death knight"
+}
+
+RPSCoreFramework.Prefix = "DRPS"
+RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
+
+RPSCoreFramework.FreeStats = 0;
+RPSCoreFramework.FreeStatsCached = 0;
+RPSCoreFramework.TargetAura = 1000012;
+RPSCoreFramework.TimerID = false;
+RPSCoreFramework.ShowMain = false;
+RPSCoreFramework.RequestUnlearn = 50000;
+RPSCoreFramework.RequestRescale = 500000;
+RPSCoreFramework.GetLastClickedSlot = "chest";
+RPSCoreFramework.StatsLevel = 40;
 RPSCoreFramework.MyScale = 0 -- Takes it from the server if -1 we lock the slider and disable it.
 RPSCoreFramework.ChoosedScale = 0
 
---EQUIPMENT_SLOT_HEAD         = 0, 1 2
---EQUIPMENT_SLOT_NECK         = 1, 3 4
---EQUIPMENT_SLOT_SHOULDERS    = 2, 5 6
---EQUIPMENT_SLOT_BODY         = 3, 7 8
---EQUIPMENT_SLOT_CHEST        = 4, 9 10
---EQUIPMENT_SLOT_WAIST        = 5, 11 12
---EQUIPMENT_SLOT_LEGS         = 6, 13 14
---EQUIPMENT_SLOT_FEET         = 7, 15 16
---EQUIPMENT_SLOT_WRISTS       = 8, 17 18
---EQUIPMENT_SLOT_HANDS        = 9, 19 20
---EQUIPMENT_SLOT_FINGER1      = 10, 21 22
---EQUIPMENT_SLOT_FINGER2      = 11, 23 24
---EQUIPMENT_SLOT_TRINKET1     = 12, 25 26
---EQUIPMENT_SLOT_TRINKET2     = 13, 27 28
---EQUIPMENT_SLOT_BACK         = 14, 29 30
---EQUIPMENT_SLOT_MAINHAND     = 15, 31 32
---EQUIPMENT_SLOT_OFFHAND      = 16, 33 34
---EQUIPMENT_SLOT_RANGED       = 17, 35 36
---EQUIPMENT_SLOT_TABARD       = 18, 37 38
+RPSCoreFramework.Interface.HighlightedButtons = {};
+RPSCoreFramework.Interface.HighlightedTabButtons = {};
+RPSCoreFramework.Interface.HidingFrames = {};
+RPSCoreFramework.Interface.MenuButtons = {};
+RPSCoreFramework.Interface.SubMenuButtons = {};
 
-RPSCoreFramework.Scroller = {}
+RPSCoreFramework.StatsDiff = {
+	Strength = 0,
+	Agility = 0,
+	Intellect = 0,
+	CriticalChance = 0,
+	Spirit = 0,
+	Endurance = 0,
+	Dexterity = 0,
+	Will = 0
+}
+RPSCoreFramework.Stats = {
+	Strength = 0,
+	Agility = 0,
+	Intellect = 0,
+	CriticalChance = 0,
+	Spirit = 0,
+	Endurance = 0,
+	Dexterity = 0,
+	Will = 0
+}
+RPSCoreFramework.ItemsStats = {
+	Strength = 0,
+	Agility = 0,
+	Intellect = 0,
+	CriticalChance = 0,
+	Spirit = 0,
+	Endurance = 0,
+	Dexterity = 0,
+	Will = 0
+}
+
+RPSCoreFramework.SlotnameListPresets = {
+	head = ".disp head ",
+	shoulder = ".disp shoulder ",
+	back = ".disp back ",
+	chest = ".disp chest ",
+	shirt = ".disp shirt ",
+	tabard = ".disp tabard ",
+	wrist = ".disp wrist ",
+	hands = ".disp hands ",
+	waist = ".disp waist ",
+	legs = ".disp legs ",
+	feet = ".disp feet ",
+	mainhand = ".disp mainhand ",
+	offhand = ".disp offhand "
+}
+
+RPSCoreFramework.SlotnameListNames = {
+	shoulder = "наплечников",
+	back = "плаща",
+	chest = "тела",
+	shirt = "рубашки",
+	tabard = "гербовой накидки",
+	wrist = "наручей",
+	hands = "перчаток",
+	waist = "пояса",
+	legs = "штанов",
+	feet = "обуви",
+	mainhand = "оружия в правой руке",
+	offhand = "оружия в левой руке"
+}
+
+RPSCoreFramework.CharacterBackground = {
+	DEATHKNIGHT = "Interface\\DRESSUPFRAME\\DressingRoomDeathKnight.BLP",
+	DEMONHUNTER = "Interface\\DRESSUPFRAME\\DressingRoomDemonHunter.BLP",
+	DRUID = "Interface\\DRESSUPFRAME\\DressingRoomDruid.BLP",
+	HUNTER = "Interface\\DRESSUPFRAME\\DressingRoomHunter.BLP",
+	MAGE = "Interface\\DRESSUPFRAME\\DressingRoomMage.BLP",
+	MONK = "Interface\\DRESSUPFRAME\\DressingRoomMonk.BLP",
+	PALADIN = "Interface\\DRESSUPFRAME\\DressingRoomPaladin.BLP",
+	PRIEST = "Interface\\DRESSUPFRAME\\DressingRoomPriest.BLP",
+	ROGUE = "Interface\\DRESSUPFRAME\\DressingRoomRogue.BLP",
+	SHAMAN = "Interface\\DRESSUPFRAME\\DressingRoomShaman.BLP",
+	WARLOCK = "Interface\\DRESSUPFRAME\\DressingRoomWarlock.BLP",
+	WARRIOR = "Interface\\DRESSUPFRAME\\DressingRoomWarrior.BLP"
+}
+
+RPSCoreFramework.DropDownDisplayMenu = {
+	    { text = "Display", isTitle = true, notCheckable = true},
+	    { text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
+	    { text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end }
+}
+
+
 RPSCoreFramework.Scroller.lineplusoffset = {
 	[1] = 0,
 	[2] = 0,
@@ -32,7 +140,6 @@ RPSCoreFramework.Scroller.lineplusoffset = {
 	[6] = 0 
 }
 
-RPSCoreFramework.Display = {}
 RPSCoreFramework.Display.Scroll = {
 	{".disp hea ", -1, 0},
 	{".disp neck ", -1, 0},
@@ -55,14 +162,7 @@ RPSCoreFramework.Display.Scroll = {
 	{".disp tabard ", -1, 0}	
 }
 
-RPSCoreFramework.Interface = {}
-RPSCoreFramework.Interface.HighlightedButtons = {}
-RPSCoreFramework.Interface.HighlightedTabButtons = {}
-RPSCoreFramework.Interface.HidingFrames = {}
-RPSCoreFramework.Interface.MenuButtons = {}
-RPSCoreFramework.Interface.SubMenuButtons = {}
 
-RPSCoreFramework.Interface.ActiveAuraCounter = 0
 RPSCoreFramework.Interface.Auras = {
 	{"Походный рюкзак", "Практично и стильно", 2000, 0, 0},
 	{"Колчан со стрелами", "Самый обычный", 2000, 0, 0},
@@ -211,6 +311,8 @@ RPSCoreFramework.Interface.Auras = {
 	{"Свечение Элуны", "Аура. Персонаж становится источником сильного света", 10000, 0, 0}
 }
 
+RPSCoreFramework.Interface.ActiveAuraCounter = 0
+
 RPSCoreFramework.Interface.Auras.Message = {
 	{" ", 0},
 	{" ", 0},
@@ -223,272 +325,3 @@ RPSCoreFramework.Interface.Auras.Message = {
 RPSCoreFramework.Interface.Auras.Initialized = false
 RPSCoreFramework.Interface.Auras.GhostClick = false
 RPSCoreFramework.Interface.Auras.AllowUpdate = true
-
---DarkmoonPlayerModel
---<Texture file="Interface\DRESSUPFRAME\DressingRoomPaladin.BLP" horizTile="true" vertTile="true">
-RPSCoreFramework.CharacterBackground = {
-	DEATHKNIGHT = "Interface\\DRESSUPFRAME\\DressingRoomDeathKnight.BLP",
-	DEMONHUNTER = "Interface\\DRESSUPFRAME\\DressingRoomDemonHunter.BLP",
-	DRUID = "Interface\\DRESSUPFRAME\\DressingRoomDruid.BLP",
-	HUNTER = "Interface\\DRESSUPFRAME\\DressingRoomHunter.BLP",
-	MAGE = "Interface\\DRESSUPFRAME\\DressingRoomMage.BLP",
-	MONK = "Interface\\DRESSUPFRAME\\DressingRoomMonk.BLP",
-	PALADIN = "Interface\\DRESSUPFRAME\\DressingRoomPaladin.BLP",
-	PRIEST = "Interface\\DRESSUPFRAME\\DressingRoomPriest.BLP",
-	ROGUE = "Interface\\DRESSUPFRAME\\DressingRoomRogue.BLP",
-	SHAMAN = "Interface\\DRESSUPFRAME\\DressingRoomShaman.BLP",
-	WARLOCK = "Interface\\DRESSUPFRAME\\DressingRoomWarlock.BLP",
-	WARRIOR = "Interface\\DRESSUPFRAME\\DressingRoomWarrior.BLP"
-}
-
-function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если нет активной ауры
-	if RPSCoreFramework.Interface.Auras.Initialized then
-		for jBtn=1, #RPSCoreFramework.Scroller.lineplusoffset do
-			local lineplusoffset = RPSCoreFramework.Scroller.lineplusoffset[jBtn]
-			if lineplusoffset <= #RPSCoreFramework.Interface.Auras then
-		      
-		      _G["RPS_AuraButton"..jBtn.."Name"]:SetText(RPSCoreFramework.Interface.Auras[lineplusoffset][1])
-		      _G["RPS_AuraButton"..jBtn.."Description"]:SetText(RPSCoreFramework.Interface.Auras[lineplusoffset][2])
-		      _G["RPS_AuraButton"..jBtn.."Number"]:SetText(lineplusoffset)
-		      _G["RPS_AuraButton"..jBtn]:SetScript("OnEnter", function()
-		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				    GameTooltip:AddLine("|cFFFFFFFF"..RPSCoreFramework.Interface.Auras[lineplusoffset][1].."|r")
-				    GameTooltip:AddLine("|cFFABD473"..RPSCoreFramework.Interface.Auras[lineplusoffset][2].."|r\n\n")
-				    if (tonumber(RPSCoreFramework.Interface.Auras[lineplusoffset][3]) > tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[lineplusoffset][4] == 0) then
-				    	GameTooltip:AddLine("Цена покупки: |cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]).."|r")
-				    	GameTooltip:AddLine("Не хватает денег.")
-				    elseif (tonumber(RPSCoreFramework.Interface.Auras[lineplusoffset][3]) < tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[lineplusoffset][4] == 0) then
-				    	GameTooltip:AddLine("Цена покупки: "..GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]))
-				    	GameTooltip:AddLine("Клик: Приобрести")
-				    end
-					if RPSCoreFramework.Interface.Auras[lineplusoffset][4] > 0 then
-				    	GameTooltip:AddLine("Клик: Использовать")
-				    end
-				    GameTooltip:Show()
-		      	end)
-		      _G["RPS_AuraButton"..jBtn]:SetScript("OnLeave", function()
-				    GameTooltip:Hide()
-		      	end)
-		      if RPSCoreFramework.Interface.Auras[lineplusoffset][4] > 0 then
-		        _G["RPS_AuraButton"..jBtn.."Price"]:Hide()
-		        _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
-		        _G["RPS_AuraButton"..jBtn.."Macros"]:Show()
-		        _G["RPS_AuraButton"..jBtn.."Macros"]:SetScript("OnClick", function()
-		        	if (GetNumMacros() <= 120) then
-		        		CreateMacro(RPSCoreFramework.Interface.Auras[lineplusoffset][1], "INV_DARKMOON_EYE", ".rps action aura toggle "..lineplusoffset, 1);
-		        		PickupMacro(RPSCoreFramework.Interface.Auras[lineplusoffset][1]);
-					else
-						Utils.message.displayMessage(loc("QE_MACRO_MAX"), 4);
-					end
-		        end)
-		        RPSCoreFramework.Interface.Auras.Message[jBtn][1] = ".rps action aura toggle "..lineplusoffset
-		      else
-		        _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
-		        _G["RPS_AuraButton"..jBtn.."Macros"]:Hide()
-		        _G["RPS_AuraButton"..jBtn.."Price"]:Show()
-		        if tonumber(RPSCoreFramework.Interface.Auras[lineplusoffset][3]) > tonumber(GetMoney()) then
-		        	_G["RPS_AuraButton"..jBtn.."Price"]:SetText("|cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]).."|r")
-		        else
-		        	_G["RPS_AuraButton"..jBtn.."Price"]:SetText(GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]))
-		    	end
-		        RPSCoreFramework.Interface.Auras.Message[jBtn][1] = ".rps action aura learn "..lineplusoffset
-		      end
-		      if RPSCoreFramework.Interface.Auras[lineplusoffset][5] == 1 then
-		      	_G["RPS_AuraButton"..jBtn.."Completed"]:Show()
-		        --_G["RPS_AuraButton"..jBtn]:LockHighlight()
-		      else
-		        --_G["RPS_AuraButton"..jBtn]:UnlockHighlight()
-		        _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
-		      end
-		      RPSCoreFramework.Interface.Auras.Message[jBtn][2] = lineplusoffset
-		      _G["RPS_AuraButton"..jBtn]:Show()
-		    else
-		      _G["RPS_AuraButton"..jBtn]:Hide()
-		    end
-		end
-	end
-end
-
-function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
-	if RPSCoreFramework.Interface.Auras.Initialized then
-		RPSCoreFramework:ScrollMenuUpdater();
-	end
-end
-
-function RPSCoreFramework:OneShotUpdater()
-	self:SendCoreMessage(".disp list");
-	self:SendCoreMessage(".rps action scale info");
-	self:SendCoreMessage(".rps action aura list known");
-	self:SendCoreMessage(".rps action aura list active");
-end
-
-function RPSCoreFramework:PeriodicallyAurasUpdate()
-	self:SendCoreMessage(".rps action aura list known");
-	self:SendCoreMessage(".rps action aura list active");
-end
-
-function RPSCoreFramework:GhostClickUpdater()
-	RPSCoreFramework.Interface.Auras.GhostClick = false;
-end
-
-function RPSCoreFramework:KnownAura(arg)
-	if RPSCoreFramework.Interface.Auras[arg][4] > 0 then
-		return true;
-	end
-	return false;
-end
-
-function RPSCoreFramework:isAuraActive(arg)
-	if RPSCoreFramework.Interface.Auras[arg][5] > 0 then
-		return true;
-	end
-	return false;
-end
-
-function RPSCoreFramework:ThreeTimesUpdate()
-	self.ThreeTimesTimerCount = self.ThreeTimesTimerCount + 1
-	if self.ThreeTimesTimerCount == 4 then
-		RPSCoreFramework.Interface.Auras.AllowUpdate = true
-		self.ThreeTimesTimerCount = 0
-		self:CancelTimer(self.ThreeTimesTimer)
-	end
-	RPSCoreFramework:PeriodicallyAurasUpdate()
-	RPSCoreFramework:ScrollMenuUpdater()
-end
-
-function RPSCoreFramework:UpdateActiveAurasCounter()
-	local counter = 0
-	if RPSCoreFramework.Interface.ActiveAuraCounter ~= 0 then
-		for i = 1, #RPSCoreFramework.Interface.Auras do
-			if RPSCoreFramework.Interface.Auras[i][5] > 0 then
-				counter = counter + 1
-			end
-		end
-		RPSCoreFramework.Interface.ActiveAuraCounter = counter
-	end
-
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
-	
-	return true
-end
-
-function RPSCoreFramework:HideEffectAuraButtons()
-	RPS_AuraButton1Completed:Hide()
-	RPS_AuraButton2Completed:Hide()
-	RPS_AuraButton3Completed:Hide()
-	RPS_AuraButton4Completed:Hide()
-	RPS_AuraButton5Completed:Hide()
-	RPS_AuraButton6Completed:Hide()
-end
-
-function RPSCoreFramework:LearnMyAuras(button, arg1)
-	self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
-	_G[button:GetName().."Price"]:Hide()
-    _G[button:GetName().."Macros"]:Show()
-	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][4] = 1;
-	RPSCoreFramework.Interface.Auras.Message[arg1][1] = ".rps action aura toggle ".. RPSCoreFramework.Interface.Auras.Message[arg1][2]
-end
-
-function RPSCoreFramework:MaxToggledAuras(button, arg1)
-	RPSCoreFramework.Interface.ActiveAuraCounter = 1
-	for i = 1, #RPSCoreFramework.Interface.Auras do
-		RPSCoreFramework.Interface.Auras[i][5] = 0
-	end
-	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1;
-	self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
-	RPSCoreFramework:HideEffectAuraButtons()
-	_G[button:GetName().."Completed"]:Show()
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
-end
-
-function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
-	if RPSCoreFramework.Interface.Auras.GhostClick then
-		return false
-	end
-
-	RPSCoreFramework.Interface.Auras.GhostClick = true
-
-	StaticPopupDialogs["LearnAura"] = {
-		text = "Вы действительно желаете приобрести выбранную ауру?",
-		button1 = YES,
-		button2 = NO,
-		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, arg1) end,
-		timeout = 0,
-		whileDead = true,
-		hideOnEscape = true,
-		exclusive = true,
-		showAlert = 1,
-		preferredIndex = 3, 
-	}
-
-	StaticPopupDialogs["MaxToggledAuras"] = {
-		text = "У вас уже активно 3 ауры. Активация ещё одной сбросит все предыдущие, вы уверены что хотите активировать эту ауру?",
-		button1 = YES,
-		button2 = NO,
-		OnAccept = function() RPSCoreFramework:MaxToggledAuras(button, arg1) end,
-		timeout = 0,
-		whileDead = true,
-		hideOnEscape = true,
-		exclusive = true,
-		showAlert = 1,
-		preferredIndex = 3, 
-	}
-	
-	local id = RPSCoreFramework.Interface.Auras.Message[arg1][2]
-	if RPSCoreFramework:KnownAura(id) then -- if we know
-		if RPSCoreFramework:UpdateActiveAurasCounter() and RPSCoreFramework:isAuraActive(id) then
-			self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
-			-- TODO counter
-			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter - 1
-			RPSCoreFramework.Interface.Auras[id][5] = 0 -- turn it off
-			_G[button:GetName().."Completed"]:Hide()
-		else
-			if tonumber(RPSCoreFramework.Interface.ActiveAuraCounter) < 3 then
-				self:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
-				-- TODO counter
-				RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
-				RPSCoreFramework.Interface.Auras[id][5] = 1 -- turn it on
-				_G[button:GetName().."Completed"]:Show()
-			else
-				StaticPopup_Show("MaxToggledAuras")
-			end
-		end
-	else
-		if (GetMoney() >= tonumber(RPSCoreFramework.Interface.Auras[id][3])) then
-			StaticPopup_Show("LearnAura")
-		end
-	end
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
-	self:ScheduleTimer("GhostClickUpdater", 0.5)
-
-	if RPSCoreFramework.Interface.Auras.AllowUpdate then
-		self.ThreeTimesTimerCount = 0
-		RPSCoreFramework.Interface.Auras.AllowUpdate = false
-		self.ThreeTimesTimer = self:ScheduleRepeatingTimer("ThreeTimesUpdate", 7)
-	end
-end
-
-function RPSCoreFramework:OnClickCosmetic(frame)
-	PlaySound(624, "SFX")
-	for i = 1, #RPSCoreFramework.Interface.HighlightedButtons do
-		RPSCoreFramework.Interface.HighlightedButtons[i]:UnlockHighlight()
-	end
-	frame:LockHighlight()
-end
-
-function RPSCoreFramework:OnClickCosmeticTabs(frame)
-	PlaySound(21968, "SFX")
-	for i = 1, #RPSCoreFramework.Interface.HighlightedTabButtons do
-		RPSCoreFramework.Interface.HighlightedTabButtons[i]:UnlockHighlight()
-	end
-	frame:LockHighlight()
-end
-
-function RPSCoreFramework:OnClickFrameShowing(frame)
-	
-	for i=1, #RPSCoreFramework.Interface.HidingFrames do
-		RPSCoreFramework.Interface.HidingFrames[i]:Hide()
-	end
-
-	frame:Show()
-end

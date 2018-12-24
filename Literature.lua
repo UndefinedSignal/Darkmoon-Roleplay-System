@@ -139,3 +139,19 @@ RPSCoreFramework.Literature.DarkmoonDispDesc = [[<html><body><p align="center">�
 
 RPSCoreFramework.Literature.DarkmoonSettingsBarbershop = [[ <html><body><p align="left">* Может быть недоступна для некоторых рас.</p>
 <p align="left">* Для того чтобы услуга была бесплатной необходимо сменить прическу.</p></body></html> ]]
+
+
+function RPSCoreFramework:ChangeDefaultWords()
+	AFK = "Вне роли";
+	CHAT_AFK_GET = "%s <Вне роли>:\32";
+	CLEAR_AFK = "Автоматическая отмена режима \"Вне роли\"";
+	OPTION_TOOLTIP_CLEAR_AFK = "Автоматический выход из режима \"Вне роли\"\nпри движении персонажа или начале разговора.";
+	CLEARED_AFK = "Вы вышли из режима \"Вне роли\".";
+	MARKED_AFK = "Вы находитесь вне роли.";
+	MARKED_AFK_MESSAGE = "Вы вне роли, оставив сообщение: \"%s\".";
+	CHAT_FLAG_AFK = "<Вне роли>";
+	CHAT_MSG_AFK = "Вне роли";
+	DEFAULT_AFK_MESSAGE = "Вне роли";	
+	GM_EMAIL_NAME  = "Darkmoon";
+	FRIENDS_LIST_AWAY = "Вне роли";
+end
