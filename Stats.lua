@@ -14,7 +14,9 @@ local function FormatRoll(stat, bonus)
 	end;
 	if (bonus ~= nil and tonumber(bonus)>0) then
 		local statbonus = stat+bonus;
-		if (statbonus>80) then
+		if (statbonus == 80) then
+			statbonus = "|cFFFFFF0080|r";
+		elseif (statbonus>80) then
 			statbonus = "|cFFFF000080|r";
 		end
 		return statbonus.." - "..maxRoll.." ("..stat.."|cFF00FF00+"..bonus.."|r)";
