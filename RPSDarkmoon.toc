@@ -7,11 +7,11 @@
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam
 ## SavedVariablesPerCharacter: RPSCoreShouldFirstTime
 
+libs\LibStub.lua
 libs\AceAddon.lua
 libs\AceTimer.lua
 libs\AceHook.lua
 libs\AceDB.lua
-libs\LibStub.lua
 libs\LibCallbackHandler.lua
 libs\LibDataBroker.lua
 libs\LibDBIcon.lua
