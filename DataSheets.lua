@@ -1,15 +1,30 @@
 RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0")
-RPSCoreFramework.HDB = LibStub("HereBeDragons-1.0")
-RPSCoreFramework.HDB.Pins = LibStub("HereBeDragons-Pins-1.0")
+RPSCoreFramework.HBD = LibStub("HereBeDragons-1.0")
+RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-1.0")
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.Scroller = {};
 RPSCoreFramework.Display = {};
 RPSCoreFramework.Interface = {};
 RPSCoreFramework.DB = {};
-RPSCoreFramework.DB.Pins = {}
-RPSCoreFramework.Map = {}
-RPSCoreFramework.Map.Icons = {}
-RPSCoreFramework.Map.PinButtons = {}
+RPSCoreFramework.DB.Pins = {};
+RPSCoreFramework.Map = {};
+RPSCoreFramework.Map.Icons = {
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\anchor",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\camp",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\conflict",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\farm",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\loot",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\lumber",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\mine",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\monster",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\point",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\question",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\tower",
+	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\workshop"
+};
+RPSCoreFramework.Map.PinButtons = {};
 
 RPSCoreFramework.DifficultRaces = {
 	"Void Elf",
@@ -19,16 +34,17 @@ RPSCoreFramework.DifficultRaces = {
 	"Lightforgen Draenei",
 	"Pandaren",
 	"Night Elf"
-}
+};
 
 RPSCoreFramework.DifficultClases = {
 	"Daemon hunter",
 	"Death knight"
-}
+};
 
 RPSCoreFramework.Prefix = "DRPS"
 RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
 
+RPSCoreFramework.POIIterator = 0;
 RPSCoreFramework.FreeStats = 0;
 RPSCoreFramework.FreeStatsCached = 0;
 RPSCoreFramework.TargetAura = 1000012;
@@ -38,8 +54,8 @@ RPSCoreFramework.RequestUnlearn = 50000;
 RPSCoreFramework.RequestRescale = 500000;
 RPSCoreFramework.GetLastClickedSlot = "chest";
 RPSCoreFramework.StatsLevel = 40;
-RPSCoreFramework.MyScale = 0 -- Takes it from the server if -1 we lock the slider and disable it.
-RPSCoreFramework.ChoosedScale = 0
+RPSCoreFramework.MyScale = 0; -- Takes it from the server if -1 we lock the slider and disable it.
+RPSCoreFramework.ChoosedScale = 0;
 
 RPSCoreFramework.Interface.HighlightedButtons = {};
 RPSCoreFramework.Interface.HighlightedTabButtons = {};

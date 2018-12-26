@@ -30,6 +30,7 @@ Init.lua
 Chat.lua
 Hooks.lua
 Macros.lua
+DifficultChoiceAlert.lua
 POI.lua
 
 
