@@ -41,7 +41,7 @@ RPSCoreFramework.DifficultClases = {
 	"Death knight"
 };
 
-RPSCoreFrameWork.Prefix = "DRPS";
+RPSCoreFramework.Prefix = "DRPS";
 RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
 RPSCoreFramework.POIIterator = 0;
 RPSCoreFramework.FreeStats = 0;
