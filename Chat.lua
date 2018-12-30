@@ -38,7 +38,7 @@ function sysMsg(self, event, msg, author, ...)
 end
 
 function RPSCoreFramework:SendCoreMessage(msg)
-	SendAddonMessage("DRPS", msg, "WHISPER", UnitName("player"));
+	SendAddonMessage(RPSCoreFramework.Prefix, msg, "WHISPER", UnitName("player"));
 end;
 
 

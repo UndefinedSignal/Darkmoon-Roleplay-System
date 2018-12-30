@@ -45,8 +45,8 @@ function RPSCoreFramework:UpdateScrollerPosition()
 end
 
 function RPSCoreFramework:PeriodicallyUpdater()
-	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Prefix, ".rps action scale info")
-	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Prefix, ".rps action aura list active")
+	RPSCoreFramework:SendCoreMessage(".rps action scale info")
+	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
 	RPSCoreFramework:UpdateScaleReset()
 
 	-- Action Camera
