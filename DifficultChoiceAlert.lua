@@ -37,13 +37,13 @@ function RPSCoreFramework:DifficultMessageSendToPlayer()
 
 	if flag then
 		StaticPopupDialogs["PopupDifficultRaceOrClassMessage"] = {
-			text = message,
+			text = message,	
 			button1 = OKAY,
 			OnAccept = function() RPSCoreFramework:SubmitDiff() end,
-			timeout = 3,
+			--timeout = 3,
 			whileDead = true,
 			hideOnEscape = false,
-			StartDelay = function() return 1; end,
+			--StartDelay = function() return 1; end,
 			exclusive = true,
 			showAlert = 1,
 			preferredIndex = 3, 
