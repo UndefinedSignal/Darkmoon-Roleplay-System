@@ -7,6 +7,7 @@ function RPSCoreFramework:OnEnable()
 		RPSCoreFramework:switchMainFrame();
 		RPSCoreShouldFirstTime = true;
 	end
+	RPSCoreFramework:DifficultMessageSendToPlayer();
 end
 
 function RPSCoreFramework:OnInitialize()
@@ -171,6 +172,7 @@ function RPSCoreFramework:OnInitialize()
 	RPSCoreFramework:GenerateCharScaleSlider()
 	RPSCoreFramework:GenerateClassBackground()
 	RPSCoreFramework:UpdateScaleReset()
+
 
 	-- Popup's
 

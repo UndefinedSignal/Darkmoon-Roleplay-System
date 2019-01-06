@@ -27,19 +27,17 @@ RPSCoreFramework.Map.Icons = {
 RPSCoreFramework.Map.PinButtons = {};
 
 RPSCoreFramework.DifficultRaces = {
-	"Void Elf",
-	"Highmountain Tauren",
-	"Blood Elf",
-	"Draenei",
-	"Lightforgen Draenei",
-	"Pandaren",
-	"Night Elf"
+	"void elf",
+	"highmountain tauren",
+	"blood elf",
+	"draenei",
+	"lightforgen draenei",
+	"pandaren",
+	"night elf",
+	"nightborne"
 };
 
-RPSCoreFramework.DifficultClases = {
-	"Daemon hunter",
-	"Death knight"
-};
+RPSCoreFramework.DifficultClass = { 2, 6, 7, 9, 10, 11, 12};
 
 RPSCoreFramework.Prefix = "DRPS";
 RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
