@@ -20,6 +20,7 @@ libs\HereBeDragons-Pins-1.0.lua
 
 DataSheets.lua
 Literature.lua
+DifficultChoiceAlert.lua
 Scroller.lua
 Updater.lua
 Interact.lua
@@ -30,7 +31,6 @@ Init.lua
 Chat.lua
 Hooks.lua
 Macros.lua
-DifficultChoiceAlert.lua
 POI.lua
 
 
