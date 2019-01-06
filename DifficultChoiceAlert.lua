@@ -36,8 +36,6 @@ function RPSCoreFramework:DifficultMessageSendToPlayer()
 	end
 
 	if flag then
-		RPSCoreFramework:ShowDifficultMessageConstructor(message);
-
 		StaticPopupDialogs["PopupDifficultRaceOrClassMessage"] = {
 			text = message,
 			button1 = OKAY,
