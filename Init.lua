@@ -1,13 +1,14 @@
 function RPSCoreFramework:OnEnable()
-	self:ScheduleTimer("OneShotUpdater", 5)
-	self:ScheduleTimer("UpdateScrollerPosition", 7)
-	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5)
+	self:ScheduleTimer("OneShotUpdater", 5);
+	self:ScheduleTimer("UpdateScrollerPosition", 7);
+	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5);
 --	self:ScheduleRepeatingTimer("PeriodicallyUpdater", 10)
+	RPSCoreFramework:DifficultMessageSendToPlayer()
 	if (not RPSCoreShouldFirstTime) then
 		RPSCoreFramework:switchMainFrame();
 		RPSCoreShouldFirstTime = true;
 	end
-	RPSCoreFramework:DifficultMessageSendToPlayer();
+	
 end
 
 function RPSCoreFramework:OnInitialize()
