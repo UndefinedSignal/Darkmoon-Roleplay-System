@@ -40,10 +40,10 @@ function RPSCoreFramework:DifficultMessageSendToPlayer()
 			text = message,	
 			button1 = OKAY,
 			OnAccept = function() RPSCoreFramework:SubmitDiff() end,
-			--timeout = 3,
+			timeout = 15,
 			whileDead = true,
-			hideOnEscape = false,
-			--StartDelay = function() return 1; end,
+			hideOnEscape = false, -- И почему тут был true?
+			StartDelay = function() return 1; end,
 			exclusive = true,
 			showAlert = 1,
 			preferredIndex = 3, 

@@ -75,6 +75,7 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
+		enterClicksFirstButton = true,
 		exclusive = true,
 		showAlert = 1,
 		preferredIndex = 3, 
@@ -119,6 +120,7 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 	  	timeout = 15,
 	  	whileDead = true,
 	  	hideOnEscape = true,
+	  	enterClicksFirstButton = true,
 	}
 	StaticPopup_Hide("removeDisp")
 	StaticPopup_Hide("DipsSlotEditMenu")
