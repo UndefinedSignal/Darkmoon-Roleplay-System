@@ -168,3 +168,85 @@ function RPSCoreFramework:AddMinimapIcon()
 	icon:Register("RPSDarkmoonIcon", LDBObject, RPSCoreIconData);
 	icon:Show("RPSDarkmoonIcon");
 end
+
+function RPSCoreFramework:ChangePlayerPassword()
+	local oldpass, newpass, newpassrep;
+
+	StaticPopupDialogs["OldPassword"] = {
+		text = "Введите старый пароль",
+		button1 = "Продолжить",
+		button2 = "Выйти",
+		OnShow = function (self, data)
+
+		end,
+		OnAccept = function (self, data, data2)
+			oldpass = self.editBox:GetText()
+			StaticPopup_Hide("OldPassword")
+			StaticPopup_Show("NewPassword")
+		end,
+	  	OnCancel = function (_,reason)
+	--		Nope
+	  	end,
+		hasEditBox = true,
+--	  	timeout = 3,
+	  	whileDead = true,
+	  	hideOnEscape = true,
+	  	enterClicksFirstButton = true,
+	}
+
+	StaticPopupDialogs["NewPassword"] = {
+		text = "Введите новый пароль",
+		button1 = "Продолжить",
+		button2 = "Выйти",
+		OnShow = function (self, data)
+
+		end,
+		OnAccept = function (self, data, data2)
+			newpass = self.editBox:GetText()
+			if string.len(newpass) < 4 then
+				message("\nПароль не может содержать менее 4 символов")
+				return false
+			end
+			StaticPopup_Hide("NewPassword")
+			StaticPopup_Show("NewPasswordRepeat")
+		end,
+	  	OnCancel = function (_,reason)
+	--		Nope
+	  	end,
+		hasEditBox = true,
+--	  	timeout = 3,
+	  	whileDead = true,
+	  	hideOnEscape = true,
+	  	enterClicksFirstButton = true,
+	}
+
+	StaticPopupDialogs["NewPasswordRepeat"] = {
+		text = "Повторите новый пароль",
+		button1 = "Продолжить",
+		button2 = "Выйти",
+		OnShow = function (self, data)
+
+		end,
+		OnAccept = function (self, data, data2)
+			newpassrep = self.editBox:GetText()
+			StaticPopup_Hide("NewPasswordRepeat")
+			
+			if newpassrep ~= newpass then
+				message("\nПароли не совпадают")
+				return false
+			end
+			local msg = ".bnetaccount password "..oldpass.." "..newpass.." "..newpass
+			SendChatMessage(msg, "WHISPER", "Common", GetUnitName("player"));
+		end,
+	  	OnCancel = function (_,reason)
+	--		Nope
+	  	end,
+		hasEditBox = true,
+--	  	timeout = 3,
+	  	whileDead = true,
+	  	hideOnEscape = true,
+	  	enterClicksFirstButton = true,
+	}
+
+	StaticPopup_Show("OldPassword")
+end

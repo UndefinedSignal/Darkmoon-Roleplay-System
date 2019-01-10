@@ -108,7 +108,7 @@
                                 </Frames>
                                 <Scripts>
                                     <OnShow>
-                                        InfoFrameBordersCaptionPanel:Hide()
+                                        InfoFrameBordersCaptionPanel:Hide();
                                     </OnShow>
                                 </Scripts>
                             </Frame>
@@ -493,7 +493,7 @@
                                         <Scripts>
                                             <OnShow>
                                                 if RPSCoreFramework.MyScale == -1 then
-                                                    self:Disable()
+                                                    self:Disable();
                                                 end
                                             </OnShow>
                                         </Scripts>
@@ -503,14 +503,14 @@
                                         <Size x="150" y="60"/>
                                         <Scripts>
                                             <OnEnter>
-                                                self:SetAnimation(66)
+                                                self:SetAnimation(66);
                                             </OnEnter>
                                             <OnLeave>
-                                                self:SetAnimation(0)
+                                                self:SetAnimation(0);
                                             </OnLeave>
                                             <OnShow>
-                                                DarkmoonPlayerModel:SetUnit("player")
-                                                DarkmoonPlayerModel:SetAllPoints()
+                                                DarkmoonPlayerModel:SetUnit("player");
+                                                DarkmoonPlayerModel:SetAllPoints();
                                             </OnShow>
                                             <OnMouseUp>
                                                 self.onMouseUpFunc(self, button);
@@ -531,12 +531,12 @@
 
                                         <Scripts>
                                             <OnLoad>
-                                                self:SetFrameStrata("DIALOG")
-                                                self:SetText("Применить")
+                                                self:SetFrameStrata("DIALOG");
+                                                self:SetText("Применить");
                                             </OnLoad>
 
                                             <OnShow>
-                                                RPSCoreFramework:UpdateScaleApplyButton()
+                                                RPSCoreFramework:UpdateScaleApplyButton();
                                             </OnShow>
 
                                             <OnClick>
@@ -552,12 +552,12 @@
                                         </Anchors>
                                         <Scripts>
                                             <OnLoad>
-                                                self:SetFrameStrata("DIALOG")
-                                                self:SetText("Сброс "..GetCoinTextureString(500000))
+                                                self:SetFrameStrata("DIALOG");
+                                                self:SetText("Сброс "..GetCoinTextureString(500000));
                                             </OnLoad>
 
                                             <OnShow>
-                                                RPSCoreFramework:UpdateScaleReset()
+                                                RPSCoreFramework:UpdateScaleReset();
                                             </OnShow>
 
                                             <OnClick>
@@ -622,7 +622,7 @@
                                         </Layers>
                                         <Scripts>
                                             <OnLoad>
-                                                self:Disable()
+                                                self:Disable();
                                             </OnLoad>
                                         </Scripts>
                                     </CheckButton>
@@ -662,24 +662,24 @@
                                         <Scripts>
                                             <OnShow>
                                                 if RPSCoreActionCam then
-                                                    RPS_ACTIONCAMCheckBox:SetChecked(true)
-                                                    SetCVar("test_cameraDynamicPitch", 1)
-                                                    SetCVar("test_cameraOverShoulder", 1)
+                                                    RPS_ACTIONCAMCheckBox:SetChecked(true);
+                                                    SetCVar("test_cameraDynamicPitch", 1);
+                                                    SetCVar("test_cameraOverShoulder", 1);
                                                 else
-                                                    RPS_ACTIONCAMCheckBox:SetChecked(false)
-                                                    SetCVar("test_cameraDynamicPitch", 0)
-                                                    SetCVar("test_cameraOverShoulder", 0)
+                                                    RPS_ACTIONCAMCheckBox:SetChecked(false);
+                                                    SetCVar("test_cameraDynamicPitch", 0);
+                                                    SetCVar("test_cameraOverShoulder", 0);
                                                 end
                                             </OnShow>
                                             <OnClick>
                                                 if self:GetChecked() then
-                                                    RPSCoreActionCam = true
-                                                    SetCVar("test_cameraDynamicPitch", 1)
-                                                    SetCVar("test_cameraOverShoulder", 1)
+                                                    RPSCoreActionCam = true;
+                                                    SetCVar("test_cameraDynamicPitch", 1);
+                                                    SetCVar("test_cameraOverShoulder", 1);
                                                 else
-                                                    RPSCoreActionCam = false
-                                                    SetCVar("test_cameraDynamicPitch", 0)
-                                                    SetCVar("test_cameraOverShoulder", 0)
+                                                    RPSCoreActionCam = false;
+                                                    SetCVar("test_cameraDynamicPitch", 0);
+                                                    SetCVar("test_cameraOverShoulder", 0);
                                                 end
                                             </OnClick>
                                         </Scripts>
@@ -693,7 +693,7 @@
                                         <Scripts>
                                             <OnClick>
                                                 RPSCoreFramework:SendCoreMessage(".rps act barber");
-                                                PlaySound(624, "SFX")
+                                                PlaySound(624, "SFX");
                                             </OnClick>
                                         </Scripts>
                                         <Frames>
@@ -715,11 +715,11 @@
                                 </Anchors>
                                 <Scripts>
                                     <OnClick>
-                                        DrakmoonCharacterFrameMain:Show()
-                                        DrakmoonCharacterFrameSettings:Hide()
-                                        self:LockHighlight()
-                                        RPS_CHRBTN2:UnlockHighlight()
-                                        PlaySound(21968, "SFX")
+                                        DrakmoonCharacterFrameMain:Show();
+                                        DrakmoonCharacterFrameSettings:Hide();
+                                        self:LockHighlight();
+                                        RPS_CHRBTN2:UnlockHighlight();
+                                        PlaySound(21968, "SFX");
                                     </OnClick>
                                 </Scripts>
                             </Button>
@@ -731,11 +731,11 @@
                                 </Anchors>
                                 <Scripts>
                                     <OnClick>
-                                        DrakmoonCharacterFrameMain:Hide()
-                                        DrakmoonCharacterFrameSettings:Show()
-                                        self:LockHighlight()
-                                        RPS_CHRBTN1:UnlockHighlight()
-                                        PlaySound(21968, "SFX")
+                                        DrakmoonCharacterFrameMain:Hide();
+                                        DrakmoonCharacterFrameSettings:Show();
+                                        self:LockHighlight();
+                                        RPS_CHRBTN1:UnlockHighlight();
+                                        PlaySound(21968, "SFX");
                                     </OnClick>
                                 </Scripts>
                             </Button>
@@ -825,8 +825,8 @@
                                         FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
                                     </OnVerticalScroll>
                                     <OnShow>
-                                        RPSCoreFramework.Interface.Auras.Initialized = true
-                                        RPSCoreFramework:GenerateScrollMenu()
+                                        RPSCoreFramework.Interface.Auras.Initialized = true;
+                                        RPSCoreFramework:GenerateScrollMenu();
                                     </OnShow>
                                 </Scripts>
                             </ScrollFrame>
@@ -834,7 +834,7 @@
                                 <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-17"/></Anchors>
                                 <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 1);</OnClick>
                                 <OnEnter>
-                                    RPSCoreFramework:GenerateTooltipForFrame(RPS_AuraButton1)
+                                    RPSCoreFramework:GenerateTooltipForFrame(RPS_AuraButton1);
                                 </OnEnter>
                                 </Scripts>
                             </Button>
@@ -916,7 +916,7 @@
                                 </Anchors>
                                 <Scripts>
                                     <OnShow>
-                                        RPSCoreFramework:ReloadDispList()
+                                        RPSCoreFramework:ReloadDispList();
                                     </OnShow>
                                 </Scripts>
                             </Frame>
@@ -943,7 +943,8 @@
 
                                 <Scripts>
                                     <OnClick>
-                                        RPSCoreFramework:CreateDispMacro()
+                                        RPSCoreFramework:CreateDispMacro();
+                                        PlaySound(624, "SFX");
                                     </OnClick>
                                 </Scripts>
                             </Button>
@@ -993,8 +994,8 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self)
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonInfoFrame)
+			        		RPSCoreFramework:OnClickCosmetic(self);
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonInfoFrame);
 			        	</OnClick>
                         </Scripts>
                     </Button>
@@ -1016,8 +1017,8 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self)
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonRulesFrame)
+			        		RPSCoreFramework:OnClickCosmetic(self);
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonRulesFrame);
 			        	</OnClick>
                         </Scripts>
                     </Button>
@@ -1039,8 +1040,8 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self)
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonFightSystemFrame)
+			        		RPSCoreFramework:OnClickCosmetic(self);
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonFightSystemFrame);
 			        	</OnClick>
                         </Scripts>
                     </Button>
@@ -1062,8 +1063,8 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self)
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharStatsFrame)
+			        		RPSCoreFramework:OnClickCosmetic(self);
+			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharStatsFrame);
 			        	</OnClick>
                         </Scripts>
                     </Button>
@@ -1085,8 +1086,8 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-				        		RPSCoreFramework:OnClickCosmetic(self)
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharacterFrame)	    						
+				        		RPSCoreFramework:OnClickCosmetic(self);
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharacterFrame);
 			        		</OnClick>
                         </Scripts>
                     </Button>
@@ -1107,9 +1108,9 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-                                RPSCoreFramework.Interface.Auras.Initialized = true
-				        		RPSCoreFramework:OnClickCosmetic(self)
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonAurasFrame)
+                                RPSCoreFramework.Interface.Auras.Initialized = true;
+				        		RPSCoreFramework:OnClickCosmetic(self);
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonAurasFrame);
 			        		</OnClick>
                         </Scripts>
                     </Button>
@@ -1131,13 +1132,39 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-                                RPSCoreFramework:OnClickCosmetic(self)
-                                RPSCoreFramework:OnClickFrameShowing(DarkmoonDisplayInfoFrame)
+                                RPSCoreFramework:OnClickCosmetic(self);
+                                RPSCoreFramework:OnClickFrameShowing(DarkmoonDisplayInfoFrame);
                             </OnClick>
                         </Scripts>
                     </Button>
+
+                    <Button name="RPS_DropMyPassword" inherits="RPS_CategoryButton">
+                        <Size x="158" y="24"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-288"/> -- *1.1
+                        </Anchors>
+                        <Layers>
+                            <Layer level="ARTWORK">
+                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Сменить пароль">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
+                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Scripts>
+                            <OnClick>
+                                --RPSCoreFramework:OnClickCosmetic(self);
+                                RPSCoreFramework:ChangePlayerPassword();
+                            </OnClick>
+                        </Scripts>
+                    </Button>
+
                 </Frames>
             </ScrollFrame>
         </Frames>
     </Frame>
 </Ui>
+
+

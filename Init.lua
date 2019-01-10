@@ -143,36 +143,38 @@ function RPSCoreFramework:OnInitialize()
 
 	-- Button extensions
 
-	RPS_DarkmoonInfo:LockHighlight() -- Starting page
-    RPS_CHRBTN1:LockHighlight()
-    RPS_CHRBTN2:UnlockHighlight()
+	RPS_DarkmoonInfo:LockHighlight(); -- Starting page
+    RPS_CHRBTN1:LockHighlight();
+    RPS_CHRBTN2:UnlockHighlight();
 
 	RPSCoreFramework:OnClickCosmeticTabs(RPS_FSBTN1);
 	RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
 
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DarkmoonInfo)
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_RulesInfo)
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_BattleSystemInfo)
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_StatsInfo)
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_ScaleInfo)
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_AurasInfo)
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DisplayInfo)
-	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN1)
-	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2)
-	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3)
-	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN4)
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DarkmoonInfo);
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_RulesInfo);
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_BattleSystemInfo);
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_StatsInfo);
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_ScaleInfo);
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_AurasInfo);
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DisplayInfo);
+	--table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DropMyPassword);
+
+	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN1);
+	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2);
+	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3);
+	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN4);
 	
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonInfoFrame)
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonRulesFrame)
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonFightSystemFrame)
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonCharStatsFrame)
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonCharacterFrame)
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonAurasFrame)
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonDisplayInfoFrame)
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonInfoFrame);
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonRulesFrame);
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonFightSystemFrame);
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonCharStatsFrame);
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonCharacterFrame);
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonAurasFrame);
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonDisplayInfoFrame);
 	
-	RPSCoreFramework:GenerateCharScaleSlider()
-	RPSCoreFramework:GenerateClassBackground()
-	RPSCoreFramework:UpdateScaleReset()
+	RPSCoreFramework:GenerateCharScaleSlider();
+	RPSCoreFramework:GenerateClassBackground();
+	RPSCoreFramework:UpdateScaleReset();
 
 
 	-- Popup's
