@@ -27,13 +27,13 @@ RPSCoreFramework.Map.Icons = {
 RPSCoreFramework.Map.PinButtons = {};
 
 RPSCoreFramework.DifficultRaces = {
-	"void elf",
-	"highmountain tauren",
-	"blood elf",
+	"voidelf",
+	"highmountaintauren",
+	"bloodelf",
 	"draenei",
-	"lightforgen draenei",
+	"lightforgendraenei",
 	"pandaren",
-	"night elf",
+	"nightelf",
 	"nightborne"
 };
 

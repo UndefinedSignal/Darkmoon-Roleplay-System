@@ -1,8 +1,8 @@
 function RPSCoreFramework:IsDifficultRace()
-	race, raceEn = string.lower(UnitRace("player"));
+	race, raceEn = UnitRace("player");
 
 	for k, v in ipairs(RPSCoreFramework.DifficultRaces) do
-		if v == raceEn then
+		if v == string.lower(raceEn) then
 			return true
 		end
 	end
@@ -40,10 +40,10 @@ function RPSCoreFramework:DifficultMessageSendToPlayer()
 			text = message,	
 			button1 = OKAY,
 			OnAccept = function() RPSCoreFramework:SubmitDiff() end,
-			timeout = 15,
+			--timeout = 15,
 			whileDead = true,
-			hideOnEscape = false, -- И почему тут был true?
-			StartDelay = function() return 1; end,
+			hideOnEscape = false,
+			--StartDelay = function() return 1; end, -- РЇ РЅРµ РїРѕРЅСЏР» РєР°Рє СЌС‚Рѕ СЂР°Р±РѕС‚Р°РµС‚.
 			exclusive = true,
 			showAlert = 1,
 			preferredIndex = 3, 
