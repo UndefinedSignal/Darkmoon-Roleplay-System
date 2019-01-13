@@ -951,6 +951,209 @@
 
                         </Frames>
                     </Frame>
+
+
+                    <Frame name="DarkmoonPasswordChangeFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="-30" />
+                            <Anchor point="TOPRIGHT" x="2" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\Artifacts\ArtifactUIRogue">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                    <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                </Texture>
+                            </Layer>
+
+                            <Layer>
+                                <FontString name="DarkmoonPasswordChangeFrameInfoTitle" font="Fonts\FRIZQT___CYR.TTF" text="Смена пароля" justifyH="CENTER" justifyV="TOP">
+                                    <Color r="1" g="1" b="1" a="1"/>
+                                    <FontHeight val="24"/>
+                                    <Anchors>
+                                        <Anchor point="TOP" relativeTo="DarkmoonPasswordChangeFrame" x="0" y="-40" />
+                                    </Anchors>
+                                    <Shadow>
+                                        <Offset x="1" y="1" />
+                                        <Color r="0" g="0" b="0"/>
+                                    </Shadow>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+
+							<EditBox name="RPS_Oldpassword" letters="80" enableMouse="false" autoFocus="false">
+                                <Size x="120" y="40"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonPasswordChangeFrame" x="185" y="-120" relativePoint="TOPLEFT"/>
+                                </Anchors>
+							    <Layers>
+							        <Layer level="BACKGROUND">
+							            <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+							                <Size x="75" y="32" />
+							                <Anchors>
+							                    <Anchor point="LEFT">
+							                        <Offset x="-10" y="0" />
+							                    </Anchor>
+							                </Anchors>
+							                <TexCoords left="0" right="0.2" top="0" bottom="1.0"/>
+							            </Texture>
+							            <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+							                <Size x="75" y="32" />
+							                <Anchors>
+							                    <Anchor point="RIGHT">
+							                        <Offset x="10" y="0" />
+							                    </Anchor>
+							                </Anchors>
+							                <TexCoords left="0.7" right="1.0" top="0" bottom="1.0"/>
+							            </Texture>
+							        </Layer>
+	                                <Layer>
+	                                    <FontString name="RPS_TextOldPass" font="Fonts\FRIZQT___CYR.TTF" text="Старый пароль" justifyH="CENTER" justifyV="TOP">
+	                                        <Color r="1" g="1" b="0" a="1"/>
+	                                        <FontHeight val="16"/>
+	                                        <Anchors>
+	                                            <Anchor point="TOPLEFT" relativeTo="RPS_Oldpassword" x="3" y="25" />
+	                                        </Anchors>
+	                                    </FontString>
+	                                </Layer>
+							    </Layers>
+							    <Scripts>
+									<OnEscapePressed>
+										self:ClearFocus();
+									</OnEscapePressed>
+									<OnEnterPressed>
+										self:ClearFocus();
+									</OnEnterPressed>
+							    </Scripts>
+							    <FontString inherits="ChatFontNormal" />
+							</EditBox>
+
+
+							<EditBox name="RPS_Newpassword" letters="80" enableMouse="false" autoFocus="false">
+                                <Size x="120" y="40"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonPasswordChangeFrame" x="185" y="-200" relativePoint="TOPLEFT"/>
+                                </Anchors>
+							    <Layers>
+							        <Layer level="BACKGROUND">
+							            <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+							                <Size x="75" y="32" />
+							                <Anchors>
+							                    <Anchor point="LEFT">
+							                        <Offset x="-10" y="0" />
+							                    </Anchor>
+							                </Anchors>
+							                <TexCoords left="0" right="0.2" top="0" bottom="1.0"/>
+							            </Texture>
+							            <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+							                <Size x="75" y="32" />
+							                <Anchors>
+							                    <Anchor point="RIGHT">
+							                        <Offset x="10" y="0" />
+							                    </Anchor>
+							                </Anchors>
+							                <TexCoords left="0.7" right="1.0" top="0" bottom="1.0"/>
+							            </Texture>
+							        </Layer>
+	                                <Layer>
+	                                    <FontString name="RPS_TextNewPass" font="Fonts\FRIZQT___CYR.TTF" text="Новый пароль" justifyH="CENTER" justifyV="TOP">
+	                                        <Color r="1" g="1" b="0" a="1"/>
+	                                        <FontHeight val="16"/>
+	                                        <Anchors>
+	                                            <Anchor point="TOPLEFT" relativeTo="RPS_Newpassword" x="3" y="25" />
+	                                        </Anchors>
+	                                    </FontString>
+	                                </Layer>
+							    </Layers>
+							    <Scripts>
+									<OnEscapePressed>
+										self:ClearFocus();
+									</OnEscapePressed>
+									<OnEnterPressed>
+										self:ClearFocus();
+									</OnEnterPressed>
+							    </Scripts>
+							    <FontString inherits="ChatFontNormal" />
+							</EditBox>
+
+
+
+							<EditBox name="RPS_NewpasswordRepeate" letters="80" enableMouse="false" autoFocus="false">
+                                <Size x="120" y="40"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonPasswordChangeFrame" x="185" y="-280" relativePoint="TOPLEFT"/>
+                                </Anchors>
+							    <Layers>
+							        <Layer level="BACKGROUND">
+							            <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Left">
+							                <Size x="75" y="32" />
+							                <Anchors>
+							                    <Anchor point="LEFT">
+							                        <Offset x="-10" y="0" />
+							                    </Anchor>
+							                </Anchors>
+							                <TexCoords left="0" right="0.2" top="0" bottom="1.0"/>
+							            </Texture>
+							            <Texture file="Interface\ChatFrame\UI-ChatInputBorder-Right">
+							                <Size x="75" y="32" />
+							                <Anchors>
+							                    <Anchor point="RIGHT">
+							                        <Offset x="10" y="0" />
+							                    </Anchor>
+							                </Anchors>
+							                <TexCoords left="0.7" right="1.0" top="0" bottom="1.0"/>
+							            </Texture>
+							        </Layer>
+	                                <Layer>
+	                                    <FontString name="RPS_TextOldPassRepeate" font="Fonts\FRIZQT___CYR.TTF" text="Повтор пароля" justifyH="CENTER" justifyV="TOP">
+	                                        <Color r="1" g="1" b="0" a="1"/>
+	                                        <FontHeight val="16"/>
+	                                        <Anchors>
+	                                            <Anchor point="TOPLEFT" relativeTo="RPS_NewpasswordRepeate" x="3" y="25" />
+	                                        </Anchors>
+	                                    </FontString>
+	                                </Layer>
+							    </Layers>
+							    <Scripts>
+									<OnEscapePressed>
+										self:ClearFocus();
+									</OnEscapePressed>
+									<OnEnterPressed>
+										self:ClearFocus();
+									</OnEnterPressed>
+							    </Scripts>
+							    <FontString inherits="ChatFontNormal" />
+							</EditBox>
+
+                            <Button name="RPS_DispUpdateButton" inherits="UIPanelButtonTemplate" text="Изменить пароль">
+                                <Size x="124" y="28"/>
+                                <Anchors><Anchor relativeTo="DarkmoonPasswordChangeFrame" point="BOTTOM" x="0" y="41"/></Anchors>
+                                <NormalFont style="GameFontNormal"/>
+
+                                <Scripts>
+                                    <OnClick>
+                                        RPSCoreFramework:ChangePassword(RPS_Oldpassword:GetText(), RPS_Newpassword:GetText(), RPS_NewpasswordRepeate:GetText());
+                                        PlaySound(624, "SFX");
+                                    </OnClick>
+                                </Scripts>
+                            </Button>
+                        </Frames>
+                    </Frame>
+
                 </Frames>
             </Frame>
             <!-- LEFT PART : Menu -->
@@ -994,9 +1197,9 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self);
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonInfoFrame);
-			        	</OnClick>
+				        		RPSCoreFramework:OnClickCosmetic(self);
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonInfoFrame);
+			        		</OnClick>
                         </Scripts>
                     </Button>
                     <Button name="RPS_RulesInfo" inherits="RPS_CategoryButton">
@@ -1017,9 +1220,9 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self);
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonRulesFrame);
-			        	</OnClick>
+				        		RPSCoreFramework:OnClickCosmetic(self);
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonRulesFrame);
+				        	</OnClick>
                         </Scripts>
                     </Button>
                     <Button name="RPS_BattleSystemInfo" inherits="RPS_CategoryButton">
@@ -1040,9 +1243,9 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self);
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonFightSystemFrame);
-			        	</OnClick>
+				        		RPSCoreFramework:OnClickCosmetic(self);
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonFightSystemFrame);
+			        		</OnClick>
                         </Scripts>
                     </Button>
                     <Button name="RPS_StatsInfo" inherits="RPS_CategoryButton">
@@ -1063,9 +1266,9 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-			        		RPSCoreFramework:OnClickCosmetic(self);
-			        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharStatsFrame);
-			        	</OnClick>
+				        		RPSCoreFramework:OnClickCosmetic(self);
+				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharStatsFrame);
+			        		</OnClick>
                         </Scripts>
                     </Button>
                     <Button name="RPS_ScaleInfo" inherits="RPS_CategoryButton">
@@ -1155,12 +1358,12 @@
                         </Layers>
                         <Scripts>
                             <OnClick>
-                                --RPSCoreFramework:OnClickCosmetic(self);
-                                RPSCoreFramework:ChangePlayerPassword();
+                                RPSCoreFramework:OnClickCosmetic(self);
+                                --RPSCoreFramework:ChangePlayerPassword();
+                                RPSCoreFramework:OnClickFrameShowing(DarkmoonPasswordChangeFrame);
                             </OnClick>
                         </Scripts>
                     </Button>
-
                 </Frames>
             </ScrollFrame>
         </Frames>

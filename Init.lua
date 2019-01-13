@@ -157,7 +157,7 @@ function RPSCoreFramework:OnInitialize()
 	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_ScaleInfo);
 	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_AurasInfo);
 	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DisplayInfo);
-	--table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DropMyPassword);
+	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DropMyPassword);
 
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN1);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2);
@@ -171,6 +171,8 @@ function RPSCoreFramework:OnInitialize()
 	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonCharacterFrame);
 	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonAurasFrame);
 	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonDisplayInfoFrame);
+	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonPasswordChangeFrame);
+	
 	
 	RPSCoreFramework:GenerateCharScaleSlider();
 	RPSCoreFramework:GenerateClassBackground();
