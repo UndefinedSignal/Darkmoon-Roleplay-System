@@ -38,6 +38,21 @@ function RPSCoreFramework:OnInitialize()
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip")
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip")
 
+	self:HookScript(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton, "OnClick", function() print("Clicked"); end)
+	self:HookScript(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton, "OnClick", function() print("Clicked"); end)
+
+	self:SecureHook("ZoomOut", function() RPSCoreFramework:FlushAllPinsOnMap();	end)
+
+
+	RPSCoreFramework.HBD.RegisterCallback("RPSCoreFramework", "PlayerZoneChanged", function() RPSCoreFramework:GeneratePOIPlaces();	end) -- Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
+	--self:SecureHook("SetMapToCurrentZone", function() print("SetMapToCurrentZone");	end) -- Fires when worldmap sets on player.
+	self:SecureHook("ProcessMapClick", function()	self:ScheduleTimer("POIPreGenerate", 2)	end)
+	self:SecureHook("SetMapZoom", function() RPSCoreFramework:FlushAllPinsOnMap();	end)
+
+
+
+
+
 	--RPS_CharScaleSlider:HookScript("OnMouseUp", function() StaticPopup_Show("setCharacterScale") end)
 	RPS_BTNReScale:HookScript("OnMouseUp", function() if RPS_BTNReScale:IsEnabled() then StaticPopup_Show("setCharacterReScale") end end)
 	RPS_BTNAcceptScale:HookScript("OnMouseUp", function() if RPS_BTNAcceptScale:IsEnabled() then StaticPopup_Show("setCharacterScale") end end)

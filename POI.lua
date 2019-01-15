@@ -14,11 +14,15 @@ function RPSCoreFramework:InsertPinOnMap(icon_name, icon_path, zoneid, x, y)
 -- local p,f,x,y,w,h=WorldMapButton f=CrT or CreateFrame("Button","CrT",p) f:SetSize(16,16) f:SetNormalTexture("")
 	local p = WorldMapButton
 	local IFrame = CreateFrame("Button", name, p)
-	IFrame:SetSize(18,18)
+	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
+		IFrame:SetSize(24,24);
+	else
+		IFrame:SetSize(18,18);
+	end
 
 	local ntex = IFrame:CreateTexture()
 	ntex:SetTexture(icon_path)
-	ntex:SetVertexColor(0, 0, 0)
+	ntex:SetVertexColor(0.5, 0.5, 0.5) -- https://wow.gamepedia.com/Power_colors
 	ntex:SetAllPoints()
 	IFrame:SetNormalTexture(ntex)
 
@@ -42,11 +46,15 @@ function RPSCoreFramework:InsertPinOnMiniMap(icon_name, icon_path, zoneid, x, y)
 
 	local p = WorldMapButton
 	local IFrame = CreateFrame("Button", name, p)
-	IFrame:SetSize(18,18)
+	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
+		IFrame:SetSize(24,24);
+	else
+		IFrame:SetSize(18,18);
+	end
 
 	local ntex = IFrame:CreateTexture()
 	ntex:SetTexture(icon_path)
-	ntex:SetVertexColor(0, 0, 0)
+	ntex:SetVertexColor(0.5, 0.5, 0.5) -- https://wow.gamepedia.com/Power_colors
 	ntex:SetAllPoints()
 	IFrame:SetNormalTexture(ntex)
 
@@ -78,9 +86,9 @@ end
 function RPSCoreFramework:TakePinIcon()
 	--RPSCoreFramework.Map.Icons
 
-	local icon = "Interface\\MINIMAP\\TrapActive_Grey.blp"
+	local icon = "Interface\\MINIMAP\\TrapActive_Grey.blp";
 
-	return icon
+	return icon;
 end
 
 --function RPSCoreFramework:GeneratePinButtons()
@@ -88,16 +96,28 @@ end
 --end
 
 function RPSCoreFramework:GetPlayerPosition()
-	local x,y, mapid, _, _ = RPSCoreFramework.HBD:GetPlayerZonePosition()
+	local x,y, mapid, _, _ = RPSCoreFramework.HBD:GetPlayerZonePosition();
 	print("X: "..x.." Y: "..y.. " MapID: "..mapid)
 end
 
 function RPSCoreFramework:GeneratePOIPlaces()
 	for k, v in pairs(RPSCoreFramework.Map.PinButtons) do
-		RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[5], v[3], v[4])
-		RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[5], v[3], v[4])
+		RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[5], v[3], v[4]);
+		RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[5], v[3], v[4]);
 	end
+	print("POI Generation")
+	return true
 end
+
+function RPSCoreFramework:POIPreGenerate()
+	RPSCoreFramework:FlushAllPinsOnMap();
+	if GetCurrentMapZone() ~= 0 then
+		RPSCoreFramework:GeneratePOIPlaces();
+		return true;
+	end
+	return false;
+end
+
 
 --[[Retrieve the zone information the player is currently in.
 {"Tavern", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn", 0.504987, 0.903770, 301},
