@@ -65,7 +65,7 @@ RPSCoreFramework.Interface.MenuButtons = {
 	{"Информация", "RPS_DarkmoonInfo", "DarkmoonInfoFrame", false, 0, false},
 	{"Правила", "RPS_RuleInfo", "DarkmoonRulesFrame", false, 0, false},
 	{"Система боя", "RPS_BattleSystemInfo", "DarkmoonFightSystemFrame", false, 0, false},
-	{"Характеристики", "RPS_StatsInfo", "DarkmoonCharStatsFrame", true, 1, true},
+	{"Характеристики", "RPS_StatsInfo", nil, true, 1, true},
 	{"Персонаж", "RPS_ScaleInfo", "DarkmoonCharacterFrame", false, 0, false},
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
 	{"Display", "RPS_DisplayInfo", "DarkmoonDisplayInfoFrame", false, 0, false},

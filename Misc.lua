@@ -298,6 +298,7 @@ function RPSCoreFramework:PreGenerateDMButtons()
 					end
 					SubMenuButton:SetSize(130,24)
 					_G[RPSCoreFramework.Interface.SubMenuButtons[j][3].."Label"]:SetText("|cffFFFFFF"..RPSCoreFramework.Interface.SubMenuButtons[j][2]);
+					table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.SubMenuButtons[j][4]]);
 					table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]);
 					SubMenuButton:SetScript('OnClick', function()
 						RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]);
@@ -318,7 +319,9 @@ function RPSCoreFramework:PreGenerateDMButtons()
 				RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 			end
 		end)
-		table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
-		table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
+		if RPSCoreFramework.Interface.MenuButtons[i][3] ~= nil then
+			table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
+			table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
+		end
 	end
 end
