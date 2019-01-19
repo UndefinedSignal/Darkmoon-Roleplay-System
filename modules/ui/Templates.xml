@@ -1177,12 +1177,6 @@
 			</Layer>
 		</Layers>
 
-		<Script>
-			<OnLoad>
-				isExpanded = false;
-			</OnLoad>
-		</Script>
-
 		<HighlightTexture file="Interface\AchievementFrame\UI-Achievement-Category-Highlight" alphaMode="ADD">
 			<Anchors>
 				<Anchor point="TOPLEFT" x="0" y="0"/>

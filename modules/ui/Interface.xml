@@ -1154,6 +1154,68 @@
                         </Frames>
                     </Frame>
 
+                    <Frame name="DarkmoonBattleStatsFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="-30" />
+                            <Anchor point="TOPRIGHT" x="2" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\Artifacts\ArtifactUIRogue">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                    <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+
+                        </Frames>
+                    </Frame>
+
+                    <Frame name="DarkmoonSocialStatsFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="-30" />
+                            <Anchor point="TOPRIGHT" x="2" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\Artifacts\ArtifactUIRogue">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                    <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+
+                        </Frames>
+                    </Frame>
+
                 </Frames>
             </Frame>
             <!-- LEFT PART : Menu -->
@@ -1178,193 +1240,6 @@
                         </Texture>
                     </Layer>
                 </Layers>
-                <Frames>
-                    <Button name="RPS_DarkmoonInfo" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-50"/>
-                        </Anchors>
-                        <NormalFont style="GameFontNormal"/>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Информация">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-				        		RPSCoreFramework:OnClickCosmetic(self);
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonInfoFrame);
-			        		</OnClick>
-                        </Scripts>
-                    </Button>
-                    <Button name="RPS_RulesInfo" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-76"/> -- *1.1
-			        
-                        </Anchors>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Правила">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-				        		RPSCoreFramework:OnClickCosmetic(self);
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonRulesFrame);
-				        	</OnClick>
-                        </Scripts>
-                    </Button>
-                    <Button name="RPS_BattleSystemInfo" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-102"/> -- *1.1
-			        
-                        </Anchors>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Система боя">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-				        		RPSCoreFramework:OnClickCosmetic(self);
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonFightSystemFrame);
-			        		</OnClick>
-                        </Scripts>
-                    </Button>
-                    <Button name="RPS_StatsInfo" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-158"/> -- *1.1
-			        
-                        </Anchors>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Характеристики">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-				        		RPSCoreFramework:OnClickCosmetic(self);
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharStatsFrame);
-			        		</OnClick>
-                        </Scripts>
-                    </Button>
-                    <Button name="RPS_ScaleInfo" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-184"/> -- *1.1
-			        
-                        </Anchors>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Персонаж">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-				        		RPSCoreFramework:OnClickCosmetic(self);
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonCharacterFrame);
-			        		</OnClick>
-                        </Scripts>
-                    </Button>
-                    <Button name="RPS_AurasInfo" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-210"/> -- *1.1
-                        </Anchors>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Ауры">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-                                RPSCoreFramework.Interface.Auras.Initialized = true;
-				        		RPSCoreFramework:OnClickCosmetic(self);
-				        		RPSCoreFramework:OnClickFrameShowing(DarkmoonAurasFrame);
-			        		</OnClick>
-                        </Scripts>
-                    </Button>
-
-                    <Button name="RPS_DisplayInfo" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-236"/> -- *1.1
-                        </Anchors>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Display">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-                                RPSCoreFramework:OnClickCosmetic(self);
-                                RPSCoreFramework:OnClickFrameShowing(DarkmoonDisplayInfoFrame);
-                            </OnClick>
-                        </Scripts>
-                    </Button>
-
-                    <Button name="RPS_DropMyPassword" inherits="RPS_CategoryButton">
-                        <Size x="158" y="24"/>
-                        <Anchors>
-                            <Anchor relativeTo="RPS_MainFrameMenuScroll" relativePoint="TOPLEFT" x="16" y="-288"/> -- *1.1
-                        </Anchors>
-                        <Layers>
-                            <Layer level="ARTWORK">
-                                <FontString name="$parentLabel" inherits="GameFontNormal" wordwrap="false" justifyH="CENTER" text="Сменить пароль">
-                                    <Anchors>
-                                        <Anchor point="BOTTOMLEFT" x="24" y="22"/>
-                                        <Anchor point="TOPRIGHT" x="-16" y="-26"/>
-                                    </Anchors>
-                                </FontString>
-                            </Layer>
-                        </Layers>
-                        <Scripts>
-                            <OnClick>
-                                RPSCoreFramework:OnClickCosmetic(self);
-                                --RPSCoreFramework:ChangePlayerPassword();
-                                RPSCoreFramework:OnClickFrameShowing(DarkmoonPasswordChangeFrame);
-                            </OnClick>
-                        </Scripts>
-                    </Button>
-                </Frames>
             </ScrollFrame>
         </Frames>
     </Frame>

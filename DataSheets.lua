@@ -54,11 +54,27 @@ RPSCoreFramework.StatsLevel = 40;
 RPSCoreFramework.MyScale = 0; -- Takes it from the server if -1 we lock the slider and disable it.
 RPSCoreFramework.ChoosedScale = 0;
 
+
+
 RPSCoreFramework.Interface.HighlightedButtons = {};
 RPSCoreFramework.Interface.HighlightedTabButtons = {};
 RPSCoreFramework.Interface.HidingFrames = {};
-RPSCoreFramework.Interface.MenuButtons = {};
-RPSCoreFramework.Interface.SubMenuButtons = {};
+
+-- Button name, Button name in interface, Showing frame, is have a submenu?, submenus number, need a space tab?
+RPSCoreFramework.Interface.MenuButtons = {
+	{"Информация", "RPS_DarkmoonInfo", "DarkmoonInfoFrame", false, 0, false},
+	{"Правила", "RPS_RuleInfo", "DarkmoonRulesFrame", false, 0, false},
+	{"Система боя", "RPS_BattleSystemInfo", "DarkmoonFightSystemFrame", false, 0, false},
+	{"Характеристики", "RPS_StatsInfo", "DarkmoonCharStatsFrame", true, 1, true},
+	{"Персонаж", "RPS_ScaleInfo", "DarkmoonCharacterFrame", false, 0, false},
+	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
+	{"Display", "RPS_DisplayInfo", "DarkmoonDisplayInfoFrame", false, 0, false},
+	{"Сменить пароль", "RPS_DropMyPassword", "DarkmoonPasswordChangeFrame", false, 0, true}
+}
+RPSCoreFramework.Interface.SubMenuButtons = {
+	{1, "Боевые", "RPS_BattleStats", "DarkmoonBattleStatsFrame"}, 
+	{1, "Социальные", "RPS_SocialStats", "DarkmoonSocialStatsFrame"}
+}
 
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,

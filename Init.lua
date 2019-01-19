@@ -13,80 +13,48 @@ end
 
 function RPSCoreFramework:OnInitialize()
 --	RPSCoreFramework:BadAddonProtection()
-	LoggingChat(1)
-	SetCVar("autoClearAFK", 0)
-	self:RegisterEvent("PLAYER_TARGET_CHANGED")
-	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:RegisterEvent("PLAYER_LEVEL_UP")
-	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
-	self:RegisterEvent("PLAYER_MONEY");
+	LoggingChat(1);
+	SetCVar("autoClearAFK", 0);
+
 	self.isTypingMessage = false
-	
-	for index = 1, NUM_CHAT_WINDOWS do
-		local editbox = _G["ChatFrame" .. index .. "EditBox"]
-		self:HookScript(editbox, "OnTextChanged",   "UpdateTypingStatus")
-		self:HookScript(editbox, "OnEscapePressed", "UpdateTypingStatus")
-		self:HookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus")
-		self:HookScript(editbox, "OnHide",          "UpdateTypingStatus")
-	end
-	
-	self:HookScript(self, "OnEvent", "OnEventFrame")	
-	self:HookScript(GameTooltip, "OnTooltipSetItem", "ItemTooltip")
-	self:HookScript(ItemRefTooltip, "OnTooltipSetItem", "ItemTooltip")
-	self:HookScript(ItemRefShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip")
-	self:HookScript(ItemRefShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip")
-	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip")
-	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip")
 
-	self:HookScript(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton, "OnClick", function() print("Clicked"); end)
-	self:HookScript(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton, "OnClick", function() print("Clicked"); end)
+	table.insert(UISpecialFrames, RPS_MainFrame);
 
-	self:SecureHook("ZoomOut", function() RPSCoreFramework:FlushAllPinsOnMap();	end)
+	self:EnableDrag(RPS_MainFrame);
+	self:EnableDrag(RPS_InteractFrame);
 
+	self:InitializeHooks();
 
-	RPSCoreFramework.HBD.RegisterCallback("RPSCoreFramework", "PlayerZoneChanged", function() RPSCoreFramework:GeneratePOIPlaces();	end) -- Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
-	--self:SecureHook("SetMapToCurrentZone", function() print("SetMapToCurrentZone");	end) -- Fires when worldmap sets on player.
-	self:SecureHook("ProcessMapClick", function()	self:ScheduleTimer("POIPreGenerate", 2)	end)
-	self:SecureHook("SetMapZoom", function() RPSCoreFramework:FlushAllPinsOnMap();	end)
+	self:PaperdollDispInit();
+	self:AddMinimapIcon();
+	self:ChangeDefaultWords();
 
+	self:PreGenerateDMButtons();
+	self:FormatDMButtons();
 
-
-
-
-	--RPS_CharScaleSlider:HookScript("OnMouseUp", function() StaticPopup_Show("setCharacterScale") end)
-	RPS_BTNReScale:HookScript("OnMouseUp", function() if RPS_BTNReScale:IsEnabled() then StaticPopup_Show("setCharacterReScale") end end)
-	RPS_BTNAcceptScale:HookScript("OnMouseUp", function() if RPS_BTNAcceptScale:IsEnabled() then StaticPopup_Show("setCharacterScale") end end)
-	--RPS_BTNResetScale:HookScript("", handler)
-
-	-- Mainframe misc settings		
-	--tinsert(UISpecialFrames, RPS_MainFrame);
-	RPSCoreFramework:EnableDrag(RPS_MainFrame);
-	RPSCoreFramework:EnableDrag(RPS_InteractFrame);
-	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
-
-	RPSCoreFramework:PaperdollDispInit()
-	RPSCoreFramework:AddMinimapIcon()
-	RPSCoreFramework:ChangeDefaultWords()
+	self:GenerateCharScaleSlider();
+	self:GenerateClassBackground();
+	self:UpdateScaleReset();
 
 	-- Disp & Scale
 
-	RPSCoreFramework:SendCoreMessage(".disp list")
-	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
-	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
-	RPSCoreFramework:SendCoreMessage(".rps action scale info")
+	self:SendCoreMessage(".disp list");
+	self:SendCoreMessage(".rps action aura list known");
+	self:SendCoreMessage(".rps action aura list active");
+	self:SendCoreMessage(".rps action scale info");
 
 	-- Stats
 
-	RPSCoreFramework:UpdateDiff()
-	StrengthStatName:SetText("Сила")
-	AgilityStatName:SetText("Ловкость")
-	IntellectStatName:SetText("Интеллект")
-	CriticalChanceStatName:SetText("Критический шанс")
-	SpiritStatName:SetText("Дух")
-	EnduranceStatName:SetText("Стойкость")
-	DexterityStatName:SetText("Сноровка")
-	WillStatName:SetText("Воля")
-	DarkmoonCharStatsInfoUnlearn:SetText("Разучить "..GetCoinTextureString(RPSCoreFramework.RequestUnlearn))
+	self:UpdateDiff();
+	StrengthStatName:SetText("Сила");
+	AgilityStatName:SetText("Ловкость");
+	IntellectStatName:SetText("Интеллект");
+	CriticalChanceStatName:SetText("Критический шанс");
+	SpiritStatName:SetText("Дух");
+	EnduranceStatName:SetText("Стойкость");
+	DexterityStatName:SetText("Сноровка");
+	WillStatName:SetText("Воля");
+	DarkmoonCharStatsInfoUnlearn:SetText("Разучить "..GetCoinTextureString(RPSCoreFramework.RequestUnlearn));
 	
 	ITEM_MOD_MANA = "%c%s к духу";
 	ITEM_MOD_MANA_SHORT = "к духу";
@@ -97,24 +65,17 @@ function RPSCoreFramework:OnInitialize()
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
 	DarkmoonCharStatsInfoUnlearn:Disable();
+
+	self:StatsIncDecFunc();
 	
-	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
-	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
-	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
-	
-	RPS_InteractFrameHelp:SetScript("OnClick", function()	local msg = ".rps action help "..GetUnitName("target")	RPSCoreFramework:SendCoreMessage(msg) end);
-	RPS_InteractFrameKill:SetScript("OnClick", function()	local msg = ".rps action kill "..GetUnitName("target")	RPSCoreFramework:SendCoreMessage(msg) end);
-	
-	RPSCoreFramework:StatsIncDecFunc()
-	
-	StrengthIcon:SetTexture("Interface\\ICONS\\achievement_bg_most_damage_killingblow_dieleast")
-    AgilityIcon:SetTexture("Interface\\ICONS\\ability_rogue_quickrecovery")
-    IntellectIcon:SetTexture("Interface\\ICONS\\spell_shadow_brainwash")
+	StrengthIcon:SetTexture("Interface\\ICONS\\achievement_bg_most_damage_killingblow_dieleast");
+    AgilityIcon:SetTexture("Interface\\ICONS\\ability_rogue_quickrecovery");
+    IntellectIcon:SetTexture("Interface\\ICONS\\spell_shadow_brainwash");
 	CriticalChanceIcon:SetTexture("Interface\\ICONS\\spell_impending_victory");
-    SpiritIcon:SetTexture("Interface\\ICONS\\spell_holy_divinespirit")
-    EnduranceIcon:SetTexture("Interface\\ICONS\\ability_warrior_intensifyrage")
-    DexterityIcon:SetTexture("Interface\\ICONS\\ability_rogue_cheatdeath")
-    WillIcon:SetTexture("Interface\\ICONS\\ability_shaman_astralshift")
+    SpiritIcon:SetTexture("Interface\\ICONS\\spell_holy_divinespirit");
+    EnduranceIcon:SetTexture("Interface\\ICONS\\ability_warrior_intensifyrage");
+    DexterityIcon:SetTexture("Interface\\ICONS\\ability_rogue_cheatdeath");
+    WillIcon:SetTexture("Interface\\ICONS\\ability_shaman_astralshift");
 
 	-- RPSLiterature.lua text formatting
 
@@ -158,40 +119,18 @@ function RPSCoreFramework:OnInitialize()
 
 	-- Button extensions
 
-	RPS_DarkmoonInfo:LockHighlight(); -- Starting page
+--	RPS_DarkmoonInfo:LockHighlight(); -- Starting page
     RPS_CHRBTN1:LockHighlight();
     RPS_CHRBTN2:UnlockHighlight();
 
-	RPSCoreFramework:OnClickCosmeticTabs(RPS_FSBTN1);
+	self:OnClickCosmeticTabs(RPS_FSBTN1);
 	RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
-
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DarkmoonInfo);
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_RulesInfo);
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_BattleSystemInfo);
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_StatsInfo);
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_ScaleInfo);
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_AurasInfo);
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DisplayInfo);
-	table.insert(RPSCoreFramework.Interface.HighlightedButtons, RPS_DropMyPassword);
 
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN1);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN4);
 	
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonInfoFrame);
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonRulesFrame);
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonFightSystemFrame);
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonCharStatsFrame);
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonCharacterFrame);
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonAurasFrame);
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonDisplayInfoFrame);
-	table.insert(RPSCoreFramework.Interface.HidingFrames, DarkmoonPasswordChangeFrame);
-	
-	
-	RPSCoreFramework:GenerateCharScaleSlider();
-	RPSCoreFramework:GenerateClassBackground();
-	RPSCoreFramework:UpdateScaleReset();
 
 
 	-- Popup's
@@ -279,6 +218,5 @@ function RPSCoreFramework:OnInitialize()
 		{"House 3", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.556268, 0.403740, 301},
 		{"House 4", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.577851, 0.495251, 301},
 		{"Tavern 2", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.751721, 0.543597, 301}
-}
-
+	}
 end

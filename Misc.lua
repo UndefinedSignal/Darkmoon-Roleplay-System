@@ -227,3 +227,98 @@ function RPSCoreFramework:ChangePassword(Oldpas, Newpas, NewpasRep)
 	return true;
 end
 
+function RPSCoreFramework:FormatDMButtons(button)
+	local shift = 0;
+	local y = -60;
+	for i=1, #RPSCoreFramework.Interface.MenuButtons do
+		if i == 1 then 
+			_G[RPSCoreFramework.Interface.MenuButtons[i][2]]:SetPoint("TOPLEFT", RPS_MainFrameMenuScroll, 16, -60);
+		else
+			y = -25 + shift;
+			if RPSCoreFramework.Interface.MenuButtons[i][6] then
+				_G[RPSCoreFramework.Interface.MenuButtons[i][2]]:SetPoint("BOTTOMLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i-1][2]], 0, y - 20);
+			else
+				_G[RPSCoreFramework.Interface.MenuButtons[i][2]]:SetPoint("BOTTOMLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i-1][2]], 0, y);
+			end
+			shift = 0;
+		end
+		if RPSCoreFramework.Interface.MenuButtons[i][4] then
+			if RPSCoreFramework.Interface.MenuButtons[i][2] == button then
+				for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
+					if RPSCoreFramework.Interface.SubMenuButtons[j][1] == RPSCoreFramework.Interface.MenuButtons[i][5] then
+						if j==1 then
+							_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i][2]], 25, y);
+							_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:LockHighlight();
+						else
+							y = -25
+							_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.SubMenuButtons[j-1][3]], 0, y);
+						end
+						_G[RPSCoreFramework.Interface.SubMenuButtons[j][3].."Label"]:SetText("|cffFFFFFF"..RPSCoreFramework.Interface.SubMenuButtons[j][2]);
+						shift = shift - 25;
+					end
+					_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Show();
+				end
+			else
+				for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
+					_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Hide();
+				end
+			end
+		end
+	end
+end
+
+function RPSCoreFramework:PreGenerateDMButtons()
+	local shift = 0;
+	local y = -60;
+	for i=1, #RPSCoreFramework.Interface.MenuButtons do
+		local MenuButton = CreateFrame('Button', RPSCoreFramework.Interface.MenuButtons[i][2], RPS_MainFrame, "RPS_CategoryButton")
+		if i == 1 then 
+			MenuButton:SetPoint("TOPLEFT", RPS_MainFrameMenuScroll, 16, -60);
+			MenuButton:LockHighlight();
+		else
+			y = -25 + shift;
+			if RPSCoreFramework.Interface.MenuButtons[i][6] then
+				MenuButton:SetPoint("BOTTOMLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i-1][2]], 0, y - 20);
+			else
+				MenuButton:SetPoint("BOTTOMLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i-1][2]], 0, y);
+			end
+			shift = 0;
+		end
+		MenuButton:SetSize(158, 24);
+		-- If button have a submenu
+		if RPSCoreFramework.Interface.MenuButtons[i][4] then
+			for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
+				if RPSCoreFramework.Interface.SubMenuButtons[j][1] == RPSCoreFramework.Interface.MenuButtons[i][5] then
+					local SubMenuButton = CreateFrame('Button', RPSCoreFramework.Interface.SubMenuButtons[j][3], RPS_MainFrame, "RPS_CategoryButton");
+					if j==1 then
+						SubMenuButton:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i][2]], 25, y);
+					else
+						y = -25
+						SubMenuButton:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.SubMenuButtons[j-1][3]], 0, y);
+					end
+					SubMenuButton:SetSize(130,24)
+					_G[RPSCoreFramework.Interface.SubMenuButtons[j][3].."Label"]:SetText("|cffFFFFFF"..RPSCoreFramework.Interface.SubMenuButtons[j][2]);
+					table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]);
+					SubMenuButton:SetScript('OnClick', function()
+						RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]);
+						RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.SubMenuButtons[j][4]]);
+					end)
+					shift = shift - 25;
+				end
+			end
+		end
+		_G[RPSCoreFramework.Interface.MenuButtons[i][2].."Label"]:SetText(RPSCoreFramework.Interface.MenuButtons[i][1]);
+		MenuButton:SetScript('OnClick', function()
+			RPSCoreFramework:FormatDMButtons(RPSCoreFramework.Interface.MenuButtons[i][2]);
+			if RPSCoreFramework.Interface.MenuButtons[i][4] then
+				RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[1][3]]);
+				RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.SubMenuButtons[1][4]]);
+			else
+				RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
+				RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
+			end
+		end)
+		table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
+		table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
+	end
+end
