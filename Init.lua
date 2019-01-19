@@ -12,7 +12,6 @@ function RPSCoreFramework:OnEnable()
 end
 
 function RPSCoreFramework:OnInitialize()
---	RPSCoreFramework:BadAddonProtection()
 	LoggingChat(1);
 	SetCVar("autoClearAFK", 0);
 
@@ -134,16 +133,122 @@ function RPSCoreFramework:OnInitialize()
 
 
 	-- Popup's
-
+	
+	StaticPopupDialogs["ActionHelp"] = {
+		text = "Вы действительно желаете помочь выбранному персонажу?",
+		button1 = YES,
+		button2 = NO,
+		button1Pulse = true,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action help"); end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = true,
+		StartDelay = function() return 3; end,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
+	}
+	StaticPopupDialogs["ActionKill"] = {
+		text = "|cFFFF0000С выбором этого действия нить судьбы выбранного персонажа обрывается...|r\n\nВы действительно желаете добить выбранного персонажа?",
+		button1 = YES,
+		button2 = NO,
+		button2Pulse = true,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action kill"); end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = true,
+		StartDelay = function() return 3; end,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
+	}	
+	StaticPopupDialogs["ActionPillage"] = {
+		text = "Вы действительно желаете ограбить выбранного персонажа?",
+		button1 = YES,
+		button2 = NO,
+		button2Pulse = true,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action pillage"); end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = true,
+		StartDelay = function() return 3; end,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
+	}
 	StaticPopupDialogs["UnlearnStats"] = {
 		text = "Вы действительно желаете разучить все ваши характеристики? Стоимость: 5 |cff00ff00|TInterface\\MoneyFrame\\UI-GoldIcon:16|t|r",
 		button1 = YES,
 		button2 = NO,
 		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps stat reset"); end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
-		StartDelay = function() return 1; end,
+		StartDelay = function() return 3; end,
 		exclusive = true,
 		showAlert = 1,
 		preferredIndex = 3, 
@@ -153,11 +258,27 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете изучить выбранные характеристики?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:SubmitDiff() end,
+		OnAccept = function() RPSCoreFramework:SubmitDiff(); end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
-		StartDelay = function() return 1; end,
+		StartDelay = function() return 3; end,
 		exclusive = true,
 		showAlert = 1,
 		preferredIndex = 3, 
@@ -168,10 +289,26 @@ function RPSCoreFramework:OnInitialize()
 		button1 = YES,
 		button2 = NO,
 		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale reset");	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable() end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
-		StartDelay = function() return 1; end,
+		StartDelay = function() return 3; end,
 		exclusive = true,
 		showAlert = 1,
 		preferredIndex = 3, 
@@ -181,11 +318,27 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно уверены в выбранном росте?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale apply "..RPSCoreFramework.ChoosedScale);	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable() end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale apply "..RPSCoreFramework.ChoosedScale);	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable(); end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
 		timeout = 0,
 		whileDead = true,
 		hideOnEscape = true,
-		StartDelay = function() return 1; end,
+		StartDelay = function() return 3; end,
 		exclusive = true,
 		showAlert = 1,
 		preferredIndex = 3, 

@@ -1,8 +1,7 @@
 function RPSCoreFramework:IsDifficultRace()
-	race, raceEn = UnitRace("player");
-
+	_, raceEn = UnitRace("player");
 	for k, v in ipairs(RPSCoreFramework.DifficultRaces) do
-		if v == string.lower(raceEn) then
+		if (v == string.lower(raceEn)) then
 			return true
 		end
 	end
@@ -11,9 +10,9 @@ function RPSCoreFramework:IsDifficultRace()
 end
 
 function RPSCoreFramework:IsDifficultClass()
-	className, __, classID = UnitClass("player");
+	_, _, classID = UnitClass("player");
 	for k, v in ipairs(RPSCoreFramework.DifficultClass) do
-		if v == classID then
+		if (v == classID) then
 			return true
 		end
 	end
@@ -37,20 +36,35 @@ function RPSCoreFramework:DifficultMessageSendToPlayer()
 
 	if flag then
 		StaticPopupDialogs["PopupDifficultRaceOrClassMessage"] = {
-			text = message,	
+			text = "|cFFFFFF00ВНИМАНИЕ!|r\n\n"..message,	
 			button1 = OKAY,
-			OnAccept = function() RPSCoreFramework:SubmitDiff() end,
+			OnAccept = function() end,
+			OnShow = function(self)
+				self.declineTimeLeft = 15;
+				self.button1:SetText(self.declineTimeLeft);
+				self.button1:Disable();
+				self.ticker = C_Timer.NewTicker(1, function()
+					self.declineTimeLeft = self.declineTimeLeft - 1;
+					if (self.declineTimeLeft == 0) then
+						self.button1:SetText(OKAY)
+						self.button1:Enable();
+						self.ticker:Cancel();
+						return;
+					else
+						self.button1:SetText(self.declineTimeLeft);
+					end
+				end);
+			end,
 			timeout = 0,
 			whileDead = true,
-			hideOnEscape = true,
-			StartDelay = function() return 1; end,
+			hideOnEscape = false,
+			StartDelay = function() return 15; end,
 			exclusive = true,
 			showAlert = 1,
 			preferredIndex = 3, 
 		}
-
-		StaticPopup_Show("PopupDifficultRaceOrClassMessage")
-
+		
+		C_Timer.NewTicker(5, function() StaticPopup_Show("PopupDifficultRaceOrClassMessage"); end, 1);	
 		flag = false;
 	end
 end

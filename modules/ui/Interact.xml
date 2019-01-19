@@ -147,7 +147,7 @@
 			<PlayerModel name="$parentSelfModel">
 				<Size x="64" y="64"/>
 				<Anchors>
-					<Anchor point="CENTER" x="-144" y="8"/>
+					<Anchor point="CENTER" x="-150" y="8"/>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
@@ -158,7 +158,7 @@
 			<PlayerModel name="$parentTargetModel">
 				<Size x="64" y="64"/>
 				<Anchors>
-					<Anchor point="CENTER" x="144" y="8"/>
+					<Anchor point="CENTER" x="150" y="8"/>
 				</Anchors>
 				<Scripts>
 					<OnLoad>
@@ -171,13 +171,21 @@
 			<Button name="$parentHelp" inherits="UIPanelButtonTemplate" text="Помочь">
 				 <Size x="72" y="24"/>
 				 <Anchors>
-					<Anchor point="CENTER" x="-54" y="-16"/>
+					<Anchor point="CENTER" x="-72" y="-16"/>
 				 </Anchors>
 			</Button>
+			
+			<Button name="$parentPillage" inherits="UIPanelButtonTemplate" text="Ограбить">
+				 <Size x="72" y="24"/>
+				 <Anchors>
+					<Anchor point="CENTER" x="0" y="-16"/>
+				 </Anchors>
+			</Button>
+			
 			<Button name="$parentKill" inherits="UIPanelButtonTemplate" text="Добить">
 				 <Size x="72" y="24"/>
 				 <Anchors>
-					<Anchor point="CENTER" x="54" y="-16"/>
+					<Anchor point="CENTER" x="72" y="-16"/>
 				 </Anchors>
 			</Button>			
 		</Frames>

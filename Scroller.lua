@@ -114,7 +114,24 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 		button1 = YES,
 		button2 = NO,
 		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, arg1) end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
 		timeout = 0,
+		StartDelay = function() return 3; end,
 		whileDead = true,
 		hideOnEscape = true,
 		exclusive = true,
@@ -127,7 +144,24 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 		button1 = YES,
 		button2 = NO,
 		OnAccept = function() RPSCoreFramework:MaxToggledAuras(button, arg1) end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
 		timeout = 0,
+		StartDelay = function() return 3; end,
 		whileDead = true,
 		hideOnEscape = true,
 		exclusive = true,

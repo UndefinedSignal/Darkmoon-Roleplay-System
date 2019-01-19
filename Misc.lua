@@ -141,11 +141,6 @@ function RPSCoreFramework:isAuraActive(arg)
 	return false
 end
 
---function RPSCoreFramework:BadAddonProtection()
---	DisableAddOn("RPSDarkmoon")
---	return true
---end
-
 function RPSCoreFramework:AddMinimapIcon()
 	LDBObject = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("RPSCoreFramework", {
 		type = "data source",

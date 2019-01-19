@@ -1,6 +1,6 @@
 function RPSCoreFramework:IsInteractCast()
 	local name, _, _, _, _, _, _, _, _, _ = UnitCastingInfo("player");
-	if (name == "Помочь" or name == "Добить") then
+	if (name == "Помочь" or name == "Добить" or name "Ограбить") then
 		return true;
 	else
 		return false;

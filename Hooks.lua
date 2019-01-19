@@ -41,16 +41,14 @@ function RPSCoreFramework:InitializeHooks()
 
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
 
-
 	
 	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
 	
-	RPS_InteractFrameHelp:SetScript("OnClick", function() RPSCoreFramework:SendCoreMessage(".rps action help") end);
-	RPS_InteractFrameKill:SetScript("OnClick", function() RPSCoreFramework:SendCoreMessage(".rps action kill") end);
-	
-
+	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
+	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
+	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillage"); end);
 end
 
 function RPSCoreFramework:OnEventFrame(self, event, ...)
