@@ -48,7 +48,7 @@ function RPSCoreFramework:InitializeHooks()
 	
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
-	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillage"); end);
+	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
 end
 
 function RPSCoreFramework:OnEventFrame(self, event, ...)

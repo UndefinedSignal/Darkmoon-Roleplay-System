@@ -194,25 +194,28 @@ function RPSCoreFramework:OnInitialize()
 		showAlert = 1,
 		preferredIndex = 3, 
 	}	
-	StaticPopupDialogs["ActionPillage"] = {
+	StaticPopupDialogs["ActionPillageLoot"] = {
 		text = "Вы действительно желаете ограбить выбранного персонажа?",
-		button1 = YES,
-		button2 = NO,
-		button2Pulse = true,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action pillage"); end,
+		button1 = NO,
+		button2 = YES,
+		button3 = YES,
+		button1Pulse = true,
+		OnAccept = function() print(1) end,
+		OnCancel = function() RPSCoreFramework:SendCoreMessage(".rps action loot"); end,
+		OnAlt = function(self) RPSCoreFramework:SendCoreMessage(".rps action pillage"); self:Hide(); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
-			self.button1:SetText(self.declineTimeLeft);
-			self.button1:Disable();
+			self.button2:SetText(self.declineTimeLeft);
+			self.button2:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft == 0) then
-					self.button1:SetText(YES)
-					self.button1:Enable();
+					self.button2:SetText(YES)
+					self.button2:Enable();
 					self.ticker:Cancel();
 					return;
 				else
-					self.button1:SetText(self.declineTimeLeft);
+					self.button2:SetText(self.declineTimeLeft);
 				end
 			end);
 		end,
