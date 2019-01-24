@@ -1,14 +1,44 @@
 function RPSCoreFramework:IsInteractCast()
 	local name, _, _, _, _, _, _, _, _, _ = UnitCastingInfo("player");
-	if (name == "Помочь" or name == "Добить" or name "Ограбить") then
+	if (name == "Помочь" or name == "Добить" or name == "Ограбить") then
 		return true;
 	else
 		return false;
 	end;
 end
 
+function RPSCoreFramework:UpdateInteractButtons()
+	-- looted (only loot)
+	--if (self:HasAura(RPSCoreFramework.LootedAura, target)) then	
+	-- disable loot, pillage, kill
+	if ((self:HasAura(RPSCoreFramework.NoviceAura) or self:HasAura(RPSCoreFramework.PillageWoundsAura))) then
+		RPS_InteractFramePillage:Hide();
+		RPS_InteractFrameKill:Hide();
+	else
+		RPS_InteractFramePillage:Show();
+		RPS_InteractFrameKill:Show();
+	end;
+end;
+
 function RPSCoreFramework:AuraCheckTimer()
 	self:UpdateInteractionFrame();
+end
+
+function RPSCoreFramework:HasAura(id, target)
+	if (target == nil) then
+		target = "player";
+	end;
+
+	local counter = 1;
+	local aura = UnitAura(target, counter)
+	while aura do
+		aura, _, _, _, _, _, _, _, _, _, spellId = UnitAura(target, counter);
+		counter = counter + 1;
+		if (spellId == id) then
+			return true;
+		end
+	end
+	return false;
 end
 
 function RPSCoreFramework:IsFallen()

@@ -13,9 +13,13 @@ function RPSCoreFramework:EnableDrag(frame)
 end
 
 function RPSCoreFramework:UpdateInteractionFrame()
-	if (self:IsFallen() and CheckInteractDistance("target", 3) and not UnitIsUnit("player", "target") and not self:IsInteractCast()) then
-		RPS_InteractFrame:Show();
+	if (self:IsFallen() and CheckInteractDistance("target", 3) and not UnitIsUnit("player", "target") and not self:IsInteractCast() and not self:HasAura(RPSCoreFramework.WoundsAura)) then
+		if (not RPS_InteractFrame:IsShown()) then
+			RPSCoreFramework:UpdateInteractButtons()
+			RPS_InteractFrame:Show();
+		end
 	else
+		RPSCoreFramework:UpdateInteractButtons()
 		RPS_InteractFrame:Hide();
 	end
 end
