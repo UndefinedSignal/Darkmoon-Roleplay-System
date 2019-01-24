@@ -1,7 +1,7 @@
 function RPSCoreFramework:IsDifficultRace()
 	_, raceEn = UnitRace("player");
-	for k, v in ipairs(RPSCoreFramework.DifficultRaces) do
-		if (v == string.lower(raceEn)) then
+	for i=1, #RPSCoreFramework.DifficultRaces do
+		if (RPSCoreFramework.DifficultRaces[i] == string.lower(raceEn)) then
 			return true
 		end
 	end
@@ -11,8 +11,8 @@ end
 
 function RPSCoreFramework:IsDifficultClass()
 	_, _, classID = UnitClass("player");
-	for k, v in ipairs(RPSCoreFramework.DifficultClass) do
-		if (v == classID) then
+	for i=1, #RPSCoreFramework.DifficultClass do
+		if (RPSCoreFramework.DifficultClass[i] == classID) then
 			return true
 		end
 	end
