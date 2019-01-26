@@ -32,8 +32,8 @@ function RPSCoreFramework:IsCharsheetRequired()
 end
 
 function RPSCoreFramework:AdvancedCharacterMessageCheck()	
-	if (not RPSCoreAdvancedCharacterCheckShowed) then		
-		RPSCoreAdvancedCharacterCheckShowed = true;
+	if (not RPSCoreAdvancedCharacterCheckShown) then		
+		RPSCoreAdvancedCharacterCheckShown = true;
 	else
 		return;
 	end
