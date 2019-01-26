@@ -8,7 +8,7 @@ function RPSCoreFramework:OnEnable()
 		RPSCoreShouldFirstTime = true;
 	end
 	if (not RPSCoreDifficultRaceAttention) then
-		self:ScheduleTimer("DifficultMessageSendToPlayer", 5)
+		self:DifficultMessageSendToPlayer();
 		RPSCoreDifficultRaceAttention = true;
 	end
 end
@@ -56,12 +56,6 @@ function RPSCoreFramework:OnInitialize()
 	DexterityStatName:SetText("Сноровка");
 	WillStatName:SetText("Воля");
 	DarkmoonCharStatsInfoUnlearn:SetText("Разучить "..GetCoinTextureString(RPSCoreFramework.RequestUnlearn));
-	
-	ITEM_MOD_MANA = "%c%s к духу";
-	ITEM_MOD_MANA_SHORT = "к духу";
-	
-	ITEM_MOD_CRIT_RATING = "Показатель критического шанса +%s.";
-	ITEM_MOD_CRIT_RATING_SHORT = "к критическому шансу";
 
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
