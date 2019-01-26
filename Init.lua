@@ -9,7 +9,6 @@ function RPSCoreFramework:OnEnable()
 	end
 	
 	self:AdvancedCharacterMessageCheck();
-
 end
 
 function RPSCoreFramework:OnInitialize()

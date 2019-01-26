@@ -736,11 +736,11 @@
                             </Layer>
 
                             <Layer>
-                                <FontString name="DisplayInfoTitle" font="Fonts\FRIZQT___CYR.TTF" text="Display Info" justifyH="CENTER" justifyV="TOP">
+                                <FontString name="DisplayInfoTitle" font="Fonts\FRIZQT___CYR.TTF" text="Display Info|nВнешний вид предметов" justifyH="CENTER" justifyV="TOP">
                                     <Color r="1" g="1" b="1" a="1"/>
                                     <FontHeight val="24"/>
                                     <Anchors>
-                                        <Anchor point="TOP" relativeTo="DarkmoonDisplayInfoFrame" x="0" y="-40" />
+                                        <Anchor point="TOP" relativeTo="DarkmoonDisplayInfoFrame" x="0" y="-20" />
                                     </Anchors>
                                     <Shadow>
                                         <Offset x="1" y="1" />
@@ -1156,6 +1156,37 @@
                     </Frame>
 
                     <Frame name="DarkmoonSocialStatsFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="-30" />
+                            <Anchor point="TOPRIGHT" x="2" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
+                        </Anchors>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\Artifacts\ArtifactUIRogue">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                    <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+
+                        </Frames>
+                    </Frame>
+
+                    <Frame name="DarkmoonMasteryStatsFrame" hidden="true">
                         <Size x="500" y="430"/>
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>

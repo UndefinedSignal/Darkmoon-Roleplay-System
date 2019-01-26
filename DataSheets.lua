@@ -79,7 +79,8 @@ RPSCoreFramework.Interface.MenuButtons = {
 }
 RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Боевые", "RPS_BattleStats", "DarkmoonBattleStatsFrame"}, 
-	{1, "Социальные", "RPS_SocialStats", "DarkmoonSocialStatsFrame"}
+--	{1, "Социальные", "RPS_SocialStats", "DarkmoonSocialStatsFrame"},
+--	{1, "Мастерство", "RPS_MasteryStats", "DarkmoonMasteryStatsFrame"}
 }
 
 RPSCoreFramework.StatsDiff = {
