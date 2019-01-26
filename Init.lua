@@ -163,25 +163,46 @@ function RPSCoreFramework:OnInitialize()
 	StaticPopupDialogs["ActionPillageLoot"] = {
 		text = "Вы действительно желаете ограбить выбранного персонажа?",
 		button1 = NO,
-		button2 = YES,
-		button3 = YES,
+		button2 = "Ограбить",
+		button3 = "Ограбить и избить",
 		button1Pulse = true,
-		OnAccept = function() print(1) end,
+		OnAccept = function() end,
 		OnCancel = function() RPSCoreFramework:SendCoreMessage(".rps action loot"); end,
 		OnAlt = function(self) RPSCoreFramework:SendCoreMessage(".rps action pillage"); self:Hide(); end,
 		OnShow = function(self)
-			self.declineTimeLeft = 3;
-			self.button2:SetText(self.declineTimeLeft);
+			if (RPSCoreFramework:HasAura(RPSCoreFramework.LootedAura, "target")) then
+				self.canloot = false;
+				self.text:SetText("|cFFFFFF00ВНИМАНИЕ!|r\n\nПерсонаж уже ограблен и может быть только избит.\nВый действительно желаете избить выбранного персонажа?");
+			else
+				self.canloot = true;
+			end
+			self.declineTimeLeft = 3;			
+			if (self.canloot) then
+				self.button2:SetText(self.declineTimeLeft);
+			end
+			self.button3:SetText(self.declineTimeLeft);
+			self.button1:Enable();
 			self.button2:Disable();
+			self.button3:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft == 0) then
-					self.button2:SetText(YES)
-					self.button2:Enable();
+					if (self.canloot) then
+						self.button2:SetText("Ограбить");
+						self.button2:Enable();
+						self.button3:SetText("Ограбить и избить");
+					else
+						self.button3:SetText("Избить");
+						self.text:SetText("|cFFFFFF00ВНИМАНИЕ!|r\n\nПерсонаж уже ограблен и может быть только избит.\nВый действительно желаете избить выбранного персонажа?");
+					end
+					self.button3:Enable();
 					self.ticker:Cancel();
 					return;
 				else
-					self.button2:SetText(self.declineTimeLeft);
+					if (self.canloot) then
+						self.button2:SetText(self.declineTimeLeft);
+					end
+					self.button3:SetText(self.declineTimeLeft);
 				end
 			end);
 		end,
