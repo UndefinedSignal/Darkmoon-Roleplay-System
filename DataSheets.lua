@@ -26,7 +26,7 @@ RPSCoreFramework.Map.Icons = {
 };
 RPSCoreFramework.Map.PinButtons = {};
 
-RPSCoreFramework.DifficultRaces = {
+RPSCoreFramework.AdvancedRaces = {
 	"voidelf",
 	"highmountaintauren",
 	"bloodelf",
@@ -37,7 +37,9 @@ RPSCoreFramework.DifficultRaces = {
 	"nightborne"
 };
 
-RPSCoreFramework.DifficultClass = { 2, 6, 7, 9, 10, 11, 12};
+RPSCoreFramework.AdvancedClasses = { 2, 6, 7, 9, 10, 11, 12};
+RPSCoreFramework.AdvancedClassesCharsheetRequired = {6, 12};
+
 
 RPSCoreFramework.Prefix = "DRPS";
 RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
