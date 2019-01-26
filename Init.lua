@@ -7,10 +7,9 @@ function RPSCoreFramework:OnEnable()
 		RPSCoreFramework:switchMainFrame();
 		RPSCoreShouldFirstTime = true;
 	end
-	if (not RPSCoreDifficultRaceAttention) then
-		self:ScheduleTimer("DifficultMessageSendToPlayer", 5)
-		RPSCoreDifficultRaceAttention = true;
-	end
+	
+	self:AdvancedCharacterMessageCheck();
+
 end
 
 function RPSCoreFramework:OnInitialize()
@@ -352,6 +351,35 @@ function RPSCoreFramework:OnInitialize()
 	    timeout = 15,
 	    whileDead = true,
 	    hideOnEscape = true,
+	}
+	
+	StaticPopupDialogs["AdvancedCharacterMessage"] = {
+		text = "|cFFFFFF00ВНИМАНИЕ!|r\n%s",	
+		button1 = OKAY,
+		OnAccept = function() end,
+		OnShow = function(self)
+			self.declineTimeLeft = 15;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(OKAY)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = false,
+		StartDelay = function() return 15; end,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
 	}
 
 	RPSCoreFramework.Map.PinButtons = {

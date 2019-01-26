@@ -5,7 +5,7 @@
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam
-## SavedVariablesPerCharacter: RPSCoreShouldFirstTime, RPSCoreDifficultRaceAttention
+## SavedVariablesPerCharacter: RPSCoreShouldFirstTime, RPSCoreAdvancedCharacterCheckShowed
 
 libs\LibStub.lua
 libs\AceAddon.lua
@@ -20,7 +20,7 @@ libs\HereBeDragons-Pins-1.0.lua
 
 DataSheets.lua
 Literature.lua
-DifficultChoiceAlert.lua
+AdvancedCharacterCheck.lua
 Scroller.lua
 Updater.lua
 Interact.lua
