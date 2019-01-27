@@ -120,7 +120,7 @@ function RPSCoreFramework:OnInitialize()
 				end
 			end);
 		end,
-		timeout = 0,
+		timeout = 10,
 		whileDead = true,
 		hideOnEscape = true,
 		StartDelay = function() return 3; end,
@@ -150,7 +150,7 @@ function RPSCoreFramework:OnInitialize()
 				end
 			end);
 		end,
-		timeout = 0,
+		timeout = 10,
 		whileDead = true,
 		hideOnEscape = true,
 		StartDelay = function() return 3; end,
@@ -204,7 +204,7 @@ function RPSCoreFramework:OnInitialize()
 				end
 			end);
 		end,
-		timeout = 0,
+		timeout = 10,
 		whileDead = true,
 		hideOnEscape = true,
 		StartDelay = function() return 3; end,
