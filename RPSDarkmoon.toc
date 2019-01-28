@@ -32,7 +32,7 @@ Chat.lua
 Hooks.lua
 Macros.lua
 POI.lua
-
+Search.lua
 
 modules\ui\Templates.xml
 modules\ui\Interact.xml

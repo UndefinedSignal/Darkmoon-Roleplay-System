@@ -7,6 +7,13 @@
         <Anchors>
             <Anchor point="CENTER" x="-400" y="0"/>
         </Anchors>
+
+        <Scripts>
+            <OnLoad>
+                tinsert(UISpecialFrames, self:GetName());
+            </OnLoad>
+        </Scripts>
+
         <Layers>
             <Layer level="BACKGROUND">
                 <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
@@ -662,6 +669,28 @@
                         </Layers>
 
                         <Frames>
+
+                            <EditBox parentKey="searchBox" inherits="SearchBoxTemplate" letters="40" hidden="false">
+                                <Size x="107" y="30"/>
+                                <Anchors>
+                                    <Anchor point="TOPRIGHT" relativeTo="DarkmoonAurasFrame" relativePoint="TOPRIGHT" x="-8" y="0"/>
+                                </Anchors>
+                                <Scripts>
+                                    <OnShow/>
+                                    <OnEnterPressed>
+                                        RPSCoreFramework:Search(RPSCoreFramework.Interface.Auras, self:GetText())
+                                        self:ClearFocus()
+                                    </OnEnterPressed>
+                                    <OnTextChanged>
+                                        RPSCoreFramework:GenerateScrollMenu();
+                                        SearchBoxTemplate_OnTextChanged(self);
+                                    </OnTextChanged>
+                                    <OnEditFocusLost/>
+                                    <OnEditFocusGained/>
+                                    <OnKeyDown/>
+                                </Scripts>
+                            </EditBox>
+
                             <ScrollFrame name="DarkmoonAurasScrollFrame" inherits="FauxScrollFrameTemplate">
                                 <Anchors>
                                     <Anchor point="TOPLEFT" x="18" y="-7"/>

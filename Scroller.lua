@@ -1,5 +1,5 @@
 function RPSCoreFramework:GenerateScrollMenu()
-  FauxScrollFrame_Update(DarkmoonAurasScrollFrame,#RPSCoreFramework.Interface.Auras,6,32);
+  FauxScrollFrame_Update(DarkmoonAurasScrollFrame,#RPSCoreFramework.Interface.Auras.Show,6,32);
 
   for jBtn=1, 6 do
     lineplusoffset = jBtn + FauxScrollFrame_GetOffset(DarkmoonAurasScrollFrame);
@@ -15,26 +15,26 @@ function RPSCoreFramework:GhostClickUpdater()
 end
 
 function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если нет активной ауры
-	if RPSCoreFramework.Interface.Auras.Initialized then
+	if RPSCoreFramework.Interface.Auras.Initialized and RPSCoreFramework.Interface.Auras.Show[1] ~= nil then
 		for jBtn=1, #RPSCoreFramework.Scroller.lineplusoffset do
 			local lineplusoffset = RPSCoreFramework.Scroller.lineplusoffset[jBtn]
-			if lineplusoffset <= #RPSCoreFramework.Interface.Auras then
-		      
-		      _G["RPS_AuraButton"..jBtn.."Name"]:SetText(RPSCoreFramework.Interface.Auras[lineplusoffset][1])
-		      _G["RPS_AuraButton"..jBtn.."Description"]:SetText(RPSCoreFramework.Interface.Auras[lineplusoffset][2])
+			if lineplusoffset <= #RPSCoreFramework.Interface.Auras.Show then
+		      --RPSCoreFramework.Interface.Auras
+		      _G["RPS_AuraButton"..jBtn.."Name"]:SetText(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1])
+		      _G["RPS_AuraButton"..jBtn.."Description"]:SetText(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2])
 		      _G["RPS_AuraButton"..jBtn.."Number"]:SetText(lineplusoffset)
 		      _G["RPS_AuraButton"..jBtn]:SetScript("OnEnter", function()
 		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-				    GameTooltip:AddLine("|cFFFFFFFF"..RPSCoreFramework.Interface.Auras[lineplusoffset][1].."|r")
-				    GameTooltip:AddLine("|cFFABD473"..RPSCoreFramework.Interface.Auras[lineplusoffset][2].."|r\n\n")
-				    if (tonumber(RPSCoreFramework.Interface.Auras[lineplusoffset][3]) > tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[lineplusoffset][4] == 0) then
-				    	GameTooltip:AddLine("Цена покупки: |cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]).."|r")
+				    GameTooltip:AddLine("|cFFFFFFFF"..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1].."|r")
+				    GameTooltip:AddLine("|cFFABD473"..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2].."|r\n\n")
+				    if (tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][3]) > tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][4] == 0) then
+				    	GameTooltip:AddLine("Цена покупки: |cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][3]).."|r")
 				    	GameTooltip:AddLine("Не хватает денег.")
-				    elseif (tonumber(RPSCoreFramework.Interface.Auras[lineplusoffset][3]) < tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[lineplusoffset][4] == 0) then
-				    	GameTooltip:AddLine("Цена покупки: "..GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]))
+				    elseif (tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][3]) < tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][4] == 0) then
+				    	GameTooltip:AddLine("Цена покупки: "..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][3]))
 				    	GameTooltip:AddLine("Клик: Приобрести")
 				    end
-					if RPSCoreFramework.Interface.Auras[lineplusoffset][4] > 0 then
+					if RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][4] > 0 then
 				    	GameTooltip:AddLine("Клик: Использовать")
 				    end
 				    GameTooltip:Show()
@@ -42,14 +42,14 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		      _G["RPS_AuraButton"..jBtn]:SetScript("OnLeave", function()
 				    GameTooltip:Hide()
 		      	end)
-		      if RPSCoreFramework.Interface.Auras[lineplusoffset][4] > 0 then
+		      if RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][4] > 0 then
 		        _G["RPS_AuraButton"..jBtn.."Price"]:Hide()
 		        _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:Show()
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:SetScript("OnClick", function()
 		        	if (GetNumMacros() <= 120) then
-		        		CreateMacro(RPSCoreFramework.Interface.Auras[lineplusoffset][1], "INV_DARKMOON_EYE", ".rps action aura toggle "..lineplusoffset, 1);
-		        		PickupMacro(RPSCoreFramework.Interface.Auras[lineplusoffset][1]);
+		        		CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1], "INV_DARKMOON_EYE", ".rps action aura toggle "..lineplusoffset, 1);
+		        		PickupMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1]);
 					else
 						Utils.message.displayMessage(loc("QE_MACRO_MAX"), 4);
 					end
@@ -59,14 +59,14 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		        _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:Hide()
 		        _G["RPS_AuraButton"..jBtn.."Price"]:Show()
-		        if tonumber(RPSCoreFramework.Interface.Auras[lineplusoffset][3]) > tonumber(GetMoney()) then
-		        	_G["RPS_AuraButton"..jBtn.."Price"]:SetText("|cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]).."|r")
+		        if tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][3]) > tonumber(GetMoney()) then
+		        	_G["RPS_AuraButton"..jBtn.."Price"]:SetText("|cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][3]).."|r")
 		        else
-		        	_G["RPS_AuraButton"..jBtn.."Price"]:SetText(GetCoinTextureString(RPSCoreFramework.Interface.Auras[lineplusoffset][3]))
+		        	_G["RPS_AuraButton"..jBtn.."Price"]:SetText(GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][3]))
 		    	end
 		        RPSCoreFramework.Interface.Auras.Message[jBtn][1] = ".rps action aura learn "..lineplusoffset
 		      end
-		      if RPSCoreFramework.Interface.Auras[lineplusoffset][5] == 1 then
+		      if RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][5] == 1 then
 		      	_G["RPS_AuraButton"..jBtn.."Completed"]:Show()
 		        --_G["RPS_AuraButton"..jBtn]:LockHighlight()
 		      else
@@ -79,6 +79,9 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		      _G["RPS_AuraButton"..jBtn]:Hide()
 		    end
 		end
+	else
+		RPSCoreFramework:PreGenerateShowAuras();
+		RPSCoreFramework:ScrollMenuUpdater();
 	end
 end
 
@@ -109,65 +112,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 
 	RPSCoreFramework.Interface.Auras.GhostClick = true
 
-	StaticPopupDialogs["LearnAura"] = {
-		text = "Вы действительно желаете приобрести выбранную ауру?",
-		button1 = YES,
-		button2 = NO,
-		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, arg1) end,
-		OnShow = function(self)
-			self.declineTimeLeft = 3;
-			self.button1:SetText(self.declineTimeLeft);
-			self.button1:Disable();
-			self.ticker = C_Timer.NewTicker(1, function()
-				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
-					self.button1:SetText(YES)
-					self.button1:Enable();
-					self.ticker:Cancel();
-					return;
-				else
-					self.button1:SetText(self.declineTimeLeft);
-				end
-			end);
-		end,
-		timeout = 0,
-		StartDelay = function() return 3; end,
-		whileDead = true,
-		hideOnEscape = true,
-		exclusive = true,
-		showAlert = 1,
-		preferredIndex = 3, 
-	}
 
-	StaticPopupDialogs["MaxToggledAuras"] = {
-		text = "У вас уже активно 3 ауры. Активация ещё одной сбросит все предыдущие, вы уверены что хотите активировать эту ауру?",
-		button1 = YES,
-		button2 = NO,
-		OnAccept = function() RPSCoreFramework:MaxToggledAuras(button, arg1) end,
-		OnShow = function(self)
-			self.declineTimeLeft = 3;
-			self.button1:SetText(self.declineTimeLeft);
-			self.button1:Disable();
-			self.ticker = C_Timer.NewTicker(1, function()
-				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
-					self.button1:SetText(YES)
-					self.button1:Enable();
-					self.ticker:Cancel();
-					return;
-				else
-					self.button1:SetText(self.declineTimeLeft);
-				end
-			end);
-		end,
-		timeout = 0,
-		StartDelay = function() return 3; end,
-		whileDead = true,
-		hideOnEscape = true,
-		exclusive = true,
-		showAlert = 1,
-		preferredIndex = 3, 
-	}
 	
 	local id = RPSCoreFramework.Interface.Auras.Message[arg1][2]
 	if RPSCoreFramework:KnownAura(id) then -- if we know

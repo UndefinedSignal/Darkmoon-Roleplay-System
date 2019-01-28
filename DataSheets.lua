@@ -347,6 +347,8 @@ RPSCoreFramework.Interface.Auras = {
 	{"Свечение Элуны", "Аура. Персонаж становится источником сильного света", 10000, 0, 0}
 }
 
+RPSCoreFramework.Interface.Auras.Show = {}
+
 RPSCoreFramework.Interface.ActiveAuraCounter = 0
 
 RPSCoreFramework.Interface.Auras.Message = {

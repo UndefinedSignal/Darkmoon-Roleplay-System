@@ -165,6 +165,12 @@ function RPSCoreFramework:ChangeDefaultWords()
 	
 	ITEM_MOD_CRIT_RATING = "Показатель критического шанса +%s.";
 	ITEM_MOD_CRIT_RATING_SHORT = "к критическому шансу";
+
+	ITEM_MOD_MANA = "%c%s к духу";
+	ITEM_MOD_MANA_SHORT = "к духу";
+	
+	ITEM_MOD_CRIT_RATING = "Показатель критического шанса +%s.";
+	ITEM_MOD_CRIT_RATING_SHORT = "к критическому шансу";
 end
 
 function RPSCoreFramework:LiteratureTextFormatting()

@@ -35,6 +35,8 @@ function RPSCoreFramework:OnInitialize()
 	self:GenerateClassBackground();
 	self:UpdateScaleReset();
 
+	self:PreGenerateShowAuras();
+
 	-- Disp & Scale
 
 	self:SendCoreMessage(".disp list");
@@ -54,12 +56,6 @@ function RPSCoreFramework:OnInitialize()
 	DexterityStatName:SetText("Сноровка");
 	WillStatName:SetText("Воля");
 	DarkmoonCharStatsInfoUnlearn:SetText("Разучить "..GetCoinTextureString(RPSCoreFramework.RequestUnlearn));
-	
-	ITEM_MOD_MANA = "%c%s к духу";
-	ITEM_MOD_MANA_SHORT = "к духу";
-	
-	ITEM_MOD_CRIT_RATING = "Показатель критического шанса +%s.";
-	ITEM_MOD_CRIT_RATING_SHORT = "к критическому шансу";
 
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
@@ -376,6 +372,66 @@ function RPSCoreFramework:OnInitialize()
 		whileDead = true,
 		hideOnEscape = false,
 		StartDelay = function() return 15; end,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
+	}
+
+	StaticPopupDialogs["LearnAura"] = {
+		text = "Вы действительно желаете приобрести выбранную ауру?",
+		button1 = YES,
+		button2 = NO,
+		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, arg1) end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
+		timeout = 0,
+		StartDelay = function() return 3; end,
+		whileDead = true,
+		hideOnEscape = true,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
+	}
+
+	StaticPopupDialogs["MaxToggledAuras"] = {
+		text = "У вас уже активно 3 ауры. Активация ещё одной сбросит все предыдущие, вы уверены что хотите активировать эту ауру?",
+		button1 = YES,
+		button2 = NO,
+		OnAccept = function() RPSCoreFramework:MaxToggledAuras(button, arg1) end,
+		OnShow = function(self)
+			self.declineTimeLeft = 3;
+			self.button1:SetText(self.declineTimeLeft);
+			self.button1:Disable();
+			self.ticker = C_Timer.NewTicker(1, function()
+				self.declineTimeLeft = self.declineTimeLeft - 1;
+				if (self.declineTimeLeft == 0) then
+					self.button1:SetText(YES)
+					self.button1:Enable();
+					self.ticker:Cancel();
+					return;
+				else
+					self.button1:SetText(self.declineTimeLeft);
+				end
+			end);
+		end,
+		timeout = 0,
+		StartDelay = function() return 3; end,
+		whileDead = true,
+		hideOnEscape = true,
 		exclusive = true,
 		showAlert = 1,
 		preferredIndex = 3, 
