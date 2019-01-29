@@ -377,66 +377,6 @@ function RPSCoreFramework:OnInitialize()
 		preferredIndex = 3, 
 	}
 
-	StaticPopupDialogs["LearnAura"] = {
-		text = "Вы действительно желаете приобрести выбранную ауру?",
-		button1 = YES,
-		button2 = NO,
-		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, arg1) end,
-		OnShow = function(self)
-			self.declineTimeLeft = 3;
-			self.button1:SetText(self.declineTimeLeft);
-			self.button1:Disable();
-			self.ticker = C_Timer.NewTicker(1, function()
-				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
-					self.button1:SetText(YES)
-					self.button1:Enable();
-					self.ticker:Cancel();
-					return;
-				else
-					self.button1:SetText(self.declineTimeLeft);
-				end
-			end);
-		end,
-		timeout = 0,
-		StartDelay = function() return 3; end,
-		whileDead = true,
-		hideOnEscape = true,
-		exclusive = true,
-		showAlert = 1,
-		preferredIndex = 3, 
-	}
-
-	StaticPopupDialogs["MaxToggledAuras"] = {
-		text = "У вас уже активно 3 ауры. Активация ещё одной сбросит все предыдущие, вы уверены что хотите активировать эту ауру?",
-		button1 = YES,
-		button2 = NO,
-		OnAccept = function() RPSCoreFramework:MaxToggledAuras(button, arg1) end,
-		OnShow = function(self)
-			self.declineTimeLeft = 3;
-			self.button1:SetText(self.declineTimeLeft);
-			self.button1:Disable();
-			self.ticker = C_Timer.NewTicker(1, function()
-				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
-					self.button1:SetText(YES)
-					self.button1:Enable();
-					self.ticker:Cancel();
-					return;
-				else
-					self.button1:SetText(self.declineTimeLeft);
-				end
-			end);
-		end,
-		timeout = 0,
-		StartDelay = function() return 3; end,
-		whileDead = true,
-		hideOnEscape = true,
-		exclusive = true,
-		showAlert = 1,
-		preferredIndex = 3, 
-	}
-
 	RPSCoreFramework.Map.PinButtons = {
 		{"Tavern", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn", 0.504987, 0.903770, 301},
 		{"House 1", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.742743, 0.579597, 301},
