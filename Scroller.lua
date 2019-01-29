@@ -15,7 +15,7 @@ function RPSCoreFramework:GhostClickUpdater()
 end
 
 function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если нет активной ауры
-	if RPSCoreFramework.Interface.Auras.Initialized and RPSCoreFramework.Interface.Auras.Show[1] ~= nil then
+	if RPSCoreFramework.Interface.Auras.Initialized then
 		for jBtn=1, #RPSCoreFramework.Scroller.lineplusoffset do
 			local lineplusoffset = RPSCoreFramework.Scroller.lineplusoffset[jBtn]
 			if lineplusoffset <= #RPSCoreFramework.Interface.Auras.Show then
@@ -79,9 +79,6 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		      _G["RPS_AuraButton"..jBtn]:Hide()
 		    end
 		end
-	else
-		RPSCoreFramework:PreGenerateShowAuras();
-		RPSCoreFramework:ScrollMenuUpdater();
 	end
 end
 

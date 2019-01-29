@@ -671,9 +671,9 @@
                         <Frames>
 
                             <EditBox parentKey="searchBox" inherits="SearchBoxTemplate" letters="40" hidden="false">
-                                <Size x="107" y="30"/>
+                                <Size x="287" y="30"/>
                                 <Anchors>
-                                    <Anchor point="TOPRIGHT" relativeTo="DarkmoonAurasFrame" relativePoint="TOPRIGHT" x="-22" y="0"/>
+                                    <Anchor point="TOPRIGHT" relativeTo="DarkmoonAurasFrame" relativePoint="TOPRIGHT" x="-100" y="-4"/>
                                 </Anchors>
                                 <Scripts>
                                     <OnShow/>

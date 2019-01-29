@@ -14,7 +14,4 @@ function RPSCoreFramework:AurasSearch(input, key)
 			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
 		end
 	end
-	if RPSCoreFramework.Interface.Auras.Show[1] == nil then
-		RPSCoreFramework:PreGenerateShowAuras()
-	end
 end
