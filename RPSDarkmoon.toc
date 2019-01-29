@@ -1,7 +1,7 @@
 ## Interface: 70300
 ## Title: RPSDarkmoon
 ## Author: TestUnit, -SeMGa!
-## Version: 1.12
+## Version: 1.22
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam
