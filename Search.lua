@@ -10,6 +10,7 @@ function RPSCoreFramework:Search(input, key)
 end
 
 function RPSCoreFramework:PreGenerateShowAuras()
+	RPSCoreFramework.Interface.Auras.Show = {}
 	for i=1, #RPSCoreFramework.Interface.Auras do
 		table.insert(RPSCoreFramework.Interface.Auras.Show, i);
 	end

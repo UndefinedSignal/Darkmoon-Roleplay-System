@@ -678,8 +678,9 @@
                                 <Scripts>
                                     <OnShow/>
                                     <OnEnterPressed>
-                                        RPSCoreFramework:Search(RPSCoreFramework.Interface.Auras, self:GetText())
-                                        self:ClearFocus()
+                                        RPSCoreFramework:Search(RPSCoreFramework.Interface.Auras, self:GetText());
+                                        RPSCoreFramework:GenerateScrollMenu();
+                                        self:ClearFocus();
                                     </OnEnterPressed>
                                     <OnTextChanged>
                                         RPSCoreFramework:GenerateScrollMenu();
@@ -698,8 +699,12 @@
                                 </Anchors>
                                 <Scripts>
                                     <OnVerticalScroll>
-                                        FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
-                                        FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                        if (RPS_AuraButton6:IsShown()) then -- Костыль который катит телегу
+                                            FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                            FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                        else
+                                            FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                        end
                                     </OnVerticalScroll>
                                     <OnShow>
                                         RPSCoreFramework.Interface.Auras.Initialized = true;
