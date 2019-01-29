@@ -628,7 +628,7 @@
                                     <Color r="1" g="1" b="1" a="1"/>
                                     <FontHeight val="18"/>
                                     <Anchors>
-                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="-12" y="17" />
+                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="-12" y="13" />
                                     </Anchors>
                                     <Shadow>
                                         <Offset x="1" y="1" />
@@ -642,7 +642,7 @@
                                     <Color r="1" g="1" b="1" a="1"/>
                                     <FontHeight val="18"/>
                                     <Anchors>
-                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="60" y="15" />
+                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="60" y="11" />
                                     </Anchors>
                                     <Shadow>
                                         <Offset x="1" y="1" />
@@ -656,7 +656,7 @@
                                     <Color r="1" g="1" b="0" a="1"/>
                                     <FontHeight val="12"/>
                                     <Anchors>
-                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="120" y="17" />
+                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="120" y="13" />
                                     </Anchors>
                                     <Shadow>
                                         <Offset x="1" y="1" />
@@ -673,12 +673,12 @@
                             <EditBox parentKey="searchBox" inherits="SearchBoxTemplate" letters="40" hidden="false">
                                 <Size x="107" y="30"/>
                                 <Anchors>
-                                    <Anchor point="TOPRIGHT" relativeTo="DarkmoonAurasFrame" relativePoint="TOPRIGHT" x="-8" y="0"/>
+                                    <Anchor point="TOPRIGHT" relativeTo="DarkmoonAurasFrame" relativePoint="TOPRIGHT" x="-22" y="0"/>
                                 </Anchors>
                                 <Scripts>
                                     <OnShow/>
                                     <OnEnterPressed>
-                                        RPSCoreFramework:Search(RPSCoreFramework.Interface.Auras, self:GetText());
+                                        RPSCoreFramework:AurasSearch(RPSCoreFramework.Interface.Auras, self:GetText());
                                         RPSCoreFramework:GenerateScrollMenu();
                                         self:ClearFocus();
                                     </OnEnterPressed>
@@ -713,7 +713,7 @@
                                 </Scripts>
                             </ScrollFrame>
                             <Button name="RPS_AuraButton1" inherits="RPS_CampaignButtonTemplate">
-                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-17"/></Anchors>
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-23"/></Anchors>
                                 <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 1);</OnClick>
                                 <OnEnter>
                                     RPSCoreFramework:GenerateTooltipForFrame(RPS_AuraButton1);
@@ -721,23 +721,23 @@
                                 </Scripts>
                             </Button>
                             <Button name="RPS_AuraButton2" inherits="RPS_CampaignButtonTemplate">
-                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-82"/></Anchors>
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-88"/></Anchors>
                                 <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 2)</OnClick></Scripts>
                             </Button>
                             <Button name="RPS_AuraButton3" inherits="RPS_CampaignButtonTemplate">
-                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-147"/></Anchors>
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-153"/></Anchors>
                                 <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 3)</OnClick></Scripts>
                             </Button>
                             <Button name="RPS_AuraButton4" inherits="RPS_CampaignButtonTemplate">
-                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-212"/></Anchors>
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-218"/></Anchors>
                                 <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 4)</OnClick></Scripts>
                             </Button>
                             <Button name="RPS_AuraButton5" inherits="RPS_CampaignButtonTemplate">
-                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-277"/></Anchors>
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-283"/></Anchors>
                                 <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 5)</OnClick></Scripts>
                             </Button>
                             <Button name="RPS_AuraButton6" inherits="RPS_CampaignButtonTemplate">
-                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-342"/></Anchors>
+                                <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-348"/></Anchors>
                                 <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 6)</OnClick></Scripts>
                             </Button>
                         </Frames>
