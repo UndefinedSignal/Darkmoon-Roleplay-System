@@ -80,6 +80,11 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		    end
 		end
 	end
+	if RPS_AuraButton1:IsShown() then
+		AurasNotFound:Hide();
+	else
+		AurasNotFound:Show();
+	end
 end
 
 function RPSCoreFramework:LearnMyAuras(button, arg1)

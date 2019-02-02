@@ -665,6 +665,20 @@
                                 </FontString>
                             </Layer>
 
+                            <Layer>
+                                <FontString name="AurasNotFound" font="Fonts\FRIZQT___CYR.TTF" text="Ничего не найдено" justifyH="LEFT" justifyV="TOP">
+                                    <Color r="1" g="1" b="1" a="1"/>
+                                    <FontHeight val="20"/>
+                                    <Anchors>
+                                        <Anchor point="CENTER" relativeTo="DarkmoonAurasFrame" x="0" y="0" />
+                                    </Anchors>
+                                    <Shadow>
+                                        <Offset x="1" y="1" />
+                                        <Color r="0" g="0" b="0"/>
+                                    </Shadow>
+                                </FontString>
+                            </Layer>
+
 
                         </Layers>
 
@@ -1188,30 +1202,31 @@
                             </Frame>
                         </Frames>
                     </Frame>
-
+                    
                     <Frame name="DarkmoonSocialStatsFrame" hidden="true">
-                        <Size x="500" y="430"/>
+                        <Size x="525" y="450"/>
                         <Anchors>
-                            <Anchor relativeTo="RPS_MainFramePageContainer" x="15" y="-10" relativePoint="TOPLEFT"/>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="5" y="-5" relativePoint="TOPLEFT"/>
                         </Anchors>
+
+
                         <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
-                            <EdgeSize val="24"/>
+                            <EdgeSize val="16"/>
                         </Backdrop>
                         <Anchors>
-                            <Anchor point="TOPLEFT" x="0" y="-30" />
-                            <Anchor point="TOPRIGHT" x="2" y="-30" />
-                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
-                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
+                            <Anchor point="TOPLEFT" x="-10" y="-30" />
+                            <Anchor point="TOPRIGHT" x="12" y="-30" />
+                            <Anchor point="BOTTOMLEFT" x="-10" y="2" />
+                            <Anchor point="BOTTOMRIGHT" x="12" y="2" />
                         </Anchors>
                         <Layers>
                             <Layer level="BACKGROUND">
-                                <Texture file="Interface\Artifacts\ArtifactUIRogue">
+                                <Texture file="Interface\ACHIEVEMENTFRAME\UI-GuildAchievement-Parchment-Horizontal-Desaturated">
                                     <Anchors>
-                                        <Anchor point="TOPRIGHT" x="-5" y="-5"/>
-                                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-3"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
                                         <Anchor point="LEFT" x="5" y="0"/>
                                     </Anchors>
-                                    <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
                                 </Texture>
                             </Layer>
                         </Layers>
