@@ -1096,6 +1096,68 @@
 			</Button>
 		</Frames>
 	</Frame>
+	
+	<Frame name="RPS_SkillCompact" virtual="true">
+		<Frames>
+			<Frame name="$parent" inherits="RPS_SimpleIcon">
+				<Size x="35" y="35" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="25" y="-25" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentStatName" font="Fonts\FRIZQT___CYR.TTF" text="Характеристика" justifyH="LEFT" justifyV="TOP">
+						  <FontHeight val="14"/>
+						  <Anchors>
+						   <Anchor point="TOPLEFT" x="40" y="0" />
+						  </Anchors>
+						  <Shadow>
+							<Offset x="1" y="1" />
+							<Color r="0" g="0" b="0"/>
+						  </Shadow>
+						</FontString>
+						
+						<FontString name="$parentStatRoll" font="Fonts\FRIZQT___CYR.TTF" text="1 - 20" justifyH="LEFT" justifyV="TOP">
+						  <FontHeight val="12"/>
+						  <Anchors>
+						   <Anchor point="TOPLEFT" x="40" y="-20" />
+						  </Anchors>
+						  <Shadow>
+							<Offset x="1" y="1" />
+							<Color r="0" g="0" b="0"/>
+						  </Shadow>
+						</FontString>
+						
+						<FontString name="$parentStatValue" font="Fonts\FRIZQT___CYR.TTF" text="10" justifyH="LEFT" justifyV="TOP">
+						  <FontHeight val="12"/>
+						  <Anchors>
+						   <Anchor point="TOPLEFT" x="185" y="-13" />
+						  </Anchors>
+						  <Shadow>
+							<Offset x="1" y="1" />
+							<Color r="0" g="0" b="0"/>
+						  </Shadow>
+						</FontString>
+						
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Button name="$parentMinus" inherits="UIPanelButtonTemplate" text="-">
+				 <Size x="24" y="24"/>
+				 <Anchors>
+					<Anchor point="TOPLEFT" x="180" y="-30"/>
+				 </Anchors>
+			</Button>
+			
+			<Button name="$parentPlus" inherits="UIPanelButtonTemplate" text="+">
+				 <Size x="24" y="24"/>
+				 <Anchors>
+					<Anchor point="TOPLEFT" x="235" y="-30"/>
+				 </Anchors>
+			</Button>
+		</Frames>
+	</Frame>
 
 	<Frame name="RPS_InnerFrame" virtual="true">
 		<Layers>

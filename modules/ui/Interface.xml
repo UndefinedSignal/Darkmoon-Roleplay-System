@@ -1208,8 +1208,6 @@
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="5" y="-5" relativePoint="TOPLEFT"/>
                         </Anchors>
-
-
                         <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
                             <EdgeSize val="16"/>
                         </Backdrop>
@@ -1231,9 +1229,154 @@
                             </Layer>
                         </Layers>
                         <Frames>
-                            <!-- СЁМГА ПИХАТЬ СЮДА -->
-                        </Frames>
-                    </Frame>
+							<Frame name="DarkmoonCharStatsInfo">
+                                <Size x="525" y="450"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonSocialStatsFrame" x="-10" y="20" relativePoint="TOPLEFT"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                        <!--Interface\BankFrame\Bank-Background-->
+                                        <!--Interface\Collections\CollectionsBackgroundTile-->
+                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                        <FontString name="$parentFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="Свободные очки:" justifyH="LEFT" justifyV="TOP">
+                                            <FontHeight val="15"/>
+                                            <Anchors>
+                                                <Anchor point="CENTER" x="10" y="-187" />
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="1" y="1" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                    <Frame name="Strength" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-13" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Agility" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-59" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Intellect" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-105" />
+                                        </Anchors>
+                                    </Frame>                                   
+                                    <Frame name="CriticalChance" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-151" />
+                                        </Anchors>
+                                    </Frame>                                    
+                                    <Frame name="Spirit" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-197" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Endurance" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-243" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Dexterity" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-289" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Will" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="-335" />
+                                        </Anchors>
+                                    </Frame>
+									
+									
+									<Frame name="Strength" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-13" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Agility" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-59" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Intellect" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-105" />
+                                        </Anchors>
+                                    </Frame>                                   
+                                    <Frame name="CriticalChance" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-151" />
+                                        </Anchors>
+                                    </Frame>                                    
+                                    <Frame name="Spirit" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-197" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Endurance" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-243" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Dexterity" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-289" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="Will" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="265" y="-335" />
+                                        </Anchors>
+                                    </Frame>
+									
+									
+									
+                                    <Button name="$parentSubmit" inherits="UIPanelButtonTemplate" text="Выучить">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor point="CENTER" x="-96" y="-215"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentReset" inherits="UIPanelButtonTemplate" text="Сброс">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor point="CENTER" x="10" y="-215"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentUnlearn" inherits="UIPanelButtonTemplate" text="Разучить">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor point="CENTER" x="116" y="-215"/>
+                                        </Anchors>
+                                    </Button>
+                                </Frames>
+                            </Frame>                       
+						</Frames>
+						
+					</Frame>
 
                     <Frame name="DarkmoonMasteryStatsFrame" hidden="true">
                         <Size x="500" y="430"/>
