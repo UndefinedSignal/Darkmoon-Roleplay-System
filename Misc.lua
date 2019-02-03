@@ -128,14 +128,14 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 end
 
 function RPSCoreFramework:KnownAura(arg)
-	if RPSCoreFramework.Interface.Auras[arg][4] > 0 then
+	if RPSCoreFramework.Interface.Auras[arg][5] > 0 then
 		return true
 	end
 	return false
 end
 
 function RPSCoreFramework:isAuraActive(arg)
-	if RPSCoreFramework.Interface.Auras[arg][5] > 0 then
+	if RPSCoreFramework.Interface.Auras[arg][6] > 0 then
 		return true
 	end
 	return false

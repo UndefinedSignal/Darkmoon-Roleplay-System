@@ -68,28 +68,28 @@ function RPSCoreFramework:UpdateScaleInfo(str)
 end
 
 function RPSCoreFramework:UpdateAuraKnownInfo(str)
-	str = string.gsub(str, "RPS.AuraKnown ", "") -- 4
+	str = string.gsub(str, "RPS.AuraKnown ", "") -- 5
 	local values = {strsplit(' ', str)}
 	if (tonumber(str) == 0 or str == nil) then
 		return false
 	end
 	for i=1, #values do
-		RPSCoreFramework.Interface.Auras[tonumber(values[i])][4] = 1
+		RPSCoreFramework.Interface.Auras[tonumber(values[i])][5] = 1
 	end
 end
 
 function RPSCoreFramework:UpdateAuraActiveInfo(str)
-	str = string.gsub(str, "RPS.AuraActive ", "") -- 5
+	str = string.gsub(str, "RPS.AuraActive ", "") -- 6
 	local values = {strsplit(' ', str)}
 	if (tonumber(str) == 0 or str == nil) then
 		return false
 	end
 	for j=1, #RPSCoreFramework.Interface.Auras do
-		RPSCoreFramework.Interface.Auras[j][5] = 0
+		RPSCoreFramework.Interface.Auras[j][6] = 0
 	end
 	if (values[1] ~= "RPS.AuraActive") then
 		for i=1, #values do
-			RPSCoreFramework.Interface.Auras[tonumber(values[i])][5] = 1
+			RPSCoreFramework.Interface.Auras[tonumber(values[i])][6] = 1
 			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
 		end
 	end
@@ -165,7 +165,7 @@ function RPSCoreFramework:UpdateActiveAurasCounter()
 	local counter = 0
 	if RPSCoreFramework.Interface.ActiveAuraCounter ~= 0 then
 		for i = 1, #RPSCoreFramework.Interface.Auras do
-			if RPSCoreFramework.Interface.Auras[i][5] > 0 then
+			if RPSCoreFramework.Interface.Auras[i][6] > 0 then
 				counter = counter + 1
 			end
 		end
