@@ -14,6 +14,43 @@
 		</Layers>
 	</Frame>
 
+	<Frame name="RPS_MenestreleCards" virtual="true">
+		<Size x="123" y="99"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBackground" parentKey="Background" file="Interface\ACHIEVEMENTFRAME\UI-Achievement-StatsBackground">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+
+			<Layer>
+				<Texture name="$parentIcon" parentKey="Icon" file="Interface\BUTTONS\UI-EmptySlot">
+					<Anchors>
+						<Anchor point="CENTER" x="0" y="15"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+
+            <Layer>
+                <FontString name="$parentText" font="Fonts\FRIZQT___CYR.TTF" text="Название" justifyH="LEFT" justifyV="TOP">
+                    <Color r="1" g="1" b="1" a="1"/>
+                    <FontHeight val="14"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="0" y="-19" />
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="1" />
+                        <Color r="0" g="0" b="0"/>
+                    </Shadow>
+                </FontString>
+            </Layer>
+
+		</Layers>
+	</Frame>
+
 	<Frame name="RPS_FieldSetFrame" virtual="true">
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
 			<EdgeSize val="16"/>

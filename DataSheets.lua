@@ -75,6 +75,7 @@ RPSCoreFramework.Interface.MenuButtons = {
 	{"Персонаж", "RPS_ScaleInfo", "DarkmoonCharacterFrame", false, 0, false},
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
 	{"Display", "RPS_DisplayInfo", "DarkmoonDisplayInfoFrame", false, 0, false},
+	{"Менестрель", "RPS_Menestrel", "DarkmoonMenestrelFrame", false, 0, false},
 	{"Сменить пароль", "RPS_DropMyPassword", "DarkmoonPasswordChangeFrame", false, 0, true}
 }
 RPSCoreFramework.Interface.SubMenuButtons = {
