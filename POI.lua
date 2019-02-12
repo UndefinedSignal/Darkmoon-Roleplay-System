@@ -35,9 +35,12 @@ function RPSCoreFramework:InsertPinOnMap(icon_name, icon_path, zoneid, x, y)
 				    GameTooltip:Hide();
 		      	end)
 
-	RPSCoreFramework.HBD.Pins:AddWorldMapIconMF(RPSCoreFramework, IFrame, zoneid, nil, x, y, false)
+	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, zoneid, x, y)
 	return true
 end
+
+--RPSCoreFramework:InsertPinOnMap("Meme", "Interface\\MINIMAP\\TrapActive_Grey.blp", 974, 6333.3002929688, -4291.8999023438)
+
 
 function RPSCoreFramework:InsertPinOnMiniMap(icon_name, icon_path, zoneid, x, y)
 
@@ -67,7 +70,7 @@ function RPSCoreFramework:InsertPinOnMiniMap(icon_name, icon_path, zoneid, x, y)
 				    GameTooltip:Hide()
 		      	end)
 
-	RPSCoreFramework.HBD.Pins:AddMinimapIconMF(RPSCoreFramework, IFrame, zoneid, nil, x, y, false)
+	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, zoneid, x, y, false)
 	return true
 end
 
@@ -80,6 +83,7 @@ function RPSCoreFramework:FlushAllPinsOnMiniMap()
 	RPSCoreFramework.HBD.Pins:RemoveAllMinimapIcons(RPSCoreFramework)
 	return true
 end
+
 
 -- RPSCoreFramework:InsertPinOnMap("Interface\\MINIMAP\\TrapActive_Grey.blp", 720, 0.48706679450996, 0.174886696061)
 -- RPSCoreFramework:InsertPinOnMap("Interface\\MINIMAP\\TrapActive_Grey.blp", 301, 0.504987, 0.903770)
@@ -96,9 +100,11 @@ end
 --end
 
 function RPSCoreFramework:GetPlayerPosition()
-	local x,y, mapid, _, _ = RPSCoreFramework.HBD:GetPlayerZonePosition();
-	print("X: "..x.." Y: "..y.. " MapID: "..mapid)
+	local x,y, instanceID = RPSCoreFramework.HBD:GetPlayerWorldPosition();
+	print("X: "..x.." Y: "..y.. " instanceID: "..instanceID)
 end
+
+
 
 function RPSCoreFramework:GeneratePOIPlaces()
 	for k, v in pairs(RPSCoreFramework.Map.PinButtons) do
