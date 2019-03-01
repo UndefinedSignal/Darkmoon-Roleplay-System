@@ -6,10 +6,13 @@ function RPSCoreFramework:AddPinCoords(zoneid, icon, name, x, y)
 	return true
 end
 
-function RPSCoreFramework:InsertPinOnMap(icon_name, icon_path, zoneid, x, y)
 
-	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
-	local name = "POI"..RPSCoreFramework.POIIterator;
+--GUID, MapId, x, y,  type, Name,  Description
+function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, type, name, descr)
+	icon_name, icon_path, zoneid, x, y)
+
+--	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
+	local name = "POI-"..guid;
 
 -- local p,f,x,y,w,h=WorldMapButton f=CrT or CreateFrame("Button","CrT",p) f:SetSize(16,16) f:SetNormalTexture("")
 	local p = WorldMapButton
@@ -21,31 +24,33 @@ function RPSCoreFramework:InsertPinOnMap(icon_name, icon_path, zoneid, x, y)
 	end
 
 	local ntex = IFrame:CreateTexture()
-	ntex:SetTexture(icon_path)
+	ntex:SetTexture("Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\".."type") -- TODO TYPE
 	ntex:SetVertexColor(0.5, 0.5, 0.5) -- https://wow.gamepedia.com/Power_colors
 	ntex:SetAllPoints()
 	IFrame:SetNormalTexture(ntex)
 
 	IFrame:SetScript("OnEnter", function()
 		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				    GameTooltip:AddLine("|cffFFC125"..icon_name);
+				    GameTooltip:AddLine("|cffFFC125"..name);
+				    GameTooltip:AddLine("|cffFF8040"..descr);
 				    GameTooltip:Show();
 				    end)
 	IFrame:SetScript("OnLeave", function()
 				    GameTooltip:Hide();
 		      	end)
 
-	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, zoneid, x, y)
+	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, mapid, x, y)
 	return true
 end
 
 --RPSCoreFramework:InsertPinOnMap("Meme", "Interface\\MINIMAP\\TrapActive_Grey.blp", 974, 6333.3002929688, -4291.8999023438)
 
 
-function RPSCoreFramework:InsertPinOnMiniMap(icon_name, icon_path, zoneid, x, y)
+function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, type, name, descr)
+	icon_name, icon_path, zoneid, x, y)
 
-	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
-	local name = "POITex"..RPSCoreFramework.POIIterator;
+--	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
+	local name = "POITex-"..guid;
 
 	local p = WorldMapButton
 	local IFrame = CreateFrame("Button", name, p)
@@ -56,21 +61,22 @@ function RPSCoreFramework:InsertPinOnMiniMap(icon_name, icon_path, zoneid, x, y)
 	end
 
 	local ntex = IFrame:CreateTexture()
-	ntex:SetTexture(icon_path)
+	ntex:SetTexture("Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\".."type") -- TODO TYPE
 	ntex:SetVertexColor(0.5, 0.5, 0.5) -- https://wow.gamepedia.com/Power_colors
 	ntex:SetAllPoints()
 	IFrame:SetNormalTexture(ntex)
 
 	IFrame:SetScript("OnEnter", function()
 		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				    GameTooltip:AddLine("|cffffcc00"..icon_name);
+				    GameTooltip:AddLine("|cffFFC125"..name);
+				    GameTooltip:AddLine("|cffFF8040"..descr);
 				    GameTooltip:Show();
 				    end)
 	IFrame:SetScript("OnLeave", function()
 				    GameTooltip:Hide()
 		      	end)
 
-	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, zoneid, x, y, false)
+	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, mapid, x, y, false)
 	return true
 end
 
@@ -87,13 +93,6 @@ end
 
 -- RPSCoreFramework:InsertPinOnMap("Interface\\MINIMAP\\TrapActive_Grey.blp", 720, 0.48706679450996, 0.174886696061)
 -- RPSCoreFramework:InsertPinOnMap("Interface\\MINIMAP\\TrapActive_Grey.blp", 301, 0.504987, 0.903770)
-function RPSCoreFramework:TakePinIcon()
-	--RPSCoreFramework.Map.Icons
-
-	local icon = "Interface\\MINIMAP\\TrapActive_Grey.blp";
-
-	return icon;
-end
 
 --function RPSCoreFramework:GeneratePinButtons()
 --	RPSCoreFramework.Map.PinButtons
@@ -105,13 +104,13 @@ function RPSCoreFramework:GetPlayerPosition()
 end
 
 
-
 function RPSCoreFramework:GeneratePOIPlaces()
-	for k, v in pairs(RPSCoreFramework.Map.PinButtons) do
-		RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[5], v[3], v[4]);
-		RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[5], v[3], v[4]);
+	if #RPSCoreFramework.Map.PinButtons > 0 then
+		for i = 1, #RPSCoreFramework.Map.PinButtons do
+			RPSCoreFramework:InsertPinOnMap(RPSCoreFramework.Map.PinButtons[i][1], RPSCoreFramework.Map.PinButtons[i][2], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][3], RPSCoreFramework.Map.PinButtons[i][4], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][6], RPSCoreFramework.Map.PinButtons[i][7]);
+			RPSCoreFramework:InsertPinOnMiniMap(RPSCoreFramework.Map.PinButtons[i][1], RPSCoreFramework.Map.PinButtons[i][2], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][3], RPSCoreFramework.Map.PinButtons[i][4], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][6], RPSCoreFramework.Map.PinButtons[i][7]);
+		end
 	end
-	print("POI Generation")
 	return true
 end
 

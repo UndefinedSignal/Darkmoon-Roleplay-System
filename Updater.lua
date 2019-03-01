@@ -109,6 +109,19 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	end
 end
 
+----GUID, MapId, x, y,  type, Name,  Description
+function RPSCoreFramework:UpdatePOIPins(str)
+	local values = {strsplit('#',str)}
+	local k, v = 1;
+	for i = 1, #values do
+		RPSCoreFramework.Map.PinButtons[k][v] = values[i];
+		v = v + 1;
+		if (k % 7 == 0 and k ~= 1) then
+			k = k + 1
+		end
+	end
+end
+
 function RPSCoreFramework:RefreshActiveAuras(str)
 	str = string.gsub(str, "RPS.AuraRefresh ", "") -- 5
 	local values = {strsplit(' ', str)}
@@ -151,6 +164,7 @@ end
 
 function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage(".disp list")
+	RPSCoreFramework:SendCoreMessage(".rps poi request abc123")
 	RPSCoreFramework:SendCoreMessage(".rps action scale info")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active")

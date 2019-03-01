@@ -376,13 +376,4 @@ function RPSCoreFramework:OnInitialize()
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-
-	RPSCoreFramework.Map.PinButtons = {
-		{"Tavern", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn", 0.504987, 0.903770, 301},
-		{"House 1", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.742743, 0.579597, 301},
-		{"House 2", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.626656, 0.447683, 301},
-		{"House 3", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.556268, 0.403740, 301},
-		{"House 4", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.577851, 0.495251, 301},
-		{"Tavern 2", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house", 0.751721, 0.543597, 301}
-	}
 end

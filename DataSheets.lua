@@ -9,21 +9,23 @@ RPSCoreFramework.DB = {};
 RPSCoreFramework.DB.Pins = {};
 RPSCoreFramework.Map = {};
 RPSCoreFramework.Map.Icons = {
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\anchor",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\camp",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\conflict",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\farm",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\loot",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\lumber",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\mine",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\monster",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\point",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\question",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\tower",
-	"Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\workshop"
+    anchor = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\anchor",
+    camp = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\camp",
+    conflict = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\conflict",
+    farm = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\farm",
+    house = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house",
+    inn = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn",
+    loot = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\loot",
+    lumber = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\lumber",
+    mine = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\mine",
+    monster = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\monster",
+    point = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\point",
+    question = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\question",
+    tower = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\tower",
+    workshop = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\workshop"
 };
+
+--GUID, MapId, x, y,  type, Name,  Description
 RPSCoreFramework.Map.PinButtons = {};
 
 RPSCoreFramework.AdvancedRaces = {
