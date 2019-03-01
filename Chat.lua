@@ -37,7 +37,7 @@ function sysMsg(self, event, msg, author, ...)
 	end
 end
 
-local AddomMessageHandler = CreateFrame("Frame");
+local AddonMessageHandler = CreateFrame("Frame");
 AddomMessageHandler:RegisterEvent("CHAT_MSG_ADDON");
 AddomMessageHandler:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
 	if (prefix == "RPS.POI") then

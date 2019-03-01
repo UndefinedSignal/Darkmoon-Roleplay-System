@@ -112,13 +112,9 @@ end
 ----GUID, MapId, x, y,  type, Name,  Description
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)}
-	local k, v = 1;
+	local k = #RPSCoreFramework.Map.PinButtons + 1
 	for i = 1, #values do
-		RPSCoreFramework.Map.PinButtons[k][v] = values[i];
-		v = v + 1;
-		if (k % 7 == 0 and k ~= 1) then
-			k = k + 1
-		end
+		RPSCoreFramework.Map.PinButtons[k][i] = values[i]
 	end
 end
 
