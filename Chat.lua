@@ -38,8 +38,8 @@ function sysMsg(self, event, msg, author, ...)
 end
 
 local AddonMessageHandler = CreateFrame("Frame");
-AddomMessageHandler:RegisterEvent("CHAT_MSG_ADDON");
-AddomMessageHandler:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+AddonMessageHandler:RegisterEvent("CHAT_MSG_ADDON");
+AddonMessageHandler:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
 	if (prefix == "RPS.POI") then
 		RPSCoreFramework:UpdatePOIPins(msg)
 	elseif (prefix ==  "RPS.StatMe") then
