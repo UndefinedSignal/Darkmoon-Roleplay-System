@@ -5,8 +5,7 @@ RPSCoreFramework.Literature = {};
 RPSCoreFramework.Scroller = {};
 RPSCoreFramework.Display = {};
 RPSCoreFramework.Interface = {};
-RPSCoreFramework.DB = {};
-RPSCoreFramework.DB.Pins = {};
+--RPSCoreFramework.DB = {};
 RPSCoreFramework.Map = {};
 RPSCoreFramework.Map.Icons = {
     anchor = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\anchor",
@@ -26,7 +25,6 @@ RPSCoreFramework.Map.Icons = {
 };
 
 --GUID, MapId, x, y,  type, Name,  Description
-RPSCoreFramework.Map.PinButtons = {};
 
 RPSCoreFramework.AdvancedRaces = {
 	"voidelf",

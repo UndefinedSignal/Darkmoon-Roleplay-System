@@ -1,6 +1,3 @@
--- RPSCoreFramework.Map = {}
--- RPSCoreFramework.DB.Pins = {}
-
 function RPSCoreFramework:AddPinCoords(zoneid, icon, name, x, y)
 	table.insert(RPSCoreFramework.DB.Pins, {zoneid, icon, name, x, y})
 	return true
@@ -88,14 +85,6 @@ function RPSCoreFramework:FlushAllPinsOnMiniMap()
 	return true
 end
 
-
--- RPSCoreFramework:InsertPinOnMap("Interface\\MINIMAP\\TrapActive_Grey.blp", 720, 0.48706679450996, 0.174886696061)
--- RPSCoreFramework:InsertPinOnMap("Interface\\MINIMAP\\TrapActive_Grey.blp", 301, 0.504987, 0.903770)
-
---function RPSCoreFramework:GeneratePinButtons()
---	RPSCoreFramework.Map.PinButtons
---end
-
 function RPSCoreFramework:GetPlayerPosition()
 	local x,y, instanceID = RPSCoreFramework.HBD:GetPlayerWorldPosition();
 	print("X: "..x.." Y: "..y.. " instanceID: "..instanceID)
@@ -103,10 +92,10 @@ end
 
 
 function RPSCoreFramework:GeneratePOIPlaces()
-	if #RPSCoreFramework.Map.PinButtons > 0 then
-		for i = 1, #RPSCoreFramework.Map.PinButtons do
-			RPSCoreFramework:InsertPinOnMap(RPSCoreFramework.Map.PinButtons[i][1], RPSCoreFramework.Map.PinButtons[i][2], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][3], RPSCoreFramework.Map.PinButtons[i][4], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][6], RPSCoreFramework.Map.PinButtons[i][7]);
-			RPSCoreFramework:InsertPinOnMiniMap(RPSCoreFramework.Map.PinButtons[i][1], RPSCoreFramework.Map.PinButtons[i][2], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][3], RPSCoreFramework.Map.PinButtons[i][4], RPSCoreFramework.Map.PinButtons[i][5], RPSCoreFramework.Map.PinButtons[i][6], RPSCoreFramework.Map.PinButtons[i][7]);
+	if #RPSCorePOIPins > 0 then
+		for i = 1, #RPSCorePOIPins do
+			RPSCoreFramework:InsertPinOnMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7]);
+			RPSCoreFramework:InsertPinOnMiniMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7]);
 		end
 	end
 	return true
@@ -120,31 +109,3 @@ function RPSCoreFramework:POIPreGenerate()
 	end
 	return false;
 end
-
-
---[[Retrieve the zone information the player is currently in.
-{"Tavern", "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn", 0.504987, 0.903770, 301},
-This functions is independent of the world map and does not rely on the world map to retrieve the players current position.
-
-Return values
-	x
-X zone coordinate of the player
-	y
-Y zone coordinate of the player
-	currentPlayerZoneMapID
-The MapID of the zone
-	currentPlayerLevel
-The map level the player is on
-	currentMapFile
-The map file of the current zone (can be a micro dungeon map)
-	currentMapIsMicroDungeon
-True if the player is currently in a micro dungeon]]
-
-
--- IDкарты, имя, x, y, комментарий с названием карты
-
-
-
-
-
-

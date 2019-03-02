@@ -112,9 +112,15 @@ end
 ----GUID, MapId, x, y,  type, Name,  Description
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)}
-	local k = #RPSCoreFramework.Map.PinButtons + 1
+	local k = #RPSCorePOIPins + 1
+
 	for i = 1, #values do
-		RPSCoreFramework.Map.PinButtons[k][i] = values[i]
+		local ExistingGUID = RPSCoreFramework:GetExistingPOIGUID(values[i][1]);
+		if ExistingGUID then
+			RPSCorePOIPins[ExistingGUID][i] = values[i]
+		else
+			RPSCorePOIPins[k][i] = values[i]
+		end
 	end
 end
 
