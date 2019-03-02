@@ -65,19 +65,19 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		self:PeriodicallyScrollMenuUpdater();
 	elseif (event == "CHAT_MSG_ADDON") then
 		if (prefix == "RPS.POI") then
-			RPSCoreFramework:UpdatePOIPins(msg)
-		elseif (prefix ==  "RPS.StatMe") then
-			RPSCoreFramework:UpdateInfo(msg);
+			RPSCoreFramework:AddonMessageUpdatePOIPins(msg)
+		elseif (prefix == "RPS.StatMe") then
+			RPSCoreFramework:AddonMessageUpdateInfo(msg);
 		elseif (prefix == "RPS.Scale") then
-			RPSCoreFramework:UpdateScaleInfo(msg);
+			RPSCoreFramework:AddonMessageUpdateScaleInfo(msg);
 		elseif (prefix == "RPS.AuraKnown") then
-			RPSCoreFramework:UpdateAuraKnownInfo(msg);
+			RPSCoreFramework:AddonMessageUpdateAuraKnownInfo(msg);
 		elseif (prefix == "RPS.AuraActive") then
-			RPSCoreFramework:UpdateAuraActiveInfo(msg);
+			RPSCoreFramework:AddonMessageUpdateAuraActiveInfo(msg);
 		elseif (prefix == "RPS.Display") then
-			RPSCoreFramework:UpdateDisplayMacrosInfo(msg);
+			RPSCoreFramework:AddonMessageUpdateDisplayMacrosInfo(msg);
 		elseif (prefix == "RPS.AuraRefresh") then
-			RPSCoreFramework:RefreshActiveAuras(msg);
+			RPSCoreFramework:AddonMessageRefreshActiveAuras(msg);
 		end
 	end
 end

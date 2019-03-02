@@ -1,15 +1,12 @@
 function RPSCoreFramework:AddPinCoords(zoneid, icon, name, x, y)
 	table.insert(RPSCoreFramework.DB.Pins, {zoneid, icon, name, x, y})
-	return true
 end
 
 
 --GUID, MapId, x, y,  type, Name,  Description
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, type, name, descr)
-
 --	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
 	local name = "POI-"..guid;
-
 -- local p,f,x,y,w,h=WorldMapButton f=CrT or CreateFrame("Button","CrT",p) f:SetSize(16,16) f:SetNormalTexture("")
 	local p = WorldMapButton
 	local IFrame = CreateFrame("Button", name, p)
@@ -36,14 +33,12 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, type, name, descr)
 		      	end)
 
 	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, mapid, x, y)
-	return true
 end
 
 --RPSCoreFramework:InsertPinOnMap("Meme", "Interface\\MINIMAP\\TrapActive_Grey.blp", 974, 6333.3002929688, -4291.8999023438)
 
 
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, type, name, descr)
-
 --	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
 	local name = "POITex-"..guid;
 
@@ -72,17 +67,14 @@ function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, type, name, desc
 		      	end)
 
 	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, mapid, x, y, false)
-	return true
 end
 
 function RPSCoreFramework:FlushAllPinsOnMap()
 	RPSCoreFramework.HBD.Pins:RemoveAllWorldMapIcons(RPSCoreFramework)
-	return true
 end
 
 function RPSCoreFramework:FlushAllPinsOnMiniMap()
 	RPSCoreFramework.HBD.Pins:RemoveAllMinimapIcons(RPSCoreFramework)
-	return true
 end
 
 function RPSCoreFramework:GeneratePOIPlaces()

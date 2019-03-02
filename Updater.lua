@@ -158,6 +158,96 @@ function RPSCoreFramework:UpdateInfo(str)
 	self:UpdateUnlearn();	
 end
 
+function RPSCoreFramework:AddonMessageUpdateScaleInfo(str)
+	RPSCoreFramework.MyScale = tonumber(str)
+	RPSCoreFramework:UpdateScaleReset()
+end
+
+function RPSCoreFramework:AddonMessageUpdateAuraKnownInfo(str)
+	local values = {strsplit(' ', str)}
+	if (tonumber(str) == 0 or str == nil) then
+		return false
+	end
+	for i=1, #values do
+		RPSCoreFramework.Interface.Auras[tonumber(values[i])][5] = 1
+	end
+end
+
+function RPSCoreFramework:AddonMessageUpdateAuraActiveInfo(str)
+	local values = {strsplit(' ', str)}
+	if (tonumber(str) == 0 or str == nil) then
+		return false
+	end
+	for j=1, #RPSCoreFramework.Interface.Auras do
+		RPSCoreFramework.Interface.Auras[j][6] = 0
+	end
+	for i=1, #values do
+		RPSCoreFramework.Interface.Auras[tonumber(values[i])][6] = 1
+		RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
+	end
+	
+	RPSCoreFramework:UpdateActiveAurasCounter()
+end
+
+function RPSCoreFramework:AddonMessageUpdateDisplayMacrosInfo(str)
+	local values = {strsplit(' ', str)}
+	local j = 1
+	for i = 1, 19 do
+		RPSCoreFramework.Display.Scroll[i][2] = values[j]
+		j = j + 1
+		RPSCoreFramework.Display.Scroll[i][3] = values[j]
+		j = j + 1
+	end
+end
+
+----GUID, MapId, x, y,  type, Name,  Description
+function RPSCoreFramework:AddonMessageUpdatePOIPins(str)
+	local values = {strsplit('#',str)}
+	local k = #RPSCorePOIPins + 1
+
+	for i = 1, #values do
+		local ExistingGUID = RPSCoreFramework:GetExistingPOIGUID(values[i][1]);
+		if ExistingGUID then
+			RPSCorePOIPins[ExistingGUID][i] = values[i]
+		else
+			RPSCorePOIPins[k][i] = values[i]
+		end
+	end
+end
+
+function RPSCoreFramework:AddonMessageRefreshActiveAuras(str)
+	local values = {strsplit(' ', str)}
+	-- Do smth
+end
+
+function RPSCoreFramework:AddonMessageUpdateInfo(str)
+	local values = {strsplit(' ', str)};
+	self.FreeStats = values[1];
+	self.FreeStatsCached = values[1];
+	-- values[2] - hp
+	self.Stats.Strength = values[3];
+    self.Stats.Agility = values[4];
+    self.Stats.Intellect = values[5];
+    self.Stats.Spirit = values[6];
+    self.Stats.Endurance = values[7];
+    self.Stats.Dexterity = values[8];
+    self.Stats.Will = values[9];
+	self.Stats.CriticalChance = values[17];
+	
+	self.ItemsStats.Strength = values[10];
+    self.ItemsStats.Agility = values[11];
+    self.ItemsStats.Intellect = values[12];
+    self.ItemsStats.Spirit = values[13];
+    self.ItemsStats.Endurance = values[14];
+    self.ItemsStats.Dexterity = values[15];
+    self.ItemsStats.Will = values[16];
+	self.ItemsStats.CriticalChance = values[18];
+	
+	self:UpdateNormal();
+	self:UpdateDiff();
+	self:UpdateUnlearn();	
+end
+
 function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 	if RPSCoreFramework.Interface.Auras.Initialized then
 		RPSCoreFramework:ScrollMenuUpdater()
