@@ -9,7 +9,6 @@ end
 
 --GUID, MapId, x, y,  type, Name,  Description
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, type, name, descr)
-	icon_name, icon_path, zoneid, x, y)
 
 --	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
 	local name = "POI-"..guid;
@@ -47,7 +46,6 @@ end
 
 
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, type, name, descr)
-	icon_name, icon_path, zoneid, x, y)
 
 --	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
 	local name = "POITex-"..guid;
