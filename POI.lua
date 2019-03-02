@@ -7,8 +7,7 @@ end
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, ptype, name, description)
 --	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
 -- local p,f,x,y,w,h=WorldMapButton f=CrT or CreateFrame("Button","CrT",p) f:SetSize(16,16) f:SetNormalTexture("")
-	local p = WorldMapButton
-	local IFrame = CreateFrame("Button", "POI-"..guid, p)
+	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton)
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
 		IFrame:SetSize(24,24);
 	else
@@ -39,8 +38,7 @@ end
 
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, ptype, name, description)
 --	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
-	local p = WorldMapButton
-	local IFrame = CreateFrame("Button", "POITex-"..guid, p)
+	local IFrame = CreateFrame("Button", "POITex-"..guid, WorldMapButton)
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
 		IFrame:SetSize(24,24);
 	else
