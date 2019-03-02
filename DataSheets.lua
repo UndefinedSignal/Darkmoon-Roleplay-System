@@ -24,6 +24,10 @@ RPSCoreFramework.Map.Icons = {
     workshop = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\workshop"
 };
 
+if RPSCorePOIPins == nil then
+	RPSCorePOIPins = {}
+end
+
 --GUID, MapId, x, y,  type, Name,  Description
 
 RPSCoreFramework.AdvancedRaces = {

@@ -37,26 +37,6 @@ function sysMsg(self, event, msg, author, ...)
 	end
 end
 
-local AddonMessageHandler = CreateFrame("Frame");
-AddonMessageHandler:RegisterEvent("CHAT_MSG_ADDON");
-AddonMessageHandler:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
-	if (prefix == "RPS.POI") then
-		RPSCoreFramework:UpdatePOIPins(msg)
-	elseif (prefix ==  "RPS.StatMe") then
-		RPSCoreFramework:UpdateInfo(msg);
-	elseif (prefix == "RPS.Scale") then
-		RPSCoreFramework:UpdateScaleInfo(msg);
-	elseif (prefix == "RPS.AuraKnown") then
-		RPSCoreFramework:UpdateAuraKnownInfo(msg);
-	elseif (prefix == "RPS.AuraActive") then
-		RPSCoreFramework:UpdateAuraActiveInfo(msg);
-	elseif (prefix == "RPS.Display") then
-		RPSCoreFramework:UpdateDisplayMacrosInfo(msg);
-	elseif (prefix == "RPS.AuraRefresh") then
-		RPSCoreFramework:RefreshActiveAuras(msg);
-	end
-end)
-
 function RPSCoreFramework:SendCoreMessage(msg)
 	SendAddonMessage(RPSCoreFramework.Prefix, msg, "WHISPER", UnitName("player"));
 end;

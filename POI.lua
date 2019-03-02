@@ -85,12 +85,6 @@ function RPSCoreFramework:FlushAllPinsOnMiniMap()
 	return true
 end
 
-function RPSCoreFramework:GetPlayerPosition()
-	local x,y, instanceID = RPSCoreFramework.HBD:GetPlayerWorldPosition();
-	print("X: "..x.." Y: "..y.. " instanceID: "..instanceID)
-end
-
-
 function RPSCoreFramework:GeneratePOIPlaces()
 	if #RPSCorePOIPins > 0 then
 		for i = 1, #RPSCorePOIPins do
@@ -98,7 +92,6 @@ function RPSCoreFramework:GeneratePOIPlaces()
 			RPSCoreFramework:InsertPinOnMiniMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7]);
 		end
 	end
-	return true
 end
 
 function RPSCoreFramework:POIPreGenerate()
@@ -109,3 +102,11 @@ function RPSCoreFramework:POIPreGenerate()
 	end
 	return false;
 end
+
+
+--[[
+function RPSCoreFramework:GetPlayerPosition()
+	local x,y, instanceID = RPSCoreFramework.HBD:GetPlayerWorldPosition();
+	print("X: "..x.." Y: "..y.. " instanceID: "..instanceID)
+end
+]]

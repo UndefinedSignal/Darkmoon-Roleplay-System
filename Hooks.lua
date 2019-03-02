@@ -5,6 +5,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_LEVEL_UP");
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
+	self:RegisterEvent("CHAT_MSG_ADDON");
 	
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -51,7 +52,7 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
 end
 
-function RPSCoreFramework:OnEventFrame(self, event, ...)
+function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
 		self.TimerID = self:ScheduleRepeatingTimer("AuraCheckTimer", 0.5);
 		self:UpdatePlayerModel();
@@ -62,6 +63,22 @@ function RPSCoreFramework:OnEventFrame(self, event, ...)
 		self:UpdateUnlearn();
 		self:UpdateScaleReset();
 		self:PeriodicallyScrollMenuUpdater();
+	elseif (event == "CHAT_MSG_ADDON") then
+		if (prefix == "RPS.POI") then
+			RPSCoreFramework:UpdatePOIPins(msg)
+		elseif (prefix ==  "RPS.StatMe") then
+			RPSCoreFramework:UpdateInfo(msg);
+		elseif (prefix == "RPS.Scale") then
+			RPSCoreFramework:UpdateScaleInfo(msg);
+		elseif (prefix == "RPS.AuraKnown") then
+			RPSCoreFramework:UpdateAuraKnownInfo(msg);
+		elseif (prefix == "RPS.AuraActive") then
+			RPSCoreFramework:UpdateAuraActiveInfo(msg);
+		elseif (prefix == "RPS.Display") then
+			RPSCoreFramework:UpdateDisplayMacrosInfo(msg);
+		elseif (prefix == "RPS.AuraRefresh") then
+			RPSCoreFramework:RefreshActiveAuras(msg);
+		end
 	end
 end
 
