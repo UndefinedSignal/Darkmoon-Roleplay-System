@@ -1,12 +1,7 @@
-function RPSCoreFramework:AddPinCoords(zoneid, icon, name, x, y)
-	table.insert(RPSCoreFramework.DB.Pins, {zoneid, icon, name, x, y})
-end
+local POIPath = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\";
 
-
---GUID, MapId, x, y,  type, Name,  Description
-function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, ptype, name, description)
---	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
--- local p,f,x,y,w,h=WorldMapButton f=CrT or CreateFrame("Button","CrT",p) f:SetSize(16,16) f:SetNormalTexture("")
+--GUID, MapId, x, y, type, color, Name, Description
+function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, ptype, color, name, description)
 	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton)
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
 		IFrame:SetSize(24,24);
@@ -14,10 +9,11 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, ptype, name, descrip
 		IFrame:SetSize(18,18);
 	end
 
-	local ntex = IFrame:CreateTexture()
-	ntex:SetTexture("Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..ptype)
-	ntex:SetVertexColor(0.5, 0.5, 0.5) -- https://wow.gamepedia.com/Power_colors
-	ntex:SetAllPoints()
+	local ntex = IFrame:CreateTexture();
+	ntex:SetTexture(POIPath..ptype);
+	local r, g, b = RPSCoreFramework:hex2rgb("#"..color);
+	ntex:SetVertexColor(r/255, g/255, b/255); -- https://wow.gamepedia.com/Power_colors
+	ntex:SetAllPoints();
 	IFrame:SetNormalTexture(ntex)
 
 	IFrame:SetScript("OnEnter", function()
@@ -33,11 +29,7 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, ptype, name, descrip
 	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, mapid, x, y)
 end
 
---RPSCoreFramework:InsertPinOnMap("Meme", "Interface\\MINIMAP\\TrapActive_Grey.blp", 974, 6333.3002929688, -4291.8999023438)
-
-
-function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, ptype, name, description)
---	RPSCoreFramework.POIIterator = RPSCoreFramework.POIIterator + 1;
+function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, ptype, color, name, description)
 	local IFrame = CreateFrame("Button", "POITex-"..guid, WorldMapButton)
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
 		IFrame:SetSize(24,24);
@@ -46,8 +38,9 @@ function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, ptype, name, des
 	end
 
 	local ntex = IFrame:CreateTexture()
-	ntex:SetTexture("Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..ptype)
-	ntex:SetVertexColor(0.5, 0.5, 0.5) -- https://wow.gamepedia.com/Power_colors
+	ntex:SetTexture(POIPath..ptype)
+	local r, g, b = RPSCoreFramework:hex2rgb("#"..color);
+	ntex:SetVertexColor(r/255, g/255, b/255); -- https://wow.gamepedia.com/Power_colors
 	ntex:SetAllPoints()
 	IFrame:SetNormalTexture(ntex)
 
