@@ -26,7 +26,7 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, ptype, color, name, 
 				    GameTooltip:Hide();
 		      	end)
 
-	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, mapid, x, y)
+	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y))
 end
 
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, ptype, color, name, description)
@@ -54,7 +54,7 @@ function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, ptype, color, na
 				    GameTooltip:Hide()
 		      	end)
 
-	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, mapid, x, y, false)
+	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y), false)
 end
 
 function RPSCoreFramework:FlushAllPinsOnMap()
@@ -66,14 +66,17 @@ function RPSCoreFramework:FlushAllPinsOnMiniMap()
 end
 
 function RPSCoreFramework:GeneratePOIPlaces()
-	RPSCoreFramework:FlushAllPinsOnMap();
-	RPSCoreFramework:FlushAllPinsOnMiniMap();
-	if GetCurrentMapZone() ~= 0 and AllowPOIUpdate then
-		for i = 1, #RPSCorePOIPins do
-			RPSCoreFramework:InsertPinOnMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7], RPSCorePOIPins[i][8]);
-			RPSCoreFramework:InsertPinOnMiniMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7], RPSCorePOIPins[i][8]);
-		end
-		return true;
-	end
-	return false;
+    RPSCoreFramework:FlushAllPinsOnMap();
+    RPSCoreFramework:FlushAllPinsOnMiniMap();
+	print(GetCurrentMapZone())
+	print(AllowPOIUpdate);
+    if GetCurrentMapZone() ~= 0 and AllowPOIUpdate then
+	print("draw");
+        for k, v in pairs(RPSCorePOIPins) do
+            RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
+            RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
+        end
+        return true;
+    end
+    return false;
 end

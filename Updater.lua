@@ -109,7 +109,7 @@ end
 
 ----GUID, MapId, x, y, type, color, Name,  Description
 function RPSCoreFramework:UpdatePOIPins(str)
-	local values = strsplit('#',str);	
+	local values = {strsplit('#',str)};	
 	RPSCorePOIPins[values[1]] = values;
 end
 
@@ -148,15 +148,15 @@ function RPSCoreFramework:UpdateInfo(str)
 end
 
 ----GUID, MapId, x, y, type, color, Name,  Description
-function RPSCoreFramework:AddPOIPins(msg)
+function RPSCoreFramework:AddPOIPins(str)
 	AllowPOIUpdate = false;
-	local values = {strsplit('#',str)}
+	local values = {strsplit("#",str)}
 	RPSCorePOIPins[values[1]] = values;
 end
 
 function RPSCoreFramework:UpdatePOIPins(str)
 	AllowPOIUpdate = false;
-	local values = strsplit('#',str);
+	local values = {strsplit('#',str)};
 	RPSCorePOIPins[values[1]] = values;
 	AllowPOIUpdate = true;
 	RPSCoreFramework:GeneratePOIPlaces();
@@ -184,7 +184,7 @@ end
 
 function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage(".disp list")
-	RPSCoreFramework:SendCoreMessage(".rps poi request abc123")
+	RPSCoreFramework:SendCoreMessage(".rps request poi abc123")
 	RPSCoreFramework:SendCoreMessage(".rps action scale info")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
