@@ -34,7 +34,6 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, x, y, ptype, name, descrip
 		      	end)
 
 	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, mapid, x, y)
-	return true
 end
 
 --RPSCoreFramework:InsertPinOnMap("Meme", "Interface\\MINIMAP\\TrapActive_Grey.blp", 974, 6333.3002929688, -4291.8999023438)
@@ -68,17 +67,14 @@ function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, x, y, ptype, name, des
 		      	end)
 
 	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, mapid, x, y, false)
-	return true
 end
 
 function RPSCoreFramework:FlushAllPinsOnMap()
 	RPSCoreFramework.HBD.Pins:RemoveAllWorldMapIcons(RPSCoreFramework)
-	return true
 end
 
 function RPSCoreFramework:FlushAllPinsOnMiniMap()
 	RPSCoreFramework.HBD.Pins:RemoveAllMinimapIcons(RPSCoreFramework)
-	return true
 end
 
 function RPSCoreFramework:GeneratePOIPlaces()

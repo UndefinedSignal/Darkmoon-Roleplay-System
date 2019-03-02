@@ -109,19 +109,10 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	end
 end
 
-----GUID, MapId, x, y,  type, Name,  Description
+----GUID, MapId, x, y, type, color, Name,  Description
 function RPSCoreFramework:UpdatePOIPins(str)
-	local values = {strsplit('#',str)}
-	local k = #RPSCorePOIPins + 1
-
-	for i = 1, #values do
-		local ExistingGUID = RPSCoreFramework:GetExistingPOIGUID(values[i][1]);
-		if ExistingGUID then
-			RPSCorePOIPins[ExistingGUID][i] = values[i]
-		else
-			RPSCorePOIPins[k][i] = values[i]
-		end
-	end
+	local values = strsplit('#',str);	
+	RPSCorePOIPins[values[1]] = values;
 end
 
 function RPSCoreFramework:RefreshActiveAuras(str)
