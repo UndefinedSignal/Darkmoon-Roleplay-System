@@ -28,10 +28,9 @@ function RPSCoreFramework:InitializeHooks()
 
 	self:SecureHook("ZoomOut", function() RPSCoreFramework:FlushAllPinsOnMap();	end);
 
-
 	RPSCoreFramework.HBD.RegisterCallback("RPSCoreFramework", "PlayerZoneChanged", function() RPSCoreFramework:GeneratePOIPlaces();	end); -- Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
 	--self:SecureHook("SetMapToCurrentZone", function() print("SetMapToCurrentZone");	end) -- Fires when worldmap sets on player.
-	self:SecureHook("ProcessMapClick", function()	self:ScheduleTimer("POIPreGenerate", 2)	end);
+	self:SecureHook("ProcessMapClick", function()	self:ScheduleTimer("GeneratePOIPlaces", 2)	end);
 	self:SecureHook("SetMapZoom", function() RPSCoreFramework:FlushAllPinsOnMap();	end);
 
 	--RPS_CharScaleSlider:HookScript("OnMouseUp", function() StaticPopup_Show("setCharacterScale") end)
@@ -64,20 +63,26 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		self:UpdateScaleReset();
 		self:PeriodicallyScrollMenuUpdater();
 	elseif (event == "CHAT_MSG_ADDON") then
-		if (prefix == "RPS.POI") then
-			RPSCoreFramework:AddonMessageUpdatePOIPins(msg)
+		if (prefix == "RPS.POI.i") then
+			RPSCoreFramework:AddPOIPins(msg)
+		elseif (prefix == "RPS.POI.u") then
+			RPSCoreFramework:UpdatePOIPins(msg)
+		elseif (prefix == "RPS.POI.r") then
+			RPSCoreFramework:RemovePOIPins(msg)
+		elseif (prefix == "RPS.POI.c") then
+			RPSCoreFramework:UnlockPOIPins(msg)
 		elseif (prefix == "RPS.StatMe") then
-			RPSCoreFramework:AddonMessageUpdateInfo(msg);
+			RPSCoreFramework:UpdateInfo("RPS.StatMe "..msg);
 		elseif (prefix == "RPS.Scale") then
-			RPSCoreFramework:AddonMessageUpdateScaleInfo(msg);
+			RPSCoreFramework:UpdateScaleInfo("RPS.Scale "..msg);
 		elseif (prefix == "RPS.AuraKnown") then
-			RPSCoreFramework:AddonMessageUpdateAuraKnownInfo(msg);
+			RPSCoreFramework:UpdateAuraKnownInfo("RPS.AuraKnown "..msg);
 		elseif (prefix == "RPS.AuraActive") then
-			RPSCoreFramework:AddonMessageUpdateAuraActiveInfo(msg);
+			RPSCoreFramework:UpdateAuraActiveInfo("RPS.AuraActive "..msg);
 		elseif (prefix == "RPS.Display") then
-			RPSCoreFramework:AddonMessageUpdateDisplayMacrosInfo(msg);
+			RPSCoreFramework:UpdateDisplayMacrosInfo("RPS.Display "..msg);
 		elseif (prefix == "RPS.AuraRefresh") then
-			RPSCoreFramework:AddonMessageRefreshActiveAuras(msg);
+			RPSCoreFramework:RefreshActiveAuras("RPS.AuraRefresh "..msg);
 		end
 	end
 end

@@ -66,25 +66,14 @@ function RPSCoreFramework:FlushAllPinsOnMiniMap()
 end
 
 function RPSCoreFramework:GeneratePOIPlaces()
-	for i = 1, #RPSCorePOIPins do
-		RPSCoreFramework:InsertPinOnMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7]);
-		RPSCoreFramework:InsertPinOnMiniMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7]);
-	end
-end
-
-function RPSCoreFramework:POIPreGenerate()
 	RPSCoreFramework:FlushAllPinsOnMap();
-	if GetCurrentMapZone() ~= 0 then
-		RPSCoreFramework:GeneratePOIPlaces();
+	RPSCoreFramework:FlushAllPinsOnMiniMap();
+	if GetCurrentMapZone() ~= 0 and AllowPOIUpdate then
+		for i = 1, #RPSCorePOIPins do
+			RPSCoreFramework:InsertPinOnMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7], RPSCorePOIPins[i][8]);
+			RPSCoreFramework:InsertPinOnMiniMap(RPSCorePOIPins[i][1], RPSCorePOIPins[i][2], RPSCorePOIPins[i][5], RPSCorePOIPins[i][3], RPSCorePOIPins[i][4], RPSCorePOIPins[i][5], RPSCorePOIPins[i][6], RPSCorePOIPins[i][7], RPSCorePOIPins[i][8]);
+		end
 		return true;
 	end
 	return false;
 end
-
-
---[[
-function RPSCoreFramework:GetPlayerPosition()
-	local x,y, instanceID = RPSCoreFramework.HBD:GetPlayerWorldPosition();
-	print("X: "..x.." Y: "..y.. " instanceID: "..instanceID)
-end
-]]

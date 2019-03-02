@@ -28,6 +28,8 @@ if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {}
 end
 
+AllowPOIUpdate = false;
+
 --GUID, MapId, x, y,  type, Name,  Description
 
 RPSCoreFramework.AdvancedRaces = {
