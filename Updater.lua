@@ -84,14 +84,15 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	if (tonumber(str) == 0 or str == nil) then
 		return false
 	end
-	for j=1, #RPSCoreFramework.Interface.Auras do
-		RPSCoreFramework.Interface.Auras[j][6] = 0
+	if values[1] ~= nil and values[1] ~= "RPS.AuraActive" then
+		for j=1, #RPSCoreFramework.Interface.Auras do
+			RPSCoreFramework.Interface.Auras[j][6] = 0
+		end
+		for i=1, #values do
+			RPSCoreFramework.Interface.Auras[tonumber(values[i])][6] = 1
+			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
+		end
 	end
-	for i=1, #values do
-		RPSCoreFramework.Interface.Auras[tonumber(values[i])][6] = 1
-		RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
-	end
-	
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 

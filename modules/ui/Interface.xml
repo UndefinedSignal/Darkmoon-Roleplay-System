@@ -540,6 +540,60 @@
                                         </Scripts>
                                     </CheckButton>
 
+                                    <CheckButton name="RPS_POIPinsCheckBox" inherits="OptionsCheckButtonTemplate">
+                                        <Anchors>
+                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-200"/> -- *1.1
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Points of interest " justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_POIPinsCheckBox" x="-100" y="-5" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(Disabled)" justifyH="CENTER" justifyV="TOP" hidden="true">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_POIPinsCheckBox" x="25" y="-7" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                if (RPSCoreShowPOIPins and RPSCoreShowPOIPins ~= nil) then
+                                                    RPS_POIPinsCheckBox:SetChecked(true);
+                                                    RPSCoreShowPOIPins = true;
+                                                else
+                                                    RPS_POIPinsCheckBox:SetChecked(false);
+                                                    RPSCoreShowPOIPins = false;
+                                                end
+                                                RPSCoreFramework:GeneratePOIPlaces()
+                                            </OnShow>
+                                            <OnClick>
+                                                if (self:GetChecked()) then
+                                                    RPSCoreShowPOIPins = true;
+                                                else
+                                                    RPSCoreShowPOIPins = false;
+                                                end
+                                                RPSCoreFramework:GeneratePOIPlaces()
+                                            </OnClick>
+                                        </Scripts>
+                                    </CheckButton>
+
                                     <Button name="RPS_BARBERSHOPBUTTON" inherits="GameMenuButtonTemplate" text="Парикмахерская">
                                         <Size x="120" y="34"/>
                                         <Anchors>

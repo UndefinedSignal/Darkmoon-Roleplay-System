@@ -4,7 +4,7 @@
 ## Version: 1.22
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
-## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam, RPSCorePOIPins
+## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam, RPSCorePOIPins, RPSCoreShowPOIPins
 ## SavedVariablesPerCharacter: RPSCoreShouldFirstTime, RPSCoreAdvancedCharacterCheckShown
 
 libs\LibStub.lua

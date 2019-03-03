@@ -29,9 +29,13 @@ function RPSCoreFramework:InitializeHooks()
 	self:SecureHook("ZoomOut", function() RPSCoreFramework:FlushAllPinsOnMap();	end);
 
 	RPSCoreFramework.HBD.RegisterCallback("RPSCoreFramework", "PlayerZoneChanged", function() RPSCoreFramework:GeneratePOIPlaces();	end); -- Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
-	--self:SecureHook("SetMapToCurrentZone", function() print("SetMapToCurrentZone");	end) -- Fires when worldmap sets on player.
-	self:SecureHook("ProcessMapClick", function()	self:ScheduleTimer("GeneratePOIPlaces", 2)	end);
-	self:SecureHook("SetMapZoom", function() RPSCoreFramework:FlushAllPinsOnMap();	end);
+	self:SecureHook("SetMapToCurrentZone", function() 	RPSCoreFramework:GeneratePOIPlaces();	end) -- Fires when worldmap sets on player.
+	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
+
+	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	print("MinimizedButton")	end);
+	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton:HookScript("OnClick",function()	RPSCoreFramework:GeneratePOIPlaces();	print("MaximizedButton")	end);
+
 
 	--RPS_CharScaleSlider:HookScript("OnMouseUp", function() StaticPopup_Show("setCharacterScale") end)
 	RPS_BTNReScale:HookScript("OnMouseUp", function() if RPS_BTNReScale:IsEnabled() then StaticPopup_Show("setCharacterReScale") end end);

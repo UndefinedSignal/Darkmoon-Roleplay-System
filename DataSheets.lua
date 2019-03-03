@@ -25,7 +25,10 @@ RPSCoreFramework.Map.Icons = {
 };
 
 if RPSCorePOIPins == nil then
-	RPSCorePOIPins = {}
+	RPSCorePOIPins = {};
+end
+if RPSCoreShowPOIPins == nil then
+	RPSCoreShowPOIPins = true;
 end
 
 AllowPOIUpdate = false;
