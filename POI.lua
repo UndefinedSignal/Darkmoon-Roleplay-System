@@ -5,8 +5,10 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, 
 	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton);
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
 		IFrame:SetSize(24,24);
+		IFrame:SetFrameStrata("TOOLTIP");
 	else
 		IFrame:SetSize(18,18);
+		IFrame:SetFrameStrata("DIALOG");
 	end
 
 	local ntex = IFrame:CreateTexture();
@@ -27,7 +29,6 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, 
 	IFrame:SetScript("OnLeave", function()
 				    GameTooltip:Hide();
 		      	end)
-	IFrame:SetFrameStrata("DIALOG");
 
 	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y));
 end
