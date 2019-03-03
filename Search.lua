@@ -16,6 +16,7 @@ function RPSCoreFramework:AurasSearch(input, key)
 	end
 end
 
+--[[ Monument of HoH
 function RPSCoreFramework:GetExistingPOIGUID(guid)
 	for i=1, #RPSCorePOIPins do
 		if string.find(RPSCorePOIPins[i][1], guid) ~= nil then
@@ -24,3 +25,4 @@ function RPSCoreFramework:GetExistingPOIGUID(guid)
 	end
 	return false;
 end
+]]

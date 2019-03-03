@@ -4,10 +4,10 @@ local POIPath = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\";
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton);
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
-		IFrame:SetSize(24,24);
+		IFrame:SetSize(18,18);
 		IFrame:SetFrameStrata("TOOLTIP");
 	else
-		IFrame:SetSize(18,18);
+		IFrame:SetSize(24,24);
 		IFrame:SetFrameStrata("DIALOG");
 	end
 

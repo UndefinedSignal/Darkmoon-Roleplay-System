@@ -66,7 +66,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		self:UpdateUnlearn();
 		self:UpdateScaleReset();
 		self:PeriodicallyScrollMenuUpdater();
-	elseif (event == "CHAT_MSG_ADDON") then
+	elseif (event == "CHAT_MSG_ADDON" and sender == GetUnitName("player").."-Darkmoon") then
 		if (prefix == "RPS.POI.i") then
 			RPSCoreFramework:AddPOIPins(msg)
 		elseif (prefix == "RPS.POI.u") then

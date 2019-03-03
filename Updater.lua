@@ -150,6 +150,7 @@ end
 
 ----GUID, MapId, x, y, type, color, Name,  Description
 function RPSCoreFramework:AddPOIPins(str)
+	RPSCorePOIPins = {};
 	AllowPOIUpdate = false;
 	local values = {strsplit("#",str)}
 	RPSCorePOIPins[values[1]] = values;
@@ -164,10 +165,8 @@ function RPSCoreFramework:UpdatePOIPins(str)
 end
 
 function RPSCoreFramework:RemovePOIPins(str)
-	local position = RPSCoreFramework:GetExistingPOIGUID(str);
-	if position then
-		table.remove(RPSCorePOIPins, position);
-	end
+	RPSCorePOIPins[str] = nil;
+	RPSCoreFramework:GeneratePOIPlaces();
 end
 
 function RPSCoreFramework:UnlockPOIPins(str) -- закрывающая, отвечает за активацию флага перерисовки
