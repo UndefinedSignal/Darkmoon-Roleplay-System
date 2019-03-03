@@ -19,7 +19,9 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, 
 	IFrame:SetScript("OnEnter", function()
 		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 				    GameTooltip:AddLine("|cffFFC125"..name.."|r");
-				    GameTooltip:AddLine("|cffFF8040"..description.."|r");
+					if (string.len(description) > 0) then
+						GameTooltip:AddLine("|cffFF8040"..description.."|r");
+					end
 				    GameTooltip:Show();
 				    end)
 	IFrame:SetScript("OnLeave", function()
@@ -44,7 +46,9 @@ function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, y, x, ptype, color, na
 	IFrame:SetScript("OnEnter", function()
 		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 				    GameTooltip:AddLine("|cffFFC125"..name.."|r");
-				    GameTooltip:AddLine("|cffFF8040"..description.."|r");
+				    if (string.len(description) > 0) then
+						GameTooltip:AddLine("|cffFF8040"..description.."|r");
+					end
 				    GameTooltip:Show();
 				    end);
 	IFrame:SetScript("OnLeave", function()
