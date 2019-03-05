@@ -28,8 +28,8 @@ function RPSCoreFramework:InitializeHooks()
 
 	self:SecureHook("ZoomOut", function() RPSCoreFramework:FlushAllPinsOnMap();	end);
 
-	RPSCoreFramework.HBD.RegisterCallback("RPSCoreFramework", "PlayerZoneChanged", function() RPSCoreFramework:GeneratePOIPlaces();	end); -- Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
-	self:SecureHook("SetMapToCurrentZone", function() 	RPSCoreFramework:GeneratePOIPlaces();	end) -- Fires when worldmap sets on player.
+--	RPSCoreFramework.HBD.RegisterCallback("RPSCoreFramework", "PlayerZoneChanged", function() RPSCoreFramework:GeneratePOIPlaces();	end); -- Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
+	self:SecureHook("SetMapToCurrentZone", function() 	self:ScheduleTimer("GeneratePOIPlaces", 0.5);	end) -- Fires when worldmap sets on player.
 	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
 

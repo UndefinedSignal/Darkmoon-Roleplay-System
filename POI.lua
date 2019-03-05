@@ -73,18 +73,12 @@ function RPSCoreFramework:GeneratePOIPlaces()
 
     if GetCurrentMapZone() ~= 0 and RPSCoreFramework.Map.POIWorkflow and RPSCoreShowPOIPins then
         for k, v in pairs(RPSCorePOIPins) do
-        	if (GetCurrentMapZone() == v[2]) then
-            	RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
-            end
+            RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
         end
-        return true;
     end
 	if RPSCoreFramework.Map.POIWorkflow then
         for k, v in pairs(RPSCorePOIPins) do
-        	if (GetCurrentMapZone() == v[2]) then
-            	RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]); -- Always must be a Pins on mini-map
-            end
+            RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]); -- Always must be a Pins on mini-map
         end
     end
-    return false;
 end
