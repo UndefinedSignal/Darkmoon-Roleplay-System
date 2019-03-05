@@ -7,6 +7,9 @@ RPSCoreFramework.Display = {};
 RPSCoreFramework.Interface = {};
 --RPSCoreFramework.DB = {};
 RPSCoreFramework.Map = {};
+RPSCoreFramework.Map.UpdatePins = {};
+RPSCoreFramework.Map.POIWorkflow = true;
+RPSCoreFramework.Map.POIUpdateQueque = false;
 RPSCoreFramework.Map.Icons = {
     anchor = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\anchor",
     camp = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\camp",
@@ -30,8 +33,6 @@ end
 if RPSCoreShowPOIPins == nil then
 	RPSCoreShowPOIPins = true;
 end
-
-AllowPOIUpdate = false;
 
 --GUID, MapId, x, y,  type, Name,  Description
 

@@ -74,7 +74,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.POI.r") then
 			RPSCoreFramework:RemovePOIPins(msg)
 		elseif (prefix == "RPS.POI.c") then
-			RPSCoreFramework:UnlockPOIPins(msg)
+			RPSCoreFramework:GetCommandPOIPins(msg)
 		elseif (prefix == "RPS.StatMe") then
 			RPSCoreFramework:UpdateInfo("RPS.StatMe "..msg);
 		elseif (prefix == "RPS.Scale") then

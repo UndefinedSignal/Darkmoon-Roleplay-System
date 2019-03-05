@@ -49,7 +49,6 @@ function RPSCoreFramework:PeriodicallyUpdater()
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
 	RPSCoreFramework:UpdateScaleReset()
 
-	-- Action Camera
     if RPSCoreActionCam then
         RPSCoreActionCam = true
         SetCVar("test_cameraDynamicPitch", 1)
@@ -148,19 +147,25 @@ function RPSCoreFramework:UpdateInfo(str)
 	self:UpdateUnlearn();	
 end
 
-----GUID, MapId, x, y, type, color, Name,  Description
+function RPSCoreFramework:POIUpdateIntoMainMassive()
+    for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
+        RPSCorePOIPins[k](v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
+    end
+end
+
 function RPSCoreFramework:AddPOIPins(str)
-	AllowPOIUpdate = false;
 	local values = {strsplit("#",str)}
 	RPSCorePOIPins[values[1]] = values;
 end
 
 function RPSCoreFramework:UpdatePOIPins(str)
-	AllowPOIUpdate = false;
 	local values = {strsplit('#',str)};
-	RPSCorePOIPins[values[1]] = values;
-	AllowPOIUpdate = true;
-	RPSCoreFramework:GeneratePOIPlaces();
+	if RPSCoreFramework.Map.POIWorkflow then
+		RPSCorePOIPins[values[1]] = values;
+	else
+		RPSCoreFramework.Map.POIUpdateQueque = true;
+		RPSCoreFramework.Map.UpdatePins[values[1]] = values;
+	end
 end
 
 function RPSCoreFramework:RemovePOIPins(str)
@@ -168,9 +173,16 @@ function RPSCoreFramework:RemovePOIPins(str)
 	RPSCoreFramework:GeneratePOIPlaces();
 end
 
-function RPSCoreFramework:UnlockPOIPins(str) -- закрывающая, отвечает за активацию флага перерисовки
+function RPSCoreFramework:GetCommandPOIPins(str)
+	if (str == "refresh") then
+		RPSCoreFramework.Map.POIWorkflow = false;
+		RPSCorePOIPins = {};
+	end
 	if (str == "done") then
-		AllowPOIUpdate = true;
+		RPSCoreFramework.Map.POIWorkflow = true;
+		if (RPSCoreFramework.Map.POIUpdateQueque) then
+			RPSCoreFramework:POIUpdateIntoMainMassive();
+		end
 		RPSCoreFramework:GeneratePOIPlaces();
 	end
 end
