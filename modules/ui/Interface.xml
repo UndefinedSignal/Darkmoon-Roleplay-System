@@ -1656,6 +1656,15 @@
             </ScrollFrame>
         </Frames>
     </Frame>
+
+    <GameTooltip name="MyWorldMapTooltip" inherits="GameTooltipTemplate">
+        <Scripts>
+            <Onload>
+                self:SetOwner(WorldMapDetailFrame, "ANCHOR_NONE");
+            </Onload>
+        </Scripts>
+    </GameTooltip>
+
 </Ui>
 
 

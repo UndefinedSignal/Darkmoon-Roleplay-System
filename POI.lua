@@ -3,11 +3,14 @@ local POIPath = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\";
 --GUID, MapId, x, y, type, color, Name, Description
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton);
+	MyWorldMapTooltip:ClearLines()
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
 		IFrame:SetSize(18,18);
+		MyWorldMapTooltip:SetFrameStrata("TOOLTIP");
 		IFrame:SetFrameStrata("TOOLTIP");
 	else
 		IFrame:SetSize(24,24);
+		MyWorldMapTooltip:SetFrameStrata("DIALOG");
 		IFrame:SetFrameStrata("DIALOG");
 	end
 
@@ -19,15 +22,16 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, 
 	IFrame:SetNormalTexture(ntex);
 
 	IFrame:SetScript("OnEnter", function()
-		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				    GameTooltip:AddLine("|cffFFC125"..name.."|r");
+		        	MyWorldMapTooltip:SetOwner(WorldMapDetailFrame, "ANCHOR_CURSOR");
+				    MyWorldMapTooltip:AddLine("|cffFFC125"..name.."|r");
+
 					if (string.len(description) > 0) then
-						GameTooltip:AddLine("|cffFF8040"..description.."|r");
+						MyWorldMapTooltip:AddLine("|cffFF8040"..description.."|r");
 					end
-				    GameTooltip:Show();
+				    MyWorldMapTooltip:Show();
 				    end)
 	IFrame:SetScript("OnLeave", function()
-				    GameTooltip:Hide();
+				    MyWorldMapTooltip:Hide();
 		      	end)
 
 	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y));
@@ -45,15 +49,15 @@ function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, y, x, ptype, color, na
 	IFrame:SetNormalTexture(ntex);
 
 	IFrame:SetScript("OnEnter", function()
-		        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				    GameTooltip:AddLine("|cffFFC125"..name.."|r");
+		        	MyWorldMapTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				    MyWorldMapTooltip:AddLine("|cffFFC125"..name.."|r");
 				    if (string.len(description) > 0) then
-						GameTooltip:AddLine("|cffFF8040"..description.."|r");
+						MyWorldMapTooltip:AddLine("|cffFF8040"..description.."|r");
 					end
-				    GameTooltip:Show();
+				    MyWorldMapTooltip:Show();
 				    end);
 	IFrame:SetScript("OnLeave", function()
-				    GameTooltip:Hide();
+				    MyWorldMapTooltip:Hide();
 		      	end);
 
 	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y), false);
