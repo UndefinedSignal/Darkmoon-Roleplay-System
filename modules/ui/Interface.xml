@@ -1653,7 +1653,7 @@
         </Frames>
     </Frame>
 
-    <GameTooltip name="MyWorldMapTooltip" inherits="GameTooltipTemplate">
+    <GameTooltip name="WorldMapPOIFrame" inherits="GameTooltipTemplate">
         <Scripts>
             <Onload>
                 self:SetOwner(WorldMapDetailFrame, "ANCHOR_NONE");

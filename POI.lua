@@ -3,14 +3,14 @@ local POIPath = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\";
 --GUID, MapId, x, y, type, color, Name, Description
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton);
-	MyWorldMapTooltip:ClearLines()
+	WorldMapPOIFrame:ClearLines()
 	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
 		IFrame:SetSize(18,18);
-		MyWorldMapTooltip:SetFrameStrata("TOOLTIP");
+		WorldMapPOIFrame:SetFrameStrata("TOOLTIP");
 		IFrame:SetFrameStrata("TOOLTIP");
 	else
 		IFrame:SetSize(24,24);
-		MyWorldMapTooltip:SetFrameStrata("DIALOG");
+		WorldMapPOIFrame:SetFrameStrata("DIALOG");
 		IFrame:SetFrameStrata("DIALOG");
 	end
 
@@ -23,16 +23,16 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, 
 	IFrame:SetNormalTexture(ntex);
 
 	IFrame:SetScript("OnEnter", function()
-		        	MyWorldMapTooltip:SetOwner(WorldMapDetailFrame, "ANCHOR_CURSOR");
-				    MyWorldMapTooltip:AddLine("|cffFFC125"..name.."|r");
+		        	WorldMapPOIFrame:SetOwner(WorldMapDetailFrame, "ANCHOR_CURSOR");
+				    WorldMapPOIFrame:AddLine("|cffFFC125"..name.."|r");
 
 					if (string.len(description) > 0) then
-						MyWorldMapTooltip:AddLine("|cffFF8040"..description.."|r");
+						WorldMapPOIFrame:AddLine("|cffFF8040"..description.."|r");
 					end
-				    MyWorldMapTooltip:Show();
+				    WorldMapPOIFrame:Show();
 				    end)
 	IFrame:SetScript("OnLeave", function()
-				    MyWorldMapTooltip:Hide();
+				    WorldMapPOIFrame:Hide();
 		      	end)
 
 	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y));
