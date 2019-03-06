@@ -1653,7 +1653,7 @@
         </Frames>
     </Frame>
 
-    <GameTooltip name="WorldMapPOIFrame" inherits="GameTooltipTemplate">
+    <GameTooltip name="RPSPOIGameTooltip" inherits="GameTooltipTemplate">
         <Scripts>
             <Onload>
                 self:SetOwner(WorldMapDetailFrame, "ANCHOR_NONE");
