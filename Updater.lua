@@ -12,7 +12,6 @@ function RPSCoreFramework:ReloadDispList()
 	RPS_TextMacrosScrollText:SetText(dispstring)
 	RPS_DispUpdateButton:Enable()
 end
-
 function RPSCoreFramework:UpdateScaleReset()
 	if (GetMoney() < RPSCoreFramework.RequestRescale or RPSCoreFramework.MyScale == 0 or RPSCoreFramework.MyScale == -1) then
 		RPS_BTNReScale:Disable();
@@ -20,7 +19,6 @@ function RPSCoreFramework:UpdateScaleReset()
 		RPS_BTNReScale:Enable();
 	end
 end
-
 function RPSCoreFramework:UpdateScaleApplyButton()
 	if (RPSCoreFramework.MyScale == -1 or RPSCoreFramework.MyScale ~= 0) then
 		RPS_CharScaleSlider:Disable();
@@ -30,7 +28,6 @@ function RPSCoreFramework:UpdateScaleApplyButton()
 		RPS_BTNAcceptScale:Enable();
 	end
 end
-
 function RPSCoreFramework:UpdateScrollerPosition()
 	if RPSCoreFramework.MyScale > 0 then
 		RPS_CharScaleSlider:SetValue(RPSCoreFramework.MyScale)
@@ -43,12 +40,10 @@ function RPSCoreFramework:UpdateScrollerPosition()
 		RPS_CharScaleSlider:Enable()
 	end
 end
-
 function RPSCoreFramework:PeriodicallyUpdater()
 	RPSCoreFramework:SendCoreMessage(".rps action scale info")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
 	RPSCoreFramework:UpdateScaleReset()
-
     if RPSCoreActionCam then
         RPSCoreActionCam = true
         SetCVar("test_cameraDynamicPitch", 1)
@@ -59,15 +54,13 @@ function RPSCoreFramework:PeriodicallyUpdater()
         SetCVar("test_cameraOverShoulder", 0)
     end
 end
-
 function RPSCoreFramework:UpdateScaleInfo(str)
 	str = string.gsub(str, "RPS.Scale ", "")
 	RPSCoreFramework.MyScale = tonumber(str)
 	RPSCoreFramework:UpdateScaleReset()
 end
-
 function RPSCoreFramework:UpdateAuraKnownInfo(str)
-	str = string.gsub(str, "RPS.AuraKnown ", "") -- 5
+	str = string.gsub(str, "RPS.AuraKnown ", "")
 	local values = {strsplit(' ', str)}
 	if (tonumber(str) == 0 or str == nil) then
 		return false
@@ -76,9 +69,8 @@ function RPSCoreFramework:UpdateAuraKnownInfo(str)
 		RPSCoreFramework.Interface.Auras[tonumber(values[i])][5] = 1
 	end
 end
-
 function RPSCoreFramework:UpdateAuraActiveInfo(str)
-	str = string.gsub(str, "RPS.AuraActive ", "") -- 6
+	str = string.gsub(str, "RPS.AuraActive ", "")
 	local values = {strsplit(' ', str)}
 	if (tonumber(str) == 0 or str == nil) then
 		return false
@@ -94,7 +86,6 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	end
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
-
 function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	str = string.gsub(str, "RPS.Display ", "") -- 5
 	local values = {strsplit(' ', str)}
@@ -106,24 +97,19 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 		j = j + 1
 	end
 end
-
-----GUID, MapId, x, y, type, color, Name,  Description
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};	
 	RPSCorePOIPins[values[1]] = values;
 end
-
 function RPSCoreFramework:RefreshActiveAuras(str)
-	str = string.gsub(str, "RPS.AuraRefresh ", "") -- 5
+	str = string.gsub(str, "RPS.AuraRefresh ", "")
 	local values = {strsplit(' ', str)}
 end
-
 function RPSCoreFramework:UpdateInfo(str)
 	str = string.gsub(str, "RPS.StatMe ", "");
 	local values = {strsplit(' ', str)};
 	self.FreeStats = values[1];
 	self.FreeStatsCached = values[1];
-	-- values[2] - hp
 	self.Stats.Strength = values[3];
     self.Stats.Agility = values[4];
     self.Stats.Intellect = values[5];
@@ -132,7 +118,6 @@ function RPSCoreFramework:UpdateInfo(str)
     self.Stats.Dexterity = values[8];
     self.Stats.Will = values[9];
 	self.Stats.CriticalChance = values[17];
-	
 	self.ItemsStats.Strength = values[10];
     self.ItemsStats.Agility = values[11];
     self.ItemsStats.Intellect = values[12];
@@ -141,23 +126,19 @@ function RPSCoreFramework:UpdateInfo(str)
     self.ItemsStats.Dexterity = values[15];
     self.ItemsStats.Will = values[16];
 	self.ItemsStats.CriticalChance = values[18];
-	
 	self:UpdateNormal();
 	self:UpdateDiff();
 	self:UpdateUnlearn();	
 end
-
 function RPSCoreFramework:POIUpdateIntoMainMassive()
     for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
         RPSCorePOIPins[k](v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
     end
 end
-
 function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
 	RPSCorePOIPins[values[1]] = values;
 end
-
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};
 	if RPSCoreFramework.Map.POIWorkflow then
@@ -167,12 +148,10 @@ function RPSCoreFramework:UpdatePOIPins(str)
 		RPSCoreFramework.Map.UpdatePins[values[1]] = values;
 	end
 end
-
 function RPSCoreFramework:RemovePOIPins(str)
 	RPSCorePOIPins[str] = nil;
 	RPSCoreFramework:GeneratePOIPlaces();
 end
-
 function RPSCoreFramework:GetCommandPOIPins(str)
 	if (str == "refresh") then
 		RPSCoreFramework.Map.POIWorkflow = false;
@@ -186,13 +165,11 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 		RPSCoreFramework:GeneratePOIPlaces();
 	end
 end
-
 function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 	if RPSCoreFramework.Interface.Auras.Initialized then
 		RPSCoreFramework:ScrollMenuUpdater()
 	end
 end
-
 function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage(".disp list")
 	RPSCoreFramework:SendCoreMessage(".rps request poi abc123")
@@ -200,12 +177,10 @@ function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
 end
-
 function RPSCoreFramework:PeriodicallyAurasUpdate()
 	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
 end
-
 function RPSCoreFramework:UpdateActiveAurasCounter()
 	local counter = 0
 	if RPSCoreFramework.Interface.ActiveAuraCounter ~= 0 then
@@ -216,13 +191,10 @@ function RPSCoreFramework:UpdateActiveAurasCounter()
 		end
 		RPSCoreFramework.Interface.ActiveAuraCounter = counter
 	end
-
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
-	
 	return true
 end
-
-function RPSCoreFramework:ThreeTimesUpdate() -- TODO Rework it
+function RPSCoreFramework:ThreeTimesUpdate()
 	self.ThreeTimesTimerCount = self.ThreeTimesTimerCount + 1
 	if self.ThreeTimesTimerCount == 4 then
 		RPSCoreFramework.Interface.Auras.AllowUpdate = true

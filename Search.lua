@@ -4,7 +4,6 @@ function RPSCoreFramework:PreGenerateShowAuras()
 		table.insert(RPSCoreFramework.Interface.Auras.Show, i);
 	end
 end
-
 function RPSCoreFramework:AurasSearch(input, key)
 	RPSCoreFramework.Interface.Auras.Show = {}
 	for i=1, #input do
@@ -17,14 +16,3 @@ function RPSCoreFramework:AurasSearch(input, key)
 		end
 	end
 end
-
---[[ Monument of HoH
-function RPSCoreFramework:GetExistingPOIGUID(guid)
-	for i=1, #RPSCorePOIPins do
-		if string.find(RPSCorePOIPins[i][1], guid) ~= nil then
-			return i; -- Position of existig guid
-		end
-	end
-	return false;
-end
-]]

@@ -1,11 +1,9 @@
 local DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
-
 function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
 	if (GetInventoryItemID("player", inventorySlotId)) then
 		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
 	end
 end
-
 function RPSCoreFramework:PaperdollDispInit()
 	RPSCoreFramework:HookScript(_G["CharacterHeadSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "head"
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HEAD)
@@ -47,9 +45,6 @@ function RPSCoreFramework:PaperdollDispInit()
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND)
 	 end end)
 end
-
-
-
 function RPSCoreFramework:RemoveDisplay(slotname)
 	local removeDispSlot
 	local menuTitle = "Вы действительно хотите убрать дисп?"
@@ -59,14 +54,12 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 			break
 		end
 	end
-
 	for v,h in pairs(RPSCoreFramework.SlotnameListNames) do
 		if v == slotname then
 			menuTitle = "Вы действительно хотите убрать дисп для " .. h .. "?"
 			break
 		end
 	end
-
 	StaticPopupDialogs["removeDisp"] = {
 		text = menuTitle,
 		button1 = YES,
@@ -84,7 +77,6 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 	StaticPopup_Hide("removeDisp")
 	StaticPopup_Show("removeDisp")
 end
-
 function RPSCoreFramework:ShowDisplayInfo(slotname)
 	local displayMessage
 	local menuTitle = "Введите ID предмета для выбранного слота."
@@ -94,14 +86,12 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 			break
 		end
 	end
-
 	for v,h in pairs(RPSCoreFramework.SlotnameListNames) do
 		if v == slotname then
 			menuTitle = "Введите ID предмета для " .. h .. "."
 			break
 		end
 	end
-
 	StaticPopupDialogs["DipsSlotEditMenu"] = {
 		text = menuTitle,
 		button1 = "Применить",
@@ -114,7 +104,6 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 			RPSCoreFramework:SendCoreMessage(displayMessage)
 		end,
 	  	OnCancel = function (_,reason)
-	--		Nope
 	  	end,
 		hasEditBox = true,
 	  	timeout = 15,
@@ -126,21 +115,18 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 	StaticPopup_Hide("DipsSlotEditMenu")
 	StaticPopup_Show("DipsSlotEditMenu")
 end
-
 function RPSCoreFramework:KnownAura(arg)
 	if RPSCoreFramework.Interface.Auras[arg][5] > 0 then
 		return true
 	end
 	return false
 end
-
 function RPSCoreFramework:isAuraActive(arg)
 	if RPSCoreFramework.Interface.Auras[arg][6] > 0 then
 		return true
 	end
 	return false
 end
-
 function RPSCoreFramework:AddMinimapIcon()
 	LDBObject = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("RPSCoreFramework", {
 		type = "data source",
@@ -163,7 +149,6 @@ function RPSCoreFramework:AddMinimapIcon()
 	icon:Register("RPSDarkmoonIcon", LDBObject, RPSCoreIconData);
 	icon:Show("RPSDarkmoonIcon");
 end
-
 function RPSCoreFramework:ChangePassword(Oldpas, Newpas, NewpasRep)
 
 	StaticPopupDialogs["ChangePassword"] = {
@@ -178,18 +163,15 @@ function RPSCoreFramework:ChangePassword(Oldpas, Newpas, NewpasRep)
 				RPS_TextOldPassRepeate:SetText("|cffFFFF00Повтор пароля|r");
 		end,
 	  	OnCancel = function (_,reason)
-	--		Nope
 	  	end,
 		hasEditBox = true,
---	  	timeout = 3,
 	  	whileDead = true,
 	  	hideOnEscape = true,
 	  	enterClicksFirstButton = true,
 	}
-
 	if Oldpas == '' or Newpas == '' or NewpasRep == '' then
 		message("\nЗаполнены не все поля")
-		if Oldpas == '' then -- Красный цвет, что-то пошло не так
+		if Oldpas == '' then
 			RPS_TextOldPass:SetText("|cffFF8040Старый пароль|r");
 		end
 		if Newpas == '' then
@@ -221,7 +203,6 @@ function RPSCoreFramework:ChangePassword(Oldpas, Newpas, NewpasRep)
 	StaticPopup_Show("ChangePassword");
 	return true;
 end
-
 function RPSCoreFramework:FormatDMButtons(button)
 	local shift = 0;
 	local y = -60;
@@ -261,7 +242,6 @@ function RPSCoreFramework:FormatDMButtons(button)
 		end
 	end
 end
-
 function RPSCoreFramework:PreGenerateDMButtons()
 	local shift = 0;
 	local y = -60;
@@ -280,7 +260,6 @@ function RPSCoreFramework:PreGenerateDMButtons()
 			shift = 0;
 		end
 		MenuButton:SetSize(158, 24);
-		-- If button have a submenu
 		if RPSCoreFramework.Interface.MenuButtons[i][4] then
 			for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
 				if RPSCoreFramework.Interface.SubMenuButtons[j][1] == RPSCoreFramework.Interface.MenuButtons[i][5] then
@@ -320,8 +299,6 @@ function RPSCoreFramework:PreGenerateDMButtons()
 		end
 	end
 end
-
-
 function RPSCoreFramework:hex2rgb(hex)
     local hex = hex:gsub("#","")
     if hex:len() == 3 then

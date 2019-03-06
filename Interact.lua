@@ -8,9 +8,6 @@ function RPSCoreFramework:IsInteractCast()
 end
 
 function RPSCoreFramework:UpdateInteractButtons()
-	-- looted (only loot)
-	--if (self:HasAura(RPSCoreFramework.LootedAura, target)) then	
-	-- disable loot, pillage, kill
 	if ((self:HasAura(RPSCoreFramework.NoviceAura) or self:HasAura(RPSCoreFramework.PillageWoundsAura))) then
 		RPS_InteractFramePillage:Hide();
 		RPS_InteractFrameKill:Hide();

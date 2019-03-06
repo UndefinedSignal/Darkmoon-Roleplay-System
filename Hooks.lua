@@ -1,20 +1,17 @@
--- TODO: Перенести хуки СЮДА
 function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_TARGET_CHANGED");
 	self:RegisterEvent("PLAYER_ENTERING_WORLD");
 	self:RegisterEvent("PLAYER_LEVEL_UP");
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
-	self:RegisterEvent("CHAT_MSG_ADDON");
-	
+	self:RegisterEvent("CHAT_MSG_ADDON");	
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
 		self:HookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
 		self:HookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
 		self:HookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
 		self:HookScript(editbox, "OnHide",          "UpdateTypingStatus");
-	end
-	
+	end	
 	self:HookScript(self, "OnEvent", "OnEventFrame");
 	self:HookScript(GameTooltip, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ItemRefTooltip, "OnTooltipSetItem", "ItemTooltip");
@@ -22,34 +19,19 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ItemRefShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
-
---	self:HookScript(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton, "OnClick", function() print("Clicked"); end);
---	self:HookScript(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton, "OnClick", function() print("Clicked"); end);
-
 	self:SecureHook("ZoomOut", function() RPSCoreFramework:FlushAllPinsOnMap();	end);
-
---	RPSCoreFramework.HBD.RegisterCallback("RPSCoreFramework", "PlayerZoneChanged", function() RPSCoreFramework:GeneratePOIPlaces();	end); -- Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
-	self:SecureHook("SetMapToCurrentZone", function() 	self:ScheduleTimer("GeneratePOIPlaces", 0.5);	end) -- Fires when worldmap sets on player.
+	self:SecureHook("SetMapToCurrentZone", function() 	self:ScheduleTimer("GeneratePOIPlaces", 0.5);	end)
 	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
-
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
-
-
-	--RPS_CharScaleSlider:HookScript("OnMouseUp", function() StaticPopup_Show("setCharacterScale") end)
 	RPS_BTNReScale:HookScript("OnMouseUp", function() if RPS_BTNReScale:IsEnabled() then StaticPopup_Show("setCharacterReScale") end end);
 	RPS_BTNAcceptScale:HookScript("OnMouseUp", function() if RPS_BTNAcceptScale:IsEnabled() then StaticPopup_Show("setCharacterScale") end end);
 	DarkmoonAurasFrameClearButton:HookScript("OnClick", function()	RPSCoreFramework:AurasSearch(RPSCoreFramework.Interface.Auras, DarkmoonAurasFrame.searchBox:GetText());	RPSCoreFramework:GenerateScrollMenu() end);
-	--RPS_BTNResetScale:HookScript("", handler)
-
-
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
-	
 	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
-	
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
@@ -95,7 +77,6 @@ function RPSCoreFramework:ItemTooltip(self)
 	local link = select(2, self:GetItem())
 	if not link then return end
 	local _, _, _, _, _, sType, _, _ = GetItemInfo(link);
-	
 	if (sType == "Доспехи" or sType == "Armor") then		
 		local name = self:GetName()
 		for i = 1, self:NumLines() do
@@ -110,13 +91,11 @@ function RPSCoreFramework:ItemTooltip(self)
 					_G[name .. "TextLeft" .. i]:SetText(string.gsub(left:GetText(), ITEM_MOD_INTELLECT_SHORT, "к воле"));
 				end
 			end
-
 			if (right:GetText() ~= nil) then
 				if (string.find(right:GetText(), "Декоративный предмет") or string.find(right:GetText(), "Cosmetic")) then
 					_G[name .. "TextRight" .. i]:SetText("Предмет");
 				end
 			end
-
 		end
 	end
 end

@@ -1,19 +1,14 @@
 function RPSCoreFramework:GenerateScrollMenu()
   FauxScrollFrame_Update(DarkmoonAurasScrollFrame,#RPSCoreFramework.Interface.Auras.Show,6,32);
-
   for jBtn=1, 6 do
     lineplusoffset = jBtn + FauxScrollFrame_GetOffset(DarkmoonAurasScrollFrame);
     RPSCoreFramework.Scroller.lineplusoffset[jBtn] = tonumber(lineplusoffset)
-    --print("RPSCoreFramework.Scroller.lineplusoffset["..jBtn.."]:"..RPSCoreFramework.Scroller.lineplusoffset[jBtn])
   end
-
   RPSCoreFramework:ScrollMenuUpdater()
 end
-
 function RPSCoreFramework:GhostClickUpdater()
 	RPSCoreFramework.Interface.Auras.GhostClick = false
 end
-
 function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если нет активной ауры
 	if RPSCoreFramework.Interface.Auras.Initialized then
 		for jBtn=1, #RPSCoreFramework.Scroller.lineplusoffset do
@@ -86,7 +81,6 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		AurasNotFound:Show();
 	end
 end
-
 function RPSCoreFramework:LearnMyAuras(button, arg1)
 
 	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1])
@@ -95,7 +89,6 @@ function RPSCoreFramework:LearnMyAuras(button, arg1)
 	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1
 	RPSCoreFramework.Interface.Auras.Message[arg1][1] = ".rps action aura toggle ".. RPSCoreFramework.Interface.Auras.Message[arg1][2]
 end
-
 function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	RPSCoreFramework.Interface.ActiveAuraCounter = 1
 	for i = 1, #RPSCoreFramework.Interface.Auras do
@@ -107,14 +100,11 @@ function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	_G[button:GetName().."Completed"]:Show()
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
 end
-
 function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 	if RPSCoreFramework.Interface.Auras.GhostClick then
 		return false
 	end
-
 	RPSCoreFramework.Interface.Auras.GhostClick = true
-
 	StaticPopupDialogs["LearnAura"] = {
 		text = "Вы действительно желаете приобрести выбранную ауру?",
 		button1 = YES,
@@ -144,7 +134,6 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-
 	StaticPopupDialogs["MaxToggledAuras"] = {
 		text = "У вас уже активно 3 ауры. Активация ещё одной сбросит все предыдущие, вы уверены что хотите активировать эту ауру?",
 		button1 = YES,
@@ -174,21 +163,18 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-	
 	local id = RPSCoreFramework.Interface.Auras.Message[arg1][2]
-	if RPSCoreFramework:KnownAura(id) then -- if we know
+	if RPSCoreFramework:KnownAura(id) then
 		if RPSCoreFramework:UpdateActiveAurasCounter() and RPSCoreFramework:isAuraActive(id) then
 			RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1])
-			-- TODO counter
 			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter - 1
-			RPSCoreFramework.Interface.Auras[id][6] = 0 -- turn it off
+			RPSCoreFramework.Interface.Auras[id][6] = 0
 			_G[button:GetName().."Completed"]:Hide()
 		else
 			if tonumber(RPSCoreFramework.Interface.ActiveAuraCounter) < 3 then
 				RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1])
-				-- TODO counter
 				RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
-				RPSCoreFramework.Interface.Auras[id][6] = 1 -- turn it on
+				RPSCoreFramework.Interface.Auras[id][6] = 1
 				_G[button:GetName().."Completed"]:Show()
 			else
 				StaticPopup_Show("MaxToggledAuras")
@@ -201,7 +187,6 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 	end
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
 	self:ScheduleTimer("GhostClickUpdater", 0.5)
-
 	if RPSCoreFramework.Interface.Auras.AllowUpdate then
 		self.ThreeTimesTimerCount = 0
 		RPSCoreFramework.Interface.Auras.AllowUpdate = false

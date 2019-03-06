@@ -4,4 +4,3 @@ function RPSCoreFramework:CreateDispMacro()
     end
     PlaySound(624, "SFX")
 end
-

@@ -5,13 +5,11 @@ function RPSCoreFramework:switchMainFrame()
 		RPS_MainFrame:Show();
 	end
 end
-
 function RPSCoreFramework:EnableDrag(frame)
 	frame:RegisterForDrag("LeftButton");
 	frame:SetScript("OnDragStart", frame.StartMoving);
 	frame:SetScript("OnDragStop", frame.StopMovingOrSizing);
 end
-
 function RPSCoreFramework:UpdateInteractionFrame()
 	if (self:IsFallen() and CheckInteractDistance("target", 3) and not UnitIsUnit("player", "target") and not self:IsInteractCast() and not self:HasAura(RPSCoreFramework.WoundsAura)) then
 		if (not RPS_InteractFrame:IsShown()) then
@@ -23,39 +21,31 @@ function RPSCoreFramework:UpdateInteractionFrame()
 		RPS_InteractFrame:Hide();
 	end
 end
-
 function RPSCoreFramework:GenerateClassBackground()
 	local _, classFileName = UnitClass("player")
 	if classFileName == nil then
 		classFileName=PALADIN
 	end
-
 	local tex = DarkmoonPlayerModel:CreateTexture(nil, "BACKGROUND")
 	tex:SetTexture(RPSCoreFramework.CharacterBackground[classFileName]);
 	tex:SetPoint("TOPLEFT", 1, -3)
 	tex:SetPoint("BOTTOMRIGHT", 22, -6)
 end
-
 function RPSCoreFramework:GenerateCharScaleSlider()
 	RPS_CharScaleSlider:SetOrientation('VERTICAL')
 	RPS_CharScaleSlider:SetMinMaxValues(1, 11)
-
 	if RPSCoreFramework.MyScale > 0 then
 		RPS_CharScaleSlider:SetValue(RPSCoreFramework.MyScale)
 	else
 		RPS_CharScaleSlider:SetValue(6)
 	end
-	
 	RPS_CharScaleSlider:SetValueStep(1)
 	RPS_CharScaleSlider:SetObeyStepOnDrag(true)
-
 	RPS_CharScaleSliderLow:SetText(' ')
     RPS_CharScaleSliderHigh:SetText(' ')
     RPS_CharScaleSliderText:SetText(' ')
-
 	DarkmoonPlayerModel:SetCamDistanceScale(0.75)
 	DarkmoonPlayerModel:SetPosition(-1, 0, -0.05)
-
 	RPS_CharScaleSlider.minValue, RPS_CharScaleSlider.maxValue = RPS_CharScaleSlider:GetMinMaxValues() 
 	RPS_CharScaleSlider:SetScript("OnValueChanged", function(self,event,arg1) 
 		if event == 1 then -- Огромный
@@ -105,13 +95,11 @@ function RPSCoreFramework:GenerateCharScaleSlider()
 		end
 	end)
 end
-
 function RPSCoreFramework:EnableDrag(frame)
 	frame:RegisterForDrag("LeftButton");
 	frame:SetScript("OnDragStart", frame.StartMoving);
 	frame:SetScript("OnDragStop", frame.StopMovingOrSizing);
 end
-
 function RPSCoreFramework:HideEffectAuraButtons() -- TODO Rework it
 	RPS_AuraButton1Completed:Hide()
 	RPS_AuraButton2Completed:Hide()
@@ -120,7 +108,6 @@ function RPSCoreFramework:HideEffectAuraButtons() -- TODO Rework it
 	RPS_AuraButton5Completed:Hide()
 	RPS_AuraButton6Completed:Hide()
 end
-
 function RPSCoreFramework:OnClickCosmetic(frame)
 	PlaySound(624, "SFX")
 	for i = 1, #RPSCoreFramework.Interface.HighlightedButtons do
@@ -128,7 +115,6 @@ function RPSCoreFramework:OnClickCosmetic(frame)
 	end
 	frame:LockHighlight()
 end
-
 function RPSCoreFramework:OnClickCosmeticTabs(frame)
 	PlaySound(21968, "SFX")
 	for i = 1, #RPSCoreFramework.Interface.HighlightedTabButtons do
@@ -136,12 +122,9 @@ function RPSCoreFramework:OnClickCosmeticTabs(frame)
 	end
 	frame:LockHighlight()
 end
-
 function RPSCoreFramework:OnClickFrameShowing(frame)
-	
 	for i=1, #RPSCoreFramework.Interface.HidingFrames do
 		RPSCoreFramework.Interface.HidingFrames[i]:Hide()
 	end
-
 	frame:Show()
 end

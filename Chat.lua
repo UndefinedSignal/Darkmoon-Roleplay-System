@@ -14,7 +14,6 @@ function RPSCoreFramework:UpdateTypingStatus(editbox)
 		end
 	end
 end
-
 function sysMsg(self, event, msg, author, ...)
 	if (string.find(msg, "RPS.StatMe")) then
 		RPSCoreFramework:UpdateInfo(msg);
@@ -36,9 +35,7 @@ function sysMsg(self, event, msg, author, ...)
 		return true;
 	end
 end
-
 function RPSCoreFramework:SendCoreMessage(msg)
 	SendAddonMessage(RPSCoreFramework.Prefix, msg, "WHISPER", UnitName("player"));
 end;
-
 ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", sysMsg);

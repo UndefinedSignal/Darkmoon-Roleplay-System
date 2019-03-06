@@ -5,10 +5,8 @@ function RPSCoreFramework:IsAdvancedRace()
 			return true;
 		end
 	end
-
 	return false;
 end
-
 function RPSCoreFramework:IsAdvancedClass()
 	_, _, classID = UnitClass("player");
 	for i=1, #RPSCoreFramework.AdvancedClasses do
@@ -16,10 +14,8 @@ function RPSCoreFramework:IsAdvancedClass()
 			return true;
 		end
 	end
-
 	return false;
 end
-
 function RPSCoreFramework:IsCharsheetRequired()
 	_, _, classID = UnitClass("player");
 	for i=1, #RPSCoreFramework.AdvancedClassesCharsheetRequired do
@@ -27,48 +23,37 @@ function RPSCoreFramework:IsCharsheetRequired()
 			return true;
 		end
 	end
-
 	return false;
 end
-
 function RPSCoreFramework:AdvancedCharacterMessageCheck()	
 	if (not RPSCoreAdvancedCharacterCheckShown) then		
 		RPSCoreAdvancedCharacterCheckShown = true;
 	else
 		return;
 	end
-	
 	local message = "";
 	local flag = false;
-	
 	local isAdvancedRace = self:IsAdvancedRace();
 	local isAdvancedClass = self:IsAdvancedClass();
 	local isCharsheetRequired = self:IsCharsheetRequired();
-	
 	if (isAdvancedRace) then
 		message = message.."\n"..RPSCoreFramework.Literature.AdvancedRaceMessage;
 	end
-	
 	if (isAdvancedClass) then
 		message = message.."\n"..RPSCoreFramework.Literature.AdvancedClassMessage;
 	end
-		
 	if (isCharsheetRequired) then
 		message = message.."\n\n"..RPSCoreFramework.Literature.CharsheetRequiredMessage;
 	end
-	
 	if (isAdvancedRace or isAdvancedClass or isCharsheetRequired) then
 		flag = true;
 	end
-	
 	if (flag) then	
 		if ((isAdvancedRace or isAdvancedClass) and not isCharsheetRequired) then
 			if (not isCharsheetRequired) then
 				message = message.."\n\n"..RPSCoreFramework.Literature.CharsheetRecommendedMessage;
 			end
-			--message = message.."\n\n"..RPSCoreFramework.Literature.AdvancedRaceOrClassMessage;
 		end
 		C_Timer.NewTicker(5, function() StaticPopup_Show("AdvancedCharacterMessage", message); end, 1);
-	end;
-				
+	end;		
 end
