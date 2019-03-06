@@ -61,7 +61,6 @@ function RPSCoreFramework:PeriodicallyUpdater()
 end
 
 function RPSCoreFramework:UpdateScaleInfo(str)
-	print(str)
 	str = string.gsub(str, "RPS.Scale ", "")
 	RPSCoreFramework.MyScale = tonumber(str)
 	RPSCoreFramework:UpdateScaleReset()
