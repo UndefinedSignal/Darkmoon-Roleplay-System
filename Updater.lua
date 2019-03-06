@@ -14,7 +14,7 @@ function RPSCoreFramework:ReloadDispList()
 end
 
 function RPSCoreFramework:UpdateScaleReset()
-	if (GetMoney() <= RPSCoreFramework.RequestRescale or RPSCoreFramework.MyScale == 0 or RPSCoreFramework.MyScale == -1) then
+	if (GetMoney() < RPSCoreFramework.RequestRescale or RPSCoreFramework.MyScale == 0 or RPSCoreFramework.MyScale == -1) then
 		RPS_BTNReScale:Disable();
 	else
 		RPS_BTNReScale:Enable();
@@ -61,6 +61,7 @@ function RPSCoreFramework:PeriodicallyUpdater()
 end
 
 function RPSCoreFramework:UpdateScaleInfo(str)
+	print(str)
 	str = string.gsub(str, "RPS.Scale ", "")
 	RPSCoreFramework.MyScale = tonumber(str)
 	RPSCoreFramework:UpdateScaleReset()

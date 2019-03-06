@@ -414,10 +414,6 @@
                                             <OnShow>
                                                 RPSCoreFramework:UpdateScaleReset();
                                             </OnShow>
-
-                                            <OnClick>
-                                                -- hookskript
-                                            </OnClick>
                                         </Scripts>
                                     </Button>
 

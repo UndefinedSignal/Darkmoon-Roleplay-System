@@ -272,7 +272,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете сбросить рост?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale reset");	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable() end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale reset");	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable();	RPS_CharScaleSlider:SetValue(6); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);

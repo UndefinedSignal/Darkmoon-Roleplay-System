@@ -17,6 +17,7 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, 
 	local ntex = IFrame:CreateTexture();
 	ntex:SetTexture(POIPath..ptype);
 	local r, g, b = RPSCoreFramework:hex2rgb("#"..color);
+
 	ntex:SetVertexColor(r, g, b, 0.9); -- https://wow.gamepedia.com/Power_colors
 	ntex:SetAllPoints();
 	IFrame:SetNormalTexture(ntex);
