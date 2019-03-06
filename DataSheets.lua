@@ -10,22 +10,6 @@ RPSCoreFramework.Map = {};
 RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
-RPSCoreFramework.Map.Icons = {
-    anchor = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\anchor",
-    camp = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\camp",
-    conflict = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\conflict",
-    farm = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\farm",
-    house = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\house",
-    inn = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\inn",
-    loot = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\loot",
-    lumber = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\lumber",
-    mine = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\mine",
-    monster = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\monster",
-    point = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\point",
-    question = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\question",
-    tower = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\tower",
-    workshop = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\workshop"
-};
 
 if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {};
