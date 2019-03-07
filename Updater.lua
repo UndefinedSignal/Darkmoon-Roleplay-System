@@ -172,7 +172,7 @@ function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 end
 function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage(".disp list")
-	RPSCoreFramework:SendCoreMessage(".rps request poi abc123")
+	RPSCoreFramework:SendCoreMessage(".rps request poi init")
 	RPSCoreFramework:SendCoreMessage(".rps action scale info")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
