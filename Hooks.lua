@@ -19,7 +19,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ItemRefShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
-	self:SecureHook("ZoomOut", function() RPSCoreFramework:FlushAllPinsOnMap();	end);
+	self:SecureHook("ZoomOut", function() RPSCoreFramework:GeneratePOIPlaces();	end);
 	self:SecureHook("SetMapToCurrentZone", function() 	self:ScheduleTimer("GeneratePOIPlaces", 0.5);	end)
 	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
