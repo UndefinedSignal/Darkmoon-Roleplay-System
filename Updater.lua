@@ -155,7 +155,7 @@ end
 function RPSCoreFramework:GetCommandPOIPins(str)
 	if (str == "refresh") then
 		RPSCoreFramework.Map.POIWorkflow = false;
-		--RPSCorePOIPins = {};
+		RPSCorePOIPins = {};
 	elseif (str == "done") then
 		RPSCoreFramework.Map.POIWorkflow = true;
 		if (RPSCoreFramework.Map.POIUpdateQueque) then
