@@ -1300,7 +1300,7 @@
                 self:SetFrameStrata("TOOLTIP")
             </OnLoad>
             <OnEnter>
-				RPSPOIGameTooltip:SetOwner(WorldMapDetailFrame, "ANCHOR_CURSOR");
+				RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 				RPSPOIGameTooltip:AddLine("|cffFFC125"..self.dataName.."|r");
 				if (string.len(self.dataDescription) > 0) then
 					RPSPOIGameTooltip:AddLine("|cffFF8040"..self.dataDescription.."|r");
