@@ -1284,5 +1284,34 @@
 			<TexCoords left="0" right="0.6640625" top="0" bottom="1"/>
 		</HighlightTexture>
 	</Button>
+	
+	<GameTooltip name="RPSPOIGameTooltip" inherits="GameTooltipTemplate">
+        <Scripts>
+            <Onload>
+                self:SetOwner(WorldMapDetailFrame, "ANCHOR_NONE");
+            </Onload>
+        </Scripts>
+    </GameTooltip>
+
+    <Button name="RPS_POIButton" virtual="true">
+        <Size x="15" y="15"/>
+        <Scripts>
+            <OnLoad>
+                self:SetFrameStrata("TOOLTIP")
+            </OnLoad>
+            <OnEnter>
+				RPSPOIGameTooltip:SetOwner(WorldMapDetailFrame, "ANCHOR_CURSOR");
+				RPSPOIGameTooltip:AddLine("|cffFFC125"..self.dataName.."|r");
+				if (string.len(self.dataDescription) > 0) then
+					RPSPOIGameTooltip:AddLine("|cffFF8040"..self.dataDescription.."|r");
+				end
+				RPSPOIGameTooltip:Show();
+            </OnEnter>
+            <OnLeave>
+                RPSPOIGameTooltip:ClearLines();
+				RPSPOIGameTooltip:Hide();
+            </OnLeave>
+        </Scripts>
+    </Button>
 
 </Ui>

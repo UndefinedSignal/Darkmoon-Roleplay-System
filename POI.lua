@@ -1,16 +1,11 @@
 local POIPath = "Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\";
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, description)
-	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton);
-	RPSPOIGameTooltip:ClearLines();
-	if WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:IsShown() then
-		IFrame:SetSize(18,18);
-		RPSPOIGameTooltip:SetFrameStrata("TOOLTIP");
-		IFrame:SetFrameStrata("TOOLTIP");
-	else
-		IFrame:SetSize(24,24);
-		RPSPOIGameTooltip:SetFrameStrata("DIALOG");
-		IFrame:SetFrameStrata("DIALOG");
-	end
+	local IFrame = CreateFrame("Button", "POI-"..guid, WorldMapButton, "RPS_POIButton");
+	IFrame.dataName = name;
+	IFrame.dataDescription = description;
+	IFrame:SetSize(18,18);
+	RPSPOIGameTooltip:SetFrameStrata("TOOLTIP");
+	IFrame:SetFrameStrata("TOOLTIP");
 	local ntex = IFrame:CreateTexture();
 	ntex:SetTexture(POIPath..ptype);
 	local r, g, b = RPSCoreFramework:hex2rgb("#"..color);
@@ -18,23 +13,13 @@ function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, 
 	ntex:SetAllPoints();
 	IFrame:SetNormalTexture(ntex);
 	IFrame:SetHighlightTexture("Interface\\BUTTONS\\IconBorder-GlowRing")
-	IFrame:SetScript("OnEnter", function()
-		        	RPSPOIGameTooltip:SetOwner(WorldMapDetailFrame, "ANCHOR_CURSOR");
-				    RPSPOIGameTooltip:AddLine("|cffFFC125"..name.."|r");
-
-					if (string.len(description) > 0) then
-						RPSPOIGameTooltip:AddLine("|cffFF8040"..description.."|r");
-					end
-				    RPSPOIGameTooltip:Show();
-				    end)
-	IFrame:SetScript("OnLeave", function()
-				    RPSPOIGameTooltip:Hide();
-		      	end)
 
 	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y));
 end
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, y, x, ptype, color, name, description)
-	local IFrame = CreateFrame("Button", "POITex-"..guid, WorldMapButton);
+	local IFrame = CreateFrame("Button", "POITex-"..guid, WorldMapButton, "RPS_POIButton");
+	IFrame.dataName = name;
+	IFrame.dataDescription = description;
 	IFrame:SetSize(18,18);
 	local ntex = IFrame:CreateTexture();
 	ntex:SetTexture(POIPath..ptype);
@@ -42,17 +27,6 @@ function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, y, x, ptype, color, na
 	ntex:SetVertexColor(r, g, b, 0.9);
 	ntex:SetAllPoints();
 	IFrame:SetNormalTexture(ntex);
-	IFrame:SetScript("OnEnter", function()
-		        	RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				    RPSPOIGameTooltip:AddLine("|cffFFC125"..name.."|r");
-				    if (string.len(description) > 0) then
-						RPSPOIGameTooltip:AddLine("|cffFF8040"..description.."|r");
-					end
-				    RPSPOIGameTooltip:Show();
-				    end);
-	IFrame:SetScript("OnLeave", function()
-				    RPSPOIGameTooltip:Hide();
-		      	end);
 
 	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(RPSCoreFramework, IFrame, tonumber(mapid), tonumber(x), tonumber(y), false);
 end

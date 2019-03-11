@@ -20,7 +20,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:SecureHook("ZoomOut", function() RPSCoreFramework:GeneratePOIPlaces();	end);
-	self:SecureHook("SetMapToCurrentZone", function() 	self:ScheduleTimer("GeneratePOIPlaces", 0.5);	end)
+	self:SecureHook("SetMapToCurrentZone", function() 	RPSCoreFramework:GeneratePOIPlaces();	end)
 	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);

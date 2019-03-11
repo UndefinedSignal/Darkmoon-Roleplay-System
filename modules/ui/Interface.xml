@@ -1277,15 +1277,6 @@
             </ScrollFrame>
         </Frames>
     </Frame>
-
-    <GameTooltip name="RPSPOIGameTooltip" inherits="GameTooltipTemplate">
-        <Scripts>
-            <Onload>
-                self:SetOwner(WorldMapDetailFrame, "ANCHOR_NONE");
-            </Onload>
-        </Scripts>
-    </GameTooltip>
-
 </Ui>
 
 
