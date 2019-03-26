@@ -11,7 +11,6 @@ end
 
 function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, specialTexture)
 	frame.size = size;
-
 	local name = frame:GetName();
 	local bgTextureTop = _G[name .. "BackgroundTop"];
 	local bgTextureMiddle = _G[name .. "BackgroundMiddle1"];
@@ -167,28 +166,20 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 		_G[name .. "Item" .. j]:Hide();
 	end
 
+	frame:SetMovable(true);
+	RPSCoreFramework:EnableDrag(frame);
 	-- Set up button for drag
 	local btn = _G[name.."Plate"];
 	btn:RegisterForDrag("LeftButton")
-	btn:SetMovable();
-	btn.main = frame;
-
-
-end
-
-function RPSCoreFramework:ToggleContainer()
-	if containerFrame:IsShown() then
-		containerFrame:Hide();
-	else
-		containerFrame:Show();
-	end
+	btn:SetMovable(true);
+	btn:SetScript("OnDragStart", frame.StartMoving);
+	btn:SetScript("OnDragStop", frame.StopMovingOrSizing);
 end
 
 function RPSCoreFramework:ContainerFrameOnShow(self)
 	PlaySound(862);
 	RPSCoreFramework:ContainerFrameUpdate(self)
 end
-
 
 function RPSCoreFramework:ContainerFrameOnLoad()
 	print("on load");
@@ -202,19 +193,5 @@ end
 function RPSCoreFramework:ContainerFrameOnHide()
 	print("on hide");
 end
-
-function RPSCoreFramework:ContainerFrameOnShow(self)
-	print("on show");
-end
-
-
-
-
-
-
-
-
-
-
 
 

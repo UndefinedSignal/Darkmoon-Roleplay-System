@@ -5,11 +5,7 @@ function RPSCoreFramework:switchMainFrame()
 		RPS_MainFrame:Show();
 	end
 end
-function RPSCoreFramework:EnableDrag(frame)
-	frame:RegisterForDrag("LeftButton");
-	frame:SetScript("OnDragStart", frame.StartMoving);
-	frame:SetScript("OnDragStop", frame.StopMovingOrSizing);
-end
+
 function RPSCoreFramework:UpdateInteractionFrame()
 	if (self:IsFallen() and CheckInteractDistance("target", 3) and not UnitIsUnit("player", "target") and not self:IsInteractCast() and not self:HasAura(RPSCoreFramework.WoundsAura)) then
 		if (not RPS_InteractFrame:IsShown()) then
@@ -21,6 +17,7 @@ function RPSCoreFramework:UpdateInteractionFrame()
 		RPS_InteractFrame:Hide();
 	end
 end
+
 function RPSCoreFramework:GenerateClassBackground()
 	local _, classFileName = UnitClass("player")
 	if classFileName == nil then
@@ -31,6 +28,7 @@ function RPSCoreFramework:GenerateClassBackground()
 	tex:SetPoint("TOPLEFT", 1, -3)
 	tex:SetPoint("BOTTOMRIGHT", 22, -6)
 end
+
 function RPSCoreFramework:GenerateCharScaleSlider()
 	RPS_CharScaleSlider:SetOrientation('VERTICAL')
 	RPS_CharScaleSlider:SetMinMaxValues(1, 11)
@@ -95,11 +93,13 @@ function RPSCoreFramework:GenerateCharScaleSlider()
 		end
 	end)
 end
+
 function RPSCoreFramework:EnableDrag(frame)
 	frame:RegisterForDrag("LeftButton");
 	frame:SetScript("OnDragStart", frame.StartMoving);
 	frame:SetScript("OnDragStop", frame.StopMovingOrSizing);
 end
+
 function RPSCoreFramework:HideEffectAuraButtons() -- TODO Rework it
 	RPS_AuraButton1Completed:Hide()
 	RPS_AuraButton2Completed:Hide()
@@ -108,6 +108,7 @@ function RPSCoreFramework:HideEffectAuraButtons() -- TODO Rework it
 	RPS_AuraButton5Completed:Hide()
 	RPS_AuraButton6Completed:Hide()
 end
+
 function RPSCoreFramework:OnClickCosmetic(frame)
 	PlaySound(624, "SFX")
 	for i = 1, #RPSCoreFramework.Interface.HighlightedButtons do
@@ -115,6 +116,7 @@ function RPSCoreFramework:OnClickCosmetic(frame)
 	end
 	frame:LockHighlight()
 end
+
 function RPSCoreFramework:OnClickCosmeticTabs(frame)
 	PlaySound(21968, "SFX")
 	for i = 1, #RPSCoreFramework.Interface.HighlightedTabButtons do
@@ -122,6 +124,7 @@ function RPSCoreFramework:OnClickCosmeticTabs(frame)
 	end
 	frame:LockHighlight()
 end
+
 function RPSCoreFramework:OnClickFrameShowing(frame)
 	for i=1, #RPSCoreFramework.Interface.HidingFrames do
 		RPSCoreFramework.Interface.HidingFrames[i]:Hide()

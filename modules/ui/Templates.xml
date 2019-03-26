@@ -1360,7 +1360,7 @@
 			</OnEvent>
 		</Scripts>
 	</Button>
-	<Frame name="RPS_ContainerFrameTemplate" frameStrata="MEDIUM" toplevel="true" movable="true" enableMouse="true" hidden="false" virtual="true">
+	<Frame name="RPS_ContainerFrameTemplate" frameStrata="MEDIUM" toplevel="true" movable="true" enableMouse="true" hidden="false" virtual="true" clampedToScreen="true">
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture name="$parentPortrait">
