@@ -33,6 +33,7 @@ Hooks.lua
 Macros.lua
 POI.lua
 Search.lua
+container.lua
 
 modules\ui\Templates.xml
 modules\ui\Interact.xml

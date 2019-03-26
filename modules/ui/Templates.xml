@@ -1313,5 +1313,237 @@
             </OnLeave>
         </Scripts>
     </Button>
+	
+		<Button name="RPS_ContainerFrameItemButtonTemplate" inherits="ItemButtonTemplate" hidden="true" virtual="true">
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0" />
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Cooldown name="$parentCooldown" inherits="CooldownFrameTemplate" />
+		</Frames>
+		<Scripts>
+			<OnClick>
+				if ( not ( IsModifierKeyDown() or IsShiftKeyDown() ) ) then
+					--GHI_ContainerFrameItemButton_OnClick(self,button);
+				end
+				GHI_ContainerFrameItemButton_OnClick(self,button)
+			</OnClick>
+			<PostClick></PostClick>
+			<OnLoad></OnLoad>
+			<OnEnter></OnEnter>
+			<OnLeave>self.updateTooltip = nil;
+				GameTooltip:Hide();
+				--ResetCursor();
+			</OnLeave>
+			<OnHide>if ( self.hasStackSplit and (self.hasStackSplit == 1) ) then
+				StackSplitFrame:Hide();
+				end
+			</OnHide>
+			<OnShow />
+			<OnDragStart>
+				if ( not ( IsModifierKeyDown() or IsShiftKeyDown() ) ) then
+					
+				end
+			</OnDragStart>
+			<OnReceiveDrag />
+			<OnUpdate>
+				
+			</OnUpdate>
+			<OnEvent>
+				if ( GameTooltip:IsOwned(self) ) then
+					--GHI_ContainerFrameItemButton_OnEnter(self);
+				end
+			</OnEvent>
+		</Scripts>
+	</Button>
+	<Frame name="RPS_ContainerFrameTemplate" frameStrata="MEDIUM" toplevel="true" movable="true" enableMouse="true" hidden="false" virtual="true">
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentPortrait">
+					<Size>
+						<AbsDimension x="40" y="40" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentBackgroundTop" file="Interface\ContainerFrame\UI-Bag-Components">
+					<Size>
+						<AbsDimension x="256" y="512" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT" relativeTo="$parent">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<Texture name="$parentBackgroundMiddle1" file="Interface\ContainerFrame\UI-Bag-Components">
+					<Size>
+						<AbsDimension x="256" y="512" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentBackgroundTop" relativePoint="BOTTOM" />
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.3515625" bottom="0.8515625" />
+				</Texture>
+				<Texture name="$parentBackgroundMiddle2" file="Interface\ContainerFrame\UI-Bag-Components" hidden="true">
+					<Size>
+						<AbsDimension x="256" y="256" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentBackgroundMiddle1" relativePoint="BOTTOM" />
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.353515625" bottom="0.8515625" />
+				</Texture>
+				<Texture name="$parentBackgroundBottom" file="Interface\ContainerFrame\UI-Bag-Components">
+					<Size>
+						<AbsDimension x="256" y="10" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="$parentBackgroundMiddle1" relativePoint="BOTTOM" />
+					</Anchors>
+					<TexCoords left="0" right="1" top="0.330078125" bottom="0.349609375" />
+				</Texture>
+				<FontString name="$parentName" inherits="GameFontHighlight">
+					<Size>
+						<AbsDimension x="112" y="12" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="47" y="-10" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentBackground1Slot" file="Interface\ContainerFrame\UI-Bag-1Slot" hidden="true">
+					<Size>
+						<AbsDimension x="99" y="74" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="0" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0" right="0.7734375" top="0" bottom="0.578125" />
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentPlate">
+				<Size>
+					<AbsDimension x="112" y="12" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="47" y="-10" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Frame name="$parentMoneyFrame" inherits="SmallMoneyFrameTemplate" hidden="true">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="-216" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Frame>
+			<Button name="$parentItem1" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem2" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem3" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem4" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem5" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem6" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem7" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem8" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem9" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem10" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem11" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem12" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem13" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem14" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem15" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem16" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem17" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem18" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem19" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem20" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem21" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem22" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem23" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem24" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem25" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem26" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem27" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem28" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem29" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem30" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem31" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem32" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem33" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem34" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem35" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentItem36" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<Button name="$parentPortraitButton">
+				<Size>
+					<AbsDimension x="40" y="40" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset>
+							<AbsDimension x="7" y="-5" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnEnter>GameTooltip:SetOwner(self, "ANCHOR_LEFT");</OnEnter>
+					<OnLeave>GameTooltip:Hide();</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-1" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>self:GetParent():Hide();</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+            <OnEvent>
+                RPSCoreFramework:ContainerFrameOnEvent();
+            </OnEvent>
+            <OnLoad>
+                RPSCoreFramework:ContainerFrameOnLoad();            
+            </OnLoad>
+            <OnHide>
+                RPSCoreFramework:ContainerFrameOnHide();
+            </OnHide>
+            <OnShow>
+                RPSCoreFramework:ContainerFrameOnShow(self);
+            </OnShow>
+		</Scripts>
+	</Frame>
 
 </Ui>
