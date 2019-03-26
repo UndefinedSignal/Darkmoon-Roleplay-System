@@ -46,6 +46,7 @@ end
 function RPSCoreFramework:GeneratePOIPlaces()
     RPSCoreFramework:FlushAllPinsOnMap();
     RPSCoreFramework:FlushAllPinsOnMiniMap();
+
     if (GetCurrentMapZone() ~= 0 and RPSCoreFramework.Map.POIWorkflow and RPSCoreShowPOIPins) then
         for k, v in pairs(RPSCorePOIPins) do
             RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);

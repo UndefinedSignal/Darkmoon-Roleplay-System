@@ -4,7 +4,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_LEVEL_UP");
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
-	self:RegisterEvent("CHAT_MSG_ADDON");	
+	self:RegisterEvent("CHAT_MSG_ADDON");
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
 		self:HookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
@@ -20,9 +20,10 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:SecureHook("ZoomOut", function() RPSCoreFramework:GeneratePOIPlaces();	end);
-	self:SecureHook("SetMapToCurrentZone", function() 	RPSCoreFramework:GeneratePOIPlaces();	end)
+	--self:SecureHook("SetMapToCurrentZone", function() 	if IsOutdoors() then RPSCoreFramework:GeneratePOIPlaces(); end	end)
 	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
+	self:SecureHook("ToggleWorldMap", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	RPS_BTNReScale:HookScript("OnMouseUp", function() if RPS_BTNReScale:IsEnabled() then StaticPopup_Show("setCharacterReScale") end end);
