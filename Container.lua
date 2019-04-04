@@ -1,14 +1,16 @@
-local containerFrame;
+local PlayerCursorInformation = nil;
+containerFrame = nil;
 
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
 
 function RPSCoreFramework:SetUpcontainerFrame()
-	containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
-	RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, 4, nil, "Keyring");
-	containerFrame.items = {};
+	if (not containerFrame) then
+		containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
+		containerFrame.items = {};
+		RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, 12, nil, "Keyring");	
+	end
 	containerFrame:SetPoint("CENTER", nil, "CENTER", 0, 0 );
 	containerFrame:Show();
-	RPSCoreFramework:PlayerContainerFrame_Update(containerFrame)
 end
 
 function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, specialTexture)
@@ -47,7 +49,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 
 		frame:SetHeight(70);
 		frame:SetWidth(99);
-		_G[frame:GetName() .. "Name"]:SetText("ЮНИТ ПРЕВЕТ");
+		_G[frame:GetName() .. "Name"]:SetText("");
 		local itemButton = _G[name .. "Item1"];
 		itemButton:SetID(1);
 		itemButton:SetPoint("BOTTOMRIGHT", name, "BOTTOMRIGHT", -10, 5);
@@ -176,11 +178,20 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 	btn:SetMovable(true);
 	btn:SetScript("OnDragStart", frame.StartMoving);
 	btn:SetScript("OnDragStop", frame.StopMovingOrSizing);
+	
+	
+	RPSCoreFramework:PushContainerItem(6, {itemId = 6, itemGuid = 112095, count = 13, quaility = 2, locked = false})
+	
+	RPSCoreFramework:ContainerFrameUpdate(frame);
 end
 
 function RPSCoreFramework:ContainerFrameOnShow(self)
 	PlaySound(862);
-	RPSCoreFramework:ContainerFrameUpdate(self)
+	--RPSCoreFramework:ContainerFrameUpdate(self)
+end
+
+function RPSCoreFramework:ContainerFrameOnHide()
+	print("on hide");
 end
 
 function RPSCoreFramework:ContainerFrameOnLoad()
@@ -190,146 +201,111 @@ end
 function RPSCoreFramework:ContainerFrameUpdate(frame)
 	local frameName = frame:GetName();
 	print("update items");
-end
+	
+	for j = 1, frame.size, 1 do
+		local itemButton = _G[frameName .. "Item" .. j];
+		local itemGuid, texture, count, locked = RPSCoreFramework:GetContainerItem(j);
 
-function RPSCoreFramework:ContainerFrameOnHide()
-	print("on hide");
-end
-
-
-function RPSCoreFramework:ContainerFrameItemButton_OnClick(self, button)
-	if ( button == "LeftButton" ) then		
-		if ( not IsModifierKeyDown() ) then
-			local type, money = GetCursorInfo();
-            if ( type == "item" ) then
-            	print("Contain")
-                RPSCoreFramework:PlacePlayerContainerItem(self);
-            else
-            	print("Not contain")
-                RPSCoreFramework:PickupPlayerContainerItem(self, 1)
-			end			
-			--StackSplitFrame:Hide();
-		end
-	else
-        -- RIGHT CLICK
-        --if ( not IsModifierKeyDown() ) then
-            --PlayerContainerItemToBag(this)
-        --end
-	end
-end
-
-
-function RPSCoreFramework:PlayerContainerFrame_Update(frame)
-	local id = frame:GetID();
-	local frameName = frame:GetName();
-	local name,texture, itemCount, locked, quality, readablem, ID;
-	--frame.size = 16;
-	for j=1, frame.size, 1 do
-		local itemButton = getglobal(frameName.."Item"..j);
-        local data = frame.items[j];
-		if type(data) == "table" then
-			ID = tonumber(data.itemID);
-            name = data.name;
-            texture = GetItemIcon(ID)
-			itemCount = tonumber(data.count);
-			locked = data.locked;
-			quality = 0;
-			readable = nil;
-            itemButton.hyperlink = data.link;
-		else
-            ID = 0;
-			name = nil;			
-			texture = ""
-			itemCount = 0;
-			locked = nil;
-			quality = 0;
-			readable = nil;
-            itemButton.hyperlink = nil;
-		end
-		
 		SetItemButtonTexture(itemButton, texture);
-		SetItemButtonCount(itemButton, itemCount);
-		--locked
+		SetItemButtonCount(itemButton, count);
 		SetItemButtonDesaturated(itemButton, locked, 0.5, 0.5, 0.5);
-		itemButton.ID = ID;
-		itemButton.number = j;
-		
-		if ( name ) then
+		itemButton.slotID = j;
+
+		if (itemGuid) then
+			--GHI_ContainerFrame_UpdateCooldown(itemGuid, itemButton);
 			itemButton.hasItem = 1;
 		else
-			getglobal(frameName.."Item"..j.."Cooldown"):Hide();
+			_G[frameName .. "Item" .. j .. "Cooldown"]:Hide();
 			itemButton.hasItem = nil;
 		end
-
-		itemButton.readable = readable;
 	end
-end
-
-
-function RPSCoreFramework:PickupPlayerContainerItem(frame,amount)
-    local parent = frame:GetParent();
-	local id = parent:GetID();
-	local slot = frame.number;
-	local data = parent.items[slot];	
 	
-	if type(data)=="table" then
-		if(data.locked == 1) then return end; 
-		if parent.items[slot].locked  == true then
-			return;
+end
+
+function RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)
+	self:RegisterForDrag("LeftButton", "RightButton");
+	self:RegisterForClicks("AnyUp");
+end
+
+function RPSCoreFramework:ContainerFrameItemButtonOnClick(self, button)
+	if button == "LeftButton" then
+		local infoType = GetCursorInfo()
+		if (RPSCoreFramework:GetCursorItem()) then
+			RPSCoreFramework:PlaceContainerItem(self)
+		else
+			RPSCoreFramework:PickupContainerItem(self)
 		end
-		local temp = {};
-
-		temp.ItemOrigFrame = frame;
-		temp.ItemOrigBag = id;
-		temp.ItemAmount = amount;
-		temp.id = frame.ID;
-		
-		parent.items[slot].locked = 1;
-
-		PlayerContainerCursorInfo = temp;
-        RPSCoreFramework:PickupItem(temp.ItemOrigFrame.hyperlink);
-		RPSCoreFramework:PlayerContainerFrame_Update(parent)
+--	elseif button == "RightButton" then
+--		print("click right");
 	end
 end
 
-function RPSCoreFramework:PlacePlayerContainerItem(frame)
-    local parent = frame:GetParent();
-	if ( parent:GetName() == "PlayerContainerFrame" ) then
-        local slot_item = parent.items[frame.number];
-        print(slot_item)
-        if(PlayerContainerCursorInfo)then
-        	print(PlayerContainerCursorInfo)
-            --SendAddonMessage("PLAYER_CONTAINER_MOVE", PlayerContainerCursorInfo.ItemOrigFrame.number.."/b"..frame.number.."/b"..PlayerContainerCursorInfo.ItemAmount, "WHISPER", UnitName("player"))
-            PlayerContainerCursorInfo = nil;
-        else
-        	print("parent.playerBagId: "..parent.playerBagId.. " parent.playerSlotId: "..parent.playerSlotId)
-            --SendAddonMessage("PLAYER_CONTAINER_STORE_FROM_INV", parent.playerBagId.."/b"..parent.playerSlotId.."/b"..frame.number, "WHISPER", UnitName("player"))
-            parent.playerBagId = nil;
-            parent.playerSlotId = nil;
-        end
-            
-        RPSCoreFramework:PlayerContainerFrame_Update(parent);
-        ClearCursor();
-        
-        --[[parent.items[frame.number] = parent.items[PlayerContainerCursorInfo.ItemOrigFrame.number];
-        parent.items[frame.number].locked = nil;
-        if ( slot_item ) then
-            parent.items[PlayerContainerCursorInfo.ItemOrigFrame.number] = slot_item;
-        else
-            parent.items[PlayerContainerCursorInfo.ItemOrigFrame.number] = nil;
-        end
-         ]]
-    elseif ( string.match(parent:GetName(), "ContainerFrame.-") == "ContainerFrame" ) then        
-        if(PlayerContainerCursorInfo)then
-            SendAddonMessage("PLAYER_CONTAINER_TAKE", parent:GetID().."/b"..frame:GetID().."/b"..PlayerContainerCursorInfo.ItemOrigFrame.number.."/b"..PlayerContainerCursorInfo.ItemAmount, "WHISPER", UnitName("player"))
-            PlayerContainerCursorInfo = nil;
-            RPSCoreFramework:PlayerContainerFrame_Update(PlayerContainerFrame);
-            ClearCursor();
-        end
-        
-        --parent.items[frame.number].locked = nil;
-        --PlayerContainerCursorInfo = nil;
-        
-        
-    end
+function RPSCoreFramework:PickupContainerItem(self)
+	local id = self:GetID()
+	local item = containerFrame.items[id]
+	local parent = self:GetParent();
+
+	if item == nil or item.locked then return; end
+
+	local temp = {};
+	temp.itemId = item.itemId;
+	temp.itemGuid = item.itemGuid;
+	temp.count = item.count;
+	temp.quality = item.quaility;
+
+	item.locked = true;
+	PlayerCursorInformation = temp;
+	PickupItem(item.itemGuid)
+	RPSCoreFramework:ContainerFrameUpdate(parent);
+end
+
+function RPSCoreFramework:PlaceContainerItem(self)
+	if RPSCoreFramework:GetCursorItem() then
+		local id = self:GetID()
+		local item = containerFrame.items[id]
+		local parent = self:GetParent();
+
+		if PlayerCursorInformation and id ~= PlayerCursorInformation.itemId then
+			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = PlayerCursorInformation.itemGuid, count = PlayerCursorInformation.count, quaility = PlayerCursorInformation.quality, locked = false})
+
+			containerFrame.items[tonumber(PlayerCursorInformation.itemId)] = nil;
+			
+		else
+			containerFrame.items[id].locked = false;
+		end
+		PlayerCursorInformation = nil;
+		ClearCursor();
+		RPSCoreFramework:ContainerFrameUpdate(parent)
+	end
+end
+
+function RPSCoreFramework:GetContainerItem(slotID)
+	local item = containerFrame.items[tonumber(slotID)];
+--	if slotID == 6 then
+--		print("item.itemGuid:"..item.itemGuid.." item.texture:"..item.texture.." item.count:"..item.count.." item.locked:"..item.locked.." item.quality:"..item.quality)
+--	end
+	if (item) then
+		return item.itemGuid, item.texture, item.count, item.locked, item.quality;
+	end
+	--return nil, "Interface\\Icons\\INV_Misc_QuestionMark", 5, 1;	
+end
+
+function RPSCoreFramework:PushContainerItem(slotID, item, update)
+	print("locked: "..tostring(item.locked));
+	local __, _, _, _, _, _, _, _, _, tex = GetItemInfo(tonumber(item.itemGuid))
+	containerFrame.items[slotID] = {itemId = item.itemId or nil, itemGuid = item.itemGuid or nil, texture = GetItemIcon(item.itemGuid) or "Interface\\Icons\\INV_Misc_QuestionMark", count = item.count or 0, locked = item.locked or false, quality = item.quality or 0};
+	if (update) then
+		RPSCoreFramework:ContainerFrameUpdate(containerFrame);
+	end
+end
+
+function RPSCoreFramework:SetCursorItem()
+
+end
+
+function RPSCoreFramework:GetCursorItem()
+	if (CursorHasItem() or PlayerCursorInformation) then
+		return true;
+	end
+	return false;
 end
