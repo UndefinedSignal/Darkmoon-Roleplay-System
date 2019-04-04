@@ -1,4 +1,4 @@
-local PlayerCursorInformation = nil;
+PlayerCursorInformation = nil;
 containerFrame = nil;
 
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
@@ -265,33 +265,39 @@ function RPSCoreFramework:PlaceContainerItem(self)
 		local item = containerFrame.items[id]
 		local parent = self:GetParent();
 
-		if PlayerCursorInformation and id ~= PlayerCursorInformation.itemId then
+		if (item ~= nil and PlayerCursorInformation) then
+			if PlayerCursorInformation.itemId == 0 then
+				ClearCursor();
+				PlayerCursorInformation = nil;
+				return;
+			end
+			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = PlayerCursorInformation.itemGuid, count = PlayerCursorInformation.count, quaility = PlayerCursorInformation.quality, locked = false})
+			RPSCoreFramework:PushContainerItem(PlayerCursorInformation.itemId, {itemId = PlayerCursorInformation.itemId, itemGuid = item.itemGuid, count = item.count, quaility = item.quality, locked = false})
+			containerFrame.items[id].locked = false;
+			containerFrame.items[item.itemId].locked = false;
+		elseif (PlayerCursorInformation) then
 			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = PlayerCursorInformation.itemGuid, count = PlayerCursorInformation.count, quaility = PlayerCursorInformation.quality, locked = false})
 
 			containerFrame.items[tonumber(PlayerCursorInformation.itemId)] = nil;
-			
-		else
 			containerFrame.items[id].locked = false;
 		end
-		PlayerCursorInformation = nil;
-		ClearCursor();
-		RPSCoreFramework:ContainerFrameUpdate(parent)
+
+		RPSCoreFramework:ContainerFrameUpdate(parent);
 	end
+	ClearCursor();
+	PlayerCursorInformation = nil;
 end
 
 function RPSCoreFramework:GetContainerItem(slotID)
 	local item = containerFrame.items[tonumber(slotID)];
---	if slotID == 6 then
---		print("item.itemGuid:"..item.itemGuid.." item.texture:"..item.texture.." item.count:"..item.count.." item.locked:"..item.locked.." item.quality:"..item.quality)
---	end
+
 	if (item) then
 		return item.itemGuid, item.texture, item.count, item.locked, item.quality;
 	end
-	--return nil, "Interface\\Icons\\INV_Misc_QuestionMark", 5, 1;	
 end
 
 function RPSCoreFramework:PushContainerItem(slotID, item, update)
-	print("locked: "..tostring(item.locked));
+--	print("locked: "..tostring(item.locked));
 	local __, _, _, _, _, _, _, _, _, tex = GetItemInfo(tonumber(item.itemGuid))
 	containerFrame.items[slotID] = {itemId = item.itemId or nil, itemGuid = item.itemGuid or nil, texture = GetItemIcon(item.itemGuid) or "Interface\\Icons\\INV_Misc_QuestionMark", count = item.count or 0, locked = item.locked or false, quality = item.quality or 0};
 	if (update) then

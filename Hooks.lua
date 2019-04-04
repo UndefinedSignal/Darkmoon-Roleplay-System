@@ -5,6 +5,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
+	self:RegisterEvent("ITEM_LOCK_CHANGED");
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
 		self:HookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
@@ -71,6 +72,15 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.AuraRefresh") then
 			RPSCoreFramework:RefreshActiveAuras("RPS.AuraRefresh "..msg);
 		end
+	elseif (event == "ITEM_LOCK_CHANGED") then
+		local __, itemCount, __, quality = GetContainerItemInfo(prefix, msg)
+		local guidId = GetContainerItemID(prefix, msg);
+		local temp = {}
+		temp.itemId = 0;
+		temp.itemGuid = guidId;
+		temp.count = itemCount;
+		temp.quality = quality;
+		PlayerCursorInformation = temp;
 	end
 end
 
