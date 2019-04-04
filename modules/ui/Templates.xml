@@ -1327,13 +1327,10 @@
 		</Frames>
 		<Scripts>
 			<OnClick>
-				if ( not ( IsModifierKeyDown() or IsShiftKeyDown() ) ) then
-					--GHI_ContainerFrameItemButton_OnClick(self,button);
-				end
-				GHI_ContainerFrameItemButton_OnClick(self,button)
+				RPSCoreFramework:ContainerFrameItemButtonOnClick(self, button)
 			</OnClick>
 			<PostClick></PostClick>
-			<OnLoad></OnLoad>
+			<OnLoad>RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)</OnLoad>
 			<OnEnter></OnEnter>
 			<OnLeave>self.updateTooltip = nil;
 				GameTooltip:Hide();

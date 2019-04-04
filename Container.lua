@@ -3,8 +3,11 @@ local containerFrame;
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
 
 function RPSCoreFramework:SetUpcontainerFrame()
-	containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
-	RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, 4, nil, "Keyring");
+	if (not containerFrame) then
+		containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
+		containerFrame.items = {};
+		RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, 12, nil, "Keyring");	
+	end
 	containerFrame:SetPoint("CENTER", nil, "CENTER", 0, 0 );
 	containerFrame:Show();
 end
@@ -45,7 +48,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 
 		frame:SetHeight(70);
 		frame:SetWidth(99);
-		_G[frame:GetName() .. "Name"]:SetText("ЮНИТ ПРЕВЕТ");
+		_G[frame:GetName() .. "Name"]:SetText("");
 		local itemButton = _G[name .. "Item1"];
 		itemButton:SetID(1);
 		itemButton:SetPoint("BOTTOMRIGHT", name, "BOTTOMRIGHT", -10, 5);
@@ -132,7 +135,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 		frame:SetHeight(bgTextureTop:GetHeight() + bgTextureBottom:GetHeight() + middleBgHeight);
 		frame:SetWidth(CONTAINER_WIDTH);
 
-		_G[frame:GetName() .. "Name"]:SetText("ЮНИТ ПРЕВЕТ");
+		_G[frame:GetName() .. "Name"]:SetText("ЮНИТ ЛЕНТЯЙ");
 		_G[frame:GetName() .. "Name"]:SetJustifyH("LEFT");
 	end
 
@@ -174,11 +177,16 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 	btn:SetMovable(true);
 	btn:SetScript("OnDragStart", frame.StartMoving);
 	btn:SetScript("OnDragStop", frame.StopMovingOrSizing);
+	
+	
+	RPSCoreFramework:PushContainerItem(6, {itemId = 2, itemGuid = 1, count = 2, texture = "Interface\\Icons\\achievement_guildperk_bountifulbags", quaility = 2, locked = false})
+	
+	RPSCoreFramework:ContainerFrameUpdate(frame);
 end
 
 function RPSCoreFramework:ContainerFrameOnShow(self)
 	PlaySound(862);
-	RPSCoreFramework:ContainerFrameUpdate(self)
+	--RPSCoreFramework:ContainerFrameUpdate(self)
 end
 
 function RPSCoreFramework:ContainerFrameOnLoad()
@@ -188,10 +196,58 @@ end
 function RPSCoreFramework:ContainerFrameUpdate(frame)
 	local frameName = frame:GetName();
 	print("update items");
+	
+	for j = 1, frame.size, 1 do
+		local itemButton = _G[frameName .. "Item" .. j];
+		local itemGuid, texture, count, locked = RPSCoreFramework:GetContainerItem(j);
+
+		SetItemButtonTexture(itemButton, texture);
+		SetItemButtonCount(itemButton, count);
+		SetItemButtonDesaturated(itemButton, locked, 0.5, 0.5, 0.5);
+		itemButton.slotID = j;
+
+		if (itemGuid) then
+			--GHI_ContainerFrame_UpdateCooldown(itemGuid, itemButton);
+			itemButton.hasItem = 1;
+		else
+			_G[frameName .. "Item" .. j .. "Cooldown"]:Hide();
+			itemButton.hasItem = nil;
+		end
+	end
+	
 end
 
 function RPSCoreFramework:ContainerFrameOnHide()
 	print("on hide");
+end
+
+function RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)
+	self:RegisterForDrag("LeftButton", "RightButton");
+	self:RegisterForClicks("AnyUp");
+end
+
+function RPSCoreFramework:ContainerFrameItemButtonOnClick(self, button)
+	if button == "LeftButton" then
+		print("click left");
+	elseif button == "RightButton" then
+		print("click right");
+	end
+end
+
+function RPSCoreFramework:GetContainerItem(slotID)
+	local item = containerFrame.items[slotID];
+	if (item) then
+		return item.itemGuid, item.texture, item.count, item.locked, item.quality;
+	end
+	--return nil, "Interface\\Icons\\INV_Misc_QuestionMark", 5, 1;	
+end
+
+function RPSCoreFramework:PushContainerItem(slotID, item, update)
+	print("locked: "..tostring(item.locked));
+	containerFrame.items[slotID] = {itemId = item.id or nil, itemGuid = item.itemGuid or nil, texture = item.texture or "Interface\\Icons\\INV_Misc_QuestionMark", count = item.count or 0, locked = item.locked or false, quality = item.quality or 0};
+	if (update) then
+		RPSCoreFramework:ContainerFrameUpdate(containerFrame);
+	end
 end
 
 
