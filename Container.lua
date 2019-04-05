@@ -1,5 +1,4 @@
-PlayerCursorInformation = nil;
-containerFrame = nil;
+local containerFrame = nil;
 
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
 
@@ -254,7 +253,7 @@ function RPSCoreFramework:PickupContainerItem(self)
 	temp.quality = item.quaility;
 
 	item.locked = true;
-	PlayerCursorInformation = temp;
+	RPSCoreFramework.PlayerCursorInformation = temp;
 	PickupItem(item.itemGuid)
 	RPSCoreFramework:ContainerFrameUpdate(parent);
 end
@@ -265,27 +264,32 @@ function RPSCoreFramework:PlaceContainerItem(self)
 		local item = containerFrame.items[id]
 		local parent = self:GetParent();
 
-		if (item ~= nil and PlayerCursorInformation) then
-			if PlayerCursorInformation.itemId == 0 then
+		if (item ~= nil and RPSCoreFramework.PlayerCursorInformation) then
+			if RPSCoreFramework.PlayerCursorInformation.itemId == 0 then
 				ClearCursor();
-				PlayerCursorInformation = nil;
+				RPSCoreFramework.PlayerCursorInformation = nil;
 				return;
 			end
-			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = PlayerCursorInformation.itemGuid, count = PlayerCursorInformation.count, quaility = PlayerCursorInformation.quality, locked = false})
-			RPSCoreFramework:PushContainerItem(PlayerCursorInformation.itemId, {itemId = PlayerCursorInformation.itemId, itemGuid = item.itemGuid, count = item.count, quaility = item.quality, locked = false})
+			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = RPSCoreFramework.PlayerCursorInformation.itemGuid, count = RPSCoreFramework.PlayerCursorInformation.count, quaility = RPSCoreFramework.PlayerCursorInformation.quality, locked = false})
+			RPSCoreFramework:PushContainerItem(RPSCoreFramework.PlayerCursorInformation.itemId, {itemId = RPSCoreFramework.PlayerCursorInformation.itemId, itemGuid = item.itemGuid, count = item.count, quaility = item.quality, locked = false})
 			containerFrame.items[id].locked = false;
 			containerFrame.items[item.itemId].locked = false;
-		elseif (PlayerCursorInformation) then
-			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = PlayerCursorInformation.itemGuid, count = PlayerCursorInformation.count, quaility = PlayerCursorInformation.quality, locked = false})
+		elseif (RPSCoreFramework.PlayerCursorInformation) then
+			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = RPSCoreFramework.PlayerCursorInformation.itemGuid, count = RPSCoreFramework.PlayerCursorInformation.count, quaility = RPSCoreFramework.PlayerCursorInformation.quality, locked = false})
 
-			containerFrame.items[tonumber(PlayerCursorInformation.itemId)] = nil;
+			containerFrame.items[tonumber(RPSCoreFramework.PlayerCursorInformation.itemId)] = nil;
 			containerFrame.items[id].locked = false;
 		end
 
 		RPSCoreFramework:ContainerFrameUpdate(parent);
 	end
 	ClearCursor();
-	PlayerCursorInformation = nil;
+	RPSCoreFramework.PlayerCursorInformation = nil;
+end
+
+function RPSCoreFramework:UlockContainerItem(arg1)
+	local id = arg1:GetID()
+	containerFrame.items[id].locked = false;
 end
 
 function RPSCoreFramework:GetContainerItem(slotID)
@@ -310,7 +314,7 @@ function RPSCoreFramework:SetCursorItem()
 end
 
 function RPSCoreFramework:GetCursorItem()
-	if (CursorHasItem() or PlayerCursorInformation) then
+	if (CursorHasItem() or RPSCoreFramework.PlayerCursorInformation) then
 		return true;
 	end
 	return false;

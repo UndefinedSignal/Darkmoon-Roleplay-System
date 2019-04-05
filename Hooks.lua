@@ -80,7 +80,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		temp.itemGuid = guidId;
 		temp.count = itemCount;
 		temp.quality = quality;
-		PlayerCursorInformation = temp;
+		RPSCoreFramework.PlayerCursorInformation = temp;
 	end
 end
 

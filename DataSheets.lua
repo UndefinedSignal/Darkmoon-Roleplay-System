@@ -11,6 +11,9 @@ RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
 
+RPSCoreFramework.PlayerCursorInformation = nil;
+RPSCoreFramework.DraggingContainerFrame = nil;
+
 if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {};
 end

@@ -1331,8 +1331,10 @@
 			</OnClick>
 			<PostClick></PostClick>
 			<OnLoad>RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)</OnLoad>
-			<OnEnter></OnEnter>
-			<OnLeave>self.updateTooltip = nil;
+			<OnEnter>RPSCoreFramework.DraggingContainerFrame = self;</OnEnter>
+			<OnLeave>
+				RPSCoreFramework.DraggingContainerFrame = nil;
+				self.updateTooltip = nil;
 				GameTooltip:Hide();
 				--ResetCursor();
 			</OnLeave>
@@ -1342,10 +1344,19 @@
 			</OnHide>
 			<OnShow />
 			<OnDragStart>
-				if ( not ( IsModifierKeyDown() or IsShiftKeyDown() ) ) then
-					
-				end
+				RPSCoreFramework:PickupContainerItem(self);
 			</OnDragStart>
+			<OnDragStop>
+				if RPSCoreFramework.DraggingContainerFrame then
+					RPSCoreFramework:PlaceContainerItem(RPSCoreFramework.DraggingContainerFrame);
+				else
+					RPSCoreFramework:UlockContainerItem(self)
+					ClearCursor();
+					RPSCoreFramework.PlayerCursorInformation = nil;
+					local parent = self:GetParent();
+					RPSCoreFramework:ContainerFrameUpdate(parent);
+				end
+			</OnDragStop>
 			<OnReceiveDrag />
 			<OnUpdate>
 				
