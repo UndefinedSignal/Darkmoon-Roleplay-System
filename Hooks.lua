@@ -20,11 +20,13 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ItemRefShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
-	self:SecureHook("ZoomOut", function() RPSCoreFramework:GeneratePOIPlaces();	end);
+	self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+
 	--self:SecureHook("SetMapToCurrentZone", function() 	if IsOutdoors() then RPSCoreFramework:GeneratePOIPlaces(); end	end)
 	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
 	self:SecureHook("ToggleWorldMap", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MaximizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 	RPS_BTNReScale:HookScript("OnMouseUp", function() if RPS_BTNReScale:IsEnabled() then StaticPopup_Show("setCharacterReScale") end end);
@@ -73,14 +75,16 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:RefreshActiveAuras("RPS.AuraRefresh "..msg);
 		end
 	elseif (event == "ITEM_LOCK_CHANGED") then
-		local __, itemCount, __, quality = GetContainerItemInfo(prefix, msg)
-		local guidId = GetContainerItemID(prefix, msg);
-		local temp = {}
-		temp.itemId = 0;
-		temp.itemGuid = guidId;
-		temp.count = itemCount;
-		temp.quality = quality;
-		RPSCoreFramework.PlayerCursorInformation = temp;
+		if prefix ~= nil and msg ~= nil then
+			local __, itemCount, __, quality = GetContainerItemInfo(prefix, msg)
+			local guidId = GetContainerItemID(prefix, msg);
+			local temp = {}
+			temp.itemId = 0;
+			temp.itemGuid = guidId;
+			temp.count = itemCount;
+			temp.quality = quality;
+			RPSCoreFramework.PlayerCursorInformation = temp;
+		end
 	end
 end
 

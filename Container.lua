@@ -145,6 +145,8 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 		local index = size - j + 1;
 		local itemButton = _G[name .. "Item" .. j];
 		itemButton:SetID(j);
+		itemButton.guid = nil;
+		itemButton.count = nil;
 		if (j == 1) then
 			-- Anchor the first item differently if its the backpack frame
 			if (id == 0) then
@@ -190,21 +192,21 @@ function RPSCoreFramework:ContainerFrameOnShow(self)
 end
 
 function RPSCoreFramework:ContainerFrameOnHide()
-	print("on hide");
+	
 end
 
 function RPSCoreFramework:ContainerFrameOnLoad()
-	print("on load");
+	
 end
 
 function RPSCoreFramework:ContainerFrameUpdate(frame)
 	local frameName = frame:GetName();
-	print("update items");
-	
+
 	for j = 1, frame.size, 1 do
 		local itemButton = _G[frameName .. "Item" .. j];
 		local itemGuid, texture, count, locked = RPSCoreFramework:GetContainerItem(j);
-
+		itemButton.guid = itemGuid;
+		itemButton.count = count;
 		SetItemButtonTexture(itemButton, texture);
 		SetItemButtonCount(itemButton, count);
 		SetItemButtonDesaturated(itemButton, locked, 0.5, 0.5, 0.5);
@@ -218,7 +220,6 @@ function RPSCoreFramework:ContainerFrameUpdate(frame)
 			itemButton.hasItem = nil;
 		end
 	end
-	
 end
 
 function RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)
@@ -256,6 +257,8 @@ function RPSCoreFramework:PickupContainerItem(self)
 	RPSCoreFramework.PlayerCursorInformation = temp;
 	PickupItem(item.itemGuid)
 	RPSCoreFramework:ContainerFrameUpdate(parent);
+
+	RPSCoreFramework.Timers.ContainerStatus = RPSCoreFramework:ScheduleRepeatingTimer("ItemLockdownUpdate", 1)
 end
 
 function RPSCoreFramework:PlaceContainerItem(self)
@@ -277,7 +280,7 @@ function RPSCoreFramework:PlaceContainerItem(self)
 		elseif (RPSCoreFramework.PlayerCursorInformation) then
 			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = RPSCoreFramework.PlayerCursorInformation.itemGuid, count = RPSCoreFramework.PlayerCursorInformation.count, quaility = RPSCoreFramework.PlayerCursorInformation.quality, locked = false})
 
-			containerFrame.items[tonumber(RPSCoreFramework.PlayerCursorInformation.itemId)] = nil;
+			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.itemId] = nil;
 			containerFrame.items[id].locked = false;
 		end
 
@@ -313,7 +316,27 @@ function RPSCoreFramework:SetCursorItem()
 
 end
 
+function RPSCoreFramework:ItemLockdownUpdate()
+	if GetCursorInfo() == nil then
+		if RPSCoreFramework.PlayerCursorInformation then
+			if RPSCoreFramework.PlayerCursorInformation.itemId ~= 0 then
+				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.itemId].locked = false;
+				RPSCoreFramework.PlayerCursorInformation = nil;
+			end
+		end
+		RPSCoreFramework:ContainerFrameUpdate(RPS_ContainerFrame)
+		self:CancelTimer(RPSCoreFramework.Timers.ContainerStatus)
+	end
+end
+
 function RPSCoreFramework:GetCursorItem()
+	if (CursorHasItem() == false and RPSCoreFramework.PlayerCursorInformation ~= nil) then
+		if (RPSCoreFramework.PlayerCursorInformation.itemId == 0) then
+			RPSCoreFramework.PlayerCursorInformation = nil;
+			return false;
+		end
+	end
+
 	if (CursorHasItem() or RPSCoreFramework.PlayerCursorInformation) then
 		return true;
 	end

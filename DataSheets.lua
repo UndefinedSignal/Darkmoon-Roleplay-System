@@ -35,6 +35,10 @@ RPSCoreFramework.AdvancedRaces = {
 RPSCoreFramework.AdvancedClasses = { 2, 6, 7, 9, 10, 11, 12};
 RPSCoreFramework.AdvancedClassesCharsheetRequired = {6, 12};
 
+RPSCoreFramework.Timers = {};
+RPSCoreFramework.Timers.ContainerStatus = nil;
+
+
 
 RPSCoreFramework.Prefix = "DRPS";
 RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
