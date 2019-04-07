@@ -6,7 +6,7 @@ function RPSCoreFramework:SetUpcontainerFrame()
 	if (not containerFrame) then
 		containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
 		containerFrame.items = {};
-		RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, 12, nil, "Keyring");	
+		RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, 12);	
 	end
 	containerFrame:SetPoint("CENTER", nil, "CENTER", 0, 0 );
 	containerFrame:Show();
@@ -22,7 +22,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 	local rows = ceil(size / columns);
 
 	local bagTextureSuffix = specialTexture or "";
-	if specialTexture == "Bank" or specialTexture == "Keyring" then
+	if (specialTexture == "Bank" or specialTexture == "Keyring") then
 		bagTextureSuffix = "-" .. specialTexture;
 	end
 	bgTextureTop:SetTexture("Interface\\ContainerFrame\\UI-Bag-Components" .. bagTextureSuffix);
@@ -33,7 +33,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 	bgTextureBottom:SetTexture("Interface\\ContainerFrame\\UI-Bag-Components" .. bagTextureSuffix);
 	_G[name .. "MoneyFrame"]:Hide();
 
-	if size == 1 then
+	if (size == 1) then
 		local bgTextureTop = _G[name .. "BackgroundTop"];
 		local bgTextureMiddle = _G[name .. "BackgroundMiddle1"];
 		local bgTextureMiddle2 = _G[name .. "BackgroundMiddle2"];
@@ -183,7 +183,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 	
 	RPSCoreFramework:PushContainerItem(6, {itemId = 6, itemGuid = 112095, count = 13, quaility = 2, locked = false})
 	
-	RPSCoreFramework:ContainerFrameUpdate(frame);
+	RPSCoreFramework:ContainerFrameUpdate();
 end
 
 function RPSCoreFramework:ContainerFrameOnShow(self)
@@ -199,10 +199,9 @@ function RPSCoreFramework:ContainerFrameOnLoad()
 	
 end
 
-function RPSCoreFramework:ContainerFrameUpdate(frame)
-	local frameName = frame:GetName();
-
-	for j = 1, frame.size, 1 do
+function RPSCoreFramework:ContainerFrameUpdate()
+	local frameName = containerFrame:GetName();
+	for j = 1, containerFrame.size, 1 do
 		local itemButton = _G[frameName .. "Item" .. j];
 		local itemGuid, texture, count, locked = RPSCoreFramework:GetContainerItem(j);
 		itemButton.guid = itemGuid;
@@ -256,7 +255,7 @@ function RPSCoreFramework:PickupContainerItem(self)
 	item.locked = true;
 	RPSCoreFramework.PlayerCursorInformation = temp;
 	PickupItem(item.itemGuid)
-	RPSCoreFramework:ContainerFrameUpdate(parent);
+	RPSCoreFramework:ContainerFrameUpdate();
 
 	RPSCoreFramework.Timers.ContainerStatus = RPSCoreFramework:ScheduleRepeatingTimer("ItemLockdownUpdate", 1)
 end
@@ -284,7 +283,7 @@ function RPSCoreFramework:PlaceContainerItem(self)
 			containerFrame.items[id].locked = false;
 		end
 
-		RPSCoreFramework:ContainerFrameUpdate(parent);
+		RPSCoreFramework:ContainerFrameUpdate();
 	end
 	ClearCursor();
 	RPSCoreFramework.PlayerCursorInformation = nil;
@@ -304,11 +303,9 @@ function RPSCoreFramework:GetContainerItem(slotID)
 end
 
 function RPSCoreFramework:PushContainerItem(slotID, item, update)
---	print("locked: "..tostring(item.locked));
-	local __, _, _, _, _, _, _, _, _, tex = GetItemInfo(tonumber(item.itemGuid))
 	containerFrame.items[slotID] = {itemId = item.itemId or nil, itemGuid = item.itemGuid or nil, texture = GetItemIcon(item.itemGuid) or "Interface\\Icons\\INV_Misc_QuestionMark", count = item.count or 0, locked = item.locked or false, quality = item.quality or 0};
 	if (update) then
-		RPSCoreFramework:ContainerFrameUpdate(containerFrame);
+		RPSCoreFramework:ContainerFrameUpdate();
 	end
 end
 
@@ -317,14 +314,14 @@ function RPSCoreFramework:SetCursorItem()
 end
 
 function RPSCoreFramework:ItemLockdownUpdate()
-	if GetCursorInfo() == nil then
-		if RPSCoreFramework.PlayerCursorInformation then
-			if RPSCoreFramework.PlayerCursorInformation.itemId ~= 0 then
+	if (GetCursorInfo() == nil) then
+		if (RPSCoreFramework.PlayerCursorInformation) then
+			if (RPSCoreFramework.PlayerCursorInformation.itemId ~= 0) then
 				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.itemId].locked = false;
 				RPSCoreFramework.PlayerCursorInformation = nil;
 			end
 		end
-		RPSCoreFramework:ContainerFrameUpdate(RPS_ContainerFrame)
+		RPSCoreFramework:ContainerFrameUpdate()
 		self:CancelTimer(RPSCoreFramework.Timers.ContainerStatus)
 	end
 end
