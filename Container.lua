@@ -330,7 +330,7 @@ function RPSCoreFramework:ItemLockdownUpdate()
 	if (GetCursorInfo() == nil) then
 		if (RPSCoreFramework.PlayerCursorInformation) then
 			if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
-				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.isVirtual].locked = false;
+				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID].locked = false;
 				RPSCoreFramework.PlayerCursorInformation = nil;
 			end
 		end
