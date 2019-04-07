@@ -181,7 +181,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 	btn:SetScript("OnDragStop", frame.StopMovingOrSizing);
 	
 	
-	RPSCoreFramework:PushContainerItem(6, {itemId = 6, itemGuid = 112095, count = 13, quaility = 2, locked = false})
+	RPSCoreFramework:PushContainerItem(6, {isVirtual = true, itemID = 112095, count = 13, quaility = 2, locked = false})
 	
 	RPSCoreFramework:ContainerFrameUpdate();
 end
@@ -191,28 +191,37 @@ function RPSCoreFramework:ContainerFrameOnShow(self)
 	--RPSCoreFramework:ContainerFrameUpdate(self)
 end
 
-function RPSCoreFramework:ContainerFrameOnHide()
-	
+function RPSCoreFramework:ContainerFrameOnHide(self)
+--[[	if ( self.hasStackSplit and (self.hasStackSplit == 1) ) then
+		StackSplitFrame:Hide();
+	end]]
 end
 
-function RPSCoreFramework:ContainerFrameOnLoad()
-	
+function RPSCoreFramework:ContainerFrameOnDragStop()
+	if RPSCoreFramework.DraggingContainerFrame then
+		RPSCoreFramework:PlaceContainerItem(RPSCoreFramework.DraggingContainerFrame);
+	else
+		ClearCursor();
+		RPSCoreFramework:UlockContainerItem(self)
+		RPSCoreFramework.PlayerCursorInformation = nil;
+		RPSCoreFramework:ContainerFrameUpdate();
+	end
 end
 
 function RPSCoreFramework:ContainerFrameUpdate()
 	local frameName = containerFrame:GetName();
 	for j = 1, containerFrame.size, 1 do
 		local itemButton = _G[frameName .. "Item" .. j];
-		local itemGuid, texture, count, locked = RPSCoreFramework:GetContainerItem(j);
-		itemButton.guid = itemGuid;
+		local itemID, texture, count, locked = RPSCoreFramework:GetContainerItem(j);
+		itemButton.guid = itemID;
 		itemButton.count = count;
 		SetItemButtonTexture(itemButton, texture);
 		SetItemButtonCount(itemButton, count);
 		SetItemButtonDesaturated(itemButton, locked, 0.5, 0.5, 0.5);
 		itemButton.slotID = j;
 
-		if (itemGuid) then
-			--GHI_ContainerFrame_UpdateCooldown(itemGuid, itemButton);
+		if (itemID) then
+			--GHI_ContainerFrame_UpdateCooldown(itemID, itemButton);
 			itemButton.hasItem = 1;
 		else
 			_G[frameName .. "Item" .. j .. "Cooldown"]:Hide();
@@ -225,6 +234,11 @@ function RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)
 	self:RegisterForDrag("LeftButton", "RightButton");
 	self:RegisterForClicks("AnyUp");
 end
+
+function RPSCoreFramework:ContainerFrameOnLoad()
+	-- Nothing
+end
+
 
 function RPSCoreFramework:ContainerFrameItemButtonOnClick(self, button)
 	if button == "LeftButton" then
@@ -247,14 +261,14 @@ function RPSCoreFramework:PickupContainerItem(self)
 	if item == nil or item.locked then return; end
 
 	local temp = {};
-	temp.itemId = item.itemId;
-	temp.itemGuid = item.itemGuid;
+	temp.isVirtual = item.isVirtual;
+	temp.itemID = item.itemID;
 	temp.count = item.count;
-	temp.quality = item.quaility;
+	temp.slotID = id;
 
 	item.locked = true;
 	RPSCoreFramework.PlayerCursorInformation = temp;
-	PickupItem(item.itemGuid)
+	PickupItem(item.itemID)
 	RPSCoreFramework:ContainerFrameUpdate();
 
 	RPSCoreFramework.Timers.ContainerStatus = RPSCoreFramework:ScheduleRepeatingTimer("ItemLockdownUpdate", 1)
@@ -265,28 +279,25 @@ function RPSCoreFramework:PlaceContainerItem(self)
 		local id = self:GetID()
 		local item = containerFrame.items[id]
 		local parent = self:GetParent();
-
 		if (item ~= nil and RPSCoreFramework.PlayerCursorInformation) then
-			if RPSCoreFramework.PlayerCursorInformation.itemId == 0 then
+			if RPSCoreFramework.PlayerCursorInformation.isVirtual then
+				RPSCoreFramework:SwapContainerItems(self) -- self = a slotbutton that was clicked
+			else
+				-- 
 				ClearCursor();
 				RPSCoreFramework.PlayerCursorInformation = nil;
 				return;
 			end
-			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = RPSCoreFramework.PlayerCursorInformation.itemGuid, count = RPSCoreFramework.PlayerCursorInformation.count, quaility = RPSCoreFramework.PlayerCursorInformation.quality, locked = false})
-			RPSCoreFramework:PushContainerItem(RPSCoreFramework.PlayerCursorInformation.itemId, {itemId = RPSCoreFramework.PlayerCursorInformation.itemId, itemGuid = item.itemGuid, count = item.count, quaility = item.quality, locked = false})
-			containerFrame.items[id].locked = false;
-			containerFrame.items[item.itemId].locked = false;
 		elseif (RPSCoreFramework.PlayerCursorInformation) then
-			RPSCoreFramework:PushContainerItem(id, {itemId = id, itemGuid = RPSCoreFramework.PlayerCursorInformation.itemGuid, count = RPSCoreFramework.PlayerCursorInformation.count, quaility = RPSCoreFramework.PlayerCursorInformation.quality, locked = false})
+			RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
 
-			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.itemId] = nil;
+			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
 			containerFrame.items[id].locked = false;
 		end
-
-		RPSCoreFramework:ContainerFrameUpdate();
 	end
 	ClearCursor();
 	RPSCoreFramework.PlayerCursorInformation = nil;
+	RPSCoreFramework:ContainerFrameUpdate();
 end
 
 function RPSCoreFramework:UlockContainerItem(arg1)
@@ -298,26 +309,28 @@ function RPSCoreFramework:GetContainerItem(slotID)
 	local item = containerFrame.items[tonumber(slotID)];
 
 	if (item) then
-		return item.itemGuid, item.texture, item.count, item.locked, item.quality;
+		return item.itemID, item.texture, item.count, item.locked;
 	end
 end
 
 function RPSCoreFramework:PushContainerItem(slotID, item, update)
-	containerFrame.items[slotID] = {itemId = item.itemId or nil, itemGuid = item.itemGuid or nil, texture = GetItemIcon(item.itemGuid) or "Interface\\Icons\\INV_Misc_QuestionMark", count = item.count or 0, locked = item.locked or false, quality = item.quality or 0};
+	containerFrame.items[slotID] = {isVirtual = item.isVirtual or false, itemID = item.itemID or nil, texture = GetItemIcon(item.itemID) or "Interface\\Icons\\INV_Misc_QuestionMark", count = item.count or 0, locked = item.locked or false};
 	if (update) then
 		RPSCoreFramework:ContainerFrameUpdate();
 	end
 end
 
+--[[
 function RPSCoreFramework:SetCursorItem()
 
 end
+]]--
 
 function RPSCoreFramework:ItemLockdownUpdate()
 	if (GetCursorInfo() == nil) then
 		if (RPSCoreFramework.PlayerCursorInformation) then
-			if (RPSCoreFramework.PlayerCursorInformation.itemId ~= 0) then
-				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.itemId].locked = false;
+			if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
+				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.isVirtual].locked = false;
 				RPSCoreFramework.PlayerCursorInformation = nil;
 			end
 		end
@@ -328,14 +341,58 @@ end
 
 function RPSCoreFramework:GetCursorItem()
 	if (CursorHasItem() == false and RPSCoreFramework.PlayerCursorInformation ~= nil) then
-		if (RPSCoreFramework.PlayerCursorInformation.itemId == 0) then
+		if (RPSCoreFramework.PlayerCursorInformation.isVirtual == false) then
 			RPSCoreFramework.PlayerCursorInformation = nil;
 			return false;
 		end
 	end
-
 	if (CursorHasItem() or RPSCoreFramework.PlayerCursorInformation) then
 		return true;
 	end
 	return false;
+end
+
+function RPSCoreFramework:SwapContainerItems(slot)
+	local targetID = slot:GetID();
+	local targetItem = containerFrame.items[targetID]
+	if RPSCoreFramework.PlayerCursorInformation == nil then
+		return;
+	end
+
+	RPSCoreFramework:PushContainerItem(targetID, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
+	RPSCoreFramework:PushContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID, {isVirtual = true, itemID = targetItem.itemID, count = targetItem.count, locked = false})
+
+	containerFrame.items[targetID].locked = false;
+	containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID].locked = false;
+end
+
+function RPSCoreFramework:ContainerFrameOnEnter(self)
+	RPSCoreFramework:ShowContainerToolTip(self)
+	RPSCoreFramework.DraggingContainerFrame = self;
+end
+
+function RPSCoreFramework:ContainerFrameOnLeave(self)
+	self.updateTooltip = nil;
+	RPSCoreFramework.DraggingContainerFrame = nil;
+	ContainerGameTooltip:Hide();
+	--ResetCursor();
+end
+
+function RPSCoreFramework:ShowContainerToolTip(self)
+	ContainerGameTooltip:ClearLines();
+	ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");
+	if self.guid ~= nil then
+		local __, itemLink = GetItemInfo(self.guid)
+		ContainerGameTooltip:SetHyperlink(itemLink)
+	elseif (RPS_ContainerFramePortraitDescription == self) then
+		ContainerGameTooltip:AddLine(RPS_ContainerFrameName:GetText());
+	else
+		return;
+	end
+	ContainerGameTooltip:Show();
+end
+
+function RPSCoreFramework:HideContainerToolTip()
+	ContainerGameTooltip:ClearLines()
+	ContainerGameTooltip:Hide();
 end

@@ -76,13 +76,13 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		end
 	elseif (event == "ITEM_LOCK_CHANGED") then
 		if prefix ~= nil and msg ~= nil then
-			local __, itemCount, __, quality = GetContainerItemInfo(prefix, msg)
-			local guidId = GetContainerItemID(prefix, msg);
+			local __, itemCount = GetContainerItemInfo(prefix, msg)
+			local itemID = GetContainerItemID(prefix, msg);
 			local temp = {}
-			temp.itemId = 0;
-			temp.itemGuid = guidId;
+			temp.isVirtual = false;
+			temp.itemID = itemID;
 			temp.count = itemCount;
-			temp.quality = quality;
+			temp.slotID = 0;
 			RPSCoreFramework.PlayerCursorInformation = temp;
 		end
 	end

@@ -1322,7 +1322,7 @@
         </Scripts>
     </Button>
 	
-		<Button name="RPS_ContainerFrameItemButtonTemplate" inherits="ItemButtonTemplate" hidden="true" virtual="true">
+	<Button name="RPS_ContainerFrameItemButtonTemplate" inherits="ItemButtonTemplate" hidden="true" virtual="true">
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT">
 				<Offset>
@@ -1342,24 +1342,13 @@
 				RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)
 			</OnLoad>
 			<OnEnter>
-				if self.guid ~= nil then
-					ContainerGameTooltip:ClearLines();
-					local itemName, itemLink = GetItemInfo(self.guid)
-					ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");
-					ContainerGameTooltip:SetHyperlink(itemLink)
-					ContainerGameTooltip:Show();
-				end
-				RPSCoreFramework.DraggingContainerFrame = self;
+				RPSCoreFramework:ContainerFrameOnEnter(self);
 			</OnEnter>
 			<OnLeave>
-				self.updateTooltip = nil;
-				RPSCoreFramework.DraggingContainerFrame = nil;
-				ContainerGameTooltip:Hide();
-				--ResetCursor();
+				RPSCoreFramework:ContainerFrameOnLeave(self);
 			</OnLeave>
-			<OnHide>if ( self.hasStackSplit and (self.hasStackSplit == 1) ) then
-				StackSplitFrame:Hide();
-				end
+			<OnHide>
+				RPSCoreFramework:ContainerFrameOnHide(self)
 			</OnHide>
 			<OnShow />
 			<OnDragStart>
@@ -1367,20 +1356,10 @@
 				ContainerGameTooltip:Hide();
 			</OnDragStart>
 			<OnDragStop>
-				if RPSCoreFramework.DraggingContainerFrame then
-					RPSCoreFramework:PlaceContainerItem(RPSCoreFramework.DraggingContainerFrame);
-				else
-					ClearCursor();
-					local parent = self:GetParent();
-					RPSCoreFramework:UlockContainerItem(self)
-					RPSCoreFramework.PlayerCursorInformation = nil;
-					RPSCoreFramework:ContainerFrameUpdate(parent);
-				end
+				RPSCoreFramework:ContainerFrameOnDragStop();
 			</OnDragStop>
 			<OnReceiveDrag />
-			<OnUpdate>
-				
-			</OnUpdate>
+			<OnUpdate />
 			<OnEvent>
 				if ( GameTooltip:IsOwned(self) ) then
 					--RPSCoreFramework:ContainerFrameItemButton_OnEnter(self);
@@ -1485,13 +1464,10 @@
 					</Anchors>
 					<Scripts>
 						<OnEnter>
-							ContainerGameTooltip:ClearLines();
-							ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");
-							ContainerGameTooltip:AddLine(RPS_ContainerFrameName:GetText());
-							ContainerGameTooltip:Show();
+							RPSCoreFramework:ShowContainerToolTip(self);
 						</OnEnter>
 						<OnLeave>
-							ContainerGameTooltip:Hide();
+							RPSCoreFramework:HideContainerToolTip();
 						</OnLeave>
 					</Scripts>
 			</Frame>
@@ -1564,8 +1540,12 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnEnter>ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");</OnEnter>
-					<OnLeave>ContainerGameTooltip:Hide();</OnLeave>
+					<OnEnter>
+						ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");
+					</OnEnter>
+					<OnLeave>
+						ContainerGameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
@@ -1577,7 +1557,9 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnClick>self:GetParent():Hide();</OnClick>
+					<OnClick>
+						self:GetParent():Hide();
+					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
@@ -1586,6 +1568,7 @@
                 RPSCoreFramework:ContainerFrameOnEvent();
             </OnEvent>
             <OnLoad>
+            	tinsert(UISpecialFrames, self:GetName());
                 RPSCoreFramework:ContainerFrameOnLoad();            
             </OnLoad>
             <OnHide>
