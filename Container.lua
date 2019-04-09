@@ -304,18 +304,23 @@ function RPSCoreFramework:PlaceContainerItem(self)
 				ClearCursor();
 				RPSCoreFramework.PlayerCursorInformation = nil;
 				return;
-			end
+			end --local msg = "rps container put "..bag.." "..slot.." "..conSlot;
 		elseif (RPSCoreFramework.PlayerCursorInformation) then
-			RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
-			RPSCoreFramework:InventoryToContainer(slot, itemID)
-			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
-			containerFrame.items[id].locked = false;
+			if (RPSCoreFramework.Container.ClickedBag ~= nil and RPSCoreFramework.Container.ClickedSlot ~= nil) then
+				RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
+				RPSCoreFramework:InventoryToContainer(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot, id)
+				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
+				containerFrame.items[id].locked = false;
+				RPSCoreFramework.Container.ClickedBag = nil;
+				RPSCoreFramework.Container.ClickedSlot = nil;
+			end
 		end
 	end
 	ClearCursor();
 	RPSCoreFramework.PlayerCursorInformation = nil;
 	RPSCoreFramework:ContainerFrameUpdate();
 end
+
 
 function RPSCoreFramework:UlockContainerItem(arg1)
 	local id = arg1:GetID()
@@ -336,12 +341,6 @@ function RPSCoreFramework:PushContainerItem(slotID, item, update)
 		RPSCoreFramework:ContainerFrameUpdate();
 	end
 end
-
---[[
-function RPSCoreFramework:SetCursorItem()
-
-end
-]]--
 
 function RPSCoreFramework:ItemLockdownUpdate()
 	if (GetCursorInfo() == nil) then
@@ -416,19 +415,21 @@ function RPSCoreFramework:HideContainerToolTip()
 	ContainerGameTooltip:Hide();
 end
 
-function RPSCoreFramework:ContainerToInventory(bag, slot, item)
+function RPSCoreFramework:ContainerToInventory(bag, slot)
 	if (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
 		if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
 			local count = RPSCoreFramework.PlayerCursorInformation.count;
 			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
 			local msg = "rps container take "..bag.." "..bagslot.." "..containerSlotID;
 			RPSCoreFramework:SendCoreMessage(msg);
+			RPSCoreFramework.PlayerCursorInformation = nil;
+			ClearCursor();
 		end
 	end
 end
 
-function RPSCoreFramework:InventoryToContainer(slot, bag, bagSlot)
-	local msg = "rps container put "..bag.." "..batSlot.." "..slot;
+function RPSCoreFramework:InventoryToContainer(bag, slot, conSlot)
+	local msg = "rps container put "..bag.." "..slot.." "..conSlot;
 	RPSCoreFramework:SendCoreMessage(msg)
 end
 

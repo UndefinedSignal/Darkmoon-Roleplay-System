@@ -220,14 +220,14 @@ function RPSCoreFramework:InitializeContainer(msg)
 		--[[name(title)
 		--	type
 		--	size]]
-		SetUpcontainerFrame(values[1],values[2],values[3]);
+		RPSCoreFramework:SetUpcontainerFrame(values[1],values[2],values[3]);
 		RPSCoreFramework.ContainerDataFlow = false;
 		return;
 	end
 	--[[slot
 	--	itemID
 	--	count]]
-	RPSCoreFramework:PushContainerItem(values[1], {isVirtual = true, itemID = values[2], count = values[3], locked = false})
+	RPSCoreFramework:PushContainerItem(values[1], {isVirtual = true, itemID = values[2], count = values[3], locked = false});
 end
 --"RPS.CON.c"
 function RPSCoreFramework:InvokeContainerComamnd(msg)

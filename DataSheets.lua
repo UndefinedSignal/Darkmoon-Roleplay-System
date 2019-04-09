@@ -11,6 +11,9 @@ RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
 
+RPSCoreFramework.Container = {};
+RPSCoreFramework.Container.ClickedBag = nil;
+RPSCoreFramework.Container.ClickedSlot = nil;
 RPSCoreFramework.ContainerDataFlow = true;
 RPSCoreFramework.PlayerCursorInformation = nil;
 RPSCoreFramework.DraggingContainerFrame = nil;
