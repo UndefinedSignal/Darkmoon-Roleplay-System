@@ -146,5 +146,7 @@ function RPSCoreFramework:ItemTooltip(self)
 end
 
 function RPSCoreFramework:HookPlayerContainerClick(self)
-	print(self:GetName())
+	local bag, slot = string.match(self:GetName(), '%D+(%d+)%D+(%d+)');
+	local item = GetContainerItemID(bag, slot);
+	PSCoreFramework:ContainerToInventory(bag, slot, item);
 end

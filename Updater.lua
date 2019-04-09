@@ -207,7 +207,7 @@ end
 --"RPS.CON.i"
 function RPSCoreFramework:InitializeContainer(msg)
 	print("InitializeContainer: ".. msg);
-	local values = {strsplit('#',str)};	
+	local values = {strsplit('#',msg)};	
 	--[[name(title)
 	--	type
 	--	size]]

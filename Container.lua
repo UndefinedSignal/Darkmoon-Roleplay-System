@@ -307,7 +307,7 @@ function RPSCoreFramework:PlaceContainerItem(self)
 			end
 		elseif (RPSCoreFramework.PlayerCursorInformation) then
 			RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
-			RPSCoreFramework:ContainerPut(slot, itemID)
+			RPSCoreFramework:InventoryToContainer(slot, itemID)
 			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
 			containerFrame.items[id].locked = false;
 		end
@@ -416,17 +416,23 @@ function RPSCoreFramework:HideContainerToolTip()
 	ContainerGameTooltip:Hide();
 end
 
-function RPSCoreFramework:ContainerTake(slot, itemID)
-	local msg = "container.take#"..slot;
-	RPSCoreFramework:SendCoreMessage(msg)
+function RPSCoreFramework:ContainerToInventory(bag, slot, item)
+	if (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
+		if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
+			local count = RPSCoreFramework.PlayerCursorInformation.count;
+			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
+			local msg = "rps container take "..bag.." "..bagslot.." "..containerSlotID;
+			RPSCoreFramework:SendCoreMessage(msg);
+		end
+	end
 end
 
-function RPSCoreFramework:ContainerPut(slot, itemID)
-	local msg = "container.put#"..slot.."#"..itemID;
+function RPSCoreFramework:InventoryToContainer(slot, bag, bagSlot)
+	local msg = "rps container put "..bag.." "..batSlot.." "..slot;
 	RPSCoreFramework:SendCoreMessage(msg)
 end
 
 function RPSCoreFramework:ContainerSwap(prevSlot, secSlot)
-	local msg = "container.swap#"..prevSlot.."#"..secSlot;
+	local msg = "rps container swap "..prevSlot.." "..secSlot;
 	RPSCoreFramework:SendCoreMessage(msg)
 end
