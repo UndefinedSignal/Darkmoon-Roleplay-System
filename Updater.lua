@@ -152,7 +152,7 @@ function RPSCoreFramework:RemovePOIPins(str)
 	RPSCorePOIPins[str] = nil;
 	RPSCoreFramework:GeneratePOIPlaces();
 end
-function RPSCoreFramework:GetServerCommandPOIPins(str)
+function RPSCoreFramework:GetCommandPOIPins(str)
 	if (str == "refresh") then
 		RPSCoreFramework.Map.POIWorkflow = false;
 		RPSCorePOIPins = {};
