@@ -220,20 +220,24 @@ function RPSCoreFramework:InitializeContainer(msg)
 		--[[name(title)
 		--	type
 		--	size]]
-		RPSCoreFramework:SetUpcontainerFrame(values[1],values[2],values[3]);
 		RPSCoreFramework.ContainerDataFlow = false;
+		RPSCoreFramework.Container.title = values[1];
+		RPSCoreFramework.Container.type = values[2];
+		RPSCoreFramework.Container.size = tonumber(values[3]);
+		RPSCoreFramework:SetUpContainerFrame();
 		return;
 	end
 	--[[slot
 	--	itemID
 	--	count]]
-	RPSCoreFramework:PushContainerItem(values[1], {isVirtual = true, itemID = values[2], count = values[3], locked = false});
+	RPSCoreFramework:PushContainerItem(tonumber(values[1]), {isVirtual = true, itemID = tonumber(values[2]), count = tonumber(values[3]), locked = false});
 end
 --"RPS.CON.c"
 function RPSCoreFramework:InvokeContainerComamnd(msg)
 	print("InvokeContainerComamnd: ".. msg);
 	if ( msg == "done" ) then
 		RPSCoreFramework.ContainerDataFlow = true
+		RPSCoreFramework:ContainerFrameGenerateFrame(_G["RPS_ContainerFrame"], RPSCoreFramework.Container.size, RPSCoreFramework.Container.title)
 	end
 end
 --"RPS.CON.upd"

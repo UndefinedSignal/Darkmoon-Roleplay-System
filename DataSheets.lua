@@ -12,6 +12,9 @@ RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
 
 RPSCoreFramework.Container = {};
+RPSCoreFramework.Container.title = nil;
+RPSCoreFramework.Container.size = nil;
+RPSCoreFramework.Container.type = nil;
 RPSCoreFramework.Container.ClickedBag = nil;
 RPSCoreFramework.Container.ClickedSlot = nil;
 RPSCoreFramework.ContainerDataFlow = true;
