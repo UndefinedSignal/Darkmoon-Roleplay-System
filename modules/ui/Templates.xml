@@ -1311,7 +1311,10 @@
 				RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 				RPSPOIGameTooltip:AddLine("|cffFFC125"..self.dataName.."|r");
 				if (string.len(self.dataDescription) > 0) then
-					RPSPOIGameTooltip:AddLine("|cffFF8040"..self.dataDescription.."|r");
+					RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
+				end
+				if true then
+					RPSPOIGameTooltip:AppendText(" |cff80528C("..self.debugGuid..")");
 				end
 				RPSPOIGameTooltip:Show();
             </OnEnter>

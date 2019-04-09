@@ -30,71 +30,71 @@ function RPSCoreFramework:UpdateScaleApplyButton()
 end
 function RPSCoreFramework:UpdateScrollerPosition()
 	if RPSCoreFramework.MyScale > 0 then
-		RPS_CharScaleSlider:SetValue(RPSCoreFramework.MyScale)
-		RPS_CharScaleSlider:Disable()
+		RPS_CharScaleSlider:SetValue(RPSCoreFramework.MyScale);
+		RPS_CharScaleSlider:Disable();
 	elseif RPSCoreFramework.MyScale == -1 then
-		RPS_CharScaleSlider:SetValue(6)
-		RPS_CharScaleSlider:Disable()
+		RPS_CharScaleSlider:SetValue(6);
+		RPS_CharScaleSlider:Disable();
 	else
-		RPS_CharScaleSlider:SetValue(6)
-		RPS_CharScaleSlider:Enable()
+		RPS_CharScaleSlider:SetValue(6);
+		RPS_CharScaleSlider:Enable();
 	end
 end
 function RPSCoreFramework:PeriodicallyUpdater()
-	RPSCoreFramework:SendCoreMessage(".rps action scale info")
-	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
-	RPSCoreFramework:UpdateScaleReset()
+	RPSCoreFramework:SendCoreMessage(".rps action scale info");
+	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
+	RPSCoreFramework:UpdateScaleReset();
     if RPSCoreActionCam then
-        RPSCoreActionCam = true
-        SetCVar("test_cameraDynamicPitch", 1)
-        SetCVar("test_cameraOverShoulder", 1)
+        RPSCoreActionCam = true;
+        SetCVar("test_cameraDynamicPitch", 1);
+        SetCVar("test_cameraOverShoulder", 1);
     else
-        RPSCoreActionCam = false
-        SetCVar("test_cameraDynamicPitch", 0)
-        SetCVar("test_cameraOverShoulder", 0)
+        RPSCoreActionCam = false;
+        SetCVar("test_cameraDynamicPitch", 0);
+        SetCVar("test_cameraOverShoulder", 0);
     end
 end
 function RPSCoreFramework:UpdateScaleInfo(str)
-	str = string.gsub(str, "RPS.Scale ", "")
-	RPSCoreFramework.MyScale = tonumber(str)
-	RPSCoreFramework:UpdateScaleReset()
+	str = string.gsub(str, "RPS.Scale ", "");
+	RPSCoreFramework.MyScale = tonumber(str);
+	RPSCoreFramework:UpdateScaleReset();
 end
 function RPSCoreFramework:UpdateAuraKnownInfo(str)
-	str = string.gsub(str, "RPS.AuraKnown ", "")
-	local values = {strsplit(' ', str)}
+	str = string.gsub(str, "RPS.AuraKnown ", "");
+	local values = {strsplit(' ', str)};
 	if (tonumber(str) == 0 or str == nil) then
-		return false
+		return false;
 	end
 	for i=1, #values do
-		RPSCoreFramework.Interface.Auras[tonumber(values[i])][5] = 1
+		RPSCoreFramework.Interface.Auras[tonumber(values[i])][5] = 1;
 	end
 end
 function RPSCoreFramework:UpdateAuraActiveInfo(str)
-	str = string.gsub(str, "RPS.AuraActive ", "")
-	local values = {strsplit(' ', str)}
+	str = string.gsub(str, "RPS.AuraActive ", "");
+	local values = {strsplit(' ', str)};
 	if (tonumber(str) == 0 or str == nil) then
 		return false
 	end
 	if values[1] ~= nil and values[1] ~= "RPS.AuraActive" then
 		for j=1, #RPSCoreFramework.Interface.Auras do
-			RPSCoreFramework.Interface.Auras[j][6] = 0
+			RPSCoreFramework.Interface.Auras[j][6] = 0;
 		end
 		for i=1, #values do
-			RPSCoreFramework.Interface.Auras[tonumber(values[i])][6] = 1
-			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
+			RPSCoreFramework.Interface.Auras[tonumber(values[i])][6] = 1;
+			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1;
 		end
 	end
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
-	str = string.gsub(str, "RPS.Display ", "") -- 5
-	local values = {strsplit(' ', str)}
-	local j = 1
+	str = string.gsub(str, "RPS.Display ", ""); -- 5
+	local values = {strsplit(' ', str)};
+	local j = 1;
 	for i = 1, 19 do
-		RPSCoreFramework.Display.Scroll[i][2] = values[j]
-		j = j + 1
-		RPSCoreFramework.Display.Scroll[i][3] = values[j]
-		j = j + 1
+		RPSCoreFramework.Display.Scroll[i][2] = values[j];
+		j = j + 1;
+		RPSCoreFramework.Display.Scroll[i][3] = values[j];
+		j = j + 1;
 	end
 end
 function RPSCoreFramework:UpdatePOIPins(str)
@@ -152,7 +152,7 @@ function RPSCoreFramework:RemovePOIPins(str)
 	RPSCorePOIPins[str] = nil;
 	RPSCoreFramework:GeneratePOIPlaces();
 end
-function RPSCoreFramework:GetCommandPOIPins(str)
+function RPSCoreFramework:GetServerCommandPOIPins(str)
 	if (str == "refresh") then
 		RPSCoreFramework.Map.POIWorkflow = false;
 		RPSCorePOIPins = {};
@@ -166,40 +166,70 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 end
 function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 	if RPSCoreFramework.Interface.Auras.Initialized then
-		RPSCoreFramework:ScrollMenuUpdater()
+		RPSCoreFramework:ScrollMenuUpdater();
 	end
 end
 function RPSCoreFramework:OneShotUpdater()
-	RPSCoreFramework:SendCoreMessage(".disp list")
-	RPSCoreFramework:SendCoreMessage(".rps request poi init")
-	RPSCoreFramework:SendCoreMessage(".rps action scale info")
-	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
-	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
+	RPSCoreFramework:SendCoreMessage(".disp list");
+	RPSCoreFramework:SendCoreMessage(".rps request poi init");
+	RPSCoreFramework:SendCoreMessage(".rps action scale info");
+	RPSCoreFramework:SendCoreMessage(".rps action aura list known");
+	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
 end
 function RPSCoreFramework:PeriodicallyAurasUpdate()
-	RPSCoreFramework:SendCoreMessage(".rps action aura list known")
-	RPSCoreFramework:SendCoreMessage(".rps action aura list active")
+	RPSCoreFramework:SendCoreMessage(".rps action aura list known");
+	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
 end
 function RPSCoreFramework:UpdateActiveAurasCounter()
-	local counter = 0
+	local counter = 0;
 	if RPSCoreFramework.Interface.ActiveAuraCounter ~= 0 then
 		for i = 1, #RPSCoreFramework.Interface.Auras do
 			if RPSCoreFramework.Interface.Auras[i][6] > 0 then
-				counter = counter + 1
+				counter = counter + 1;
 			end
 		end
-		RPSCoreFramework.Interface.ActiveAuraCounter = counter
+		RPSCoreFramework.Interface.ActiveAuraCounter = counter;
 	end
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
+	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5);
 	return true
 end
 function RPSCoreFramework:ThreeTimesUpdate()
-	self.ThreeTimesTimerCount = self.ThreeTimesTimerCount + 1
+	self.ThreeTimesTimerCount = self.ThreeTimesTimerCount + 1;
 	if self.ThreeTimesTimerCount == 4 then
-		RPSCoreFramework.Interface.Auras.AllowUpdate = true
-		self.ThreeTimesTimerCount = 0
-		self:CancelTimer(self.ThreeTimesTimer)
+		RPSCoreFramework.Interface.Auras.AllowUpdate = true;
+		self.ThreeTimesTimerCount = 0;
+		self:CancelTimer(self.ThreeTimesTimer);
 	end
-	RPSCoreFramework:PeriodicallyAurasUpdate()
-	RPSCoreFramework:ScrollMenuUpdater()
+	RPSCoreFramework:PeriodicallyAurasUpdate();
+	RPSCoreFramework:ScrollMenuUpdater();
+end
+
+--"RPS.CON.i"
+function RPSCoreFramework:InitializeContainer(msg)
+	print("InitializeContainer: ".. msg);
+	local values = {strsplit('#',str)};	
+	--[[name(title)
+	--	type
+	--	size]]
+	SetUpcontainerFrame(values[1],values[2],values[3]);
+end
+--"RPS.CON.c"
+function RPSCoreFramework:InvokeContainerComamnd(msg)
+	print("InvokeContainerComamnd: ".. msg);
+	if ( msg == "meme" ) then
+		print("Meme!");
+	end
+end
+--"RPS.CON.upd"
+function RPSCoreFramework:UpdateContainer(msg)
+	print("UpdateContainer: ".. msg);
+	RPSCoreFramework:ContainerFrameUpdate();
+end
+
+function RPSCoreFramework:SalaryIndicator(msg)
+	print("Salary coming in! ".. msg);
+
+--[[treasuregoblin_coinimpact.m2
+	treasuregoblin_portal.m2]]
+
 end

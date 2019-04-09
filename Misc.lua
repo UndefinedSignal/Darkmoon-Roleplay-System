@@ -4,6 +4,7 @@ function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
 		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
 	end
 end
+
 function RPSCoreFramework:PaperdollDispInit()
 	RPSCoreFramework:HookScript(_G["CharacterHeadSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "head"
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HEAD)

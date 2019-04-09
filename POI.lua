@@ -4,6 +4,7 @@ local POIHL = "Interface\\BUTTONS\\IconBorder-GlowRing";
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrame = CreateFrame("Button", "POIM"..guid, WorldMapButton, "RPS_POIButton");
 	IFrame.dataName = name;
+	IFrame.debugGuid = guid;
 	IFrame.dataDescription = description;
 	IFrame:SetSize(14,14);
 	RPSPOIGameTooltip:SetFrameStrata("TOOLTIP");
@@ -22,6 +23,7 @@ end
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrame = CreateFrame("Button", "POIMM"..guid, WorldMapButton, "RPS_POIButton");
 	IFrame.dataName = name;
+	IFrame.debugGuid = guid;
 	IFrame.dataDescription = description;
 	IFrame:SetSize(14,14);
 	local ntex = IFrame:CreateTexture();

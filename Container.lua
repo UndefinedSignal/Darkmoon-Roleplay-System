@@ -2,19 +2,20 @@ local containerFrame = nil;
 
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
 
-function RPSCoreFramework:SetUpcontainerFrame()
+function RPSCoreFramework:SetUpcontainerFrame(title, type, size)
 	if (not containerFrame) then
 		containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
 		containerFrame.items = {};
-		RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, 12);	
 	end
+	RPSCoreFramework:ContainerFrameGenerateFrame(containerFrame, size, title);	
 	containerFrame:SetPoint("CENTER", nil, "CENTER", 0, 0 );
 	containerFrame:Show();
 end
 
-function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, specialTexture)
+function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, title, icon, specialTexture)
 	frame.size = size;
 	local name = frame:GetName();
+	local containerName = title or "Контейнер";
 	local bgTextureTop = _G[name .. "BackgroundTop"];
 	local bgTextureMiddle = _G[name .. "BackgroundMiddle1"];
 	local bgTextureBottom = _G[name .. "BackgroundBottom"];
@@ -135,7 +136,7 @@ function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, icon, special
 		frame:SetHeight(bgTextureTop:GetHeight() + bgTextureBottom:GetHeight() + middleBgHeight);
 		frame:SetWidth(CONTAINER_WIDTH);
 
-		_G[frame:GetName() .. "Name"]:SetText("Контейнер");
+		_G[frame:GetName() .. "Name"]:SetText(title);
 		_G[frame:GetName() .. "Name"]:SetJustifyH("LEFT");
 	end
 
@@ -228,6 +229,22 @@ function RPSCoreFramework:ContainerFrameUpdate()
 			itemButton.hasItem = nil;
 		end
 	end
+
+	if RPSCoreFramework:CursorIsNotValid() then
+		print("Invalid cursor information. Container frame would be rebuild.")
+		RPSCoreFramework:ContainerFrameUpdate()
+	end
+end
+
+function RPSCoreFramework:CursorIsNotValid()
+	if RPSCoreFramework:GetCursorItem() and PlayerCursorInformation ~= nil then
+		if (PlayerCursorInformation.itemID == containerFrame.items[PlayerCursorInformation.slotID].itemID) then
+			ClearCursor();
+			PlayerCursorInformation = nil;
+			return true;
+		end
+	end
+	return false;
 end
 
 function RPSCoreFramework:ContainerFrameItemButtonOnLoad(self)
@@ -290,7 +307,7 @@ function RPSCoreFramework:PlaceContainerItem(self)
 			end
 		elseif (RPSCoreFramework.PlayerCursorInformation) then
 			RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
-
+			RPSCoreFramework:ContainerPut(slot, itemID)
 			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
 			containerFrame.items[id].locked = false;
 		end
@@ -362,6 +379,8 @@ function RPSCoreFramework:SwapContainerItems(slot)
 	RPSCoreFramework:PushContainerItem(targetID, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
 	RPSCoreFramework:PushContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID, {isVirtual = true, itemID = targetItem.itemID, count = targetItem.count, locked = false})
 
+	RPSCoreFramework:ContainerSwap(RPSCoreFramework.PlayerCursorInformation.slotID, targetID);
+
 	containerFrame.items[targetID].locked = false;
 	containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID].locked = false;
 end
@@ -395,4 +414,19 @@ end
 function RPSCoreFramework:HideContainerToolTip()
 	ContainerGameTooltip:ClearLines()
 	ContainerGameTooltip:Hide();
+end
+
+function RPSCoreFramework:ContainerTake(slot, itemID)
+	local msg = "container.take#"..slot;
+	RPSCoreFramework:SendCoreMessage(msg)
+end
+
+function RPSCoreFramework:ContainerPut(slot, itemID)
+	local msg = "container.put#"..slot.."#"..itemID;
+	RPSCoreFramework:SendCoreMessage(msg)
+end
+
+function RPSCoreFramework:ContainerSwap(prevSlot, secSlot)
+	local msg = "container.swap#"..prevSlot.."#"..secSlot;
+	RPSCoreFramework:SendCoreMessage(msg)
 end

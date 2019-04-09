@@ -6,6 +6,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
 	self:RegisterEvent("ITEM_LOCK_CHANGED");
+	self:RegisterEvent("BAG_UPDATE")
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
 		self:HookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
@@ -39,6 +40,25 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
+
+	RPSCoreFramework:HookAllPlayerBagButtons();
+end
+
+function RPSCoreFramework:HookAllPlayerBagButtons()
+	local bagButton = nil;
+	local num = nil;
+	for i = 0, NUM_BAG_SLOTS do -- Пробег по всем сумкам, существуют ли они?
+		local slots = GetContainerNumSlots(i) or 0;
+		if slots > 0 then -- Пробег по всем слотам и прикручивание к ним нашего кода
+			for j = 1, slots do
+				num = i + 1;
+				bagButton = _G["ContainerFrame"..num.."Item"..j]
+				if (not RPSCoreFramework:IsHooked(bagButton, "OnClick")) then
+					self:HookScript(bagButton, "OnClick", "HookPlayerContainerClick");
+				end
+			end
+		end
+	end
 end
 
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
@@ -73,6 +93,14 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdateDisplayMacrosInfo("RPS.Display "..msg);
 		elseif (prefix == "RPS.AuraRefresh") then
 			RPSCoreFramework:RefreshActiveAuras("RPS.AuraRefresh "..msg);
+		elseif (prefix == "RPS.CON.i") then
+			RPSCoreFramework:InitializeContainer(msg);
+		elseif (prefix == "RPS.CON.c") then
+			RPSCoreFramework:InvokeContainerComamnd(msg);
+		elseif (prefix == "RPS.CON.upd") then
+			RPSCoreFramework:UpdateContainer(msg);
+		elseif (prefix == "RPS.ECO.ti") then
+			RPSCoreFramework:SalaryIndicator(msg)
 		end
 	elseif (event == "ITEM_LOCK_CHANGED") then
 		if prefix ~= nil and msg ~= nil then
@@ -85,6 +113,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			temp.slotID = 0;
 			RPSCoreFramework.PlayerCursorInformation = temp;
 		end
+	elseif (event == "BAG_UPDATE") then
+		RPSCoreFramework:HookAllPlayerBagButtons();
 	end
 end
 
@@ -113,4 +143,8 @@ function RPSCoreFramework:ItemTooltip(self)
 			end
 		end
 	end
+end
+
+function RPSCoreFramework:HookPlayerContainerClick(self)
+	print(self:GetName())
 end
