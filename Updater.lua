@@ -139,6 +139,7 @@ function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
 	RPSCorePOIPins[values[1]] = values;
 end
+
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};
 	if RPSCoreFramework.Map.POIWorkflow then
@@ -148,10 +149,12 @@ function RPSCoreFramework:UpdatePOIPins(str)
 		RPSCoreFramework.Map.UpdatePins[values[1]] = values;
 	end
 end
+
 function RPSCoreFramework:RemovePOIPins(str)
 	RPSCorePOIPins[str] = nil;
 	RPSCoreFramework:GeneratePOIPlaces();
 end
+
 function RPSCoreFramework:GetCommandPOIPins(str)
 	if (str == "refresh") then
 		RPSCoreFramework.Map.POIWorkflow = false;
@@ -164,11 +167,13 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 		RPSCoreFramework:GeneratePOIPlaces();
 	end
 end
+
 function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 	if RPSCoreFramework.Interface.Auras.Initialized then
 		RPSCoreFramework:ScrollMenuUpdater();
 	end
 end
+
 function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage(".disp list");
 	RPSCoreFramework:SendCoreMessage(".rps request poi init");
@@ -176,10 +181,12 @@ function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage(".rps action aura list known");
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
 end
+
 function RPSCoreFramework:PeriodicallyAurasUpdate()
 	RPSCoreFramework:SendCoreMessage(".rps action aura list known");
 	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
 end
+
 function RPSCoreFramework:UpdateActiveAurasCounter()
 	local counter = 0;
 	if RPSCoreFramework.Interface.ActiveAuraCounter ~= 0 then
@@ -193,6 +200,7 @@ function RPSCoreFramework:UpdateActiveAurasCounter()
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5);
 	return true
 end
+
 function RPSCoreFramework:ThreeTimesUpdate()
 	self.ThreeTimesTimerCount = self.ThreeTimesTimerCount + 1;
 	if self.ThreeTimesTimerCount == 4 then
@@ -208,16 +216,24 @@ end
 function RPSCoreFramework:InitializeContainer(msg)
 	print("InitializeContainer: ".. msg);
 	local values = {strsplit('#',msg)};	
-	--[[name(title)
-	--	type
-	--	size]]
-	SetUpcontainerFrame(values[1],values[2],values[3]);
+	if RPSCoreFramework.ContainerDataFlow then
+		--[[name(title)
+		--	type
+		--	size]]
+		SetUpcontainerFrame(values[1],values[2],values[3]);
+		RPSCoreFramework.ContainerDataFlow = false;
+		return;
+	end
+	--[[slot
+	--	itemID
+	--	count]]
+	RPSCoreFramework:PushContainerItem(values[1], {isVirtual = true, itemID = values[2], count = values[3], locked = false})
 end
 --"RPS.CON.c"
 function RPSCoreFramework:InvokeContainerComamnd(msg)
 	print("InvokeContainerComamnd: ".. msg);
-	if ( msg == "meme" ) then
-		print("Meme!");
+	if ( msg == "done" ) then
+		RPSCoreFramework.ContainerDataFlow = true
 	end
 end
 --"RPS.CON.upd"
