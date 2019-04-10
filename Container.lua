@@ -204,7 +204,6 @@ function RPSCoreFramework:ContainerFrameOnDragStop()
 	else
 		ClearCursor();
 		RPSCoreFramework:UlockContainerItem(self)
-		RPSCoreFramework.PlayerCursorInformation = nil;
 		RPSCoreFramework:ContainerFrameUpdate();
 	end
 end
@@ -333,6 +332,7 @@ function RPSCoreFramework:UlockContainerItem(arg1)
 	local id = arg1:GetID()
 	if containerFrame.items[id] ~= nil then
 		containerFrame.items[id].locked = false;
+		RPSCoreFramework.PlayerCursorInformation = nil;
 	end
 end
 
@@ -427,13 +427,15 @@ function RPSCoreFramework:HideContainerToolTip()
 	ContainerGameTooltip:Hide();
 end
 
-function RPSCoreFramework:ContainerToInventory(bag, slot)
+function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 	if (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
 		if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
 			local count = RPSCoreFramework.PlayerCursorInformation.count;
 			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
-			local msg = "rps container take "..bag.." "..bagslot.." "..containerSlotID;
+			local msg = "rps container take "..bag.." "..bagSlot.." "..containerSlotID;
 			RPSCoreFramework:SendCoreMessage(msg);
+
+			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
 			RPSCoreFramework.PlayerCursorInformation = nil;
 			ClearCursor();
 		end

@@ -106,7 +106,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		if prefix ~= nil and msg ~= nil then
 			local __, itemCount = GetContainerItemInfo(prefix, msg)
 			local itemID = GetContainerItemID(prefix, msg);
-			print(prefix.." "..msg)
 			local temp = {}
 			temp.isVirtual = false;
 			temp.itemID = itemID;

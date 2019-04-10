@@ -1355,11 +1355,11 @@
 			</OnHide>
 			<OnShow />
 			<OnDragStart>
-				RPSCoreFramework:PickupContainerItem(self);
+			--	RPSCoreFramework:PickupContainerItem(self);
 				ContainerGameTooltip:Hide();
 			</OnDragStart>
 			<OnDragStop>
-				RPSCoreFramework:ContainerFrameOnDragStop();
+			--	RPSCoreFramework:ContainerFrameOnDragStop();
 			</OnDragStop>
 			<OnReceiveDrag />
 			<OnUpdate />
