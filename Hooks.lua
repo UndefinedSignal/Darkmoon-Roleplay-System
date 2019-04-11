@@ -149,7 +149,6 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 	end
 
 	if RPSCoreFramework.PlayerCursorInformation then
-		print(itemID)
 		if RPSCoreFramework.PlayerCursorInformation.isVirtual then
 			RPSCoreFramework:ContainerToInventory(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
 		end
