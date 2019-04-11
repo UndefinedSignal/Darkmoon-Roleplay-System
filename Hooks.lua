@@ -106,6 +106,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		if prefix ~= nil and msg ~= nil then
 			local __, itemCount = GetContainerItemInfo(prefix, msg)
 			local itemID = GetContainerItemID(prefix, msg);
+			print("ItemLockChanged: "..prefix.." "..msg)
 			local temp = {}
 			temp.isVirtual = false;
 			temp.itemID = itemID;
@@ -147,8 +148,9 @@ end
 
 function RPSCoreFramework:HookPlayerContainerClick(self)
 	local bag, slot = string.match(self:GetName(), '%D+(%d+)%D+(%d+)');
-	RPSCoreFramework.Container.ClickedBag = bag;
-	RPSCoreFramework.Container.ClickedSlot = slot;
+	RPSCoreFramework.Container.ClickedBag = self:GetParent():GetID();
+	RPSCoreFramework.Container.ClickedSlot = self:GetID();
+	print("Hook: "..RPSCoreFramework.Container.ClickedBag.." "..RPSCoreFramework.Container.ClickedSlot);
 	--local item = GetContainerItemID(bag, slot);
 	RPSCoreFramework:ContainerToInventory(bag, slot);
 end

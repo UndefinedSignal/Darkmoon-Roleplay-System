@@ -264,8 +264,8 @@ function RPSCoreFramework:ContainerFrameItemButtonOnClick(self, button)
 		else
 			RPSCoreFramework:PickupContainerItem(self)
 		end
---	elseif button == "RightButton" then
---		print("click right");
+	elseif button == "RightButton" then
+		print("click right");
 	end
 end
 
@@ -432,7 +432,7 @@ function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 		if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
 			local count = RPSCoreFramework.PlayerCursorInformation.count;
 			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
-			local msg = "rps container take "..bag.." "..bagSlot.." "..containerSlotID;
+			local msg = ".rps container take "..bag.." "..bagSlot.." "..containerSlotID;
 			RPSCoreFramework:SendCoreMessage(msg);
 
 			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
@@ -443,11 +443,11 @@ function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 end
 
 function RPSCoreFramework:InventoryToContainer(bag, slot, conSlot)
-	local msg = "rps container put "..bag.." "..slot.." "..conSlot;
+	local msg = ".rps container put "..bag.." "..slot.." "..conSlot;
 	RPSCoreFramework:SendCoreMessage(msg)
 end
 
 function RPSCoreFramework:ContainerSwap(prevSlot, secSlot)
-	local msg = "rps container swap "..prevSlot.." "..secSlot;
+	local msg = ".rps container swap "..prevSlot.." "..secSlot;
 	RPSCoreFramework:SendCoreMessage(msg)
 end
