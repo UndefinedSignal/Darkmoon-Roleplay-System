@@ -10,6 +10,7 @@ RPSCoreFramework.Map = {};
 RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
+RPSCoreFramework.SalaryTimer = nil;
 
 RPSCoreFramework.Container = {};
 RPSCoreFramework.Container.title = nil;

@@ -1277,6 +1277,30 @@
             </ScrollFrame>
         </Frames>
     </Frame>
+
+    <Frame name="CurrencyFrame" hidden="true">
+        <Size x="500" y="300"/>
+        <Anchors>
+            <Anchor point="TOP" x="30" y="-20"/>
+        </Anchors>
+        <Frames>
+            <PlayerModel name="CurrencyFrameMoneyModel" inherits="MouseDisabledModelTemplate">
+                <Size x="300" y="100"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="CurrencyFrame" x="0" y="0" />
+                </Anchors>
+
+                <Scripts>
+                    <OnShow>
+                        self:SetModel("Spells\\treasuregoblin_coinimpact.m2");
+                        self:SetCamDistanceScale(2.6);
+                        self:SetAnimation(153);
+                        self:SetAllPoints();
+                    </OnShow>
+                    <OnMouseWheel function="nil"/>
+                </Scripts>
+            </PlayerModel>
+        </Frames>
+    </Frame>
+
 </Ui>
-
-

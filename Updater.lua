@@ -247,9 +247,14 @@ function RPSCoreFramework:UpdateContainer(msg)
 end
 
 function RPSCoreFramework:SalaryIndicator(msg)
-	print("Salary coming in! ".. msg);
+	print("[|cFFFF8040Получка|r] Вы получили: |cFFFFFF00".. GetCoinTextureString(tonumber(msg)).."|r");
+	RPSCoreFramework.SalaryTimer = RPSCoreFramework:ScheduleTimer("HideSalaryIndicator", 5);
+	CurrencyFrame:Show();
 
 --[[treasuregoblin_coinimpact.m2
 	treasuregoblin_portal.m2]]
+end
 
+function RPSCoreFramework:HideSalaryIndicator()
+	CurrencyFrame:Hide();
 end
