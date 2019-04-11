@@ -38,10 +38,10 @@ function RPSCoreFramework:OnInitialize()
 
 	-- Disp & Scale
 
-	self:SendCoreMessage(".disp list");
-	self:SendCoreMessage(".rps action aura list known");
-	self:SendCoreMessage(".rps action aura list active");
-	self:SendCoreMessage(".rps action scale info");
+	self:SendCoreMessage("disp list");
+	self:SendCoreMessage("rps action aura list known");
+	self:SendCoreMessage("rps action aura list active");
+	self:SendCoreMessage("rps action scale info");
 
 	-- Stats
 
@@ -98,7 +98,7 @@ function RPSCoreFramework:OnInitialize()
 		button1 = YES,
 		button2 = NO,
 		button1Pulse = true,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action help"); end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("rps action help"); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
@@ -128,7 +128,7 @@ function RPSCoreFramework:OnInitialize()
 		button1 = YES,
 		button2 = NO,
 		button2Pulse = true,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action kill"); end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("rps action kill"); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
@@ -160,8 +160,8 @@ function RPSCoreFramework:OnInitialize()
 		button3 = "Ограбить и избить",
 		button1Pulse = true,
 		OnAccept = function() end,
-		OnCancel = function() RPSCoreFramework:SendCoreMessage(".rps action loot"); end,
-		OnAlt = function(self) RPSCoreFramework:SendCoreMessage(".rps action pillage"); self:Hide(); end,
+		OnCancel = function() RPSCoreFramework:SendCoreMessage("rps action loot"); end,
+		OnAlt = function(self) RPSCoreFramework:SendCoreMessage("rps action pillage"); self:Hide(); end,
 		OnShow = function(self)
 			if (RPSCoreFramework:HasAura(RPSCoreFramework.LootedAura, "target")) then
 				self.canloot = false;
@@ -211,7 +211,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете разучить все ваши характеристики? Стоимость: 5 |cff00ff00|TInterface\\MoneyFrame\\UI-GoldIcon:16|t|r",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps stat reset"); end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("rps stat reset"); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
@@ -271,7 +271,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно желаете сбросить рост?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale reset");	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable();	RPS_CharScaleSlider:SetValue(6); end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("rps action scale reset");	RPS_BTNAcceptScale:Enable();	RPS_CharScaleSlider:Enable();	RPS_CharScaleSlider:SetValue(6); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
@@ -301,7 +301,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно уверены в выбранном росте?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage(".rps action scale apply "..RPSCoreFramework.ChoosedScale);	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable(); end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("rps action scale apply "..RPSCoreFramework.ChoosedScale);	RPS_BTNAcceptScale:Disable();	RPS_CharScaleSlider:Disable(); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);

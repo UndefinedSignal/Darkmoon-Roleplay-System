@@ -41,8 +41,8 @@ function RPSCoreFramework:UpdateScrollerPosition()
 	end
 end
 function RPSCoreFramework:PeriodicallyUpdater()
-	RPSCoreFramework:SendCoreMessage(".rps action scale info");
-	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
+	RPSCoreFramework:SendCoreMessage("rps action scale info");
+	RPSCoreFramework:SendCoreMessage("rps action aura list active");
 	RPSCoreFramework:UpdateScaleReset();
     if RPSCoreActionCam then
         RPSCoreActionCam = true;
@@ -175,16 +175,16 @@ function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 end
 
 function RPSCoreFramework:OneShotUpdater()
-	RPSCoreFramework:SendCoreMessage(".disp list");
-	RPSCoreFramework:SendCoreMessage(".rps request poi init");
-	RPSCoreFramework:SendCoreMessage(".rps action scale info");
-	RPSCoreFramework:SendCoreMessage(".rps action aura list known");
-	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
+	RPSCoreFramework:SendCoreMessage("disp list");
+	RPSCoreFramework:SendCoreMessage("rps request poi init");
+	RPSCoreFramework:SendCoreMessage("rps action scale info");
+	RPSCoreFramework:SendCoreMessage("rps action aura list known");
+	RPSCoreFramework:SendCoreMessage("rps action aura list active");
 end
 
 function RPSCoreFramework:PeriodicallyAurasUpdate()
-	RPSCoreFramework:SendCoreMessage(".rps action aura list known");
-	RPSCoreFramework:SendCoreMessage(".rps action aura list active");
+	RPSCoreFramework:SendCoreMessage("rps action aura list known");
+	RPSCoreFramework:SendCoreMessage("rps action aura list active");
 end
 
 function RPSCoreFramework:UpdateActiveAurasCounter()

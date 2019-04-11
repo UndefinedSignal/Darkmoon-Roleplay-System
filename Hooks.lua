@@ -102,18 +102,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.ECO.ti") then
 			RPSCoreFramework:SalaryIndicator(msg)
 		end
-	elseif (event == "ITEM_LOCK_CHANGED") then
-		if prefix ~= nil and msg ~= nil then
-			local __, itemCount = GetContainerItemInfo(prefix, msg)
-			local itemID = GetContainerItemID(prefix, msg);
-			print("ItemLockChanged: "..prefix.." "..msg)
-			local temp = {}
-			temp.isVirtual = false;
-			temp.itemID = itemID;
-			temp.count = itemCount;
-			temp.slotID = 0;
-			RPSCoreFramework.PlayerCursorInformation = temp;
-		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
 	end
@@ -150,7 +138,19 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 	local bag, slot = string.match(self:GetName(), '%D+(%d+)%D+(%d+)');
 	RPSCoreFramework.Container.ClickedBag = self:GetParent():GetID();
 	RPSCoreFramework.Container.ClickedSlot = self:GetID();
-	print("Hook: "..RPSCoreFramework.Container.ClickedBag.." "..RPSCoreFramework.Container.ClickedSlot);
+
+	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
+	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
+	if (itemCount ~= 0) then
+		local temp = {}
+		temp.isVirtual = false;
+		temp.itemID = itemID;
+		temp.count = itemCount;
+		temp.slotID = 0;
+		RPSCoreFramework.PlayerCursorInformation = temp;
+	end
+
+	--print("Hook: "..RPSCoreFramework.Container.ClickedBag.." "..RPSCoreFramework.Container.ClickedSlot);
 	--local item = GetContainerItemID(bag, slot);
 	RPSCoreFramework:ContainerToInventory(bag, slot);
 end

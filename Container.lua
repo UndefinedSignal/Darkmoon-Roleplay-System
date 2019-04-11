@@ -2,12 +2,9 @@ local containerFrame = nil;
 
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
 
-
 function RPSCoreFramework:SetUpContainerFrame()
-	if (not containerFrame) then
-		containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
-		containerFrame.items = {};
-	end
+	containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
+	containerFrame.items = {};
 	containerFrame:SetPoint("CENTER", nil, "CENTER", 0, 0 );
 	containerFrame:Show();
 end
@@ -264,8 +261,8 @@ function RPSCoreFramework:ContainerFrameItemButtonOnClick(self, button)
 		else
 			RPSCoreFramework:PickupContainerItem(self)
 		end
-	elseif button == "RightButton" then
-		print("click right");
+	--elseif button == "RightButton" then
+	--	print("click right");
 	end
 end
 
@@ -432,7 +429,7 @@ function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 		if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
 			local count = RPSCoreFramework.PlayerCursorInformation.count;
 			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
-			local msg = ".rps container take "..bag.." "..bagSlot.." "..containerSlotID;
+			local msg = "rps container take "..bag.." "..bagSlot.." "..containerSlotID;
 			RPSCoreFramework:SendCoreMessage(msg);
 
 			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
@@ -443,11 +440,11 @@ function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 end
 
 function RPSCoreFramework:InventoryToContainer(bag, slot, conSlot)
-	local msg = ".rps container put "..bag.." "..slot.." "..conSlot;
+	local msg = "rps container put "..bag.." "..slot.." "..conSlot;
 	RPSCoreFramework:SendCoreMessage(msg)
 end
 
 function RPSCoreFramework:ContainerSwap(prevSlot, secSlot)
-	local msg = ".rps container swap "..prevSlot.." "..secSlot;
+	local msg = "rps container swap "..prevSlot.." "..secSlot;
 	RPSCoreFramework:SendCoreMessage(msg)
 end

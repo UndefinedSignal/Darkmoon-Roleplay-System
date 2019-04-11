@@ -43,13 +43,13 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:Show()
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:SetScript("OnClick", function()
 		        	if (GetNumMacros() <= 120) then
-		        		CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2], "INV_DARKMOON_EYE", ".rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1], 1);
+		        		CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2], "INV_DARKMOON_EYE", "rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1], 1);
 		        		PickupMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2]);
 					else
 						Utils.message.displayMessage(loc("QE_MACRO_MAX"), 4);
 					end
 		        end)
-		        RPSCoreFramework.Interface.Auras.Message[jBtn][1] = ".rps action aura toggle "..tonumber(RPSCoreFramework.Interface.Auras.Show[lineplusoffset])
+		        RPSCoreFramework.Interface.Auras.Message[jBtn][1] = "rps action aura toggle "..tonumber(RPSCoreFramework.Interface.Auras.Show[lineplusoffset])
 		      else
 		        _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:Hide()
@@ -59,7 +59,7 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		        else
 		        	_G["RPS_AuraButton"..jBtn.."Price"]:SetText(GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][4]))
 		    	end
-		        RPSCoreFramework.Interface.Auras.Message[jBtn][1] = ".rps action aura learn "..tonumber(RPSCoreFramework.Interface.Auras.Show[lineplusoffset])
+		        RPSCoreFramework.Interface.Auras.Message[jBtn][1] = "rps action aura learn "..tonumber(RPSCoreFramework.Interface.Auras.Show[lineplusoffset])
 		      end
 		      if RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][6] == 1 then
 		      	_G["RPS_AuraButton"..jBtn.."Completed"]:Show()
@@ -87,7 +87,7 @@ function RPSCoreFramework:LearnMyAuras(button, arg1)
 	_G[button:GetName().."Price"]:Hide()
     _G[button:GetName().."Macros"]:Show()
 	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1
-	RPSCoreFramework.Interface.Auras.Message[arg1][1] = ".rps action aura toggle ".. RPSCoreFramework.Interface.Auras.Message[arg1][2]
+	RPSCoreFramework.Interface.Auras.Message[arg1][1] = "rps action aura toggle ".. RPSCoreFramework.Interface.Auras.Message[arg1][2]
 end
 function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	RPSCoreFramework.Interface.ActiveAuraCounter = 1

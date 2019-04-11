@@ -280,28 +280,28 @@ function RPSCoreFramework:ResetDiff()
 end
 function RPSCoreFramework:SubmitDiff()
 	if (self.StatsDiff.Strength>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit strength "..self.StatsDiff.Strength);
+		RPSCoreFramework:SendCoreMessage("rps stat submit strength "..self.StatsDiff.Strength);
 	end
 	if (self.StatsDiff.Agility>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit agility "..self.StatsDiff.Agility);
+		RPSCoreFramework:SendCoreMessage("rps stat submit agility "..self.StatsDiff.Agility);
 	end
 	if (self.StatsDiff.Intellect>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit intellect "..self.StatsDiff.Intellect);
+		RPSCoreFramework:SendCoreMessage("rps stat submit intellect "..self.StatsDiff.Intellect);
 	end
 	if (self.StatsDiff.CriticalChance>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit criticalchance "..self.StatsDiff.CriticalChance);
+		RPSCoreFramework:SendCoreMessage("rps stat submit criticalchance "..self.StatsDiff.CriticalChance);
 	end
 	if (self.StatsDiff.Spirit>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit spirit "..self.StatsDiff.Spirit);
+		RPSCoreFramework:SendCoreMessage("rps stat submit spirit "..self.StatsDiff.Spirit);
 	end
 	if (self.StatsDiff.Endurance>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit endurance "..self.StatsDiff.Endurance);
+		RPSCoreFramework:SendCoreMessage("rps stat submit endurance "..self.StatsDiff.Endurance);
 	end
 	if (self.StatsDiff.Dexterity>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit dexterity "..self.StatsDiff.Dexterity);
+		RPSCoreFramework:SendCoreMessage("rps stat submit dexterity "..self.StatsDiff.Dexterity);
 	end
 	if (self.StatsDiff.Will>0) then
-		RPSCoreFramework:SendCoreMessage(".rps stat submit will "..self.StatsDiff.Will);
+		RPSCoreFramework:SendCoreMessage("rps stat submit will "..self.StatsDiff.Will);
 	end
 	self.StatsDiff.Strength = 0;
 	self.StatsDiff.Agility = 0;
@@ -313,7 +313,7 @@ function RPSCoreFramework:SubmitDiff()
 	self.StatsDiff.Will = 0;
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
-	RPSCoreFramework:SendCoreMessage(".rps stat self")
+	RPSCoreFramework:SendCoreMessage("rps stat self")
 end
 function RPSCoreFramework:StatsIncDecFunc()
 	StrengthMinus:SetScript("OnClick", function() RPSCoreFramework:DecStrength() end);
