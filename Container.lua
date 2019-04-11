@@ -286,7 +286,7 @@ function RPSCoreFramework:PickupContainerItem(self)
 	PickupItem(item.itemID)
 	RPSCoreFramework:ContainerFrameUpdate();
 
-	RPSCoreFramework.Timers.ContainerStatus = RPSCoreFramework:ScheduleRepeatingTimer("ItemLockdownUpdate", 1)
+	RPSCoreFramework.Timers.ContainerStatus = RPSCoreFramework:ScheduleRepeatingTimer("ItemLockdownUpdate", 0.5)
 end
 
 function RPSCoreFramework:PlaceContainerItem(self)
@@ -327,12 +327,19 @@ function RPSCoreFramework:PlaceContainerItem(self)
 	RPSCoreFramework:ContainerFrameUpdate();
 end
 
-function RPSCoreFramework:UlockContainerItem(arg1)
-	local id = arg1:GetID()
+function RPSCoreFramework:UlockContainerItem(arg1, itemID)
+	local id = nil;
+	if arg1 ~= nil then
+		id = arg1:GetID()
+	else
+		id = itemID;
+	end
 	if containerFrame.items[id] ~= nil then
 		containerFrame.items[id].locked = false;
-		RPSCoreFramework.PlayerCursorInformation = nil;
 	end
+	RPSCoreFramework.PlayerCursorInformation = nil;
+	RPSCoreFramework.Container.ClickedBag = nil;
+	RPSCoreFramework.Container.ClickedSlot = nil;
 end
 
 function RPSCoreFramework:GetContainerItem(slotID)
@@ -427,17 +434,21 @@ function RPSCoreFramework:HideContainerToolTip()
 end
 
 function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
+	local itemID = GetContainerItemID(bag, bagSlot);
 	if (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
-		if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
+		if (RPSCoreFramework.PlayerCursorInformation.isVirtual and itemID == nil) then
 			local count = RPSCoreFramework.PlayerCursorInformation.count;
 			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
 			local msg = "rps container take "..bag.." "..bagSlot.." "..containerSlotID;
 			print(msg)
 			RPSCoreFramework:SendCoreMessage(msg);
 
-			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
+			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil
+			RPSCoreFramework:UlockContainerItem(nil, RPSCoreFramework.PlayerCursorInformation.slotID)
 			RPSCoreFramework.PlayerCursorInformation = nil;
 			ClearCursor();
+		else
+			RPSCoreFramework:UlockContainerItem(nil, RPSCoreFramework.PlayerCursorInformation.slotID)
 		end
 	end
 end
