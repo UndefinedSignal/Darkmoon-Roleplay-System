@@ -3,7 +3,9 @@ local containerFrame = nil;
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
 
 function RPSCoreFramework:SetUpContainerFrame()
-	containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
+	if (not containerFrame) then
+		containerFrame = CreateFrame("Frame", "RPS_ContainerFrame", UIParent, "RPS_ContainerFrameTemplate");
+	end
 	containerFrame.items = {};
 	containerFrame:SetPoint("CENTER", nil, "CENTER", 0, 0 );
 	containerFrame:Show();
@@ -292,7 +294,6 @@ function RPSCoreFramework:PlaceContainerItem(self)
 		local id = self:GetID()
 		local item = containerFrame.items[id]
 		local parent = self:GetParent();
---		print(item)
 		if (item ~= nil and RPSCoreFramework.PlayerCursorInformation) then
 --			print("1")
 			if RPSCoreFramework.PlayerCursorInformation.isVirtual then
@@ -315,11 +316,12 @@ function RPSCoreFramework:PlaceContainerItem(self)
 				RPSCoreFramework.Container.ClickedBag = nil;
 				RPSCoreFramework.Container.ClickedSlot = nil;
 			else
+--				print("5")
 				RPSCoreFramework:SwapContainerItems(self)
---				print("Move around container")
 			end
 		end
 	end
+--	print("6")
 	ClearCursor();
 	RPSCoreFramework.PlayerCursorInformation = nil;
 	RPSCoreFramework:ContainerFrameUpdate();
@@ -430,6 +432,7 @@ function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 			local count = RPSCoreFramework.PlayerCursorInformation.count;
 			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
 			local msg = "rps container take "..bag.." "..bagSlot.." "..containerSlotID;
+			print(msg)
 			RPSCoreFramework:SendCoreMessage(msg);
 
 			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
@@ -441,10 +444,12 @@ end
 
 function RPSCoreFramework:InventoryToContainer(bag, slot, conSlot)
 	local msg = "rps container put "..bag.." "..slot.." "..conSlot;
+	print(msg)
 	RPSCoreFramework:SendCoreMessage(msg)
 end
 
 function RPSCoreFramework:ContainerSwap(prevSlot, secSlot)
 	local msg = "rps container swap "..prevSlot.." "..secSlot;
+	print(msg)
 	RPSCoreFramework:SendCoreMessage(msg)
 end

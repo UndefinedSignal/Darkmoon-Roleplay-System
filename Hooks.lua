@@ -138,10 +138,13 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 	local bag, slot = string.match(self:GetName(), '%D+(%d+)%D+(%d+)');
 	RPSCoreFramework.Container.ClickedBag = self:GetParent():GetID();
 	RPSCoreFramework.Container.ClickedSlot = self:GetID();
-
-	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
+	print("Hook: "..RPSCoreFramework.Container.ClickedBag.." "..RPSCoreFramework.Container.ClickedSlot);
 	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
-	if (itemCount ~= 0) then
+	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
+	print(RPSCoreFramework:GetCursorItem())
+
+	if (itemID) then
+		print("RPSCoreFramework.PlayerCursorInformation")
 		local temp = {}
 		temp.isVirtual = false;
 		temp.itemID = itemID;
@@ -150,7 +153,9 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 		RPSCoreFramework.PlayerCursorInformation = temp;
 	end
 
-	--print("Hook: "..RPSCoreFramework.Container.ClickedBag.." "..RPSCoreFramework.Container.ClickedSlot);
-	--local item = GetContainerItemID(bag, slot);
-	RPSCoreFramework:ContainerToInventory(bag, slot);
+	if RPSCoreFramework.PlayerCursorInformation then
+		if RPSCoreFramework.PlayerCursorInformation.isVirtual then
+			RPSCoreFramework:ContainerToInventory(bag, slot);
+		end
+	end
 end
