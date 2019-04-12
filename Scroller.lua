@@ -43,7 +43,7 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:Show()
 		        _G["RPS_AuraButton"..jBtn.."Macros"]:SetScript("OnClick", function()
 		        	if (GetNumMacros() <= 120) then
-		        		CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2], "INV_DARKMOON_EYE", "rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1], 1);
+		        		CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2], "INV_DARKMOON_EYE", ".rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1], 1);
 		        		PickupMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][2]);
 					else
 						Utils.message.displayMessage(loc("QE_MACRO_MAX"), 4);
