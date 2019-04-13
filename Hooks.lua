@@ -97,7 +97,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:InitializeContainer(msg);
 		elseif (prefix == "RPS.CON.c") then
 			RPSCoreFramework:InvokeContainerComamnd(msg);
-		elseif (prefix == "RPS.CON.upd") then
+		elseif (prefix == "RPS.CON.u") then
 			RPSCoreFramework:UpdateContainer(msg);
 		elseif (prefix == "RPS.ECO.ti") then
 			RPSCoreFramework:SalaryIndicator(msg)
@@ -140,17 +140,22 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
 	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
 	if (itemID and RPSCoreFramework.PlayerCursorInformation == nil) then
+		print("Назначаем")
 		local temp = {}
 		temp.isVirtual = false;
 		temp.itemID = itemID;
 		temp.count = itemCount;
 		temp.slotID = 0;
 		RPSCoreFramework.PlayerCursorInformation = temp;
+	elseif (RPSCoreFramework:GetCursorItem() and not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
+		print("Зануляем")
+		RPSCoreFramework.PlayerCursorInformation = nil;
 	end
 
 	if RPSCoreFramework.PlayerCursorInformation then
 		if RPSCoreFramework.PlayerCursorInformation.isVirtual then
 			RPSCoreFramework:ContainerToInventory(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
+			return
 		end
 	end
 end

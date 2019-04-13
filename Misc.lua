@@ -46,6 +46,7 @@ function RPSCoreFramework:PaperdollDispInit()
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND)
 	 end end)
 end
+
 function RPSCoreFramework:RemoveDisplay(slotname)
 	local removeDispSlot
 	local menuTitle = "Вы действительно хотите убрать дисп?"
@@ -78,6 +79,7 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 	StaticPopup_Hide("removeDisp")
 	StaticPopup_Show("removeDisp")
 end
+
 function RPSCoreFramework:ShowDisplayInfo(slotname)
 	local displayMessage
 	local menuTitle = "Введите ID предмета для выбранного слота."
@@ -116,18 +118,21 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 	StaticPopup_Hide("DipsSlotEditMenu")
 	StaticPopup_Show("DipsSlotEditMenu")
 end
+
 function RPSCoreFramework:KnownAura(arg)
 	if RPSCoreFramework.Interface.Auras[arg][5] > 0 then
 		return true
 	end
 	return false
 end
+
 function RPSCoreFramework:isAuraActive(arg)
 	if RPSCoreFramework.Interface.Auras[arg][6] > 0 then
 		return true
 	end
 	return false
 end
+
 function RPSCoreFramework:AddMinimapIcon()
 	LDBObject = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("RPSCoreFramework", {
 		type = "data source",
@@ -150,6 +155,7 @@ function RPSCoreFramework:AddMinimapIcon()
 	icon:Register("RPSDarkmoonIcon", LDBObject, RPSCoreIconData);
 	icon:Show("RPSDarkmoonIcon");
 end
+
 function RPSCoreFramework:ChangePassword(Oldpas, Newpas, NewpasRep)
 
 	StaticPopupDialogs["ChangePassword"] = {
@@ -204,6 +210,7 @@ function RPSCoreFramework:ChangePassword(Oldpas, Newpas, NewpasRep)
 	StaticPopup_Show("ChangePassword");
 	return true;
 end
+
 function RPSCoreFramework:FormatDMButtons(button)
 	local shift = 0;
 	local y = -60;
@@ -243,6 +250,7 @@ function RPSCoreFramework:FormatDMButtons(button)
 		end
 	end
 end
+
 function RPSCoreFramework:PreGenerateDMButtons()
 	local shift = 0;
 	local y = -60;
@@ -300,6 +308,7 @@ function RPSCoreFramework:PreGenerateDMButtons()
 		end
 	end
 end
+
 function RPSCoreFramework:hex2rgb(hex)
     local hex = hex:gsub("#","")
     if hex:len() == 3 then

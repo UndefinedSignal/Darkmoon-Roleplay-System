@@ -12,6 +12,7 @@ function RPSCoreFramework:ReloadDispList()
 	RPS_TextMacrosScrollText:SetText(dispstring)
 	RPS_DispUpdateButton:Enable()
 end
+
 function RPSCoreFramework:UpdateScaleReset()
 	if (GetMoney() < RPSCoreFramework.RequestRescale or RPSCoreFramework.MyScale == 0 or RPSCoreFramework.MyScale == -1) then
 		RPS_BTNReScale:Disable();
@@ -19,6 +20,7 @@ function RPSCoreFramework:UpdateScaleReset()
 		RPS_BTNReScale:Enable();
 	end
 end
+
 function RPSCoreFramework:UpdateScaleApplyButton()
 	if (RPSCoreFramework.MyScale == -1 or RPSCoreFramework.MyScale ~= 0) then
 		RPS_CharScaleSlider:Disable();
@@ -28,6 +30,7 @@ function RPSCoreFramework:UpdateScaleApplyButton()
 		RPS_BTNAcceptScale:Enable();
 	end
 end
+
 function RPSCoreFramework:UpdateScrollerPosition()
 	if RPSCoreFramework.MyScale > 0 then
 		RPS_CharScaleSlider:SetValue(RPSCoreFramework.MyScale);
@@ -40,6 +43,7 @@ function RPSCoreFramework:UpdateScrollerPosition()
 		RPS_CharScaleSlider:Enable();
 	end
 end
+
 function RPSCoreFramework:PeriodicallyUpdater()
 	RPSCoreFramework:SendCoreMessage("rps action scale info");
 	RPSCoreFramework:SendCoreMessage("rps action aura list active");
@@ -54,11 +58,13 @@ function RPSCoreFramework:PeriodicallyUpdater()
         SetCVar("test_cameraOverShoulder", 0);
     end
 end
+
 function RPSCoreFramework:UpdateScaleInfo(str)
 	str = string.gsub(str, "RPS.Scale ", "");
 	RPSCoreFramework.MyScale = tonumber(str);
 	RPSCoreFramework:UpdateScaleReset();
 end
+
 function RPSCoreFramework:UpdateAuraKnownInfo(str)
 	str = string.gsub(str, "RPS.AuraKnown ", "");
 	local values = {strsplit(' ', str)};
@@ -69,6 +75,7 @@ function RPSCoreFramework:UpdateAuraKnownInfo(str)
 		RPSCoreFramework.Interface.Auras[tonumber(values[i])][5] = 1;
 	end
 end
+
 function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	str = string.gsub(str, "RPS.AuraActive ", "");
 	local values = {strsplit(' ', str)};
@@ -86,6 +93,7 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	end
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
+
 function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	str = string.gsub(str, "RPS.Display ", ""); -- 5
 	local values = {strsplit(' ', str)};
@@ -97,14 +105,17 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 		j = j + 1;
 	end
 end
+
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};	
 	RPSCorePOIPins[values[1]] = values;
 end
+
 function RPSCoreFramework:RefreshActiveAuras(str)
 	str = string.gsub(str, "RPS.AuraRefresh ", "")
 	local values = {strsplit(' ', str)}
 end
+
 function RPSCoreFramework:UpdateInfo(str)
 	str = string.gsub(str, "RPS.StatMe ", "");
 	local values = {strsplit(' ', str)};
@@ -130,11 +141,13 @@ function RPSCoreFramework:UpdateInfo(str)
 	self:UpdateDiff();
 	self:UpdateUnlearn();	
 end
+
 function RPSCoreFramework:POIUpdateIntoMainMassive()
     for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
         RPSCorePOIPins[k](v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
     end
 end
+
 function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
 	RPSCorePOIPins[values[1]] = values;
@@ -214,9 +227,9 @@ end
 
 --"RPS.CON.i"
 function RPSCoreFramework:InitializeContainer(msg)
-	print("InitializeContainer: ".. msg);
 	local values = {strsplit('#',msg)};	
 	if RPSCoreFramework.ContainerDataFlow then
+		print("InitializeContainer: ".. msg);
 		--[[name(title)
 		--	type
 		--	size]]
@@ -230,8 +243,10 @@ function RPSCoreFramework:InitializeContainer(msg)
 	--[[slot
 	--	itemID
 	--	count]]
+	print("Add new item in to container: ".. msg);
 	RPSCoreFramework:PushContainerItem(tonumber(values[1]), {isVirtual = true, itemID = tonumber(values[2]), count = tonumber(values[3]), locked = false});
 end
+
 --"RPS.CON.c"
 function RPSCoreFramework:InvokeContainerComamnd(msg)
 	print("InvokeContainerComamnd: ".. msg);
@@ -240,9 +255,18 @@ function RPSCoreFramework:InvokeContainerComamnd(msg)
 		RPSCoreFramework:ContainerFrameGenerateFrame(_G["RPS_ContainerFrame"], RPSCoreFramework.Container.size, RPSCoreFramework.Container.title)
 	end
 end
+
 --"RPS.CON.upd"
 function RPSCoreFramework:UpdateContainer(msg)
 	print("UpdateContainer: ".. msg);
+	values = {strsplit('#',msg)};
+	if values ~= nil then
+		if tonumber(values[1]) == 0 then
+			 RPSCoreFramework:ClearContainerItem(tonumber(values[2]));
+		elseif tonumber(values[1]) == 1 then
+			RPSCoreFramework:PushContainerItem(tonumber(values[2]), {isVirtual = true, itemID = tonumber(values[3]), count = tonumber(values[4]), locked = false})
+		end
+	end
 	RPSCoreFramework:ContainerFrameUpdate();
 end
 
