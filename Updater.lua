@@ -272,8 +272,9 @@ end
 
 function RPSCoreFramework:SalaryIndicator(msg)
 	PlaySound(54125, "SFX")
-	print("[|cFFFF8040Получка|r] Вы получили: |cFFFFFF00".. GetCoinTextureString(tonumber(msg)).."|r");
-	RPSCoreFramework.SalaryTimer = RPSCoreFramework:ScheduleTimer("HideSalaryIndicator", 5);
+	CurrencyFrameTextFrameString:SetText("[|cFFFF8040Получка|r] Вы получили: |cFFFFFF00".. GetCoinTextureString(tonumber(msg)).."|r")
+	RPSCoreFramework.SalaryTimer = RPSCoreFramework:ScheduleTimer("HideSalaryIndicator", 2.5);
+
 	CurrencyFrame:Show();
 
 --[[treasuregoblin_coinimpact.m2
@@ -283,5 +284,3 @@ end
 function RPSCoreFramework:HideSalaryIndicator()
 	CurrencyFrame:Hide();
 end
-
-				--RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})

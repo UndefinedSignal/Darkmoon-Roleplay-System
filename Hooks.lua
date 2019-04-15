@@ -83,7 +83,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:GetCommandPOIPins(msg)
 		elseif (prefix == "RPS.StatMe") then
 			RPSCoreFramework:UpdateInfo("RPS.StatMe "..msg);
-			print("RPS.StatMe "..msg)
 		elseif (prefix == "RPS.Scale") then
 			RPSCoreFramework:UpdateScaleInfo("RPS.Scale "..msg);
 		elseif (prefix == "RPS.AuraKnown") then

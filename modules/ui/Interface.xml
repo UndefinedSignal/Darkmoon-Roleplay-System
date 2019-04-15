@@ -597,7 +597,7 @@
                                         </Anchors>
                                         <Scripts>
                                             <OnClick>
-                                                RPSCoreFramework:SendCoreMessage(".rps act barber");
+                                                RPSCoreFramework:SendCoreMessage("rps act barber");
                                                 PlaySound(624, "SFX");
                                             </OnClick>
                                         </Scripts>
@@ -874,7 +874,7 @@
 
                                 <Scripts>
                                     <OnClick>
-                                        RPSCoreFramework:SendCoreMessage(".disp list");
+                                        RPSCoreFramework:SendCoreMessage("disp list");
                                         RPS_DispUpdateButton:Disable();
                                         RPSCoreFramework:ScheduleTimer("ReloadDispList", 2);
                                         PlaySound(624, "SFX");
@@ -1287,7 +1287,7 @@
             <Frame name="$parentTextFrame">
                 <Size x="300" y="100"/>
                 <Anchors>
-                    <Anchor point="TOP" relativeTo="CurrencyFrame" x="0" y="-100"/>
+                    <Anchor point="TOP" relativeTo="CurrencyFrame" x="-30" y="-150"/>
                 </Anchors>
                 <Layers>
                     <Layer>
@@ -1295,7 +1295,7 @@
                             <Color r="1" g="1" b="0" a="1"/>
                             <FontHeight val="16"/>
                             <Anchors>
-                                <Anchor point="TOPLEFT" relativeTo="$parentTextFrame" x="3" y="25" />
+                                <Anchor point="TOPLEFT" relativeTo="$parentTextFrame" x="-75" y="25" />
                             </Anchors>
                         </FontString>
                     </Layer>
