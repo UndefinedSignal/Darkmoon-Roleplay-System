@@ -83,6 +83,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:GetCommandPOIPins(msg)
 		elseif (prefix == "RPS.StatMe") then
 			RPSCoreFramework:UpdateInfo("RPS.StatMe "..msg);
+			print("RPS.StatMe "..msg)
 		elseif (prefix == "RPS.Scale") then
 			RPSCoreFramework:UpdateScaleInfo("RPS.Scale "..msg);
 		elseif (prefix == "RPS.AuraKnown") then
@@ -106,6 +107,9 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		RPSCoreFramework:HookAllPlayerBagButtons();
 	end
 end
+
+
+
 
 function RPSCoreFramework:ItemTooltip(self)
 	local link = select(2, self:GetItem())
@@ -139,7 +143,7 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 	RPSCoreFramework.Container.ClickedSlot = tonumber(self:GetID());
 	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
 	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
-	if (itemID and RPSCoreFramework.PlayerCursorInformation == nil) then
+	if (itemID and (RPSCoreFramework.PlayerCursorInformation == nil or not RPSCoreFramework:GetCursorItem())) then
 		print("Назначаем")
 		local temp = {}
 		temp.isVirtual = false;
