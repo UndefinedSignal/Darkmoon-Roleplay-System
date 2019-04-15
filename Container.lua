@@ -446,7 +446,7 @@ function RPSCoreFramework:SwapContainerItems(slot)
 	if RPSCoreFramework.PlayerCursorInformation == nil then
 		return;
 	end
-
+--[[
 	if targetItem == nil then
 		--RPSCoreFramework:PushContainerItem(targetID, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
 		--containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
@@ -457,7 +457,7 @@ function RPSCoreFramework:SwapContainerItems(slot)
 		--containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID].locked = false;
 		--RPSCoreFramework:ContainerSwap(RPSCoreFramework.PlayerCursorInformation.slotID, targetID);
 		print("targetItem != nil")
-	end
+	end]]
 	--containerFrame.items[targetID].locked = false;
 	RPSCoreFramework:ContainerSwap(RPSCoreFramework.PlayerCursorInformation.slotID, targetID);
 end
