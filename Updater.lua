@@ -262,7 +262,7 @@ function RPSCoreFramework:UpdateContainer(msg)
 	values = {strsplit('#',msg)};
 	if values ~= nil then
 		if tonumber(values[1]) == 0 then
-			 RPSCoreFramework:ClearContainerItem(tonumber(values[2]));
+			 RPSCoreFramework:ClearItemByID(tonumber(values[2]));
 		elseif tonumber(values[1]) == 1 then
 			RPSCoreFramework:PushContainerItem(tonumber(values[2]), {isVirtual = true, itemID = tonumber(values[3]), count = tonumber(values[4]), locked = false})
 		end
@@ -283,3 +283,5 @@ end
 function RPSCoreFramework:HideSalaryIndicator()
 	CurrencyFrame:Hide();
 end
+
+				--RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})

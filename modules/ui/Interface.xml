@@ -1284,6 +1284,23 @@
             <Anchor point="TOP" x="30" y="-20"/>
         </Anchors>
         <Frames>
+            <Frame name="$parentTextFrame">
+                <Size x="300" y="100"/>
+                <Anchors>
+                    <Anchor point="TOP" relativeTo="CurrencyFrame" x="0" y="-100"/>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="$parentString" font="Fonts\FRIZQT___CYR.TTF" text="Новый пароль" justifyH="CENTER" justifyV="TOP">
+                            <Color r="1" g="1" b="0" a="1"/>
+                            <FontHeight val="16"/>
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativeTo="$parentTextFrame" x="3" y="25" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
             <PlayerModel name="CurrencyFrameMoneyModel" inherits="MouseDisabledModelTemplate">
                 <Size x="300" y="100"/>
                 <Anchors>
