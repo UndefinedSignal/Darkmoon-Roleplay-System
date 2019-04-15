@@ -67,7 +67,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		self:UpdatePlayerModel();
 		self:UpdateInteractionFrame();
 	elseif (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LEVEL_UP" or event == "PLAYER_EQUIPMENT_CHANGED") then
-		RPSCoreFramework:SendCoreMessage(".rps stat self");
+		RPSCoreFramework:SendCoreMessage("rps stat self");
 	elseif (event == "PLAYER_MONEY") then
 		self:UpdateUnlearn();
 		self:UpdateScaleReset();
@@ -108,9 +108,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 	end
 end
 
-
-
-
 function RPSCoreFramework:ItemTooltip(self)
 	local link = select(2, self:GetItem())
 	if not link then return end
@@ -144,7 +141,6 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
 	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
 	if (itemID and (RPSCoreFramework.PlayerCursorInformation == nil or not RPSCoreFramework:GetCursorItem())) then
-		print("Назначаем")
 		local temp = {}
 		temp.isVirtual = false;
 		temp.itemID = itemID;
@@ -152,7 +148,6 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 		temp.slotID = 0;
 		RPSCoreFramework.PlayerCursorInformation = temp;
 	elseif (RPSCoreFramework:GetCursorItem() and not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
-		print("Зануляем")
 		RPSCoreFramework.PlayerCursorInformation = nil;
 	end
 

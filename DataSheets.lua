@@ -22,7 +22,6 @@ RPSCoreFramework.ContainerDataFlow = true;
 RPSCoreFramework.PlayerCursorInformation = nil;
 RPSCoreFramework.DraggingContainerFrame = nil;
 
-
 if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {};
 end
@@ -120,19 +119,19 @@ RPSCoreFramework.ItemsStats = {
 }
 
 RPSCoreFramework.SlotnameListPresets = {
-	head = ".disp head ",
-	shoulder = ".disp shoulder ",
-	back = ".disp back ",
-	chest = ".disp chest ",
-	shirt = ".disp shirt ",
-	tabard = ".disp tabard ",
-	wrist = ".disp wrist ",
-	hands = ".disp hands ",
-	waist = ".disp waist ",
-	legs = ".disp legs ",
-	feet = ".disp feet ",
-	mainhand = ".disp mainhand ",
-	offhand = ".disp offhand "
+	head = "disp head ",
+	shoulder = "disp shoulder ",
+	back = "disp back ",
+	chest = "disp chest ",
+	shirt = "disp shirt ",
+	tabard = "disp tabard ",
+	wrist = "disp wrist ",
+	hands = "disp hands ",
+	waist = "disp waist ",
+	legs = "disp legs ",
+	feet = "disp feet ",
+	mainhand = "disp mainhand ",
+	offhand = "disp offhand "
 }
 
 RPSCoreFramework.SlotnameListNames = {
