@@ -272,7 +272,7 @@ end
 
 function RPSCoreFramework:SalaryIndicator(msg)
 	PlaySound(54125, "SFX")
-	CurrencyFrameTextFrameString:SetText("Вы получили: |cFFFFFF00".. GetCoinTextureString(tonumber(msg)).."|r")
+	CurrencyFrameTextFrameString:SetText("Получено |cFFFFFF00".. GetCoinTextureString(tonumber(msg)).."|r")
 	RPSCoreFramework.SalaryTimer = RPSCoreFramework:ScheduleTimer("HideSalaryIndicator", 2.5);
 
 	CurrencyFrame:Show();
