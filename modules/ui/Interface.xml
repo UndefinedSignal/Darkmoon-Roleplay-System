@@ -1291,7 +1291,7 @@
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="$parentString" font="Fonts\FRIZQT___CYR.TTF" text="Новый пароль" justifyH="CENTER" justifyV="TOP">
+                        <FontString name="$parentString" font="Fonts\FRIZQT___CYR.TTF" text="В ваш кошелёк упало золотишко!" justifyH="CENTER" justifyV="TOP">
                             <Color r="1" g="1" b="0" a="1"/>
                             <FontHeight val="16"/>
                             <Anchors>

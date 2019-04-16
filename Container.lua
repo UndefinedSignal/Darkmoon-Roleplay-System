@@ -339,11 +339,15 @@ function RPSCoreFramework:ClearItemByID(id)
 	containerFrame.items[id] = nil;
 end
 
+function RPSCoreFramework:UnlockItemByID(id)
+	containerFrame.items[id].locked = false;
+end
+
 function RPSCoreFramework:ContainerMouseItemChecker()
 	if (GetCursorInfo() == nil) then
 		if (RPSCoreFramework.PlayerCursorInformation) then
 			if (RPSCoreFramework.PlayerCursorInformation.isVirtual) then
-				containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID].locked = false;
+				RPSCoreFramework:UnlockItemByID(RPSCoreFramework.PlayerCursorInformation.slotID)
 				RPSCoreFramework.PlayerCursorInformation = nil;
 			end
 		end
@@ -360,7 +364,7 @@ function RPSCoreFramework:UlockContainerItem(arg1, itemID)
 		id = itemID;
 	end
 	if containerFrame.items[id] ~= nil then
-		containerFrame.items[id].locked = false;
+		RPSCoreFramework:UnlockItemByID(id);
 	end
 	RPSCoreFramework.PlayerCursorInformation = nil;
 	RPSCoreFramework.Container.ClickedBag = nil;
@@ -374,9 +378,9 @@ function RPSCoreFramework:PlaceContainerItem(self)
 		local item = containerFrame.items[id]
 		local parent = self:GetParent();
 		if (item ~= nil and RPSCoreFramework.PlayerCursorInformation) then
---			print("1")
+			print("1")
 			if RPSCoreFramework.PlayerCursorInformation.isVirtual then
---				print("2")
+				print("2")
 				RPSCoreFramework:SwapContainerItems(self) -- self = a slotbutton that was clicked
 			else
 				-- 
@@ -385,9 +389,9 @@ function RPSCoreFramework:PlaceContainerItem(self)
 				return;
 			end --local msg = "rps container put "..bag.." "..slot.." "..conSlot;
 		elseif (RPSCoreFramework.PlayerCursorInformation) then
---			print("3")
+			print("3")
 			if (RPSCoreFramework.Container.ClickedBag ~= nil and RPSCoreFramework.Container.ClickedSlot ~= nil) then
---				print("4")
+				print("4")
 				--RPSCoreFramework:PushContainerItem(id, {isVirtual = true, itemID = RPSCoreFramework.PlayerCursorInformation.itemID, count = RPSCoreFramework.PlayerCursorInformation.count, locked = false})
 				RPSCoreFramework:InventoryToContainer(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot, id)
 				--containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil;
@@ -397,12 +401,12 @@ function RPSCoreFramework:PlaceContainerItem(self)
 				RPSCoreFramework.Container.ClickedBag = nil;
 				RPSCoreFramework.Container.ClickedSlot = nil;
 			else
---				print("5")
+				print("5")
 				RPSCoreFramework:SwapContainerItems(self)
 			end
 		end
 	end
---	print("6")
+	print("6")
 	RPSCoreFramework:ClearCursor();
 	RPSCoreFramework.PlayerCursorInformation = nil;
 	RPSCoreFramework:ContainerFrameUpdate();
@@ -444,6 +448,10 @@ function RPSCoreFramework:SwapContainerItems(slot)
 	local targetID = slot:GetID();
 	local targetItem = containerFrame.items[targetID]
 	if RPSCoreFramework.PlayerCursorInformation == nil then
+		return;
+	end
+	if targetID == RPSCoreFramework.PlayerCursorInformation.slotID then
+		RPSCoreFramework:UnlockItemByID(targetID);
 		return;
 	end
 --[[
