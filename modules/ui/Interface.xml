@@ -1320,4 +1320,141 @@
         </Frames>
     </Frame>
 
+    <Frame name="PoolFrame" inherits="RPS_SmallerStandardParchmentFrame" hidden="true">
+        <Size x="365" y="230"/>
+        <Anchors>
+            <Anchor point="CENTER" x="30" y="-20"/>
+        </Anchors>
+
+        <Frames>
+
+            <Frame name="$parentTimer">
+                <Size x="75" y="25"/>
+                    <Backdrop bgFile="Interface\CHATFRAME\CHATFRAMEBACKGROUND" edgeFile="Interface\CHATFRAME\CHATFRAMEBACKGROUND" tile="true">
+                        <EdgeSize>
+                            <AbsValue val="1"/>
+                        </EdgeSize>
+                    </Backdrop>
+                    <Anchors><Anchor relativeTo="PoolFrame" point="CENTER" x="0" y="13"/></Anchors>
+                    <Layers>
+                        <Layer level="OVERLAY">
+                            <FontString name="$parentCountdown" text="02:00" inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
+                                <Anchors>
+                                    <Anchor point="CENTER" x="0" y="0"/>
+                                </Anchors>
+                            </FontString>
+                        </Layer>
+                    </Layers>
+                    <Scripts>
+                        <OnLoad>
+                            self:SetBackdropBorderColor(255, 255, 255, 0.1)
+                            self:SetBackdropColor(0.102, 0.102, 0.102, 0.45)
+                        </OnLoad>
+                    </Scripts>
+            </Frame>
+
+            <Button name="$parentChoice1" inherits="RPSPoll_DialogChoiceButton" text="Твоё очко" hidden="false">
+                <Size x="124" y="28"/>
+                <Anchors><Anchor relativeTo="PoolFrame" point="LEFT" x="0" y="-15"/></Anchors>
+                <NormalFont style="GameFontNormal"/>
+                <Scripts>
+                    <OnLoad>
+                        self.number:SetText("A");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Button name="$parentChoice2" inherits="RPSPoll_DialogChoiceButton" text="Королева Лирия Седогрив" hidden="false">
+                <Size x="124" y="28"/>
+                <Anchors><Anchor relativeTo="$parentChoice1" point="LEFT" x="0" y="-20"/></Anchors>
+                <NormalFont style="GameFontNormal"/>
+                <Scripts>
+                    <OnLoad>
+                        self.number:SetText("B");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Button name="$parentChoice3" inherits="RPSPoll_DialogChoiceButton" text="Поднять полотенце" hidden="false">
+                <Size x="124" y="28"/>
+                <Anchors><Anchor relativeTo="$parentChoice2" point="LEFT" x="0" y="-20"/></Anchors>
+                <NormalFont style="GameFontNormal"/>
+                <Scripts>
+                    <OnLoad>
+                        self.number:SetText("C");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Button name="$parentChoice4" inherits="RPSPoll_DialogChoiceButton" text="Я газовщик пацаны" hidden="false">
+                <Size x="124" y="28"/>
+                <Anchors><Anchor relativeTo="$parentChoice3" point="LEFT" x="0" y="-20"/></Anchors>
+                <NormalFont style="GameFontNormal"/>
+                <Scripts>
+                    <OnLoad>
+                        self.number:SetText("D");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Frame name="PoolQuestion">
+                <Size x="340" y="70"/>
+                <Anchors>
+                    <Anchor point="TOP" x="0" y="-42"/>
+                </Anchors>
+                <Frames>
+                    <Frame name="RPSPoll_NPCFrameChat" parentKey="chat" frameStrata="HIGH">
+                        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+                            <EdgeSize>
+                                <AbsValue val="16"/>
+                            </EdgeSize>
+                            <TileSize>
+                                <AbsValue val="16"/>
+                            </TileSize>
+                            <BackgroundInsets>
+                                <AbsInset left="3" right="3" top="3" bottom="3"/>
+                            </BackgroundInsets>
+                        </Backdrop>
+                        <Size x="340" y="70"/>
+                        <Anchors>
+                            <Anchor point="BOTTOM" x="0" y="25"/>
+                            <Anchor point="LEFT" x="10" y="0"/>
+                            <Anchor point="RIGHT" x="-10" y="0"/>
+                        </Anchors>
+                        <Layers>
+                            <Layer level="OVERLAY">
+                                <FontString name="RPSPoll_NPCFrameChatNextText" text="Этот дреней, некогда здоровый и полный сил паладин, серьезно заболел после битв с Пылающим Легионом и пополнил ряды Сломленных. Впоследствии он стал могущественным шаманом." inherits="GameFontNormal" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
+                                    <Anchors>
+                                        <Anchor point="BOTTOMLEFT" x="10" y="10"/>
+                                        <Anchor point="TOPLEFT" x="10" />
+                                        <Anchor point="BOTTOMRIGHT" x="-10"/>
+                                    </Anchors>
+                                    <Color r="1" g="1" b="0.4"/>
+                                </FontString>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+                            <Frame name="RPSPoll_NPCFrameChatHighlight" inherits="GlowBorderTemplate" hidden="true">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" x="5" y="-2"/>
+                                    <Anchor point="BOTTOMRIGHT" x="-3" y="0"/>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        self:SetAlpha(0.15);
+                                    </OnLoad>
+                                </Scripts>
+                            </Frame>
+                            <Button name="RPSPoll_NPCFrameChatNext" parentKey="next" inherits="RPSPoll_InvisibleButton" setAllPoints="true" frameLevel="4">
+                                <Scripts>
+                                    <OnEnter>
+                                        RPSPoll_NPCFrameChatHighlight:Show();
+                                    </OnEnter>
+                                    <OnLeave>
+                                        RPSPoll_NPCFrameChatHighlight:Hide();
+                                    </OnLeave>
+                                </Scripts>
+                            </Button>
+                        </Frames>
+                    </Frame>
+                </Frames>
+            </Frame>
+        </Frames>
+    </Frame>
 </Ui>

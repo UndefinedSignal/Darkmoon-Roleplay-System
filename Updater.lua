@@ -181,6 +181,13 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 	end
 end
 
+function RPSCoreFramework:InitializePool(str)
+	local values = {strsplit('#',str)};
+	if values[1] == nil then
+		return;
+	end
+end
+
 function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 	if RPSCoreFramework.Interface.Auras.Initialized then
 		RPSCoreFramework:ScrollMenuUpdater();

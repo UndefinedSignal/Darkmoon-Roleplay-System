@@ -67,6 +67,12 @@ RPSCoreFramework.StatsLevel = 40;
 RPSCoreFramework.MyScale = 0;
 RPSCoreFramework.ChoosedScale = 0;
 
+RPSCoreFramework.Poll = {};
+RPSCoreFramework.Poll.Question = nil;
+RPSCoreFramework.Poll.ScheduleTimer = nil;
+RPSCoreFramework.Poll.Answers = {};
+	--[[	{ 1, "Путин" }
+			{ 2, "Жирик" }]]
 
 
 RPSCoreFramework.Interface.HighlightedButtons = {};

@@ -104,6 +104,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
+--[[	elseif (event == "RPS.POLL") then
+		RPSCoreFramework:InitializePool(msg);]]
 	end
 end
 
@@ -146,8 +148,10 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 		temp.count = itemCount;
 		temp.slotID = 0;
 		RPSCoreFramework.PlayerCursorInformation = temp;
-	elseif (RPSCoreFramework:GetCursorItem() and not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
-		RPSCoreFramework.PlayerCursorInformation = nil;
+	elseif (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
+		if (not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
+			RPSCoreFramework.PlayerCursorInformation = nil;
+		end
 	end
 
 	if RPSCoreFramework.PlayerCursorInformation then
