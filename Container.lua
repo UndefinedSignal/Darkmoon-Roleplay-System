@@ -268,22 +268,29 @@ function RPSCoreFramework:GetContainerItem(slotID)
 end
 
 function RPSCoreFramework:ShowContainerToolTip(self)
-	ContainerGameTooltip:ClearLines();
-	ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");
+	GameTooltip:ClearLines();
+	GameTooltip:SetOwner(self, "ANCHOR_LEFT");
+	--ContainerGameTooltip:ClearLines();
+	--ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");
 	if self.guid ~= nil then
 		local __, itemLink = GetItemInfo(self.guid)
-		ContainerGameTooltip:SetHyperlink(itemLink)
+		GameTooltip:SetHyperlink(itemLink)
+		--ContainerGameTooltip:SetHyperlink(itemLink)
 	elseif (RPS_ContainerFramePortraitDescription == self) then
-		ContainerGameTooltip:AddLine(RPS_ContainerFrameName:GetText());
+		GameTooltip:AddLine(RPS_ContainerFrameName:GetText());
+		--ContainerGameTooltip:AddLine(RPS_ContainerFrameName:GetText());
 	else
 		return;
 	end
-	ContainerGameTooltip:Show();
+	GameTooltip:Show();
+	--ContainerGameTooltip:Show();
 end
 
 function RPSCoreFramework:HideContainerToolTip()
-	ContainerGameTooltip:ClearLines()
-	ContainerGameTooltip:Hide();
+	GameTooltip:ClearLines()
+	GameTooltip:Hide();
+	--ContainerGameTooltip:ClearLines()
+	--ContainerGameTooltip:Hide();
 end
 
 function RPSCoreFramework:ContainerFrameOnEnter(self)

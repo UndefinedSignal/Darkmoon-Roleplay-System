@@ -2,6 +2,8 @@ function RPSCoreFramework:OnEnable()
 	self:ScheduleTimer("OneShotUpdater", 5);
 	self:ScheduleTimer("UpdateScrollerPosition", 7);
 	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5);
+	self:ScheduleRepeatingTimer("StartGarbageCollection", 3600);
+	
 	if (not RPSCoreShouldFirstTime) then
 		RPSCoreFramework:switchMainFrame();
 		RPSCoreShouldFirstTime = true;

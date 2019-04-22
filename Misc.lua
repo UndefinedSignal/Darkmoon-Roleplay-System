@@ -317,3 +317,23 @@ function RPSCoreFramework:hex2rgb(hex)
       return tonumber("0x"..hex:sub(1,2))/255, tonumber("0x"..hex:sub(3,4))/255, tonumber("0x"..hex:sub(5,6))/255
     end
 end
+
+function RPSCoreFramework:StartGarbageCollection()
+	RPSCoreFramework.GBCounter = collectgarbage("count")
+	collectgarbage("collect")
+	if RPSCoreFramework.PrintGarbageCollector then
+		print("Collected " .. (RPSCoreFramework.GBCounter-collectgarbage("count")) .. " kB of garbage");
+	end
+end
+
+SLASH_RPSGARBAGECOLLECTOR1 = "/rpsgarbage";
+
+function SlashCmdList.RPSGARBAGECOLLECTOR()
+    if RPSCoreFramework.PrintGarbageCollector then
+    	print("Hide garbage collector debug message.")
+    	RPSCoreFramework.PrintGarbageCollector = false;
+    else
+    	print("Show garbage collector debug message.")
+    	RPSCoreFramework.PrintGarbageCollector = true;
+    end
+end

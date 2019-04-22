@@ -1300,22 +1300,22 @@
 	<GameTooltip name="ContainerGameTooltip" inherits="GameTooltipTemplate">
         <Scripts>
             <Onload>
-            	ContainerGameTooltipTextRight1:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft1:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextRight2:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft2:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextRight3:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft3:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextRight4:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft4:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextRight5:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft5:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextRight6:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft6:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextRight7:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft7:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextRight8:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
-            	ContainerGameTooltipTextLeft8:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight1:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft1:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight2:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft2:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight3:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft3:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight4:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft4:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight5:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft5:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight6:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft6:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight7:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft7:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight8:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft8:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
                 self:SetOwner(WorldFrame, "ANCHOR_NONE");
             </Onload>
         </Scripts>
@@ -1376,7 +1376,7 @@
 			<OnShow />
 			<OnDragStart>
 			--	RPSCoreFramework:PickupContainerItem(self);
-				ContainerGameTooltip:Hide();
+				GameTooltip:Hide();
 			</OnDragStart>
 			<OnDragStop>
 			--	RPSCoreFramework:ContainerFrameOnDragStop();
@@ -1564,10 +1564,10 @@
 				</Anchors>
 				<Scripts>
 					<OnEnter>
-						ContainerGameTooltip:SetOwner(self, "ANCHOR_LEFT");
+						GameTooltip:SetOwner(self, "ANCHOR_LEFT");
 					</OnEnter>
 					<OnLeave>
-						ContainerGameTooltip:Hide();
+						GameTooltip:Hide();
 					</OnLeave>
 				</Scripts>
 			</Button>
@@ -1779,9 +1779,9 @@
 			</OnEscapePressed>
 			<OnEditFocusGained>
 				if self.disabled then
-				self:ClearFocus();
+					self:ClearFocus();
 				else
-				self:HighlightText();
+					self:HighlightText();
 				end
 			</OnEditFocusGained>
 			<OnEditFocusLost>

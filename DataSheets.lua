@@ -12,6 +12,9 @@ RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
 RPSCoreFramework.SalaryTimer = nil;
 
+RPSCoreFramework.PrintGarbageCollector = false;
+RPSCoreFramework.GBCounter = nil;
+
 RPSCoreFramework.Container = {};
 RPSCoreFramework.Container.title = nil;
 RPSCoreFramework.Container.size = nil;
