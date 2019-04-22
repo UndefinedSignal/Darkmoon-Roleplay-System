@@ -1567,7 +1567,7 @@
 						GameTooltip:SetOwner(self, "ANCHOR_LEFT");
 					</OnEnter>
 					<OnLeave>
-						GameTooltip:Hide();
+						RPSCoreFramework:HideContainerToolTip();
 					</OnLeave>
 				</Scripts>
 			</Button>
@@ -1596,10 +1596,17 @@
             </OnLoad>
             <OnHide>
                 RPSCoreFramework:ContainerFrameOnHide();
+                RPSCoreFramework:HideContainerToolTip();
             </OnHide>
             <OnShow>
                 RPSCoreFramework:ContainerFrameOnShow(self);
             </OnShow>
+            <OnEnter>
+            	RPSCoreFramework:HideContainerToolTip();
+            </OnEnter>
+            <OnLeave>
+            	RPSCoreFramework:HideContainerToolTip();
+            </OnLeave>
 		</Scripts>
 	</Frame>
 
