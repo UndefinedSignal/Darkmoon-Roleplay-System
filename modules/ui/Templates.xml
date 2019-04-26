@@ -545,7 +545,6 @@
 		</Layers>
 	</Frame>
 
-
 	<Button name="RPS_QuestPageTemplate" virtual="true" inherits="RPS_SmallerStandardParchmentFrame">
 		<Size x="0" y="158"/>
 		<Layers>

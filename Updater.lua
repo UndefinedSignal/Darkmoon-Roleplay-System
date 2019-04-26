@@ -76,6 +76,20 @@ function RPSCoreFramework:UpdateAuraKnownInfo(str)
 	end
 end
 
+function RPSCoreFramework:UpdatePLayerAuraList(str)
+	str = string.gsub(str, "RPS.AuraKnown ", "");
+	local values = {strsplit(' ', str)};
+	if (str == nil or str == "RPS.AuraKnown") then
+		return false;
+	end
+	for i=1, #values do
+		RPSCoreFramework.Interface.Auras[tonumber(values[i])][6] = 0;
+	end
+	if (_G["DarkmoonAurasFrame"]:IsShown() and _G["RPS_MainFrame"]:IsShown() ) then
+		RPSCoreFramework:ScrollMenuUpdater();
+	end
+end
+
 function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	str = string.gsub(str, "RPS.AuraActive ", "");
 	local values = {strsplit(' ', str)};
@@ -269,12 +283,19 @@ function RPSCoreFramework:UpdateContainer(msg)
 	values = {strsplit('#',msg)};
 	if values ~= nil then
 		if tonumber(values[1]) == 0 then
-			 RPSCoreFramework:ClearItemByID(tonumber(values[2]));
+			RPSCoreFramework:ClearItemByID(tonumber(values[2]));
 		elseif tonumber(values[1]) == 1 then
 			RPSCoreFramework:PushContainerItem(tonumber(values[2]), {isVirtual = true, itemID = tonumber(values[3]), count = tonumber(values[4]), locked = false})
 		end
 	end
+
+	if (RPSCoreFramework:GetContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID) == nil) then
+		RPSCoreFramework:ClearCursor();
+		RPSCoreFramework.PlayerCursorInformation = nil;
+	end
+
 	RPSCoreFramework:ContainerFrameUpdate();
+
 end
 
 function RPSCoreFramework:SalaryIndicator(msg)

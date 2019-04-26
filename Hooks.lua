@@ -101,6 +101,9 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdateContainer(msg);
 		elseif (prefix == "RPS.ECO.ti") then
 			RPSCoreFramework:SalaryIndicator(msg)
+		elseif (prefix == "RPS.AuraOff") then
+			print(msg);
+			RPSCoreFramework:UpdatePLayerAuraList(msg)
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();

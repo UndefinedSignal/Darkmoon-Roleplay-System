@@ -82,7 +82,6 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
 	end
 end
 function RPSCoreFramework:LearnMyAuras(button, arg1)
-
 	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1])
 	_G[button:GetName().."Price"]:Hide()
     _G[button:GetName().."Macros"]:Show()
@@ -165,31 +164,31 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 	}
 	local id = RPSCoreFramework.Interface.Auras.Message[arg1][2]
 	if RPSCoreFramework:KnownAura(id) then
-		if RPSCoreFramework:UpdateActiveAurasCounter() and RPSCoreFramework:isAuraActive(id) then
-			RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1])
-			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter - 1
-			RPSCoreFramework.Interface.Auras[id][6] = 0
-			_G[button:GetName().."Completed"]:Hide()
+		if ( RPSCoreFramework:UpdateActiveAurasCounter() and RPSCoreFramework:isAuraActive(id) ) then
+			RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
+			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter - 1;
+			RPSCoreFramework.Interface.Auras[id][6] = 0;
+			_G[button:GetName().."Completed"]:Hide();
 		else
-			if tonumber(RPSCoreFramework.Interface.ActiveAuraCounter) < 3 then
-				RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1])
-				RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1
-				RPSCoreFramework.Interface.Auras[id][6] = 1
-				_G[button:GetName().."Completed"]:Show()
+			if ( tonumber(RPSCoreFramework.Interface.ActiveAuraCounter) < 3 ) then
+				RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
+				RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1;
+				RPSCoreFramework.Interface.Auras[id][6] = 1;
+				_G[button:GetName().."Completed"]:Show();
 			else
-				StaticPopup_Show("MaxToggledAuras")
+				StaticPopup_Show("MaxToggledAuras");
 			end
 		end
 	else
 		if (GetMoney() >= tonumber(RPSCoreFramework.Interface.Auras[id][4])) then
-			StaticPopup_Show("LearnAura")
+			StaticPopup_Show("LearnAura");
 		end
 	end
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
-	self:ScheduleTimer("GhostClickUpdater", 0.5)
-	if RPSCoreFramework.Interface.Auras.AllowUpdate then
-		self.ThreeTimesTimerCount = 0
-		RPSCoreFramework.Interface.Auras.AllowUpdate = false
-		self.ThreeTimesTimer = self:ScheduleRepeatingTimer("ThreeTimesUpdate", 7)
+	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5);
+	self:ScheduleTimer("GhostClickUpdater", 0.5);
+	if (RPSCoreFramework.Interface.Auras.AllowUpdate) then
+		self.ThreeTimesTimerCount = 0;
+		RPSCoreFramework.Interface.Auras.AllowUpdate = false;
+		self.ThreeTimesTimer = self:ScheduleRepeatingTimer("ThreeTimesUpdate", 7);
 	end
 end

@@ -1320,13 +1320,20 @@
         </Frames>
     </Frame>
 
-    <Frame name="PoolFrame" inherits="RPS_SmallerStandardParchmentFrame" hidden="true">
+    <Frame name="PollFrame" inherits="RPS_SmallerStandardParchmentFrame" movable="true" hidden="true">
         <Size x="365" y="230"/>
         <Anchors>
-            <Anchor point="CENTER" x="30" y="-20"/>
+            <Anchor point="CENTER" x="0" y="0"/>
         </Anchors>
 
         <Frames>
+
+            <Button parentKey="Close" inherits="UIPanelCloseButton">
+                <Size x="20" y="20"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                </Anchors>
+            </Button>
 
             <Frame name="$parentTimer">
                 <Size x="75" y="25"/>
@@ -1335,7 +1342,7 @@
                             <AbsValue val="1"/>
                         </EdgeSize>
                     </Backdrop>
-                    <Anchors><Anchor relativeTo="PoolFrame" point="CENTER" x="0" y="13"/></Anchors>
+                    <Anchors><Anchor relativeTo="PollFrame" point="CENTER" x="0" y="13"/></Anchors>
                     <Layers>
                         <Layer level="OVERLAY">
                             <FontString name="$parentCountdown" text="02:00" inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
@@ -1355,7 +1362,7 @@
 
             <Button name="$parentChoice1" inherits="RPSPoll_DialogChoiceButton" text="Твоё очко" hidden="false">
                 <Size x="124" y="28"/>
-                <Anchors><Anchor relativeTo="PoolFrame" point="LEFT" x="0" y="-15"/></Anchors>
+                <Anchors><Anchor relativeTo="PollFrame" point="LEFT" x="0" y="-15"/></Anchors>
                 <NormalFont style="GameFontNormal"/>
                 <Scripts>
                     <OnLoad>
@@ -1393,7 +1400,7 @@
                     </OnLoad>
                 </Scripts>
             </Button>
-            <Frame name="PoolQuestion">
+            <Frame name="PollQuestion">
                 <Size x="340" y="70"/>
                 <Anchors>
                     <Anchor point="TOP" x="0" y="-42"/>
@@ -1456,5 +1463,50 @@
                 </Frames>
             </Frame>
         </Frames>
+
+        <Scripts>
+            <OnLoad>
+                tinsert(UISpecialFrames, self:GetName());
+            </OnLoad>
+        </Scripts>
+
     </Frame>
+
+    <Frame name="PollFrameAnnouncer" movable="true" hidden="false">
+        <Size x="225" y="158"/>
+        <Anchors>
+            <Anchor point="BOTTOMRIGHT" x="-60" y="60"/>
+        </Anchors>
+
+        <Frames>
+
+            <Button parentKey="Close" inherits="UIPanelCloseButton">
+                <Size x="20" y="20"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                </Anchors>
+            </Button>
+
+            <Button name="$parentYES" inherits="UIPanelButtonTemplate" text="Ответить!">
+                <Size x="94" y="22"/>
+                <Anchors><Anchor relativeTo="PollFrameAnnouncer" point="BOTTOM" x="0" y="35"/></Anchors>
+                <NormalFont style="GameFontNormal"/>
+
+                <Scripts>
+                    <OnClick>
+                        PlaySound(624, "SFX");
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
+
+        <Scripts>
+            <OnShow>
+                PollFrameAnnouncer.switchButton:Hide();
+                PollFrameAnnouncerName:SetText("Новый вопрос! Спеши ответить!");
+                PollFrameAnnouncerRange:Hide();
+            </OnShow>
+        </Scripts>
+    </Frame>
+
 </Ui>

@@ -17,11 +17,15 @@ function RPSCoreFramework:OnInitialize()
 	SetCVar("autoClearAFK", 0);
 
 	self.isTypingMessage = false
-
+	
+	table.insert(UISpecialFrames, PollFrame);
 	table.insert(UISpecialFrames, RPS_MainFrame);
+	table.insert(UISpecialFrames, PollFrameAnnouncer);
 
 	self:EnableDrag(RPS_MainFrame);
 	self:EnableDrag(RPS_InteractFrame);
+	self:EnableDrag(PollFrameAnnouncer);
+	self:EnableDrag(PollFrame);
 
 	self:InitializeHooks();
 
