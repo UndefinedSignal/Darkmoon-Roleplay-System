@@ -5,7 +5,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
-	self:RegisterEvent("ITEM_LOCK_CHANGED");
+--	self:RegisterEvent("ITEM_LOCK_CHANGED");
 	self:RegisterEvent("BAG_UPDATE")
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -54,7 +54,7 @@ function RPSCoreFramework:HookAllPlayerBagButtons()
 				num = i + 1;
 				bagButton = _G["ContainerFrame"..num.."Item"..j]
 				if (not RPSCoreFramework:IsHooked(bagButton, "OnClick")) then
-					self:HookScript(bagButton, "OnClick", "HookPlayerContainerClick");
+					self:SecureHookScript(bagButton, "OnClick", "HookPlayerContainerClick");
 				end
 			end
 		end
