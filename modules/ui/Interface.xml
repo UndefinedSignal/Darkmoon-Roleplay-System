@@ -1360,7 +1360,7 @@
             </Frame>
 
             <StatusBar name="$parentStatusBar" hidden="false" minValue="0" maxValue="120" defaultValue="120" orientation="HORIZONTAL" frameStrata="PARENT">
-                <Size x="250" y="13"/>
+                <Size x="250" y="12"/>
                 <Anchors><Anchor relativeTo="PollFrame" point="CENTER" x="0" y="13"/></Anchors>
                 <BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>
                 <Layers>
