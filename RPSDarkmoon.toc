@@ -36,5 +36,7 @@ Search.lua
 container.lua
 
 modules\ui\Templates.xml
+modules\ui\MiscTemplates.xml
+modules\ui\PollToast.xml
 modules\ui\Interact.xml
 modules\ui\Interface.xml

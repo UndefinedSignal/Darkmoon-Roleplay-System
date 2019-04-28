@@ -289,9 +289,11 @@ function RPSCoreFramework:UpdateContainer(msg)
 		end
 	end
 
-	if (RPSCoreFramework:GetContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID) == nil) then
-		RPSCoreFramework:ClearCursor();
-		RPSCoreFramework.PlayerCursorInformation = nil;
+	if ( RPSCoreFramework.PlayerCursorInformation ~= nil ) then
+		if (RPSCoreFramework:GetContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID) == nil) then
+			RPSCoreFramework:ClearCursor();
+			RPSCoreFramework.PlayerCursorInformation = nil;
+		end
 	end
 
 	RPSCoreFramework:ContainerFrameUpdate();

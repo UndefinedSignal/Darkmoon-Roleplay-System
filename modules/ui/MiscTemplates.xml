@@ -1,0 +1,64 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<Frame name="PollToastTemplate" parent="UIParent" enableMouse="true" movable="true" hidden="true" virtual="true">
+		<Size x="278" y="98"/>
+		<Anchors>
+			<Anchor point="CENTER" x="0" y="0"/>
+		</Anchors>
+	    <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+	    <!--Interface\BankFrame\Bank-Background-->
+	    <!--Interface\Collections\CollectionsBackgroundTile-->
+	    <!--Interface\GuildBankFrame\GuildVaultBG-->
+	    <!--<Backdrop bgFile="Interface\GuildBankFrame\GuildVaultBG" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<EdgeSize val="16"/>
+			<TileSize val="60"/>
+		 	<BackgroundInsets left="5" right="5" top="5" bottom="5"/>
+	    </Backdrop>-->
+	    <Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="ToastBG" atlas="LootToast-LessAwesome" useAtlasSize="true">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+            <Layer level="OVERLAY">
+	            <Texture name="$parentIcon" parentKey="Icon" file="Interface\ICONS\INV_Scroll_11">
+	                <Size x="45" y="45" />
+	                <Anchors>
+	                    <Anchor point="LEFT">
+	                        <Offset x="27" y="1" />
+	                    </Anchor>
+	                </Anchors>
+	            </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+	            <Texture parentKey="iconglow" file="Interface\TUTORIALFRAME\minimap-glow" alphaMode="ADD" hidden="true">
+	                <Size x="64" y="64" />
+	                <Anchors>
+	                    <Anchor point="CENTER" relativeTo="$parentIcon">
+	                        <Offset x="7" y="-7" />
+	                    </Anchor>
+	                </Anchors>
+	            </Texture>
+            </Layer>
+            <Layer level="HIGHLIGHT">
+	            <Texture parentKey="highlight" file="Interface\BUTTONS\UI-Panel-Button-Glow" alphaMode="ADD" frameStrata="HIGH">
+	            	<TexCoords top="0.6" left="0.76" bottom="0" right="0"/>
+	                <Anchors>
+	                    <Anchor point="TOPLEFT" x="-20" y="10"/>
+	                    <Anchor point="BOTTOMRIGHT" x="20" y="-10"/>
+	                </Anchors>
+	            </Texture>
+            </Layer>
+	    </Layers>
+
+		<Scripts>
+			<OnLoad>self:RegisterForDrag("LeftButton");</OnLoad>
+			<OnDragStart>self:StartMoving();</OnDragStart>
+			<OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+		</Scripts>
+	</Frame>
+</Ui>

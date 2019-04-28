@@ -3,7 +3,7 @@
     xmlns="http://www.blizzard.com/wow/ui/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <Script file="Scroller.lua"/>
-    <Frame name="RPS_MainFrame" inherits="RPS_FrameTemplate" movable="true" hidden="true">
+    <Frame name="RPS_MainFrame" parent="UIParent" inherits="RPS_FrameTemplate" movable="true" hidden="true">
         <Anchors>
             <Anchor point="CENTER" x="-400" y="0"/>
         </Anchors>
@@ -1320,14 +1320,13 @@
         </Frames>
     </Frame>
 
-    <Frame name="PollFrame" inherits="RPS_SmallerStandardParchmentFrame" movable="true" hidden="true">
-        <Size x="365" y="230"/>
+    <Frame name="PollFrame" parent="UIParent" inherits="RPS_SmallerStandardParchmentFrame" enableMouse="true" movable="true" hidden="false"  frameStrata="MEDIUM" clampedToScreen="true">
+        <Size x="470" y="300"/>
         <Anchors>
             <Anchor point="CENTER" x="0" y="0"/>
         </Anchors>
 
         <Frames>
-
             <Button parentKey="Close" inherits="UIPanelCloseButton">
                 <Size x="20" y="20"/>
                 <Anchors>
@@ -1361,9 +1360,9 @@
             </Frame>
 
             <Button name="$parentChoice1" inherits="RPSPoll_DialogChoiceButton" text="Твоё очко" hidden="false">
-                <Size x="124" y="28"/>
+                <Size x="124" y="34"/>
                 <Anchors><Anchor relativeTo="PollFrame" point="LEFT" x="0" y="-15"/></Anchors>
-                <NormalFont style="GameFontNormal"/>
+                <NormalFont style="GameFontNormalLarge"/>
                 <Scripts>
                     <OnLoad>
                         self.number:SetText("A");
@@ -1371,9 +1370,9 @@
                 </Scripts>
             </Button>
             <Button name="$parentChoice2" inherits="RPSPoll_DialogChoiceButton" text="Королева Лирия Седогрив" hidden="false">
-                <Size x="124" y="28"/>
-                <Anchors><Anchor relativeTo="$parentChoice1" point="LEFT" x="0" y="-20"/></Anchors>
-                <NormalFont style="GameFontNormal"/>
+                <Size x="124" y="34"/>
+                <Anchors><Anchor relativeTo="$parentChoice1" point="LEFT" x="0" y="-30"/></Anchors>
+                <NormalFont style="GameFontNormalLarge"/>
                 <Scripts>
                     <OnLoad>
                         self.number:SetText("B");
@@ -1381,9 +1380,9 @@
                 </Scripts>
             </Button>
             <Button name="$parentChoice3" inherits="RPSPoll_DialogChoiceButton" text="Поднять полотенце" hidden="false">
-                <Size x="124" y="28"/>
-                <Anchors><Anchor relativeTo="$parentChoice2" point="LEFT" x="0" y="-20"/></Anchors>
-                <NormalFont style="GameFontNormal"/>
+                <Size x="124" y="34"/>
+                <Anchors><Anchor relativeTo="$parentChoice2" point="LEFT" x="0" y="-30"/></Anchors>
+                <NormalFont style="GameFontNormalLarge"/>
                 <Scripts>
                     <OnLoad>
                         self.number:SetText("C");
@@ -1391,9 +1390,9 @@
                 </Scripts>
             </Button>
             <Button name="$parentChoice4" inherits="RPSPoll_DialogChoiceButton" text="Я газовщик пацаны" hidden="false">
-                <Size x="124" y="28"/>
-                <Anchors><Anchor relativeTo="$parentChoice3" point="LEFT" x="0" y="-20"/></Anchors>
-                <NormalFont style="GameFontNormal"/>
+                <Size x="124" y="34"/>
+                <Anchors><Anchor relativeTo="$parentChoice3" point="LEFT" x="0" y="-30"/></Anchors>
+                <NormalFont style="GameFontNormalLarge"/>
                 <Scripts>
                     <OnLoad>
                         self.number:SetText("D");
@@ -1401,12 +1400,13 @@
                 </Scripts>
             </Button>
             <Frame name="PollQuestion">
-                <Size x="340" y="70"/>
+                <Size x="340" y="80"/>
                 <Anchors>
-                    <Anchor point="TOP" x="0" y="-42"/>
+                    <Anchor point="TOPLEFT" x="15" y="-45"/>
+                    <Anchor point="RIGHT" x="-15" y="0"/>
                 </Anchors>
                 <Frames>
-                    <Frame name="RPSPoll_NPCFrameChat" parentKey="chat" frameStrata="HIGH">
+                    <Frame name="RPSPoll_NPCFrameChat" parentKey="chat" frameStrata="PARENT">
                         <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
                             <EdgeSize>
                                 <AbsValue val="16"/>
@@ -1418,15 +1418,14 @@
                                 <AbsInset left="3" right="3" top="3" bottom="3"/>
                             </BackgroundInsets>
                         </Backdrop>
-                        <Size x="340" y="70"/>
+                        <Size x="340" y="80"/>
                         <Anchors>
-                            <Anchor point="BOTTOM" x="0" y="25"/>
-                            <Anchor point="LEFT" x="10" y="0"/>
-                            <Anchor point="RIGHT" x="-10" y="0"/>
+                            <Anchor point="TOPLEFT" x="10" y="30"/>
+                            <Anchor point="BOTTOMRIGHT" x="-10" y="5"/>
                         </Anchors>
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="RPSPoll_NPCFrameChatNextText" text="Этот дреней, некогда здоровый и полный сил паладин, серьезно заболел после битв с Пылающим Легионом и пополнил ряды Сломленных. Впоследствии он стал могущественным шаманом." inherits="GameFontNormal" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
+                                <FontString name="RPSPoll_NPCFrameChatNextText" text="Этот дреней, некогда здоровый и полный сил паладин, серьезно заболел после битв с Пылающим Легионом и пополнил ряды Сломленных. Впоследствии он стал могущественным шаманом." inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
                                     <Anchors>
                                         <Anchor point="BOTTOMLEFT" x="10" y="10"/>
                                         <Anchor point="TOPLEFT" x="10" />
@@ -1466,47 +1465,12 @@
 
         <Scripts>
             <OnLoad>
-                tinsert(UISpecialFrames, self:GetName());
-            </OnLoad>
+                self:RegisterForDrag("LeftButton");
+                tinsert(UISpecialFrames, self:GetName());</OnLoad>
+            <OnDragStart>self:StartMoving();</OnDragStart>
+            <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
         </Scripts>
 
-    </Frame>
-
-    <Frame name="PollFrameAnnouncer" movable="true" hidden="false">
-        <Size x="225" y="158"/>
-        <Anchors>
-            <Anchor point="BOTTOMRIGHT" x="-60" y="60"/>
-        </Anchors>
-
-        <Frames>
-
-            <Button parentKey="Close" inherits="UIPanelCloseButton">
-                <Size x="20" y="20"/>
-                <Anchors>
-                    <Anchor point="TOPRIGHT" x="-5" y="-5"/>
-                </Anchors>
-            </Button>
-
-            <Button name="$parentYES" inherits="UIPanelButtonTemplate" text="Ответить!">
-                <Size x="94" y="22"/>
-                <Anchors><Anchor relativeTo="PollFrameAnnouncer" point="BOTTOM" x="0" y="35"/></Anchors>
-                <NormalFont style="GameFontNormal"/>
-
-                <Scripts>
-                    <OnClick>
-                        PlaySound(624, "SFX");
-                    </OnClick>
-                </Scripts>
-            </Button>
-        </Frames>
-
-        <Scripts>
-            <OnShow>
-                PollFrameAnnouncer.switchButton:Hide();
-                PollFrameAnnouncerName:SetText("Новый вопрос! Спеши ответить!");
-                PollFrameAnnouncerRange:Hide();
-            </OnShow>
-        </Scripts>
     </Frame>
 
 </Ui>

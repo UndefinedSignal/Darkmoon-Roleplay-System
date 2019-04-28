@@ -318,6 +318,14 @@ function RPSCoreFramework:hex2rgb(hex)
     end
 end
 
+function RPSCoreFramework:SchedulePollTimer()
+	PollToastStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
+	RPSCoreFramework.PollTimer.Counter = RPSCoreFramework.PollTimer.Counter - 1;
+	if RPSCoreFramework.PollTimer.Counter == 0 then
+		RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer)
+	end
+end
+
 function RPSCoreFramework:StartGarbageCollection()
 	RPSCoreFramework.GBCounter = collectgarbage("count")
 	collectgarbage("collect")

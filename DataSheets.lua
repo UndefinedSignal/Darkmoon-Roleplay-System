@@ -11,6 +11,9 @@ RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
 RPSCoreFramework.SalaryTimer = nil;
+RPSCoreFramework.PollTimer = {};
+RPSCoreFramework.PollTimer.Timer = nil;
+RPSCoreFramework.PollTimer.Counter = nil;
 
 RPSCoreFramework.PrintGarbageCollector = false;
 RPSCoreFramework.GBCounter = nil;
