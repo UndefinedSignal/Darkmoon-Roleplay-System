@@ -1,11 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-	<Frame name="PollToastTemplate" parent="UIParent" enableMouse="true" movable="true" hidden="true" virtual="true">
+	<Frame name="PollToastTemplate" parent="UIParent" enableMouse="true" movable="true" hidden="true" clampedToScreen="true" virtual="true">
 		<Size x="278" y="98"/>
-		<Anchors>
-			<Anchor point="CENTER" x="0" y="0"/>
-		</Anchors>
 	    <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
 	    <!--Interface\BankFrame\Bank-Background-->
 	    <!--Interface\Collections\CollectionsBackgroundTile-->
