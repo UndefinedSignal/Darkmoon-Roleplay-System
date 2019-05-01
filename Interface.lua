@@ -131,3 +131,20 @@ function RPSCoreFramework:OnClickFrameShowing(frame)
 	end
 	frame:Show()
 end
+
+function RPSCoreFramework:MenstrelOnShow(self)
+    PickupItem(1000207);
+    ClearCursor();
+end
+
+function RPSCoreFramework:MenstrelCoinOnEnter(self)
+    GameTooltip:ClearLines();
+    GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+    local __, itemLink = GetItemInfo(1000207);
+    GameTooltip:SetHyperlink(itemLink);
+    GameTooltip:Show();
+end
+
+function RPSCoreFramework:MenstrelCoinOnLeave(self)
+	GameTooltip:Hide();
+end

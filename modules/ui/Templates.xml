@@ -16,6 +16,11 @@
 
 	<Frame name="RPS_MenestreleCards" virtual="true">
 		<Size x="123" y="99"/>
+
+        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+            <EdgeSize val="12"/>
+        </Backdrop>
+
 		<Layers>
 			<Layer level="BACKGROUND">
 				<Texture name="$parentBackground" parentKey="Background" file="Interface\ACHIEVEMENTFRAME\UI-Achievement-StatsBackground">
@@ -440,7 +445,7 @@
 					<EditBox name="$parentText" parentKey="text" multiLine="true" enableMouse="false" autoFocus="false">
 						<Anchors>
 							<Anchor point="TOPLEFT" x="0" y="-4"/>
-							<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+							<Anchor point="BOTTOMRIGHT" x="0" y="12"/>
 						</Anchors>
 						<Scripts>
 							<OnShow>

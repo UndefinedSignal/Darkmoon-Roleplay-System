@@ -136,6 +136,12 @@ RPSCoreFramework.Literature.DarkmoonRules = [[<html><body><br/><h3>|cFFe36c09- �
 
 RPSCoreFramework.Literature.DarkmoonDispDesc = [[<html><body><p align="center">Отображает использованные Вами ID предметов для трансмогрификации вещей на персонаже. В дальнейшем вы можете скопировать отсюда все команды и использовать их для создания макроса или сообщить эти ID другим пользователям.</p></body></html>]]
 
+RPSCoreFramework.Literature.DescriptionMinstrel = [[<html><body>
+<p>1. Не будь мудаком и не твори мемы с ближним своим сынко моё.</p>
+<p>2. Если сотворил говно то будь добр убрать его за собой.</p>
+</body></html>]]
+
+RPSCoreFramework.Literature.DarkmoonMinstrel1 = [[1|n2|n3|n4|n5|n6|n7|n8|n9|n10|n11|n12|n13|n14|n15|n16|n17|n18|n19|n20|n21|n22|n23|n24|n25|n26|n27|n28|n29|n30]]
 
 RPSCoreFramework.Literature.DarkmoonSettingsBarbershop = [[ <html><body><p align="left">* Может быть недоступна для некоторых рас.</p>
 <p align="left">* Для того чтобы услуга была бесплатной необходимо сменить прическу.</p></body></html> ]]
@@ -202,6 +208,13 @@ function RPSCoreFramework:LiteratureTextFormatting()
 	RPS_DarkmoonDispFrameContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DarkmoonDispFrameContent:SetFontObject("h3", GameFontNormalLarge);
 	RPS_DarkmoonDispFrameContent:SetText(RPSCoreFramework.Literature.DarkmoonDispDesc);
+
+	RPS_DescriptionMinstrel:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
+	RPS_DescriptionMinstrel:SetFontObject("p", GameFontNormal);
+	RPS_DescriptionMinstrel:SetFontObject("h1", GameFontNormalHuge3);
+	RPS_DescriptionMinstrel:SetFontObject("h2", GameFontNormalHuge);
+	RPS_DescriptionMinstrel:SetFontObject("h3", GameFontNormalLarge);
+	RPS_DescriptionMinstrel:SetText(RPSCoreFramework.Literature.DescriptionMinstrel)
 
 
 	RPS_DarkmoonBARBERSHOPBUTTONText:SetFont('Fonts\FRIZQT___CYR.TTF', 12);

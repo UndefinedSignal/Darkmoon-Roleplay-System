@@ -68,7 +68,6 @@
                                     <Anchors>
                                         <Anchor point="TOPLEFT" x="3" y="-2"/>
                                         <Anchor point="BOTTOMRIGHT" x="-10" y="-2"/>
-
                                     </Anchors>
                                     <TexCoords left="0" right="0.7" top="0.10" bottom="0"/>
                                 </Texture>
@@ -1245,10 +1244,120 @@
                                           </OnClick>
                                         </Scripts>
                                     </Button>
-
                                 </Frames>
                             </Frame>
                         </Frames>
+                        <Size x="120" y="40"/>
+                        <Anchors>
+                            <Anchor relativeTo="DarkmoonPasswordChangeFrame" x="185" y="-280" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                    </Frame>
+
+                    <Frame name="DarkmoonMinstrelFrame" hidden="true">
+                        <Size x="500" y="430"/>
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" />
+                            <Anchor point="TOPLEFT" x="0" y="0" />
+                            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="12"/>
+                        </Backdrop>
+
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\Artifacts\ArtifactUIWarlock">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" x="2" y="-2"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-2" y="0"/>
+                                    </Anchors>
+                                    <TexCoords left="0" right="0.7" top="0.5" bottom="0"/>
+                                </Texture>
+                            </Layer>
+                            <Layer>
+                                <FontString name="$parentString" font="Fonts\FRIZQT___CYR.TTF" text="Менестрель" justifyH="CENTER" justifyV="TOP">
+                                    <Color r="1" g="1" b="1" a="1"/>
+                                    <FontHeight val="24"/>
+                                    <Anchors>
+                                        <Anchor point="TOP" relativeTo="DarkmoonMinstrelFrame" x="-80" y="-26" />
+                                    </Anchors>
+                                </FontString>
+                            </Layer>
+
+                        </Layers>
+
+                        <Frames>
+                            <Frame name="RPS_TextMinstrel" inherits="RPS_TextArea">
+                                <Size x="455" y="240"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonMinstrelFrame" point="TOPLEFT" x="20" y="-90" />
+                                    <Anchor point="BOTTOMRIGHT" x="-10" y="10" />
+                                </Anchors>
+                                <Scripts>
+                                    <OnShow>
+                                        RPS_TextMinstrelScrollText:SetText(RPSCoreFramework.Literature.DarkmoonMinstrel1);
+                                    </OnShow>
+                                </Scripts>
+                            </Frame>
+
+                            <SimpleHTML name="RPS_DescriptionMinstrel">
+                                <Size x="460" y="340"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonMinstrelFrame" point="TOPLEFT" x="20" y="-65" />
+                                    <Anchor point="TOP" x="20" y="-90" />
+                                </Anchors>
+                            </SimpleHTML>
+
+                            <Button name="$parentBuy" inherits="UIPanelButtonTemplate" text="">
+                                <Size x="126" y="38"/>
+                                <Anchors>
+                                    <Anchor point="TOPRIGHT" x="-20" y="-22"/>
+                                </Anchors>
+                                <NormalFont style="GameFontNormal"/>
+
+                                <Scripts>
+                                    <OnLoad>
+                                        self:SetFrameStrata("DIALOG");
+                                        self:SetText("Активировать");
+                                    </OnLoad>
+                                </Scripts>
+                            </Button>
+
+                            <Frame name="RPSTokenTexture">
+                                <Size x="24" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="$parentBuy" point="LEFT" x="-30" y="0"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="OVERLAY">
+                                        <Texture name="RPSTokenTexture" file="Interface\ICONS\INV_Misc_Token_Darkmoon_01">
+                                            <Size x="24" y="24"/>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                            </Frame>
+
+                            <Button name="$parentTextDummy">
+                                <Size x="24" y="24"/>
+                                <Anchors>
+                                    <Anchor relativeTo="RPSTokenTexture" point="TOPLEFT"/>
+                                </Anchors>
+                                <Scripts>
+                                    <OnEnter>
+                                        RPSCoreFramework:MenstrelCoinOnEnter(self);
+                                    </OnEnter>
+                                    <OnLeave>
+                                        RPSCoreFramework:MenstrelCoinOnLeave(self);
+                                    </OnLeave>
+                                </Scripts>
+                            </Button>
+                        </Frames>
+
+                        <Scripts>
+                            <OnShow>
+                                RPSCoreFramework:MenstrelOnShow(self);
+                            </OnShow>
+                        </Scripts>
                     </Frame>
                 </Frames>
             </Frame>
