@@ -209,6 +209,7 @@ function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 end
 
 function RPSCoreFramework:OneShotUpdater()
+	RPSCoreFramework:SendCoreMessage("rps minstrel status");
 	RPSCoreFramework:SendCoreMessage("disp list");
 	RPSCoreFramework:SendCoreMessage("rps request poi init");
 	RPSCoreFramework:SendCoreMessage("rps action scale info");

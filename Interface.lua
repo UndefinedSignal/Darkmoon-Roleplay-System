@@ -133,8 +133,10 @@ function RPSCoreFramework:OnClickFrameShowing(frame)
 end
 
 function RPSCoreFramework:MenstrelOnShow(self)
-    PickupItem(1000207);
-    ClearCursor();
+	if (GetItemInfo(1000207) == nil) then
+	    PickupItem(1000207);
+	    ClearCursor();
+	end
 end
 
 function RPSCoreFramework:MenstrelCoinOnEnter(self)
@@ -147,4 +149,8 @@ end
 
 function RPSCoreFramework:MenstrelCoinOnLeave(self)
 	GameTooltip:Hide();
+end
+
+function RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self)
+	---
 end

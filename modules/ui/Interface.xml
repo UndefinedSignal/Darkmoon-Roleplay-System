@@ -1283,7 +1283,6 @@
                                     </Anchors>
                                 </FontString>
                             </Layer>
-
                         </Layers>
 
                         <Frames>
@@ -1320,6 +1319,11 @@
                                         self:SetFrameStrata("DIALOG");
                                         self:SetText("Активировать");
                                     </OnLoad>
+
+                                    <OnClick>
+                                        RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
+                                    </OnClick>
+
                                 </Scripts>
                             </Button>
 
