@@ -28,6 +28,8 @@ RPSCoreFramework.ContainerDataFlow = true;
 RPSCoreFramework.PlayerCursorInformation = nil;
 RPSCoreFramework.DraggingContainerFrame = nil;
 
+RPSCoreFramework.MinstrelStatus = 2;
+
 if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {};
 end

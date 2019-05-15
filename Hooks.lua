@@ -104,7 +104,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.AuraOff") then
 			RPSCoreFramework:UpdatePLayerAuraList(msg)
 		elseif (prefix == "RPS.Minstrel") then
-			print(msg);
+			RPSCoreFramework:UpdateMinstrelStatus(msg);
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();

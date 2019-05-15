@@ -1294,7 +1294,7 @@
                                 </Anchors>
                                 <Scripts>
                                     <OnShow>
-                                        RPS_TextMinstrelScrollText:SetText(RPSCoreFramework.Literature.DarkmoonMinstrel1);
+                                        RPSCoreFramework:MinstrelSetTextOnShow(RPS_TextMinstrelScrollText)
                                     </OnShow>
                                 </Scripts>
                             </Frame>
@@ -1315,9 +1315,12 @@
                                 <NormalFont style="GameFontNormal"/>
 
                                 <Scripts>
+                                    <OnShow>
+                                        RPSCoreFramework:MinstrelCheckLock();
+                                    </OnShow>
+
                                     <OnLoad>
                                         self:SetFrameStrata("DIALOG");
-                                        self:SetText("Активировать");
                                     </OnLoad>
 
                                     <OnClick>

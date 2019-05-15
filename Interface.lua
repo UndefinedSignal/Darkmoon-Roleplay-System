@@ -151,6 +151,27 @@ function RPSCoreFramework:MenstrelCoinOnLeave(self)
 	GameTooltip:Hide();
 end
 
+function RPSCoreFramework:MinstrelCheckLock()
+	if (RPSCoreFramework.MinstrelStatus == 0) then
+		DarkmoonMinstrelFrameBuy:Disable();
+		DarkmoonMinstrelFrameBuy:SetText("Заблокировано");
+	elseif (RPSCoreFramework.MinstrelStatus == 1) then
+		DarkmoonMinstrelFrameBuy:Disable();
+		DarkmoonMinstrelFrameBuy:SetText("Куплено");
+	elseif (RPSCoreFramework.MinstrelStatus == 2) then
+		DarkmoonMinstrelFrameBuy:Enable();
+		DarkmoonMinstrelFrameBuy:SetText("Активировать");
+	end
+end
+
+function RPSCoreFramework:MinstrelSetTextOnShow(self)
+	self:SetText(RPSCoreFramework.Literature.DarkmoonMinstrel1);
+end
+
 function RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self)
-	---
+	if (GetItemCount(1000207) ~= 0) then
+		StaticPopup_Show("buyMinstrel");
+	else
+		message("Недостаточно предметов для активации Менестрели");
+	end
 end

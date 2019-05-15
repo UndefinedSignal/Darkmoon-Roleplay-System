@@ -108,6 +108,24 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 
+--[[
+	rps minstrel activate
+	RPS.Minstrel 1 - Менестрель есть
+	RPS.Minstrel 0 - Менестрель заблочена(например у чувака ГМка)
+	RPS.Minstrel 2 - Менестрели нет.
+]]--
+
+
+function RPSCoreFramework:UpdateMinstrelStatus(str)
+	if (tonumber(str) == 0 or str == nil) then
+		RPSCoreFramework.MinstrelStatus = tonumber(str);
+		RPSCoreFramework:MinstrelCheckLock();
+	else
+		RPSCoreFramework.MinstrelStatus = tonumber(str);
+		RPSCoreFramework:MinstrelCheckLock();
+	end
+end
+
 function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	str = string.gsub(str, "RPS.Display ", ""); -- 5
 	local values = {strsplit(' ', str)};
