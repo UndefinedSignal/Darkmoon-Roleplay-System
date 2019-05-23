@@ -78,6 +78,7 @@ function RPSCoreFramework:OnInitialize()
 	-- RPSLiterature.lua text formatting
 
 	self:LiteratureTextFormatting()
+	self:MinstrelSetTextOnShow()
 
 	-- Button extensions
 

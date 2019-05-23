@@ -1324,6 +1324,7 @@
                                     </OnLoad>
 
                                     <OnClick>
+                                        RPS_TextMinstrel:Show();
                                         RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
                                     </OnClick>
 
