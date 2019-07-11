@@ -21,11 +21,19 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ItemRefShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
-	self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+	--self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
-	--self:SecureHook("SetMapToCurrentZone", function() 	if IsOutdoors() then RPSCoreFramework:GeneratePOIPlaces(); end	end)
-	self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
-	self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
+--PlayerZoneChanged(currentPlayerUiMapID, currentPlayerUiMapType)
+--Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
+
+	WorldMapFrame.ScrollContainer:HookScript("OnMouseDown", function(self, button)
+		if WorldMapFrame.ScrollContainer:IsMouseOver() then
+			RPSCoreFramework:ProcessMapClick(button);
+		end
+	end)
+	--self:SecureHook("PlayerZoneChanged", function() 	if IsOutdoors() then RPSCoreFramework:GeneratePOIPlaces(); end	end)
+	--self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+	--self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
 	self:SecureHook("ToggleWorldMap", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
@@ -163,5 +171,19 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 			RPSCoreFramework:ContainerToInventory(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
 			return
 		end
+	end
+end
+
+function RPSCoreFramework:ProcessMapClick(button)
+	if button == "RightButton" then
+		RPSCoreFramework:GeneratePOIPlaces();
+	elseif button == "LeftButton" then
+		RPSCoreFramework:GeneratePOIPlaces();
+	elseif button == "MiddleButton" then
+		print("Middle button!");
+	elseif button == "Button4" then
+		print("Button4 button!");
+	elseif button == "Button5" then
+		print("Button5 button!");
 	end
 end

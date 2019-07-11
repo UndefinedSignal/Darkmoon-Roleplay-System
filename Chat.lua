@@ -17,5 +17,5 @@ end
 
 function RPSCoreFramework:SendCoreMessage(msg)
 	msg = "."..msg;
-	SendAddonMessage(RPSCoreFramework.Prefix, msg, "WHISPER", UnitName("player"));
+	C_ChatInfo.SendAddonMessage(RPSCoreFramework.Prefix, msg, "WHISPER", UnitName("player"));
 end

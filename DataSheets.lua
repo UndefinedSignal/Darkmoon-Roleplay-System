@@ -1,6 +1,6 @@
 RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0")
-RPSCoreFramework.HBD = LibStub("HereBeDragons-1.0")
-RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-1.0")
+RPSCoreFramework.HBD = LibStub("HereBeDragons-2.0")
+RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-2.0")
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.Scroller = {};
 RPSCoreFramework.Display = {};
@@ -57,7 +57,7 @@ RPSCoreFramework.Timers.ContainerStatus = nil;
 
 
 RPSCoreFramework.Prefix = "DRPS";
-RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
+C_ChatInfo.RegisterAddonMessagePrefix(RPSCoreFramework.Prefix)
 RPSCoreFramework.POIIterator = 0;
 RPSCoreFramework.FreeStats = 0;
 RPSCoreFramework.FreeStatsCached = 0;
@@ -516,3 +516,5 @@ RPSCoreFramework.Interface.Auras.Message = {
 RPSCoreFramework.Interface.Auras.Initialized = false
 RPSCoreFramework.Interface.Auras.GhostClick = false
 RPSCoreFramework.Interface.Auras.AllowUpdate = true
+
+RPSCoreFramework.Interface.POIpepe = { 	"1243", "0", "-8832.26", "613.63", "house", "00D1FF", "Дом в Торговом квартале", "Владелец Мотрик. 15з. 0 уровень." }

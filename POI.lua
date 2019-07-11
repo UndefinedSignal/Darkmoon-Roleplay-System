@@ -49,14 +49,15 @@ function RPSCoreFramework:GeneratePOIPlaces()
     RPSCoreFramework:FlushAllPinsOnMap();
     RPSCoreFramework:FlushAllPinsOnMiniMap();
 
-    if (GetCurrentMapZone() ~= 0 and RPSCoreFramework.Map.POIWorkflow and RPSCoreShowPOIPins) then
-        for k, v in pairs(RPSCorePOIPins) do
-            RPSCoreFramework:InsertPinOnMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
+    if (RPSCoreFramework.Map.POIWorkflow and RPSCoreShowPOIPins) then
+        for k, v in pairs(RPSCoreFramework.Interface.POIpepe) do
+        	print(RPSCoreFramework.Interface.POIpepe[1]..RPSCoreFramework.Interface.POIpepe[2]..RPSCoreFramework.Interface.POIpepe[3]..RPSCoreFramework.Interface.POIpepe[4]..RPSCoreFramework.Interface.POIpepe[5]..RPSCoreFramework.Interface.POIpepe[6]..RPSCoreFramework.Interface.POIpepe[7]..RPSCoreFramework.Interface.POIpepe[8]);
+            RPSCoreFramework:InsertPinOnMap(RPSCoreFramework.Interface.POIpepe[1], RPSCoreFramework.Interface.POIpepe[2], RPSCoreFramework.Interface.POIpepe[3], RPSCoreFramework.Interface.POIpepe[4], RPSCoreFramework.Interface.POIpepe[5], RPSCoreFramework.Interface.POIpepe[6], RPSCoreFramework.Interface.POIpepe[7], RPSCoreFramework.Interface.POIpepe[8]);
         end
     end
-	if (RPSCoreFramework.Map.POIWorkflow) then
-        for k, v in pairs(RPSCorePOIPins) do
-            RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
-        end
-    end
+--	if (RPSCoreFramework.Map.POIWorkflow) then
+--        for k, v in pairs(RPSCoreFramework.Interface.POIpepe) do -- RPSCorePOIPins
+--            RPSCoreFramework:InsertPinOnMiniMap(v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
+--        end
+--    end
 end

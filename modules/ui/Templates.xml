@@ -1292,11 +1292,8 @@
 	<GameTooltip name="RPSPOIGameTooltip" inherits="GameTooltipTemplate">
         <Scripts>
             <Onload>
-            	RPSPOIGameTooltipTextRight1:SetFont(RPSPOIGameTooltipTextRight1:GetFont(), 11)
-            	RPSPOIGameTooltipTextLeft1:SetFont(RPSPOIGameTooltipTextLeft1:GetFont(), 11)
-            	RPSPOIGameTooltipTextRight2:SetFont(RPSPOIGameTooltipTextLeft1:GetFont(), 11)
-            	RPSPOIGameTooltipTextLeft2:SetFont(RPSPOIGameTooltipTextLeft1:GetFont(), 11)
-                self:SetOwner(WorldMapDetailFrame, "ANCHOR_NONE");
+
+                self:SetOwner(WorldMapFrame, "ANCHOR_NONE");
             </Onload>
         </Scripts>
     </GameTooltip>

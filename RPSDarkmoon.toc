@@ -1,4 +1,4 @@
-## Interface: 70300
+## Interface: 80100
 ## Title: RPSDarkmoon
 ## Author: TestUnit, -SeMGa!
 ## Version: 1.22
@@ -15,8 +15,8 @@ libs\AceDB.lua
 libs\LibCallbackHandler.lua
 libs\LibDataBroker.lua
 libs\LibDBIcon.lua
-libs\HereBeDragons-1.0.lua
-libs\HereBeDragons-Pins-1.0.lua
+libs\HereBeDragons-2.0.lua
+libs\HereBeDragons-Pins-2.0.lua
 
 DataSheets.lua
 Literature.lua
