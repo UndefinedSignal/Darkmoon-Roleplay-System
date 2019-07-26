@@ -516,5 +516,3 @@ RPSCoreFramework.Interface.Auras.Message = {
 RPSCoreFramework.Interface.Auras.Initialized = false
 RPSCoreFramework.Interface.Auras.GhostClick = false
 RPSCoreFramework.Interface.Auras.AllowUpdate = true
-
-RPSCoreFramework.Interface.POIpepe = { 	"1243", "0", "-8832.26", "613.63", "house", "00D1FF", "Дом в Торговом квартале", "Владелец Мотрик. 15з. 0 уровень." }

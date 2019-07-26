@@ -2,7 +2,6 @@
 <Ui
     xmlns="http://www.blizzard.com/wow/ui/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Script file="Scroller.lua"/>
     <Frame name="RPS_MainFrame" parent="UIParent" inherits="RPS_FrameTemplate" movable="true" hidden="true">
         <Anchors>
             <Anchor point="CENTER" x="-400" y="0"/>
@@ -372,7 +371,6 @@
                                             <OnMouseDown>
                                                 Model_OnMouseDown(self, button);
                                             </OnMouseDown>
-                                            <OnMouseWheel function="nil"/>
                                         </Scripts>
                                     </PlayerModel>
 
@@ -1412,7 +1410,7 @@
                             <Color r="1" g="1" b="0" a="1"/>
                             <FontHeight val="16"/>
                             <Anchors>
-                                <Anchor point="TOPLEFT" relativeTo="$parentTextFrame" x="-75" y="25" />
+                                <Anchor point="TOPLEFT" relativeTo="CurrencyFrameTextFrame" x="-75" y="25" />
                             </Anchors>
                         </FontString>
                     </Layer>
@@ -1431,7 +1429,6 @@
                         self:SetAnimation(153);
                         self:SetAllPoints();
                     </OnShow>
-                    <OnMouseWheel function="nil"/>
                 </Scripts>
             </PlayerModel>
         </Frames>

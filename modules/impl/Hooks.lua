@@ -27,9 +27,7 @@ function RPSCoreFramework:InitializeHooks()
 --Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
 
 	WorldMapFrame.ScrollContainer:HookScript("OnMouseDown", function(self, button)
-		if WorldMapFrame.ScrollContainer:IsMouseOver() then
-			RPSCoreFramework:ProcessMapClick(button);
-		end
+		RPSCoreFramework:ProcessMapClick(button);
 	end)
 	--self:SecureHook("PlayerZoneChanged", function() 	if IsOutdoors() then RPSCoreFramework:GeneratePOIPlaces(); end	end)
 	--self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
@@ -50,6 +48,12 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
 
 	RPSCoreFramework:HookAllPlayerBagButtons();
+
+	--self:RawHook(MapCanvasMixin, "OnLoad()", RPSCoreFramework:AcquirePin(), true);
+end
+
+function RPSCoreFramework:AcquirePin()
+	print("Meme succesful")
 end
 
 function RPSCoreFramework:HookAllPlayerBagButtons()
@@ -80,7 +84,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		self:UpdateUnlearn();
 		self:UpdateScaleReset();
 		self:PeriodicallyScrollMenuUpdater();
-	elseif (event == "CHAT_MSG_ADDON" and sender == GetUnitName("player").."-Darkmoon") then
+	elseif (event == "CHAT_MSG_ADDON" and sender == GetUnitName("player").."-Test") then
 		if (prefix == "RPS.POI.i") then
 			RPSCoreFramework:AddPOIPins(msg)
 		elseif (prefix == "RPS.POI.u") then

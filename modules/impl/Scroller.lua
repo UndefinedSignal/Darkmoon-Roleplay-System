@@ -99,6 +99,8 @@ function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	_G[button:GetName().."Completed"]:Show()
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
 end
+
+
 function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 	if RPSCoreFramework.Interface.Auras.GhostClick then
 		return false

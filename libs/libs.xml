@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+	<!-- Please note that the loading order matters a lot -->
+	<Script file="LibStub.lua"/>
+	<Script file="AceAddon.lua"/>
+	<Script file="AceTimer.lua"/>
+	<Script file="AceHook.lua"/>
+	<Script file="AceDB.lua"/>
+	<Script file="LibCallbackHandler.lua"/>
+	<Script file="LibDataBroker.lua"/>
+	<Script file="LibDBIcon.lua"/>
+	<Script file="HereBeDragons-2.0.lua"/>
+	<Script file="HereBeDragons-Pins-2.0.lua"/>
+
+</Ui>

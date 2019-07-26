@@ -93,6 +93,8 @@ function RPSCoreFramework:OnInitialize()
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN4);
+
+	RPSCoreFramework:GeneratePOIPlaces();
 	
 --	WorldMapPOIFrame:Hide();
 
