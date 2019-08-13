@@ -5,14 +5,13 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
---	self:RegisterEvent("ITEM_LOCK_CHANGED");
 	self:RegisterEvent("BAG_UPDATE")
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
-		self:HookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
-		self:HookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
-		self:HookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
-		self:HookScript(editbox, "OnHide",          "UpdateTypingStatus");
+		self:SecureHookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
+		self:SecureHookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
+		self:SecureHookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
+		self:SecureHookScript(editbox, "OnHide",          "UpdateTypingStatus");
 	end	
 	self:HookScript(self, "OnEvent", "OnEventFrame");
 	self:HookScript(GameTooltip, "OnTooltipSetItem", "ItemTooltip");
