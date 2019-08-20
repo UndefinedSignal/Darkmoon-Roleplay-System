@@ -182,11 +182,11 @@ function RPSCoreFramework:ProcessMapClick(button)
 		RPSCoreFramework:GeneratePOIPlaces();
 	elseif button == "LeftButton" then
 		RPSCoreFramework:GeneratePOIPlaces();
-	elseif button == "MiddleButton" then
+--[[	elseif button == "MiddleButton" then
 		print("Middle button!");
 	elseif button == "Button4" then
 		print("Button4 button!");
 	elseif button == "Button5" then
-		print("Button5 button!");
+		print("Button5 button!");]]--
 	end
 end

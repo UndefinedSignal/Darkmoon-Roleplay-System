@@ -753,6 +753,33 @@
                                 </Scripts>
                             </EditBox>
 
+                            <CheckButton name="$parentFavCheckBox" inherits="UICheckButtonTemplate" checked="false">
+                                <Size x="31" y="31"/>
+                                <Anchors>
+                                    <Anchor point="TOPRIGHT">
+                                        <Offset>
+                                            <AbsDimension x="-74" y="-4"></AbsDimension>
+                                        </Offset>
+                                    </Anchor>
+                                </Anchors>
+                                <Scripts>
+                                    <OnClick>
+                                        RPSCoreFramework:PreGenerateShowAuras();
+                                        RPSCoreFramework:GenerateScrollMenu();
+                                    </OnClick>
+                                    <OnEnter>
+                                        GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+                                        GameTooltip:AddLine("|cFFFFFFFFИзбранное|r\n")
+                                        GameTooltip:AddLine("")
+                                        GameTooltip:AddLine("Клик: Открыть\\закрыть избранный список аур.")
+                                        GameTooltip:Show()
+                                    </OnEnter>
+                                    <OnLeave>
+                                        GameTooltip:Hide()
+                                    </OnLeave>
+                                </Scripts>
+                            </CheckButton>
+
                             <ScrollFrame name="DarkmoonAurasScrollFrame" inherits="FauxScrollFrameTemplate">
                                 <Anchors>
                                     <Anchor point="TOPLEFT" x="18" y="-7"/>
@@ -775,11 +802,7 @@
                             </ScrollFrame>
                             <Button name="RPS_AuraButton1" inherits="RPS_CampaignButtonTemplate">
                                 <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-23"/></Anchors>
-                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 1);</OnClick>
-                                <OnEnter>
-                                    RPSCoreFramework:GenerateTooltipForFrame(RPS_AuraButton1);
-                                </OnEnter>
-                                </Scripts>
+                                <Scripts><OnClick>RPSCoreFramework:ToggleOrBuyAuraMessage(self, 1);</OnClick></Scripts>
                             </Button>
                             <Button name="RPS_AuraButton2" inherits="RPS_CampaignButtonTemplate">
                                 <Anchors><Anchor relativeTo="DarkmoonAurasScrollFrame" point="TOP" x="0" y="-88"/></Anchors>

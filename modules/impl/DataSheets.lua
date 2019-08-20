@@ -36,6 +36,9 @@ end
 if RPSCoreShowPOIPins == nil then
 	RPSCoreShowPOIPins = true;
 end
+if RPSCoreFavourites == nil then
+	RPSCoreFavourites = {}
+end
 
 RPSCoreFramework.AdvancedRaces = {
 	"voidelf",
@@ -215,6 +218,31 @@ RPSCoreFramework.Display.Scroll = {
 	{".disp offh ", -1, 0},
 	{".disp ranged ", -1, 0},
 	{".disp tabard ", -1, 0}	
+}
+
+RPSCoreFramework.DB = {
+    ["RPS_AuraButton1Favourites"] = 0,
+    ["RPS_AuraButton2Favourites"] = 0,
+    ["RPS_AuraButton3Favourites"] = 0,
+    ["RPS_AuraButton4Favourites"] = 0,
+    ["RPS_AuraButton5Favourites"] = 0,
+    ["RPS_AuraButton6Favourites"] = 0,
+
+    ["RPS_AuraButton1"] = { 0, 0 },
+    ["RPS_AuraButton2"] = { 0, 0 },
+    ["RPS_AuraButton3"] = { 0, 0 },
+    ["RPS_AuraButton4"] = { 0, 0 },
+    ["RPS_AuraButton5"] = { 0, 0 },
+    ["RPS_AuraButton6"] = { 0, 0 }
+}
+
+RPSCoreFramework.DB.Frames = {
+    ["RPS_AuraButton1"] = nil,
+    ["RPS_AuraButton2"] = nil,
+    ["RPS_AuraButton3"] = nil,
+    ["RPS_AuraButton4"] = nil,
+    ["RPS_AuraButton5"] = nil,
+    ["RPS_AuraButton6"] = nil
 }
 
 
