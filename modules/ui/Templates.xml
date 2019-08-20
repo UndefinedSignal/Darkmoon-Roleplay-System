@@ -1096,7 +1096,7 @@
 							<Color r="0" g="0" b="0"/>
 						  </Shadow>
 						</FontString>
-						
+
 						<FontString name="$parentStatRoll" font="Fonts\FRIZQT___CYR.TTF" text="1 - 100" justifyH="LEFT" justifyV="TOP">
 						  <FontHeight val="12"/>
 						  <Anchors>
@@ -1107,7 +1107,7 @@
 							<Color r="0" g="0" b="0"/>
 						  </Shadow>
 						</FontString>
-						
+
 						<FontString name="$parentStatValue" font="Fonts\FRIZQT___CYR.TTF" text="0" justifyH="LEFT" justifyV="TOP">
 						  <FontHeight val="12"/>
 						  <Anchors>
@@ -1118,10 +1118,28 @@
 							<Color r="0" g="0" b="0"/>
 						  </Shadow>
 						</FontString>
-						
 					</Layer>
 				</Layers>
 			</Frame>
+
+			<Button name="$dummy">
+				 <Anchors>
+					<Anchor point="TOPLEFT" x="22" y="-22"/>
+					<Anchor point="BOTTOMRIGHT" x="34" y="-34"/>
+				 </Anchors>
+				<HighlightTexture file="Interface\BUTTONS\ButtonHilight-Square" alphaMode="ADD">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" x="-1" y="0"/>
+					</Anchors>
+					<TexCoords left="0.03125" right="0.984375" top="0.03125" bottom="0.984375"/>
+				</HighlightTexture>
+				<Scripts>
+					<OnEnter>
+
+					</OnEnter>
+				</Scripts>
+			</Button>
 			
 			<Button name="$parentMinus" inherits="UIPanelButtonTemplate" text="-">
 				 <Size x="24" y="24"/>
