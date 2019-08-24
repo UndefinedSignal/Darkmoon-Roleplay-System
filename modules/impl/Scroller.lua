@@ -69,9 +69,10 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
                     _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
                 end
                 RPSCoreFramework.Interface.Auras.Message[jBtn][2] = tonumber(RPSCoreFramework.Interface.Auras.Show[lineplusoffset])
-                _G["RPS_AuraButton"..jBtn.."Favourites"]:UnlockHighlight();
+                _G["RPS_AuraButton"..jBtn.."FavouritesIndicator"]:Hide();
+
                 if RPSCoreFramework:FavouritesSearch(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1]) then
-                    _G["RPS_AuraButton"..jBtn.."Favourites"]:LockHighlight();
+                    _G["RPS_AuraButton"..jBtn.."FavouritesIndicator"]:Show();
                 end
                 RPSCoreFramework.DB["RPS_AuraButton"..jBtn.."Favourites"] = RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][1];
                 _G["RPS_AuraButton"..jBtn]:Show()

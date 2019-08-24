@@ -654,16 +654,30 @@
 	            <Anchors>
 	                <Anchor relativeTo="$parent" relativePoint="TOPRIGHT" x="-33" y="-21"/>
 	            </Anchors>
-	            <NormalTexture file="Interface\COMMON\FavoritesIcon">
-	                <TexCoords left="0.171875" right="0.703125" top="0.109375" bottom="0.734375"/>
+	            <NormalTexture file="Interface/COMMON/ReputationStar">
+	                <TexCoords left="0.53125" right="0.96875" top="0.03125" bottom="0.46875"/>
 	            </NormalTexture>
-	            <PushedTexture file="Interface\COMMON\FavoritesIcon"/>
+	            <PushedTexture file="Interface\COMMON\FavoritesIcon">
+	              <TexCoords left="0.03125" right="0.78125" top="0.03125" bottom="0.6875" />
+	            </PushedTexture>
 	            <HighlightTexture file="Interface\COMMON\ReputationStar-Glow" alphaMode="ADD">
 	                <TexCoords left="0.234375" right="0.765625" top="0.265625" bottom="0.828125"/>
 	            </HighlightTexture>
+	            <Layers>
+	              <Layer level="ARTWORK"> 
+	                <Texture alphaMode="ADD" name="$parentIndicator" file="Interface\COMMON\FavoritesIcon">
+	                  <Size x="16" y="16"/>
+	                  <TexCoords left="0.03125" right="0.78125" top="0.03125" bottom="0.6875" />
+	                  <Anchors>
+	                    <Anchor relativeTo="$parent" relativePoint="TOPRIGHT" x="-16" y="0"/>
+	                  </Anchors>
+	                </Texture>
+	              </Layer>
+	            </Layers>
 	            <Scripts>
 	                <PostClick>
 	                    RPSCoreFramework:ProcessFavourites(self:GetName());
+	                    RPSCoreFramework:PreGenerateShowAuras();
 	                    RPSCoreFramework:GenerateScrollMenu();
 	                </PostClick>
 	                <OnLoad>

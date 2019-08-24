@@ -1,7 +1,7 @@
 ## Interface: 80100
 ## Title: RPSDarkmoon
 ## Author: TestUnit, -SeMGa!
-## Version: 1.5
+## Version: 1.9
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam, RPSCorePOIPins, RPSCoreShowPOIPins, RPSCoreFavourites
