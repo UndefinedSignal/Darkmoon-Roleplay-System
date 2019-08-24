@@ -758,7 +758,7 @@
                                 <Anchors>
                                     <Anchor point="TOPRIGHT">
                                         <Offset>
-                                            <AbsDimension x="-74" y="-4"></AbsDimension>
+                                            <AbsDimension x="-44" y="-4"></AbsDimension>
                                         </Offset>
                                     </Anchor>
                                 </Anchors>
@@ -769,7 +769,7 @@
                                     </OnClick>
                                     <OnEnter>
                                         GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-                                        GameTooltip:AddLine("|cFFFFFFFFИзбранное|r\n")
+                                        GameTooltip:AddLine("|cFFFFFFFFИзбранное|r")
                                         GameTooltip:AddLine("")
                                         GameTooltip:AddLine("Клик: Открыть\\закрыть избранный список аур.")
                                         GameTooltip:Show()
@@ -778,6 +778,14 @@
                                         GameTooltip:Hide()
                                     </OnLeave>
                                 </Scripts>
+                                <NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+                                <PushedTexture file="Interface\Buttons\UI-CheckBox-Down"/>
+                                <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD"/>
+                                <CheckedTexture file="Interface\COMMON\FavoritesIcon">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" x="1" y="-3"/>
+                                    </Anchors>
+                                </CheckedTexture>
                             </CheckButton>
 
                             <ScrollFrame name="DarkmoonAurasScrollFrame" inherits="FauxScrollFrameTemplate">
@@ -854,7 +862,7 @@
                             </Layer>
 
                             <Layer>
-                                <FontString name="DisplayInfoTitle" font="Fonts\FRIZQT___CYR.TTF" text="Display Info|nВнешний вид предметов" justifyH="CENTER" justifyV="TOP">
+                                <FontString name="DisplayInfoTitle" font="Fonts\FRIZQT___CYR.TTF" text="Display|nВнешний вид предметов" justifyH="CENTER" justifyV="TOP">
                                     <Color r="1" g="1" b="1" a="1"/>
                                     <FontHeight val="24"/>
                                     <Anchors>

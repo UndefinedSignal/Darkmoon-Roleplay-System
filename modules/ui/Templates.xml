@@ -638,7 +638,7 @@
 				<Scripts>
 					<OnEnter>
 			        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-					    GameTooltip:AddLine("|cFFFFFFFFСоздать макрос|r\n");
+					    GameTooltip:AddLine("|cFFFFFFFFСоздать макрос|r");
 					    GameTooltip:AddLine("");
 					    GameTooltip:AddLine("Клик: Создаёт макрос и выбирает его.");
 					    GameTooltip:Show();
@@ -671,7 +671,7 @@
 	                </OnLoad>
 					<OnEnter>
 			        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-					    GameTooltip:AddLine("|cFFFFFFFFИзбранное|r\n");
+					    GameTooltip:AddLine("|cFFFFFFFFИзбранное|r");
 					    GameTooltip:AddLine("");
 					    GameTooltip:AddLine("Клик: Добавляет\\исключает ауру из избранного.");
 					    GameTooltip:Show();
