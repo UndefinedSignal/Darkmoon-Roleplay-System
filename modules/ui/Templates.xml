@@ -1122,7 +1122,7 @@
 				</Layers>
 			</Frame>
 
-			<Button name="$dummy">
+			<Button name="$parentdummy">
 				 <Anchors>
 					<Anchor point="TOPLEFT" x="22" y="-22"/>
 					<Anchor point="BOTTOMRIGHT" x="34" y="-34"/>
@@ -1135,9 +1135,18 @@
 					<TexCoords left="0.03125" right="0.984375" top="0.03125" bottom="0.984375"/>
 				</HighlightTexture>
 				<Scripts>
+				    <OnLoad>
+				    	self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+				    </OnLoad>
+					<PostClick>
+						RPSCoreFramework:PickupBattleSpell(self:GetParent():GetName(), button);
+					</PostClick>
 					<OnEnter>
-
+						RPSCoreFramework:ShowBattleSpellGameTooltip(self:GetParent():GetName())
 					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			

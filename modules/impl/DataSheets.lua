@@ -233,7 +233,19 @@ RPSCoreFramework.DB = {
     ["RPS_AuraButton3"] = { 0, 0 },
     ["RPS_AuraButton4"] = { 0, 0 },
     ["RPS_AuraButton5"] = { 0, 0 },
-    ["RPS_AuraButton6"] = { 0, 0 }
+    ["RPS_AuraButton6"] = { 0, 0 },
+
+    				-- LMB, RMB
+    ["CharStatsSpellID"] = { 
+		["Strength"] = {1000001, 1000024},
+		["Agility"] = {1000002, 1000025},
+		["Intellect"] = {1000003, 1000026},
+		["CriticalChance"] = {1000033, 1000033},
+		["Spirit"] = {1000004, 1000027},
+		["Endurance"] = {1000028, 1000028},
+		["Dexterity"] = {1000029, 1000029},
+		["Will"] = {1000030, 1000030}
+    }
 }
 
 RPSCoreFramework.DB.Frames = {
@@ -527,6 +539,7 @@ RPSCoreFramework.Interface.Auras = {
 	{278,"Мытье", "Анимация. Персонаж что-то моет перед собой", 1000, 0, 0},
 	{279,"Красное излучение", "Анимация. Вокруг персонажа красное магическое излучение", 10000, 0, 0}
 }
+
 
 RPSCoreFramework.Interface.Auras.Show = {}
 

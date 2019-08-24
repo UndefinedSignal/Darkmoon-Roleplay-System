@@ -185,3 +185,21 @@ function RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self)
 		message("Недостаточно предметов для активации Менестрели");
 	end
 end
+
+function RPSCoreFramework:PickupBattleSpell(name, button)
+	if (button == "LeftButton") then
+		PickupSpell(RPSCoreFramework.DB["CharStatsSpellID"][name][1]);
+	elseif (button == "RightButton") then
+		PickupSpell(RPSCoreFramework.DB["CharStatsSpellID"][name][2]);
+	end
+end
+
+function RPSCoreFramework:ShowBattleSpellGameTooltip(name)
+	GameTooltip:ClearLines();
+	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+	GameTooltip:SetHyperlink(GetSpellLink(RPSCoreFramework.DB["CharStatsSpellID"][name][1]));
+	GameTooltip:AddLine(" ")
+	--GameTooltip:AddDoubleLine(" ", "Клик ЛКМ: Взять боевой спелл\nКлик ПКМ: Взять ролевой спелл", 1, 0, 0, 1.0, 0.82, 0.0);
+	GameTooltip:AddLine("Клик ЛКМ: Взять боевой спелл\nКлик ПКМ: Взять ролевой спелл")
+	GameTooltip:Show();
+end
