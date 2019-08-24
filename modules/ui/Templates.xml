@@ -639,8 +639,8 @@
 					<OnEnter>
 			        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 					    GameTooltip:AddLine("|cFFFFFFFFСоздать макрос|r");
-					    GameTooltip:AddLine("");
-					    GameTooltip:AddLine("Клик: Создаёт макрос и выбирает его.");
+					    GameTooltip:AddLine(" ");
+					    GameTooltip:AddLine("Создаёт макрос и выбирает его.");
 					    GameTooltip:Show();
 					</OnEnter>
 					<OnLeave>
