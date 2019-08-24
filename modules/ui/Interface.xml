@@ -770,8 +770,8 @@
                                     <OnEnter>
                                         GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
                                         GameTooltip:AddLine("|cFFFFFFFFИзбранное|r")
-                                        GameTooltip:AddLine("")
-                                        GameTooltip:AddLine("Клик: Открыть\\закрыть избранный список аур.")
+                                        GameTooltip:AddLine(" ")
+                                        GameTooltip:AddLine("Открыть\\закрыть избранный список аур.")
                                         GameTooltip:Show()
                                     </OnEnter>
                                     <OnLeave>
