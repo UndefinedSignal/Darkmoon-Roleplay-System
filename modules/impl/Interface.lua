@@ -200,6 +200,6 @@ function RPSCoreFramework:ShowBattleSpellGameTooltip(name)
 	GameTooltip:SetHyperlink(GetSpellLink(RPSCoreFramework.DB["CharStatsSpellID"][name][1]));
 	GameTooltip:AddLine(" ")
 	--GameTooltip:AddDoubleLine(" ", "Клик ЛКМ: Взять боевой спелл\nКлик ПКМ: Взять ролевой спелл", 1, 0, 0, 1.0, 0.82, 0.0);
-	GameTooltip:AddLine("Клик ЛКМ: Взять боевой спелл\nКлик ПКМ: Взять ролевой спелл")
+	GameTooltip:AddLine("ЛКМ: Выбрать боевую способность\nПКМ: Выбрать ролевую способность")
 	GameTooltip:Show();
 end
