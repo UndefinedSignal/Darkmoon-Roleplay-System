@@ -689,9 +689,9 @@
                         <Frames>
 
                             <Frame name="AurasTextBackground" hidden="false">
-                                <Size x="400" y="29"/>
+                                <Size x="301" y="29"/>
                                 <Anchors>
-                                    <Anchor relativeTo="DarkmoonAurasFrame" x="-205" y="37" relativePoint="BOTTOM"/>
+                                    <Anchor relativeTo="DarkmoonAurasFrame" x="-146" y="37" relativePoint="BOTTOM"/>
                                 </Anchors>
                                 <Layers>
 
@@ -711,7 +711,7 @@
                                     </Layer>
 
                                     <Layer>
-                                        <FontString name="ActiveAuraText" font="Fonts\FRIZQT___CYR.TTF" text="Активных аур: " justifyH="LEFT" justifyV="TOP">
+                                        <FontString name="ActiveAuraText" font="Fonts\FRIZQT___CYR.TTF" text="Активные ауры: " justifyH="LEFT" justifyV="TOP">
                                             <Color r="1" g="1" b="1" a="1"/>
                                             <FontHeight val="18"/>
                                             <Anchors>
@@ -728,7 +728,7 @@
                                             <Color r="1" g="1" b="1" a="1"/>
                                             <FontHeight val="18"/>
                                             <Anchors>
-                                                <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="65" y="12" />
+                                                <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="75" y="12" />
                                             </Anchors>
                                             <Shadow>
                                                 <Offset x="1" y="1" />
