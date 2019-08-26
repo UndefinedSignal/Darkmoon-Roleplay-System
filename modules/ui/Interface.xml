@@ -1428,6 +1428,39 @@
                     </Layer>
                 </Layers>
             </ScrollFrame>
+
+            <Button name="RPS_FrameworkAuthorship">
+                <Size x="36" y="36"/>
+                <Anchors><Anchor point="BOTTOMLEFT" x="100" y="0"/></Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture parentKey="I" file="Interface\common\help-i">
+                            <Size x="36" y="36"/><Anchors><Anchor point="CENTER"/></Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer level="BORDER">
+                        <Texture parentKey="Ring" file="Interface\Minimap\MiniMap-TrackingBorder">
+                           <Size x="44" y="44"/><Anchors><Anchor point="CENTER" x="9" y="-9"/></Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
+                    <Size x="36" y="36"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
+                </HighlightTexture>
+                <Scripts>
+                    <OnEnter>
+                        GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                        GameTooltip:AddDoubleLine("RPS Darkmoon:", "TestUnit", 1, 1, 1, 1, 0.96, 0.41);
+                        GameTooltip:AddDoubleLine(" ", "-SeMGa!", 1, 1, 1, 1, 0.96, 0.41);
+                        GameTooltip:AddDoubleLine("Версия:", "2.0 BFA", 1, 1, 1, 1, 0.96, 0.41);
+                        GameTooltip:Show();
+                    </OnEnter>
+                    <OnLeave>
+                        GameTooltip:Hide();
+                    </OnLeave>
+                </Scripts>
+            </Button>
+
         </Frames>
     </Frame>
 
