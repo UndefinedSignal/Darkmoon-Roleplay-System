@@ -670,48 +670,6 @@
                             </Layer>
 
                             <Layer>
-                                <FontString name="ActiveAuraText" font="Fonts\FRIZQT___CYR.TTF" text="Активных аур: " justifyH="LEFT" justifyV="TOP">
-                                    <Color r="1" g="1" b="1" a="1"/>
-                                    <FontHeight val="18"/>
-                                    <Anchors>
-                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="-12" y="13" />
-                                    </Anchors>
-                                    <Shadow>
-                                        <Offset x="1" y="1" />
-                                        <Color r="0" g="0" b="0"/>
-                                    </Shadow>
-                                </FontString>
-                            </Layer>
-
-                            <Layer>
-                                <FontString name="ActiveAura" font="Fonts\FRIZQT___CYR.TTF" text="0" justifyH="LEFT" justifyV="TOP">
-                                    <Color r="1" g="1" b="1" a="1"/>
-                                    <FontHeight val="18"/>
-                                    <Anchors>
-                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="60" y="11" />
-                                    </Anchors>
-                                    <Shadow>
-                                        <Offset x="1" y="1" />
-                                        <Color r="0" g="0" b="0"/>
-                                    </Shadow>
-                                </FontString>
-                            </Layer>
-
-                            <Layer>
-                                <FontString name="MaxAuraText" font="Fonts\FRIZQT___CYR.TTF" text="(Максимум 3)" justifyH="LEFT" justifyV="TOP">
-                                    <Color r="1" g="1" b="0" a="1"/>
-                                    <FontHeight val="12"/>
-                                    <Anchors>
-                                        <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="120" y="13" />
-                                    </Anchors>
-                                    <Shadow>
-                                        <Offset x="1" y="1" />
-                                        <Color r="0" g="0" b="0"/>
-                                    </Shadow>
-                                </FontString>
-                            </Layer>
-
-                            <Layer>
                                 <FontString name="AurasNotFound" font="Fonts\FRIZQT___CYR.TTF" text="Ничего не найдено" justifyH="LEFT" justifyV="TOP">
                                     <Color r="1" g="1" b="1" a="1"/>
                                     <FontHeight val="20"/>
@@ -730,6 +688,56 @@
 
                         <Frames>
 
+                            <Frame name="AurasTextBackground" hidden="false">
+                                <Size x="400" y="29"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonAurasFrame" x="-205" y="37" relativePoint="BOTTOM"/>
+                                </Anchors>
+                                <Layers>
+
+                                    <Layer level="BACKGROUND">
+                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                        <!--Interface\BankFrame\Bank-Background-->
+                                        <!--Interface\Collections\CollectionsBackgroundTile-->
+                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                        <Texture name="$parentIcon" parentKey="Icon" file="Interface\Collections\CollectionsBackgroundTile">
+                                            <Color r="1" g="1" b="1" a="0.8"/>
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT" x="-5" y="-3"/>
+                                                <Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+                                                <Anchor point="LEFT" x="5" y="0"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+
+                                    <Layer>
+                                        <FontString name="ActiveAuraText" font="Fonts\FRIZQT___CYR.TTF" text="Активных аур: " justifyH="LEFT" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="18"/>
+                                            <Anchors>
+                                                <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="-12" y="13" />
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="1" y="1" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                    <Layer>
+                                        <FontString name="ActiveAura" font="Fonts\FRIZQT___CYR.TTF" text="0/3" justifyH="LEFT" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="18"/>
+                                            <Anchors>
+                                                <Anchor point="BOTTOM" relativeTo="DarkmoonAurasFrame" x="65" y="12" />
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="1" y="1" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                            </Frame>
                             <EditBox parentKey="searchBox" inherits="SearchBoxTemplate" letters="40" hidden="false">
                                 <Size x="287" y="30"/>
                                 <Anchors>

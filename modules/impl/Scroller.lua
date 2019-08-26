@@ -114,7 +114,7 @@ function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1])
 	RPSCoreFramework:HideEffectAuraButtons()
 	_G[button:GetName().."Completed"]:Show()
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5)
+	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter.."/3", 0.5, 0.5)
 end
 
 
@@ -203,7 +203,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 			StaticPopup_Show("LearnAura");
 		end
 	end
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5);
+	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter.."/3", 0.5, 0.5);
 	self:ScheduleTimer("GhostClickUpdater", 0.5);
 	if (RPSCoreFramework.Interface.Auras.AllowUpdate) then
 		self.ThreeTimesTimerCount = 0;

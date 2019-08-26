@@ -250,7 +250,7 @@ function RPSCoreFramework:UpdateActiveAurasCounter()
 		end
 		RPSCoreFramework.Interface.ActiveAuraCounter = counter;
 	end
-	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter, 0.5, 0.5);
+	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter.."/3", 0.5, 0.5);
 	return true
 end
 
