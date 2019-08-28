@@ -96,6 +96,10 @@ function RPSCoreFramework:OnInitialize()
 
 	RPSCoreFramework:GeneratePOIPlaces();
 	
+--	UIErrorsFrame:Hide();
+--	UIErrorsFrame:ClearAllPoints();
+--	UIErrorsFrame:SetPoint("TOP", UIParent, "BOTTOM", 0, -100);
+
 --	WorldMapPOIFrame:Hide();
 
 	-- Popup's

@@ -6,6 +6,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
 	self:RegisterEvent("BAG_UPDATE")
+
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
 		self:SecureHookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
@@ -50,10 +51,15 @@ function RPSCoreFramework:InitializeHooks()
 
 	--self:RawHook(MapCanvasMixin, "OnLoad()", RPSCoreFramework:AcquirePin(), true);
 end
+--[[
+function RPSCoreFramework:OnErrorMessage()
+	print("Check!");
+end
+
 
 function RPSCoreFramework:AcquirePin()
 	print("Meme succesful")
-end
+end]]--
 
 function RPSCoreFramework:HookAllPlayerBagButtons()
 	local bagButton = nil;

@@ -646,6 +646,9 @@
 					<OnLeave>
 						GameTooltip:Hide();
 					</OnLeave>
+					<OnClick>
+						RPSCoreFramework:ProcessAurasMacrosOnClick(tostring(self:GetParent():GetName()))
+					</OnClick>
 				</Scripts>
 			</Button>
 
@@ -706,6 +709,13 @@
 			<TexCoords left="0" right="0.6640625" top="0" bottom="1"/>
 		</HighlightTexture>
 		<Scripts>
+			<OnEnter>
+				RPSCoreFramework:ProcessAurasOnEnter(self:GetName())
+			</OnEnter>
+			<OnClick>
+				RPSCoreFramework:ProcessAurasOnClick(self:GetName())
+			</OnClick>
+
 			<OnLeave>
 				GameTooltip:Hide();
 			</OnLeave>
