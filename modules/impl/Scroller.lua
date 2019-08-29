@@ -66,16 +66,16 @@ end
 
 function RPSCoreFramework:ProcessAurasOnEnter(name)
     GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
-    GameTooltip:AddLine("|cFFFFFFFF"..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][2].."|r")
-    GameTooltip:AddLine("|cFFABD473"..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][3].."|r\n\n")
-    if (tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][4]) > tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][5] == 0) then
-        GameTooltip:AddLine("Цена покупки: |cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][4]).."|r")
+    GameTooltip:AddLine("|cFFFFFFFF"..RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][2].."|r")
+    GameTooltip:AddLine("|cFFABD473"..RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][3].."|r\n\n")
+    if (tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][4]) > tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][5] == 0) then
+        GameTooltip:AddLine("Цена покупки: |cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][4]).."|r")
         GameTooltip:AddLine("Не хватает денег.")
-    elseif (tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][4]) < tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][5] == 0) then
-        GameTooltip:AddLine("Цена покупки: "..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][4]))
+    elseif (tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][4]) < tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][5] == 0) then
+        GameTooltip:AddLine("Цена покупки: "..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][4]))
         GameTooltip:AddLine("Клик: Приобрести")
     end
-    if RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][5] > 0 then
+    if RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][5] > 0 then
         GameTooltip:AddLine("Клик: Использовать")
     end
     GameTooltip:Show()
@@ -87,8 +87,8 @@ end
 
 function RPSCoreFramework:ProcessAurasMacrosOnClick(name)
     if (GetNumMacros() <= 120) then
-        CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][2], "INV_DARKMOON_EYE", ".rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][1], 1);
-        PickupMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[RPSCoreFramework.DB[name][1]]][2]);
+        CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][2], "INV_DARKMOON_EYE", ".rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][1], 1);
+        PickupMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][2]);
     else
         Utils.message.displayMessage(loc("QE_MACRO_MAX"), 4);
     end

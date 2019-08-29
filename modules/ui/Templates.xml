@@ -680,7 +680,9 @@
 	            <Scripts>
 	                <PostClick>
 	                    RPSCoreFramework:ProcessFavourites(self:GetName());
-	                    RPSCoreFramework:PreGenerateShowAuras();
+	                    if DarkmoonAurasFrameFavCheckBox:GetChecked() then
+	                    	RPSCoreFramework:PreGenerateShowAuras();
+	                    end
 	                    RPSCoreFramework:GenerateScrollMenu();
 	                </PostClick>
 	                <OnLoad>

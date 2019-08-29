@@ -5,7 +5,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
-	self:RegisterEvent("BAG_UPDATE")
+	self:RegisterEvent("BAG_UPDATE");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
