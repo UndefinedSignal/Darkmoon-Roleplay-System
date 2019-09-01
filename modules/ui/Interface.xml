@@ -1484,7 +1484,7 @@
                             <Color r="1" g="1" b="0" a="1"/>
                             <FontHeight val="16"/>
                             <Anchors>
-                                <Anchor point="TOPLEFT" relativeTo="CurrencyFrameTextFrame" x="-75" y="25" />
+                                <Anchor point="CENTER" relativeTo="CurrencyFrameTextFrame" x="0" y="25" />
                             </Anchors>
                         </FontString>
                     </Layer>
