@@ -42,7 +42,7 @@ function RPSCoreFramework:IsFallen()
 	local counter = 1;
 	local aura = UnitAura("Target", counter)
 	while aura do
-		aura, _, _, _, _, _, _, _, _, _, spellId = UnitAura("Target", counter);
+		aura, _, _, _, _, _, _, _, _, spellId = UnitAura("Target", counter);
 		counter = counter + 1;
 		if (spellId == RPSCoreFramework.TargetAura) then
 			return true;

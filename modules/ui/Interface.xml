@@ -1013,6 +1013,9 @@
 	                                </Layer>
 							    </Layers>
 							    <Scripts>
+                                    <OnTextChanged>
+                                        self:GetText();
+                                    </OnTextChanged>
 									<OnEscapePressed>
 										self:ClearFocus();
 									</OnEscapePressed>

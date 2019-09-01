@@ -49,15 +49,16 @@ function RPSCoreFramework:GetMiniMapPOIPin(guid, color, ptype, name, description
 	MiniMapPinPool["POIMM"..guid] = pin;
 	return pin;
 end
-
+-- RPSCoreFramework:InsertPinOnMiniMap(2357, 245, 1368.787720, -290.922150, "conflict", "FF0000", "Опасная зона", "Оче опасна")
+-- RPSCoreFramework:InsertPinOnMap(2357, 732, 1368.787720, -290.922150, "conflict", "FF0000", "Опасная зона", "Оче опасна")
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrame = RPSCoreFramework:GetMapPOIPin(guid, color, ptype, name, description);
-	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(self, IFrame, tonumber(mapid), tonumber(x), tonumber(y));
+	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(self, IFrame, tonumber(mapid), tonumber(x), tonumber(y), HBD_PINS_WORLDMAP_SHOW_WORLD);
 end
 
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrames = RPSCoreFramework:GetMiniMapPOIPin(guid, color, ptype, name, description);
-	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(self, IFrames, tonumber(mapid), tonumber(x), tonumber(y), false);
+	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(self, IFrames, tonumber(mapid), tonumber(x), tonumber(y), HBD_PINS_WORLDMAP_SHOW_WORLD);
 end
 
 function RPSCoreFramework:FlushAllPinsOnMap()
@@ -67,6 +68,7 @@ end
 function RPSCoreFramework:FlushAllPinsOnMiniMap()
 	RPSCoreFramework.HBD.Pins:RemoveAllMinimapIcons(self);
 end
+
 
 function RPSCoreFramework:GeneratePOIPlaces()
     RPSCoreFramework:FlushAllPinsOnMap();

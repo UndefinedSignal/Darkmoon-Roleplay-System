@@ -80,7 +80,7 @@ end
 
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
-		self.TimerID = self:ScheduleRepeatingTimer("AuraCheckTimer", 0.5);
+		self.TimerID = self:ScheduleRepeatingTimer("AuraCheckTimer", 1);
 		self:UpdatePlayerModel();
 		self:UpdateInteractionFrame();
 	elseif (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LEVEL_UP" or event == "PLAYER_EQUIPMENT_CHANGED") then
