@@ -1399,7 +1399,7 @@
         </Scripts>
     </Button>
 	
-	<Button name="RPS_ContainerFrameItemButtonTemplate" inherits="ItemButtonTemplate" hidden="true" virtual="true">
+	<ItemButton name="RPS_ContainerFrameItemButtonTemplate" hidden="true" virtual="true">
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT">
 				<Offset>
@@ -1443,7 +1443,7 @@
 				end
 			</OnEvent>
 		</Scripts>
-	</Button>
+	</ItemButton>
 	<Frame name="RPS_ContainerFrameTemplate" frameStrata="MEDIUM" toplevel="true" movable="true" enableMouse="true" hidden="false" virtual="true" clampedToScreen="true">
 		<Layers>
 			<Layer level="BACKGROUND">
@@ -1569,42 +1569,42 @@
 					</Anchor>
 				</Anchors>
 			</Frame>
-			<Button id="1" name="$parentItem1" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="2" name="$parentItem2" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="3" name="$parentItem3" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="4" name="$parentItem4" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="5" name="$parentItem5" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="6" name="$parentItem6" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="7" name="$parentItem7" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="8" name="$parentItem8" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="9" name="$parentItem9" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="10" name="$parentItem10" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="11" name="$parentItem11" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="12" name="$parentItem12" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="13" name="$parentItem13" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="14" name="$parentItem14" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="15" name="$parentItem15" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="16" name="$parentItem16" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="17" name="$parentItem17" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="18" name="$parentItem18" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="19" name="$parentItem19" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="20" name="$parentItem20" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="21" name="$parentItem21" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="22" name="$parentItem22" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="23" name="$parentItem23" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="24" name="$parentItem24" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="25" name="$parentItem25" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="26" name="$parentItem26" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="27" name="$parentItem27" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="28" name="$parentItem28" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="29" name="$parentItem29" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="30" name="$parentItem30" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="31" name="$parentItem31" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="32" name="$parentItem32" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="33" name="$parentItem33" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="34" name="$parentItem34" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="35" name="$parentItem35" inherits="RPS_ContainerFrameItemButtonTemplate" />
-			<Button id="36" name="$parentItem36" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="1" name="$parentItem1" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="2" name="$parentItem2" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="3" name="$parentItem3" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="4" name="$parentItem4" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="5" name="$parentItem5" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="6" name="$parentItem6" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="7" name="$parentItem7" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="8" name="$parentItem8" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="9" name="$parentItem9" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="10" name="$parentItem10" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="11" name="$parentItem11" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="12" name="$parentItem12" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="13" name="$parentItem13" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="14" name="$parentItem14" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="15" name="$parentItem15" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="16" name="$parentItem16" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="17" name="$parentItem17" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="18" name="$parentItem18" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="19" name="$parentItem19" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="20" name="$parentItem20" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="21" name="$parentItem21" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="22" name="$parentItem22" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="23" name="$parentItem23" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="24" name="$parentItem24" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="25" name="$parentItem25" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="26" name="$parentItem26" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="27" name="$parentItem27" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="28" name="$parentItem28" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="29" name="$parentItem29" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="30" name="$parentItem30" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="31" name="$parentItem31" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="32" name="$parentItem32" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="33" name="$parentItem33" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="34" name="$parentItem34" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="35" name="$parentItem35" inherits="RPS_ContainerFrameItemButtonTemplate" />
+			<ItemButton id="36" name="$parentItem36" inherits="RPS_ContainerFrameItemButtonTemplate" />
 			<Button name="$parentPortraitButton">
 				<Size>
 					<AbsDimension x="40" y="40" />
