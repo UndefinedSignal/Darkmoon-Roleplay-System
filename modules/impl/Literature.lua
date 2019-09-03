@@ -258,9 +258,9 @@ function RPSCoreFramework:ChangeDefaultWords()
 	
 	ITEM_MOD_CRIT_RATING = "Показатель критического шанса +%s.";
 	ITEM_MOD_CRIT_RATING_SHORT = "к критическому шансу";
-	
-	VOICE_CHAT_ERROR_CODE_FORMATTER = " ";
-	ERR_VOICE_CHAT_GENERIC_UNABLE_TO_CONNECT = " ";
+
+	VOICE_CHAT_ERROR_CODE_FORMATTER = "";
+	ERR_VOICE_CHAT_GENERIC_UNABLE_TO_CONNECT = "Добро пожаловать на Darkmoon!";
 end
 
 function RPSCoreFramework:LiteratureTextFormatting()
