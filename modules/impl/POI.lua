@@ -53,12 +53,12 @@ end
 -- RPSCoreFramework:InsertPinOnMap(2357, 732, 1368.787720, -290.922150, "conflict", "FF0000", "Опасная зона", "Оче опасна")
 function RPSCoreFramework:InsertPinOnMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrame = RPSCoreFramework:GetMapPOIPin(guid, color, ptype, name, description);
-	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(self, IFrame, tonumber(mapid), tonumber(x), tonumber(y), HBD_PINS_WORLDMAP_SHOW_WORLD);
+	RPSCoreFramework.HBD.Pins:AddWorldMapIconWorld(self, IFrame, tonumber(mapid), tonumber(x), tonumber(y));
 end
 
 function RPSCoreFramework:InsertPinOnMiniMap(guid, mapid, y, x, ptype, color, name, description)
 	local IFrames = RPSCoreFramework:GetMiniMapPOIPin(guid, color, ptype, name, description);
-	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(self, IFrames, tonumber(mapid), tonumber(x), tonumber(y), HBD_PINS_WORLDMAP_SHOW_WORLD);
+	RPSCoreFramework.HBD.Pins:AddMinimapIconWorld(self, IFrames, tonumber(mapid), tonumber(x), tonumber(y));
 end
 
 function RPSCoreFramework:FlushAllPinsOnMap()

@@ -391,7 +391,7 @@ function RPSCoreFramework:OnInitialize()
 		text = "Вы действительно хотите активировать Менестрель?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:SendCoreMessage("rps minstrel activate"); end,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("minstrel activate"); end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);

@@ -420,13 +420,13 @@ function RPSCoreFramework:PlaceContainerItem(self)
 end
 
 function RPSCoreFramework:InventoryToContainer(bag, slot, conSlot)
-	local msg = "rps container put "..bag.." "..slot.." "..conSlot;
+	local msg = "container put "..bag.." "..slot.." "..conSlot;
 	print(msg)
 	RPSCoreFramework:SendCoreMessage(msg)
 end
 
 function RPSCoreFramework:ContainerSwap(prevSlot, secSlot)
-	local msg = "rps container swap "..prevSlot.." "..secSlot;
+	local msg = "container swap "..prevSlot.." "..secSlot;
 	print(msg)
 	RPSCoreFramework:SendCoreMessage(msg)
 end
@@ -437,7 +437,7 @@ function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 		if (RPSCoreFramework.PlayerCursorInformation.isVirtual and itemID == nil) then
 			local count = RPSCoreFramework.PlayerCursorInformation.count;
 			local containerSlotID = RPSCoreFramework.PlayerCursorInformation.slotID;
-			local msg = "rps container take "..bag.." "..bagSlot.." "..containerSlotID;
+			local msg = "container take "..bag.." "..bagSlot.." "..containerSlotID;
 			print(msg)
 			RPSCoreFramework:SendCoreMessage(msg);
 

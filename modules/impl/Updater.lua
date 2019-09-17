@@ -109,9 +109,9 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 end
 
 --[[
-	rps minstrel activate
+	minstrel activate
 	RPS.Minstrel 1 - Менестрель есть
-	RPS.Minstrel 0 - Менестрель заблочена(например у чувака ГМка)
+	RPS.Minstrel 0 - Менестрель заблочена(например, потому-что у человека ГМка)
 	RPS.Minstrel 2 - Менестрели нет.
 ]]--
 
@@ -227,9 +227,9 @@ function RPSCoreFramework:PeriodicallyScrollMenuUpdater()
 end
 
 function RPSCoreFramework:OneShotUpdater()
-	RPSCoreFramework:SendCoreMessage("rps minstrel status");
+	RPSCoreFramework:SendCoreMessage("minstrel status");
 	RPSCoreFramework:SendCoreMessage("disp list");
-	RPSCoreFramework:SendCoreMessage("rps request poi init");
+	RPSCoreFramework:SendCoreMessage("request poi init");
 	RPSCoreFramework:SendCoreMessage("rps action scale info");
 	RPSCoreFramework:SendCoreMessage("rps action aura list known");
 	RPSCoreFramework:SendCoreMessage("rps action aura list active");
