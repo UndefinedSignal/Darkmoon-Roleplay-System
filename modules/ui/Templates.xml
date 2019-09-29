@@ -2109,10 +2109,10 @@
         </Layers>
         <Scripts>
         	<OnClick>
-				ChatFrame1EditBox:Show();
-				ChatFrame1EditBox:SetFocus();
-				ChatFrame1EditBox:SetText(RPSCoreFramework.Minstrel[self:GetName()][2]);
-				ChatFrame1EditBox:HighlightText();
+			--	ChatFrame1EditBox:Show();
+			--	ChatFrame1EditBox:SetFocus();
+			--	ChatFrame1EditBox:SetText(RPSCoreFramework.Minstrel[self:GetName()][2]);
+			--	ChatFrame1EditBox:HighlightText();
         	</OnClick>
         	<OnShow>
         		self.icon:SetTexture(RPSCoreFramework.Minstrel[self:GetName()][1]);
