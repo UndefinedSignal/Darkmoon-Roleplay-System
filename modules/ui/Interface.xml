@@ -1295,7 +1295,7 @@
                     <Frame name="DarkmoonMinstrelFrame" hidden="true">
                         <Size x="500" y="430"/>
                         <Anchors>
-                            <Anchor relativeTo="RPS_MainFramePageContainer" />
+                            <Anchor relativeTo="RPS_MainFramePageContainer"/>
                             <Anchor point="TOPLEFT" x="0" y="0" />
                             <Anchor point="BOTTOMRIGHT" x="0" y="0" />
                         </Anchors>
@@ -1325,6 +1325,172 @@
                         </Layers>
 
                         <Frames>
+                            <Frame name="$parentBackground">
+                                <Size x="240" y="330"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonMinstrelFrame" point="TOPLEFT" x="20" y="-150" />
+                                    <Anchor point="BOTTOMRIGHT" x="-20" y="10" />
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <Texture parentKey="TopLeftBorder" file="Interface\Common\Common-Input-Border-TL">
+                                            <Size x="8" y="8"/>
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="-4" y="4"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="TopRightBorder" file="Interface\Common\Common-Input-Border-TR">
+                                            <Size x="8" y="8"/>
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT" x="4" y="4"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="TopBorder" file="Interface\Common\Common-Input-Border-T">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" relativeKey="$parent.TopLeftBorder" relativePoint="TOPRIGHT"/>
+                                                <Anchor point="BOTTOMRIGHT" relativeKey="$parent.TopRightBorder" relativePoint="BOTTOMLEFT"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="BottomLeftBorder" file="Interface\Common\Common-Input-Border-BL">
+                                            <Size x="8" y="8"/>
+                                            <Anchors>
+                                                <Anchor point="BOTTOMLEFT" x="-4" y="-3"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="BottomRightBorder" file="Interface\Common\Common-Input-Border-BR">
+                                            <Size x="8" y="8"/>
+                                            <Anchors>
+                                                <Anchor point="BOTTOMRIGHT" x="4" y="-3"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="BottomBorder" file="Interface\Common\Common-Input-Border-B">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" relativeKey="$parent.BottomLeftBorder" relativePoint="TOPRIGHT"/>
+                                                <Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomRightBorder" relativePoint="BOTTOMLEFT"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="LeftBorder" file="Interface\Common\Common-Input-Border-L">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" relativeKey="$parent.TopLeftBorder" relativePoint="BOTTOMLEFT"/>
+                                                <Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomLeftBorder" relativePoint="TOPRIGHT"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="RightBorder" file="Interface\Common\Common-Input-Border-R">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" relativeKey="$parent.TopRightBorder" relativePoint="BOTTOMLEFT"/>
+                                                <Anchor point="BOTTOMRIGHT" relativeKey="$parent.BottomRightBorder" relativePoint="TOPRIGHT"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <Texture parentKey="MiddleBorder" file="Interface\Common\Common-Input-Border-M">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" relativeKey="$parent.LeftBorder" relativePoint="TOPRIGHT"/>
+                                                <Anchor point="BOTTOMRIGHT" relativeKey="$parent.RightBorder" relativePoint="BOTTOMLEFT"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                    <ScrollFrame name="$parentSlider1" inherits="UIPanelScrollFrameTemplate">
+                                        <Size x="240" y="245"/>
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="2" y="0" />
+                                            <Anchor point="BOTTOMRIGHT" x="-20" y="0" />
+                                        </Anchors>
+                                        <ScrollChild>
+                                            <Frame name="$parentChild">
+                                                <Size x="240" y="230"/>
+                                                <Anchors>
+                                                    <Anchor point="TOPLEFT" x="0" y="0" />
+                                                    <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                                                </Anchors>
+                                                <Frames>
+                                                    <Button name="$parentbtn1" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" x="115" y="0"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn2" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn1" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn3" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn2" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn4" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn3" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn5" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn4" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn6" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn5" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn7" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn6" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn8" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn7" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn9" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn8" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn10" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn9" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn11" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn10" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn12" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn11" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn13" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn12" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn14" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn13" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn15" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn14" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                </Frames>
+                                            </Frame>
+                                        </ScrollChild>
+                                        <Scripts>
+                                            ScrollFrame_OnLoad(self);
+                                            ScrollFrame_OnScrollRangeChanged(self);
+                                        </Scripts>
+                                    </ScrollFrame>
+                                </Frames>
+                            </Frame>
+
+                            <!--
                             <Frame name="RPS_TextMinstrel" inherits="RPS_TextArea">
                                 <Size x="455" y="240"/>
                                 <Anchors>
@@ -1336,7 +1502,7 @@
                                         RPSCoreFramework:MinstrelSetTextOnShow(RPS_TextMinstrelScrollText)
                                     </OnShow>
                                 </Scripts>
-                            </Frame>
+                            </Frame>-->
 
                             <SimpleHTML name="RPS_DescriptionMinstrel">
                                 <Size x="460" y="340"/>
@@ -1363,8 +1529,8 @@
                                     </OnLoad>
 
                                     <OnClick>
-                                        RPS_TextMinstrel:Show();
-                                        RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
+                                        --RPS_TextMinstrel:Show();
+                                        --RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
                                     </OnClick>
 
                                 </Scripts>
@@ -1415,11 +1581,6 @@
                     <Anchor point="TOPLEFT" x="20" y="-23"/>
                     <Anchor point="BOTTOM" x="0" y="20"/>
                 </Anchors>
-                <ScrollChild>
-                    <Frame name="RPS_MainFrameMenuContainer">
-                        <Size x="195" y="10"/>
-                    </Frame>
-                </ScrollChild>
                 <Layers>
                     <Layer level="ARTWORK">
                         <Texture file="Interface\AddOns\RPSDarkmoon\resources\logo2">
@@ -1711,5 +1872,4 @@
         </Scripts>
 
     </Frame>
-
 </Ui>

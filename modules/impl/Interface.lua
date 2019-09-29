@@ -163,7 +163,7 @@ function RPSCoreFramework:MinstrelCheckLock()
 		DarkmoonMinstrelFrameBuy:SetText("Активировать");
 	end
 end
-
+--[[
 function RPSCoreFramework:MinstrelSetTextOnShow(self)
 	if (self == nil) then
 		self = _G["RPS_TextMinstrelScrollText"];
@@ -176,7 +176,7 @@ function RPSCoreFramework:MinstrelSetTextOnShow(self)
 		self:SetText(RPSCoreFramework.Literature.DarkmoonMinstrel1);
 	end
 	self:Disable();
-end
+end]]--
 
 function RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self)
 	if (GetItemCount(1000207) ~= 0) then

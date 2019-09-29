@@ -30,6 +30,9 @@ RPSCoreFramework.DraggingContainerFrame = nil;
 
 RPSCoreFramework.MinstrelStatus = 2;
 
+RPSCoreFramework.DistanceText = nil;
+RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
+
 if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {};
 end
@@ -218,6 +221,24 @@ RPSCoreFramework.Display.Scroll = {
 	{".disp offh ", -1, 0},
 	{".disp ranged ", -1, 0},
 	{".disp tabard ", -1, 0}	
+}
+
+RPSCoreFramework.Minstrel = {
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn1"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Blue.blp", ".minstrel gobject add", ".minstrel gobject add <id> - размещение ГО с указанным номером на месте персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn2"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Green.blp", ".minstrel gobject target", ".minstrel gobject target - берет ближайшее ГО в цель и выводит информацию об объекте, включая guid, которые можно использовать для перемещения, поворота и удаления."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn3"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Purple.blp", ".minstrel gobject delete", ".minstrel gobject delete <guid> - удаление ГО с указанным уникальным номером."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn4"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Red.blp", ".minstrel gobject info", ".minstrel gobject info <guid> - получение информации о ГО с указанным уникальным номером."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn5"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_White.blp", ".minstrel gobject move", ".minstrel gobject move <guid> - перемещение ГО с указанным уникальным номером на месте, где расположен персонаж."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn6"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Yellow.blp", ".minstrel gobject turn", ".minstrel gobject turn <guid> - разворот ГО с указанным уникальным номером в сторону обзора персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn7"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Blue.blp", ".minstrel npc add", ".minstrel npc add <id> - размещение NPC с указанным номером на месте персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn8"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Green.blp", ".minstrel npc delete", ".minstrel npc delete - удаление выделенного NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn9"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel npc say", ".minstrel npc say <фраза> - сказать фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn10"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel npc yell", ".minstrel npc yell <фраза> - выкрикнуть фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn11"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_White.blp", ".minstrel npc textemote", ".minstrel npc textemote <фраза> - вывести в чат эмоцию. В отличие от say и yell имя NPC не выводит автоматически, так что это следует сделать вручную. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Yellow.blp", ".minstrel npc info", ".minstrel npc info - выводит в чат информацию о выделенном NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Blue.blp", ".minstrel npc playemote", ".minstrel npc playemote <номер> - выделенный NPC начинает циклично проигрывать эмоцию с указанным номером. Номера эмоций NPC совпадают с номерами эмоций персонажей."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Purple.blp", ".minstrel npc spawndist", ".minstrel npc spawndist <значение> - выделенный NPC начинает периодически бродить в указанном радиусе вокруг изначальной точки размещений. Проще говоря, ходит туда-сюда. Рекомендуется ставить значение в диапазоне 3-5."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_White.blp", ".minstrel npc come", ".minstrel npc come - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."}
 }
 
 RPSCoreFramework.DB = {

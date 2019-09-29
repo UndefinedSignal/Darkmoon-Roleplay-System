@@ -233,6 +233,24 @@ RPSCoreFramework.Literature.AdvancedRaceOrClassMessage = "Выходя за пр
 RPSCoreFramework.Literature.CharsheetRequiredMessage = "|cFFFF0000Требуется наличие одобренной анкеты.|r";
 RPSCoreFramework.Literature.CharsheetRecommendedMessage = "|cFF00FF00Рекомендуется наличие анкеты.|r";
 
+RPSCoreFramework.Literature.MinstrelButtons = {
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn1"] = ".minstrel gobject add <id> - размещение ГО с указанным номером на месте персонажа.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn2"] = ".minstrel gobject target - берет ближайшее ГО в цель и выводит информацию об объекте, включая guid, которые можно использовать для перемещения, поворота и удаления.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn3"] = ".minstrel gobject delete <guid> - удаление ГО с указанным уникальным номером.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn4"] = ".minstrel gobject info <guid> - получение информации о ГО с указанным уникальным номером.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn5"] = ".minstrel gobject move <guid> - перемещение ГО с указанным уникальным номером на месте, где расположен персонаж.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn6"] = ".minstrel gobject turn <guid> - разворот ГО с указанным уникальным номером в сторону обзора персонажа.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn7"] = ".minstrel npc add <id> - размещение NPC с указанным номером на месте персонажа.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn8"] = ".minstrel npc delete - удаление выделенного NPC.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn9"] = ".minstrel npc say <фраза> - сказать фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn10"] = ".minstrel npc yell <фраза> - выкрикнуть фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn11"] = ".minstrel npc textemote <фраза> - вывести в чат эмоцию. В отличие от say и yell имя NPC не выводит автоматически, так что это следует сделать вручную. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = ".minstrel npc info - выводит в чат информацию о выделенном NPC.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = ".minstrel npc playemote <номер> - выделенный NPC начинает циклично проигрывать эмоцию с указанным номером. Номера эмоций NPC совпадают с номерами эмоций персонажей.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = ".minstrel npc spawndist <значение> - выделенный NPC начинает периодически бродить в указанном радиусе вокруг изначальной точки размещений. Проще говоря, ходит туда-сюда. Рекомендуется ставить значение в диапа зоне 3-5.",
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = ".minstrel npc come - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."
+}
+
 function RPSCoreFramework:ChangeDefaultWords()
 	AFK = "Вне роли";
 	CHAT_AFK_GET = "%s <Вне роли>:\32";
