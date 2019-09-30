@@ -105,7 +105,7 @@ end
 
 
 function RPSCoreFramework:LearnMyAuras(button, arg1)
-	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
+	RPSCoreFramework:SendCoreMessage(arg1);
 	_G[button:GetName().."Price"]:Hide();
     _G[button:GetName().."Macros"]:Show();
 	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1;
@@ -125,6 +125,8 @@ end
 
 
 function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
+	local msg = RPSCoreFramework.Interface.Auras.Message[arg1][1];
+
 	if RPSCoreFramework.Interface.Auras.GhostClick then
 		return false
 	end
@@ -133,7 +135,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 		text = "Вы действительно желаете приобрести выбранную ауру?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, arg1) end,
+		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, msg) end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);

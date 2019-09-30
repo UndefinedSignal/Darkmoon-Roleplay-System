@@ -453,9 +453,9 @@ function DistanceFrameOnUpdate()
 	end
 
 	if cx and xy then
-		local distance, _, _ = DMA.HBD:GetWorldDistance(0, px, py, cx, cy);
+		local distance, _, _ = RPSCoreFramework.HBD:GetWorldDistance(0, px, py, cx, cy);
 		distance = distance * 2000;
-		RPSCoreFramework.DistanceText:SetFormattedText("|cffFF8040Юниты|r: "..tonumber(string.format("%.3f", distance)), "", 100 * cx, 100 * cy)
+		RPSCoreFramework.DistanceText:SetFormattedText("|cffFF8040Расстояние|r: "..tonumber(string.format("%.3f", distance)).." юнитов", "", 100 * cx, 100 * cy)
 	else
 		RPSCoreFramework.DistanceText:SetText("")
 	end
