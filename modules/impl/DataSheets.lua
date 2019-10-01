@@ -17,6 +17,7 @@ RPSCoreFramework.PollTimer.Counter = nil;
 
 RPSCoreFramework.PrintGarbageCollector = false;
 RPSCoreFramework.GBCounter = nil;
+RPSCoreFramework.CanScroll = true;
 
 RPSCoreFramework.Container = {};
 RPSCoreFramework.Container.title = nil;

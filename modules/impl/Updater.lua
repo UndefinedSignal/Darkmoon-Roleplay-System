@@ -229,7 +229,7 @@ end
 function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage("minstrel status");
 	RPSCoreFramework:SendCoreMessage("disp list");
-	RPSCoreFramework:SendCoreMessage("request poi");
+	RPSCoreFramework:SendCoreMessage("poi request");
 	RPSCoreFramework:SendCoreMessage("rps action scale info");
 	RPSCoreFramework:SendCoreMessage("rps action aura list known");
 	RPSCoreFramework:SendCoreMessage("rps action aura list active");

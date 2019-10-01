@@ -105,11 +105,12 @@ end
 
 
 function RPSCoreFramework:LearnMyAuras(button, arg1)
-	RPSCoreFramework:SendCoreMessage(arg1);
+	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 	_G[button:GetName().."Price"]:Hide();
     _G[button:GetName().."Macros"]:Show();
 	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][5] = 1;
 	RPSCoreFramework.Interface.Auras.Message[arg1][1] = "rps action aura toggle ".. RPSCoreFramework.Interface.Auras.Message[arg1][2];
+	RPSCoreFramework.CanScroll = true;
 end
 function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	RPSCoreFramework.Interface.ActiveAuraCounter = 1;
@@ -119,23 +120,23 @@ function RPSCoreFramework:MaxToggledAuras(button, arg1)
 	RPSCoreFramework.Interface.Auras[tonumber(RPSCoreFramework.Interface.Auras.Message[arg1][2])][6] = 1;
 	RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 	RPSCoreFramework:HideEffectAuraButtons();
+	RPSCoreFramework.CanScroll = true;
 	_G[button:GetName().."Completed"]:Show();
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter.."/3", 0.5, 0.5);
 end
 
 
 function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
-	local msg = RPSCoreFramework.Interface.Auras.Message[arg1][1];
-
 	if RPSCoreFramework.Interface.Auras.GhostClick then
 		return false
 	end
+	RPSCoreFramework.CanScroll = false;
 	RPSCoreFramework.Interface.Auras.GhostClick = true;
 	StaticPopupDialogs["LearnAura"] = {
 		text = "Вы действительно желаете приобрести выбранную ауру?",
 		button1 = YES,
 		button2 = NO,
-		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, msg) end,
+		OnAccept = function() RPSCoreFramework:LearnMyAuras(button, arg1) end,
 		OnShow = function(self)
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
@@ -152,6 +153,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 				end
 			end);
 		end,
+		OnCancel = function() RPSCoreFramework.CanScroll = true end,
 		timeout = 0,
 		StartDelay = function() return 3; end,
 		whileDead = true,
@@ -181,6 +183,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 				end
 			end);
 		end,
+		OnCancel = function() RPSCoreFramework.CanScroll = true end,
 		timeout = 0,
 		StartDelay = function() return 3; end,
 		whileDead = true,
@@ -195,12 +198,14 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 			RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 			RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter - 1;
 			RPSCoreFramework.Interface.Auras[id][6] = 0;
+			RPSCoreFramework.CanScroll = true;
 			_G[button:GetName().."Completed"]:Hide();
 		else
 			if ( tonumber(RPSCoreFramework.Interface.ActiveAuraCounter) < 3 ) then
 				RPSCoreFramework:SendCoreMessage(RPSCoreFramework.Interface.Auras.Message[arg1][1]);
 				RPSCoreFramework.Interface.ActiveAuraCounter = RPSCoreFramework.Interface.ActiveAuraCounter + 1;
 				RPSCoreFramework.Interface.Auras[id][6] = 1;
+				RPSCoreFramework.CanScroll = true;
 				_G[button:GetName().."Completed"]:Show();
 			else
 				StaticPopup_Show("MaxToggledAuras");

@@ -802,11 +802,13 @@
                                 </Anchors>
                                 <Scripts>
                                     <OnVerticalScroll>
-                                        if (RPS_AuraButton6:IsShown()) then -- Костыль который катит телегу
-                                            FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
-                                            FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
-                                        else
-                                            FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                        if (RPSCoreFramework.CanScroll) then
+                                            if (RPS_AuraButton6:IsShown()) then -- Костыль который катит телегу
+                                                FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                                FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                            else
+                                                FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
+                                            end
                                         end
                                     </OnVerticalScroll>
                                     <OnShow>
