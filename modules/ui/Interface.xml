@@ -1330,7 +1330,7 @@
                             <Frame name="$parentBackground">
                                 <Size x="240" y="330"/>
                                 <Anchors>
-                                    <Anchor relativeTo="DarkmoonMinstrelFrame" point="TOPLEFT" x="20" y="-150" />
+                                    <Anchor relativeTo="DarkmoonMinstrelFrame" point="TOPLEFT" x="20" y="-180" />
                                     <Anchor point="BOTTOMRIGHT" x="-20" y="10" />
                                 </Anchors>
                                 <Layers>
@@ -1532,7 +1532,7 @@
 
                                     <OnClick>
                                         --RPS_TextMinstrel:Show();
-                                        --RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
+                                        RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
                                     </OnClick>
 
                                 </Scripts>
