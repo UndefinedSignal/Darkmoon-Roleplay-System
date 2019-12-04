@@ -6,43 +6,43 @@ function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
 end
 
 function RPSCoreFramework:PaperdollDispInit()
-	RPSCoreFramework:HookScript(_G["CharacterHeadSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "head"
+	RPSCoreFramework:HookScript(CharacterHeadSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "head"
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HEAD)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterShoulderSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shoulder";
+	RPSCoreFramework:HookScript(CharacterShoulderSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shoulder";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_SHOULDER)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterBackSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "back";
+	RPSCoreFramework:HookScript(CharacterBackSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "back";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_BACK)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterChestSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "chest";
+	RPSCoreFramework:HookScript(CharacterChestSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "chest";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_CHEST)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterShirtSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shirt";
+	RPSCoreFramework:HookScript(CharacterShirtSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "shirt";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_BODY)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterTabardSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "tabard";
+	RPSCoreFramework:HookScript(CharacterTabardSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "tabard";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_TABARD)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterWristSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "wrist";
+	RPSCoreFramework:HookScript(CharacterWristSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "wrist";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_WRIST)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterHandsSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "hands";
+	RPSCoreFramework:HookScript(CharacterHandsSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "hands";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_HAND)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterWaistSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "waist";
+	RPSCoreFramework:HookScript(CharacterWaistSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "waist";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_WAIST)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterLegsSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "legs";
+	RPSCoreFramework:HookScript(CharacterLegsSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "legs";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_LEGS)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterFeetSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "feet";
+	RPSCoreFramework:HookScript(CharacterFeetSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "feet";
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_FEET)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterMainHandSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "mainhand"
+	RPSCoreFramework:HookScript(CharacterMainHandSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "mainhand"
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_MAINHAND)
 	 end end)
-	RPSCoreFramework:HookScript(_G["CharacterSecondaryHandSlot"], "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "offhand"
+	RPSCoreFramework:HookScript(CharacterSecondaryHandSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "offhand"
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND)
 	 end end)
 end
@@ -51,13 +51,13 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 	local removeDispSlot
 	local menuTitle = "Вы действительно хотите убрать дисп?"
 	for v,h in pairs(RPSCoreFramework.SlotnameListPresets) do
-		if v == slotname then
+		if (v == slotname) then
 			removeDispSlot = h .. "0"
 			break
 		end
 	end
 	for v,h in pairs(RPSCoreFramework.SlotnameListNames) do
-		if v == slotname then
+		if (v == slotname) then
 			menuTitle = "Вы действительно хотите убрать дисп для " .. h .. "?"
 			break
 		end
@@ -82,17 +82,17 @@ end
 
 function RPSCoreFramework:ShowDisplayInfo(slotname)
 	local displayMessage
-	local menuTitle = "Введите ID предмета для выбранного слота."
+	local menuTitle = "Введите ID предмета для выбранного слота.";
 	for v,h in pairs(RPSCoreFramework.SlotnameListPresets) do
-		if v == slotname then
-			displayMessage = h
-			break
+		if (v == slotname) then
+			displayMessage = h;
+			break;
 		end
 	end
 	for v,h in pairs(RPSCoreFramework.SlotnameListNames) do
-		if v == slotname then
-			menuTitle = "Введите ID предмета для " .. h .. "."
-			break
+		if (v == slotname) then
+			menuTitle = "Введите ID предмета для " .. h .. ".";
+			break;
 		end
 	end
 	StaticPopupDialogs["DipsSlotEditMenu"] = {
@@ -114,23 +114,25 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 	  	hideOnEscape = true,
 	  	enterClicksFirstButton = true,
 	}
-	StaticPopup_Hide("removeDisp")
-	StaticPopup_Hide("DipsSlotEditMenu")
-	StaticPopup_Show("DipsSlotEditMenu")
+	StaticPopup_Hide("removeDisp");
+	StaticPopup_Hide("DipsSlotEditMenu");
+	StaticPopup_Show("DipsSlotEditMenu");
 end
 
 function RPSCoreFramework:KnownAura(arg)
-	if RPSCoreFramework.Interface.Auras[arg][5] > 0 then
-		return true
+	if (RPSCoreFramework.Interface.Auras[arg][5] > 0) then
+		return true;
 	end
-	return false
+	
+	return false;
 end
 
 function RPSCoreFramework:isAuraActive(arg)
-	if RPSCoreFramework.Interface.Auras[arg][6] > 0 then
-		return true
+	if (RPSCoreFramework.Interface.Auras[arg][6] > 0) then
+		return true;
 	end
-	return false
+	
+	return false;
 end
 
 function RPSCoreFramework:AddMinimapIcon()
@@ -215,7 +217,7 @@ function RPSCoreFramework:FormatDMButtons(button)
 	local shift = 0;
 	local y = -60;
 	for i=1, #RPSCoreFramework.Interface.MenuButtons do
-		if i == 1 then 
+		if (i == 1) then 
 			_G[RPSCoreFramework.Interface.MenuButtons[i][2]]:SetPoint("TOPLEFT", RPS_MainFrameMenuScroll, 16, -60);
 		else
 			y = -25 + shift;
@@ -226,8 +228,8 @@ function RPSCoreFramework:FormatDMButtons(button)
 			end
 			shift = 0;
 		end
-		if RPSCoreFramework.Interface.MenuButtons[i][4] then
-			if RPSCoreFramework.Interface.MenuButtons[i][2] == button then
+		if (RPSCoreFramework.Interface.MenuButtons[i][4]) then
+			if (RPSCoreFramework.Interface.MenuButtons[i][2] == button) then
 				for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
 					if RPSCoreFramework.Interface.SubMenuButtons[j][1] == RPSCoreFramework.Interface.MenuButtons[i][5] then
 						if j==1 then
@@ -322,7 +324,7 @@ function RPSCoreFramework:SchedulePollTimer()
 	PollToastStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
 	PollFrameStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
 	RPSCoreFramework.PollTimer.Counter = RPSCoreFramework.PollTimer.Counter - 1;
-	if RPSCoreFramework.PollTimer.Counter == 0 then
+	if (RPSCoreFramework.PollTimer.Counter == 0) then
 		RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer)
 	end
 end
