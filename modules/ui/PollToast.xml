@@ -1,4 +1,3 @@
- 
 <Ui
     xmlns="http://www.blizzard.com/wow/ui/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -90,7 +89,7 @@
 			<OnShow>
 				self.FadeIn:Play()
 				self:RegisterForClicks("AnyUp");
-				if RPSCoreFramework:TimeLeft(RPSCoreFramework.PollTimer.Timer) ~= 0 then
+				if (RPSCoreFramework:TimeLeft(RPSCoreFramework.PollTimer.Timer) ~= 0) then
 					RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer)
 					RPSCoreFramework.PollTimer.Counter = 120;
 					RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
@@ -103,7 +102,7 @@
 				GameTooltip:ClearLines();
 				GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 				GameTooltip:AddLine("Новый вопрос викторины!");
-				GameTooltip:AddLine("|cFFFF8040ПКМ|r: Перейти к вопросу|n|cFFFF8040ЛКМ|r: Закрыть окно");
+				GameTooltip:AddLine("|cFFFF8040ЛКМ|r: Перейти к вопросу|n|cFFFF8040ПКМ|r: Закрыть окно");
 				GameTooltip:Show();
 			</OnEnter>
 			<OnLeave>

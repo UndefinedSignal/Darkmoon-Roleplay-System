@@ -116,8 +116,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:InvokeContainerComamnd(msg);
 		elseif (prefix == "RPS.CON.u") then
 			RPSCoreFramework:UpdateContainer(msg);
-		elseif (prefix == "RPS.ECO.ti") then
-			RPSCoreFramework:SalaryIndicator(msg)
+		elseif (prefix == "RPS.ECO.ti" or prefix == "RPS.ECO.qi") then
+			RPSCoreFramework:SalaryIndicator(msg);
 		elseif (prefix == "RPS.AuraOff") then
 			RPSCoreFramework:UpdatePLayerAuraList(msg)
 		elseif (prefix == "RPS.Minstrel") then
