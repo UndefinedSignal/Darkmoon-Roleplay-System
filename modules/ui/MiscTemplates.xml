@@ -58,4 +58,15 @@
 			<OnDragStop>self:StopMovingOrSizing();</OnDragStop>
 		</Scripts>
 	</Frame>
+
+	<Frame name="RPSCoreFrameworkWorldMapPinTemplate" hidden="true" enableMouse="true" mixin="RPSCoreFrameworkWorldMapPinMixin" virtual="true">
+		<Size x="30" y="30"/>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture parentKey="texture" setAllPoints="true">
+				</Texture>
+			</Layer>
+		</Layers>
+	</Frame>
+	
 </Ui>
