@@ -240,6 +240,11 @@ function RPSCoreFramework:PeriodicallyAurasUpdate()
 	RPSCoreFramework:SendCoreMessage("rps action aura list active");
 end
 
+function RPSCoreFramework:GlobalTimer()
+	RPSCoreFramework:QuizProcess();
+	RPSCoreFramework:AuraCheckTimer();
+end
+
 function RPSCoreFramework:UpdateActiveAurasCounter()
 	local counter = 0;
 	if RPSCoreFramework.Interface.ActiveAuraCounter ~= 0 then

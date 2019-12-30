@@ -35,6 +35,13 @@ RPSCoreFramework.MinstrelStatus = 2;
 RPSCoreFramework.DistanceText = nil;
 RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
 
+
+RPSCoreFramework.Quiz = {};
+RPSCoreFramework.Quiz.PollToast = false;
+RPSCoreFramework.Quiz.Question = nil;
+RPSCoreFramework.Quiz.Answers = {};
+
+
 if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {};
 end

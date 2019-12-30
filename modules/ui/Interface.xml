@@ -1710,7 +1710,7 @@
                     </Scripts>
             </Frame>
 
-            <StatusBar name="$parentStatusBar" hidden="false" minValue="0" maxValue="120" defaultValue="120" orientation="HORIZONTAL" frameStrata="PARENT">
+            <StatusBar name="$parentStatusBar" hidden="false" minValue="0" maxValue="30" defaultValue="30" orientation="HORIZONTAL" frameStrata="PARENT">
                 <Size x="250" y="12"/>
                 <Anchors><Anchor relativeTo="PollFrame" point="CENTER" x="0" y="13"/></Anchors>
                 <BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>
@@ -1761,7 +1761,7 @@
                 <BarColor r="1.0" g="0.61" b="0"/>
             </StatusBar>
 
-            <Button name="$parentChoice1" inherits="RPSPoll_DialogChoiceButton" text="Твоё очко" hidden="false">
+            <Button name="$parentChoice1" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
                 <Size x="124" y="34"/>
                 <Anchors><Anchor relativeTo="PollFrame" point="LEFT" x="0" y="-15"/></Anchors>
                 <NormalFont style="GameFontNormalLarge"/>
@@ -1771,7 +1771,7 @@
                     </OnLoad>
                 </Scripts>
             </Button>
-            <Button name="$parentChoice2" inherits="RPSPoll_DialogChoiceButton" text="Королева Лирия Седогрив" hidden="false">
+            <Button name="$parentChoice2" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
                 <Size x="124" y="34"/>
                 <Anchors><Anchor relativeTo="$parentChoice1" point="LEFT" x="0" y="-30"/></Anchors>
                 <NormalFont style="GameFontNormalLarge"/>
@@ -1781,7 +1781,7 @@
                     </OnLoad>
                 </Scripts>
             </Button>
-            <Button name="$parentChoice3" inherits="RPSPoll_DialogChoiceButton" text="Поднять полотенце" hidden="false">
+            <Button name="$parentChoice3" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
                 <Size x="124" y="34"/>
                 <Anchors><Anchor relativeTo="$parentChoice2" point="LEFT" x="0" y="-30"/></Anchors>
                 <NormalFont style="GameFontNormalLarge"/>
@@ -1791,7 +1791,7 @@
                     </OnLoad>
                 </Scripts>
             </Button>
-            <Button name="$parentChoice4" inherits="RPSPoll_DialogChoiceButton" text="Я газовщик пацаны" hidden="false">
+            <Button name="$parentChoice4" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
                 <Size x="124" y="34"/>
                 <Anchors><Anchor relativeTo="$parentChoice3" point="LEFT" x="0" y="-30"/></Anchors>
                 <NormalFont style="GameFontNormalLarge"/>
@@ -1827,7 +1827,7 @@
                         </Anchors>
                         <Layers>
                             <Layer level="OVERLAY">
-                                <FontString name="RPSPoll_NPCFrameChatNextText" text="Этот дреней, некогда здоровый и полный сил паладин, серьезно заболел после битв с Пылающим Легионом и пополнил ряды Сломленных. Впоследствии он стал могущественным шаманом." inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
+                                <FontString name="RPSPoll_NPCFrameChatNextText" text="..." inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
                                     <Anchors>
                                         <Anchor point="BOTTOMLEFT" x="10" y="10"/>
                                         <Anchor point="TOPLEFT" x="10" />

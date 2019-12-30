@@ -15,7 +15,7 @@ function RPSCoreFramework:UpdateInteractButtons()
 		RPS_InteractFramePillage:Show();
 		RPS_InteractFrameKill:Show();
 	end;
-end;
+end
 
 function RPSCoreFramework:AuraCheckTimer()
 	self:UpdateInteractionFrame();
@@ -29,7 +29,7 @@ function RPSCoreFramework:HasAura(id, target)
 	local counter = 1;
 	local aura = UnitAura(target, counter)
 	while aura do
-		aura, _, _, _, _, _, _, _, _, _, spellId = UnitAura(target, counter);
+		aura, _, _, _, _, _, _, _, _, spellId = UnitAura(target, counter);
 		counter = counter + 1;
 		if (spellId == id) then
 			return true;
@@ -40,7 +40,7 @@ end
 
 function RPSCoreFramework:IsFallen()
 	local counter = 1;
-	local aura = UnitAura("Target", counter)
+	local aura = UnitAura("Target", counter);
 	while aura do
 		aura, _, _, _, _, _, _, _, _, spellId = UnitAura("Target", counter);
 		counter = counter + 1;
@@ -52,6 +52,6 @@ function RPSCoreFramework:IsFallen()
 end
 
 function RPSCoreFramework:UpdatePlayerModel()
-	RPS_InteractFrameSelfModel:SetUnit("Player")
-	RPS_InteractFrameTargetModel:SetUnit("Target")
+	RPS_InteractFrameSelfModel:SetUnit("Player");
+	RPS_InteractFrameTargetModel:SetUnit("Target");
 end

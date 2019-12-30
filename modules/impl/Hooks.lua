@@ -80,7 +80,6 @@ end
 
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
-		self.TimerID = self:ScheduleRepeatingTimer("AuraCheckTimer", 1);
 		self:UpdatePlayerModel();
 		self:UpdateInteractionFrame();
 	elseif (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LEVEL_UP" or event == "PLAYER_EQUIPMENT_CHANGED") then
@@ -122,6 +121,12 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdatePLayerAuraList(msg)
 		elseif (prefix == "RPS.Minstrel") then
 			RPSCoreFramework:UpdateMinstrelStatus(msg);
+		elseif (prefix == "RPS.Quiz.s") then
+			print(msg)
+			RPSCoreFramework:QuizSetQuestion(msg);
+		elseif (prefix == "RPS.Quiz.v") then
+			print(msg)
+			RPSCoreFramework:QuizAddAnswer(msg)
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
@@ -195,4 +200,73 @@ function RPSCoreFramework:ProcessMapClick(button)
 	elseif button == "Button5" then
 		print("Button5 button!");]]--
 	end
+end
+
+
+local QuizzAnswerCounter = 1;
+
+function RPSCoreFramework:QuizShowToast()
+	PollToast:Show();
+	RPSCoreFramework.Quiz.PollToast = true;
+end
+
+
+function RPSCoreFramework:QuizProcess()
+	if (RPSCoreFramework:HasAura(1000041, "player") and not RPSCoreFramework.Quiz.PollToast) then
+		RPSCoreFramework:QuizShowToast();
+	end
+end
+
+function RPSCoreFramework:QuizAccept()
+	RPSCoreFramework:SendCoreMessage("quiz start");
+end
+
+function RPSCoreFramework:QuizSetTexts()
+	RPSPoll_NPCFrameChatNextText:SetText(RPSCoreFramework.Quiz.Question);
+	PollFrameChoice1:SetText(RPSCoreFramework.Quiz.Answers[1][1]);
+	PollFrameChoice2:SetText(RPSCoreFramework.Quiz.Answers[2][1]);
+	PollFrameChoice3:SetText(RPSCoreFramework.Quiz.Answers[3][1]);
+	PollFrameChoice4:SetText(RPSCoreFramework.Quiz.Answers[4][1]);
+end
+
+function RPSCoreFramework:QuizStart()
+	RPSCoreFramework:QuizSetTexts();
+	PollFrame:Show();
+end
+
+function RPSCoreFramework:QuizDecline()
+	RPSCoreFramework:SendCoreMessage("quiz end");
+	RPSCoreFramework.Quiz.PollToast = false;
+end
+
+function RPSCoreFramework:QuizSetQuestion(msg)
+	RPSCoreFramework.Quiz.Question = msg;
+end
+
+function RPSCoreFramework:QuizAddAnswer(msg)
+	msg = msg..math.random(1,1000);
+	if (QuizzAnswerCounter ~= 4) then
+		table.insert(RPSCoreFramework.Quiz.Answers, {msg, QuizzAnswerCounter});
+		QuizzAnswerCounter = QuizzAnswerCounter + 1;
+	else
+		table.insert(RPSCoreFramework.Quiz.Answers, {msg, QuizzAnswerCounter});
+		QuizzAnswerCounter = 1;
+		RPSCoreFramework.PollTimer.Counter = 30;
+
+		PollFrameStatusBar:SetMinMaxValues(0,RPSCoreFramework.PollTimer.Counter);
+		RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
+		
+		RPSCoreFramework.Quiz.Answers = RPSCoreFramework:QuizShuffles(RPSCoreFramework.Quiz.Answers);
+		RPSCoreFramework:QuizStart();
+	end
+end
+
+function RPSCoreFramework:QuizShuffles(tInput)
+	local tReturn = {}
+	for i = #tInput, 1, -1 do
+		local j = math.random(i)
+		tInput[i], tInput[j] = tInput[j], tInput[i]
+		table.insert(tReturn, tInput[i])
+	end
+	return tReturn
 end

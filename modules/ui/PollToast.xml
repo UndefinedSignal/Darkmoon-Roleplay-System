@@ -91,10 +91,10 @@
 				self:RegisterForClicks("AnyUp");
 				if (RPSCoreFramework:TimeLeft(RPSCoreFramework.PollTimer.Timer) ~= 0) then
 					RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer)
-					RPSCoreFramework.PollTimer.Counter = 120;
+					RPSCoreFramework.PollTimer.Counter = 118;
 					RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
 				else
-					RPSCoreFramework.PollTimer.Counter = 120;
+					RPSCoreFramework.PollTimer.Counter = 118;
 					RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
 				end
 			</OnShow>
@@ -111,10 +111,11 @@
 			</OnLeave>
 			<OnClick>
 				if (button == "RightButton") then
-					self.FadeOut:Play()
+					self.FadeOut:Play();
+					RPSCoreFramework:QuizDecline();
 				elseif (button == "LeftButton") then
-					PollFrame:Show();
-					self.FadeOut:Play()
+					self.FadeOut:Play();
+					RPSCoreFramework:QuizAccept();
 				end
 			</OnClick>
 		</Scripts>
