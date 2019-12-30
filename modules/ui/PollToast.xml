@@ -30,7 +30,7 @@
                 </Anchors>
             </Button>
 
-			<StatusBar name="$parentStatusBar" hidden="false" minValue="0" maxValue="120" defaultValue="120" orientation="HORIZONTAL" frameStrata="PARENT">
+			<StatusBar name="$parentStatusBar" hidden="false" minValue="1" maxValue="120" defaultValue="120" orientation="HORIZONTAL" frameStrata="PARENT">
 				<Size x="160" y="2"/>
 				<Anchors>
 					<Anchor point="BOTTOM" x="29" y="30"/>
@@ -88,15 +88,10 @@
 		<Scripts>
 			<OnShow>
 				self.FadeIn:Play()
-				self:RegisterForClicks("AnyUp");
-				if (RPSCoreFramework:TimeLeft(RPSCoreFramework.PollTimer.Timer) ~= 0) then
-					RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer)
-					RPSCoreFramework.PollTimer.Counter = 118;
-					RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
-				else
-					RPSCoreFramework.PollTimer.Counter = 118;
-					RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
-				end
+				self:RegisterForClicks("AnyUp");				
+				RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer)
+				RPSCoreFramework.PollTimer.Counter = 120;
+				RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);				
 			</OnShow>
 			<OnEnter>
 				GameTooltip:ClearLines();

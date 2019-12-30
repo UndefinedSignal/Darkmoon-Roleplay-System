@@ -253,7 +253,7 @@ function RPSCoreFramework:QuizAddAnswer(msg)
 		QuizzAnswerCounter = 1;
 		RPSCoreFramework.PollTimer.Counter = 30;
 
-		PollFrameStatusBar:SetMinMaxValues(0,RPSCoreFramework.PollTimer.Counter);
+		--PollFrameStatusBar:SetMinMaxValues(1,RPSCoreFramework.PollTimer.Counter);
 		RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
 		
 		RPSCoreFramework.Quiz.Answers = RPSCoreFramework:QuizShuffles(RPSCoreFramework.Quiz.Answers);
