@@ -280,8 +280,8 @@ end
 
 function RPSCoreFramework:QuizCloseReload()
 	print("QuizCloseReload");
-	PollFrame:Hide();
-	PollToast:Hide();
+	--PollFrame:Hide();
+	--PollToast:Hide();
 	RPSCoreFramework.Quiz.PollToast = false;
 	PollFrameStatusBar:SetValue(30);
 	PollToastStatusBar:SetValue(120);

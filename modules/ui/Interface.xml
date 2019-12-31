@@ -1683,6 +1683,12 @@
                 <Anchors>
                     <Anchor point="TOPRIGHT" x="-5" y="-5"/>
                 </Anchors>
+                <Scripts>
+                    <OnClick>
+                        RPSCoreFramework:QuizDecline();
+                        PollFrame.FadeOut:Play();
+                    </OnClick>
+                </Scripts>
             </Button>
 
             <Frame name="$parentTimer" hidden="true">
@@ -1771,7 +1777,6 @@
                     </OnLoad>
                     <OnClick>
                         RPSCoreFramework:QuizProcessAnswer(1)
-                        PollFrame.FadeOut:Play();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -1785,7 +1790,6 @@
                     </OnLoad>
                     <OnClick>
                         RPSCoreFramework:QuizProcessAnswer(2)
-                        PollFrame.FadeOut:Play();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -1799,7 +1803,6 @@
                     </OnLoad>
                     <OnClick>
                         RPSCoreFramework:QuizProcessAnswer(3)
-                        PollFrame.FadeOut:Play();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -1813,7 +1816,6 @@
                     </OnLoad>
                     <OnClick>
                         RPSCoreFramework:QuizProcessAnswer(4)
-                        PollFrame.FadeOut:Play();
                     </OnClick>
                 </Scripts>
             </Button>
@@ -1900,7 +1902,6 @@
                <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
                 <Scripts>
                     <OnFinished>
-                        print("Fade Out")
                         PollFrame:Hide();
                     </OnFinished>
                 </Scripts>

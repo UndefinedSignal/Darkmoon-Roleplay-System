@@ -327,8 +327,12 @@ function RPSCoreFramework:SchedulePollTimer()
 	RPSCoreFramework.PollTimer.Counter = RPSCoreFramework.PollTimer.Counter - 1;
 	if (RPSCoreFramework.PollTimer.Counter == 0) then
 		RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
-		PollToast.FadeOut:Play(120);
-		PollFrame.FadeOut:Play(30);
+		if PollToast:IsShown() then
+			PollToast.FadeOut:Play();
+		else
+			PollFrame.FadeOut:Play();
+		end
+		RPSCoreFramework:QuizCloseReload();
 	end
 end
 
