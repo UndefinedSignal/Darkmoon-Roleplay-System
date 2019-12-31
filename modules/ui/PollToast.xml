@@ -107,9 +107,11 @@
 			<OnClick>
 				if (button == "RightButton") then
 					self.FadeOut:Play();
+					RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
 					RPSCoreFramework:QuizDecline();
 				elseif (button == "LeftButton") then
 					self.FadeOut:Play();
+					RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
 					RPSCoreFramework:QuizAccept();
 				end
 			</OnClick>

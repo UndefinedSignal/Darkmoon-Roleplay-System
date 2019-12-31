@@ -323,11 +323,12 @@ end
 function RPSCoreFramework:SchedulePollTimer()
 	PollToastStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
 	PollFrameStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
-	
+
 	RPSCoreFramework.PollTimer.Counter = RPSCoreFramework.PollTimer.Counter - 1;
 	if (RPSCoreFramework.PollTimer.Counter == 0) then
 		RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
-		PollToast.FadeOut:Play();
+		PollToast.FadeOut:Play(120);
+		PollFrame.FadeOut:Play(30);
 	end
 end
 

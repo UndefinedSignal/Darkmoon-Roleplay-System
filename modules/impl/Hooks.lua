@@ -122,11 +122,12 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.Minstrel") then
 			RPSCoreFramework:UpdateMinstrelStatus(msg);
 		elseif (prefix == "RPS.Quiz.s") then
-			print(msg)
 			RPSCoreFramework:QuizSetQuestion(msg);
 		elseif (prefix == "RPS.Quiz.v") then
-			print(msg)
 			RPSCoreFramework:QuizAddAnswer(msg)
+		elseif (prefix == "RPS.Quiz.c") then
+			print("Quiz.c")
+			RPSCoreFramework:QuizCloseReload();
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
@@ -236,15 +237,15 @@ end
 
 function RPSCoreFramework:QuizDecline()
 	RPSCoreFramework:SendCoreMessage("quiz end");
-	RPSCoreFramework.Quiz.PollToast = false;
+	RPSCoreFramework:QuizCloseReload();
 end
 
 function RPSCoreFramework:QuizSetQuestion(msg)
 	RPSCoreFramework.Quiz.Question = msg;
+	RPSCoreFramework.PollTimer.Counter = 30;
 end
 
 function RPSCoreFramework:QuizAddAnswer(msg)
-	msg = msg..math.random(1,1000);
 	if (QuizzAnswerCounter ~= 4) then
 		table.insert(RPSCoreFramework.Quiz.Answers, {msg, QuizzAnswerCounter});
 		QuizzAnswerCounter = QuizzAnswerCounter + 1;
@@ -261,6 +262,12 @@ function RPSCoreFramework:QuizAddAnswer(msg)
 	end
 end
 
+function RPSCoreFramework:QuizProcessAnswer(num)
+	RPSCoreFramework:SendCoreMessage("quiz select "..num);
+	PollFrame.FadeOut:Play();
+	RPSCoreFramework:QuizCloseReload();
+end
+
 function RPSCoreFramework:QuizShuffles(tInput)
 	local tReturn = {}
 	for i = #tInput, 1, -1 do
@@ -269,4 +276,15 @@ function RPSCoreFramework:QuizShuffles(tInput)
 		table.insert(tReturn, tInput[i])
 	end
 	return tReturn
+end
+
+function RPSCoreFramework:QuizCloseReload()
+	print("QuizCloseReload");
+	PollFrame:Hide();
+	PollToast:Hide();
+	RPSCoreFramework.Quiz.PollToast = false;
+	PollFrameStatusBar:SetValue(30);
+	PollToastStatusBar:SetValue(120);
+	RPSCoreFramework.Quiz.Answers = {};
+	RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
 end

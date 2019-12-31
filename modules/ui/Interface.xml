@@ -1769,6 +1769,10 @@
                     <OnLoad>
                         self.number:SetText("A");
                     </OnLoad>
+                    <OnClick>
+                        RPSCoreFramework:QuizProcessAnswer(1)
+                        PollFrame.FadeOut:Play();
+                    </OnClick>
                 </Scripts>
             </Button>
             <Button name="$parentChoice2" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
@@ -1779,6 +1783,10 @@
                     <OnLoad>
                         self.number:SetText("B");
                     </OnLoad>
+                    <OnClick>
+                        RPSCoreFramework:QuizProcessAnswer(2)
+                        PollFrame.FadeOut:Play();
+                    </OnClick>
                 </Scripts>
             </Button>
             <Button name="$parentChoice3" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
@@ -1789,6 +1797,10 @@
                     <OnLoad>
                         self.number:SetText("C");
                     </OnLoad>
+                    <OnClick>
+                        RPSCoreFramework:QuizProcessAnswer(3)
+                        PollFrame.FadeOut:Play();
+                    </OnClick>
                 </Scripts>
             </Button>
             <Button name="$parentChoice4" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
@@ -1799,6 +1811,10 @@
                     <OnLoad>
                         self.number:SetText("D");
                     </OnLoad>
+                    <OnClick>
+                        RPSCoreFramework:QuizProcessAnswer(4)
+                        PollFrame.FadeOut:Play();
+                    </OnClick>
                 </Scripts>
             </Button>
             <Frame name="PollQuestion">
@@ -1871,7 +1887,25 @@
                 tinsert(UISpecialFrames, self:GetName());</OnLoad>
             <OnDragStart>self:StartMoving();</OnDragStart>
             <OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+            <OnShow>
+                self.FadeIn:Play();
+            </OnShow>
         </Scripts>
+
+        <Animations>
+             <AnimationGroup parentKey="FadeIn" setToFinalAlpha="true">
+               <Alpha duration="0.3" order="1" fromAlpha="0" toAlpha="1"/>
+             </AnimationGroup>
+             <AnimationGroup parentKey="FadeOut" setToFinalAlpha="true">
+               <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
+                <Scripts>
+                    <OnFinished>
+                        print("Fade Out")
+                        PollFrame:Hide();
+                    </OnFinished>
+                </Scripts>
+             </AnimationGroup>
+        </Animations>
 
     </Frame>
 </Ui>
