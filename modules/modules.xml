@@ -5,5 +5,6 @@
 
 	<Include file="impl\impl.xml"/>
 
+	<Include file="motd\interface_motd.xml"/>
 	
 </Ui>

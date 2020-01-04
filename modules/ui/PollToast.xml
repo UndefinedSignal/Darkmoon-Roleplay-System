@@ -91,7 +91,7 @@
 				self:RegisterForClicks("AnyUp");				
 				RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer)
 				RPSCoreFramework.PollTimer.Counter = 120;
-				RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);				
+				RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
 			</OnShow>
 			<OnEnter>
 				GameTooltip:ClearLines();

@@ -5,6 +5,6 @@
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam, RPSCorePOIPins, RPSCoreShowPOIPins, RPSCoreFavourites
-## SavedVariablesPerCharacter: RPSCoreShouldFirstTime, RPSCoreAdvancedCharacterCheckShown
+## SavedVariablesPerCharacter: RPSCharEntersFirstTime, RPSCoreAdvancedCharacterCheckShown
 
 RPSDarkmoon.xml

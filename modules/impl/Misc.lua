@@ -320,22 +320,6 @@ function RPSCoreFramework:hex2rgb(hex)
     end
 end
 
-function RPSCoreFramework:SchedulePollTimer()
-	PollToastStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
-	PollFrameStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
-
-	RPSCoreFramework.PollTimer.Counter = RPSCoreFramework.PollTimer.Counter - 1;
-	if (RPSCoreFramework.PollTimer.Counter == 0) then
-		RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
-		if PollToast:IsShown() then
-			PollToast.FadeOut:Play();
-		else
-			PollFrame.FadeOut:Play();
-		end
-		RPSCoreFramework:QuizCloseReload();
-	end
-end
-
 function RPSCoreFramework:StartGarbageCollection()
 	RPSCoreFramework.GBCounter = collectgarbage("count")
 	collectgarbage("collect")

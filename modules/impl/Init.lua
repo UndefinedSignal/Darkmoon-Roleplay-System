@@ -5,9 +5,9 @@ function RPSCoreFramework:OnEnable()
 	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5);
 	self:ScheduleRepeatingTimer("StartGarbageCollection", 3600);
 	
-	if (not RPSCoreShouldFirstTime) then
+	if (not RPSCharEntersFirstTime) then
 		RPSCoreFramework:switchMainFrame();
-		RPSCoreShouldFirstTime = true;
+		RPSCharEntersFirstTime = true;
 	end
 	
 	self:AdvancedCharacterMessageCheck();
