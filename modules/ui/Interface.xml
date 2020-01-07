@@ -1685,7 +1685,6 @@
                 </Anchors>
                 <Scripts>
                     <OnClick>
-                        RPSCoreFramework:QuizDecline();
                         PollFrame.FadeOut:Play();
                     </OnClick>
                 </Scripts>
@@ -1892,6 +1891,10 @@
             <OnShow>
                 self.FadeIn:Play();
             </OnShow>
+            <OnHide>
+                RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
+                RPSCoreFramework:QuizDecline();
+            </OnHide>
         </Scripts>
 
         <Animations>

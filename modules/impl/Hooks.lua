@@ -126,7 +126,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.Quiz.v") then
 			RPSCoreFramework:QuizAddAnswer(msg)
 		elseif (prefix == "RPS.Quiz.c") then
-			print("Quiz.c")
 			RPSCoreFramework:QuizCloseReload();
 		end
 	elseif (event == "BAG_UPDATE") then
