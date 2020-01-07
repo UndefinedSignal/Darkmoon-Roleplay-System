@@ -28,6 +28,12 @@
                 <Anchors>
                     <Anchor point="TOPRIGHT" x="-7" y="-7"/>
                 </Anchors>
+                <Scripts>
+                	<OnHide>
+				        RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
+				        RPSCoreFramework:QuizDecline();
+                	</OnHide>
+                </Scripts>
             </Button>
 
 			<StatusBar name="$parentStatusBar" hidden="false" minValue="1" maxValue="120" defaultValue="120" orientation="HORIZONTAL" frameStrata="PARENT">
