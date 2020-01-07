@@ -90,7 +90,6 @@ function RPSCoreFramework:QuizProcessAnswer(num)
 end
 
 function RPSCoreFramework:QuizCloseReload()
-	print("QuizCloseReload");
 	--PollFrame:Hide();
 	--PollToast:Hide();
 	RPSCoreFramework.Quiz.PollToast = false;
