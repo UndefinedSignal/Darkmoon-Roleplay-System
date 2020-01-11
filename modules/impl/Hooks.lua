@@ -151,6 +151,8 @@ function RPSCoreFramework:ItemTooltip(self)
 					_G[name .. "TextLeft" .. i]:SetText(string.gsub(left:GetText(), ITEM_MOD_AGILITY_SHORT, "к сноровке"));
 				elseif (string.find(left:GetText(), ITEM_MOD_INTELLECT_SHORT )) then
 					_G[name .. "TextLeft" .. i]:SetText(string.gsub(left:GetText(), ITEM_MOD_INTELLECT_SHORT, "к воле"));
+				elseif (string.find(left:GetText(), TRANSMOGRIFY_TOOLTIP_APPEARANCE_UNKNOWN)) then
+					_G[name .. "TextLeft" .. i]:SetText(nil);
 				end
 			end
 			if (right:GetText() ~= nil) then
