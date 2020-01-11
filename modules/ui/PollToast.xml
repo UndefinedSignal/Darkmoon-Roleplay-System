@@ -29,10 +29,11 @@
                     <Anchor point="TOPRIGHT" x="-7" y="-7"/>
                 </Anchors>
                 <Scripts>
-                	<OnHide>
+                	<OnClick>
 				        RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
 				        RPSCoreFramework:QuizDecline();
-                	</OnHide>
+				        PollToast:Hide();
+                	</OnClick>
                 </Scripts>
             </Button>
 

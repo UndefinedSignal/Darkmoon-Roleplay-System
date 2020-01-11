@@ -84,7 +84,7 @@ function RPSCoreFramework:QuizSetTexts()
 end
 
 function RPSCoreFramework:QuizProcessAnswer(num)
-	RPSCoreFramework:SendCoreMessage("quiz select "..num);
+	RPSCoreFramework:SendCoreMessage("quiz select "..RPSCoreFramework.Quiz.Answers[num][2]);
 	PollFrame.FadeOut:Play();
 	RPSCoreFramework:QuizCloseReload();
 end
