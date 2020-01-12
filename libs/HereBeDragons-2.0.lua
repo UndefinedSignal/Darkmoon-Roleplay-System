@@ -510,6 +510,14 @@ function HereBeDragons:GetPlayerWorldPosition()
     return applyCoordinateTransforms(x, y, instanceID)
 end
 
+--- Get the current world position of the player [for RPS POI]
+-- The position is transformed to the current continent, if applicable
+-- @return x, y, instanceID
+function HereBeDragons:TransformServer(x, y, instanceID)
+    if not x or not y then return nil, nil, instanceIDOverrides[instanceID] or instanceID end
+    return applyCoordinateTransforms(x, y, instanceID)
+end
+
 --- Get the current zone and level of the player
 -- The returned mapFile can represent a micro dungeon, if the player currently is inside one.
 -- @return uiMapID, mapType
