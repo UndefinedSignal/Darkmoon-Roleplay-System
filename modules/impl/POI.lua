@@ -84,14 +84,14 @@ function RPSCoreFramework:POIUpdateMapPinPool(guid)
 end
 
 function RPSCoreFramework:POIUpdateMiniMapPinPool(guid)
-	MapPinPool["POIMM"..guid].dataName = RPSCorePOIPins[guid][7]
-	MapPinPool["POIMM"..guid].dataDescription = RPSCorePOIPins[guid][8]
-	local ntex = MapPinPool["POIMM"..guid]:CreateTexture();
+	MiniMapPinPool["POIMM"..guid].dataName = RPSCorePOIPins[guid][7]
+	MiniMapPinPool["POIMM"..guid].dataDescription = RPSCorePOIPins[guid][8]
+	local ntex = MiniMapPinPool["POIMM"..guid]:CreateTexture();
 	ntex:SetTexture(POIPath..RPSCorePOIPins[guid][5]);
 	local r, g, b = RPSCoreFramework:hex2rgb("#"..RPSCorePOIPins[guid][6]);
 	ntex:SetVertexColor(r, g, b, 0.9);
 	ntex:SetAllPoints();
-	MapPinPool["POIMM"..guid]:SetNormalTexture(ntex);
+	MiniMapPinPool["POIMM"..guid]:SetNormalTexture(ntex);
 end
 
 function RPSCoreFramework:POIUpdatePinPool(guid)
