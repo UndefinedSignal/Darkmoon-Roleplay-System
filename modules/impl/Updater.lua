@@ -138,11 +138,6 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	end
 end
 
-function RPSCoreFramework:UpdatePOIPins(str)
-	local values = {strsplit('#',str)};	
-	RPSCorePOIPins[values[1]] = values;
-end
-
 function RPSCoreFramework:RefreshActiveAuras(str)
 	str = string.gsub(str, "RPS.AuraRefresh ", "")
 	local values = {strsplit(' ', str)}
@@ -189,9 +184,10 @@ function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};
 	if RPSCoreFramework.Map.POIWorkflow then
 		RPSCorePOIPins[values[1]] = values;
+		RPSCoreFramework:POIUpdatePinPool(values[1]);
 	else
 		RPSCoreFramework.Map.POIUpdateQueque = true;
-		RPSCoreFramework.Map.UpdatePins[values[1]] = values;
+		RPSCoreFramework.Map.UpdatePins[tostring(values[1])] = values;
 	end
 end
 
