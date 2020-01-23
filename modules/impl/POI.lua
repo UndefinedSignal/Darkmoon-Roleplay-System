@@ -73,25 +73,29 @@ function RPSCoreFramework:FlushAllPinsOnMiniMap()
 end
 
 function RPSCoreFramework:POIUpdateMapPinPool(guid)
-	MapPinPool["POIM"..guid].dataName = RPSCorePOIPins[guid][7]
-	MapPinPool["POIM"..guid].dataDescription = RPSCorePOIPins[guid][8]
-	local ntex = MapPinPool["POIM"..guid]:CreateTexture();
-	ntex:SetTexture(POIPath..RPSCorePOIPins[guid][5]);
-	local r, g, b = RPSCoreFramework:hex2rgb("#"..RPSCorePOIPins[guid][6]);
-	ntex:SetVertexColor(r, g, b, 0.9);
-	ntex:SetAllPoints();
-	MapPinPool["POIM"..guid]:SetNormalTexture(ntex);
+	if MapPinPool["POIM"..guid] ~= nil then
+		MapPinPool["POIM"..guid].dataName = RPSCorePOIPins[guid][7]
+		MapPinPool["POIM"..guid].dataDescription = RPSCorePOIPins[guid][8]
+		local ntex = MapPinPool["POIM"..guid]:CreateTexture();
+		ntex:SetTexture(POIPath..RPSCorePOIPins[guid][5]);
+		local r, g, b = RPSCoreFramework:hex2rgb("#"..RPSCorePOIPins[guid][6]);
+		ntex:SetVertexColor(r, g, b, 0.9);
+		ntex:SetAllPoints();
+		MapPinPool["POIM"..guid]:SetNormalTexture(ntex);
+	end
 end
 
 function RPSCoreFramework:POIUpdateMiniMapPinPool(guid)
-	MiniMapPinPool["POIMM"..guid].dataName = RPSCorePOIPins[guid][7]
-	MiniMapPinPool["POIMM"..guid].dataDescription = RPSCorePOIPins[guid][8]
-	local ntex = MiniMapPinPool["POIMM"..guid]:CreateTexture();
-	ntex:SetTexture(POIPath..RPSCorePOIPins[guid][5]);
-	local r, g, b = RPSCoreFramework:hex2rgb("#"..RPSCorePOIPins[guid][6]);
-	ntex:SetVertexColor(r, g, b, 0.9);
-	ntex:SetAllPoints();
-	MiniMapPinPool["POIMM"..guid]:SetNormalTexture(ntex);
+	if MiniMapPinPool["POIMM"..guid] ~= nil then
+		MiniMapPinPool["POIMM"..guid].dataName = RPSCorePOIPins[guid][7]
+		MiniMapPinPool["POIMM"..guid].dataDescription = RPSCorePOIPins[guid][8]
+		local ntex = MiniMapPinPool["POIMM"..guid]:CreateTexture();
+		ntex:SetTexture(POIPath..RPSCorePOIPins[guid][5]);
+		local r, g, b = RPSCoreFramework:hex2rgb("#"..RPSCorePOIPins[guid][6]);
+		ntex:SetVertexColor(r, g, b, 0.9);
+		ntex:SetAllPoints();
+		MiniMapPinPool["POIMM"..guid]:SetNormalTexture(ntex);
+	end
 end
 
 function RPSCoreFramework:POIUpdatePinPool(guid)
