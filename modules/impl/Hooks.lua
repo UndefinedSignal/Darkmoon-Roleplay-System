@@ -136,9 +136,9 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 end
 
 function RPSCoreFramework:ItemTooltip(self)
-	local link = select(2, self:GetItem())
+	local itemName, link = self:GetItem();
 	if not link then return end
-	local _, _, _, _, _, sType, _, _ = GetItemInfo(link);
+	local _, _, itemQuality, _, _, sType, _, _ = GetItemInfo(link);
 	if (sType == "Доспехи" or sType == "Armor") then		
 		local name = self:GetName()
 		for i = 1, self:NumLines() do
@@ -146,21 +146,25 @@ function RPSCoreFramework:ItemTooltip(self)
 			local right = _G[name .. "TextRight" .. i]
 			if (left:GetText() ~= nil) then
 				if (string.find(left:GetText(), ITEM_MOD_STRENGTH_SHORT)) then
-					_G[name .. "TextLeft" .. i]:SetText(string.gsub(left:GetText(), ITEM_MOD_STRENGTH_SHORT, "к стойкости"));
+					left:SetText(string.gsub(left:GetText(), ITEM_MOD_STRENGTH_SHORT, "к стойкости"));
 				elseif (string.find(left:GetText(), ITEM_MOD_AGILITY_SHORT)) then
-					_G[name .. "TextLeft" .. i]:SetText(string.gsub(left:GetText(), ITEM_MOD_AGILITY_SHORT, "к сноровке"));
+					left:SetText(string.gsub(left:GetText(), ITEM_MOD_AGILITY_SHORT, "к сноровке"));
 				elseif (string.find(left:GetText(), ITEM_MOD_INTELLECT_SHORT )) then
-					_G[name .. "TextLeft" .. i]:SetText(string.gsub(left:GetText(), ITEM_MOD_INTELLECT_SHORT, "к воле"));
+					left:SetText(string.gsub(left:GetText(), ITEM_MOD_INTELLECT_SHORT, "к воле"));
 				elseif (string.find(left:GetText(), TRANSMOGRIFY_TOOLTIP_APPEARANCE_UNKNOWN)) then
-					_G[name .. "TextLeft" .. i]:SetText(nil);
+					left:SetText(nil);
 				end
 			end
 			if (right:GetText() ~= nil) then
 				if (string.find(right:GetText(), "Декоративный предмет") or string.find(right:GetText(), "Cosmetic")) then
-					_G[name .. "TextRight" .. i]:SetText("Предмет");
+					right:SetText("Предмет");
 				end
 			end
-		end
+		end	
+	end
+	if (sType == "Доспехи" or sType == "Armor" or
+		sType == "Оружие" or sType == "Weapon") then
+		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality), 1, 1, 1);		
 	end
 end
 

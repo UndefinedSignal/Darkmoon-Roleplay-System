@@ -6,7 +6,7 @@ assert(LibStub, MAJOR .. " requires LibStub")
 local pins, _oldversion = LibStub:NewLibrary(MAJOR, MINOR)
 if not pins then return end
 
-local HBD = LibStub("HereBeDragons-2.0")
+local HBD = LibStub("HereBeDragons-2.0.1")
 
 pins.updateFrame          = pins.updateFrame or CreateFrame("Frame")
 

@@ -8,7 +8,7 @@ function RPSCoreFramework:GetMapPOIPin(guid, color, ptype, name, description)
 	if (pin ~= nil) then
 		return pin;
 	end
-		
+
 	pin = CreateFrame("Button", "POIM"..guid, WorldMapButton, "RPS_POIButton");
 	pin.used = true;
 	pin.dataName = name;
@@ -72,6 +72,38 @@ function RPSCoreFramework:FlushAllPinsOnMiniMap()
 	RPSCoreFramework.HBD.Pins:RemoveAllMinimapIcons(self);
 end
 
+function RPSCoreFramework:POIUpdateMapPinPool(guid)
+	if MapPinPool["POIM"..guid] ~= nil then
+		MapPinPool["POIM"..guid].dataName = RPSCorePOIPins[guid][7]
+		MapPinPool["POIM"..guid].dataDescription = RPSCorePOIPins[guid][8]
+		local ntex = MapPinPool["POIM"..guid]:CreateTexture();
+		ntex:SetTexture(POIPath..RPSCorePOIPins[guid][5]);
+		local r, g, b = RPSCoreFramework:hex2rgb("#"..RPSCorePOIPins[guid][6]);
+		ntex:SetVertexColor(r, g, b, 0.9);
+		ntex:SetAllPoints();
+		MapPinPool["POIM"..guid]:SetNormalTexture(ntex);
+	end
+end
+
+function RPSCoreFramework:POIUpdateMiniMapPinPool(guid)
+	if MiniMapPinPool["POIMM"..guid] ~= nil then
+		MiniMapPinPool["POIMM"..guid].dataName = RPSCorePOIPins[guid][7]
+		MiniMapPinPool["POIMM"..guid].dataDescription = RPSCorePOIPins[guid][8]
+		local ntex = MiniMapPinPool["POIMM"..guid]:CreateTexture();
+		ntex:SetTexture(POIPath..RPSCorePOIPins[guid][5]);
+		local r, g, b = RPSCoreFramework:hex2rgb("#"..RPSCorePOIPins[guid][6]);
+		ntex:SetVertexColor(r, g, b, 0.9);
+		ntex:SetAllPoints();
+		MiniMapPinPool["POIMM"..guid]:SetNormalTexture(ntex);
+	end
+end
+
+function RPSCoreFramework:POIUpdatePinPool(guid)
+	RPSCoreFramework:POIUpdateMapPinPool(guid);
+	RPSCoreFramework:POIUpdateMiniMapPinPool(guid);
+	RPSCoreFramework:GeneratePOIPlaces();
+end
+
 function RPSCoreFramework:GeneratePOIPlaces()
     RPSCoreFramework:FlushAllPinsOnMap();
     RPSCoreFramework:FlushAllPinsOnMiniMap();
@@ -88,3 +120,4 @@ function RPSCoreFramework:GeneratePOIPlaces()
         end
     end
 end
+

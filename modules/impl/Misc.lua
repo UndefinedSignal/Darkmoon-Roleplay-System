@@ -311,6 +311,12 @@ function RPSCoreFramework:PreGenerateDMButtons()
 	end
 end
 
+function RPSCoreFramework:FormatQualityName(itemName, defaultQuality)
+	local quality = RPSCoreFramework.itemsQuality[itemName] or defaultQuality;
+	local _, _, _, hex = GetItemQualityColor(quality);	
+	return "|c"..hex.._G["ITEM_QUALITY"..quality.."_DESC"].."|r";
+end
+
 function RPSCoreFramework:hex2rgb(hex)
     local hex = hex:gsub("#","")
     if hex:len() == 3 then
