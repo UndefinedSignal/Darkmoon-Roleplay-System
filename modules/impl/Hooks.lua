@@ -164,7 +164,7 @@ function RPSCoreFramework:ItemTooltip(self)
 	end
 	if (sType == "Доспехи" or sType == "Armor" or
 		sType == "Оружие" or sType == "Weapon") then
-		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality), 1, 1, 1);		
+		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality));		
 	end
 end
 
