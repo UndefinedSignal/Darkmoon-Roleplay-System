@@ -510,8 +510,8 @@
                                             <OnShow>
                                                 if RPSCoreActionCam then
                                                     RPS_ACTIONCAMCheckBox:SetChecked(true);
-                                                    SetCVar("test_cameraDynamicPitch", 0.45);
-                                                    SetCVar("test_cameraOverShoulder", 0.45);
+                                                    SetCVar("test_cameraDynamicPitch", 0.35);
+                                                    SetCVar("test_cameraOverShoulder", 0.35);
                                                 else
                                                     RPS_ACTIONCAMCheckBox:SetChecked(false);
                                                     SetCVar("test_cameraDynamicPitch", 0);
@@ -521,8 +521,8 @@
                                             <OnClick>
                                                 if self:GetChecked() then
                                                     RPSCoreActionCam = true;
-                                                    SetCVar("test_cameraDynamicPitch", 0.45);
-                                                    SetCVar("test_cameraOverShoulder", 0.45);
+                                                    SetCVar("test_cameraDynamicPitch", 0.35);
+                                                    SetCVar("test_cameraOverShoulder", 0.35);
                                                 else
                                                     RPSCoreActionCam = false;
                                                     SetCVar("test_cameraDynamicPitch", 0);
