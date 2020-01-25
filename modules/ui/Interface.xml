@@ -476,7 +476,7 @@
 
                                     <CheckButton name="RPS_ACTIONCAMCheckBox" inherits="OptionsCheckButtonTemplate">
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-165"/> -- *1.1
+                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-165"/>
                                         </Anchors>
                                         <Layers>
                                             <Layer>
@@ -510,8 +510,8 @@
                                             <OnShow>
                                                 if RPSCoreActionCam then
                                                     RPS_ACTIONCAMCheckBox:SetChecked(true);
-                                                    SetCVar("test_cameraDynamicPitch", 1);
-                                                    SetCVar("test_cameraOverShoulder", 1);
+                                                    SetCVar("test_cameraDynamicPitch", 0.45);
+                                                    SetCVar("test_cameraOverShoulder", 0.45);
                                                 else
                                                     RPS_ACTIONCAMCheckBox:SetChecked(false);
                                                     SetCVar("test_cameraDynamicPitch", 0);
@@ -521,8 +521,8 @@
                                             <OnClick>
                                                 if self:GetChecked() then
                                                     RPSCoreActionCam = true;
-                                                    SetCVar("test_cameraDynamicPitch", 1);
-                                                    SetCVar("test_cameraOverShoulder", 1);
+                                                    SetCVar("test_cameraDynamicPitch", 0.45);
+                                                    SetCVar("test_cameraOverShoulder", 0.45);
                                                 else
                                                     RPSCoreActionCam = false;
                                                     SetCVar("test_cameraDynamicPitch", 0);
@@ -534,7 +534,7 @@
 
                                     <CheckButton name="RPS_POIPinsCheckBox" inherits="OptionsCheckButtonTemplate">
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-200"/> -- *1.1
+                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-200"/>
                                         </Anchors>
                                         <Layers>
                                             <Layer>

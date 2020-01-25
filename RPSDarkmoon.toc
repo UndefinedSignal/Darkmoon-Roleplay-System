@@ -1,7 +1,7 @@
 ## Interface: 80100
 ## Title: RPS Darkmoon
-## Author: TestUnit, -SeMGa!
-## Version: 2.0
+## Author: TestUnit, -SeMGa!, Los
+## Version: 2.2
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam, RPSCorePOIPins, RPSCoreShowPOIPins, RPSCoreFavourites
