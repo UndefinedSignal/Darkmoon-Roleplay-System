@@ -137,8 +137,8 @@ end
 
 function RPSCoreFramework:ItemTooltip(self)
 	local itemName, link = self:GetItem();
-	if not link then return end
-	local _, _, itemQuality, _, _, sType, _, _ = GetItemInfo(link);
+	if not link then return end;
+	local _, _, itemQuality, _, _, sType, _, _, sEquipLoc = GetItemInfo(link);
 	if (sType == "Доспехи" or sType == "Armor") then		
 		local name = self:GetName()
 		for i = 1, self:NumLines() do
@@ -163,7 +163,8 @@ function RPSCoreFramework:ItemTooltip(self)
 		end	
 	end
 	if (sType == "Доспехи" or sType == "Armor" or
-		sType == "Оружие" or sType == "Weapon") then
+		sType == "Оружие" or sType == "Weapon" or
+		((sType == "Разное" or sType == "Miscellaneous") and sEquipLoc == "INVTYPE_HOLDABLE")) then
 		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality));		
 	end
 end
