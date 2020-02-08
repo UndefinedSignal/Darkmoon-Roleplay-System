@@ -21,7 +21,11 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ItemRefShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
+
+	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end)
 	--self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+
+	self:RawHook("GuildInfoFrame_Update", true);
 
 --PlayerZoneChanged(currentPlayerUiMapID, currentPlayerUiMapType)
 --Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return

@@ -1942,4 +1942,31 @@
         </Animations>
 
     </Frame>
+
+    <Frame name="GuildInfoFrameSalary" parent="GuildInfoFrame" setAllPoints="true" hidden="true">
+        <Frames>
+            <ScrollFrame name="$parentContainer" inherits="UIPanelScrollFrameTemplate" hidden="false">
+                <Size x="300" y="327"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="-4"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <ScrollChild>
+                    <Frame name="$parentChild">
+                        <Size x="304" y="327"/>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="0" />
+                            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                        </Anchors>
+                        <Frames>
+
+                        </Frames>
+                    </Frame>
+                </ScrollChild>
+            </ScrollFrame>
+        </Frames>
+    </Frame>
 </Ui>

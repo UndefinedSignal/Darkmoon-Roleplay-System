@@ -41,7 +41,7 @@ function RPSCoreFramework:OnInitialize()
 
 	self:PreGenerateShowAuras();
 
-	self:MemeAnotherTest()
+	self:AddGuildSalaryTab();
 
 	-- Disp & Scale
 

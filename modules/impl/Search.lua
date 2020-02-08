@@ -34,22 +34,56 @@ function RPSCoreFramework:FavouritesSearch(number)
 end
 
 
-function RPSCoreFramework:MemeAnotherTest()
+function RPSCoreFramework:AddGuildSalaryTab()
 	local TabName="Зарплата";
 	 
 	local TabID=GuildInfoFrame.numTabs+1;
 	local Tab=CreateFrame("Button","$parentTab"..TabID,GuildInfoFrame,"GuildInfoSalaryTemplate",TabID);
 	PanelTemplates_SetNumTabs(GuildInfoFrame,TabID);
-	Tab:SetPoint("LEFT","$parentTab"..(TabID-1),"RIGHT",-16,0);
+	Tab:SetPoint("LEFT","$parentTab"..(TabID-1),"RIGHT",0,0);
 	Tab:SetText(TabName);
 	PanelTemplates_TabResize(GuildInfoFrameTab4, 0);
 
-	local d,p,a,x,y = GuildInfoFrameTab1:GetPoint()
+	local d,p,a,x,y = GuildInfoFrameTab1:GetPoint();
 	GuildInfoFrameTab1:SetPoint(d,p,a,x-16,y);
-	local d,p,a,x,y = GuildInfoFrameTab4:GetPoint()
-	GuildInfoFrameTab4:SetPoint(d,p,a,x+15,y);
-	GuildInfoFrameTab1:Show();
 
 	local Panel=CreateFrame("Frame",nil,GuildInfoFrame);
 	Panel:SetAllPoints(GuildInfoFrame);
+end
+
+function RPSCoreFramework:GuildSalaryFrameLink()
+	GuildInfoFrameTab1:Show();
+
+	if(GuildInfoFrameTab3:IsShown()) then
+		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..3,"RIGHT",0,0);
+	elseif(GuildInfoFrameTab2:IsShown()) then
+		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..2,"RIGHT",0,0);
+	else
+		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..1,"RIGHT",0,0);
+	end
+end
+
+function RPSCoreFramework:GuildInfoFrame_Update()
+	local selectedTab = PanelTemplates_GetSelectedTab(GuildInfoFrame);
+	if ( selectedTab == 1 ) then
+		GuildInfoFrameInfo:Show();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Hide();
+	elseif ( selectedTab == 2 ) then
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Show();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Hide();
+	elseif ( selectedTab == 3) then
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Show();
+		GuildInfoFrameSalary:Hide();
+	else
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Show();
+	end
 end
