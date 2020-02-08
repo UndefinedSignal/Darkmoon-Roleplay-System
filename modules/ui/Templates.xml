@@ -2140,4 +2140,8 @@
 
     </Button>
 
+    <Button name="GuildInfoSalaryTemplate" inherits="TabButtonTemplate" virtual="true">
+        <Size x="124" y="34"/>
+    </Button>
+
 </Ui>

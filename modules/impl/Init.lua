@@ -41,6 +41,8 @@ function RPSCoreFramework:OnInitialize()
 
 	self:PreGenerateShowAuras();
 
+	self:MemeAnotherTest()
+
 	-- Disp & Scale
 
 	self:SendCoreMessage("disp list");
