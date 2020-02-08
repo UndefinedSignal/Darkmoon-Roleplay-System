@@ -1337,18 +1337,26 @@
         <Size x="15" y="15"/>
         <Scripts>
             <OnLoad>
-                self:SetFrameStrata("TOOLTIP")
+                self:SetFrameStrata("TOOLTIP");
             </OnLoad>
             <OnEnter>
 				RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 				RPSPOIGameTooltip:AddLine("|cffFFC125"..self.dataName.."|r");
 				if (string.len(self.dataDescription) > 0) then
-					RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
+					if (string.len(self.dataDescription) > 80) then
+						RPSCoreFramework.POIDesc = RPSCoreFramework:WordWrap(self.dataDescription, 90);
+						for i=1, #RPSCoreFramework.POIDesc do
+							RPSPOIGameTooltip:AddLine("|cff808080"..RPSCoreFramework.POIDesc[i].."|r");
+						end
+					else
+						RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
+					end
 				end
 				if true then
 					RPSPOIGameTooltip:AppendText(" |cff80528C("..self.debugGuid..")");
 				end
 				RPSPOIGameTooltip:Show();
+				RPSCoreFramework.POIDesc = {};
             </OnEnter>
             <OnLeave>
                 RPSPOIGameTooltip:ClearLines();

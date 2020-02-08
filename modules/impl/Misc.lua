@@ -326,6 +326,35 @@ function RPSCoreFramework:hex2rgb(hex)
     end
 end
 
+local function splitWords(Lines, limit)
+    while #Lines[#Lines] > limit do
+        Lines[#Lines+1] = Lines[#Lines]:sub(limit+1)
+        Lines[#Lines-1] = Lines[#Lines-1]:sub(1,limit)
+    end
+end
+
+function RPSCoreFramework:WordWrap(str, limit)
+    local Lines, here, limit, found = {}, 1, limit or 80, str:find("(%s+)()(%S+)()")
+
+    if found then
+        Lines[1] = string.sub(str,1,found-1)  -- Put the first word of the string in the first index of the table.
+    else Lines[1] = str end
+
+    str:gsub("(%s+)()(%S+)()",
+        function(sp, st, word, fi)  -- Function gets called once for every space found.
+            splitWords(Lines, limit)
+
+            if fi-here > limit then
+                here = st
+                Lines[#Lines+1] = word                                             -- If at the end of a line, start a new table index...
+            else Lines[#Lines] = Lines[#Lines].." "..word end  -- ... otherwise add to the current table index.
+        end)
+
+    splitWords(Lines, limit)
+
+    return Lines
+end
+
 function RPSCoreFramework:StartGarbageCollection()
 	RPSCoreFramework.GBCounter = collectgarbage("count")
 	collectgarbage("collect")
