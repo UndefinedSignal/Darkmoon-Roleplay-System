@@ -62,28 +62,3 @@ function RPSCoreFramework:GuildSalaryFrameLink()
 		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..1,"RIGHT",0,0);
 	end
 end
-
-function RPSCoreFramework:GuildInfoFrame_Update()
-	local selectedTab = PanelTemplates_GetSelectedTab(GuildInfoFrame);
-	if ( selectedTab == 1 ) then
-		GuildInfoFrameInfo:Show();
-		GuildInfoFrameRecruitment:Hide();
-		GuildInfoFrameApplicants:Hide();
-		GuildInfoFrameSalary:Hide();
-	elseif ( selectedTab == 2 ) then
-		GuildInfoFrameInfo:Hide();
-		GuildInfoFrameRecruitment:Show();
-		GuildInfoFrameApplicants:Hide();
-		GuildInfoFrameSalary:Hide();
-	elseif ( selectedTab == 3) then
-		GuildInfoFrameInfo:Hide();
-		GuildInfoFrameRecruitment:Hide();
-		GuildInfoFrameApplicants:Show();
-		GuildInfoFrameSalary:Hide();
-	else
-		GuildInfoFrameInfo:Hide();
-		GuildInfoFrameRecruitment:Hide();
-		GuildInfoFrameApplicants:Hide();
-		GuildInfoFrameSalary:Show();
-	end
-end

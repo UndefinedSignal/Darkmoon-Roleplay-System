@@ -2157,4 +2157,79 @@
         </Scripts>
     </Button>
 
+	<Frame name="SalaryChangeTemplate" virtual="true">
+		<Size x="295" y="24"/>
+		<Frames>
+			<EditBox name="$parentNameEditBox" autoFocus="false" historyLines="1" letters="15" inherits="InputBoxTemplate" parentKey="nameBox">
+				<Size  x="112" y="32"/>
+				<Anchors>
+					<Anchor point="LEFT" x="65" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnEditFocusGained>
+						self.startName = self:GetText();
+					</OnEditFocusGained>
+					<OnEnterPressed>
+						self:ClearFocus();
+					</OnEnterPressed>
+					<OnEscapePressed>
+						self:SetText(self.startName);
+						self:ClearFocus();
+					</OnEscapePressed>
+					<OnTextChanged>
+						if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+							self:SetTextColor(0,1,0,1);
+						else
+							self:SetTextColor(1,0,0,1);
+						end
+					</OnTextChanged>
+					<OnEditFocusLost>
+						local text = self:GetText();
+						if ( self.startName ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
+							print(self:GetText());
+						else
+							print("Error");
+							if self.startName ~= nil and self.startName ~= "" then
+								self:SetText(self.startName);
+							else
+								self:SetText("0");
+								self:SetTextColor(1, 1, 1, 1);
+							end
+						end
+						self.startName = nil;
+						self:SetTextColor(1, 1, 1, 1);
+					</OnEditFocusLost>
+				</Scripts>
+			</EditBox>
+			<Button name="$parentSetupButton" inherits="MagicButtonTemplate" text="Установить" motionScriptsWhileDisabled="true" parentKey="setup">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentNameEditBox" relativePoint="RIGHT" x="85" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+						if ( self:IsEnabled() ) then
+							GameTooltip:SetText("Нажмите для установки заданного значения заработной платы.");
+						elseif ( self.tooltip ) then
+							GameTooltip:SetText(self.tooltip, nil, nil, nil, nil, true);
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>		
+		</Frames>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="RANK" justifyH="RIGHT" parentKey="rankLabel">
+					<Size  x="0" y="12"/>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="$parentNameEditBox" relativePoint="LEFT" x="-12" y="0"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
 </Ui>

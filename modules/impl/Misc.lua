@@ -355,6 +355,55 @@ function RPSCoreFramework:WordWrap(str, limit)
     return Lines
 end
 
+function RPSCoreFramework:GuildInfoFrame_Update()
+	local selectedTab = PanelTemplates_GetSelectedTab(GuildInfoFrame);
+	if ( selectedTab == 1 ) then
+		GuildInfoFrameInfo:Show();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Hide();
+	elseif ( selectedTab == 2 ) then
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Show();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Hide();
+	elseif ( selectedTab == 3) then
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Show();
+		GuildInfoFrameSalary:Hide();
+	else
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Show();
+	end
+end
+
+--[[ Полезные ништяки по гильдии
+
+self:RegisterEvent("GUILD_RANKS_UPDATE");
+	NUM_RANK_FLAGS = 20;
+	local buttonText;
+	for i=1, NUM_RANK_FLAGS do
+		buttonText = _G["GuildControlUIRankSettingsFrameCheckbox"..i.."Text"];
+		if ( buttonText ) then
+			buttonText:SetText(_G["GUILDCONTROL_OPTION"..i]);
+		end
+	end
+
+
+	--hide removed ransk	
+	for i=numRanks+1, MAX_GUILDRANKS do
+		local rankFrame = _G[prefix..i];
+		if rankFrame then
+			rankFrame:Hide()
+		end
+	end
+
+]] --
+
+
 function RPSCoreFramework:StartGarbageCollection()
 	RPSCoreFramework.GBCounter = collectgarbage("count")
 	collectgarbage("collect")
