@@ -380,31 +380,7 @@ function RPSCoreFramework:GuildInfoFrame_Update()
 	end
 end
 
---[[ Полезные ништяки по гильдии
-
-self:RegisterEvent("GUILD_RANKS_UPDATE");
-	NUM_RANK_FLAGS = 20;
-	local buttonText;
-	for i=1, NUM_RANK_FLAGS do
-		buttonText = _G["GuildControlUIRankSettingsFrameCheckbox"..i.."Text"];
-		if ( buttonText ) then
-			buttonText:SetText(_G["GUILDCONTROL_OPTION"..i]);
-		end
-	end
-
-	--hide removed ransk	
-	for i=numRanks+1, MAX_GUILDRANKS do
-		local rankFrame = _G[prefix..i];
-		if rankFrame then
-			rankFrame:Hide()
-		end
-	end
-/dump 
-GuildControlGetNumRanks();
-]] --
-
 function RPSCoreFramework:ProcessGuildSalaryInterface()
-	--local numRanks = GuildControlGetNumRanks();
 	local gname, grankname, granknum = GetGuildInfo("player");
 	for i = 1, 10 do
 		local rankFrame = _G["GuildInfoFrameSalaryRank"..i];

@@ -16,7 +16,6 @@
 	<Script file="Macros.lua"/>
 	<Script file="POI.lua"/>
 	<Script file="Search.lua"/>
-	<Script file="container.lua"/>
 	<Script file="Quiz.lua"/>
 	
 </Ui>

@@ -276,60 +276,6 @@ function RPSCoreFramework:ThreeTimesUpdate()
 	RPSCoreFramework:ScrollMenuUpdater();
 end
 
---"RPS.CON.i"
-function RPSCoreFramework:InitializeContainer(msg)
-	local values = {strsplit('#',msg)};	
-	if RPSCoreFramework.ContainerDataFlow then
-		print("InitializeContainer: ".. msg);
-		--[[name(title)
-		--	type
-		--	size]]
-		RPSCoreFramework.ContainerDataFlow = false;
-		RPSCoreFramework.Container.title = values[1];
-		RPSCoreFramework.Container.type = values[2];
-		RPSCoreFramework.Container.size = tonumber(values[3]);
-		RPSCoreFramework:SetUpContainerFrame();
-		return;
-	end
-	--[[slot
-	--	itemID
-	--	count]]
-	print("Add new item in to container: ".. msg);
-	RPSCoreFramework:PushContainerItem(tonumber(values[1]), {isVirtual = true, itemID = tonumber(values[2]), count = tonumber(values[3]), locked = false});
-end
-
---"RPS.CON.c"
-function RPSCoreFramework:InvokeContainerComamnd(msg)
-	print("InvokeContainerComamnd: ".. msg);
-	if ( msg == "done" ) then
-		RPSCoreFramework.ContainerDataFlow = true
-		RPSCoreFramework:ContainerFrameGenerateFrame(_G["RPS_ContainerFrame"], RPSCoreFramework.Container.size, RPSCoreFramework.Container.title)
-	end
-end
-
---"RPS.CON.upd"
-function RPSCoreFramework:UpdateContainer(msg)
-	print("UpdateContainer: ".. msg);
-	values = {strsplit('#',msg)};
-	if values ~= nil then
-		if tonumber(values[1]) == 0 then
-			RPSCoreFramework:ClearItemByID(tonumber(values[2]));
-		elseif tonumber(values[1]) == 1 then
-			RPSCoreFramework:PushContainerItem(tonumber(values[2]), {isVirtual = true, itemID = tonumber(values[3]), count = tonumber(values[4]), locked = false})
-		end
-	end
-
-	if ( RPSCoreFramework.PlayerCursorInformation ~= nil ) then
-		if (RPSCoreFramework:GetContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID) == nil) then
-			RPSCoreFramework:ClearCursor();
-			RPSCoreFramework.PlayerCursorInformation = nil;
-		end
-	end
-
-	RPSCoreFramework:ContainerFrameUpdate();
-
-end
-
 function RPSCoreFramework:SalaryIndicator(msg)
 	PlaySound(54125, "SFX")
 	CurrencyFrameTextFrameString:SetText("Получено |cFFFFFF00".. GetCoinTextureString(tonumber(msg)).."|r")
