@@ -41,12 +41,19 @@ function RPSCoreFramework:OnInitialize()
 
 	self:PreGenerateShowAuras();
 
+	self:AddGuildSalaryTab();
+
 	-- Disp & Scale
 
 	self:SendCoreMessage("disp list");
 	self:SendCoreMessage("rps action aura list known");
 	self:SendCoreMessage("rps action aura list active");
 	self:SendCoreMessage("rps action scale info");
+
+	-- Guild Salary
+	if (GetGuildInfo("player") ~= "0") then
+		self:SendCoreMessage("rps guild infosalary");
+	end
 
 	-- Stats
 

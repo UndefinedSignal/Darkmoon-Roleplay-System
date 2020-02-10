@@ -326,6 +326,122 @@ function RPSCoreFramework:hex2rgb(hex)
     end
 end
 
+local function splitWords(Lines, limit)
+    while #Lines[#Lines] > limit do
+        Lines[#Lines+1] = Lines[#Lines]:sub(limit+1)
+        Lines[#Lines-1] = Lines[#Lines-1]:sub(1,limit)
+    end
+end
+
+function RPSCoreFramework:WordWrap(str, limit)
+    local Lines, here, limit, found = {}, 1, limit or 80, str:find("(%s+)()(%S+)()")
+
+    if found then
+        Lines[1] = string.sub(str,1,found-1)  -- Put the first word of the string in the first index of the table.
+    else Lines[1] = str end
+
+    str:gsub("(%s+)()(%S+)()",
+        function(sp, st, word, fi)  -- Function gets called once for every space found.
+            splitWords(Lines, limit)
+
+            if fi-here > limit then
+                here = st
+                Lines[#Lines+1] = word                                             -- If at the end of a line, start a new table index...
+            else Lines[#Lines] = Lines[#Lines].." "..word end  -- ... otherwise add to the current table index.
+        end)
+
+    splitWords(Lines, limit)
+
+    return Lines
+end
+
+function RPSCoreFramework:GuildInfoFrame_Update()
+	local selectedTab = PanelTemplates_GetSelectedTab(GuildInfoFrame);
+	if ( selectedTab == 1 ) then
+		GuildInfoFrameInfo:Show();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Hide();
+	elseif ( selectedTab == 2 ) then
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Show();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Hide();
+	elseif ( selectedTab == 3) then
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Show();
+		GuildInfoFrameSalary:Hide();
+	else
+		GuildInfoFrameInfo:Hide();
+		GuildInfoFrameRecruitment:Hide();
+		GuildInfoFrameApplicants:Hide();
+		GuildInfoFrameSalary:Show();
+	end
+end
+
+--[[ Полезные ништяки по гильдии
+
+self:RegisterEvent("GUILD_RANKS_UPDATE");
+	NUM_RANK_FLAGS = 20;
+	local buttonText;
+	for i=1, NUM_RANK_FLAGS do
+		buttonText = _G["GuildControlUIRankSettingsFrameCheckbox"..i.."Text"];
+		if ( buttonText ) then
+			buttonText:SetText(_G["GUILDCONTROL_OPTION"..i]);
+		end
+	end
+
+	--hide removed ransk	
+	for i=numRanks+1, MAX_GUILDRANKS do
+		local rankFrame = _G[prefix..i];
+		if rankFrame then
+			rankFrame:Hide()
+		end
+	end
+/dump 
+GuildControlGetNumRanks();
+]] --
+
+function RPSCoreFramework:ProcessGuildSalaryInterface()
+	--local numRanks = GuildControlGetNumRanks();
+	local gname, grankname, granknum = GetGuildInfo("player");
+	for i = 1, 10 do
+		local rankFrame = _G["GuildInfoFrameSalaryRank"..i];
+		if (GuildControlGetRankName(i) == "") then
+			rankFrame:Hide();
+		else
+			rankFrame.rankLabel:SetText(i..": "..GuildControlGetRankName(i));
+			rankFrame.nameBox:SetText(RPSCoreFramework.SalaryByRank[tostring(i)]);
+			rankFrame.nameBox:SetTextColor(1, 1, 1, 1);
+
+			if granknum == 0 then
+				rankFrame.setup:Enable();
+				rankFrame.nameBox:Enable();
+				rankFrame.setup:Show();
+			else
+				rankFrame.nameBox:Disable();
+				rankFrame.setup:Disable();
+				rankFrame.setup:Hide();
+			end
+			rankFrame:Show();
+		end
+	end
+end
+
+function RPSCoreFramework:isvalid(n)
+	return n==math.floor(n) and n>=0 and n<=10000
+end
+
+function RPSCoreFramework:CutDigits(msg)
+	msg = tostring(msg);
+	return msg:match("([1-9-]%d+)")
+end
+
+function RPSCoreFramework:SetGuildSalaryToRank(id)
+	self:SendCoreMessage("rps guild salary "..tonumber(id-1).." "..RPSCoreFramework.SalaryByRank[tostring(id)]);
+end
+
 function RPSCoreFramework:StartGarbageCollection()
 	RPSCoreFramework.GBCounter = collectgarbage("count")
 	collectgarbage("collect")

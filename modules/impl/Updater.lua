@@ -138,6 +138,16 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 	end
 end
 
+function RPSCoreFramework:UpdateGuildSalary(str)
+	local values = {strsplit(' ', str)}
+	for i=1, #values do
+		RPSCoreFramework.SalaryByRank[tostring(i)] = tonumber(values[i]);
+	end
+	if GuildInfoFrameSalary:IsShown() then
+		RPSCoreFramework:ProcessGuildSalaryInterface();
+	end
+end
+
 function RPSCoreFramework:RefreshActiveAuras(str)
 	str = string.gsub(str, "RPS.AuraRefresh ", "")
 	local values = {strsplit(' ', str)}

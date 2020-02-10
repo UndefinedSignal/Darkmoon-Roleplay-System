@@ -120,4 +120,3 @@ function RPSCoreFramework:GeneratePOIPlaces()
         end
     end
 end
-

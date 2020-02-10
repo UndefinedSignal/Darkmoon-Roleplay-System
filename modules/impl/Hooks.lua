@@ -6,6 +6,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
 	self:RegisterEvent("BAG_UPDATE");
+	self:RegisterEvent("GUILD_RANKS_UPDATE");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -21,7 +22,11 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ItemRefShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
+
+	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end)
 	--self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+
+	self:RawHook("GuildInfoFrame_Update", true);
 
 --PlayerZoneChanged(currentPlayerUiMapID, currentPlayerUiMapType)
 --Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
@@ -127,18 +132,22 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:QuizAddAnswer(msg)
 		elseif (prefix == "RPS.Quiz.c") then
 			RPSCoreFramework:QuizCloseReload();
+		elseif (prefix == "RPS.Guild.s") then
+			RPSCoreFramework:UpdateGuildSalary(msg);
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
 --[[	elseif (event == "RPS.POLL") then
 		RPSCoreFramework:InitializePool(msg);]]
+	elseif (event == "GUILD_RANKS_UPDATE") then
+		RPSCoreFramework:ProcessGuildSalaryInterface();
 	end
 end
 
 function RPSCoreFramework:ItemTooltip(self)
 	local itemName, link = self:GetItem();
-	if not link then return end
-	local _, _, itemQuality, _, _, sType, _, _ = GetItemInfo(link);
+	if not link then return end;
+	local _, _, itemQuality, _, _, sType, _, _, sEquipLoc = GetItemInfo(link);
 	if (sType == "Доспехи" or sType == "Armor") then		
 		local name = self:GetName()
 		for i = 1, self:NumLines() do
@@ -163,8 +172,9 @@ function RPSCoreFramework:ItemTooltip(self)
 		end	
 	end
 	if (sType == "Доспехи" or sType == "Armor" or
-		sType == "Оружие" or sType == "Weapon") then
-		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality), 1, 1, 1);		
+		sType == "Оружие" or sType == "Weapon" or
+		((sType == "Разное" or sType == "Miscellaneous") and sEquipLoc == "INVTYPE_HOLDABLE")) then
+		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality));		
 	end
 end
 

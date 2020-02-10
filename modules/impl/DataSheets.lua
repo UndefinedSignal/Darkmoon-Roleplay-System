@@ -34,12 +34,25 @@ RPSCoreFramework.MinstrelStatus = 2;
 RPSCoreFramework.DistanceText = nil;
 RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
 
+RPSCoreFramework.POIDesc = {};
 
 RPSCoreFramework.Quiz = {};
 RPSCoreFramework.Quiz.PollToast = false;
 RPSCoreFramework.Quiz.Question = nil;
 RPSCoreFramework.Quiz.Answers = {};
 
+RPSCoreFramework.SalaryByRank = {
+	["1"] = 0,
+	["2"] = 0,
+	["3"] = 0,
+	["4"] = 0,
+	["5"] = 0,
+	["6"] = 0,
+	["7"] = 0,
+	["8"] = 0,
+	["9"] = 0,
+	["10"] = 0
+};
 
 if RPSCorePOIPins == nil then
 	RPSCorePOIPins = {};
@@ -303,7 +316,13 @@ RPSCoreFramework.Minstrel = {
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Yellow.blp", ".minstrel npc info", "|cffffffff.minstrel npc info|r - выводит в чат информацию о выделенном NPC."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Blue.blp", ".minstrel npc playemote", "|cffffffff.minstrel npc playemote <номер>|r - выделенный NPC начинает циклично проигрывать эмоцию с указанным номером. Номера эмоций NPC совпадают с номерами эмоций персонажей."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Purple.blp", ".minstrel npc spawndist", "|cffffffff.minstrel npc spawndist <значение>|r - выделенный NPC начинает периодически бродить в указанном радиусе вокруг изначальной точки размещений. Проще говоря, ходит туда-сюда. Рекомендуется ставить значение в диапазоне 3-5."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_White.blp", ".minstrel npc come", "|cffffffff.minstrel npc come|r - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."}
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_White.blp", ".minstrel npc come", "|cffffffff.minstrel npc come|r - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn16"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_White.blp", ".minstrel npc set emote <emoteid>", "|cffffffff.minstrel npc set emote <emoteid>|r - устанавливает эмоцию под номером <emoteid> выделенному NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn17"] = {"Interface\\ICONS\\Ability_Iyyokuk_Staff_White.blp", ".minstrel gameobject set scale <guid> <scale(0.1-5)>", "|cffffffff.minstrel gameobject set scale <guid> <scale(0.1-5)>|r - изменяет размер Объекта под номером <guid> на значение <scale(0.1-5)>."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn18"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Red.blp", ".minstrel npc set scale <scale(0.1-5)>", "|cffffffff.minstrel npc set scale <scale(0.1-5)>|r - изменяет размер выделенному NPC на значение <scale(0.1-5)>."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn19"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Purple.blp", ".minstrel reset all", "|cffffffff.minstrel reset all|r - удалить все собственные NPC и Объекты."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn20"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Green.blp", ".minstrel reset creature", "|cffffffff.minstrel reset creature|r - удалить всех собственных NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."}
 }
 
 RPSCoreFramework.DB = {
@@ -763,24 +782,24 @@ RPSCoreFramework.Interface.Auras = {
 	{414,"Чародейский циклон", "Вокруг персонажа крутятся арканные формулы", 20000, 0, 0},
 	{415,"Наполнение арканой", "Персонаж высталяет вперед оружие которое впитывает магию из окружения", 50000, 0, 0},
 	{416,"Зачитывание заклинания", "Персонаж читает заклинание из книги и мерцает арканными энергиями", 30000, 0, 0},
-	{417,"Скайбокс Ульдума", "Скайбок неба Ульдума", 150000, 0, 0},
-	{418,"Небо Нер'Зула", "Скайбок неба Нер'Зула", 150000, 0, 0},
-	{419,"Небо Ша", "Скайбокс неба Ша", 150000, 0, 0},
-	{420,"Скайбокс Джайны, снег", "Скайбокс Джайны, падает снег", 150000, 0, 0},
-	{421,"Чумное небо", "Скайбокс чумного неба с пеплом", 150000, 0, 0},
-	{422,"Звездочет небо 3", "Скайбокс фиолетового неба с оскверненными бездной планетами", 150000, 0, 0},
-	{423,"Зе'ра небо", "Скайбокс звездного неба с зеленой планетой", 150000, 0, 0},
-	{424,"Небо над ледником", "Скайбокс неба над ледником", 150000, 0, 0},
-	{425,"Даларан скверна", "Скайбокс неба с плывущими энергиями скверны", 150000, 0, 0},
-	{426,"Анторус небо", "Скайбокс неба Анторуса", 150000, 0, 0},
-	{427,"Шторм небо", "Скайбокс неба затянутого тучами, идет дождик", 150000, 0, 0},
-	{428,"Кровавая луна", "Скайбокс неба с кровавой луной", 150000, 0, 0},
+	{417,"Скайбокс Ульдума", "Скайбок неба Ульдума", 750000, 0, 0},
+	{418,"Небо НерЗула", "Скайбок неба НерЗула", 750000, 0, 0},
+	{419,"Небо Ша", "Скайбокс неба Ша", 750000, 0, 0},
+	{420,"Скайбокс Джайны, снег", "Скайбокс Джайны, падает снег", 750000, 0, 0},
+	{421,"Чумное небо", "Скайбокс чумного неба с пеплом", 750000, 0, 0},
+	{422,"Звездочет небо 3", "Скайбокс фиолетового неба с оскверненными бездной планетами", 750000, 0, 0},
+	{423,"Зера небо", "Скайбокс звездного неба с зеленой планетой", 750000, 0, 0},
+	{424,"Небо над ледником", "Скайбокс неба над ледником", 750000, 0, 0},
+	{425,"Даларан скверна", "Скайбокс неба с плывущими энергиями скверны", 750000, 0, 0},
+	{426,"Анторус небо", "Скайбокс неба Анторуса", 750000, 0, 0},
+	{427,"Шторм небо", "Скайбокс неба затянутого тучами, идет дождик", 750000, 0, 0},
+	{428,"Кровавая луна", "Скайбокс неба с кровавой луной", 750000, 0, 0},
 	{429,"Обесцвечивание", "Персонаж обесцвечивается и становится прозрачным", 15000, 0, 0},
 	{430,"Алый столп", "От персонажа исходит столп алого света", 15000, 0, 0},
-	{431,"Парашут", "Персонаж виснет на парашуте", 5000, 0, 0},
+	{431,"Парашют", "Персонаж виснет на парашюте", 5000, 0, 0},
 	{432,"Закапывание", "Вокруг персонажа появляется облако пыли", 10000, 0, 0},
 	{433,"Накидка тигра", "За спиной персонажа появляется символ тигра", 10000, 0, 0},
-	{434,"Парашут", "Персонаж планирует на парашуте", 7500, 0, 0},
+	{434,"Парашют", "Персонаж планирует на парашюте", 7500, 0, 0},
 	{435,"Массовое исцеление", "Массовое исцеление в большой области вокруг персонажа", 15000, 0, 0},
 	{436,"Крюк", "Предмет. Большой крюк в правой руке", 5000, 0, 0},
 	{437,"Острошквал", "Две шарообразные молнии за спиной персонажа", 15000, 0, 0},
@@ -788,7 +807,6 @@ RPSCoreFramework.Interface.Auras = {
 	{439,"Резонанс", "Под ногами персонажа появляется нефритовая дымка", 7500, 0, 0},
 	{440,"Энергетическая башня", "Создание энергетической башни на месте персонажа", 50000, 0, 0}
 }
-
 
 RPSCoreFramework.Interface.Auras.Show = {}
 

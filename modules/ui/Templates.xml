@@ -1337,18 +1337,26 @@
         <Size x="15" y="15"/>
         <Scripts>
             <OnLoad>
-                self:SetFrameStrata("TOOLTIP")
+                self:SetFrameStrata("TOOLTIP");
             </OnLoad>
             <OnEnter>
 				RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 				RPSPOIGameTooltip:AddLine("|cffFFC125"..self.dataName.."|r");
 				if (string.len(self.dataDescription) > 0) then
-					RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
+					if (string.len(self.dataDescription) > 80) then
+						RPSCoreFramework.POIDesc = RPSCoreFramework:WordWrap(self.dataDescription, 90);
+						for i=1, #RPSCoreFramework.POIDesc do
+							RPSPOIGameTooltip:AddLine("|cff808080"..RPSCoreFramework.POIDesc[i].."|r");
+						end
+					else
+						RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
+					end
 				end
 				if true then
 					RPSPOIGameTooltip:AppendText(" |cff80528C("..self.debugGuid..")");
 				end
 				RPSPOIGameTooltip:Show();
+				RPSCoreFramework.POIDesc = {};
             </OnEnter>
             <OnLeave>
                 RPSPOIGameTooltip:ClearLines();
@@ -2137,7 +2145,95 @@
             </Anchors>
 			<TexCoords left="0" right="1.0" top="0.03" bottom="0.7175"/>
 		</HighlightTexture>
-
     </Button>
+
+    <Button name="GuildInfoSalaryTemplate" inherits="TabButtonTemplate" virtual="true">
+        <Scripts>
+        	<OnClick>
+				PanelTemplates_Tab_OnClick(self, GuildInfoFrame);
+				GuildInfoFrame_Update();
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+        	</OnClick>
+        </Scripts>
+    </Button>
+
+	<Frame name="SalaryChangeTemplate" virtual="true" hidden="true">
+		<Size x="295" y="24"/>
+		<Frames>
+			<EditBox name="$parentNameEditBox" autoFocus="false" historyLines="1" letters="5" inherits="InputBoxTemplate" parentKey="nameBox">
+				<Size  x="65" y="32"/>
+				<Anchors>
+					<Anchor point="LEFT" x="65" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnEditFocusGained>
+						self.startName = self:GetText();
+					</OnEditFocusGained>
+					<OnEnterPressed>
+						self:ClearFocus();
+					</OnEnterPressed>
+					<OnEscapePressed>
+						self:SetText(self.startName);
+						self:ClearFocus();
+					</OnEscapePressed>
+					<OnTextChanged>
+						if tonumber(self:GetText()) ~= nil or self:GetText() == "" then
+							self:SetTextColor(0,1,0,1);
+						else
+							self:SetTextColor(1,0,0,1);
+						end
+					</OnTextChanged>
+					<OnEditFocusLost>
+						local text = self:GetText();
+						if ( self.startName ~= text and text ~= "" and tonumber(self:GetText()) ~= nil and RPSCoreFramework:isvalid(tonumber(text))) then
+							RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = tonumber(text);
+							self:SetText(tonumber(text));
+						else
+							if (self.startName ~= nil and self.startName ~= "") then
+								self:SetText(self.startName);
+							else
+								self:SetText("0");
+								RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = 0;
+								self:SetTextColor(1, 1, 1, 1);
+							end
+						end
+						self.startName = nil;
+						self:SetTextColor(1, 1, 1, 1);
+					</OnEditFocusLost>
+				</Scripts>
+			</EditBox>
+			<Button name="$parentSetupButton" inherits="MagicButtonTemplate" text="Установить" motionScriptsWhileDisabled="true" parentKey="setup">
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parentNameEditBox" relativePoint="RIGHT" x="85" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnEnter>
+						GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+						if ( self:IsEnabled() ) then
+							GameTooltip:SetText("Нажмите для установки заданного значения заработной платы.");
+						elseif ( self.tooltip ) then
+							GameTooltip:SetText(self.tooltip, nil, nil, nil, nil, true);
+						end
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+					<OnClick>
+						RPSCoreFramework:SetGuildSalaryToRank(self:GetParent():GetID());
+					</OnClick>
+				</Scripts>
+			</Button>		
+		</Frames>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString inherits="GameFontNormal" text="RANK" justifyH="RIGHT" parentKey="rankLabel">
+					<Size  x="0" y="12"/>
+					<Anchors>
+						<Anchor point="RIGHT" relativeTo="$parentNameEditBox" relativePoint="LEFT" x="-12" y="0"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
 
 </Ui>
