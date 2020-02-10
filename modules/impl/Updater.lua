@@ -139,10 +139,9 @@ function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
 end
 
 function RPSCoreFramework:UpdateGuildSalary(str)
-	str = string.gsub(str, "RPS.Guild.s ", "")
 	local values = {strsplit(' ', str)}
 	for i=1, #values do
-		RPSCoreFramework.SalaryByRank[i] = values[i];
+		RPSCoreFramework.SalaryByRank[tostring(i)] = tonumber(values[i]);
 	end
 	if GuildInfoFrameSalary:IsShown() then
 		RPSCoreFramework:ProcessGuildSalaryInterface();
