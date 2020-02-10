@@ -50,6 +50,11 @@ function RPSCoreFramework:OnInitialize()
 	self:SendCoreMessage("rps action aura list active");
 	self:SendCoreMessage("rps action scale info");
 
+	-- Guild Salary
+	if (GetGuildInfo("player") ~= "0") then
+		self:SendCoreMessage("rps guild infosalary");
+	end
+
 	-- Stats
 
 	self:UpdateDiff();

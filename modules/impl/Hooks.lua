@@ -6,6 +6,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
 	self:RegisterEvent("BAG_UPDATE");
+	self:RegisterEvent("GUILD_RANKS_UPDATE");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -131,11 +132,15 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:QuizAddAnswer(msg)
 		elseif (prefix == "RPS.Quiz.c") then
 			RPSCoreFramework:QuizCloseReload();
+		elseif (prefix == "RPS.Guild.s") then
+			RPSCoreFramework:UpdateGuildSalary(msg);
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
 --[[	elseif (event == "RPS.POLL") then
 		RPSCoreFramework:InitializePool(msg);]]
+	elseif (event == "GUILD_RANKS_UPDATE") then
+		RPSCoreFramework:ProcessGuildSalaryInterface();
 	end
 end
 

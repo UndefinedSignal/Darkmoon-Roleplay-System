@@ -1945,17 +1945,105 @@
 
     <Frame name="GuildInfoFrameSalary" parent="GuildInfoFrame" setAllPoints="true" hidden="true">
         <Frames>
-            <Frame name="$parentRank1" inherits="SalaryChangeTemplate">
+            <Frame name="$parentRank1" inherits="SalaryChangeTemplate" id="1">
                 <Anchors>
-                    <Anchor point="TOP" x="40" y="-15"/>
+                    <Anchor point="TOP" x="65" y="-60"/>
                 </Anchors>
                 <Scripts>
-                    <OnLoad>
-                        self.rankLabel:SetText("Рыцарь-Капитан")
-                    </OnLoad>
+
                 </Scripts>
             </Frame>
+            <Frame name="$parentRank2" inherits="SalaryChangeTemplate" id="2">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank1" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank3" inherits="SalaryChangeTemplate" id="3">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank2" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank4" inherits="SalaryChangeTemplate" id="4">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank3" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank5" inherits="SalaryChangeTemplate" id="5">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank4" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank6" inherits="SalaryChangeTemplate" id="6">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank5" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank7" inherits="SalaryChangeTemplate" id="7">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank6" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank8" inherits="SalaryChangeTemplate" id="8">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank7" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank9" inherits="SalaryChangeTemplate" id="9">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank8" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+            <Frame name="$parentRank10" inherits="SalaryChangeTemplate" id="10">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parentRank9" x="0" y="-26"/>
+                </Anchors>
+                <Scripts>
+
+                </Scripts>
+            </Frame>
+
         </Frames>
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString inherits="GameFontNormal" wordwrap="true" text="Зарплата в медных монетах выдаваемая членам гильдии раз в 30 минут." parentKey="titleLabel">
+                    <Size  x="0" y="42"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="10" y="-15"/>
+                        <Anchor point="TOPRIGHT" x="-10" y="-70"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnShow>
+                RPSCoreFramework:SendCoreMessage("rps guild infosalary");
+                RPSCoreFramework:ProcessGuildSalaryInterface();
+            </OnShow>
+        </Scripts>
     </Frame>
 
 </Ui>

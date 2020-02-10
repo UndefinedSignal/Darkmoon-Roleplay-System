@@ -392,7 +392,6 @@ self:RegisterEvent("GUILD_RANKS_UPDATE");
 		end
 	end
 
-
 	--hide removed ransk	
 	for i=numRanks+1, MAX_GUILDRANKS do
 		local rankFrame = _G[prefix..i];
@@ -400,9 +399,38 @@ self:RegisterEvent("GUILD_RANKS_UPDATE");
 			rankFrame:Hide()
 		end
 	end
-
+/dump 
+GuildControlGetNumRanks();
 ]] --
 
+function RPSCoreFramework:ProcessGuildSalaryInterface()
+	local numRanks = GuildControlGetNumRanks();
+	local gname, grankname, granknum = GetGuildInfo("player");
+	for i = 1, numRanks do
+		local rankFrame = _G["GuildInfoFrameSalaryRank"..i];
+		rankFrame.rankLabel:SetText(i..": "..GuildControlGetRankName(i));
+		rankFrame.nameBox:SetText(RPSCoreFramework.SalaryByRank[tostring(i)]);
+		rankFrame.nameBox:SetTextColor(1, 1, 1, 1);
+
+		if granknum == 1 then
+			rankFrame.setup:Enable();
+			rankFrame.nameBox:Enable();
+			--rankFrame.setup:Show();
+		else
+			rankFrame.nameBox:Enable();
+			rankFrame.setup:Enable();
+			--rankFrame.setup:Disable();
+			--rankFrame.setup:Hide();
+			--GuildInfoFrameSalaryRank1NameEditBox:Disable();
+		end
+		rankFrame:Show();
+	end
+end
+
+function RPSCoreFramework:SetGuildSalaryToRank(id)
+	print("rps guild salary "..tonumber(id-1).." "..RPSCoreFramework.SalaryByRank[tostring(id)]);
+	--self:SendCoreMessage("rps guild salary "..tonumber(id-1).." "..RPSCoreFramework.SalaryByRank[tostring(id)]);
+end
 
 function RPSCoreFramework:StartGarbageCollection()
 	RPSCoreFramework.GBCounter = collectgarbage("count")

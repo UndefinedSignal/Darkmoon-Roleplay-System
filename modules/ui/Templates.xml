@@ -2157,11 +2157,11 @@
         </Scripts>
     </Button>
 
-	<Frame name="SalaryChangeTemplate" virtual="true">
+	<Frame name="SalaryChangeTemplate" virtual="true" hidden="true">
 		<Size x="295" y="24"/>
 		<Frames>
-			<EditBox name="$parentNameEditBox" autoFocus="false" historyLines="1" letters="15" inherits="InputBoxTemplate" parentKey="nameBox">
-				<Size  x="112" y="32"/>
+			<EditBox name="$parentNameEditBox" autoFocus="false" historyLines="1" letters="5" inherits="InputBoxTemplate" parentKey="nameBox">
+				<Size  x="65" y="32"/>
 				<Anchors>
 					<Anchor point="LEFT" x="65" y="0"/>
 				</Anchors>
@@ -2186,13 +2186,13 @@
 					<OnEditFocusLost>
 						local text = self:GetText();
 						if ( self.startName ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
-							print(self:GetText());
+							RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = self:GetText();
 						else
-							print("Error");
 							if self.startName ~= nil and self.startName ~= "" then
 								self:SetText(self.startName);
 							else
 								self:SetText("0");
+								RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = "0";
 								self:SetTextColor(1, 1, 1, 1);
 							end
 						end
@@ -2217,6 +2217,9 @@
 					<OnLeave>
 						GameTooltip:Hide();
 					</OnLeave>
+					<OnClick>
+						RPSCoreFramework:SetGuildSalaryToRank(self:GetParent():GetID());
+					</OnClick>
 				</Scripts>
 			</Button>		
 		</Frames>
