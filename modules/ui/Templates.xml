@@ -2185,14 +2185,15 @@
 					</OnTextChanged>
 					<OnEditFocusLost>
 						local text = self:GetText();
-						if ( self.startName ~= text and text ~= "" and tonumber(self:GetText()) ~= nil ) then
-							RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = self:GetText();
+						if ( self.startName ~= text and text ~= "" and tonumber(self:GetText()) ~= nil and RPSCoreFramework:isvalid(tonumber(text))) then
+							RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = tonumber(text);
+							self:SetText(tonumber(text));
 						else
-							if self.startName ~= nil and self.startName ~= "" then
+							if (self.startName ~= nil and self.startName ~= "") then
 								self:SetText(self.startName);
 							else
 								self:SetText("0");
-								RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = "0";
+								RPSCoreFramework.SalaryByRank[tostring(self:GetParent():GetID())] = 0;
 								self:SetTextColor(1, 1, 1, 1);
 							end
 						end

@@ -404,32 +404,42 @@ GuildControlGetNumRanks();
 ]] --
 
 function RPSCoreFramework:ProcessGuildSalaryInterface()
-	local numRanks = GuildControlGetNumRanks();
+	--local numRanks = GuildControlGetNumRanks();
 	local gname, grankname, granknum = GetGuildInfo("player");
-	for i = 1, numRanks do
+	for i = 1, 10 do
 		local rankFrame = _G["GuildInfoFrameSalaryRank"..i];
-		rankFrame.rankLabel:SetText(i..": "..GuildControlGetRankName(i));
-		rankFrame.nameBox:SetText(RPSCoreFramework.SalaryByRank[tostring(i)]);
-		rankFrame.nameBox:SetTextColor(1, 1, 1, 1);
-
-		if granknum == 1 then
-			rankFrame.setup:Enable();
-			rankFrame.nameBox:Enable();
-			--rankFrame.setup:Show();
+		if (GuildControlGetRankName(i) == "") then
+			rankFrame:Hide();
 		else
-			rankFrame.nameBox:Enable();
-			rankFrame.setup:Enable();
-			--rankFrame.setup:Disable();
-			--rankFrame.setup:Hide();
-			--GuildInfoFrameSalaryRank1NameEditBox:Disable();
+			rankFrame.rankLabel:SetText(i..": "..GuildControlGetRankName(i));
+			rankFrame.nameBox:SetText(RPSCoreFramework.SalaryByRank[tostring(i)]);
+			rankFrame.nameBox:SetTextColor(1, 1, 1, 1);
+
+			if granknum == 0 then
+				rankFrame.setup:Enable();
+				rankFrame.nameBox:Enable();
+				rankFrame.setup:Show();
+			else
+				rankFrame.nameBox:Disable();
+				rankFrame.setup:Disable();
+				rankFrame.setup:Hide();
+			end
+			rankFrame:Show();
 		end
-		rankFrame:Show();
 	end
 end
 
+function RPSCoreFramework:isvalid(n)
+	return n==math.floor(n) and n>=0 and n<=10000
+end
+
+function RPSCoreFramework:CutDigits(msg)
+	msg = tostring(msg);
+	return msg:match("([1-9-]%d+)")
+end
+
 function RPSCoreFramework:SetGuildSalaryToRank(id)
-	print("rps guild salary "..tonumber(id-1).." "..RPSCoreFramework.SalaryByRank[tostring(id)]);
-	--self:SendCoreMessage("rps guild salary "..tonumber(id-1).." "..RPSCoreFramework.SalaryByRank[tostring(id)]);
+	self:SendCoreMessage("rps guild salary "..tonumber(id-1).." "..RPSCoreFramework.SalaryByRank[tostring(id)]);
 end
 
 function RPSCoreFramework:StartGarbageCollection()
