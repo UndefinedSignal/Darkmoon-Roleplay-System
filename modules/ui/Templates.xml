@@ -2219,6 +2219,7 @@
 						GameTooltip:Hide();
 					</OnLeave>
 					<OnClick>
+						self:GetParent().nameBox:ClearFocus();
 						RPSCoreFramework:SetGuildSalaryToRank(self:GetParent():GetID());
 					</OnClick>
 				</Scripts>
