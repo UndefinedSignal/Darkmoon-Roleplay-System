@@ -322,7 +322,10 @@ RPSCoreFramework.Minstrel = {
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn18"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Red.blp", ".minstrel npc set scale <scale(0.1-5)>", "|cffffffff.minstrel npc set scale <scale(0.1-5)>|r - изменяет размер выделенному NPC на значение <scale(0.1-5)>."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn19"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Purple.blp", ".minstrel reset all", "|cffffffff.minstrel reset all|r - удалить все собственные NPC и Объекты."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn20"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Green.blp", ".minstrel reset creature", "|cffffffff.minstrel reset creature|r - удалить всех собственных NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."}
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn22"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <id>|r - установить на себя морф под номером <id>."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn23"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup creature", "|cffffffff.minstrel lookup creature <название>|r - поиск NPC по заданному названию."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn24"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup object <название>|r - поиск Объектов по заданному названию (только .m2)."}
 }
 
 RPSCoreFramework.DB = {

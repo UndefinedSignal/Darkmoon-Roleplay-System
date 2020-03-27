@@ -7,6 +7,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("CHAT_MSG_ADDON");
 	self:RegisterEvent("BAG_UPDATE");
 	self:RegisterEvent("GUILD_RANKS_UPDATE");
+	self:RegisterEvent("ADDON_LOADED");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
