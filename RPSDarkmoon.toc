@@ -1,4 +1,4 @@
-## Interface: 80100
+## Interface: 80300
 ## Title: RPS Darkmoon
 ## Author: TestUnit, -SeMGa!
 ## Version: 2.3
