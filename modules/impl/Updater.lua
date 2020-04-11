@@ -185,10 +185,33 @@ function RPSCoreFramework:POIUpdateIntoMainMassive()
     end
 end
 
+function string:splitstr(sep)
+    local sep, fields = sep or ":", {}
+    local pattern = string.format("([^%s]+)", sep)
+    self:gsub(pattern, function(c) fields[#fields+1] = c end)
+    return fields
+end
+
 function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
-	RPSCorePOIPins[values[1]] = values;
+	if tonumber(values[1]) ~= 0 then
+		RPSCorePOIPins[values[1]] = values;
+	end
 end
+
+--function RPSCoreFramework:AddPOIPins(str)
+--	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
+--	local lines = decom:splitstr('\r\n');
+--
+--	for i=1, #lines do
+--		print(lines[i]);
+--
+--		local values = {strsplit("#",lines[i])}
+--		if values[1] ~= "" then
+--			RPSCorePOIPins[values[1]] = values;
+--		end
+--	end
+--end
 
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};

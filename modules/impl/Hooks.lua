@@ -47,8 +47,10 @@ function RPSCoreFramework:InitializeHooks()
 	DarkmoonAurasFrameClearButton:HookScript("OnClick", function()	RPSCoreFramework:AurasSearch(RPSCoreFramework.Interface.Auras, DarkmoonAurasFrame.searchBox:GetText());	RPSCoreFramework:GenerateScrollMenu() end);
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
 	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
+
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
+
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
@@ -97,6 +99,9 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 	elseif (event == "CHAT_MSG_ADDON" and sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
 		if (prefix == "RPS.POI.i") then
 			RPSCoreFramework:AddPOIPins(msg)
+--[[		if (prefix == "RPS.POI.i2") then
+			--.poi requestdeb
+			RPSCoreFramework:AddPOIPins(msg)]]--
 		elseif (prefix == "RPS.POI.u") then
 			RPSCoreFramework:UpdatePOIPins(msg)
 		elseif (prefix == "RPS.POI.r") then

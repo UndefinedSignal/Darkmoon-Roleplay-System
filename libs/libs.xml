@@ -11,5 +11,6 @@
 	<Script file="LibDBIcon.lua"/>
 	<Script file="HereBeDragons-2.0.lua"/>
 	<Script file="HereBeDragons-Pins-2.0.lua"/>
+	<Script file="lualzw.lua"/>
 
 </Ui>
