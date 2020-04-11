@@ -337,17 +337,17 @@ function RPSCoreFramework:WordWrap(str, limit)
     local Lines, here, limit, found = {}, 1, limit or 80, str:find("(%s+)()(%S+)()")
 
     if found then
-        Lines[1] = string.sub(str,1,found-1)  -- Put the first word of the string in the first index of the table.
+        Lines[1] = string.sub(str,1,found-1)
     else Lines[1] = str end
 
     str:gsub("(%s+)()(%S+)()",
-        function(sp, st, word, fi)  -- Function gets called once for every space found.
+        function(sp, st, word, fi)
             splitWords(Lines, limit)
 
             if fi-here > limit then
                 here = st
-                Lines[#Lines+1] = word                                             -- If at the end of a line, start a new table index...
-            else Lines[#Lines] = Lines[#Lines].." "..word end  -- ... otherwise add to the current table index.
+                Lines[#Lines+1] = word
+            else Lines[#Lines] = Lines[#Lines].." "..word end
         end)
 
     splitWords(Lines, limit)

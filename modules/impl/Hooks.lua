@@ -5,7 +5,9 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
+	self:RegisterEvent("BAG_UPDATE");
 	self:RegisterEvent("GUILD_RANKS_UPDATE");
+	self:RegisterEvent("ADDON_LOADED");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -45,11 +47,15 @@ function RPSCoreFramework:InitializeHooks()
 	DarkmoonAurasFrameClearButton:HookScript("OnClick", function()	RPSCoreFramework:AurasSearch(RPSCoreFramework.Interface.Auras, DarkmoonAurasFrame.searchBox:GetText());	RPSCoreFramework:GenerateScrollMenu() end);
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
 	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
+
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
+
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
+
+	RPSCoreFramework:HookAllPlayerBagButtons();
 
 	--self:RawHook(MapCanvasMixin, "OnLoad()", RPSCoreFramework:AcquirePin(), true);
 end
@@ -62,6 +68,23 @@ end
 function RPSCoreFramework:AcquirePin()
 	print("Meme succesful")
 end]]--
+
+function RPSCoreFramework:HookAllPlayerBagButtons()
+	local bagButton = nil;
+	local num = nil;
+	for i = 0, NUM_BAG_SLOTS do -- Пробег по всем сумкам, существуют ли они?
+		local slots = GetContainerNumSlots(i) or 0;
+		if slots > 0 then -- Пробег по всем слотам и прикручивание к ним нашего кода
+			for j = 1, slots do
+				num = i + 1;
+				bagButton = _G["ContainerFrame"..num.."Item"..j]
+				if (not RPSCoreFramework:IsHooked(bagButton, "OnClick")) then
+					self:SecureHookScript(bagButton, "OnClick", "HookPlayerContainerClick");
+				end
+			end
+		end
+	end
+end
 
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
@@ -94,6 +117,12 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdateDisplayMacrosInfo("RPS.Display "..msg);
 		elseif (prefix == "RPS.AuraRefresh") then
 			RPSCoreFramework:RefreshActiveAuras("RPS.AuraRefresh "..msg);
+		elseif (prefix == "RPS.CON.i") then
+			RPSCoreFramework:InitializeContainer(msg);
+		elseif (prefix == "RPS.CON.c") then
+			RPSCoreFramework:InvokeContainerComamnd(msg);
+		elseif (prefix == "RPS.CON.u") then
+			RPSCoreFramework:UpdateContainer(msg);
 		elseif (prefix == "RPS.ECO.ti" or prefix == "RPS.ECO.qi") then
 			RPSCoreFramework:SalaryIndicator(msg);
 		elseif (prefix == "RPS.AuraOff") then
@@ -149,6 +178,32 @@ function RPSCoreFramework:ItemTooltip(self)
 		sType == "Оружие" or sType == "Weapon" or
 		((sType == "Разное" or sType == "Miscellaneous") and sEquipLoc == "INVTYPE_HOLDABLE")) then
 		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality));		
+	end
+end
+
+function RPSCoreFramework:HookPlayerContainerClick(self)
+	RPSCoreFramework.Container.ClickedBag = tonumber(self:GetParent():GetID());
+	RPSCoreFramework.Container.ClickedSlot = tonumber(self:GetID());
+	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
+	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
+	if (itemID and (RPSCoreFramework.PlayerCursorInformation == nil or not RPSCoreFramework:GetCursorItem())) then
+		local temp = {}
+		temp.isVirtual = false;
+		temp.itemID = itemID;
+		temp.count = itemCount;
+		temp.slotID = 0;
+		RPSCoreFramework.PlayerCursorInformation = temp;
+	elseif (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
+		if (not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
+			RPSCoreFramework.PlayerCursorInformation = nil;
+		end
+	end
+
+	if RPSCoreFramework.PlayerCursorInformation then
+		if RPSCoreFramework.PlayerCursorInformation.isVirtual then
+			RPSCoreFramework:ContainerToInventory(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
+			return
+		end
 	end
 end
 

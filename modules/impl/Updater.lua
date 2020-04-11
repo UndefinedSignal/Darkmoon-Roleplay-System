@@ -108,14 +108,6 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 
---[[
-	minstrel activate
-	RPS.Minstrel 1 - Менестрель есть
-	RPS.Minstrel 0 - Менестрель заблочена(например, потому-что у человека ГМка)
-	RPS.Minstrel 2 - Менестрели нет.
-]]--
-
-
 function RPSCoreFramework:UpdateMinstrelStatus(str)
 	if (tonumber(str) == 0 or str == nil) then
 		RPSCoreFramework.MinstrelStatus = tonumber(str);
@@ -185,9 +177,18 @@ function RPSCoreFramework:POIUpdateIntoMainMassive()
     end
 end
 
+function string:splitstr(sep)
+    local sep, fields = sep or ":", {}
+    local pattern = string.format("([^%s]+)", sep)
+    self:gsub(pattern, function(c) fields[#fields+1] = c end)
+    return fields
+end
+
 function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
-	RPSCorePOIPins[values[1]] = values;
+	if tonumber(values[1]) ~= 0 then
+		RPSCorePOIPins[values[1]] = values;
+	end
 end
 
 function RPSCoreFramework:UpdatePOIPins(str)

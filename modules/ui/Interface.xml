@@ -364,12 +364,6 @@
                                                 DarkmoonPlayerModel:SetUnit("player");
                                                 DarkmoonPlayerModel:SetAllPoints();
                                             </OnShow>
-                                            <OnMouseUp>
-                                                self.onMouseUpFunc(self, button);
-                                            </OnMouseUp>
-                                            <OnMouseDown>
-                                                Model_OnMouseDown(self, button);
-                                            </OnMouseDown>
                                         </Scripts>
                                     </PlayerModel>
 
@@ -1511,6 +1505,21 @@
                                                             <Anchor point="TOP" relativeTo="$parentbtn20" x="0" y="-42"/>
                                                         </Anchors>
                                                     </Button>
+                                                    <Button name="$parentbtn22" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn21" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn23" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn22" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn24" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn23" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
                                                 </Frames>
                                             </Frame>
                                         </ScrollChild>
@@ -1521,20 +1530,6 @@
                                     </ScrollFrame>
                                 </Frames>
                             </Frame>
-
-                            <!--
-                            <Frame name="RPS_TextMinstrel" inherits="RPS_TextArea">
-                                <Size x="455" y="240"/>
-                                <Anchors>
-                                    <Anchor relativeTo="DarkmoonMinstrelFrame" point="TOPLEFT" x="20" y="-90" />
-                                    <Anchor point="BOTTOMRIGHT" x="-10" y="10" />
-                                </Anchors>
-                                <Scripts>
-                                    <OnShow>
-                                        RPSCoreFramework:MinstrelSetTextOnShow(RPS_TextMinstrelScrollText)
-                                    </OnShow>
-                                </Scripts>
-                            </Frame>-->
 
                             <SimpleHTML name="RPS_DescriptionMinstrel">
                                 <Size x="460" y="340"/>
@@ -1561,7 +1556,6 @@
                                     </OnLoad>
 
                                     <OnClick>
-                                        --RPS_TextMinstrel:Show();
                                         RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
                                     </OnClick>
 
@@ -1648,7 +1642,7 @@
                         GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
                         GameTooltip:AddDoubleLine("RPS Darkmoon:", "TestUnit", 1, 1, 1, 1, 0.96, 0.41);
                         GameTooltip:AddDoubleLine(" ", "-SeMGa!", 1, 1, 1, 1, 0.96, 0.41);
-                        GameTooltip:AddDoubleLine("Версия:", "2.3 BFA", 1, 1, 1, 1, 0.96, 0.41);
+                        GameTooltip:AddDoubleLine("Версия:", RPSCoreFramework.Version.." BFA", 1, 1, 1, 1, 0.96, 0.41);
                         GameTooltip:Show();
                     </OnEnter>
                     <OnLeave>
@@ -1683,21 +1677,6 @@
                     </Layer>
                 </Layers>
             </Frame>
-            <PlayerModel name="CurrencyFrameMoneyModel" inherits="MouseDisabledModelTemplate">
-                <Size x="300" y="100"/>
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="CurrencyFrame" x="0" y="0" />
-                </Anchors>
-
-                <Scripts>
-                    <OnShow>
-                        self:SetModel("Spells\\treasuregoblin_coinimpact.m2");
-                        self:SetCamDistanceScale(2.6);
-                        self:SetAnimation(153);
-                        self:SetAllPoints();
-                    </OnShow>
-                </Scripts>
-            </PlayerModel>
         </Frames>
     </Frame>
 

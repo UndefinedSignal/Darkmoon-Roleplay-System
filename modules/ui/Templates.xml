@@ -1309,6 +1309,14 @@
         </Scripts>
     </GameTooltip>
 
+	<GameTooltip name="ContainerGameTooltip" inherits="GameTooltipTemplate">
+        <Scripts>
+            <Onload>
+                self:SetOwner(WorldFrame, "ANCHOR_NONE");
+            </Onload>
+        </Scripts>
+    </GameTooltip>
+
     <Button name="RPS_POIButton" virtual="true">
         <Size x="15" y="15"/>
         <Scripts>
@@ -1340,7 +1348,7 @@
             </OnLeave>
         </Scripts>
     </Button>
-	
+
 	<Button name="RPSPoll_CloseButton" inherits="UIPanelCloseButton" virtual="true">
 		<Scripts>
 			<OnEnter>
@@ -1941,7 +1949,7 @@
 				<FontString inherits="GameFontNormal" text="RANK" justifyH="RIGHT" parentKey="rankLabel">
 					<Size  x="0" y="12"/>
 					<Anchors>
-						<Anchor point="RIGHT" relativeTo="$parentNameEditBox" relativePoint="LEFT" x="-12" y="0"/>
+						<Anchor point="RIGHT" relativeTo="$parentNameEditBox" relativePoint="LEFT" x="-18" y="0"/>
 					</Anchors>
 				</FontString>
 			</Layer>
