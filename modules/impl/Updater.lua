@@ -359,9 +359,6 @@ function RPSCoreFramework:SalaryIndicator(msg)
 	RPSCoreFramework.SalaryTimer = RPSCoreFramework:ScheduleTimer("HideSalaryIndicator", 2.5);
 
 	CurrencyFrame:Show();
-
---[[treasuregoblin_coinimpact.m2
-	treasuregoblin_portal.m2]]
 end
 
 function RPSCoreFramework:HideSalaryIndicator()

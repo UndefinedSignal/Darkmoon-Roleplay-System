@@ -18,5 +18,6 @@
 	<Script file="Search.lua"/>
 	<Script file="container.lua"/>
 	<Script file="Quiz.lua"/>
+	<Script file="gobject.lua"/>
 	
 </Ui>

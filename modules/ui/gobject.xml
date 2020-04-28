@@ -1,0 +1,176 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Frame name="GameObjectPreview" toplevel="true" enableMouse="true" parent="UIParent" hidden="false" inherits="RPS_DefaultFrame" movable="true">
+		<Size x="325" y="400"/>
+		<Anchors>
+			<Anchor point="TOPLEFT" x="70" y="-104"/>
+		</Anchors>
+		<Frames>
+			<Frame parentKey="Control" toplevel="true" hidden="false">
+				<Size x="250" y="75"/>
+				<Anchors>
+					<Anchor point="LEFT" x="20" y="-60"/>
+					<Anchor point="BOTTOMRIGHT" x="-20" y="20"/>
+				</Anchors>
+				<Frames>
+					<Button name="$parentBackwardButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor point="CENTER" x="-16" y="-18"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewBackwardButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentForwardButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentBackwardButton" x="0" y="32"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewForwardButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentRotateRightButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentForwardButton" x="32" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewRotateRightButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.28906250, 0.41406250)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentRotateLeftButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentForwardButton" x="-32" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewRotateLeftButtonIcon:SetTexCoord(0.01562500, 0.26562500, 0.28906250, 0.41406250)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentLeftButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentBackwardButton" x="-32" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentRightButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentBackwardButton" x="32" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewRightButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentUpButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentRightButton" x="32" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewUpButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentDownButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentRotateRightButton" x="32" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewDownButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+
+					<Button name="$parentCancelButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentUpButton" x="32" y="16"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewCancelButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+
+					<Button name="$parentAcceptButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
+							<Anchor relativeTo="$parentLeftButton" x="-32" y="16"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								GameObjectPreviewAcceptButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<PlayerModel name="$parentModelScene" inherits="ModelWithControlsTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="20" y="-20"/>
+					<Anchor point="BOTTOMRIGHT" x="-20" y="85"/>
+				</Anchors>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize val="1"/>
+					<TileSize val="10" />
+					<BackgroundInsets left="3" right="3" top="3" bottom="3" />
+				</Backdrop>
+				<Scripts>
+					<OnShow>
+						self:SetModel(2204770);
+					</OnShow>
+				</Scripts>
+			</PlayerModel>
+			<Button parentKey="Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="4" y="4"/>
+				</Anchors>
+			</Button>
+		    <EditBox name="$parentEditBox" inherits="RPS_EditBox">
+		    	<Size x="64" y="32"/>
+				<Anchors>
+					<Anchor relativeTo="GameObjectPreviewForwardButton" x="0" y="32"/>
+				</Anchors>
+				<Scripts><!--TestUnit-->
+		            <OnEnter>
+		                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+		                GameTooltip:AddLine("|cFFFFFFFFЗначение смещения|r");
+		                GameTooltip:Show();
+		            </OnEnter>
+		            <OnLeave>
+		                GameTooltip:Hide();
+		            </OnLeave>
+			    	<OnEnterPressed>
+			    		print("Process")
+			    	</OnEnterPressed>
+			    	<OnTextChanged>
+			    		if self:GetText() == "" then
+			    			self:SetText("0.1");
+			    		end
+			    	</OnTextChanged>
+					<OnEscapePressed>
+						self:ClearFocus();
+					</OnEscapePressed>
+					<OnEnterPressed>
+			    		if self:GetText() == "" then
+			    			self:SetText("0.1");
+			    		end
+						self:ClearFocus();
+					</OnEnterPressed>
+				</Scripts>
+		    </EditBox>
+		</Frames>
+	</Frame>
+</Ui>
+

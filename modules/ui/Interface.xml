@@ -1700,7 +1700,7 @@
 
                 <Scripts>
                     <OnShow>
-                        self:SetModel("Spells\\treasuregoblin_coinimpact.m2");
+                        self:SetModel(918931);
                         self:SetCamDistanceScale(2.6);
                         self:SetAnimation(153);
                         self:SetAllPoints();

@@ -69,4 +69,196 @@
 		</Layers>
 	</Frame>
 	
+	<Button name="RPSObjectControlButtonTemplate" mixin="ModelControlButtonMixin" virtual="true">
+		<Size x="28" y="28"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="$parentBg" file="Interface\Common\UI-ModelControlPanel" parentKey="bg">
+					<Size x="26" y="26"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<TexCoords left="0.29687500" right="0.54687500" top="0.14843750" bottom="0.27343750"/>	
+				</Texture>
+			</Layer>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon" file="Interface\Common\UI-ModelControlPanel" parentKey="icon">
+					<Size x="26" y="26"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<TexCoords left="0.01562500" right="0.26562500" top="0.00781250" bottom="0.13281250"/>
+				</Texture>
+			</Layer>
+			<Layer level="HIGHLIGHT">
+				<Texture file="Interface\Common\UI-ModelControlPanel">
+					<Size x="26" y="26"/>
+					<Anchors>
+						<Anchor point="CENTER"/>
+					</Anchors>
+					<TexCoords left="0.57812500" right="0.82812500" top="0.00781250" bottom="0.13281250"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnMouseDown method="OnMouseDown" />
+			<OnMouseUp method="OnMouseUp" />
+			<OnClick method="OnClick" />
+		</Scripts>
+	</Button>
+  <Frame name="RPS_DefaultFrame" parent="UIParent" frameStrata="MEDIUM" enableMouse="true" movable="true" clampedToScreen="true" virtual="true">
+    <Anchors>
+    	<Anchor point="CENTER" />
+    </Anchors>
+    <Scripts>
+    	<OnLoad>tinsert(UISpecialFrames, self:GetName());</OnLoad>
+    </Scripts>
+    <Backdrop edgeFile="Interface\AchievementFrame\UI-Achievement-WoodBorder" tile="true">
+    	<EdgeSize>
+    		<AbsValue val="64" />
+    	</EdgeSize>
+    	<TileSize>
+    		<AbsValue val="32" />
+    	</TileSize>
+    	<BackgroundInsets>
+    		<AbsInset left="5" right="5" top="5" bottom="5" />
+    	</BackgroundInsets>
+    </Backdrop>
+    <Layers>
+      <Layer level="ARTWORK">
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Left">
+          <Size x="16" y="0" />
+          <Anchors>
+            <Anchor point="TOPLEFT" x="14" y="0" />
+            <Anchor point="BOTTOMLEFT" x="14" y="10" />
+          </Anchors>
+          <TexCoords left="0" right="1" top="0" bottom=".87" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Left">
+          <Size x="16" y="0" />
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-13" y="-10" />
+            <Anchor point="BOTTOMRIGHT" x="-13" y="10" />
+          </Anchors>
+          <TexCoords left="1" right="0" top=".87" bottom="0" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Top">
+          <Size x="450" y="16" />
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="28" y="13" />
+            <Anchor point="BOTTOMRIGHT" x="-28" y="13" />
+          </Anchors>
+          <TexCoords left="0" right=".87" top="1.0" bottom="0" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Top">
+          <Size x="450" y="16" />
+          <Anchors>
+            <Anchor point="TOPLEFT" x="28" y="-12" />
+            <Anchor point="TOPRIGHT" x="-28" y="-12" />
+          </Anchors>
+          <TexCoords left=".87" right="0" top="0" bottom="1" />
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY" textureSubLevel="1">
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+          <Size x="32" y="32" />
+          <Anchors>
+            <Anchor point="TOPLEFT" x="9" y="-7" />
+          </Anchors>
+          <TexCoords left="1" right="0" top="1" bottom="0" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+          <Size x="32" y="32" />
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-8" y="-7" />
+          </Anchors>
+          <TexCoords left="0" right="1" top="1" bottom="0" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+          <Size x="32" y="32" />
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="9" y="8" />
+          </Anchors>
+          <TexCoords left="1" right="0" top="0" bottom="1" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Joint">
+          <Size x="32" y="32" />
+          <Anchors>
+            <Anchor point="BOTTOMRIGHT" x="-8" y="8" />
+          </Anchors>
+          <TexCoords left="0" right="1" top="0" bottom="1" />
+        </Texture>
+      </Layer>
+      <Layer level="OVERLAY" textureSubLevel="2">
+        <Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+          <Size x="64" y="64" />
+          <Anchors>
+            <Anchor point="TOPLEFT" x="4" y="-2" />
+          </Anchors>
+          <TexCoords left="0" right="1" top="0" bottom="1" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+          <Size x="64" y="64" />
+          <Anchors>
+            <Anchor point="TOPRIGHT" x="-4" y="-2" />
+          </Anchors>
+          <TexCoords left="1" right="0" top="0" bottom="1" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+          <Size x="64" y="64" />
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" x="4" y="3" />
+          </Anchors>
+          <TexCoords left="0" right="1" top="1" bottom="0" />
+        </Texture>
+        <Texture file="Interface\AchievementFrame\UI-Achievement-WoodBorder-Corner">
+          <Size x="64" y="64" />
+          <Anchors>
+            <Anchor point="BOTTOMRIGHT" x="-4" y="3" />
+          </Anchors>
+          <TexCoords left="1" right="0" top="1" bottom="0" />
+        </Texture>
+      </Layer>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentIcon" parentKey="Icon" file="Interface\Collections\CollectionsBackgroundTile">
+          <Color r="1" g="1" b="1" a="0.6" />
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="0" />
+            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+  </Frame>
+
+   <EditBox name="RPS_EditBox" enableMouse="false" autoFocus="false" multiline="false" letters="13" virtual="true">
+        <Size x="128" y="32"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Left" file="Interface\Common\Common-Input-Border">
+					<Size x="8" y="20"/>
+					<Anchors>
+						<Anchor point="LEFT" x="-5" y="0"/>
+					</Anchors>
+					<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture parentKey="Right" file="Interface\Common\Common-Input-Border">
+					<Size x="8" y="20"/>
+					<Anchors>
+						<Anchor point="RIGHT" x="0" y="0"/>
+					</Anchors>
+					<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture parentKey="Middle" file="Interface\Common\Common-Input-Border">
+					<Size x="10" y="20"/>
+					<Anchors>
+						<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT"/>
+						<Anchor point="RIGHT" relativeKey="$parent.Right" relativePoint="LEFT"/>
+					</Anchors>
+					<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+				</Texture>
+			</Layer>
+		</Layers>
+	    <FontString inherits="ChatFontNormal" />
+    </EditBox>
 </Ui>

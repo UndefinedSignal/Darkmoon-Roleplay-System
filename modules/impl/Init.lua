@@ -21,10 +21,13 @@ function RPSCoreFramework:OnInitialize()
 	
 	table.insert(UISpecialFrames, PollFrame);
 	table.insert(UISpecialFrames, RPS_MainFrame);
+	table.insert(UISpecialFrames, GameObjectPreview);
 
 	self:EnableDrag(RPS_MainFrame);
 	self:EnableDrag(RPS_InteractFrame);
 	self:EnableDrag(PollFrame);
+	self:EnableDrag(GameObjectPreview);
+	GameObjectPreview:Show();
 
 	self:InitializeHooks();
 
