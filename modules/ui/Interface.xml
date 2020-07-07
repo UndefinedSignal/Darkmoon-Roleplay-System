@@ -1520,6 +1520,16 @@
                                                             <Anchor point="TOP" relativeTo="$parentbtn23" x="0" y="-42"/>
                                                         </Anchors>
                                                     </Button>
+                                                    <Button name="$parentbtn25" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn24" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn26" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn25" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
                                                 </Frames>
                                             </Frame>
                                         </ScrollChild>
