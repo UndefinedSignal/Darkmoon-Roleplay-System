@@ -63,6 +63,7 @@ function RPSCoreFramework:UpdateScaleInfo(str)
 	str = string.gsub(str, "RPS.Scale ", "");
 	RPSCoreFramework.MyScale = tonumber(str);
 	RPSCoreFramework:UpdateScaleReset();
+	RPSCoreFramework:UpdateScrollerPosition();
 end
 
 function RPSCoreFramework:UpdateAuraKnownInfo(str)

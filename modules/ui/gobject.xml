@@ -18,7 +18,8 @@
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewBackwardButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\down');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
 							</OnShow>
 						</Scripts>
 					</Button>
@@ -28,7 +29,8 @@
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewForwardButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\up');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
 							</OnShow>
 						</Scripts>
 					</Button>
@@ -38,7 +40,8 @@
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewRotateRightButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.28906250, 0.41406250)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\rotater');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
 							</OnShow>
 						</Scripts>
 					</Button>
@@ -48,7 +51,9 @@
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewRotateLeftButtonIcon:SetTexCoord(0.01562500, 0.26562500, 0.28906250, 0.41406250)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\rotatel');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
+								--self.icon:SetRotation(-0.9, 0.5)
 							</OnShow>
 						</Scripts>
 					</Button>
@@ -58,7 +63,10 @@
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\left');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
+								--self.icon:SetRotation(1.55, 0.55)
+								--GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
 						</Scripts>
 					</Button>
@@ -68,38 +76,49 @@
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewRightButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
-							</OnShow>
-						</Scripts>
-					</Button>
-					<Button name="$parentUpButton" inherits="RPSObjectControlButtonTemplate">
-						<Anchors>
-							<Anchor relativeTo="$parentRightButton" x="32" y="0"/>
-						</Anchors>
-						<Scripts>
-							<OnShow>
-								GameObjectPreviewUpButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\right');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
+								--self.icon:SetRotation(-1.55, 0.55)
+								--self.icon:SetAllPoints();
 							</OnShow>
 						</Scripts>
 					</Button>
 					<Button name="$parentDownButton" inherits="RPSObjectControlButtonTemplate">
 						<Anchors>
+							<Anchor relativeTo="$parentRightButton" x="32" y="0"/>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\floordown');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
+								--self.icon:SetRotation(3.141593, 0.52);
+								--GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+							</OnShow>
+						</Scripts>
+					</Button>
+					<Button name="$parentUpButton" inherits="RPSObjectControlButtonTemplate">
+						<Anchors>
 							<Anchor relativeTo="$parentRotateRightButton" x="32" y="0"/>
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewDownButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\floorup');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
+								--self.icon:SetRotation(-0.5, -0.5)
+								--GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
 						</Scripts>
 					</Button>
 
 					<Button name="$parentCancelButton" inherits="RPSObjectControlButtonTemplate">
 						<Anchors>
-							<Anchor relativeTo="$parentUpButton" x="32" y="16"/>
+							<Anchor relativeTo="$parentDownButton" x="32" y="16"/>
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewCancelButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\cancel');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
+								--GameObjectPreviewCancelButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
 						</Scripts>
 					</Button>
@@ -110,7 +129,9 @@
 						</Anchors>
 						<Scripts>
 							<OnShow>
-								GameObjectPreviewAcceptButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
+								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\accept');
+								self.icon:SetVertexColor(1, 0.91, 0, 1);
+								--GameObjectPreviewAcceptButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
 						</Scripts>
 					</Button>

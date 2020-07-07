@@ -83,11 +83,10 @@
 			</Layer>
 			<Layer level="ARTWORK">
 				<Texture name="$parentIcon" file="Interface\Common\UI-ModelControlPanel" parentKey="icon">
-					<Size x="26" y="26"/>
+					<Size x="20" y="20"/>
 					<Anchors>
 						<Anchor point="CENTER"/>
 					</Anchors>
-					<TexCoords left="0.01562500" right="0.26562500" top="0.00781250" bottom="0.13281250"/>
 				</Texture>
 			</Layer>
 			<Layer level="HIGHLIGHT">

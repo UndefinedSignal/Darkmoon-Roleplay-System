@@ -75,6 +75,9 @@ function RPSCoreFramework:OnInitialize()
 	DarkmoonCharStatsInfoSubmit:Disable();
 	DarkmoonCharStatsInfoUnlearn:Disable();
 
+	RPS_BTNReScale:Disable();
+	RPS_BTNAcceptScale:Disable();
+
 	self:StatsIncDecFunc();
 	
 	StrengthIcon:SetTexture("Interface\\ICONS\\achievement_bg_most_damage_killingblow_dieleast");
