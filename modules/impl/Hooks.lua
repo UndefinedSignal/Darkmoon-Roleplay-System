@@ -8,6 +8,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("BAG_UPDATE");
 	self:RegisterEvent("GUILD_RANKS_UPDATE");
 	self:RegisterEvent("ADDON_LOADED");
+	self:RegisterEvent("PLAYER_TALENT_UPDATE");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -24,7 +25,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 
-	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end)
+	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end);
 	--self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
 	self:RawHook("GuildInfoFrame_Update", true);
@@ -147,6 +148,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		RPSCoreFramework:InitializePool(msg);]]
 	elseif (event == "GUILD_RANKS_UPDATE") then
 		RPSCoreFramework:ProcessGuildSalaryInterface();
+	elseif(event == "PLAYER_TALENT_UPDATE") then
+		MicroButtonPulseStop(TalentMicroButton);
 	end
 end
 

@@ -461,3 +461,22 @@ function SlashCmdList.RPSGARBAGECOLLECTOR()
     	RPSCoreFramework.PrintGarbageCollector = true;
     end
 end
+
+function RPSCoreFramework:playAnimation(animationGroup, callback)
+	if animationGroup then
+		animationGroup:Stop();
+		animationGroup:Play();
+		if callback then
+			animationGroup:SetScript("OnFinished", callback)
+		end
+	elseif callback then
+		callback();
+	end
+end
+
+function RPSCoreFramework:TalentAlertMessageHide()
+	function TalentMicroButtonAlert:Show()
+		TalentMicroButtonAlert:Hide();
+	end
+	TalentMicroButtonAlert:Hide();
+end

@@ -64,6 +64,9 @@ function RPSCoreFramework:UpdateScaleInfo(str)
 	RPSCoreFramework.MyScale = tonumber(str);
 	RPSCoreFramework:UpdateScaleReset();
 	RPSCoreFramework:UpdateScrollerPosition();
+	RPSCoreFramework:UpdateScaleApplyButton();
+
+	RPSCoreFramework:playAnimation(DarkmoonWIPFrame.fadeOut);
 end
 
 function RPSCoreFramework:UpdateAuraKnownInfo(str)

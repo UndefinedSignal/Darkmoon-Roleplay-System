@@ -326,10 +326,11 @@ RPSCoreFramework.Minstrel = {
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn20"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Green.blp", ".minstrel reset creature", "|cffffffff.minstrel reset creature|r - удалить всех собственных NPC."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn22"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <id>|r - установить на себя морф под номером <id>."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn23"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup creature", "|cffffffff.minstrel lookup creature <название>|r - поиск NPC по заданному названию."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn24"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup object <название>|r - поиск Объектов по заданному названию (только .m2)."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn25"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup possess|r - Взять под контроль выделенного NPC менестреля."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn26"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup unposess|r - Прекратить контролировать NPC."}
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn23"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Red.blp", ".minstrel lookup creature", "|cffffffff.minstrel lookup creature <название>|r - поиск NPC по заданному названию."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn24"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Yellow.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup object <название>|r - поиск Объектов по заданному названию (только .m2)."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn25"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Green.blp", ".minstrel possess", "|cffffffff.minstrel possess|r - Взять под контроль выделенного NPC менестреля."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn26"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unposess", "|cffffffff.minstrel unposess|r - Прекратить контролировать NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn27"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel gameobject activate", "|cffffffff.minstrel gameobject activate <guid>|r - Активирует объект по его уникальному номеру, такой как дверь либо кнопка."}
 }
 
 RPSCoreFramework.DB = {
@@ -831,3 +832,6 @@ RPSCoreFramework.Interface.Auras.Message = {
 RPSCoreFramework.Interface.Auras.Initialized = false
 RPSCoreFramework.Interface.Auras.GhostClick = false
 RPSCoreFramework.Interface.Auras.AllowUpdate = true
+
+DarkmoonWIPFrame.content.flash1Rotation:SetDuration(8);
+DarkmoonWIPFrame.content.flash2Rotation:SetDuration(8);

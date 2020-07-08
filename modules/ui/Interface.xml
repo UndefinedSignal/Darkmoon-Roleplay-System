@@ -47,6 +47,79 @@
                 </Anchors>
             </Frame>
             <!-- RIGHT PART : Place for content -->
+            <Frame name="DarkmoonWIPFrame" frameStrata="TOOLTIP" enableMouse="true" hidden="false">
+                <Size x="540" y="455"/>
+                <Anchors>
+                    <Anchor relativeTo="RPS_MainFrame" point="TOPLEFT" x="220" y="-20"/>
+                    <Anchor relativeTo="RPS_MainFrame" point="BOTTOMRIGHT" x="-22" y="20"/>
+                </Anchors>
+
+                <Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+                    <EdgeSize val="16" />
+                    <TileSize val="418" />
+                    <BackgroundInsets left="3" right="3" top="5" bottom="3"/>
+                </Backdrop>
+                <Layers>
+                    <Layer level="BORDER">
+                        <Texture parentKey="flash1" alphaMode="ADD" file="Interface\UNITPOWERBARALT\PandarenTrainingLarge_Circular_Flash" alpha="0.5">
+                            <Size x="300" y="300"/>
+                            <Anchors>
+                                <Anchor point="CENTER" x="0" y="0"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="flash2" alphaMode="ADD" file="Interface\UNITPOWERBARALT\PandarenTrainingLarge_Circular_Flash" alpha="0.5">
+                            <Size x="400" y="400"/>
+                            <Anchors>
+                                <Anchor point="CENTER" x="0" y="0"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer><!-- interface/dialogframe/ui-dialog-icon-alertother -->
+                        <Texture parentKey="Gear1" file="interface/dialogframe/ui-dialog-icon-alertother">
+                            <!--<Color r="0" g="0" b="0" a="1"/>-->
+                            <Size x="96" y="96"/>
+                            <Anchors>
+                                <Anchor point="CENTER" x="0" y="0"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer>
+                        <FontString name="$parentText" font="Fonts\FRIZQT___CYR.TTF" text="Загрузка" justifyH="LEFT" justifyV="TOP">
+                            <Color r="0.85" g="0" b="0" a="0.8"/>
+                            <FontHeight val="24"/>
+                            <Anchors>
+                                <Anchor point="BOTTOM" relativeTo="$parent" x="0" y="70" />
+                            </Anchors>
+                            <Shadow>
+                                <Offset x="2" y="2" />
+                                <Color r="0" g="0" b="0"/>
+                            </Shadow>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Animations>
+                    <AnimationGroup parentKey="fadeOut" setToFinalAlpha="true">
+                        <Alpha duration="1" toAlpha="0" fromAlpha="1"/>
+                        <Scripts>
+                            <OnFinished>
+                                DarkmoonWIPFrame:Hide();
+                            </OnFinished>
+                        </Scripts>
+                    </AnimationGroup>
+                    <AnimationGroup parentKey="fadeIn" setToFinalAlpha="true">
+                        <Alpha duration="0" fromAlpha="1" toAlpha="0"/>
+                        <Alpha duration="0.5" fromAlpha="0" toAlpha="1"/>
+                    </AnimationGroup>
+                    <AnimationGroup parentKey="content">
+                        <Rotation parentKey="flash1Rotation" targetKey="$parent.$parent.flash1" degrees="-90"/>
+                        <Rotation parentKey="flash2Rotation" targetKey="$parent.$parent.flash2" degrees="90"/>
+                        <Scale duration="1" targetKey="flash1" scaleX="2.5" scaleY="2.5"/>
+                        <Scale duration="1" targetKey="flash2" scaleX="2.5" scaleY="2.5"/>
+                        <!--<Rotation parentKey="GearRotation" targetKey="$parent.$parent.Gear1" degrees="-360"/>-->
+                    </AnimationGroup>
+                </Animations>
+            </Frame>
             <Frame name="RPS_MainFramePageContainer">
                 <Anchors>
                     <Anchor point="TOPRIGHT" x="-20" y="-20"/>
@@ -236,6 +309,7 @@
                             </Button>
                         </Frames>
                     </Frame>
+
                     <Frame name="DarkmoonCharacterFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
@@ -1528,6 +1602,11 @@
                                                     <Button name="$parentbtn26" inherits="MinstrelButton" hidden="false">
                                                         <Anchors>
                                                             <Anchor point="TOP" relativeTo="$parentbtn25" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn27" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn26" x="0" y="-42"/>
                                                         </Anchors>
                                                     </Button>
                                                 </Frames>

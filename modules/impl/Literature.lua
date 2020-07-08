@@ -227,6 +227,7 @@ RPSCoreFramework.Literature.DarkmoonMinstrel2 = [[
 .minstrel npc come - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо.|n
 .minstrel lookup object - Взять под контроль выделенного NPC менестреля.|n
 .minstrel lookup object - Прекратить контролировать NPC.|n
+.minstrel gameobject activate <guid> - Активирует объект по его уникальному номеру, такой как дверь либо кнопка.|n
 |n|n]]
 
 RPSCoreFramework.Literature.DarkmoonSettingsBarbershop = [[ <html><body><p align="left">* Может быть недоступна для некоторых рас.</p>

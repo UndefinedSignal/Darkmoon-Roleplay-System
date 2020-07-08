@@ -110,6 +110,10 @@ function RPSCoreFramework:OnInitialize()
 
 	RPSCoreFramework:GeneratePOIPlaces();
 	
+	RPSCoreFramework:TalentAlertMessageHide();
+	
+	RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+
 --	UIErrorsFrame:Hide();
 --	UIErrorsFrame:ClearAllPoints();
 --	UIErrorsFrame:SetPoint("TOP", UIParent, "BOTTOM", 0, -100);
