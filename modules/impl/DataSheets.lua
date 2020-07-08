@@ -160,6 +160,7 @@ RPSCoreFramework.GetLastClickedSlot = "chest";
 RPSCoreFramework.StatsLevel = 40;
 RPSCoreFramework.MyScale = 0;
 RPSCoreFramework.ChoosedScale = 0;
+RPSCoreFramework.FrameUpdate = true;
 
 RPSCoreFramework.Poll = {};
 RPSCoreFramework.Poll.Question = nil;

@@ -62,6 +62,7 @@ end
 function RPSCoreFramework:UpdateScaleInfo(str)
 	str = string.gsub(str, "RPS.Scale ", "");
 	RPSCoreFramework.MyScale = tonumber(str);
+	RPSCoreFramework.FrameUpdate = false;
 	RPSCoreFramework:UpdateScaleReset();
 	RPSCoreFramework:UpdateScrollerPosition();
 	RPSCoreFramework:UpdateScaleApplyButton();

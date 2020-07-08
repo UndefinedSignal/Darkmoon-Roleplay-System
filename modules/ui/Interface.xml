@@ -47,7 +47,7 @@
                 </Anchors>
             </Frame>
             <!-- RIGHT PART : Place for content -->
-            <Frame name="DarkmoonWIPFrame" frameStrata="TOOLTIP" enableMouse="true" hidden="false">
+            <Frame name="DarkmoonWIPFrame" frameStrata="TOOLTIP" enableMouse="true" hidden="true">
                 <Size x="540" y="455"/>
                 <Anchors>
                     <Anchor relativeTo="RPS_MainFrame" point="TOPLEFT" x="220" y="-20"/>
@@ -710,6 +710,19 @@
                             </Button>
 
                         </Frames>
+                        <Scripts>
+                            <OnShow>
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
                     </Frame>
 
                     <Frame name="DarkmoonAurasFrame" hidden="true">
@@ -1001,6 +1014,20 @@
                             </Button>
 
                         </Frames>
+                        <Scripts>
+                            <OnShow>
+                                RPSCoreFramework:MenstrelOnShow(self);
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
                     </Frame>
 
 
@@ -1354,6 +1381,20 @@
                                         </Scripts>
                                     </Button>
                                 </Frames>
+                                <Scripts>
+                                    <OnShow>
+                                        RPSCoreFramework:MenstrelOnShow(self);
+                                        if not RPSCoreFramework.FrameUpdate then
+                                            DarkmoonWIPFrame:Hide();
+                                        else
+                                            DarkmoonWIPFrame:Show();
+                                            RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                        end
+                                    </OnShow>
+                                    <OnHide>
+                                        DarkmoonWIPFrame:Hide();
+                                    </OnHide>
+                                </Scripts>
                             </Frame>
                         </Frames>
                         <Size x="120" y="40"/>
@@ -1699,7 +1740,16 @@
                         <Scripts>
                             <OnShow>
                                 RPSCoreFramework:MenstrelOnShow(self);
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
                             </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
                         </Scripts>
                     </Frame>
                 </Frames>
