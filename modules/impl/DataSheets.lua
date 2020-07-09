@@ -37,6 +37,7 @@ RPSCoreFramework.DistanceText = nil;
 RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
 
 RPSCoreFramework.POIDesc = {};
+RPSCoreFramework.POITexture = nil;
 
 RPSCoreFramework.Quiz = {};
 RPSCoreFramework.Quiz.PollToast = false;

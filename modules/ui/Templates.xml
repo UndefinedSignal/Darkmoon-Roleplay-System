@@ -1341,7 +1341,8 @@
             </OnLoad>
             <OnEnter>
 				RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				RPSPOIGameTooltip:AddLine("|cffFFC125"..self.dataName.."|r");
+				RPSPOIGameTooltip:AddLine("|T"..self.ntex:GetTexture()..":0|t ".."|cffFFC125"..self.dataName.."|r");
+				--RPSCoreFramework.POITexture = self.ntex:GetTexture();
 				if (string.len(self.dataDescription) > 0) then
 					if (string.len(self.dataDescription) > 80) then
 						RPSCoreFramework.POIDesc = RPSCoreFramework:WordWrap(self.dataDescription, 90);
