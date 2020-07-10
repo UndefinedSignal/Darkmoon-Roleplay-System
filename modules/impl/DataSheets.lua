@@ -37,7 +37,6 @@ RPSCoreFramework.DistanceText = nil;
 RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
 
 RPSCoreFramework.POIDesc = {};
-RPSCoreFramework.POITexture = nil;
 
 RPSCoreFramework.Quiz = {};
 RPSCoreFramework.Quiz.PollToast = false;
@@ -837,3 +836,4 @@ RPSCoreFramework.Interface.Auras.AllowUpdate = true
 
 DarkmoonWIPFrame.content.flash1Rotation:SetDuration(8);
 DarkmoonWIPFrame.content.flash2Rotation:SetDuration(8);
+--DarkmoonWIPFrame.content.GearRotation:SetDuration(8);
