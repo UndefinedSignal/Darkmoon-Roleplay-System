@@ -201,6 +201,8 @@ function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
 	if tonumber(values[1]) ~= 0 then
 		RPSCorePOIPins[values[1]] = values;
+		RPSCoreFramework.Map.POICounter = RPSCoreFramework.Map.POICounter + 1;
+		RPSCoreFramework:POIStreamingProcess();
 	end
 end
 
@@ -235,14 +237,20 @@ function RPSCoreFramework:RemovePOIPins(str)
 end
 
 function RPSCoreFramework:GetCommandPOIPins(str)
-	if (str == "refresh") then
+	local values = {strsplit(' ',str)};
+	if (values[1] == "refresh") then
 		RPSCoreFramework.Map.POIWorkflow = false;
 		RPSCorePOIPins = {};
-	elseif (str == "done") then
+		if (values[2] ~= nil) then
+			RPSCoreFramework.Map.POICount = values[2];
+			RPSCoreFramework:POIStreamingLoad();
+		end
+	elseif (values[1] == "done") then
 		RPSCoreFramework.Map.POIWorkflow = true;
 		if (RPSCoreFramework.Map.POIUpdateQueque) then
 			RPSCoreFramework:POIUpdateIntoMainMassive();
 		end
+		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 		RPSCoreFramework:GeneratePOIPlaces();
 	end
 end

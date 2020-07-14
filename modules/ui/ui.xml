@@ -7,5 +7,6 @@
 	<Include file="Interact.xml"/>
 	<Include file="Interface.xml"/>
 	<Include file="gobject.xml"/>
+	<Include file="StreamingLoad.xml"/>
 
 </Ui>
