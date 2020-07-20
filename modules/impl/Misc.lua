@@ -296,13 +296,15 @@ function RPSCoreFramework:PreGenerateDMButtons()
 		_G[RPSCoreFramework.Interface.MenuButtons[i][2].."Label"]:SetText(RPSCoreFramework.Interface.MenuButtons[i][1]);
 		MenuButton:SetScript('OnClick', function()
 			RPSCoreFramework:FormatDMButtons(RPSCoreFramework.Interface.MenuButtons[i][2]);
-			if RPSCoreFramework.Interface.MenuButtons[i][4] then
-				RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[1][3]]);
-				RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.SubMenuButtons[1][4]]);
-			else
-				RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
-				RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
-			end
+			if RPSCoreFramework.Interface.MenuButtons[i][7] then
+				RunScript(RPSCoreFramework.Interface.MenuButtons[i][8]);
+			elseif RPSCoreFramework.Interface.MenuButtons[i][4] then
+					RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[1][3]]);
+					RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.SubMenuButtons[1][4]]);
+				else
+					RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
+					RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
+				end
 		end)
 		if RPSCoreFramework.Interface.MenuButtons[i][3] ~= nil then
 			table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
@@ -479,4 +481,8 @@ function RPSCoreFramework:TalentAlertMessageHide()
 		TalentMicroButtonAlert:Hide();
 	end
 	TalentMicroButtonAlert:Hide();
+end
+
+function RPSCoreFramework:TestFunc()
+	print("Tested!");
 end

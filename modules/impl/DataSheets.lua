@@ -178,6 +178,8 @@ RPSCoreFramework.Interface.HighlightedButtons = {};
 RPSCoreFramework.Interface.HighlightedTabButtons = {};
 RPSCoreFramework.Interface.HidingFrames = {};
 
+-- Имя, Название кнопки, Название фрейма, Открывает подменю?, Индекс кнопок подменю, Отступ перед кнопкой, Функция
+
 RPSCoreFramework.Interface.MenuButtons = {
 	{"Информация", "RPS_DarkmoonInfo", "DarkmoonInfoFrame", false, 0, false},
 	{"Правила", "RPS_RuleInfo", "DarkmoonRulesFrame", false, 0, false},
@@ -187,7 +189,8 @@ RPSCoreFramework.Interface.MenuButtons = {
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
 	{"Display", "RPS_DisplayInfo", "DarkmoonDisplayInfoFrame", false, 0, false},
 	{"Менестрель", "RPS_Minstrel", "DarkmoonMinstrelFrame", false, 0, false},
-	{"Сменить пароль", "RPS_DropMyPassword", "DarkmoonPasswordChangeFrame", false, 0, true}
+	{"Сменить пароль", "RPS_DropMyPassword", "DarkmoonPasswordChangeFrame", false, 0, true},
+	{"Парикмахерская", "RPS_FakeFrame", "DarkmoonPasswordChangeFrame", false, 0, false, true, "RPSCoreFramework:SendCoreMessage(\"rps act barber\"); PlaySound(624, \"SFX\");"}
 }
 RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Боевые", "RPS_BattleStats", "DarkmoonBattleStatsFrame"}
