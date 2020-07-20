@@ -296,12 +296,4 @@ function RPSCoreFramework:LiteratureTextFormatting()
 	RPS_DescriptionMinstrel:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DescriptionMinstrel:SetFontObject("h3", GameFontNormalLarge);
 	RPS_DescriptionMinstrel:SetText(RPSCoreFramework.Literature.DescriptionMinstrel)
-
-
-	RPS_DarkmoonBARBERSHOPBUTTONText:SetFont('Fonts\FRIZQT___CYR.TTF', 12);
-	RPS_DarkmoonBARBERSHOPBUTTONText:SetFontObject("p", GameFontNormal);
-	RPS_DarkmoonBARBERSHOPBUTTONText:SetFontObject("h1", GameFontNormalHuge3);
-	RPS_DarkmoonBARBERSHOPBUTTONText:SetFontObject("h2", GameFontNormalHuge);
-	RPS_DarkmoonBARBERSHOPBUTTONText:SetFontObject("h3", GameFontNormalLarge);
-	RPS_DarkmoonBARBERSHOPBUTTONText:SetText(RPSCoreFramework.Literature.DarkmoonSettingsBarbershop);
 end

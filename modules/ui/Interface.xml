@@ -310,6 +310,186 @@
                         </Frames>
                     </Frame>
 
+                    <Frame name="DarkmoonSettingsFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
+                        </Anchors>
+                        <Frames>
+                            <Frame name="$parentContent" inherits="RPS_InnerFrame">
+                                <Size x="350" y="375" />
+                                <Anchors>
+                                    <Anchor point="CENTER" x="0" y="0"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="SettingsBackground" file="Interface\Artifacts\ArtifactUIPriestShadow">
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT" x="-2" y="-4"/>
+                                                <Anchor point="BOTTOMRIGHT" x="-2" y="4"/>
+                                                <Anchor point="LEFT" x="2" y="0"/>
+                                            </Anchors>
+                                            <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+
+                                <Frames>
+                                    <CheckButton name="RPS_RTXCheckBox" inherits="OptionsCheckButtonTemplate" checked="true">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parent" relativePoint="TOPLEFT" x="163" y="-125"/> -- *1.1
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="RTX_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Darkmoon RTX " justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_RTXCheckBox" x="-90" y="-8" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                            <Layer>
+                                                <FontString name="RTX_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(В разработке)" justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_RTXCheckBox" x="25" y="-7" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnLoad>
+                                                self:Disable();
+                                            </OnLoad>
+                                        </Scripts>
+                                    </CheckButton>
+
+                                    <CheckButton name="RPS_ACTIONCAMCheckBox" inherits="OptionsCheckButtonTemplate">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parent" relativePoint="TOPLEFT" x="163" y="-165"/>
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Action Camera " justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_ACTIONCAMCheckBox" x="-90" y="-5" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(Disabled)" justifyH="CENTER" justifyV="TOP" hidden="true">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_ACTIONCAMCheckBox" x="25" y="-7" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                if RPSCoreActionCam then
+                                                    RPS_ACTIONCAMCheckBox:SetChecked(true);
+                                                    SetCVar("test_cameraDynamicPitch", 0.35);
+                                                    SetCVar("test_cameraOverShoulder", 0.35);
+                                                else
+                                                    RPS_ACTIONCAMCheckBox:SetChecked(false);
+                                                    SetCVar("test_cameraDynamicPitch", 0);
+                                                    SetCVar("test_cameraOverShoulder", 0);
+                                                end
+                                            </OnShow>
+                                            <OnClick>
+                                                if self:GetChecked() then
+                                                    RPSCoreActionCam = true;
+                                                    SetCVar("test_cameraDynamicPitch", 0.35);
+                                                    SetCVar("test_cameraOverShoulder", 0.35);
+                                                else
+                                                    RPSCoreActionCam = false;
+                                                    SetCVar("test_cameraDynamicPitch", 0);
+                                                    SetCVar("test_cameraOverShoulder", 0);
+                                                end
+                                            </OnClick>
+                                        </Scripts>
+                                    </CheckButton>
+
+                                    <CheckButton name="RPS_POIPinsCheckBox" inherits="OptionsCheckButtonTemplate">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parent" relativePoint="TOPLEFT" x="163" y="-200"/>
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Points of interest " justifyH="CENTER" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_POIPinsCheckBox" x="-100" y="-5" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                            <Layer>
+                                                <FontString name="ACTIONCAM_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(Disabled)" justifyH="CENTER" justifyV="TOP" hidden="true">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="RPS_POIPinsCheckBox" x="25" y="-7" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                if (RPSCoreShowPOIPins and RPSCoreShowPOIPins ~= nil) then
+                                                    RPS_POIPinsCheckBox:SetChecked(true);
+                                                    RPSCoreShowPOIPins = true;
+                                                else
+                                                    RPS_POIPinsCheckBox:SetChecked(false);
+                                                    RPSCoreShowPOIPins = false;
+                                                end
+                                                RPSCoreFramework:GeneratePOIPlaces()
+                                            </OnShow>
+                                            <OnClick>
+                                                if (self:GetChecked()) then
+                                                    RPSCoreShowPOIPins = true;
+                                                else
+                                                    RPSCoreShowPOIPins = false;
+                                                end
+                                                RPSCoreFramework:GeneratePOIPlaces()
+                                            </OnClick>
+                                        </Scripts>
+                                    </CheckButton>
+                                </Frames>
+                            </Frame>
+                        </Frames>
+                    </Frame>
+
+
                     <Frame name="DarkmoonCharacterFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
@@ -317,6 +497,62 @@
 
                         <Frames>
                             <Frame name="DrakmoonCharacterFrameMain" inherits="RPS_InnerFrame">
+                                <Size x="350" y="375" />
+                                <Anchors>
+                                    <Anchor point="CENTER" x="0" y="0"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="SettingsBackground" file="Interface\Artifacts\ArtifactUIPriestShadow">
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT" x="-2" y="-4"/>
+                                                <Anchor point="BOTTOMRIGHT" x="-2" y="4"/>
+                                                <Anchor point="LEFT" x="2" y="0"/>
+                                            </Anchors>
+                                            <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
+                                        </Texture>
+                                    </Layer>
+
+                                    <Layer>
+                                        <FontString name="$parentName" font="Fonts\FRIZQT___CYR.TTF" text="Да это же я!" justifyH="LEFT" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="12"/>
+                                            <Anchors>
+                                                <Anchor point="TOP" relativeTo="$parent" x="0" y="-20" />
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="1" y="1" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+
+                                <Frames>
+                                    <PlayerModel name="RPS_PlayerModel" inherits="ModelWithControlsTemplate">
+                                        <Size x="150" y="60"/>
+                                        <Scripts>
+                                            <OnEnter>
+                                                --self:SetAnimation(66);
+                                            </OnEnter>
+                                            <OnLeave>
+                                                --self:SetAnimation(0);
+                                            </OnLeave>
+                                            <OnShow>
+                                                RPS_PlayerModel:SetUnit("player");
+                                                RPS_PlayerModel:SetAllPoints();
+                                            </OnShow>
+                                        </Scripts>
+                                    </PlayerModel>
+                                </Frames>
+                                <Scripts>
+                                    <OnShow>
+                                        DrakmoonCharacterFrameMainName:SetText("Да это же я! "..UnitName("player"));
+                                    </OnShow>
+                                </Scripts>
+                            </Frame>
+
+                            <Frame name="DrakmoonCharacterFrameScale" inherits="RPS_InnerFrame" hidden="true">
                                 <Size x="350" y="375" />
                                 <Anchors>
                                     <Anchor point="CENTER" x="0" y="0"/>
@@ -484,208 +720,15 @@
                                 </Frames>
                             </Frame>
 
-                            <Frame name="DrakmoonCharacterFrameSettings" inherits="RPS_InnerFrame" hidden="true">
-                                <Size x="350" y="375" />
-                                <Anchors>
-                                    <Anchor point="CENTER" x="0" y="0"/>
-                                </Anchors>
-                                <Layers>
-                                    <Layer level="BACKGROUND">
-                                        <Texture name="SettingsBackground" file="Interface\Artifacts\ArtifactUIPriestShadow">
-                                            <Anchors>
-                                                <Anchor point="TOPRIGHT" x="-2" y="-4"/>
-                                                <Anchor point="BOTTOMRIGHT" x="-2" y="4"/>
-                                                <Anchor point="LEFT" x="2" y="0"/>
-                                            </Anchors>
-                                            <TexCoords left="0" right="0.7" top="0.60" bottom="0"/>
-                                        </Texture>
-                                    </Layer>
-                                </Layers>
-
-                                <Frames>
-                                    <CheckButton name="RPS_RTXCheckBox" inherits="OptionsCheckButtonTemplate" checked="true">
-                                        <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-125"/> -- *1.1
-                                        </Anchors>
-                                        <Layers>
-                                            <Layer>
-                                                <FontString name="RTX_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Darkmoon RTX " justifyH="CENTER" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="RPS_RTXCheckBox" x="-90" y="-8" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-                                            <Layer>
-                                                <FontString name="RTX_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(В разработке)" justifyH="CENTER" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="RPS_RTXCheckBox" x="25" y="-7" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-                                        </Layers>
-                                        <Scripts>
-                                            <OnLoad>
-                                                self:Disable();
-                                            </OnLoad>
-                                        </Scripts>
-                                    </CheckButton>
-
-                                    <CheckButton name="RPS_ACTIONCAMCheckBox" inherits="OptionsCheckButtonTemplate">
-                                        <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-165"/>
-                                        </Anchors>
-                                        <Layers>
-                                            <Layer>
-                                                <FontString name="ACTIONCAM_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Action Camera " justifyH="CENTER" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="RPS_ACTIONCAMCheckBox" x="-90" y="-5" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-                                            <Layer>
-                                                <FontString name="ACTIONCAM_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(Disabled)" justifyH="CENTER" justifyV="TOP" hidden="true">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="RPS_ACTIONCAMCheckBox" x="25" y="-7" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-                                        </Layers>
-                                        <Scripts>
-                                            <OnShow>
-                                                if RPSCoreActionCam then
-                                                    RPS_ACTIONCAMCheckBox:SetChecked(true);
-                                                    SetCVar("test_cameraDynamicPitch", 0.35);
-                                                    SetCVar("test_cameraOverShoulder", 0.35);
-                                                else
-                                                    RPS_ACTIONCAMCheckBox:SetChecked(false);
-                                                    SetCVar("test_cameraDynamicPitch", 0);
-                                                    SetCVar("test_cameraOverShoulder", 0);
-                                                end
-                                            </OnShow>
-                                            <OnClick>
-                                                if self:GetChecked() then
-                                                    RPSCoreActionCam = true;
-                                                    SetCVar("test_cameraDynamicPitch", 0.35);
-                                                    SetCVar("test_cameraOverShoulder", 0.35);
-                                                else
-                                                    RPSCoreActionCam = false;
-                                                    SetCVar("test_cameraDynamicPitch", 0);
-                                                    SetCVar("test_cameraOverShoulder", 0);
-                                                end
-                                            </OnClick>
-                                        </Scripts>
-                                    </CheckButton>
-
-                                    <CheckButton name="RPS_POIPinsCheckBox" inherits="OptionsCheckButtonTemplate">
-                                        <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-200"/>
-                                        </Anchors>
-                                        <Layers>
-                                            <Layer>
-                                                <FontString name="ACTIONCAM_BUTTONTEXT" font="Fonts\FRIZQT___CYR.TTF" text="Points of interest " justifyH="CENTER" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="RPS_POIPinsCheckBox" x="-100" y="-5" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-                                            <Layer>
-                                                <FontString name="ACTIONCAM_BUTTONSTATUS" font="Fonts\FRIZQT___CYR.TTF" text="|cff9d9d9d(Disabled)" justifyH="CENTER" justifyV="TOP" hidden="true">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="RPS_POIPinsCheckBox" x="25" y="-7" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-                                        </Layers>
-                                        <Scripts>
-                                            <OnShow>
-                                                if (RPSCoreShowPOIPins and RPSCoreShowPOIPins ~= nil) then
-                                                    RPS_POIPinsCheckBox:SetChecked(true);
-                                                    RPSCoreShowPOIPins = true;
-                                                else
-                                                    RPS_POIPinsCheckBox:SetChecked(false);
-                                                    RPSCoreShowPOIPins = false;
-                                                end
-                                                RPSCoreFramework:GeneratePOIPlaces()
-                                            </OnShow>
-                                            <OnClick>
-                                                if (self:GetChecked()) then
-                                                    RPSCoreShowPOIPins = true;
-                                                else
-                                                    RPSCoreShowPOIPins = false;
-                                                end
-                                                RPSCoreFramework:GeneratePOIPlaces()
-                                            </OnClick>
-                                        </Scripts>
-                                    </CheckButton>
-
-                                    <Button name="RPS_BARBERSHOPBUTTON" inherits="GameMenuButtonTemplate" text="Парикмахерская">
-                                        <Size x="120" y="34"/>
-                                        <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="CENTER" x="-60" y="-50"/> -- *1.1
-                                        </Anchors>
-                                        <Scripts>
-                                            <OnClick>
-                                                RPSCoreFramework:SendCoreMessage("rps act barber");
-                                                PlaySound(624, "SFX");
-                                            </OnClick>
-                                        </Scripts>
-                                        <Frames>
-                                            <SimpleHTML name="RPS_DarkmoonBARBERSHOPBUTTONText">
-                                                <Size x="280" y="200"/>
-                                                <Anchors>
-                                                    <Anchor relativeTo="RPS_BARBERSHOPBUTTON" relativePoint="BOTTOM" x="-125" y="-10"/>
-                                                </Anchors>
-                                            </SimpleHTML>
-                                        </Frames>
-                                    </Button>
-                                </Frames>
-                            </Frame>
-
-                            <Button name="RPS_CHRBTN1" inherits="RPS_TabBar_Tab" text="Рост">
+                            <Button name="RPS_CHRBTN1" inherits="RPS_TabBar_Tab" text="Информация">
                                 <Size x="100" y="24"/>
                                 <Anchors>
-                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-98" y="24"/> -- *1.1
+                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-98" y="24"/>
                                 </Anchors>
                                 <Scripts>
                                     <OnClick>
                                         DrakmoonCharacterFrameMain:Show();
-                                        DrakmoonCharacterFrameSettings:Hide();
+                                        DrakmoonCharacterFrameScale:Hide();
                                         self:LockHighlight();
                                         RPS_CHRBTN2:UnlockHighlight();
                                         PlaySound(21968, "SFX");
@@ -693,15 +736,15 @@
                                 </Scripts>
                             </Button>
 
-                            <Button name="RPS_CHRBTN2" inherits="RPS_TabBar_Tab" text="Настройки">
+                            <Button name="RPS_CHRBTN2" inherits="RPS_TabBar_Tab" text="Рост">
                                 <Size x="108" y="24"/>
                                 <Anchors>
-                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-10" y="24"/> -- *1.1
+                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-10" y="24"/>
                                 </Anchors>
                                 <Scripts>
                                     <OnClick>
                                         DrakmoonCharacterFrameMain:Hide();
-                                        DrakmoonCharacterFrameSettings:Show();
+                                        DrakmoonCharacterFrameScale:Show();
                                         self:LockHighlight();
                                         RPS_CHRBTN1:UnlockHighlight();
                                         PlaySound(21968, "SFX");
@@ -763,8 +806,6 @@
                                     </Shadow>
                                 </FontString>
                             </Layer>
-
-
                         </Layers>
 
                         <Frames>
