@@ -143,7 +143,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -173,7 +173,7 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();

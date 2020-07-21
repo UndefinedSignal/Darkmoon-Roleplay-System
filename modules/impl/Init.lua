@@ -132,7 +132,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -162,7 +162,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -206,7 +206,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button3:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					if (self.canloot) then
 						self.button2:SetText("Ограбить");
 						self.button2:Enable();
@@ -245,7 +245,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -275,7 +275,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -305,7 +305,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -335,7 +335,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -384,7 +384,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(OKAY)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -414,7 +414,7 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Disable();
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
