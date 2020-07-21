@@ -203,3 +203,22 @@ function RPSCoreFramework:ShowBattleSpellGameTooltip(name)
 	GameTooltip:AddLine("ЛКМ: Выбрать боевую способность\nПКМ: Выбрать ролевую способность")
 	GameTooltip:Show();
 end
+
+function RPSCoreFramework:GOB_OnMouseWheel(self, delta, maxZoom, minZoom)
+	maxZoom = maxZoom or self.maxZoom;
+	minZoom = minZoom or self.minZoom;
+	local zoomLevel = self.zoomLevel or minZoom;
+	zoomLevel = zoomLevel + delta * 0.01;
+	zoomLevel = min(zoomLevel, maxZoom);
+	zoomLevel = max(zoomLevel, minZoom);
+	self:SetModelScale(zoomLevel);
+	self.zoomLevel = zoomLevel;
+end
+
+function RPSCoreFramework:GOBModelSceneZoomIn()
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, 10, 1, 0.1)
+end
+
+function RPSCoreFramework:GOBModelSceneZoomOut()
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, -10, 1, 0.1)
+end

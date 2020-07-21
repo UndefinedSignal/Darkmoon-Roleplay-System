@@ -5,24 +5,31 @@
 		<Anchors>
 			<Anchor point="TOPLEFT" x="70" y="-104"/>
 		</Anchors>
-
+<!--
 		<Backdrop edgeFile="Interface\DialogFrame\UI-DialogBox-Gold-Border">
 			<EdgeSize>
 				<AbsValue val="26"/>
 			</EdgeSize>
 		</Backdrop>
-
+-->
 		<Frames>
 			<Frame parentKey="Control" toplevel="true" hidden="false">
-				<Size x="250" y="75"/>
+				<Size x="250" y="107"/>
 				<Anchors>
-					<Anchor point="LEFT" x="20" y="-60"/>
-					<Anchor point="BOTTOMRIGHT" x="-20" y="20"/>
+					<Anchor point="LEFT" x="35" y="-30"/>
+					<Anchor point="BOTTOMRIGHT" x="-35" y="20"/>
 				</Anchors>
+
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border-Corrupted">
+					<EdgeSize>
+						<AbsValue val="26"/>
+					</EdgeSize>
+				</Backdrop>
+
 				<Frames>
 					<Button name="$parentBackwardButton" inherits="RPSObjectControlButtonTemplate">
 						<Anchors>
-							<Anchor point="CENTER" x="-16" y="-18"/>
+							<Anchor point="CENTER" x="-16" y="-28"/>
 						</Anchors>
 						<Scripts>
 							<OnShow>
@@ -143,33 +150,17 @@
 							</OnShow>
 						</Scripts>
 					</Button>
+					<Button parentKey="Close" inherits="UIPanelCloseButton">
+						<Anchors>
+							<Anchor point="TOPRIGHT" x="4" y="2"/>
+						</Anchors>
+					</Button>
 				</Frames>
 			</Frame>
-			<PlayerModel name="$parentModelScene" inherits="ModelWithControlsTemplate">
-				<Anchors>
-					<Anchor point="TOPLEFT" x="20" y="-20"/>
-					<Anchor point="BOTTOMRIGHT" x="-20" y="85"/>
-				</Anchors>
-				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-					<EdgeSize val="1"/>
-					<TileSize val="10" />
-					<BackgroundInsets left="3" right="3" top="3" bottom="3" />
-				</Backdrop>
-				<Scripts>
-					<OnShow>
-						self:SetModel(2204770);
-					</OnShow>
-				</Scripts>
-			</PlayerModel>
-			<Button parentKey="Close" inherits="UIPanelCloseButton">
-				<Anchors>
-					<Anchor point="TOPRIGHT" x="4" y="4"/>
-				</Anchors>
-			</Button>
 		    <EditBox name="$parentEditBox" inherits="RPS_EditBox">
 		    	<Size x="64" y="32"/>
 				<Anchors>
-					<Anchor relativeTo="GameObjectPreviewForwardButton" x="0" y="32"/>
+					<Anchor relativeTo="GameObjectPreviewForwardButton" x="0" y="28"/>
 				</Anchors>
 				<Scripts><!--TestUnit-->
 		            <OnEnter>
@@ -199,6 +190,53 @@
 					</OnEnterPressed>
 				</Scripts>
 		    </EditBox>
+			<PlayerModel name="$parentModelScenePlatform" inherits="MouseDisabledModelTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="20" y="-20"/>
+					<Anchor point="BOTTOMRIGHT" x="-20" y="85"/>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						self:SetModel(1408474);
+						GameObjectPreviewModelScenePlatform:SetCamDistanceScale(5);
+						GameObjectPreviewModelScenePlatform:SetFacing(math.pi);
+						self:SetAllPoints();
+					</OnShow>
+				</Scripts>
+			</PlayerModel>
+			<PlayerModel name="$parentModelSceneLightray" inherits="MouseDisabledModelTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="20" y="-20"/>
+					<Anchor point="BOTTOMRIGHT" x="-20" y="85"/>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+						self:SetModel(193659);
+						GameObjectPreviewModelSceneLightray:SetCamDistanceScale(2.5);
+						--self:SetAllPoints();
+					</OnShow>
+				</Scripts>
+			</PlayerModel>
+			<PlayerModel name="$parentModelScene" inherits="ModelWithControlsTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="0" y="-20"/>
+					<Anchor point="BOTTOMRIGHT" x="0" y="105"/>
+				</Anchors>
+				<!--<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+					<EdgeSize val="1"/>
+					<TileSize val="10" />
+					<BackgroundInsets left="3" right="3" top="3" bottom="3" />
+				</Backdrop>-->
+				<Scripts>
+					<OnShow>
+						self:SetModel(526868);
+						--self:SetAllPoints();
+					</OnShow>
+					<OnMouseWheel>
+						RPSCoreFramework:GOB_OnMouseWheel(self, delta, 1, 0.1)
+					</OnMouseWheel>
+				</Scripts>
+			</PlayerModel>
 		</Frames>
 	</Frame>
 </Ui>
