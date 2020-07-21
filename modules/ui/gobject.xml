@@ -150,11 +150,6 @@
 							</OnShow>
 						</Scripts>
 					</Button>
-					<Button parentKey="Close" inherits="UIPanelCloseButton">
-						<Anchors>
-							<Anchor point="TOPRIGHT" x="4" y="2"/>
-						</Anchors>
-					</Button>
 				</Frames>
 			</Frame>
 		    <EditBox name="$parentEditBox" inherits="RPS_EditBox">
@@ -220,7 +215,7 @@
 			<PlayerModel name="$parentModelScene" inherits="ModelWithControlsTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT" x="0" y="-20"/>
-					<Anchor point="BOTTOMRIGHT" x="0" y="105"/>
+					<Anchor point="BOTTOMRIGHT" x="0" y="115"/>
 				</Anchors>
 				<!--<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
 					<EdgeSize val="1"/>
@@ -237,6 +232,11 @@
 					</OnMouseWheel>
 				</Scripts>
 			</PlayerModel>
+			<Button parentKey="Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="RIGHT" x="-35" y="-90"/>
+				</Anchors>
+			</Button>
 		</Frames>
 	</Frame>
 </Ui>
