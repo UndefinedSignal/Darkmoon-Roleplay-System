@@ -294,6 +294,13 @@ function RPSCoreFramework:PreGenerateDMButtons()
 			end
 		end
 		_G[RPSCoreFramework.Interface.MenuButtons[i][2].."Label"]:SetText(RPSCoreFramework.Interface.MenuButtons[i][1]);
+--[[	if RPSCoreFramework.Interface.MenuButtons[i][7] then
+			MenuButton:SetScript('OnEnter', function()
+				GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+	            GameTooltip:AddLine("|cFFFFFFFFПарикмахерская|r");
+	            GameTooltip:Show();
+	        end);
+		end]]--
 		MenuButton:SetScript('OnClick', function()
 			RPSCoreFramework:FormatDMButtons(RPSCoreFramework.Interface.MenuButtons[i][2]);
 			if RPSCoreFramework.Interface.MenuButtons[i][7] then
@@ -306,6 +313,9 @@ function RPSCoreFramework:PreGenerateDMButtons()
 					RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 				end
 		end)
+--[[	MenuButton:SetScript('OnLeave', function()
+			GameTooltip:Hide();
+	    end);]]--
 		if RPSCoreFramework.Interface.MenuButtons[i][3] ~= nil then
 			table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 			table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
