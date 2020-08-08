@@ -184,17 +184,23 @@ RPSCoreFramework.Interface.MenuButtons = {
 	{"Информация", "RPS_DarkmoonInfo", "DarkmoonInfoFrame", false, 0, false},
 	{"Правила", "RPS_RuleInfo", "DarkmoonRulesFrame", false, 0, false},
 	{"Система боя", "RPS_BattleSystemInfo", "DarkmoonFightSystemFrame", false, 0, false},
+
 	{"Характеристики", "RPS_StatsInfo", nil, true, 1, true},
-	{"Персонаж", "RPS_ScaleInfo", "DarkmoonCharacterFrame", false, 0, false},
+	{"Персонаж", "RPS_ScaleInfo", nil, true, 2, false},
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
 	{"Display", "RPS_DisplayInfo", "DarkmoonDisplayInfoFrame", false, 0, false},
 	{"Менестрель", "RPS_Minstrel", "DarkmoonMinstrelFrame", false, 0, false},
+
 	{"Настройки", "RPS_CharSettings", "DarkmoonSettingsFrame", false, 0, true},
 	{"Сменить пароль", "RPS_DropMyPassword", "DarkmoonPasswordChangeFrame", false, 0, false},
 	{"Парикмахерская", "RPS_FakeFrame", "DarkmoonPasswordChangeFrame", false, 0, false, true, "RPSCoreFramework:SendCoreMessage(\"rps act barber\"); PlaySound(624, \"SFX\"); RPSCoreFramework:switchMainFrame();"}
 }
 RPSCoreFramework.Interface.SubMenuButtons = {
-	{1, "Боевые", "RPS_BattleStats", "DarkmoonBattleStatsFrame"}
+	{1, "Боевые", "RPS_BattleStatsInfo", "DarkmoonBattleStatsFrame"},
+	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
+	{1, "Мемные", "RPS_S12321ocialStatsInfo", "DarkmoonSocialStatsFrame"},
+	{2, "Амиел", "RPS_CharInfo", "DarkmoonCharacterFrame"},
+	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrame"}
 }
 
 RPSCoreFramework.StatsDiff = {
