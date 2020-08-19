@@ -198,9 +198,8 @@ RPSCoreFramework.Interface.MenuButtons = {
 RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Боевые", "RPS_BattleStatsInfo", "DarkmoonBattleStatsFrame"},
 	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
-	{1, "Мемные", "RPS_S12321ocialStatsInfo", "DarkmoonSocialStatsFrame"},
-	{2, "Амиел", "RPS_CharInfo", "DarkmoonCharacterFrame"},
-	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrame"}
+	{2, UnitName("player"), "RPS_CharInfo", "DrakmoonCharacterFrameInfo"},
+	{2, "Рост", "RPS_CharScaleInfo", "DrakmoonCharacterFrameScale"}
 }
 
 RPSCoreFramework.StatsDiff = {
@@ -319,33 +318,42 @@ RPSCoreFramework.Display.Scroll = {
 }
 
 RPSCoreFramework.Minstrel = {
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn1"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Blue.blp", ".minstrel gobject add", "|cffffffff.minstrel gobject add <id>|r - размещение ГО с указанным номером на месте персонажа."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn2"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Green.blp", ".minstrel gobject target", "|cffffffff.minstrel gobject target|r - берет ближайшее ГО в цель и выводит информацию об объекте, включая guid, которые можно использовать для перемещения, поворота и удаления."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn3"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Purple.blp", ".minstrel gobject delete", "|cffffffff.minstrel gobject delete <guid>|r - удаление ГО с указанным уникальным номером."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn4"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Red.blp", ".minstrel gobject info", "|cffffffff.minstrel gobject info <guid>|r - получение информации о ГО с указанным уникальным номером."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn5"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_White.blp", ".minstrel gobject move", "|cffffffff.minstrel gobject move <guid>|r - перемещение ГО с указанным уникальным номером на месте, где расположен персонаж."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn6"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Yellow.blp", ".minstrel gobject turn", "|cffffffff.minstrel gobject turn <guid>|r - разворот ГО с указанным уникальным номером в сторону обзора персонажа."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn7"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Blue.blp", ".minstrel npc add", "|cffffffff.minstrel npc add <id>|r - размещение NPC с указанным номером на месте персонажа."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn8"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Green.blp", ".minstrel npc delete", "|cffffffff.minstrel npc delete|r - удаление выделенного NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn9"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel npc say", "|cffffffff.minstrel npc say <фраза>|r - сказать фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn10"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel npc yell", "|cffffffff.minstrel npc yell <фраза>|r - выкрикнуть фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn11"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_White.blp", ".minstrel npc textemote", "|cffffffff.minstrel npc textemote <фраза>|r - вывести в чат эмоцию. В отличие от say и yell имя NPC не выводит автоматически, так что это следует сделать вручную. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Yellow.blp", ".minstrel npc info", "|cffffffff.minstrel npc info|r - выводит в чат информацию о выделенном NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Blue.blp", ".minstrel npc playemote", "|cffffffff.minstrel npc playemote <номер>|r - выделенный NPC начинает циклично проигрывать эмоцию с указанным номером. Номера эмоций NPC совпадают с номерами эмоций персонажей."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Purple.blp", ".minstrel npc spawndist", "|cffffffff.minstrel npc spawndist <значение>|r - выделенный NPC начинает периодически бродить в указанном радиусе вокруг изначальной точки размещений. Проще говоря, ходит туда-сюда. Рекомендуется ставить значение в диапазоне 3-5."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_White.blp", ".minstrel npc come", "|cffffffff.minstrel npc come|r - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn16"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_White.blp", ".minstrel npc set emote <emoteid>", "|cffffffff.minstrel npc set emote <emoteid>|r - устанавливает эмоцию под номером <emoteid> выделенному NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn17"] = {"Interface\\ICONS\\Ability_Iyyokuk_Staff_White.blp", ".minstrel gameobject set scale <guid> <scale(0.1-5)>", "|cffffffff.minstrel gameobject set scale <guid> <scale(0.1-5)>|r - изменяет размер Объекта под номером <guid> на значение <scale(0.1-5)>."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn18"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Red.blp", ".minstrel npc set scale <scale(0.1-5)>", "|cffffffff.minstrel npc set scale <scale(0.1-5)>|r - изменяет размер выделенному NPC на значение <scale(0.1-5)>."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn19"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Purple.blp", ".minstrel reset all", "|cffffffff.minstrel reset all|r - удалить все собственные NPC и Объекты."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn20"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Green.blp", ".minstrel reset creature", "|cffffffff.minstrel reset creature|r - удалить всех собственных NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn22"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <id>|r - установить на себя морф под номером <id>."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn23"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Red.blp", ".minstrel lookup creature", "|cffffffff.minstrel lookup creature <название>|r - поиск NPC по заданному названию."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn24"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Yellow.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup object <название>|r - поиск Объектов по заданному названию (только .m2)."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn25"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Green.blp", ".minstrel possess", "|cffffffff.minstrel possess|r - Взять под контроль выделенного NPC менестреля."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn26"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unposess", "|cffffffff.minstrel unposess|r - Прекратить контролировать NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn27"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel gameobject activate", "|cffffffff.minstrel gameobject activate <guid>|r - Активирует объект по его уникальному номеру, такой как дверь либо кнопка."}
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn1"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Yellow.blp", ".minstrel npc info", "|cffffffff.minstrel npc info|r - выводит в чат информацию о выделенном NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn2"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Blue.blp", ".minstrel npc add", "|cffffffff.minstrel npc add <id>|r - размещение NPC с указанным номером на месте персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn3"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Green.blp", ".minstrel npc delete", "|cffffffff.minstrel npc delete|r - удаление выделенного NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn4"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Purple.blp", ".minstrel npc spawndist", "|cffffffff.minstrel npc spawndist <значение>|r - выделенный NPC начинает периодически бродить в указанном радиусе вокруг изначальной точки размещений. Проще говоря, ходит туда-сюда. Рекомендуется ставить значение в диапазоне 3-5."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn5"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel npc say", "|cffffffff.minstrel npc say <фраза>|r - сказать фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn6"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel npc yell", "|cffffffff.minstrel npc yell <фраза>|r - выкрикнуть фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn7"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_White.blp", ".minstrel npc textemote", "|cffffffff.minstrel npc textemote <фраза>|r - вывести в чат эмоцию. В отличие от say и yell имя NPC не выводит автоматически, так что это следует сделать вручную. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn8"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Blue.blp", ".minstrel npc playemote", "|cffffffff.minstrel npc playemote <номер>|r - выделенный NPC начинает циклично проигрывать эмоцию с указанным номером. Номера эмоций NPC совпадают с номерами эмоций персонажей."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn9"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_White.blp", ".minstrel npc come", "|cffffffff.minstrel npc come|r - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn10"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_White.blp", ".minstrel npc set emote <emoteid>", "|cffffffff.minstrel npc set emote <emoteid>|r - устанавливает эмоцию под номером <emoteid> выделенному NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn11"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Red.blp", ".minstrel npc set scale <scale(0.1-5)>", "|cffffffff.minstrel npc set scale <scale(0.1-5)>|r - изменяет размер выделенному NPC на значение <scale(0.1-5)>."},
+
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Green.blp", ".minstrel possess", "|cffffffff.minstrel possess|r - Взять под контроль выделенного NPC менестреля."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unposess", "|cffffffff.minstrel unposess|r - Прекратить контролировать NPC."},
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <display id>|r - установить на себя морф под номером <display id>."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel demorph", "|cffffffff.minstrel demorph <id>|r - снять с себя морф."},
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn16"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Red.blp", ".minstrel lookup creature", "|cffffffff.minstrel lookup creature <название>|r - поиск NPC по заданному названию."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn17"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Yellow.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup object <название>|r - поиск Объектов по заданному названию (только .m2)."},
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn18"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Blue.blp", ".minstrel gobject add", "|cffffffff.minstrel gobject add <id>|r - размещение ГО с указанным номером на месте персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn19"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Purple.blp", ".minstrel gobject delete", "|cffffffff.minstrel gobject delete <guid>|r - удаление ГО с указанным уникальным номером."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn20"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Green.blp", ".minstrel gobject target", "|cffffffff.minstrel gobject target|r - берет ближайшее ГО в цель и выводит информацию об объекте, включая guid, которые можно использовать для перемещения, поворота и удаления."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Red.blp", ".minstrel gobject info", "|cffffffff.minstrel gobject info <guid>|r - получение информации о ГО с указанным уникальным номером."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn22"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_White.blp", ".minstrel gobject move", "|cffffffff.minstrel gobject move <guid>|r - перемещение ГО с указанным уникальным номером на месте, где расположен персонаж."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn23"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Yellow.blp", ".minstrel gobject turn", "|cffffffff.minstrel gobject turn <guid>|r - разворот ГО с указанным уникальным номером в сторону обзора персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn24"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel gobject activate", "|cffffffff.minstrel gobject activate <guid>|r - Активирует объект по его уникальному номеру, такой как дверь либо кнопка."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn25"] = {"Interface\\ICONS\\Ability_Iyyokuk_Staff_White.blp", ".minstrel gobject set scale <guid> <scale(0.1-5)>", "|cffffffff.minstrel gobject set scale <guid> <scale(0.1-5)>|r - изменяет размер Объекта под номером <guid> на значение <scale(0.1-5)>."},
+
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn26"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Purple.blp", ".minstrel reset all", "|cffffffff.minstrel reset all|r - удалить все собственные NPC и Объекты."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn27"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Green.blp", ".minstrel reset creature", "|cffffffff.minstrel reset creature|r - удалить всех собственных NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn28"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."}
 }
 
 RPSCoreFramework.DB = {

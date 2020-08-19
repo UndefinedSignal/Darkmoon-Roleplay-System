@@ -2237,4 +2237,25 @@
 		</Layers>
 	</Frame>
 
+    <Button name="DaystrikeButton" virtual="true">
+        <Size x="80" y="80"/>
+        <NormalTexture atlas="mountequipment-slot-background">
+        </NormalTexture>
+        <PushedTexture atlas="mountequipment-slot-background">
+        </PushedTexture>
+        <!--<HighlightTexture atlas="mountequipment-slot-corners" alphaMode="ADD">
+        </HighlightTexture>-->
+        <Layers>
+        	<Layer level="OVERLAY">
+                <Texture name="seal" atlas="Quest-Legionfall-WaxSeal">
+                	<Size x="52" y="49"/>
+                    <Anchors>
+                        <Anchor point="CENTER" y="-2"/>
+                    </Anchors>
+                </Texture>
+        	</Layer>
+        </Layers>
+    </Button>
+
+
 </Ui>

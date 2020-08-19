@@ -14,6 +14,7 @@ function RPSCoreFramework:OnEnable()
 end
 
 function RPSCoreFramework:OnInitialize()
+
 	LoggingChat(1);
 	SetCVar("autoClearAFK", 0);
 
@@ -91,15 +92,11 @@ function RPSCoreFramework:OnInitialize()
 
 	-- RPSLiterature.lua text formatting
 
-	self:LiteratureTextFormatting()
---	self:MinstrelSetTextOnShow()
+	self:LiteratureTextFormatting();
 
 	-- Button extensions
 
---	RPS_DarkmoonInfo:LockHighlight(); -- Starting page
-    RPS_CHRBTN1:LockHighlight();
-    RPS_CHRBTN2:UnlockHighlight();
-
+	--RPS_CharInfoLabel:SetText(UnitName("player"));
 	self:OnClickCosmeticTabs(RPS_FSBTN1);
 	RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
 
