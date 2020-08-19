@@ -571,8 +571,8 @@
 
                             <Frame name="$parentTestBody">
                                 <Anchors>
-                                    <Anchor point="TOP" x="60" y="-30"/>
-                                    <Anchor point="RIGHT" x="-30" y="80"/>
+                                    <Anchor point="TOP" x="67" y="-30"/>
+                                    <Anchor point="RIGHT" x="-23" y="80"/>
                                 </Anchors>
                                 <Layers>
                                     <Layer level="BACKGROUND">
@@ -585,6 +585,29 @@
                                     </Layer>
                                 </Layers>
                                 <Frames>
+                                    <Button name="$parentWhereAmI">
+                                        <Size x="24" y="24" />
+                                        <Anchors>
+                                            <Anchor point="TOPRIGHT" x="5" y="7"/>
+                                        </Anchors>
+                                        <NormalTexture atlas="worldquest-tracker-questmarker" />
+                                        <PushedTexture atlas="worldquest-tracker-questmarker" />
+                                        <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
+                                            <Size x="24" y="24"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
+                                        </HighlightTexture>
+                                        <Scripts>
+                                            <OnEnter>
+                                                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                                                GameTooltip:AddLine("|cFFFFFFFFКуда я попал?|r");
+                                                GameTooltip:AddLine(" ");
+                                                GameTooltip:AddLine("И что это за казинычЪ?!");
+                                                GameTooltip:Show();
+                                            </OnEnter>
+                                            <OnLeave>
+                                                GameTooltip:Hide();
+                                            </OnLeave>
+                                        </Scripts>
+                                    </Button>
                                     <Button name="$parentDay1" inherits="DaystrikeButton">
                                         <Anchors>
                                             <Anchor point="TOP" x="123" y="-38"/>
