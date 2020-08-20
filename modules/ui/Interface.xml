@@ -645,13 +645,13 @@
                                     <Layer>
                                         <FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Мои POI" justifyH="CENTER" justifyV="TOP">
                                             <Color r="1" g="1" b="1" a="1"/>
-                                            <FontHeight val="28"/>
+                                            <FontHeight val="16"/>
                                             <Shadow>
                                                 <Offset x="3" y="3" />
                                                 <Color r="0" g="0" b="0"/>
                                             </Shadow>
                                             <Anchors>
-                                                <Anchor point="TOP" x="0" y="35"/>
+                                                <Anchor point="TOPLEFT" x="0" y="25"/>
                                             </Anchors>
                                         </FontString>
                                     </Layer>
@@ -725,6 +725,7 @@
                                         </ScrollChild>
                                         <Scripts>
                                             <OnShow>
+                                                RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);
                                                 RPSCoreFramework:OwnPOIListShow();
                                             </OnShow>
                                             ScrollFrame_OnLoad(self);

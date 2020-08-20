@@ -83,6 +83,7 @@ function RPSCoreFramework:OwnPOIListShow()
 			_G["POISearchContentChildbtn"..i.."Title"]:SetText(RPSCoreFramework.POISearch[i][7]);
 			_G["POISearchContentChildbtn"..i.."Description"]:SetText(RPSCoreFramework.POISearch[i][8]);
 			_G["POISearchContentChildbtn"..i.."POITex"]:SetTexture("Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..RPSCoreFramework.POISearch[i][5]);
+			_G["POISearchContentChildbtn"..i].FuncTable = {RPSCoreFramework.POISearch[i][1], RPSCoreFramework.POISearch[i][5], RPSCoreFramework.POISearch[i][7], RPSCoreFramework.POISearch[i][8]}
 			_G["POISearchContentChildbtn"..i]:Show();
 		end
 	end

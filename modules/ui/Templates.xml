@@ -2302,6 +2302,18 @@
 				</FontString>
 			</Layer>
         </Layers>
+        <Scripts> 
+			<OnEnter>
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine("|TInterface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..self.FuncTable[2]..":0|t "..self.FuncTable[3]);
+			    GameTooltip:AddLine(self.FuncTable[4], 1,1,1, true);
+
+			    GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+        </Scripts>
     </Button>
 
 </Ui>
