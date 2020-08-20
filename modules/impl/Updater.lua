@@ -206,6 +206,15 @@ function RPSCoreFramework:AddPOIPins(str)
 	end
 end
 
+function RPSCoreFramework:DailyStatusUpdate(str)
+	for i = 1, 5 do
+		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Hide();
+	end
+	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
+		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
+	end
+end
+
 --function RPSCoreFramework:AddPOIPins(str)
 --	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
 --	local lines = decom:splitstr('\r\n');
@@ -252,6 +261,7 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 		end
 		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 		RPSCoreFramework:GeneratePOIPlaces();
+		RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);
 	end
 end
 

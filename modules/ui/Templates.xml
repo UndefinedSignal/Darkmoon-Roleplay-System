@@ -2247,7 +2247,7 @@
         </HighlightTexture>-->
         <Layers>
         	<Layer level="OVERLAY">
-                <Texture name="seal" atlas="Quest-Legionfall-WaxSeal">
+                <Texture name="$parentSeal" atlas="Quest-Legionfall-WaxSeal" hidden="true">
                 	<Size x="52" y="49"/>
                     <Anchors>
                         <Anchor point="CENTER" y="-2"/>
@@ -2255,7 +2255,53 @@
                 </Texture>
         	</Layer>
         </Layers>
+        <Scripts>
+        	<OnClick>
+        		print(self:GetName());
+        	</OnClick>
+        </Scripts>
     </Button>
 
+    <Button name="POIInfoButton" virtual="true">
+        <Size x="209" y="46"/>
+        <NormalTexture atlas="friendslist-categorybutton">
+        </NormalTexture>
+        <PushedTexture atlas="friendslist-categorybutton">
+        </PushedTexture>
+        <HighlightTexture atlas="128-RedButton-Highlight" alphaMode="ADD">
+        </HighlightTexture>
+        <Layers>
+        	<Layer level="OVERLAY">
+                <Texture name="$parentPOITex" file="Interface\AddOns\RPSDarkmoon\resources\POI\inn">
+                	<Size x="20" y="20"/>
+                    <Anchors>
+                        <Anchor point="LEFT" x="10" y="7"/>
+                    </Anchors>
+                </Texture>
+        	</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentID" inherits="GameFontNormal" text="1" justifyH="CENTER" parentKey="IDLabel">
+					<FontHeight val="6"/>
+					<Anchors>
+						<Anchor point="CENTER" relativePoint="BOTTOMLEFT" x="19" y="12"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="Таверна «Печальный отшельник»" justifyH="LEFT" parentKey="TitleLabel">
+					<FontHeight val="6"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" x="40" y="15"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="0"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentDescription" inherits="GameFontNormal" text="Владелец: Амиел. 80 з. 4 уровень." justifyH="LEFT" parentKey="DescriptionLabel">
+					<FontHeight val="5"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" x="40" y="-15"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="0"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+        </Layers>
+    </Button>
 
 </Ui>

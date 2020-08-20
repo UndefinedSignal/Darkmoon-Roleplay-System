@@ -3,6 +3,16 @@ RPSCoreFramework.HBD = LibStub("HereBeDragons-2.0.1");
 RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-2.0");
 RPSCoreFramework.LualZW = LibStub("LualZW");
 RPSCoreFramework.Version = 2.31;
+RPSCoreFramework.DailyStrike = 0;
+
+RPSCoreFramework.DailyCipher = {}
+RPSCoreFramework.DailyCipher[0] = 0;
+RPSCoreFramework.DailyCipher[1] = 1;
+RPSCoreFramework.DailyCipher[2] = 2;
+RPSCoreFramework.DailyCipher[4] = 3;
+RPSCoreFramework.DailyCipher[8] = 4;
+RPSCoreFramework.DailyCipher[16] = 5;
+
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.Scroller = {};
 RPSCoreFramework.Display = {};
@@ -41,6 +51,7 @@ RPSCoreFramework.DistanceText = nil;
 RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
 
 RPSCoreFramework.POIDesc = {};
+RPSCoreFramework.POISearch = {};
 
 RPSCoreFramework.Quiz = {};
 RPSCoreFramework.Quiz.PollToast = false;
@@ -198,8 +209,8 @@ RPSCoreFramework.Interface.MenuButtons = {
 RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Боевые", "RPS_BattleStatsInfo", "DarkmoonBattleStatsFrame"},
 	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
-	{2, UnitName("player"), "RPS_CharInfo", "DrakmoonCharacterFrameInfo"},
-	{2, "Рост", "RPS_CharScaleInfo", "DrakmoonCharacterFrameScale"}
+	{2, UnitName("player"), "RPS_CharInfo", "DarkmoonCharacterFrameInfo"},
+	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"}
 }
 
 RPSCoreFramework.StatsDiff = {

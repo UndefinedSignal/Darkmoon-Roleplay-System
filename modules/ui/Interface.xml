@@ -504,7 +504,7 @@
                         </Frames>
                     </Frame>
 
-                    <Frame name="DrakmoonCharacterFrameInfo" inherits="RPS_StandardParchmentFrame" hidden="true">
+                    <Frame name="DarkmoonCharacterFrameInfo" inherits="RPS_StandardParchmentFrame" hidden="true">
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
                         </Anchors>
@@ -563,13 +563,13 @@
                                 </Layers>
                                 <Scripts>
                                     <OnShow>
-                                        DrakmoonCharacterFrameInfoBodyTextName:SetText(UnitName("player"))
-                                        SetPortraitTexture(DrakmoonCharacterFrameInfoBodyPortrait, "player")
+                                        DarkmoonCharacterFrameInfoBodyTextName:SetText(UnitName("player"))
+                                        SetPortraitTexture(DarkmoonCharacterFrameInfoBodyPortrait, "player")
                                     </OnShow>
                                 </Scripts>
                             </Frame>
 
-                            <Frame name="$parentTestBody">
+                            <Frame name="$parentTRBody">
                                 <Anchors>
                                     <Anchor point="TOP" x="67" y="-30"/>
                                     <Anchor point="RIGHT" x="-23" y="80"/>
@@ -610,29 +610,127 @@
                                     </Button>
                                     <Button name="$parentDay1" inherits="DaystrikeButton">
                                         <Anchors>
-                                            <Anchor point="TOP" x="123" y="-38"/>
+                                            <Anchor point="TOP" x="-148" y="-38"/>
                                         </Anchors>
                                     </Button>
                                     <Button name="$parentDay2" inherits="DaystrikeButton">
                                         <Anchors>
-                                            <Anchor relativeTo="$parentDay1" relativePoint="LEFT" point="RIGHT" x="12"/>
+                                            <Anchor relativeTo="$parentDay1" relativePoint="RIGHT" point="LEFT" x="-12"/>
                                         </Anchors>
                                     </Button>
                                     <Button name="$parentDay3" inherits="DaystrikeButton">
                                         <Anchors>
-                                            <Anchor relativeTo="$parentDay2" relativePoint="LEFT" point="RIGHT" x="12"/>
+                                            <Anchor relativeTo="$parentDay2" relativePoint="RIGHT" point="LEFT" x="-12"/>
                                         </Anchors>
                                     </Button>
                                     <Button name="$parentDay4" inherits="DaystrikeButton">
                                         <Anchors>
-                                            <Anchor relativeTo="$parentDay3" relativePoint="LEFT" point="RIGHT" x="12"/>
+                                            <Anchor relativeTo="$parentDay3" relativePoint="RIGHT" point="LEFT" x="-12"/>
                                         </Anchors>
                                     </Button>
                                     <Button name="$parentDay5" inherits="DaystrikeButton">
                                         <Anchors>
-                                            <Anchor relativeTo="$parentDay4" relativePoint="LEFT" point="RIGHT" x="12"/>
+                                            <Anchor relativeTo="$parentDay4" relativePoint="RIGHT" point="LEFT" x="-12"/>
                                         </Anchors>
                                     </Button>
+
+                                </Frames>
+                            </Frame>
+                            <Frame name="$parentMainContent" inherits="RPS_InnerFrame">
+                                <Anchors>
+                                    <Anchor point="LEFT" x="42" y="-110"/>
+                                    <Anchor point="BOTTOMRIGHT" x="-42" y="35"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer>
+                                        <FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Мои POI" justifyH="CENTER" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="28"/>
+                                            <Shadow>
+                                                <Offset x="3" y="3" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                            <Anchors>
+                                                <Anchor point="TOP" x="0" y="35"/>
+                                            </Anchors>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                    <ScrollFrame name="POISearchContent" inherits="UIPanelScrollFrameTemplate">
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="2" y="0" />
+                                            <Anchor point="BOTTOMRIGHT" x="-20" y="0" />
+                                        </Anchors>
+                                        <ScrollChild>
+                                            <Frame name="$parentChild">
+                                                <Size x="240" y="230"/>
+                                                <Anchors>
+                                                    <Anchor point="TOPLEFT" x="0" y="0" />
+                                                    <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                                                </Anchors>
+                                                <Frames>
+                                                    <Button name="$parentbtn1" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor point="TOPLEFT" x="2" y="-10"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn2" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn1" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn3" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn1" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn4" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn3" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn5" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn3" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn6" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn5" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn7" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn5" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <!--<Button name="$parentbtn8" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn7" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn9" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn7" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn10" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn9" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>-->
+                                                </Frames>
+                                            </Frame>
+                                        </ScrollChild>
+                                        <Scripts>
+                                            <OnShow>
+                                                RPSCoreFramework:OwnPOIListShow();
+                                            </OnShow>
+                                            ScrollFrame_OnLoad(self);
+                                            ScrollFrame_OnScrollRangeChanged(self);
+                                        </Scripts>
+                                    </ScrollFrame>
 
                                 </Frames>
                             </Frame>
@@ -653,7 +751,7 @@
                         </Scripts>
                     </Frame>
 
-                    <Frame name="DrakmoonCharacterFrameScale" inherits="RPS_StandardParchmentFrame" hidden="true">
+                    <Frame name="DarkmoonCharacterFrameScale" inherits="RPS_StandardParchmentFrame" hidden="true">
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
                         </Anchors>
@@ -693,7 +791,7 @@
                                                     <Color r="1" g="1" b="1" a="1"/>
                                                     <FontHeight val="12"/>
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DrakmoonCharacterFrameScale" x="98" y="-70" />
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-70" />
                                                     </Anchors>
                                                     <Shadow>
                                                         <Offset x="1" y="1" />
@@ -707,7 +805,7 @@
                                                     <Color r="1" g="1" b="1" a="1"/>
                                                     <FontHeight val="12"/>
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DrakmoonCharacterFrameScale" x="98" y="-130" />
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-130" />
                                                     </Anchors>
                                                     <Shadow>
                                                         <Offset x="1" y="1" />
@@ -721,7 +819,7 @@
                                                     <Color r="1" g="1" b="1" a="1"/>
                                                     <FontHeight val="12"/>
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DrakmoonCharacterFrameScale" x="98" y="-226" />
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-226" />
                                                     </Anchors>
                                                     <Shadow>
                                                         <Offset x="1" y="1" />
@@ -735,7 +833,7 @@
                                                     <Color r="1" g="1" b="1" a="1"/>
                                                     <FontHeight val="12"/>
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DrakmoonCharacterFrameScale" x="98" y="-324" />
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-324" />
                                                     </Anchors>
                                                     <Shadow>
                                                         <Offset x="1" y="1" />
@@ -749,7 +847,7 @@
                                                     <Color r="1" g="1" b="1" a="1"/>
                                                     <FontHeight val="12"/>
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DrakmoonCharacterFrameScale" x="98" y="-386" />
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-386" />
                                                     </Anchors>
                                                     <Shadow>
                                                         <Offset x="1" y="1" />
@@ -787,7 +885,7 @@
                                     <Button name="RPS_BTNAcceptScale" inherits="UIPanelButtonTemplate" text=" ">
                                         <Size x="114" y="28"/>
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameScale" relativePoint="CENTER" x="-102" y="-150"/>
+                                            <Anchor relativeTo="DarkmoonCharacterFrameScale" relativePoint="CENTER" x="-102" y="-150"/>
                                         </Anchors>
                                         <NormalFont style="GameFontNormal"/>
 
@@ -810,7 +908,7 @@
                                     <Button name="RPS_BTNReScale" inherits="UIPanelButtonTemplate" text=" ">
                                         <Size x="122" y="28"/>
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameScale" relativePoint="CENTER" x="15" y="-150"/>
+                                            <Anchor relativeTo="DarkmoonCharacterFrameScale" relativePoint="CENTER" x="15" y="-150"/>
                                         </Anchors>
                                         <Scripts>
                                             <OnLoad>
@@ -1941,6 +2039,11 @@
                                                     <Button name="$parentbtn27" inherits="MinstrelButton" hidden="false">
                                                         <Anchors>
                                                             <Anchor point="TOP" relativeTo="$parentbtn26" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn28" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn27" x="0" y="-42"/>
                                                         </Anchors>
                                                     </Button>
                                                 </Frames>
