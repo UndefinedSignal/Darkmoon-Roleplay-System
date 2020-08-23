@@ -47,6 +47,8 @@ function RPSCoreFramework:OnInitialize()
 
 	self:AddGuildSalaryTab();
 
+	--RPSCoreFramework:AddGuildPOIInfo();
+
 	-- Disp & Scale
 
 	self:SendCoreMessage("disp list");
@@ -58,6 +60,15 @@ function RPSCoreFramework:OnInitialize()
 	if (GetGuildInfo("player") ~= "0") then
 		self:SendCoreMessage("rps guild infosalary");
 	end
+
+	-- Guild goals
+
+	--[[GuildInfoFrameInfoChallenge1:Hide();
+	GuildInfoFrameInfoChallenge2:Hide();
+	GuildInfoFrameInfoChallenge3:Hide();
+	GuildInfoFrameInfoChallenge4:Hide();
+	GuildInfoFrameInfoChallenge5:Hide();
+	GuildInfoFrameInfoHeader1Label:SetText("Гильдейские точки интереса (POI)");]]--
 
 	-- Stats
 

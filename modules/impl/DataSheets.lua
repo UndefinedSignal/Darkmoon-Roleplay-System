@@ -23,6 +23,7 @@ RPSCoreFramework.Map.POICount = 0;
 RPSCoreFramework.Map.POICounter = 0;
 RPSCoreFramework.Map.POICountLow = 0;
 RPSCoreFramework.Map.POICountMid = 0;
+
 RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
@@ -52,6 +53,7 @@ RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
 
 RPSCoreFramework.POIDesc = {};
 RPSCoreFramework.POISearch = {};
+RPSCoreFramework.GuildInfoPOIFrame = nil;
 
 RPSCoreFramework.Quiz = {};
 RPSCoreFramework.Quiz.PollToast = false;

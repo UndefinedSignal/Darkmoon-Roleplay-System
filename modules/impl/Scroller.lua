@@ -24,12 +24,14 @@ function RPSCoreFramework:ScrollMenuUpdater() -- Выбивает если не�
                     _G["RPS_AuraButton"..jBtn.."Price"]:Hide()
                     _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
                     _G["RPS_AuraButton"..jBtn.."Macros"]:Show()
+                    _G["RPS_AuraButton"..jBtn].bannertexture:SetAtlas("GarrMission_RewardsBanner");
 
                     RPSCoreFramework.Interface.Auras.Message[jBtn][1] = "rps action aura toggle "..tonumber(RPSCoreFramework.Interface.Auras.Show[lineplusoffset])
                 else
                     _G["RPS_AuraButton"..jBtn.."Completed"]:Hide()
                     _G["RPS_AuraButton"..jBtn.."Macros"]:Hide()
                     _G["RPS_AuraButton"..jBtn.."Price"]:Show()
+                    _G["RPS_AuraButton"..jBtn].bannertexture:SetAtlas("GarrMission_RewardsBanner-Desaturate");
                     if tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][4]) > tonumber(GetMoney()) then
                         _G["RPS_AuraButton"..jBtn.."Price"]:SetText("|cFFFF0000"..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.Interface.Auras.Show[lineplusoffset]][4]).."|r")
                     else

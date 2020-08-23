@@ -551,10 +551,17 @@
 						<Anchor point="CENTER" relativeKey="$parent.Icon" x="165" y="0"/>
 					</Anchors>
 				</Texture>
-				<Texture parentKey="banner" file="Interface\QuestionFrame\TitleBanner" alpha="0.85">
+				<Texture parentKey="banner">
 					<Size x="256" y="64"/>
 					<Anchors>
 						<Anchor point="CENTER" x="1" y="-10"/>
+					</Anchors>
+				</Texture>
+
+				<Texture parentKey="bannertexture" atlas="GarrMission_RewardsBanner-Desaturate" alpha="0.85">
+					<Size x="256" y="54"/>
+					<Anchors>
+						<Anchor relativeKey="$parent.banner" point="CENTER" x="1" y="15"/>
 					</Anchors>
 				</Texture>
 

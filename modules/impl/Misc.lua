@@ -382,21 +382,25 @@ function RPSCoreFramework:GuildInfoFrame_Update()
 	local selectedTab = PanelTemplates_GetSelectedTab(GuildInfoFrame);
 	if ( selectedTab == 1 ) then
 		GuildInfoFrameInfo:Show();
+		--RPSCoreFramework.GuildInfoPOIFrame:Show();
 		GuildInfoFrameRecruitment:Hide();
 		GuildInfoFrameApplicants:Hide();
 		GuildInfoFrameSalary:Hide();
 	elseif ( selectedTab == 2 ) then
 		GuildInfoFrameInfo:Hide();
+		--RPSCoreFramework.GuildInfoPOIFrame:Hide();
 		GuildInfoFrameRecruitment:Show();
 		GuildInfoFrameApplicants:Hide();
 		GuildInfoFrameSalary:Hide();
 	elseif ( selectedTab == 3) then
 		GuildInfoFrameInfo:Hide();
+		--RPSCoreFramework.GuildInfoPOIFrame:Hide();
 		GuildInfoFrameRecruitment:Hide();
 		GuildInfoFrameApplicants:Show();
 		GuildInfoFrameSalary:Hide();
 	else
 		GuildInfoFrameInfo:Hide();
+		--RPSCoreFramework.GuildInfoPOIFrame:Hide();
 		GuildInfoFrameRecruitment:Hide();
 		GuildInfoFrameApplicants:Hide();
 		GuildInfoFrameSalary:Show();
@@ -504,6 +508,19 @@ function RPSCoreFramework:TalentAlertMessageHide()
 	TalentMicroButtonAlert:Hide();
 end
 
-function RPSCoreFramework:TestFunc()
-	print("Tested!");
+
+
+function RPSCoreFramework:AddGuildPOIInfo()
+	RPSCoreFramework.GuildInfoPOIFrame = CreateFrame("Frame","GuildInfoPOIFrame",GuildFrame)
+	RPSCoreFramework.GuildInfoPOIFrame:SetFrameStrata("HIGH")
+
+	local t = RPSCoreFramework.GuildInfoPOIFrame:CreateTexture(nil,"BACKGROUND")
+	t:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Factions.blp")
+	t:SetAllPoints(RPSCoreFramework.GuildInfoPOIFrame)
+	RPSCoreFramework.GuildInfoPOIFrame.texture = t
+
+	RPSCoreFramework.GuildInfoPOIFrame:SetPoint("TOPLEFT",GuildInfoFrameInfo,5,-25)
+	RPSCoreFramework.GuildInfoPOIFrame:SetPoint("BOTTOMRIGHT",GuildInfoFrameInfo,-5,200)
+
+	RPSCoreFramework.GuildInfoPOIFrame:Show()
 end

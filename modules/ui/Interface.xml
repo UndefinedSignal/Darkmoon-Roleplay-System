@@ -560,6 +560,15 @@
                                             </Shadow>
                                         </FontString>
                                     </Layer>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="$parentTextNameBackground" atlas="BossBanner-BgBanner-Mid">
+                                            <Size x="504" y="168" /> <!--467,141-->
+                                            <Anchors>
+                                                <Anchor relativeTo="$parentTextName" point="TOPLEFT" x="-15" y="3" />
+                                                <Anchor relativeTo="$parentTextName" point="BOTTOMRIGHT" x="25" y="-3" />
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
                                 </Layers>
                                 <Scripts>
                                     <OnShow>
@@ -642,7 +651,7 @@
                                     <Anchor point="BOTTOMRIGHT" x="-42" y="35"/>
                                 </Anchors>
                                 <Layers>
-                                    <Layer>
+                                    <Layer>                                       
                                         <FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Мои POI" justifyH="CENTER" justifyV="TOP">
                                             <Color r="1" g="1" b="1" a="1"/>
                                             <FontHeight val="16"/>
@@ -655,6 +664,15 @@
                                             </Anchors>
                                         </FontString>
                                     </Layer>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="$parentTitleBackground" atlas="BossBanner-BgBanner-Mid">
+                                            <Size x="504" y="168" /> <!--467,141-->
+                                            <Anchors>
+                                                <Anchor relativeTo="$parentTitle" point="TOPLEFT" x="-15" y="3" />
+                                                <Anchor relativeTo="$parentTitle" point="BOTTOMRIGHT" x="35" y="-3" />
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
                                 </Layers>
                                 <Frames>
                                     <ScrollFrame name="POISearchContent" inherits="UIPanelScrollFrameTemplate">
@@ -662,6 +680,16 @@
                                             <Anchor point="TOPLEFT" x="2" y="0" />
                                             <Anchor point="BOTTOMRIGHT" x="-20" y="0" />
                                         </Anchors>
+                                        <Layers>
+                                            <Layer level="BACKGROUND">
+                                                <Texture name="$parentBackground" atlas="BFA-mission-complete-background-Alliance">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" x="-2" y="-3" />
+                                                        <Anchor point="BOTTOMRIGHT" x="19" y="0" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                        </Layers>
                                         <ScrollChild>
                                             <Frame name="$parentChild">
                                                 <Size x="240" y="230"/>
@@ -2590,4 +2618,13 @@
             </OnShow>
         </Scripts>
     </Frame>
+    <Frame name="GuildInfoPOIFrame" inherits="RPS_InnerFrame" hidden="true">
+        <Anchors>
+            <Anchors>
+                <Anchor relativeTo="GuildInfoFrameInfo" point="TOPLEFT" x="0" y="0"/>
+                <Anchor relativeTo="GuildInfoFrameInfo" point="BOTTOMRIGHT" x="0" y="0"/>
+            </Anchors>
+        </Anchors>
+    </Frame>
+
 </Ui>
