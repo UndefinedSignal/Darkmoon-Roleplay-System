@@ -594,10 +594,30 @@
                                     </Layer>
                                 </Layers>
                                 <Frames>
-                                    <Button name="$parentWhereAmI">
-                                        <Size x="24" y="24" />
+                                   <Button name="DarkmoonDropSpecChoose" inherits="RPS_EasyDropDownTemplate">
                                         <Anchors>
-                                            <Anchor point="TOPRIGHT" x="5" y="7"/>
+                                            <Anchor point="LEFT" x="-135" y="-20" />
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnShow>
+                                                if not RPSCharSpec then
+                                                    RPSCharSpec = tonumber(1);
+                                                    DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[1]);
+                                                else
+                                                    DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]);
+                                                end
+                                            </OnShow>
+                                            <OnLoad>
+                                                DarkmoonDropSpecChoose.Button:SetScript("OnClick", function()
+                                                    RPSCoreFramework:ShowCharSpecChooseDropDownMenu();
+                                                end);
+                                            </OnLoad>
+                                        </Scripts>
+                                   </Button>
+                                    <Button name="$parentWhereAmI">
+                                        <Size x="21" y="21" />
+                                        <Anchors>
+                                            <Anchor point="TOPRIGHT" x="-7" y="0"/>
                                         </Anchors>
                                         <NormalTexture atlas="worldquest-tracker-questmarker" />
                                         <PushedTexture atlas="worldquest-tracker-questmarker" />
@@ -1267,6 +1287,90 @@
                         </Scripts>
                     </Frame>
 
+                    <Frame name="DarkmoonDisplayPresetFrame" hidden="true">
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Layers>
+                            <Layer>
+                                <Texture parentKey="Background" atlas="UI-Frame-Horde-CardParchmentWider">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" x="0" y="0"/>
+                                        <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="0" />
+                            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                        </Anchors>
+                        <Frames>
+                            <Frame name="$parentMenu" inherits="RPS_InnerFrame">
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonDisplayPresetFrame" point="TOPLEFT" x="0" y="0" />
+                                    <Anchor relativeTo="DarkmoonDisplayPresetFrame" point="BOTTOM" x="-150" y="0" />
+                                </Anchors>
+                                <Frames>
+                                    <ScrollFrame name="$parentSlider" inherits="UIPanelScrollFrameTemplate">
+                                        <Size x="240" y="245"/>
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="2" y="0" />
+                                            <Anchor point="BOTTOMRIGHT" x="-20" y="0" />
+                                        </Anchors>
+                                        <ScrollChild>
+                                            <Frame name="$parentBody">
+                                                <Size x="240" y="230"/>
+                                                <Anchors>
+                                                    <Anchor point="TOPLEFT" x="0" y="0" />
+                                                    <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                                                </Anchors>
+                                                <Frames>
+
+                                                </Frames>
+                                            </Frame>
+                                        </ScrollChild>
+                                        <Scripts>
+                                            ScrollFrame_OnLoad(self);
+                                            ScrollFrame_OnScrollRangeChanged(self);
+                                        </Scripts>
+                                    </ScrollFrame>
+                                </Frames>
+                            </Frame>
+                            <PlayerModel name="$parentModel" inherits="ModelWithControlsTemplate">
+                                <Anchors>
+                                    <Anchor relativeTo="$parent" point="TOP" x="150" y="0" />
+                                    <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="0" y="0" />
+                                </Anchors>
+                                <Scripts>
+                                    <OnEnter>
+                                        self:SetAnimation(66);
+                                    </OnEnter>
+                                    <OnLeave>
+                                        self:SetAnimation(0);
+                                    </OnLeave>
+                                    <OnShow>
+                                        self:SetUnit("player");
+                                        self:SetAllPoints();
+                                    </OnShow>
+                                </Scripts>
+                            </PlayerModel>
+                        </Frames>
+                        <Scripts>
+                            <OnShow>
+                                RPSCoreFramework:MenstrelOnShow(self);
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
+                    </Frame>
 
                     <Frame name="DarkmoonPasswordChangeFrame" hidden="true">
                         <Size x="500" y="430"/>
@@ -2617,14 +2721,6 @@
                 RPSCoreFramework:ProcessGuildSalaryInterface();
             </OnShow>
         </Scripts>
-    </Frame>
-    <Frame name="GuildInfoPOIFrame" inherits="RPS_InnerFrame" hidden="true">
-        <Anchors>
-            <Anchors>
-                <Anchor relativeTo="GuildInfoFrameInfo" point="TOPLEFT" x="0" y="0"/>
-                <Anchor relativeTo="GuildInfoFrameInfo" point="BOTTOMRIGHT" x="0" y="0"/>
-            </Anchors>
-        </Anchors>
     </Frame>
 
 </Ui>

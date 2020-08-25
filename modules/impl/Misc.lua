@@ -1,8 +1,11 @@
-local DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
 function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
 	if (GetInventoryItemID("player", inventorySlotId)) then
-		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
+		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, RPSCoreFramework.DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
 	end
+end
+
+function RPSCoreFramework:ShowCharSpecChooseDropDownMenu()
+	EasyMenu(RPSCoreFramework.DropDownCharSpecChooseMenu, RPSCoreFramework.DropDownClassChooseMenu, "cursor", 5, -15, "MENU", 5);
 end
 
 function RPSCoreFramework:PaperdollDispInit()

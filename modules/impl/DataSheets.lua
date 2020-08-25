@@ -46,6 +46,9 @@ RPSCoreFramework.ContainerDataFlow = true;
 RPSCoreFramework.PlayerCursorInformation = nil;
 RPSCoreFramework.DraggingContainerFrame = nil;
 
+RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
+RPSCoreFramework.DropDownClassChooseMenu = CreateFrame("Frame", "DropDownClassChooseMenu", UIParent, "UIDropDownMenuTemplate");
+
 RPSCoreFramework.MinstrelStatus = 2;
 
 RPSCoreFramework.DistanceText = nil;
@@ -201,7 +204,7 @@ RPSCoreFramework.Interface.MenuButtons = {
 	{"Характеристики", "RPS_StatsInfo", nil, true, 1, true},
 	{"Персонаж", "RPS_ScaleInfo", nil, true, 2, false},
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
-	{"Display", "RPS_DisplayInfo", "DarkmoonDisplayInfoFrame", false, 0, false},
+	{"Display", "RPS_DisplayInfo", nil, true, 3, false},
 	{"Менестрель", "RPS_Minstrel", "DarkmoonMinstrelFrame", false, 0, false},
 
 	{"Настройки", "RPS_CharSettings", "DarkmoonSettingsFrame", false, 0, true},
@@ -212,8 +215,16 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Боевые", "RPS_BattleStatsInfo", "DarkmoonBattleStatsFrame"},
 	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
 	{2, UnitName("player"), "RPS_CharInfo", "DarkmoonCharacterFrameInfo"},
-	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"}
+	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
+	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
+	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"}
 }
+
+RPSCoreFramework.CharChooseSpec = {}
+RPSCoreFramework.CharChooseSpec[1] = "Случайная"
+RPSCoreFramework.CharChooseSpec[2] = "Первая"
+RPSCoreFramework.CharChooseSpec[3] = "Вторая"
+RPSCoreFramework.CharChooseSpec[4] = "Третья"
 
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -293,11 +304,18 @@ RPSCoreFramework.CharacterBackground = {
 }
 
 RPSCoreFramework.DropDownDisplayMenu = {
-	    { text = "Display", isTitle = true, notCheckable = true},
-	    { text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
-	    { text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end }
+	{ text = "Display", isTitle = true, notCheckable = true},
+	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end }
 }
 
+RPSCoreFramework.DropDownCharSpecChooseMenu = {
+	{ text = "Выбрать специализацию", isTitle = true, notCheckable = true},
+	{ text = "Случайная", notCheckable = true, func = function() RPSCharSpec = 1;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },	
+	{ text = "Первая", notCheckable = true, func = function() RPSCharSpec = 2;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Вторая", notCheckable = true, func = function() RPSCharSpec = 3;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Третья", notCheckable = true, func = function() RPSCharSpec = 4;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end }
+}
 
 RPSCoreFramework.Scroller.lineplusoffset = {
 	[1] = 0,

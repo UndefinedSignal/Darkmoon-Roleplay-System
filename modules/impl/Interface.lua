@@ -236,3 +236,5 @@ function RPSCoreFramework:GuildSalaryFrameLink()
 		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..1,"RIGHT",0,0);
 	end
 end
+
+-- DarkmoonCharacterFrameInfoTRBody
