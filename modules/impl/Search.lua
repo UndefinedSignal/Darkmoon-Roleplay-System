@@ -48,12 +48,12 @@ function RPSCoreFramework:OwnPOIListShow()
 		_G["POISearchContentChildbtn"..i]:Hide();
 	end
 	for i = 1, #RPSCoreFramework.POISearch do
-		if i < 8 then
+		if i <= 8 then
 			_G["POISearchContentChildbtn"..i.."ID"]:SetText("|cFFFF8040"..RPSCoreFramework.POISearch[i][1])
 			_G["POISearchContentChildbtn"..i.."Title"]:SetText(RPSCoreFramework.POISearch[i][7]);
 			_G["POISearchContentChildbtn"..i.."Description"]:SetText(RPSCoreFramework.POISearch[i][8]);
 			_G["POISearchContentChildbtn"..i.."POITex"]:SetTexture("Interface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..RPSCoreFramework.POISearch[i][5]);
-			_G["POISearchContentChildbtn"..i].FuncTable = {RPSCoreFramework.POISearch[i][1], RPSCoreFramework.POISearch[i][5], RPSCoreFramework.POISearch[i][7], RPSCoreFramework.POISearch[i][8]}
+			_G["POISearchContentChildbtn"..i].FuncTable = {RPSCoreFramework.POISearch[i][1], RPSCoreFramework.POISearch[i][2], RPSCoreFramework.POISearch[i][3], RPSCoreFramework.POISearch[i][4], RPSCoreFramework.POISearch[i][5], RPSCoreFramework.POISearch[i][6], RPSCoreFramework.POISearch[i][7], RPSCoreFramework.POISearch[i][8]}
 			_G["POISearchContentChildbtn"..i]:Show();
 		end
 	end

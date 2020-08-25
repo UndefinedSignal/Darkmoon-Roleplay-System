@@ -2262,11 +2262,6 @@
                 </Texture>
         	</Layer>
         </Layers>
-        <Scripts>
-        	<OnClick>
-        		print(self:GetName());
-        	</OnClick>
-        </Scripts>
     </Button>
 
     <Button name="POIInfoButton" virtual="true">
@@ -2312,9 +2307,9 @@
         <Scripts> 
 			<OnEnter>
 	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			    GameTooltip:AddLine("|TInterface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..self.FuncTable[2]..":0|t "..self.FuncTable[3]);
-			    GameTooltip:AddLine(self.FuncTable[4], 1,1,1, true);
-
+			    GameTooltip:AddLine("|TInterface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..self.FuncTable[5]..":0|t "..self.FuncTable[7]);
+			    GameTooltip:AddLine(self.FuncTable[8], 1,1,1, true);
+			    GameTooltip:AddLine("|cFFFF8040Локация:|r "..GetRealZoneText(self.FuncTable[2]), 1,1,1, true);
 			    GameTooltip:Show();
 			</OnEnter>
 			<OnLeave>

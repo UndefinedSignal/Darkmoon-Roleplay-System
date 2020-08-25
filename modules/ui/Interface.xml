@@ -627,9 +627,11 @@
                                         <Scripts>
                                             <OnEnter>
                                                 GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-                                                GameTooltip:AddLine("|cFFFFFFFFКуда я попал?|r");
+                                                GameTooltip:AddLine("|cFFFFFFFFПерсонаж|r");
                                                 GameTooltip:AddLine(" ");
-                                                GameTooltip:AddLine("И что это за казинычЪ?!");
+                                                GameTooltip:AddLine("В этом окне вы можете получить отследить, зафиксировать и в будущем|nполучить свой бонус за 5 дней игры на сервере.");
+                                                GameTooltip:AddLine("В центральной части можно выбрать специализацию. Эта опция необходима для|nмаунтов которые меняют свою модель, либо окрас, в зависимости от специализации персонажа.");
+                                                GameTooltip:AddLine("В нижней части расположено окно которое поможет отследить те точки интереса (POI)|nв владельцах которых числится ваш персонаж.");
                                                 GameTooltip:Show();
                                             </OnEnter>
                                             <OnLeave>
@@ -753,12 +755,12 @@
                                                             <Anchor relativeTo="$parentbtn5" point="BOTTOM" y="-50" />
                                                         </Anchors>
                                                     </Button>
-                                                    <!--<Button name="$parentbtn8" inherits="POIInfoButton" hidden="true">
+                                                    <Button name="$parentbtn8" inherits="POIInfoButton" hidden="true">
                                                         <Anchors>
                                                             <Anchor relativeTo="$parentbtn7" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
                                                         </Anchors>
                                                     </Button>
-                                                    <Button name="$parentbtn9" inherits="POIInfoButton" hidden="true">
+                                                    <!--<Button name="$parentbtn9" inherits="POIInfoButton" hidden="true">
                                                         <Anchors>
                                                             <Anchor relativeTo="$parentbtn7" point="BOTTOM" y="-50" />
                                                         </Anchors>
