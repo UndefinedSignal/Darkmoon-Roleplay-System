@@ -1463,42 +1463,42 @@
                                                     <OnLoad>self.InvSlot = "head";</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentShoulder" frameStrata="DIALOG" id="2" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentShoulder" frameStrata="DIALOG" id="3" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentHead" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "shoulder"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentBack" frameStrata="DIALOG" id="3" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentBack" frameStrata="DIALOG" id="15" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentShoulder" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "back"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentChest" frameStrata="DIALOG" id="4" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentChest" frameStrata="DIALOG" id="5" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentBack" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "chest"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentShirt" frameStrata="DIALOG" id="5" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentShirt" frameStrata="DIALOG" id="4" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentChest" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "shirt"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentTabard" frameStrata="DIALOG" id="6" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentTabard" frameStrata="DIALOG" id="19" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentShirt" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "tabard"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentWrist" frameStrata="DIALOG" id="7" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentWrist" frameStrata="DIALOG" id="9" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentTabard" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
@@ -1506,28 +1506,28 @@
                                                 </Scripts>
                                             </Frame>
 
-                                            <Frame name="$parentHand" frameStrata="DIALOG" id="8" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentHand" frameStrata="DIALOG" id="10" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor point="TOPRIGHT" x="-15" y="-60"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "hands"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentWaist" frameStrata="DIALOG" id="9" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentWaist" frameStrata="DIALOG" id="6" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentHand" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "waist"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentLegs" frameStrata="DIALOG" id="10" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentLegs" frameStrata="DIALOG" id="7" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentWaist" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "legs"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentFeet" frameStrata="DIALOG" id="11" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentFeet" frameStrata="DIALOG" id="8" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentLegs" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
@@ -1535,14 +1535,14 @@
                                                 </Scripts>
                                             </Frame>
                                             
-                                            <Frame name="$parentMainhand" frameStrata="DIALOG" id="12" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentMainhand" frameStrata="DIALOG" id="16" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentFeet" point="BOTTOM" x="0" y="-70"/></Anchors>
                                                 <Scripts>
                                                     <OnLoad>self.InvSlot = "mainhand"</OnLoad>
                                                 </Scripts>
                                             </Frame>
-                                            <Frame name="$parentSecondaryhand" frameStrata="DIALOG" id="13" inherits="DarkmoonTransmogButton">
+                                            <Frame name="$parentSecondaryhand" frameStrata="DIALOG" id="17" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentMainhand" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>

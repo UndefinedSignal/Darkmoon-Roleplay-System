@@ -2406,6 +2406,7 @@
 	        		</OnLeave>
 	        		<OnClick>
 	        			if (button == "RightButton") then
+	        				print(self:GetParent():GetName().." "..self:GetParent():GetID())
 	        				RPSCoreFramework:ClearDispModel(self:GetParent():GetID());
 	        			end
 	        		</OnClick>
