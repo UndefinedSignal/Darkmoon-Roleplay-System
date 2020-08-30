@@ -255,10 +255,12 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 			RPSCoreFramework:POIStreamingLoad();
 		end
 	elseif (values[1] == "done") then
+		RPSCoreFramework.CharcterPOILoaded = true;
 		RPSCoreFramework.Map.POIWorkflow = true;
 		if (RPSCoreFramework.Map.POIUpdateQueque) then
 			RPSCoreFramework:POIUpdateIntoMainMassive();
 		end
+		RPSCoreFramework:CharacterInfoPOIBlock(2);
 		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 		RPSCoreFramework:GeneratePOIPlaces();
 		RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);

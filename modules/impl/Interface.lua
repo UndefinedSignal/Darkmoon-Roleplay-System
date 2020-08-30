@@ -238,3 +238,100 @@ function RPSCoreFramework:GuildSalaryFrameLink()
 end
 
 -- DarkmoonCharacterFrameInfoTRBody
+-- DarkmoonDisplayPresetFrameRightItemsHead
+
+function RPSCoreFramework:InitializeDispButtons()
+	local number, name, description;
+	local mainframe = _G["DarkmoonDisplayPresetFrameMenuSliderBody"];
+	for i = 1, #RPSDispTable do
+        local button = CreateFrame("Button", "DarkmoonDispButton"..i, mainframe, "CharDispButton");
+        if i == 1 then
+        	button:SetPoint("TOPLEFT", mainframe, 6, 0);
+    	else
+    		button:SetPoint("BOTTOM", _G["DarkmoonDispButton"..i-1], 0, -40);
+    	end
+    	button.IDLabel:SetText(i);
+    	button.TitleLabel:SetText(RPSDispTable[i][2]);
+    	button.DescriptionLabel:SetText(RPSDispTable[i][3]);
+    	button.Mod:SetAtlas(RPSDispTableColors[math.random(#RPSDispTableColors)]);
+    	button:Show();
+	end
+end
+
+function RPSCoreFramework:DispListAcceptDisp()
+	print("Disp Accepted");
+end
+
+local slots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Secondaryhand"}
+
+function RPSCoreFramework:DispSetItemTexture(slotID, itemID)
+	local frame;
+	local name, _, _, _, _, _, _, _, _, texture = GetItemInfo(itemID)
+	if not slotID then return; end
+	frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[tonumber(slotID)]];
+	frame.Normal:SetTexture(nil);
+	frame.Normal:SetMask(nil);
+	frame.Normal:SetMask("Interface\\COMMON\\Indicator-Gray");
+	frame.Normal:SetTexture(nil);
+	frame.Normal:SetTexture(texture);
+	frame.TooltipItemID = itemID;
+	frame.Normal:Show();
+end
+
+function RPSCoreFramework:DispRemoveItemTexture(slotID, clearAll)
+	local frame;
+	if not slotID then return; end
+	if not clearAll then
+		print("Single")
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[slotID]];
+		frame.Normal:SetTexture(nil);
+		frame.Normal:Hide();
+	else
+		print("Multiple clear")
+		for i = 1, 13 do
+			frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+			frame.Normal:SetTexture(nil);
+			frame.Normal:Hide();
+		end
+	end
+end
+
+function RPSCoreFramework:ClearDispModel(slotID)
+	if slotID == nil then return; end
+	if slotID == 0 then
+		DarkmoonDisplayPresetFrameRightModel:Undress();
+	else
+		print("Removed slot: "..slotID);
+		DarkmoonDisplayPresetFrameRightModel:UndressSlot(slotID);
+	end
+end
+
+function RPSCoreFramework:DressUpDispModel(itemID)
+	if RPSCoreFramework.DressUpOnLoad then
+		RPSCoreFramework:ClearDispModel(0);
+		RPSCoreFramework.DressUpOnLoad = false;
+	end
+	local __, itemLink, itemRarity = GetItemInfo(itemID);
+	-- itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+	-- itemEquipLoc, itemIcon, itemSellPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, 
+	-- isCraftingReagent = GetItemInfo(itemID or "itemString" or "itemName" or "itemLink") 
+	DarkmoonDisplayPresetFrameRightModel:TryOn(itemLink);
+end
+
+function RPSCoreFramework:ShowDispalyItemTooltip(self)
+	GameTooltip:ClearLines();
+	GameTooltip:SetOwner(self, "ANCHOR_LEFT");
+	if self.TooltipItemID ~= nil then
+		local __, itemLink = GetItemInfo(self.TooltipItemID)
+		GameTooltip:SetHyperlink(itemLink)
+		--ContainerGameTooltip:SetHyperlink(itemLink)
+	else
+		GameTooltip:AddLine("Пустой слот");
+	end
+	GameTooltip:Show();
+end
+
+function RPSCoreFramework:CharacterInfoPOIBlock(duration)
+	local frame = DarkmoonCharacterFrameInfoMainContent.BlockOnLoad
+	frame.content.flash1Rotation:SetDuration(duration);
+end

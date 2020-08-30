@@ -27,11 +27,13 @@ RPSCoreFramework.Map.POICountMid = 0;
 RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
+RPSCoreFramework.CharcterPOILoaded = false;
 RPSCoreFramework.SalaryTimer = nil;
 RPSCoreFramework.PollTimer = {};
 RPSCoreFramework.PollTimer.Timer = nil;
 RPSCoreFramework.PollTimer.Counter = nil;
 
+RPSCoreFramework.DressUpOnLoad = true;
 RPSCoreFramework.PrintGarbageCollector = false;
 RPSCoreFramework.GBCounter = nil;
 RPSCoreFramework.CanScroll = true;
@@ -62,6 +64,37 @@ RPSCoreFramework.Quiz = {};
 RPSCoreFramework.Quiz.PollToast = false;
 RPSCoreFramework.Quiz.Question = nil;
 RPSCoreFramework.Quiz.Answers = {};
+
+RPSCoreFramework.DispButtonsInitialize = true;
+RPSDispTable = { {1, "Пипа", "Пипа описание"},
+				{2, "Попа", "Попа описание"},
+				{3, "Твоё очко", "И его отзвуки"},
+				{4, "Хренота", "Мяу мяу"},
+				{5, "Попа", "Попа описание"},
+				{6, "Твоё очко", "И его отзвуки"},
+				{7, "Хренота", "Мяу мяу"},
+				{8, "Попа", "Попа описание"},
+				{9, "Твоё очко", "И его отзвуки"},
+				{10, "Хренота", "Мяу мяу"},
+				{11, "Попа", "Попа описание"},
+				{12, "Твоё очко", "И его отзвуки"},
+				{13, "Хренота", "Мяу мяу"},
+				{14, "Попа", "Попа описание"},
+				{15, "Твоё очко", "И его отзвуки"},
+				{16, "Хренота", "Мяу мяу"},
+				{17, "Твоё очко", "И его отзвуки"},
+				{18, "Хренота", "Мяу мяу"},
+				{19, "Попа", "Попа описание"},
+				{20, "Твоё очко", "И его отзвуки"},
+				{21, "Хренота", "Мяу мяу"},
+				{21, "Попа", "Попа описание"},
+				{22, "Твоё очко", "И его отзвуки"},
+				{23, "Хренота", "Мяу мяу"},
+				{24, "Попа", "Попа описание"},
+				{25, "Твоё очко", "И его отзвуки"},
+				{26, "Хренота", "Мяу мяу"}
+}
+RPSDispTableColors = { "Garr_FollowerToast-Epic", "Garr_FollowerToast-Rare", "Garr_FollowerToast-Uncommon", "Garr_MissionToast-Blank" }
 
 RPSCoreFramework.SalaryByRank = {
 	["1"] = 0,
@@ -216,15 +249,16 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
 	{2, UnitName("player"), "RPS_CharInfo", "DarkmoonCharacterFrameInfo"},
 	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
-	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
-	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"}
+	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
+	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"}
+
 }
 
 RPSCoreFramework.CharChooseSpec = {}
-RPSCoreFramework.CharChooseSpec[1] = "Случайная"
-RPSCoreFramework.CharChooseSpec[2] = "Первая"
-RPSCoreFramework.CharChooseSpec[3] = "Вторая"
-RPSCoreFramework.CharChooseSpec[4] = "Третья"
+RPSCoreFramework.CharChooseSpec[1] = "Случайный"
+RPSCoreFramework.CharChooseSpec[2] = "Первый"
+RPSCoreFramework.CharChooseSpec[3] = "Второй"
+RPSCoreFramework.CharChooseSpec[4] = "Третий"
 
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -962,4 +996,6 @@ RPSCoreFramework.Interface.Auras.AllowUpdate = true
 
 DarkmoonWIPFrame.content.flash1Rotation:SetDuration(8);
 DarkmoonWIPFrame.content.flash2Rotation:SetDuration(8);
+DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
+DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
 --DarkmoonWIPFrame.content.GearRotation:SetDuration(8);

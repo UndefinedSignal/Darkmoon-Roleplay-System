@@ -2318,4 +2318,174 @@
         </Scripts>
     </Button>
 
+    <Button name="CharDispButton" virtual="true">
+        <Size x="198" y="36"/>
+        <NormalTexture atlas="Garr_MissionToast-Blank">
+        </NormalTexture>
+        <PushedTexture atlas="Garr_MissionToast-Blank">
+        </PushedTexture>
+        <HighlightTexture atlas="128-RedButton-Highlight" alphaMode="ADD">
+        </HighlightTexture>
+        <Layers>
+        	<Layer level="OVERLAY">
+                <Texture name="$parentMod" atlas="Garr_FollowerToast-Epic" alphaMode="ALPHAKEY" parentKey="Mod">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="0" y="0"/>
+                        <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                    </Anchors>
+                </Texture>
+        	</Layer>
+        	<Layer level="OVERLAY">
+                <Texture name="$parentPOITex" file="Interface\AddOns\RPSDarkmoon\resources\POI\inn" parentKey="Tex">
+                	<Size x="20" y="20"/>
+                    <Anchors>
+                        <Anchor point="LEFT" x="10" y="7"/>
+                    </Anchors>
+                </Texture>
+        	</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="$parentID" inherits="GameFontNormal" text="99" justifyH="CENTER" parentKey="IDLabel">
+					<FontHeight val="6"/>
+					<Anchors>
+						<Anchor point="CENTER" relativePoint="BOTTOMLEFT" x="19" y="10"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="Slutmog" justifyH="LEFT" parentKey="TitleLabel">
+					<FontHeight val="6"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" x="40" y="15"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="0"/>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentDescription" inherits="GameFontNormal" text="For real man" justifyH="LEFT" parentKey="DescriptionLabel">
+					<FontHeight val="5"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="LEFT" x="40" y="-15"/>
+						<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="0"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+        </Layers>
+    </Button>
+    <Frame name="DarkmoonTransmogButton" virtual="true">
+        <Size x="35" y="37"/>
+        <Layers>
+        	<Layer level="OVERLAY">
+                <Texture parentKey="Normal" atlas="transmog-nav-slot-shirt">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT"/>
+                    </Anchors>
+                </Texture>
+        	</Layer>
+        	<Layer>
+                <Texture parentKey="Main" atlas="transmog-nav-slot-shirt">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+        	<Button name="$parentDummy">
+        		<HighlightTexture atlas="transmog-icon-hidden" alphaMode="ADD"/>
+        		<Anchors>
+					<Anchor point="TOPLEFT" x="0" y="0"/>
+					<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+        		</Anchors>
+        		<Scripts>
+        			<OnLoad>
+        				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+        			</OnLoad>
+	        		<OnEnter>
+	        			RPSCoreFramework:ShowDispalyItemTooltip(self:GetParent());
+	        		</OnEnter>
+	        		<OnLeave>
+	        			GameTooltip:Hide();
+	        		</OnLeave>
+	        		<OnClick>
+	        			if (button == "RightButton") then
+	        				RPSCoreFramework:ClearDispModel(self:GetParent():GetID());
+	        			end
+	        		</OnClick>
+	        	</Scripts>
+        	</Button>
+        </Frames>
+        <Scripts>
+            <OnShow>
+                self.Normal:SetAtlas("transmog-nav-slot-"..self.InvSlot);
+                self.Main:SetAtlas("transmog-nav-slot-"..self.InvSlot);
+            </OnShow>
+        </Scripts>
+    </Frame>
+
+    <Frame name="WIPFrame" enableMouse="true" virtual="true">
+        <Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <EdgeSize val="16" />
+            <TileSize val="418" />
+            <BackgroundInsets left="3" right="3" top="5" bottom="3"/>
+        </Backdrop>
+        <Layers>
+            <Layer level="BORDER">
+                <Texture parentKey="flash1" alphaMode="ADD" file="Interface\UNITPOWERBARALT\PandarenTrainingLarge_Circular_Flash" alpha="0.5">
+                    <Size x="200" y="200"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="0" y="0"/>
+                    </Anchors>
+                </Texture>
+                <Texture parentKey="flash2" alphaMode="ADD" file="Interface\UNITPOWERBARALT\PandarenTrainingLarge_Circular_Flash" alpha="0.5">
+                    <Size x="300" y="300"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="0" y="0"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer><!-- interface/dialogframe/ui-dialog-icon-alertother -->
+                <Texture parentKey="Gear1" file="interface/dialogframe/ui-dialog-icon-alertother">
+                    <!--<Color r="0" g="0" b="0" a="1"/>-->
+                    <Size x="96" y="96"/>
+                    <Anchors>
+                        <Anchor point="CENTER" x="0" y="0"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer>
+                <FontString parentKey="Text" font="Fonts\FRIZQT___CYR.TTF" text="Загрузка" justifyH="CENTER" justifyV="CENTER">
+                    <Color r="0.9" g="0" b="0" a="1"/>
+                    <FontHeight val="18"/>
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parent" x="0" y="-60" />
+                    </Anchors>
+                    <Shadow>
+                        <Offset x="1" y="-1" />
+                        <Color a="0.9" r="0.2" g="0.2" b="0.2"/>
+                    </Shadow>
+                </FontString>
+            </Layer>
+        </Layers>
+
+        <Animations>
+            <AnimationGroup parentKey="fadeOut" setToFinalAlpha="true">
+                <Alpha duration="1" toAlpha="0" fromAlpha="1"/>
+                <Scripts>
+                    <OnFinished>
+                        self:Hide();
+                    </OnFinished>
+                </Scripts>
+            </AnimationGroup>
+            <AnimationGroup parentKey="fadeIn" setToFinalAlpha="true">
+                <Alpha duration="0" fromAlpha="1" toAlpha="0"/>
+                <Alpha duration="0.5" fromAlpha="0" toAlpha="1"/>
+            </AnimationGroup>
+            <AnimationGroup parentKey="content">
+                <Rotation parentKey="flash1Rotation" targetKey="$parent.$parent.flash1" degrees="-90"/>
+                <Rotation parentKey="flash2Rotation" targetKey="$parent.$parent.flash2" degrees="90"/>
+                <Scale duration="1" targetKey="flash1" scaleX="2.5" scaleY="2.5"/>
+                <Scale duration="1" targetKey="flash2" scaleX="2.5" scaleY="2.5"/>
+                <!--<Rotation parentKey="GearRotation" targetKey="$parent.$parent.Gear1" degrees="-360"/>-->
+            </AnimationGroup>
+        </Animations>
+    </Frame>
+
 </Ui>

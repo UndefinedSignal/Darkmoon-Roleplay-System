@@ -28,7 +28,7 @@ function RPSCoreFramework:OnInitialize()
 	self:EnableDrag(RPS_InteractFrame);
 	self:EnableDrag(PollFrame);
 	self:EnableDrag(GameObjectPreview);
-	GameObjectPreview:Show();
+	--GameObjectPreview:Show();
 
 	self:InitializeHooks();
 
