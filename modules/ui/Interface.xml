@@ -650,7 +650,7 @@
                                     <Button name="$parentDaystreakInfo">
                                         <Size x="21" y="21" />
                                         <Anchors>
-                                            <Anchor point="TOPRIGHT" x="-7" y="0"/>
+                                            <Anchor point="TOPRIGHT" x="-24" y="-8"/>
                                         </Anchors>
                                         <NormalTexture atlas="worldquest-tracker-questmarker" />
                                         <PushedTexture atlas="worldquest-tracker-questmarker" />
@@ -1460,49 +1460,56 @@
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor point="TOPLEFT" x="15" y="-60"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "head";</OnLoad>
+                                                    <OnLoad>self.InvSlot = "head";
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentShoulder" frameStrata="DIALOG" id="3" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentHead" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "shoulder"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "shoulder"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentBack" frameStrata="DIALOG" id="15" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentShoulder" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "back"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "back"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentChest" frameStrata="DIALOG" id="5" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentBack" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "chest"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "chest"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentShirt" frameStrata="DIALOG" id="4" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentChest" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "shirt"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "shirt"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentTabard" frameStrata="DIALOG" id="19" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentShirt" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "tabard"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "tabard"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentWrist" frameStrata="DIALOG" id="9" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentTabard" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "wrist"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "wrist"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
 
@@ -1510,28 +1517,32 @@
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor point="TOPRIGHT" x="-15" y="-60"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "hands"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "hands"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentWaist" frameStrata="DIALOG" id="6" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentHand" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "waist"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "waist"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentLegs" frameStrata="DIALOG" id="7" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentWaist" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "legs"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "legs"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentFeet" frameStrata="DIALOG" id="8" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentLegs" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "feet"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "feet"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             
@@ -1539,14 +1550,16 @@
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentFeet" point="BOTTOM" x="0" y="-70"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "mainhand"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "mainhand"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             <Frame name="$parentSecondaryhand" frameStrata="DIALOG" id="17" inherits="DarkmoonTransmogButton">
                                                 <Size x="35" y="37"/>
                                                 <Anchors><Anchor relativeTo="$parentMainhand" point="BOTTOM" x="0" y="-35"/></Anchors>
                                                 <Scripts>
-                                                    <OnLoad>self.InvSlot = "secondaryhand"</OnLoad>
+                                                    <OnLoad>self.InvSlot = "secondaryhand"
+                                                        self.SlotID = self:GetID();</OnLoad>
                                                 </Scripts>
                                             </Frame>
                                             
@@ -1559,6 +1572,7 @@
                                         <Scripts>
                                             <OnClick>
                                                 RPSCoreFramework:ClearDispModel(0);
+                                                RPSCoreFramework:DispSetClearAllItemTextures();
                                                 PlaySound(624, "SFX");
                                             </OnClick>
                                         </Scripts>
@@ -1801,7 +1815,7 @@
 							    <FontString inherits="ChatFontNormal" />
 							</EditBox>
 
-                            <Button name="RPS_DispUpdateButton" inherits="UIPanelButtonTemplate" text="Изменить пароль">
+                            <Button name="RPS_PasswordUpdateButton" inherits="UIPanelButtonTemplate" text="Изменить пароль">
                                 <Size x="124" y="28"/>
                                 <Anchors><Anchor relativeTo="DarkmoonPasswordChangeFrame" point="BOTTOM" x="0" y="41"/></Anchors>
                                 <NormalFont style="GameFontNormal"/>
@@ -2020,7 +2034,7 @@
                                     </Layer>
                                 </Layers>
                             </Frame>
-                            <Frame parentKey="Block" inherits="WIPFrame" frameStrata="HIGH" hidden="true">
+                            <Frame parentKey="Block" inherits="WIPFrame" frameStrata="HIGH">
                                 <Anchors>
                                     <Anchor relativeTo="DarkmoonSocialStatsFrame" point="TOPLEFT" x="0" y="0"/>
                                     <Anchor relativeTo="DarkmoonSocialStatsFrame" point="BOTTOMRIGHT" x="0" y="0"/>
@@ -2160,6 +2174,11 @@
                                         <Anchors>
                                             <Anchor point="BOTTOM" x="0" y="20"/>
                                         </Anchors>
+                                        <Scripts>
+                                            <OnShow>
+                                                self:Disable();
+                                            </OnShow>
+                                        </Scripts>
                                     </Button>
 
                                     <Button name="$parentSubmit" inherits="UIPanelButtonTemplate" text="Выучить">
@@ -2167,6 +2186,11 @@
                                         <Anchors>
                                             <Anchor relativeTo="$parentReset" relativePoint="RIGHT" point="LEFT" x="0" y="0"/>
                                         </Anchors>
+                                        <Scripts>
+                                            <OnShow>
+                                                self:Disable();
+                                            </OnShow>
+                                        </Scripts>
                                     </Button>
 
                                     <Button name="$parentUnlearn" inherits="UIPanelButtonTemplate" text="Разучить">
@@ -2174,6 +2198,11 @@
                                         <Anchors>
                                             <Anchor relativeTo="$parentReset" relativePoint="LEFT" point="RIGHT" x="0" y="0"/>
                                         </Anchors>
+                                        <Scripts>
+                                            <OnShow>
+                                                self:Disable();
+                                            </OnShow>
+                                        </Scripts>
                                     </Button>
                                 </Frames>
                             </Frame>               

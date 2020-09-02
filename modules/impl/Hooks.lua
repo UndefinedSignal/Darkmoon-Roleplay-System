@@ -146,7 +146,9 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.Guild.s") then
 			RPSCoreFramework:UpdateGuildSalary(msg);
 		elseif (prefix == "RPS.DLS") then
-			RPSCoreFramework:DailyStatusUpdate(msg);
+			if RPSCoreFramework.DailyCipherShow then
+				RPSCoreFramework:DailyStatusUpdate(msg);
+			end
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();

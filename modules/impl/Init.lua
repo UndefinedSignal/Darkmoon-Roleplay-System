@@ -81,6 +81,25 @@ function RPSCoreFramework:OnInitialize()
 	EnduranceStatName:SetText("Стойкость");
 	DexterityStatName:SetText("Сноровка");
 	WillStatName:SetText("Воля");
+
+	DarkmoonSocialStatsFrameStat1StatName:SetText("Харизма"); -- INV_BandofBrothers
+	DarkmoonSocialStatsFrameStat2StatName:SetText("Лидерство"); -- Achievement_PVP_Legion08
+	DarkmoonSocialStatsFrameStat3StatName:SetText("Дипломатия"); -- Achievement_Reputation_08
+	DarkmoonSocialStatsFrameStat4StatName:SetText("Торговля"); -- TimelessCoin
+	DarkmoonSocialStatsFrameStat5StatName:SetText("Устрашение"); -- Ability_Warrior_Revenge
+	DarkmoonSocialStatsFrameStat6StatName:SetText("Эрудиция"); -- INV_Misc_ScrollRolled04
+	DarkmoonSocialStatsFrameStat7StatName:SetText("Искусство"); -- Achievement_Faction_GoldenLotus
+	DarkmoonSocialStatsFrameStat8StatName:SetText("Выживание"); -- Ability_Hunter_ImprovedTracking
+	DarkmoonSocialStatsFrameStat9StatName:SetText("Внимательность"); -- Ability_Hunter_MarkedForDeath
+	DarkmoonSocialStatsFrameStat10StatName:SetText("Реакция"); -- Ability_Hunter_MarkedShot
+	DarkmoonSocialStatsFrameStat11StatName:SetText("Поиск"); -- TRADE_ARCHAEOLOGY
+	DarkmoonSocialStatsFrameStat12StatName:SetText("Слух"); -- Ability_Hunter_BeastCall
+	DarkmoonSocialStatsFrameStat13StatName:SetText("Скрытность"); -- Ability_Hunter_Camouflage
+	DarkmoonSocialStatsFrameStat14StatName:SetText("Ловкость рук"); -- Ability_Hunter_BeastSoothe
+	DarkmoonSocialStatsFrameStat15StatName:SetText("Верховая езда"); -- ACHIEVEMENT_GUILDPERK_MOUNTUP
+	DarkmoonSocialStatsFrameStat16StatName:SetText("Удача"); -- Achievement_Boss_CThun
+
+
 	DarkmoonCharStatsInfoUnlearn:SetText("Разучить "..GetCoinTextureString(RPSCoreFramework.RequestUnlearn));
 
 	DarkmoonCharStatsInfoReset:Disable();
@@ -100,6 +119,56 @@ function RPSCoreFramework:OnInitialize()
     EnduranceIcon:SetTexture("Interface\\ICONS\\ability_warrior_intensifyrage");
     DexterityIcon:SetTexture("Interface\\ICONS\\ability_rogue_cheatdeath");
     WillIcon:SetTexture("Interface\\ICONS\\ability_shaman_astralshift");
+
+	DarkmoonSocialStatsFrameStat1Icon:SetTexture("Interface\\ICONS\\INV_BandofBrothers");
+	DarkmoonSocialStatsFrameStat2Icon:SetTexture("Interface\\ICONS\\Achievement_PVP_Legion08");
+	DarkmoonSocialStatsFrameStat3Icon:SetTexture("Interface\\ICONS\\Achievement_Reputation_08");
+	DarkmoonSocialStatsFrameStat4Icon:SetTexture("Interface\\ICONS\\TimelessCoin");
+	DarkmoonSocialStatsFrameStat5Icon:SetTexture("Interface\\ICONS\\Ability_Warrior_Revenge");
+	DarkmoonSocialStatsFrameStat6Icon:SetTexture("Interface\\ICONS\\INV_Misc_ScrollRolled04");
+	DarkmoonSocialStatsFrameStat7Icon:SetTexture("Interface\\ICONS\\Achievement_Faction_GoldenLotus");
+	DarkmoonSocialStatsFrameStat8Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_ImprovedTracking");
+	DarkmoonSocialStatsFrameStat9Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_MarkedForDeath");
+	DarkmoonSocialStatsFrameStat10Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_MarkedShot");
+	DarkmoonSocialStatsFrameStat11Icon:SetTexture("Interface\\ICONS\\TRADE_ARCHAEOLOGY");
+	DarkmoonSocialStatsFrameStat12Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_BeastCall");
+	DarkmoonSocialStatsFrameStat13Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_Camouflage");
+	DarkmoonSocialStatsFrameStat14Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_BeastSoothe");
+	DarkmoonSocialStatsFrameStat15Icon:SetTexture("Interface\\ICONS\\ACHIEVEMENT_GUILDPERK_MOUNTUP");
+	DarkmoonSocialStatsFrameStat16Icon:SetTexture("Interface\\ICONS\\Achievement_Boss_CThun");
+
+	DarkmoonSocialStatsFrameStat1Minus:Disable();
+	DarkmoonSocialStatsFrameStat1Plus:Disable();
+	DarkmoonSocialStatsFrameStat2Minus:Disable();
+	DarkmoonSocialStatsFrameStat2Plus:Disable();
+	DarkmoonSocialStatsFrameStat3Minus:Disable();
+	DarkmoonSocialStatsFrameStat3Plus:Disable();
+	DarkmoonSocialStatsFrameStat4Minus:Disable();
+	DarkmoonSocialStatsFrameStat4Plus:Disable();
+	DarkmoonSocialStatsFrameStat5Minus:Disable();
+	DarkmoonSocialStatsFrameStat5Plus:Disable();
+	DarkmoonSocialStatsFrameStat6Minus:Disable();
+	DarkmoonSocialStatsFrameStat6Plus:Disable();
+	DarkmoonSocialStatsFrameStat7Minus:Disable();
+	DarkmoonSocialStatsFrameStat7Plus:Disable();
+	DarkmoonSocialStatsFrameStat8Minus:Disable();
+	DarkmoonSocialStatsFrameStat8Plus:Disable();
+	DarkmoonSocialStatsFrameStat9Minus:Disable();
+	DarkmoonSocialStatsFrameStat9Plus:Disable();
+	DarkmoonSocialStatsFrameStat10Minus:Disable();
+	DarkmoonSocialStatsFrameStat10Plus:Disable();
+	DarkmoonSocialStatsFrameStat11Minus:Disable();
+	DarkmoonSocialStatsFrameStat11Plus:Disable();
+	DarkmoonSocialStatsFrameStat12Minus:Disable();
+	DarkmoonSocialStatsFrameStat12Plus:Disable();
+	DarkmoonSocialStatsFrameStat13Minus:Disable();
+	DarkmoonSocialStatsFrameStat13Plus:Disable();
+	DarkmoonSocialStatsFrameStat14Minus:Disable();
+	DarkmoonSocialStatsFrameStat14Plus:Disable();
+	DarkmoonSocialStatsFrameStat15Minus:Disable();
+	DarkmoonSocialStatsFrameStat15Plus:Disable();
+	DarkmoonSocialStatsFrameStat16Minus:Disable();
+	DarkmoonSocialStatsFrameStat16Plus:Disable();
 
 	-- RPSLiterature.lua text formatting
 

@@ -2366,6 +2366,24 @@
 				</FontString>
 			</Layer>
         </Layers>
+        <Scripts>
+			<OnEnter>
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine(self.Title);
+			    GameTooltip:AddLine(self.Description, 1,1,1, true);
+			    GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+        	<OnClick>
+        		RPSCoreFramework.DispButtonFrame = self;
+        		RPSCoreFramework:DispRemoveItemTexture(0, true)
+        		RPSCoreFramework:ClearDispModel(0);
+        		RPSCoreFramework:ScheduleTimer("ApplyDispTimer",0.5);
+        		RPSCoreFramework:ApplyTransmogSet(self);
+        	</OnClick>
+        </Scripts>
     </Button>
     <Frame name="DarkmoonTransmogButton" virtual="true">
         <Size x="35" y="37"/>
@@ -2406,19 +2424,14 @@
 	        		</OnLeave>
 	        		<OnClick>
 	        			if (button == "RightButton") then
-	        				print(self:GetParent():GetName().." "..self:GetParent():GetID())
+	        				self:GetParent().DispID = "0";
 	        				RPSCoreFramework:ClearDispModel(self:GetParent():GetID());
+	        				RPSCoreFramework:DispSetClearItemTexture(self:GetParent());
 	        			end
 	        		</OnClick>
 	        	</Scripts>
         	</Button>
         </Frames>
-        <Scripts>
-            <OnShow>
-                self.Normal:SetAtlas("transmog-nav-slot-"..self.InvSlot);
-                self.Main:SetAtlas("transmog-nav-slot-"..self.InvSlot);
-            </OnShow>
-        </Scripts>
     </Frame>
 
     <Frame name="WIPFrame" enableMouse="true" virtual="true">

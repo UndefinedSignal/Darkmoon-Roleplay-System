@@ -240,6 +240,11 @@ end
 -- DarkmoonCharacterFrameInfoTRBody
 -- DarkmoonDisplayPresetFrameRightItemsHead
 
+local sepModificator, buttonItemString;
+local slots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Secondaryhand"}
+local dispSlots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Offhand"}
+local slotsID = {1,3,15,5,4,19,9,10,6,7,8,16,17};
+
 function RPSCoreFramework:InitializeDispButtons()
 	local number, name, description;
 	local mainframe = _G["DarkmoonDisplayPresetFrameMenuSliderBody"];
@@ -254,15 +259,21 @@ function RPSCoreFramework:InitializeDispButtons()
     	button.TitleLabel:SetText(RPSDispTable[i][2]);
     	button.DescriptionLabel:SetText(RPSDispTable[i][3]);
     	button.Mod:SetAtlas(RPSDispTableColors[math.random(#RPSDispTableColors)]);
+    	button.Title = RPSDispTable[i][2];
+    	button.Description = RPSDispTable[i][3];
+    	button.Items = RPSDispTable[i];
     	button:Show();
 	end
 end
 
 function RPSCoreFramework:DispListAcceptDisp()
-	print("Disp Accepted");
+	local frame;
+	for i=1, #slots do
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+		if frame.DispID == nil then frame.DispID = "0"; end
+		SendChatMessage(".disp "..dispSlots[i].." "..frame.DispID);
+	end
 end
-
-local slots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Secondaryhand"}
 
 function RPSCoreFramework:DispSetItemTexture(slotID, itemID)
 	local frame;
@@ -274,20 +285,43 @@ function RPSCoreFramework:DispSetItemTexture(slotID, itemID)
 	frame.Normal:SetMask("Interface\\COMMON\\Indicator-Gray");
 	frame.Normal:SetTexture(nil);
 	frame.Normal:SetTexture(texture);
+	frame.DispID = itemID;
 	frame.TooltipItemID = itemID;
 	frame.Normal:Show();
+end
+
+function RPSCoreFramework:DispSetClearItemTexture(self)
+	self.Normal:SetTexture(nil);
+	self.Normal:SetMask(nil);
+	self.Normal:SetMask("Interface\\COMMON\\Indicator-Gray");
+	self.Normal:SetTexture(nil);
+	self.Normal:SetTexture("transmog-nav-slot-"..self.InvSlot);
+	self.TooltipItemID = 0;
+	self.Normal:Show();
+end
+
+function RPSCoreFramework:DispSetClearAllItemTextures()
+	local frame;
+	for i=1, #slots do
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+		frame.Normal:SetTexture(nil);
+		frame.Normal:SetMask(nil);
+		frame.Normal:SetMask("Interface\\COMMON\\Indicator-Gray");
+		frame.Normal:SetTexture(nil);
+		frame.Normal:SetTexture("transmog-nav-slot-"..frame.InvSlot);
+		frame.TooltipItemID = 0;
+		frame.Normal:Show();
+	end
 end
 
 function RPSCoreFramework:DispRemoveItemTexture(slotID, clearAll)
 	local frame;
 	if not slotID then return; end
 	if not clearAll then
-		print("Single")
 		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[slotID]];
 		frame.Normal:SetTexture(nil);
 		frame.Normal:Hide();
 	else
-		print("Multiple clear")
 		for i = 1, 13 do
 			frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
 			frame.Normal:SetTexture(nil);
@@ -301,7 +335,6 @@ function RPSCoreFramework:ClearDispModel(slotID)
 	if slotID == 0 then
 		DarkmoonDisplayPresetFrameRightModel:Undress();
 	else
-		print("Removed slot: "..slotID);
 		DarkmoonDisplayPresetFrameRightModel:UndressSlot(slotID);
 	end
 end
@@ -321,12 +354,11 @@ end
 function RPSCoreFramework:ShowDispalyItemTooltip(self)
 	GameTooltip:ClearLines();
 	GameTooltip:SetOwner(self, "ANCHOR_LEFT");
-	if self.TooltipItemID ~= nil then
+	if self.TooltipItemID == nil or self.TooltipItemID == 0 then
+		GameTooltip:AddLine("Пустой слот");
+	else
 		local __, itemLink = GetItemInfo(self.TooltipItemID)
 		GameTooltip:SetHyperlink(itemLink)
-		--ContainerGameTooltip:SetHyperlink(itemLink)
-	else
-		GameTooltip:AddLine("Пустой слот");
 	end
 	GameTooltip:Show();
 end
@@ -334,4 +366,41 @@ end
 function RPSCoreFramework:CharacterInfoPOIBlock(duration)
 	local frame = DarkmoonCharacterFrameInfoMainContent.BlockOnLoad
 	frame.content.flash1Rotation:SetDuration(duration);
+end
+
+function RPSCoreFramework:ApplyTransmogSet(button)
+	local sepModificator;
+	local buttonItemID;
+	for i = 4, 16 do
+		if button.Items[i] == nil then button.Items[i] = 0 end;
+		sepModificator = string.find(button.Items[i], ":") or 0;
+		if sepModificator > 0 then
+			buttonItemID = string.sub(button.Items[i], 1, sepModificator-1);
+			RPSCoreFramework:DressUpDispModel(buttonItemID);
+		else
+			buttonItemID = button.Items[i];
+			RPSCoreFramework:DressUpDispModel(button.Items[i]);
+		end
+		RPSCoreFramework:DispSetItemTexture(i-3, tonumber(buttonItemID));
+	end
+end
+
+function RPSCoreFramework:ApplyDispTimer()
+	RPSCoreFramework:ApplyTransmogSet(RPSCoreFramework.DispButtonFrame);
+end
+
+function RPSCoreFramework:InitializeDisplayButtons()
+	local frame;
+	for i=1, #slots do
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+		frame.Normal:SetAtlas("transmog-nav-slot-"..frame.InvSlot);
+		frame.Main:SetAtlas("transmog-nav-slot-"..frame.InvSlot);
+		frame.TooltipItemID = 0;
+	end
+end
+
+function RPSCoreFramework:ConfirmedAddonLoading()
+	RPSCoreFramework:InitializeDisplayButtons();
+	RPSCoreFramework:playAnimation(DarkmoonWIPFrame.fadeOut);
+	RPSCoreFramework.DailyCipherShow = true;
 end
