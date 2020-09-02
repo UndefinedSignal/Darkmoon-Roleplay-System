@@ -214,6 +214,7 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Hide();
 	end
 	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
+		PlaySoundFile("Interface\\AddOns\\RPSDarkmoon\\resources\\test.ogg");
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
 	end
 	if RPSCoreFramework.DailyCipherShow then
