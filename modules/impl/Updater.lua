@@ -216,10 +216,12 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
 	end
-	if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
-		print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
-	else
-		print("|cFFFF8040Ура! Вы были с нами |cFFFFFF005|r|cFFFF8040 дней подряд и получаете награду|cFFFFFF00 "..GetCoinTextureString(30000).."|r|cFFFF8040!|r");
+	if RPSCoreFramework.DailyCipherShow then
+		if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
+			print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
+		else
+			print("|cFFFF8040Ура! Вы были с нами |cFFFFFF005|r|cFFFF8040 дней подряд и получаете награду|cFFFFFF00 "..GetCoinTextureString(30000).."|r|cFFFF8040!|r");
+		end
 	end
 end
 
