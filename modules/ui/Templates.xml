@@ -2423,7 +2423,9 @@
 	        			GameTooltip:Hide();
 	        		</OnLeave>
 	        		<OnClick>
-	        			if (button == "RightButton") then
+	        			if (button == "LeftButton" and IsShiftKeyDown() and self:GetParent().DispID ~= "0") then
+	        				RPSCoreFramework:DispInsertItemLink(self:GetParent().DispID);
+	        			elseif(button == "RightButton") then
 	        				self:GetParent().DispID = "0";
 	        				RPSCoreFramework:ClearDispModel(self:GetParent():GetID());
 	        				RPSCoreFramework:DispSetClearItemTexture(self:GetParent());

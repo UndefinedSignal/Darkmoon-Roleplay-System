@@ -404,3 +404,8 @@ function RPSCoreFramework:ConfirmedAddonLoading()
 	RPSCoreFramework:playAnimation(DarkmoonWIPFrame.fadeOut);
 	RPSCoreFramework.DailyCipherShow = true;
 end
+
+function RPSCoreFramework:DispInsertItemLink(itemID)
+	local _, itemLink = GetItemInfo(itemID)
+	ChatEdit_InsertLink(itemLink);
+end
