@@ -209,6 +209,7 @@ end
 function RPSCoreFramework:DailyStatusUpdate(str)
 	local int = tonumber(5 - RPSCoreFramework.DailyCipher[tonumber(str)]);
 	local text;
+	RPSDailyStreak = str;
 	if int == 1 then text = "остался"; else text = "осталось"; end
 	for i = 1, 5 do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Hide();

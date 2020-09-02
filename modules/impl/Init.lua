@@ -61,6 +61,8 @@ function RPSCoreFramework:OnInitialize()
 		self:SendCoreMessage("rps guild infosalary");
 	end
 
+	RPSCoreFramework:DailyStatusUpdate(RPSDailyStreak);
+
 	-- Guild goals
 
 	--[[GuildInfoFrameInfoChallenge1:Hide();
