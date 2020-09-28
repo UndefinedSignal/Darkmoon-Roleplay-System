@@ -2,6 +2,7 @@ function RPSCoreFramework:OnEnable()
 	self.TimerID = self:ScheduleRepeatingTimer("GlobalTimer", 1);
 	self:ScheduleTimer("OneShotUpdater", 10);
 	self:ScheduleTimer("UpdateScrollerPosition", 7);
+	self:ScheduleTimer("ConfirmedAddonLoading", 10);
 	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5);
 	self:ScheduleRepeatingTimer("StartGarbageCollection", 3600);
 	

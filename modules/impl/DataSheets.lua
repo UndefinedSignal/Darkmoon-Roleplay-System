@@ -14,7 +14,7 @@ RPSCoreFramework.DailyCipher[2] = 2;
 RPSCoreFramework.DailyCipher[4] = 3;
 RPSCoreFramework.DailyCipher[8] = 4;
 RPSCoreFramework.DailyCipher[16] = 5;
-RPSCoreFramework.DailyCipherShow = false;
+RPSCoreFramework.DailyCipherShow = 0;
 
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.Scroller = {};
@@ -72,7 +72,7 @@ RPSCoreFramework.DispButtonFrame = nil;
 RPSCoreFramework.DispApplyTimer = nil;
 RPSCoreFramework.DispButtonsInitialize = true;
 RPSCoreFramework.DispFrameInitizlize = true;
-RPSDispTable = { {1, "Горожанин","Пустота","1000370", "0", "0", "1000270", "0", "0", "0", "0", "160463", "158612", "1000235", "66956", "0"},
+RPSDispTable = { {1, "Горожанин","Обычный горожанин","1000370", "0", "0", "1000270", "0", "0", "0", "0", "160463", "158612", "1000235", "66956", "0"},
 				{2, "Ремесленник","Пустота","4393", "0", "0", "120088", "89191", "0", "0", "0", "1000222", "1000375", "168975", "0", "0"},
 				{3, "Продавец","Продавец магазина или рынка. Для мужчин и женщин.","0", "0", "0", "24792", "6795", "0", "35896", "4307", "14258", "61052", "9820", "0", "0"},
 				{4, "Горожанин","Обычный горожанин, Для мужчин","0", "0", "0", "0", "41253", "0", "0", "0", "0", "151804", "6836", "0", "0"},
@@ -92,7 +92,9 @@ RPSDispTable = { {1, "Горожанин","Пустота","1000370", "0", "0", 
 				{18, "Лучник", "Обычный лучник в лёгкой броне", "151971", "0", "158583", "63866", "0", "0", "152087:1", "146878", "125445", "63783", "61553", "134665", "0"},
 				{19, "Разбойник", "Парень с большой дороги/тяжелорабочий", "1000231", "131659", "64511", "0", "0", "0", "152087:1", "55738", "151990:1", "64589", "75130", "816", "0"},
 				{20, "Чернокнижник/некромант", "Культист", "0", "0", "114829", "0", "0", "0", "0", "0", "165765", "163264",  "103157", "39427", "59547"},
-				{21, "Стрелок Кул-Тираса", "Карабинер/Снайпер/Gunslinger", "0", "159163", "155168", "0", "165010", "0", "18525", "160465", "1000284", "158042", "154183", "168644", "0"}
+				{21, "Стрелок Кул-Тираса", "Карабинер/Снайпер/Gunslinger", "0", "159163", "155168", "0", "165010", "0", "18525", "160465", "1000284", "158042", "154183", "168644", "0"},
+				{22, "Наемник","Опытный наемник. Для мужчин и женщин.","0", "53596", "0", "142802", "0", "0", "0", "126125", "126083", "142854", "65774", "0", "0"},
+				{23, "Воин","Опытный воин с оружием и броней. Для мужчин и женщин.","0", "40960", "0", "35588", "4333", "0", "0", "55034", "128068", "82521", "35866", "59550", "57452"}
 }
 RPSDispTableColors = { "Garr_FollowerToast-Epic", "Garr_FollowerToast-Rare", "Garr_FollowerToast-Uncommon", "Garr_MissionToast-Blank" }
 
@@ -344,11 +346,11 @@ RPSCoreFramework.DropDownDisplayMenu = {
 }
 
 RPSCoreFramework.DropDownCharSpecChooseMenu = {
-	{ text = "Выбрать специализацию", isTitle = true, notCheckable = true},
-	{ text = "Случайная", notCheckable = true, func = function() RPSCharSpec = 1;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },	
-	{ text = "Первая", notCheckable = true, func = function() RPSCharSpec = 2;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
-	{ text = "Вторая", notCheckable = true, func = function() RPSCharSpec = 3;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
-	{ text = "Третья", notCheckable = true, func = function() RPSCharSpec = 4;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end }
+	{ text = "Сделайте выбор", isTitle = true, notCheckable = true},
+	{ text = "Случайный", notCheckable = true, func = function() RPSCharSpec = 1;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },	
+	{ text = "Первый", notCheckable = true, func = function() RPSCharSpec = 2;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Второй", notCheckable = true, func = function() RPSCharSpec = 3;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Третий", notCheckable = true, func = function() RPSCharSpec = 4;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end }
 }
 
 RPSCoreFramework.Scroller.lineplusoffset = {

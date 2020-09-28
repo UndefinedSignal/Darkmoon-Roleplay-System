@@ -12,6 +12,7 @@ function RPSCoreFramework:InitializeHooks()
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
+		--local chatframe = _G["ChatFrame"..index];
 		self:SecureHookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
@@ -147,6 +148,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdateGuildSalary(msg);
 		elseif (prefix == "RPS.DLS") then
 			RPSCoreFramework:DailyStatusUpdate(msg);
+		elseif (prefix == "RPS.mdS") then
+			RPSCoreFramework:MountModelStatusUpdate(msg);
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();

@@ -371,6 +371,7 @@ end
 function RPSCoreFramework:ApplyTransmogSet(button)
 	local sepModificator;
 	local buttonItemID;
+	DarkmoonDisplayPresetFrameRightTitle:SetText("["..button.Title.."]")
 	for i = 4, 16 do
 		if button.Items[i] == nil then button.Items[i] = 0 end;
 		sepModificator = string.find(button.Items[i], ":") or 0;
@@ -402,7 +403,6 @@ end
 function RPSCoreFramework:ConfirmedAddonLoading()
 	RPSCoreFramework:InitializeDisplayButtons();
 	RPSCoreFramework:playAnimation(DarkmoonWIPFrame.fadeOut);
-	RPSCoreFramework.DailyCipherShow = true;
 end
 
 function RPSCoreFramework:DispInsertItemLink(itemID)

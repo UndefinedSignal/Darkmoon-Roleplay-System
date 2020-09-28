@@ -535,7 +535,7 @@
                                         </Texture>
                                     </Layer>
                                     <Layer>
-                                        <FontString name="AvaNUM" font="Fonts\FRIZQT___CYR.TTF" text="2" justifyH="CENTER" justifyV="TOP">
+                                        <FontString name="$parentAvaGraduate" font="Fonts\FRIZQT___CYR.TTF" text="2" justifyH="CENTER" justifyV="TOP">
                                             <Color r="1" g="1" b="1" a="1"/>
                                             <FontHeight val="11"/>
                                             <Anchors>
@@ -600,10 +600,10 @@
                                         </Anchors>
                                         <Layers>
                                             <Layer level="OVERLAY">
-                                                <FontString inherits="GameFontNormal" text="Визуальный стиль маунтов" justifyH="CENTER" parentKey="rankLabel">
+                                                <FontString inherits="GameFontNormal" text="Визуальный стиль ездовых животных" justifyH="CENTER" parentKey="rankLabel">
                                                     <Size  x="0" y="12"/>
                                                     <Anchors>
-                                                        <Anchor point="TOP" relativeTo="$parent" relativePoint="TOPRIGHT" x="55" y="15"/>
+                                                        <Anchor point="TOP" relativeTo="$parent" relativePoint="TOPRIGHT" x="85" y="15"/>
                                                     </Anchors>
                                                 </FontString>
                                             </Layer>
@@ -637,9 +637,9 @@
                                         <Scripts>
                                             <OnEnter>
                                                 GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-                                                GameTooltip:AddLine("|cFFFFFFFFВизуальный стиль маунтов|r");
+                                                GameTooltip:AddLine("|cFFFFFFFFСтиль ездовых животных|r");
                                                 GameTooltip:AddLine(" ");
-                                                GameTooltip:AddLine("Эта опция необходима для маунтов которые меняют свою модель,|nлибо окрас, в зависимости от специализации персонажа.");
+                                                GameTooltip:AddLine("Выбор визуального стиля ездового животного согласно специализации, если такой выбор поддерживается ездовым животным.");
                                                 GameTooltip:Show();
                                             </OnEnter>
                                             <OnLeave>
@@ -660,9 +660,9 @@
                                         <Scripts>
                                             <OnEnter>
                                                 GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-                                                GameTooltip:AddLine("|cFFFFFFFFПерсонаж|r");
+                                                GameTooltip:AddLine("|cFFFFFFFFБонус ежедневной игры|r");
                                                 GameTooltip:AddLine(" ");
-                                                GameTooltip:AddLine("В этом окне вы можете получить отследить, зафиксировать и в будущем|nполучить свой бонус за 5 дней игры на сервере.");
+                                                GameTooltip:AddLine("Отыгрывайте 5 дней подряд и получите бонус в ".. GetCoinTextureString(30000) .. " монеты.");
                                                 GameTooltip:Show();
                                             </OnEnter>
                                             <OnLeave>
@@ -705,7 +705,7 @@
                                 </Anchors>
                                 <Layers>
                                     <Layer>                                       
-                                        <FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Мои POI" justifyH="CENTER" justifyV="TOP">
+                                        <FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Мои точки интереса (POI)" justifyH="CENTER" justifyV="TOP">
                                             <Color r="1" g="1" b="1" a="1"/>
                                             <FontHeight val="16"/>
                                             <Shadow>
@@ -845,9 +845,9 @@
                                         <Scripts>
                                             <OnEnter>
                                                 GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-                                                GameTooltip:AddLine("|cFFFFFFFFВизуальный стиль маунтов|r");
+                                                GameTooltip:AddLine("|cFFFFFFFFМои точки интереса (POI)|r");
                                                 GameTooltip:AddLine(" ");
-                                                GameTooltip:AddLine("В данной части расположено окно которое поможет отследить те точки интереса (POI)|nв владельцах которых числится ваш персонаж.");
+                                                GameTooltip:AddLine("Точки интереса, которые принадлежат или имеют отношение к вашему персонажу.");
                                                 GameTooltip:Show();
                                             </OnEnter>
                                             <OnLeave>

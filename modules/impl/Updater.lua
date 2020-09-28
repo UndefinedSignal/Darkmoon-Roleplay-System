@@ -66,7 +66,6 @@ function RPSCoreFramework:UpdateScaleInfo(str)
 	RPSCoreFramework:UpdateScaleReset();
 	RPSCoreFramework:UpdateScrollerPosition();
 	RPSCoreFramework:UpdateScaleApplyButton();
-
 	RPSCoreFramework:ConfirmedAddonLoading();
 end
 
@@ -207,18 +206,19 @@ function RPSCoreFramework:AddPOIPins(str)
 end
 
 function RPSCoreFramework:DailyStatusUpdate(str)
+	RPSCoreFramework.DailyCipherShow = RPSCoreFramework.DailyCipherShow + 1;
 	local int = tonumber(5 - RPSCoreFramework.DailyCipher[tonumber(str)]);
 	local text;
 	RPSDailyStreak = str;
 	if int == 1 then text = "остался"; else text = "осталось"; end
+	_G["DarkmoonCharacterFrameInfoBodyAvaGraduate"]:SetText(int);
 	for i = 1, 5 do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Hide();
 	end
 	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
-		PlaySoundFile("Interface\\AddOns\\RPSDarkmoon\\resources\\test.ogg");
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
 	end
-	if RPSCoreFramework.DailyCipherShow then
+	if RPSCoreFramework.DailyCipherShow > 1 then
 		if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
 			print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
 		else
@@ -227,6 +227,15 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 	end
 end
 
+function MountModelStatusUpdate(str)
+	local values = {strsplit(' ',str)}
+	if tonumber(values[1]) ~= nil then
+		RPSCharSpec = tonumber(values[1]) + 1;
+	else
+		RPSCharSpec = 1;
+	end
+	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]);
+end
 
 
 --function RPSCoreFramework:AddPOIPins(str)

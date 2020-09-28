@@ -5,7 +5,7 @@ function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
 end
 
 function RPSCoreFramework:ShowCharSpecChooseDropDownMenu()
-	EasyMenu(RPSCoreFramework.DropDownCharSpecChooseMenu, RPSCoreFramework.DropDownClassChooseMenu, "cursor", 5, -15, "MENU", 5);
+	EasyMenu(RPSCoreFramework.DropDownCharSpecChooseMenu, RPSCoreFramework.DropDownClassChooseMenu, "DarkmoonDropSpecChooseButton", -110, 0, "MENU", 5);
 end
 
 function RPSCoreFramework:PaperdollDispInit()
@@ -527,3 +527,12 @@ function RPSCoreFramework:AddGuildPOIInfo()
 
 	RPSCoreFramework.GuildInfoPOIFrame:Show()
 end
+
+--[[
+function putInChatBox(name)
+  name = type(name) ~= "string" and "" or name
+  local e = DEFAULT_CHAT_FRAME.editBox
+  ChatEdit_ActivateChat(e)
+  e:SetText("/tdps whisper "..name)
+end
+]]--
