@@ -347,10 +347,10 @@ RPSCoreFramework.DropDownDisplayMenu = {
 
 RPSCoreFramework.DropDownCharSpecChooseMenu = {
 	{ text = "Сделайте выбор", isTitle = true, notCheckable = true},
-	{ text = "Случайный", notCheckable = true, func = function() RPSCharSpec = 1;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },	
-	{ text = "Первый", notCheckable = true, func = function() RPSCharSpec = 2;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
-	{ text = "Второй", notCheckable = true, func = function() RPSCharSpec = 3;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
-	{ text = "Третий", notCheckable = true, func = function() RPSCharSpec = 4;	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end }
+	{ text = "Случайный", notCheckable = true, func = function() RPSCharSpec = 1;	RPSCoreFramework:SendCoreMessage("rps mountdisplay 0");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },	
+	{ text = "Первый", notCheckable = true, func = function() RPSCharSpec = 2;		RPSCoreFramework:SendCoreMessage("rps mountdisplay 1");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Второй", notCheckable = true, func = function() RPSCharSpec = 3;		RPSCoreFramework:SendCoreMessage("rps mountdisplay 2");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Третий", notCheckable = true, func = function() RPSCharSpec = 4;		RPSCoreFramework:SendCoreMessage("rps mountdisplay 3");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end }
 }
 
 RPSCoreFramework.Scroller.lineplusoffset = {
