@@ -206,7 +206,7 @@ function RPSCoreFramework:AddPOIPins(str)
 end
 
 function RPSCoreFramework:DailyStatusUpdate(str)
-	RPSCoreFramework.DailyCipherShow = RPSCoreFramework.DailyCipherShow + 1;
+	RPSCoreFramework.DailyCipherShow = tonumber(RPSCoreFramework.DailyCipherShow) + 1;
 	local int = tonumber(5 - RPSCoreFramework.DailyCipher[tonumber(str)]);
 	local text;
 	RPSDailyStreak = str;
@@ -218,7 +218,7 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
 	end
-	if RPSCoreFramework.DailyCipherShow > 1 then
+	if RPSCoreFramework.DailyCipherShow > 2 then
 		if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
 			print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
 		else
