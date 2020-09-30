@@ -1,21 +1,42 @@
 RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCoreFramework", "AceHook-3.0", "AceTimer-3.0");
 RPSCoreFramework.HBD = LibStub("HereBeDragons-2.0.1");
 RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-2.0");
+RPSCoreFramework.LualZW = LibStub("LualZW");
 RPSCoreFramework.Version = 2.31;
+if RPSDailyStreak == nil then
+	RPSDailyStreak = 0;
+end
+
+RPSCoreFramework.DailyCipher = {}
+RPSCoreFramework.DailyCipher[0] = 0;
+RPSCoreFramework.DailyCipher[1] = 1;
+RPSCoreFramework.DailyCipher[2] = 2;
+RPSCoreFramework.DailyCipher[4] = 3;
+RPSCoreFramework.DailyCipher[8] = 4;
+RPSCoreFramework.DailyCipher[16] = 5;
+RPSCoreFramework.DailyCipherShow = 0;
+
 RPSCoreFramework.Literature = {};
 RPSCoreFramework.Scroller = {};
 RPSCoreFramework.Display = {};
 RPSCoreFramework.Interface = {};
 --RPSCoreFramework.DB = {};
 RPSCoreFramework.Map = {};
+RPSCoreFramework.Map.POICount = 0;
+RPSCoreFramework.Map.POICounter = 0;
+RPSCoreFramework.Map.POICountLow = 0;
+RPSCoreFramework.Map.POICountMid = 0;
+
 RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
+RPSCoreFramework.CharcterPOILoaded = false;
 RPSCoreFramework.SalaryTimer = nil;
 RPSCoreFramework.PollTimer = {};
 RPSCoreFramework.PollTimer.Timer = nil;
 RPSCoreFramework.PollTimer.Counter = nil;
 
+RPSCoreFramework.DressUpOnLoad = true;
 RPSCoreFramework.PrintGarbageCollector = false;
 RPSCoreFramework.GBCounter = nil;
 RPSCoreFramework.CanScroll = true;
@@ -30,17 +51,52 @@ RPSCoreFramework.ContainerDataFlow = true;
 RPSCoreFramework.PlayerCursorInformation = nil;
 RPSCoreFramework.DraggingContainerFrame = nil;
 
+RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
+RPSCoreFramework.DropDownClassChooseMenu = CreateFrame("Frame", "DropDownClassChooseMenu", UIParent, "UIDropDownMenuTemplate");
+
 RPSCoreFramework.MinstrelStatus = 2;
 
 RPSCoreFramework.DistanceText = nil;
 RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
 
 RPSCoreFramework.POIDesc = {};
+RPSCoreFramework.POISearch = {};
+RPSCoreFramework.GuildInfoPOIFrame = nil;
 
 RPSCoreFramework.Quiz = {};
 RPSCoreFramework.Quiz.PollToast = false;
 RPSCoreFramework.Quiz.Question = nil;
 RPSCoreFramework.Quiz.Answers = {};
+
+RPSCoreFramework.DispButtonFrame = nil;
+RPSCoreFramework.DispApplyTimer = nil;
+RPSCoreFramework.DispButtonsInitialize = true;
+RPSCoreFramework.DispFrameInitizlize = true;
+RPSDispTable = { {1, "Горожанин","Обычный горожанин","1000370", "0", "0", "1000270", "0", "0", "0", "0", "160463", "158612", "1000235", "66956", "0"},
+				{2, "Ремесленник","Пустота","4393", "0", "0", "120088", "89191", "0", "0", "0", "1000222", "1000375", "168975", "0", "0"},
+				{3, "Продавец","Продавец магазина или рынка. Для мужчин и женщин.","0", "0", "0", "24792", "6795", "0", "35896", "4307", "14258", "61052", "9820", "0", "0"},
+				{4, "Горожанин","Обычный горожанин, Для мужчин","0", "0", "0", "0", "41253", "0", "0", "0", "0", "151804", "6836", "0", "0"},
+				{5, "Дровосек","Работник лесопилки, с топором. Для мужчин и женщин.","0", "0", "0", "0", "41250", "0", "0", "109863:449", "0", "1000372", "1000224", "157001", "0"},
+				{6, "Шахтер","Работник рудника, с киркой. Для мужчин и женщин.","23838", "0", "0", "2234", "0", "0", "0", "122326", "4258", "77691", "151421", "20723", "0"},
+				{7, "Фермер","Работник фермы, с лопатой. Для мужчин и женщин ","19972", "0", "0", "9508", "98087", "0", "0", "0", "0", "0", "18307", "151421", "0"},
+				{8, "Исследователь","Авантюрист-исследователь. Для мужчин и женщин.","171324", "0", "171333", "171331", "0", "0", "0", "171330", "171329", "171326", "171325", "0", "0"},
+				{9, "Головорез","Подходит как наемникам так и бандитам. Для мужчин и женщин.","130322", "64600", "0", "64511", "98093", "0", "0", "64526", "128299", "64589", "67163", "0", "0"},
+				{10, "Егерь","Хорошая форма охотника, с обычным луком. Для мужчин и женщин.","124296", "0", "0", "124284", "0", "0", "0", "124292", "124310", "124301", "124285", "134665", "0"},
+				{11, "Оборванец","Бездомный, одежда испорчена. Для мужчин и женщин.","0", "0", "0", "23405", "0", "0", "0", "26008", "0", "151078", "18735", "0", "0"},
+				{12, "Повар","Работник таверны, с сковородой. Для мужчин и женщин.","134013", "0", "0", "0", "10034", "86468", "0", "0", "72883", "146016", "166830", "86559", "0"},
+				{13, "Дворецкий","Прислуга больших домов. Для мужчин и женщин.","0", "0", "0", "6670", "6833", "0", "0", "4248", "5975", "5961", "55657", "0", "0"},
+				{14, "Смокинг","Стильный черный костюм. Для мужчин.","0", "0", "0", "10036", "6833", "0", "0", "0", "0", "6835", "6836", "0", "0"},
+				{15, "Аукционист","Работник аукционного дома. Для мужчин и женщин.","0", "0", "0", "24663", "0", "0", "0", "24664", "24645", "61052", "14174", "0", "0"},
+				{16, "Археолог","Рядовой археолог. Для мужчин и женщин.","117483", "0", "0", "10553", "16060", "0", "0", "0", "24653", "9825", "9820", "0", "0"},
+				{17, "Сорвиголова","Стильный сорвиголова. Для мужчин и женщин.","0", "0", "0", "0", "6795", "0", "86844", "161076:449", "167820", "109814:449", "160628:449", "0", "0"},
+				{18, "Лучник", "Обычный лучник в лёгкой броне", "151971", "0", "158583", "63866", "0", "0", "152087:1", "146878", "125445", "63783", "61553", "134665", "0"},
+				{19, "Разбойник", "Парень с большой дороги/тяжелорабочий", "1000231", "131659", "64511", "0", "0", "0", "152087:1", "55738", "151990:1", "64589", "75130", "816", "0"},
+				{20, "Чернокнижник/некромант", "Культист", "0", "0", "114829", "0", "0", "0", "0", "0", "165765", "163264",  "103157", "39427", "59547"},
+				{21, "Стрелок Кул-Тираса", "Карабинер/Снайпер/Gunslinger", "0", "159163", "155168", "0", "165010", "0", "18525", "160465", "1000284", "158042", "154183", "168644", "0"},
+				{22, "Наемник","Опытный наемник. Для мужчин и женщин.","0", "53596", "0", "142802", "0", "0", "0", "126125", "126083", "142854", "65774", "0", "0"},
+				{23, "Воин","Опытный воин с оружием и броней. Для мужчин и женщин.","0", "40960", "0", "35588", "4333", "0", "0", "55034", "128068", "82521", "35866", "59550", "57452"}
+}
+RPSDispTableColors = { "Garr_FollowerToast-Epic", "Garr_FollowerToast-Rare", "Garr_FollowerToast-Uncommon", "Garr_MissionToast-Blank" }
 
 RPSCoreFramework.SalaryByRank = {
 	["1"] = 0,
@@ -159,6 +215,7 @@ RPSCoreFramework.GetLastClickedSlot = "chest";
 RPSCoreFramework.StatsLevel = 40;
 RPSCoreFramework.MyScale = 0;
 RPSCoreFramework.ChoosedScale = 0;
+RPSCoreFramework.FrameUpdate = true;
 
 RPSCoreFramework.Poll = {};
 RPSCoreFramework.Poll.Question = nil;
@@ -172,20 +229,38 @@ RPSCoreFramework.Interface.HighlightedButtons = {};
 RPSCoreFramework.Interface.HighlightedTabButtons = {};
 RPSCoreFramework.Interface.HidingFrames = {};
 
+-- Имя, Название кнопки, Название фрейма, Открывает подменю?, Индекс кнопок подменю, Отступ перед кнопкой, RunScript()
+
 RPSCoreFramework.Interface.MenuButtons = {
 	{"Информация", "RPS_DarkmoonInfo", "DarkmoonInfoFrame", false, 0, false},
 	{"Правила", "RPS_RuleInfo", "DarkmoonRulesFrame", false, 0, false},
 	{"Система боя", "RPS_BattleSystemInfo", "DarkmoonFightSystemFrame", false, 0, false},
+
 	{"Характеристики", "RPS_StatsInfo", nil, true, 1, true},
-	{"Персонаж", "RPS_ScaleInfo", "DarkmoonCharacterFrame", false, 0, false},
+	{"Персонаж", "RPS_ScaleInfo", nil, true, 2, false},
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
-	{"Display", "RPS_DisplayInfo", "DarkmoonDisplayInfoFrame", false, 0, false},
+	{"Display", "RPS_DisplayInfo", nil, true, 3, false},
 	{"Менестрель", "RPS_Minstrel", "DarkmoonMinstrelFrame", false, 0, false},
-	{"Сменить пароль", "RPS_DropMyPassword", "DarkmoonPasswordChangeFrame", false, 0, true}
+
+	{"Настройки", "RPS_CharSettings", "DarkmoonSettingsFrame", false, 0, true},
+	{"Сменить пароль", "RPS_DropMyPassword", "DarkmoonPasswordChangeFrame", false, 0, false},
+	{"Парикмахерская", "RPS_FakeFrame", "DarkmoonPasswordChangeFrame", false, 0, false, true, "RPSCoreFramework:SendCoreMessage(\"rps act barber\"); PlaySound(624, \"SFX\"); RPSCoreFramework:switchMainFrame();"}
 }
 RPSCoreFramework.Interface.SubMenuButtons = {
-	{1, "Боевые", "RPS_BattleStats", "DarkmoonBattleStatsFrame"}
+	{1, "Боевые", "RPS_BattleStatsInfo", "DarkmoonBattleStatsFrame"},
+	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
+	{2, UnitName("player"), "RPS_CharInfo", "DarkmoonCharacterFrameInfo"},
+	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
+	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
+	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"}
+
 }
+
+RPSCoreFramework.CharChooseSpec = {}
+RPSCoreFramework.CharChooseSpec[1] = "Случайный"
+RPSCoreFramework.CharChooseSpec[2] = "Первый"
+RPSCoreFramework.CharChooseSpec[3] = "Второй"
+RPSCoreFramework.CharChooseSpec[4] = "Третий"
 
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -265,11 +340,18 @@ RPSCoreFramework.CharacterBackground = {
 }
 
 RPSCoreFramework.DropDownDisplayMenu = {
-	    { text = "Display", isTitle = true, notCheckable = true},
-	    { text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
-	    { text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end }
+	{ text = "Display", isTitle = true, notCheckable = true},
+	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end }
 }
 
+RPSCoreFramework.DropDownCharSpecChooseMenu = {
+	{ text = "Сделайте выбор", isTitle = true, notCheckable = true},
+	{ text = "Случайный", notCheckable = true, func = function() RPSCharSpec = 1;	RPSCoreFramework:SendCoreMessage("rps mountdisplay 0");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },	
+	{ text = "Первый", notCheckable = true, func = function() RPSCharSpec = 2;		RPSCoreFramework:SendCoreMessage("rps mountdisplay 1");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Второй", notCheckable = true, func = function() RPSCharSpec = 3;		RPSCoreFramework:SendCoreMessage("rps mountdisplay 2");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },
+	{ text = "Третий", notCheckable = true, func = function() RPSCharSpec = 4;		RPSCoreFramework:SendCoreMessage("rps mountdisplay 3");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end }
+}
 
 RPSCoreFramework.Scroller.lineplusoffset = {
 	[1] = 0,
@@ -303,30 +385,42 @@ RPSCoreFramework.Display.Scroll = {
 }
 
 RPSCoreFramework.Minstrel = {
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn1"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Blue.blp", ".minstrel gobject add", "|cffffffff.minstrel gobject add <id>|r - размещение ГО с указанным номером на месте персонажа."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn2"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Green.blp", ".minstrel gobject target", "|cffffffff.minstrel gobject target|r - берет ближайшее ГО в цель и выводит информацию об объекте, включая guid, которые можно использовать для перемещения, поворота и удаления."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn3"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Purple.blp", ".minstrel gobject delete", "|cffffffff.minstrel gobject delete <guid>|r - удаление ГО с указанным уникальным номером."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn4"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Red.blp", ".minstrel gobject info", "|cffffffff.minstrel gobject info <guid>|r - получение информации о ГО с указанным уникальным номером."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn5"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_White.blp", ".minstrel gobject move", "|cffffffff.minstrel gobject move <guid>|r - перемещение ГО с указанным уникальным номером на месте, где расположен персонаж."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn6"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Yellow.blp", ".minstrel gobject turn", "|cffffffff.minstrel gobject turn <guid>|r - разворот ГО с указанным уникальным номером в сторону обзора персонажа."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn7"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Blue.blp", ".minstrel npc add", "|cffffffff.minstrel npc add <id>|r - размещение NPC с указанным номером на месте персонажа."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn8"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Green.blp", ".minstrel npc delete", "|cffffffff.minstrel npc delete|r - удаление выделенного NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn9"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel npc say", "|cffffffff.minstrel npc say <фраза>|r - сказать фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn10"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel npc yell", "|cffffffff.minstrel npc yell <фраза>|r - выкрикнуть фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn11"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_White.blp", ".minstrel npc textemote", "|cffffffff.minstrel npc textemote <фраза>|r - вывести в чат эмоцию. В отличие от say и yell имя NPC не выводит автоматически, так что это следует сделать вручную. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Yellow.blp", ".minstrel npc info", "|cffffffff.minstrel npc info|r - выводит в чат информацию о выделенном NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Blue.blp", ".minstrel npc playemote", "|cffffffff.minstrel npc playemote <номер>|r - выделенный NPC начинает циклично проигрывать эмоцию с указанным номером. Номера эмоций NPC совпадают с номерами эмоций персонажей."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Purple.blp", ".minstrel npc spawndist", "|cffffffff.minstrel npc spawndist <значение>|r - выделенный NPC начинает периодически бродить в указанном радиусе вокруг изначальной точки размещений. Проще говоря, ходит туда-сюда. Рекомендуется ставить значение в диапазоне 3-5."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_White.blp", ".minstrel npc come", "|cffffffff.minstrel npc come|r - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn16"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_White.blp", ".minstrel npc set emote <emoteid>", "|cffffffff.minstrel npc set emote <emoteid>|r - устанавливает эмоцию под номером <emoteid> выделенному NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn17"] = {"Interface\\ICONS\\Ability_Iyyokuk_Staff_White.blp", ".minstrel gameobject set scale <guid> <scale(0.1-5)>", "|cffffffff.minstrel gameobject set scale <guid> <scale(0.1-5)>|r - изменяет размер Объекта под номером <guid> на значение <scale(0.1-5)>."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn18"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Red.blp", ".minstrel npc set scale <scale(0.1-5)>", "|cffffffff.minstrel npc set scale <scale(0.1-5)>|r - изменяет размер выделенному NPC на значение <scale(0.1-5)>."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn19"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Purple.blp", ".minstrel reset all", "|cffffffff.minstrel reset all|r - удалить все собственные NPC и Объекты."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn20"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Green.blp", ".minstrel reset creature", "|cffffffff.minstrel reset creature|r - удалить всех собственных NPC."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn22"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <id>|r - установить на себя морф под номером <id>."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn23"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup creature", "|cffffffff.minstrel lookup creature <название>|r - поиск NPC по заданному названию."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn24"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup object <название>|r - поиск Объектов по заданному названию (только .m2)."}
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn1"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Yellow.blp", ".minstrel npc info", "|cffffffff.minstrel npc info|r - выводит в чат информацию о выделенном NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn2"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Blue.blp", ".minstrel npc add", "|cffffffff.minstrel npc add <id>|r - размещение NPC с указанным номером на месте персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn3"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Green.blp", ".minstrel npc delete", "|cffffffff.minstrel npc delete|r - удаление выделенного NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn4"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Purple.blp", ".minstrel npc spawndist", "|cffffffff.minstrel npc spawndist <значение>|r - выделенный NPC начинает периодически бродить в указанном радиусе вокруг изначальной точки размещений. Проще говоря, ходит туда-сюда. Рекомендуется ставить значение в диапазоне 3-5."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn5"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel npc say", "|cffffffff.minstrel npc say <фраза>|r - сказать фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn6"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel npc yell", "|cffffffff.minstrel npc yell <фраза>|r - выкрикнуть фразу от имени выделенного NPC. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn7"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_White.blp", ".minstrel npc textemote", "|cffffffff.minstrel npc textemote <фраза>|r - вывести в чат эмоцию. В отличие от say и yell имя NPC не выводит автоматически, так что это следует сделать вручную. Стоит учесть, что фраза не должна быть длиннее 230 символов, иначе дальнейшая часть может быть обрезана."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn8"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Blue.blp", ".minstrel npc playemote", "|cffffffff.minstrel npc playemote <номер>|r - выделенный NPC начинает циклично проигрывать эмоцию с указанным номером. Номера эмоций NPC совпадают с номерами эмоций персонажей."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn9"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_White.blp", ".minstrel npc come", "|cffffffff.minstrel npc come|r - выделенный NPC следует на место, где находится ваш персонаж. ВНИМАНИЕ: команда действует на всех NPC, а не только на NPC менестреля. Это создано для того, чтобы можно было освобождать сцены от ненужных NPC. Злоупотребление ей недопустимо."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn10"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_White.blp", ".minstrel npc set emote <emoteid>", "|cffffffff.minstrel npc set emote <emoteid>|r - устанавливает эмоцию под номером <emoteid> выделенному NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn11"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Red.blp", ".minstrel npc set scale <scale(0.1-5)>", "|cffffffff.minstrel npc set scale <scale(0.1-5)>|r - изменяет размер выделенному NPC на значение <scale(0.1-5)>."},
+
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Green.blp", ".minstrel possess", "|cffffffff.minstrel possess|r - Взять под контроль выделенного NPC менестреля."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unposess", "|cffffffff.minstrel unposess|r - Прекратить контролировать NPC."},
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <display id>|r - установить на себя морф под номером <display id>."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel demorph", "|cffffffff.minstrel demorph <id>|r - снять с себя морф."},
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn16"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Red.blp", ".minstrel lookup creature", "|cffffffff.minstrel lookup creature <название>|r - поиск NPC по заданному названию."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn17"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Yellow.blp", ".minstrel lookup object", "|cffffffff.minstrel lookup object <название>|r - поиск Объектов по заданному названию (только .m2)."},
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn18"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Blue.blp", ".minstrel gobject add", "|cffffffff.minstrel gobject add <id>|r - размещение ГО с указанным номером на месте персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn19"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Purple.blp", ".minstrel gobject delete", "|cffffffff.minstrel gobject delete <guid>|r - удаление ГО с указанным уникальным номером."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn20"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Green.blp", ".minstrel gobject target", "|cffffffff.minstrel gobject target|r - берет ближайшее ГО в цель и выводит информацию об объекте, включая guid, которые можно использовать для перемещения, поворота и удаления."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn21"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Red.blp", ".minstrel gobject info", "|cffffffff.minstrel gobject info <guid>|r - получение информации о ГО с указанным уникальным номером."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn22"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_White.blp", ".minstrel gobject move", "|cffffffff.minstrel gobject move <guid>|r - перемещение ГО с указанным уникальным номером на месте, где расположен персонаж."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn23"] = {"Interface\\ICONS\\Ability_Iyyokuk_Bomb_Yellow.blp", ".minstrel gobject turn", "|cffffffff.minstrel gobject turn <guid>|r - разворот ГО с указанным уникальным номером в сторону обзора персонажа."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn24"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Purple.blp", ".minstrel gobject activate", "|cffffffff.minstrel gobject activate <guid>|r - Активирует объект по его уникальному номеру, такой как дверь либо кнопка."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn25"] = {"Interface\\ICONS\\Ability_Iyyokuk_Staff_White.blp", ".minstrel gobject set scale <guid> <scale(0.1-5)>", "|cffffffff.minstrel gobject set scale <guid> <scale(0.1-5)>|r - изменяет размер Объекта под номером <guid> на значение <scale(0.1-5)>."},
+
+
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn26"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Purple.blp", ".minstrel reset all", "|cffffffff.minstrel reset all|r - удалить все собственные NPC и Объекты."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn27"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Green.blp", ".minstrel reset creature", "|cffffffff.minstrel reset creature|r - удалить всех собственных NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn28"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Yellow.blp", ".minstrel reset object", "|cffffffff.minstrel reset object|r - удалить все собственные Объекты."}
 }
 
 RPSCoreFramework.DB = {
@@ -617,7 +711,7 @@ RPSCoreFramework.Interface.Auras = {
 	{245,"Произнесение магии", "Аура. Круг под ногами и свечение в руках. Можно использовать любые анимации", 1000, 0, 0},
 	{246,"Портал друидов", "Аура. Свечение природы и два куста по бокам ", 10000, 0, 0},
 	{247,"Цепь с шаром", "Аура. Цепь с шаром на ноге", 1000, 0, 0},
-	{248,"Облик бездны", "Аура. Персонаж входит в облик бездны и парит над землёй", 15000, 0, 0},
+	{248,"Облик бездны 1", "Аура. Персонаж входит в облик бездны и парит над землёй", 15000, 0, 0},
 	{249,"Держать весла", "Аура. Персонаж держит вёсла, сидя на коробке", 1000, 0, 0},
 	{250,"Держать весла", "Аура. Персонаж сидя держит вёсла", 1000, 0, 0},
 	{251,"Держать котенка", "Аура. Персонаж держит котика и гладит его", 5000, 0, 0},
@@ -628,7 +722,7 @@ RPSCoreFramework.Interface.Auras = {
 	{256,"Персональный барьер", "Аура. На персонажа накладывается щит в форме прозрачного, фиолетового шара", 10000, 0, 0},
 	{257,"Зеленое свечение рук", "Аура. Руки персонажа начинают гореть зеленым огнем", 5000, 0, 0},
 	{258,"Фиолетовое свечение рук", "Аура. Руки персонажа начинают гореть фиолетовым огнем, дополняемой темной аурой", 10000, 0, 0},
-	{259,"Тектоническая аура ", "Аура. Тектоническая аура действует на оружие у основания", 10000, 0, 0},
+	{259,"\"Тектоническая аура\"", "Аура. Тектоническая аура действует на оружие у основания", 10000, 0, 0},
 	{260,"Голубоватая дымка", "Аура. Персонаж окружен голубоватой дымкой", 5000, 0, 0},
 	{261,"Зеленое свечение рук 2", "Аура. Руки персонажи начинают гореть зеленым огнем с трассирующими лучами", 10000, 0, 0},
 	{262,"Арканная тюрьма", "Аура. Персонажа окружают арканные цепи", 1000, 0, 0},
@@ -658,12 +752,12 @@ RPSCoreFramework.Interface.Auras = {
 	{286,"Элемент пламени", "Аура. Вокруг персонажа кружится элемент пламени", 5000, 0, 0},
 	{287,"Элемент льда", "Аура. Вокруг персонажа кружится элемент льда", 5000, 0, 0},
 	{288,"Элемент земли", "Аура. Вокруг персонажа кружится элемент земли", 5000, 0, 0},
-	{289,"Пьяная походка", "Анимация. Персонаж качается на месте и при ходьбе .", 1000, 0, 0},
+	{289,"Пьяная походка", "Анимация. Персонаж качается на месте и при ходьбе", 1000, 0, 0},
 	{290,"Серый мешок за спиной", "На спину. Персонаж держит серый мешок.", 1000, 0, 0},
 	{291,"Ящик в руках", "Предмет. Персонаж держит ящик в руках.", 1000, 0, 0},
 	{292,"Боченок на плече", "Предмет. Персонаж держит боченок на плече.", 1000, 0, 0},
 	{293,"Карты хартстон в руках", "Предмет. Персонаж держит карты хартстон в руках.", 2000, 0, 0},
-	{294,"Сидеть и раслабленно выпивать ", "Анимация. Персонаж сидит и расслабленно держит кружку в руках", 1000, 0, 0},
+	{294,"Сидеть и раслабленно выпивать", "Анимация. Персонаж сидит и расслабленно держит кружку в руках", 1000, 0, 0},
 	{295,"Опереться на садовую косу ", "Анимация. Персонаж опирается на садовую косу. Только для человеческих женщин", 2000, 0, 0},
 	{296,"Держать книжку в левой руке", "Предмет. Персонаж красиво держит книжку в левой руке", 5000, 0, 0},
 	{297,"Держать клетку с крабом внутри", "Предмет. Персонаж тащит большую клетку с крабов внутри", 2000, 0, 0},
@@ -712,7 +806,7 @@ RPSCoreFramework.Interface.Auras = {
 	{340,"Башмак на голове", "Предмет. На голове у персонажа держится башмак", 2000, 0, 0},
 	{341,"Ящик Орды", "Предмет. Персонаж несет перед собой ящик с гравировкой Орды", 1000, 0, 0},
 	{342,"Блюдо сыроедов", "Предмет. Персонаж держит перед собой лист, на котором два плода", 1000, 0, 0},
-	{343,"Кузнец за работой", "Анимация. Работа кузнеца ", 1000, 0, 0},
+	{343,"Кузнец за работой", "Анимация. Работа кузнеца", 1000, 0, 0},
 	{344,"Тёмный щит-сфера", "Большой сферический щит с расползающимися от него во все стороны белыми энергиями", 70000, 0, 0},
 	{345,"Медитация", "Персонаж парит над землей в позе для медитации", 5000, 0, 0},
 	{346,"Мистический манашторм", "Персонажа окутывает магический вихрь", 50000, 0, 0},
@@ -779,7 +873,7 @@ RPSCoreFramework.Interface.Auras = {
 	{407,"Появление из мира духов", "Красивое появление. Персонаж резко появляется с громким звуком", 10000, 0, 0},
 	{408,"Арканное тление", "Красивое исчезновение. Персонаж постепенно растворяется в аркане", 15000, 0, 0},
 	{409,"Алое тление", "Красивое исчезновение. Персонаж постепенно растворяется в алых тонах", 15000, 0, 0},
-	{410,"Призрак с мечем в спине", "Персонаж становится призраком, а в спине у него торчит меч", 10000, 0, 0},
+	{410,"Призрак с мечом в спине", "Персонаж становится призраком, а в спине у него торчит меч", 10000, 0, 0},
 	{411,"Ворожба друстов", "Персонаж темнеет, а вокруг него проявляются магия друстов", 7500, 0, 0},
 	{412,"Друстварский колдовской ритуал", "Столп друстварских энергий", 30000, 0, 0},
 	{413,"Теневое тление", "Красивое исчезновение. Персонаж постепенно растворяется в фиолетовых тонах", 15000, 0, 0},
@@ -800,16 +894,89 @@ RPSCoreFramework.Interface.Auras = {
 	{428,"Кровавая луна", "Скайбокс неба с кровавой луной", 750000, 0, 0},
 	{429,"Обесцвечивание", "Персонаж обесцвечивается и становится прозрачным", 15000, 0, 0},
 	{430,"Алый столп", "От персонажа исходит столп алого света", 15000, 0, 0},
-	{431,"Парашют", "Персонаж виснет на парашюте", 5000, 0, 0},
+	{431,"Парашут", "Персонаж виснет на парашуте", 5000, 0, 0},
 	{432,"Закапывание", "Вокруг персонажа появляется облако пыли", 10000, 0, 0},
 	{433,"Накидка тигра", "За спиной персонажа появляется символ тигра", 10000, 0, 0},
-	{434,"Парашют", "Персонаж планирует на парашюте", 7500, 0, 0},
+	{434,"Парашут", "Персонаж планирует на парашуте", 7500, 0, 0},
 	{435,"Массовое исцеление", "Массовое исцеление в большой области вокруг персонажа", 15000, 0, 0},
 	{436,"Крюк", "Предмет. Большой крюк в правой руке", 5000, 0, 0},
 	{437,"Острошквал", "Две шарообразные молнии за спиной персонажа", 15000, 0, 0},
 	{438,"Репликация!", "Визуальный эффект репликации Элисанды", 30000, 0, 0},
 	{439,"Резонанс", "Под ногами персонажа появляется нефритовая дымка", 7500, 0, 0},
-	{440,"Энергетическая башня", "Создание энергетической башни на месте персонажа", 50000, 0, 0}
+	{440,"Энергетическая башня", "Создание энергетической башни на месте персонажа", 50000, 0, 0},
+	{441,"Левитация бездны", "Персонаж левитирует и произносит заклинание бездны", 30000, 0, 0},
+	{442,"Колчан", "Колчан со стрелами за спиной", 5000, 0, 0},
+	{443,"Завязанные руки", "Персонаж стоит с завязанными сзади руками", 1000, 0, 0},
+	{444,"Аристократическая шляпа", "Аристократическая шляпа на голове", 4000, 0, 0},
+	{445,"Флаг Альянса", "Красивый флаг Альянса за спиной", 10000, 0, 0},
+	{446,"Флаг Орды", "Красивый флаг Орды за спиной", 10000, 0, 0},
+	{447,"Сфера тьмы", "Вокруг персонажа крутится сфера тьмы (10 мин)", 10000, 0, 0},
+	{448,"Воздушный змей", "Персонаж держит воздушного змея за веревку, который витает в воздухе ", 5000, 0, 0},
+	{449,"Ауры успеха", "Персонаж оставляет радугу за собой, а сам персонаж радостно бегает", 20000, 0, 0},
+	{450,"Аркана и радуга на руках", "Вокруг рук персонажа витает розоватая аркана и радуга", 20000, 0, 0},
+	{451,"Биолюминесценция", "Персонаж излучает несильный свет (15 мин)", 10000, 0, 0},
+	{452,"Зеленое свечение", "Персонажа окружает зеленая аура (45 с)", 10000, 0, 0},
+	{453,"Аура Скверны", "Персонажа окружает пламя скверны, которое медленно вздымается вверх", 20000, 0, 0},
+	{454,"Грести веслом стоя", "Персонаж гребет веслом стоя", 1000, 0, 0},
+	{455,"Игра на арфе", "Персонаж играет на арфе. Только для ночнорожденных женского пола", 5000, 0, 0},
+	{456,"Руна скверны на лбу", "Перед головой персонажа витает небольшая руна скверны", 10000, 0, 0},
+	{457,"Бокал вина в поднятой руке", "Персонаж в одной руке держит бокал вина", 2000, 0, 0},
+	{458,"Порча бездны", "По телу персонажа проходятся волны энергии бездны", 20000, 0, 0},
+	{459,"Поднос с вином", "Персонаж держит поднос с вином. Только для ночных эльфиек и ночнорожденных женского пола", 2000, 0, 0},
+	{460,"Поднос с вином и виноградом", "Персонаж держит поднос с вином и виноградом. Только для ночных эльфиек и ночнорожденных женского пола", 2000, 0, 0},
+	{461,"Барьер скверны", "Персонажа окружает барьер из магии скверны", 30000, 0, 0},
+	{462,"Фонтан скверны", "Перед персонажем выплескивается фонтан скверны, сам персонаж выражает страх", 10000, 0, 0},
+	{463,"Огонь скверны", "Персонажа окружает пламя скверны", 10000, 0, 0},
+	{464,"Огонь скверны", "Персонажа окружает крупное пламя скверны", 15000, 0, 0},
+	{465,"След скверны", "Персонаж оставляет за собой короткий след из скверны", 10000, 0, 0},
+	{466,"Паразит бездны", "На голове появляется осьминог-паразит бездны. На экране появляются щупальца", 5000, 0, 0},
+	{467,"Знамя Орды", "Знамя Орды за спиной с клинками на окончании", 25000, 0, 0},
+	{468,"Знамя Альянса", "Знамя Альянса за спиной с орлом на окончании", 25000, 0, 0},
+	{469,"Знамя Орды", "Знамя Орды, которое персонаж держит в руке (расы Орды)", 10000, 0, 0},
+	{470,"Знамя Альянса", "Знамя Альянса, которое персонаж держит в руке", 10000, 0, 0},
+	{471,"Знамя Трюмных Крыс", "Знамя братства Трюмных Крыс за спиной", 10000, 0, 0},
+	{472,"Луч Прометей", "Персонажа обволакивает золотистое сияние на 10 секунд", 10000, 0, 0},
+	{473,"Арканная тюрьма", "Персонаж барахтается в воздухе в арканной сфере", 2000, 0, 0},
+	{474,"Призрак", "Персонаж становится бледным призраком с дымкой и совершенно прозрачными ногами", 30000, 0, 0},
+	{475,"Всплески бездны", "От персонажа исходят массивные всплески бездны", 50000, 0, 0},
+	{476,"Появление в свете", "Персонаж ненадолго освещается", 5000, 0, 0},
+	{477,"Чумные баллоны", "У персонажа за спиной появляются баллоны с чумой или ядом", 20000, 0, 0},
+	{478,"Цветочная аура", "Персонажа окружают крутящиеся цветы", 10000, 0, 0},
+	{479,"Скверно-молнии на ладонях", "На ладонях персонажа сверкают всплески энергии скверны", 10000, 0, 0},
+	{480,"Инженерный рюкзак", "На спине персонажа инженерный рюкзак/обмундирование охотника за привидениями", 15000, 0, 0},
+	{481,"Произнесение заклинания воздуха", "Персонаж произносит заклинание воздуха, вокруг него кружатся порывы ветра, а из рук исходят воздушные всплески", 20000, 0, 0},
+	{482,"Поддержание заклинания бездны", "Персонаж поддерживает действия заклинания бездны. На руках и под ногами всплески бездны", 15000, 0, 0},
+	{483,"Ткач времени", "Персонажа окружает массивная золотая дымка", 50000, 0, 0},
+	{484,"Фиолетовый призрак", "Персонаж становится едва заметным фиолетовым призраком", 20000, 0, 0},
+	{485,"Друстварский туман", "(я бы это не оставлял бы как покупное, а вынес бы для эффекта наркотиков, типо накурен)", 10000, 0, 0},
+	{486,"Два тотема-бревна", "За спиной персонажа два массивных тотема-бревна", 15000, 0, 0},
+	{487,"Поддержание магии духостранника", "Персонаж поддерживает магию, а его обволакивает мощнейшие потоки энергии", 30000, 0, 0},
+	{488,"Магия знахаря", "Персонаж сидит на земле, его окружает магический круг, тролли молятся", 10000, 0, 0},
+	{489,"Врата бездны", "Персонаж призывает перед собой врата бездны", 25000, 0, 0},
+	{490,"В цепях бездны", "Персонаж левитирует в цепях бездны", 1000, 0, 0},
+	{491,"В наручниках", "Персонаж находится в наручниках", 500, 0, 0},
+	{492,"Ледяные цепи", "Персонаж скован магией льда", 2000, 0, 0},
+	{493,"Всплески крови", "От персонажа летят всплески крови", 5000, 0, 0},
+	{494,"Пламя некротики", "Под ногами персонажа пылаем некропламя", 10000, 0, 0},
+	{495,"Произнесение заклинания крови", "Персонаж произносит заклинание, от его ладоней исходит аура магии крови", 10000, 0, 0},
+	{496,"Ракетометы на плечах и за спиной", "На плечах персонажа и за его спиной расположены ракетницы", 50000, 0, 0},
+	{497,"Парящие ракетометы", "Персонаж левитирует, на его спине активированы ракетометы, в руках технологическая пушка", 50000, 0, 0},
+	{498,"Кровавый щит", "Персонажа окружает щит магии крови", 15000, 0, 0},
+	{499,"Внушительная буря бездны", "Персонажа окружает массивная буря бездны", 150000, 0, 0},
+	{500,"Облик бездны 2", "Тени восходят по телу персонажа", 20000, 0, 0},
+	{501,"Облик бездны 3", "Персонаж становится полупрозрачным, с фиолетовыми контурами", 20000, 0, 0},
+	{502,"Облик бездны 4", "Персонаж становится темно-фиолетовым, а из него извиваются щупальца, под ногами пламя", 50000, 0, 0},
+	{503,"Облик бездны 5", "Персонаж становится темно-фиолетовым, под ногами пламя бездны", 30000, 0, 0},
+	{504,"Щупальца бездны 1", "Безднощупальца у плеч", 10000, 0, 0},
+	{505,"Щупальца бездны 2", "Безднощупальца у пояса", 10000, 0, 0},
+	{506,"Щупальца бездны 3", "Безднощупальца у бёдер", 10000, 0, 0},
+	{507,"Перенос тяжестей", "Демонстрация вашей силы", 2000, 0, 0},
+	{508,"Спокойствие", "Друидский каст, персонаж поднимает руки к небу и вокруг него появляется круг из энергий природы", 20000, 0, 0},
+	{509,"Кровавая левитация", "Персонаж левитирует за счет энергии крови", 20000, 0, 0},
+	{510,"Насыщение кровью", "Ваш персонаж покрывается потоками крови и становится красным", 20000, 0, 0},
+	{511,"Кровавый щит", "Вокруг персонажа появляется овальная кровавая сфера", 10000, 0, 0},
+	{512,"Кровавый призрак", "Персонаж становится полупрозрачным и источает алую дымку", 10000, 0, 0},
+	{513,"Алая дымка", "Персонаж источает лёгкую алую дымку", 5000, 0, 0}
 }
 
 RPSCoreFramework.Interface.Auras.Show = {}
@@ -828,3 +995,9 @@ RPSCoreFramework.Interface.Auras.Message = {
 RPSCoreFramework.Interface.Auras.Initialized = false
 RPSCoreFramework.Interface.Auras.GhostClick = false
 RPSCoreFramework.Interface.Auras.AllowUpdate = true
+
+DarkmoonWIPFrame.content.flash1Rotation:SetDuration(8);
+DarkmoonWIPFrame.content.flash2Rotation:SetDuration(8);
+DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
+DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
+--DarkmoonWIPFrame.content.GearRotation:SetDuration(8);

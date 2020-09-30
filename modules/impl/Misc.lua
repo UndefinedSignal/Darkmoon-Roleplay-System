@@ -1,8 +1,11 @@
-local DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
 function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
 	if (GetInventoryItemID("player", inventorySlotId)) then
-		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
+		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, RPSCoreFramework.DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
 	end
+end
+
+function RPSCoreFramework:ShowCharSpecChooseDropDownMenu()
+	EasyMenu(RPSCoreFramework.DropDownCharSpecChooseMenu, RPSCoreFramework.DropDownClassChooseMenu, "DarkmoonDropSpecChooseButton", -110, 0, "MENU", 5);
 end
 
 function RPSCoreFramework:PaperdollDispInit()
@@ -216,6 +219,10 @@ end
 function RPSCoreFramework:FormatDMButtons(button)
 	local shift = 0;
 	local y = -60;
+	local subMenuNeedToShow = true;
+
+	local selectedSubButtons = -1;
+
 	for i=1, #RPSCoreFramework.Interface.MenuButtons do
 		if (i == 1) then 
 			_G[RPSCoreFramework.Interface.MenuButtons[i][2]]:SetPoint("TOPLEFT", RPS_MainFrameMenuScroll, 16, -60);
@@ -228,26 +235,36 @@ function RPSCoreFramework:FormatDMButtons(button)
 			end
 			shift = 0;
 		end
+
+		if (tostring(RPSCoreFramework.Interface.MenuButtons[i][2]) == tostring(button)) then
+			selectedSubButtons = RPSCoreFramework.Interface.MenuButtons[i][5];
+		end
+
+		local count = 1;
+
 		if (RPSCoreFramework.Interface.MenuButtons[i][4]) then
-			if (RPSCoreFramework.Interface.MenuButtons[i][2] == button) then
+			if (tostring(RPSCoreFramework.Interface.MenuButtons[i][2]) == tostring(button)) then
 				for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
-					if RPSCoreFramework.Interface.SubMenuButtons[j][1] == RPSCoreFramework.Interface.MenuButtons[i][5] then
-						if j==1 then
+					if (tonumber(RPSCoreFramework.Interface.SubMenuButtons[j][1]) == tonumber(RPSCoreFramework.Interface.MenuButtons[i][5])) then
+						if count==1 then
 							_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i][2]], 25, y);
 							_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:LockHighlight();
 						else
 							y = -25
 							_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.SubMenuButtons[j-1][3]], 0, y);
 						end
+						count = count + 1;
 						_G[RPSCoreFramework.Interface.SubMenuButtons[j][3].."Label"]:SetText("|cffFFFFFF"..RPSCoreFramework.Interface.SubMenuButtons[j][2]);
 						shift = shift - 25;
+						_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Show();
 					end
-					_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Show();
 				end
 			else
 				for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
-					_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Hide();
-				end
+					if RPSCoreFramework.Interface.SubMenuButtons[j][1] ~= selectedSubButtons then
+						_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Hide();
+					end
+				end -- Привет от Николая из прошлого
 			end
 		end
 	end
@@ -256,6 +273,7 @@ end
 function RPSCoreFramework:PreGenerateDMButtons()
 	local shift = 0;
 	local y = -60;
+
 	for i=1, #RPSCoreFramework.Interface.MenuButtons do
 		local MenuButton = CreateFrame('Button', RPSCoreFramework.Interface.MenuButtons[i][2], RPS_MainFrame, "RPS_CategoryButton")
 		if i == 1 then 
@@ -271,39 +289,47 @@ function RPSCoreFramework:PreGenerateDMButtons()
 			shift = 0;
 		end
 		MenuButton:SetSize(158, 24);
+
 		if RPSCoreFramework.Interface.MenuButtons[i][4] then
 			for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
-				if RPSCoreFramework.Interface.SubMenuButtons[j][1] == RPSCoreFramework.Interface.MenuButtons[i][5] then
+				if (tonumber(RPSCoreFramework.Interface.SubMenuButtons[j][1]) == tonumber(RPSCoreFramework.Interface.MenuButtons[i][5])) then
 					local SubMenuButton = CreateFrame('Button', RPSCoreFramework.Interface.SubMenuButtons[j][3], RPS_MainFrame, "RPS_CategoryButton");
-					if j==1 then
-						SubMenuButton:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.MenuButtons[i][2]], 25, y);
-					else
-						y = -25
-						SubMenuButton:SetPoint("TOPLEFT", _G[RPSCoreFramework.Interface.SubMenuButtons[j-1][3]], 0, y);
-					end
 					SubMenuButton:SetSize(130,24)
 					_G[RPSCoreFramework.Interface.SubMenuButtons[j][3].."Label"]:SetText("|cffFFFFFF"..RPSCoreFramework.Interface.SubMenuButtons[j][2]);
 					table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.SubMenuButtons[j][4]]);
 					table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]);
+
 					SubMenuButton:SetScript('OnClick', function()
 						RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]);
 						RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.SubMenuButtons[j][4]]);
 					end)
-					shift = shift - 25;
 				end
 			end
 		end
 		_G[RPSCoreFramework.Interface.MenuButtons[i][2].."Label"]:SetText(RPSCoreFramework.Interface.MenuButtons[i][1]);
+		local index = 1;
+		for j=1, #RPSCoreFramework.Interface.SubMenuButtons do
+			if RPSCoreFramework.Interface.SubMenuButtons[j][1] == RPSCoreFramework.Interface.MenuButtons[i][5] then
+				index = j;
+				break;
+			end
+		end
+
 		MenuButton:SetScript('OnClick', function()
 			RPSCoreFramework:FormatDMButtons(RPSCoreFramework.Interface.MenuButtons[i][2]);
-			if RPSCoreFramework.Interface.MenuButtons[i][4] then
-				RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[1][3]]);
-				RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.SubMenuButtons[1][4]]);
-			else
-				RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
-				RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
-			end
+			if RPSCoreFramework.Interface.MenuButtons[i][7] then
+				RunScript(RPSCoreFramework.Interface.MenuButtons[i][8]);
+			elseif RPSCoreFramework.Interface.MenuButtons[i][4] then
+					RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.SubMenuButtons[index][3]]);
+					RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.SubMenuButtons[index][4]]);
+				else
+					RPSCoreFramework:OnClickCosmetic(_G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
+					RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
+				end
 		end)
+--[[	MenuButton:SetScript('OnLeave', function()
+			GameTooltip:Hide();
+	    end);]]--
 		if RPSCoreFramework.Interface.MenuButtons[i][3] ~= nil then
 			table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 			table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
@@ -359,21 +385,25 @@ function RPSCoreFramework:GuildInfoFrame_Update()
 	local selectedTab = PanelTemplates_GetSelectedTab(GuildInfoFrame);
 	if ( selectedTab == 1 ) then
 		GuildInfoFrameInfo:Show();
+		--RPSCoreFramework.GuildInfoPOIFrame:Show();
 		GuildInfoFrameRecruitment:Hide();
 		GuildInfoFrameApplicants:Hide();
 		GuildInfoFrameSalary:Hide();
 	elseif ( selectedTab == 2 ) then
 		GuildInfoFrameInfo:Hide();
+		--RPSCoreFramework.GuildInfoPOIFrame:Hide();
 		GuildInfoFrameRecruitment:Show();
 		GuildInfoFrameApplicants:Hide();
 		GuildInfoFrameSalary:Hide();
 	elseif ( selectedTab == 3) then
 		GuildInfoFrameInfo:Hide();
+		--RPSCoreFramework.GuildInfoPOIFrame:Hide();
 		GuildInfoFrameRecruitment:Hide();
 		GuildInfoFrameApplicants:Show();
 		GuildInfoFrameSalary:Hide();
 	else
 		GuildInfoFrameInfo:Hide();
+		--RPSCoreFramework.GuildInfoPOIFrame:Hide();
 		GuildInfoFrameRecruitment:Hide();
 		GuildInfoFrameApplicants:Hide();
 		GuildInfoFrameSalary:Show();
@@ -437,3 +467,48 @@ function SlashCmdList.RPSGARBAGECOLLECTOR()
     	RPSCoreFramework.PrintGarbageCollector = true;
     end
 end
+
+function RPSCoreFramework:playAnimation(animationGroup, callback)
+	if animationGroup then
+		animationGroup:Stop();
+		animationGroup:Play();
+		if callback then
+			animationGroup:SetScript("OnFinished", callback)
+		end
+	elseif callback then
+		callback();
+	end
+end
+
+function RPSCoreFramework:TalentAlertMessageHide()
+	function TalentMicroButtonAlert:Show()
+		TalentMicroButtonAlert:Hide();
+	end
+	TalentMicroButtonAlert:Hide();
+end
+
+
+
+function RPSCoreFramework:AddGuildPOIInfo()
+	RPSCoreFramework.GuildInfoPOIFrame = CreateFrame("Frame","GuildInfoPOIFrame",GuildFrame)
+	RPSCoreFramework.GuildInfoPOIFrame:SetFrameStrata("HIGH")
+
+	local t = RPSCoreFramework.GuildInfoPOIFrame:CreateTexture(nil,"BACKGROUND")
+	t:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Factions.blp")
+	t:SetAllPoints(RPSCoreFramework.GuildInfoPOIFrame)
+	RPSCoreFramework.GuildInfoPOIFrame.texture = t
+
+	RPSCoreFramework.GuildInfoPOIFrame:SetPoint("TOPLEFT",GuildInfoFrameInfo,5,-25)
+	RPSCoreFramework.GuildInfoPOIFrame:SetPoint("BOTTOMRIGHT",GuildInfoFrameInfo,-5,200)
+
+	RPSCoreFramework.GuildInfoPOIFrame:Show()
+end
+
+--[[
+function putInChatBox(name)
+  name = type(name) ~= "string" and "" or name
+  local e = DEFAULT_CHAT_FRAME.editBox
+  ChatEdit_ActivateChat(e)
+  e:SetText("/tdps whisper "..name)
+end
+]]--

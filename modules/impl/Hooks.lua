@@ -8,9 +8,11 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("BAG_UPDATE");
 	self:RegisterEvent("GUILD_RANKS_UPDATE");
 	self:RegisterEvent("ADDON_LOADED");
+	self:RegisterEvent("PLAYER_TALENT_UPDATE");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
+		--local chatframe = _G["ChatFrame"..index];
 		self:SecureHookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
@@ -24,7 +26,8 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 
-	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end)
+
+	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end);
 	--self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
 	self:RawHook("GuildInfoFrame_Update", true);
@@ -47,6 +50,9 @@ function RPSCoreFramework:InitializeHooks()
 	DarkmoonAurasFrameClearButton:HookScript("OnClick", function()	RPSCoreFramework:AurasSearch(RPSCoreFramework.Interface.Auras, DarkmoonAurasFrame.searchBox:GetText());	RPSCoreFramework:GenerateScrollMenu() end);
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
 	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
+
+	GameObjectPreviewModelSceneControlFrameZoomInButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomIn() end)
+	GameObjectPreviewModelSceneControlFrameZoomOutButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomOut() end)
 
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
@@ -99,6 +105,9 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 	elseif (event == "CHAT_MSG_ADDON" and sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
 		if (prefix == "RPS.POI.i") then
 			RPSCoreFramework:AddPOIPins(msg)
+--[[		if (prefix == "RPS.POI.i2") then
+			--.poi requestdeb
+			RPSCoreFramework:AddPOIPins(msg)]]--
 		elseif (prefix == "RPS.POI.u") then
 			RPSCoreFramework:UpdatePOIPins(msg)
 		elseif (prefix == "RPS.POI.r") then
@@ -137,6 +146,10 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:QuizCloseReload();
 		elseif (prefix == "RPS.Guild.s") then
 			RPSCoreFramework:UpdateGuildSalary(msg);
+		elseif (prefix == "RPS.DLS") then
+			RPSCoreFramework:DailyStatusUpdate(msg);
+		elseif (prefix == "RPS.mdS") then
+			RPSCoreFramework:MountModelStatusUpdate(msg);
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
@@ -144,6 +157,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		RPSCoreFramework:InitializePool(msg);]]
 	elseif (event == "GUILD_RANKS_UPDATE") then
 		RPSCoreFramework:ProcessGuildSalaryInterface();
+	elseif(event == "PLAYER_TALENT_UPDATE") then
+		MicroButtonPulseStop(TalentMicroButton);
 	end
 end
 

@@ -62,7 +62,11 @@ end
 function RPSCoreFramework:UpdateScaleInfo(str)
 	str = string.gsub(str, "RPS.Scale ", "");
 	RPSCoreFramework.MyScale = tonumber(str);
+	RPSCoreFramework.FrameUpdate = false;
 	RPSCoreFramework:UpdateScaleReset();
+	RPSCoreFramework:UpdateScrollerPosition();
+	RPSCoreFramework:UpdateScaleApplyButton();
+	RPSCoreFramework:ConfirmedAddonLoading();
 end
 
 function RPSCoreFramework:UpdateAuraKnownInfo(str)
@@ -107,6 +111,14 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	end
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
+
+--[[
+	minstrel activate
+	RPS.Minstrel 1 - Менестрель есть
+	RPS.Minstrel 0 - Менестрель заблочена(например, потому-что у человека ГМка)
+	RPS.Minstrel 2 - Менестрели нет.
+]]--
+
 
 function RPSCoreFramework:UpdateMinstrelStatus(str)
 	if (tonumber(str) == 0 or str == nil) then
@@ -188,8 +200,57 @@ function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
 	if tonumber(values[1]) ~= 0 then
 		RPSCorePOIPins[values[1]] = values;
+		RPSCoreFramework.Map.POICounter = RPSCoreFramework.Map.POICounter + 1;
+		RPSCoreFramework:POIStreamingProcess();
 	end
 end
+
+function RPSCoreFramework:DailyStatusUpdate(str)
+	RPSCoreFramework.DailyCipherShow = tonumber(RPSCoreFramework.DailyCipherShow) + 1;
+	local int = tonumber(5 - RPSCoreFramework.DailyCipher[tonumber(str)]);
+	local text;
+	RPSDailyStreak = str;
+	if int == 1 then text = "остался"; else text = "осталось"; end
+	_G["DarkmoonCharacterFrameInfoBodyAvaGraduate"]:SetText(int);
+	for i = 1, 5 do
+		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Hide();
+	end
+	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
+		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
+	end
+	if RPSCoreFramework.DailyCipherShow > 2 then
+		if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
+			print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
+		elseif RPSCoreFramework.DailyCipher[tonumber(str)] ~= 0 then
+			print("|cFFFF8040Ура! Вы были с нами |cFFFFFF005|r|cFFFF8040 дней подряд и получаете награду|cFFFFFF00 "..GetCoinTextureString(30000).."|r|cFFFF8040!|r");
+		end
+	end
+end
+
+function MountModelStatusUpdate(str)
+	local values = {strsplit(' ',str)}
+	if tonumber(values[1]) ~= nil then
+		RPSCharSpec = tonumber(values[1]) + 1;
+	else
+		RPSCharSpec = 1;
+	end
+	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]);
+end
+
+
+--function RPSCoreFramework:AddPOIPins(str)
+--	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
+--	local lines = decom:splitstr('\r\n');
+--
+--	for i=1, #lines do
+--		print(lines[i]);
+--
+--		local values = {strsplit("#",lines[i])}
+--		if values[1] ~= "" then
+--			RPSCorePOIPins[values[1]] = values;
+--		end
+--	end
+--end
 
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};
@@ -208,15 +269,24 @@ function RPSCoreFramework:RemovePOIPins(str)
 end
 
 function RPSCoreFramework:GetCommandPOIPins(str)
-	if (str == "refresh") then
+	local values = {strsplit(' ',str)};
+	if (values[1] == "refresh") then
 		RPSCoreFramework.Map.POIWorkflow = false;
 		RPSCorePOIPins = {};
-	elseif (str == "done") then
+		if (values[2] ~= nil) then
+			RPSCoreFramework.Map.POICount = values[2];
+			RPSCoreFramework:POIStreamingLoad();
+		end
+	elseif (values[1] == "done") then
+		RPSCoreFramework.CharcterPOILoaded = true;
 		RPSCoreFramework.Map.POIWorkflow = true;
 		if (RPSCoreFramework.Map.POIUpdateQueque) then
 			RPSCoreFramework:POIUpdateIntoMainMassive();
 		end
+		RPSCoreFramework:CharacterInfoPOIBlock(2);
+		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 		RPSCoreFramework:GeneratePOIPlaces();
+		RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);
 	end
 end
 
@@ -277,15 +347,66 @@ function RPSCoreFramework:ThreeTimesUpdate()
 	RPSCoreFramework:ScrollMenuUpdater();
 end
 
+--"RPS.CON.i"
+function RPSCoreFramework:InitializeContainer(msg)
+	local values = {strsplit('#',msg)};	
+	if RPSCoreFramework.ContainerDataFlow then
+		print("InitializeContainer: ".. msg);
+		--[[name(title)
+		--	type
+		--	size]]
+		RPSCoreFramework.ContainerDataFlow = false;
+		RPSCoreFramework.Container.title = values[1];
+		RPSCoreFramework.Container.type = values[2];
+		RPSCoreFramework.Container.size = tonumber(values[3]);
+		RPSCoreFramework:SetUpContainerFrame();
+		return;
+	end
+	--[[slot
+	--	itemID
+	--	count]]
+	print("Add new item in to container: ".. msg);
+	RPSCoreFramework:PushContainerItem(tonumber(values[1]), {isVirtual = true, itemID = tonumber(values[2]), count = tonumber(values[3]), locked = false});
+end
+
+--"RPS.CON.c"
+function RPSCoreFramework:InvokeContainerComamnd(msg)
+	print("InvokeContainerComamnd: ".. msg);
+	if ( msg == "done" ) then
+		RPSCoreFramework.ContainerDataFlow = true
+		RPSCoreFramework:ContainerFrameGenerateFrame(_G["RPS_ContainerFrame"], RPSCoreFramework.Container.size, RPSCoreFramework.Container.title)
+	end
+end
+
+--"RPS.CON.upd"
+function RPSCoreFramework:UpdateContainer(msg)
+	print("UpdateContainer: ".. msg);
+	values = {strsplit('#',msg)};
+	if values ~= nil then
+		if tonumber(values[1]) == 0 then
+			RPSCoreFramework:ClearItemByID(tonumber(values[2]));
+		elseif tonumber(values[1]) == 1 then
+			RPSCoreFramework:PushContainerItem(tonumber(values[2]), {isVirtual = true, itemID = tonumber(values[3]), count = tonumber(values[4]), locked = false})
+		end
+	end
+
+	if ( RPSCoreFramework.PlayerCursorInformation ~= nil ) then
+		if (RPSCoreFramework:GetContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID) == nil) then
+			RPSCoreFramework:ClearCursor();
+			RPSCoreFramework.PlayerCursorInformation = nil;
+		end
+	end
+
+	RPSCoreFramework:ContainerFrameUpdate();
+
+end
+
 function RPSCoreFramework:SalaryIndicator(msg)
 	PlaySound(54125, "SFX")
 	CurrencyFrameTextFrameString:SetText("Получено |cFFFFFF00".. GetCoinTextureString(tonumber(msg)).."|r")
 	RPSCoreFramework.SalaryTimer = RPSCoreFramework:ScheduleTimer("HideSalaryIndicator", 2.5);
 
 	CurrencyFrame:Show();
-
---[[treasuregoblin_coinimpact.m2
-	treasuregoblin_portal.m2]]
 end
 
 function RPSCoreFramework:HideSalaryIndicator()

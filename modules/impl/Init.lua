@@ -2,6 +2,7 @@ function RPSCoreFramework:OnEnable()
 	self.TimerID = self:ScheduleRepeatingTimer("GlobalTimer", 1);
 	self:ScheduleTimer("OneShotUpdater", 10);
 	self:ScheduleTimer("UpdateScrollerPosition", 7);
+	self:ScheduleTimer("ConfirmedAddonLoading", 10);
 	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5);
 	self:ScheduleRepeatingTimer("StartGarbageCollection", 3600);
 	
@@ -14,6 +15,7 @@ function RPSCoreFramework:OnEnable()
 end
 
 function RPSCoreFramework:OnInitialize()
+
 	LoggingChat(1);
 	SetCVar("autoClearAFK", 0);
 
@@ -21,10 +23,13 @@ function RPSCoreFramework:OnInitialize()
 	
 	table.insert(UISpecialFrames, PollFrame);
 	table.insert(UISpecialFrames, RPS_MainFrame);
+	table.insert(UISpecialFrames, GameObjectPreview);
 
 	self:EnableDrag(RPS_MainFrame);
 	self:EnableDrag(RPS_InteractFrame);
 	self:EnableDrag(PollFrame);
+	self:EnableDrag(GameObjectPreview);
+	--GameObjectPreview:Show();
 
 	self:InitializeHooks();
 
@@ -43,6 +48,8 @@ function RPSCoreFramework:OnInitialize()
 
 	self:AddGuildSalaryTab();
 
+	--RPSCoreFramework:AddGuildPOIInfo();
+
 	-- Disp & Scale
 
 	self:SendCoreMessage("disp list");
@@ -55,6 +62,17 @@ function RPSCoreFramework:OnInitialize()
 		self:SendCoreMessage("rps guild infosalary");
 	end
 
+	RPSCoreFramework:DailyStatusUpdate(RPSDailyStreak);
+
+	-- Guild goals
+
+	--[[GuildInfoFrameInfoChallenge1:Hide();
+	GuildInfoFrameInfoChallenge2:Hide();
+	GuildInfoFrameInfoChallenge3:Hide();
+	GuildInfoFrameInfoChallenge4:Hide();
+	GuildInfoFrameInfoChallenge5:Hide();
+	GuildInfoFrameInfoHeader1Label:SetText("Гильдейские точки интереса (POI)");]]--
+
 	-- Stats
 
 	self:UpdateDiff();
@@ -66,11 +84,33 @@ function RPSCoreFramework:OnInitialize()
 	EnduranceStatName:SetText("Стойкость");
 	DexterityStatName:SetText("Сноровка");
 	WillStatName:SetText("Воля");
+
+	DarkmoonSocialStatsFrameStat1StatName:SetText("Харизма"); -- INV_BandofBrothers
+	DarkmoonSocialStatsFrameStat2StatName:SetText("Лидерство"); -- Achievement_PVP_Legion08
+	DarkmoonSocialStatsFrameStat3StatName:SetText("Дипломатия"); -- Achievement_Reputation_08
+	DarkmoonSocialStatsFrameStat4StatName:SetText("Торговля"); -- TimelessCoin
+	DarkmoonSocialStatsFrameStat5StatName:SetText("Устрашение"); -- Ability_Warrior_Revenge
+	DarkmoonSocialStatsFrameStat6StatName:SetText("Эрудиция"); -- INV_Misc_ScrollRolled04
+	DarkmoonSocialStatsFrameStat7StatName:SetText("Искусство"); -- Achievement_Faction_GoldenLotus
+	DarkmoonSocialStatsFrameStat8StatName:SetText("Выживание"); -- Ability_Hunter_ImprovedTracking
+	DarkmoonSocialStatsFrameStat9StatName:SetText("Внимательность"); -- Ability_Hunter_MarkedForDeath
+	DarkmoonSocialStatsFrameStat10StatName:SetText("Реакция"); -- Ability_Hunter_MarkedShot
+	DarkmoonSocialStatsFrameStat11StatName:SetText("Поиск"); -- TRADE_ARCHAEOLOGY
+	DarkmoonSocialStatsFrameStat12StatName:SetText("Слух"); -- Ability_Hunter_BeastCall
+	DarkmoonSocialStatsFrameStat13StatName:SetText("Скрытность"); -- Ability_Hunter_Camouflage
+	DarkmoonSocialStatsFrameStat14StatName:SetText("Ловкость рук"); -- Ability_Hunter_BeastSoothe
+	DarkmoonSocialStatsFrameStat15StatName:SetText("Верховая езда"); -- ACHIEVEMENT_GUILDPERK_MOUNTUP
+	DarkmoonSocialStatsFrameStat16StatName:SetText("Удача"); -- Achievement_Boss_CThun
+
+
 	DarkmoonCharStatsInfoUnlearn:SetText("Разучить "..GetCoinTextureString(RPSCoreFramework.RequestUnlearn));
 
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
 	DarkmoonCharStatsInfoUnlearn:Disable();
+
+	RPS_BTNReScale:Disable();
+	RPS_BTNAcceptScale:Disable();
 
 	self:StatsIncDecFunc();
 	
@@ -83,17 +123,63 @@ function RPSCoreFramework:OnInitialize()
     DexterityIcon:SetTexture("Interface\\ICONS\\ability_rogue_cheatdeath");
     WillIcon:SetTexture("Interface\\ICONS\\ability_shaman_astralshift");
 
+	DarkmoonSocialStatsFrameStat1Icon:SetTexture("Interface\\ICONS\\INV_BandofBrothers");
+	DarkmoonSocialStatsFrameStat2Icon:SetTexture("Interface\\ICONS\\Achievement_PVP_Legion08");
+	DarkmoonSocialStatsFrameStat3Icon:SetTexture("Interface\\ICONS\\Achievement_Reputation_08");
+	DarkmoonSocialStatsFrameStat4Icon:SetTexture("Interface\\ICONS\\TimelessCoin");
+	DarkmoonSocialStatsFrameStat5Icon:SetTexture("Interface\\ICONS\\Ability_Warrior_Revenge");
+	DarkmoonSocialStatsFrameStat6Icon:SetTexture("Interface\\ICONS\\INV_Misc_ScrollRolled04");
+	DarkmoonSocialStatsFrameStat7Icon:SetTexture("Interface\\ICONS\\Achievement_Faction_GoldenLotus");
+	DarkmoonSocialStatsFrameStat8Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_ImprovedTracking");
+	DarkmoonSocialStatsFrameStat9Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_MarkedForDeath");
+	DarkmoonSocialStatsFrameStat10Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_MarkedShot");
+	DarkmoonSocialStatsFrameStat11Icon:SetTexture("Interface\\ICONS\\TRADE_ARCHAEOLOGY");
+	DarkmoonSocialStatsFrameStat12Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_BeastCall");
+	DarkmoonSocialStatsFrameStat13Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_Camouflage");
+	DarkmoonSocialStatsFrameStat14Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_BeastSoothe");
+	DarkmoonSocialStatsFrameStat15Icon:SetTexture("Interface\\ICONS\\ACHIEVEMENT_GUILDPERK_MOUNTUP");
+	DarkmoonSocialStatsFrameStat16Icon:SetTexture("Interface\\ICONS\\Achievement_Boss_CThun");
+
+	DarkmoonSocialStatsFrameStat1Minus:Disable();
+	DarkmoonSocialStatsFrameStat1Plus:Disable();
+	DarkmoonSocialStatsFrameStat2Minus:Disable();
+	DarkmoonSocialStatsFrameStat2Plus:Disable();
+	DarkmoonSocialStatsFrameStat3Minus:Disable();
+	DarkmoonSocialStatsFrameStat3Plus:Disable();
+	DarkmoonSocialStatsFrameStat4Minus:Disable();
+	DarkmoonSocialStatsFrameStat4Plus:Disable();
+	DarkmoonSocialStatsFrameStat5Minus:Disable();
+	DarkmoonSocialStatsFrameStat5Plus:Disable();
+	DarkmoonSocialStatsFrameStat6Minus:Disable();
+	DarkmoonSocialStatsFrameStat6Plus:Disable();
+	DarkmoonSocialStatsFrameStat7Minus:Disable();
+	DarkmoonSocialStatsFrameStat7Plus:Disable();
+	DarkmoonSocialStatsFrameStat8Minus:Disable();
+	DarkmoonSocialStatsFrameStat8Plus:Disable();
+	DarkmoonSocialStatsFrameStat9Minus:Disable();
+	DarkmoonSocialStatsFrameStat9Plus:Disable();
+	DarkmoonSocialStatsFrameStat10Minus:Disable();
+	DarkmoonSocialStatsFrameStat10Plus:Disable();
+	DarkmoonSocialStatsFrameStat11Minus:Disable();
+	DarkmoonSocialStatsFrameStat11Plus:Disable();
+	DarkmoonSocialStatsFrameStat12Minus:Disable();
+	DarkmoonSocialStatsFrameStat12Plus:Disable();
+	DarkmoonSocialStatsFrameStat13Minus:Disable();
+	DarkmoonSocialStatsFrameStat13Plus:Disable();
+	DarkmoonSocialStatsFrameStat14Minus:Disable();
+	DarkmoonSocialStatsFrameStat14Plus:Disable();
+	DarkmoonSocialStatsFrameStat15Minus:Disable();
+	DarkmoonSocialStatsFrameStat15Plus:Disable();
+	DarkmoonSocialStatsFrameStat16Minus:Disable();
+	DarkmoonSocialStatsFrameStat16Plus:Disable();
+
 	-- RPSLiterature.lua text formatting
 
-	self:LiteratureTextFormatting()
---	self:MinstrelSetTextOnShow()
+	self:LiteratureTextFormatting();
 
 	-- Button extensions
 
---	RPS_DarkmoonInfo:LockHighlight(); -- Starting page
-    RPS_CHRBTN1:LockHighlight();
-    RPS_CHRBTN2:UnlockHighlight();
-
+	--RPS_CharInfoLabel:SetText(UnitName("player"));
 	self:OnClickCosmeticTabs(RPS_FSBTN1);
 	RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
 
@@ -104,6 +190,8 @@ function RPSCoreFramework:OnInitialize()
 
 	RPSCoreFramework:GeneratePOIPlaces();
 	
+	RPSCoreFramework:TalentAlertMessageHide();
+
 --	UIErrorsFrame:Hide();
 --	UIErrorsFrame:ClearAllPoints();
 --	UIErrorsFrame:SetPoint("TOP", UIParent, "BOTTOM", 0, -100);
@@ -122,9 +210,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -152,9 +243,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -196,9 +290,12 @@ function RPSCoreFramework:OnInitialize()
 			self.button1:Enable();
 			self.button2:Disable();
 			self.button3:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					if (self.canloot) then
 						self.button2:SetText("Ограбить");
 						self.button2:Enable();
@@ -235,9 +332,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -265,9 +365,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -295,9 +398,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -325,9 +431,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -374,9 +483,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 15;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(OKAY)
 					self.button1:Enable();
 					self.ticker:Cancel();
@@ -404,9 +516,12 @@ function RPSCoreFramework:OnInitialize()
 			self.declineTimeLeft = 3;
 			self.button1:SetText(self.declineTimeLeft);
 			self.button1:Disable();
+			if self.ticker then
+				self.ticker:Cancel();
+			end
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
-				if (self.declineTimeLeft == 0) then
+				if (self.declineTimeLeft <= 0) then
 					self.button1:SetText(YES)
 					self.button1:Enable();
 					self.ticker:Cancel();

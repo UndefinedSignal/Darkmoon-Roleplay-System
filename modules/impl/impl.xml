@@ -17,5 +17,6 @@
 	<Script file="POI.lua"/>
 	<Script file="Search.lua"/>
 	<Script file="Quiz.lua"/>
-	
+	<Script file="gobject.lua"/>	
+	<Script file="StreamingLoad.lua"/>
 </Ui>

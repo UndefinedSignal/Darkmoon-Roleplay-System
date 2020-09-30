@@ -47,6 +47,79 @@
                 </Anchors>
             </Frame>
             <!-- RIGHT PART : Place for content -->
+            <Frame name="DarkmoonWIPFrame" frameStrata="TOOLTIP" enableMouse="true" hidden="true">
+                <Size x="540" y="455"/>
+                <Anchors>
+                    <Anchor relativeTo="RPS_MainFrame" point="TOPLEFT" x="220" y="-20"/>
+                    <Anchor relativeTo="RPS_MainFrame" point="BOTTOMRIGHT" x="-22" y="20"/>
+                </Anchors>
+
+                <Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+                    <EdgeSize val="16" />
+                    <TileSize val="418" />
+                    <BackgroundInsets left="3" right="3" top="5" bottom="3"/>
+                </Backdrop>
+                <Layers>
+                    <Layer level="BORDER">
+                        <Texture parentKey="flash1" alphaMode="ADD" file="Interface\UNITPOWERBARALT\PandarenTrainingLarge_Circular_Flash" alpha="0.5">
+                            <Size x="300" y="300"/>
+                            <Anchors>
+                                <Anchor point="CENTER" x="0" y="0"/>
+                            </Anchors>
+                        </Texture>
+                        <Texture parentKey="flash2" alphaMode="ADD" file="Interface\UNITPOWERBARALT\PandarenTrainingLarge_Circular_Flash" alpha="0.5">
+                            <Size x="400" y="400"/>
+                            <Anchors>
+                                <Anchor point="CENTER" x="0" y="0"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer><!-- interface/dialogframe/ui-dialog-icon-alertother -->
+                        <Texture parentKey="Gear1" file="interface/dialogframe/ui-dialog-icon-alertother">
+                            <!--<Color r="0" g="0" b="0" a="1"/>-->
+                            <Size x="96" y="96"/>
+                            <Anchors>
+                                <Anchor point="CENTER" x="0" y="0"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                    <Layer>
+                        <FontString name="$parentText" font="Fonts\FRIZQT___CYR.TTF" text="Загрузка" justifyH="LEFT" justifyV="TOP">
+                            <Color r="0.85" g="0" b="0" a="0.8"/>
+                            <FontHeight val="24"/>
+                            <Anchors>
+                                <Anchor point="BOTTOM" relativeTo="$parent" x="0" y="70" />
+                            </Anchors>
+                            <Shadow>
+                                <Offset x="2" y="2" />
+                                <Color r="0" g="0" b="0"/>
+                            </Shadow>
+                        </FontString>
+                    </Layer>
+                </Layers>
+
+                <Animations>
+                    <AnimationGroup parentKey="fadeOut" setToFinalAlpha="true">
+                        <Alpha duration="1" toAlpha="0" fromAlpha="1"/>
+                        <Scripts>
+                            <OnFinished>
+                                DarkmoonWIPFrame:Hide();
+                            </OnFinished>
+                        </Scripts>
+                    </AnimationGroup>
+                    <AnimationGroup parentKey="fadeIn" setToFinalAlpha="true">
+                        <Alpha duration="0" fromAlpha="1" toAlpha="0"/>
+                        <Alpha duration="0.5" fromAlpha="0" toAlpha="1"/>
+                    </AnimationGroup>
+                    <AnimationGroup parentKey="content">
+                        <Rotation parentKey="flash1Rotation" targetKey="$parent.$parent.flash1" degrees="-90"/>
+                        <Rotation parentKey="flash2Rotation" targetKey="$parent.$parent.flash2" degrees="90"/>
+                        <Scale duration="1" targetKey="flash1" scaleX="2.5" scaleY="2.5"/>
+                        <Scale duration="1" targetKey="flash2" scaleX="2.5" scaleY="2.5"/>
+                        <!--<Rotation parentKey="GearRotation" targetKey="$parent.$parent.Gear1" degrees="-360"/>-->
+                    </AnimationGroup>
+                </Animations>
+            </Frame>
             <Frame name="RPS_MainFramePageContainer">
                 <Anchors>
                     <Anchor point="TOPRIGHT" x="-20" y="-20"/>
@@ -236,186 +309,33 @@
                             </Button>
                         </Frames>
                     </Frame>
-                    <Frame name="DarkmoonCharacterFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
+
+                    <Frame name="DarkmoonSettingsFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
                         </Anchors>
-
                         <Frames>
-                            <Frame name="DrakmoonCharacterFrameMain" inherits="RPS_InnerFrame">
+                            <Frame name="$parentContent" inherits="RPS_InnerFrame">
                                 <Size x="350" y="375" />
                                 <Anchors>
                                     <Anchor point="CENTER" x="0" y="0"/>
                                 </Anchors>
-
                                 <Layers>
-                                    <Layer level="BACKGROUND">
-                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
-                                        <!--Interface\BankFrame\Bank-Background-->
-                                        <!--Interface\Collections\CollectionsBackgroundTile-->
-                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
-                                        <Texture name="DarkmoonCharacterBackground" horizTile="true" vertTile="true">
+
+                                    <Layer>
+                                        <FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Настройки" justifyH="CENTER" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="24"/>
                                             <Anchors>
-                                                <Anchor point="TOPLEFT" x="0" y="0"/>
-                                                <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                                                <Anchor point="TOP" relativeTo="$parent" x="0" y="-20" />
                                             </Anchors>
-                                        </Texture>
+                                            <Shadow>
+                                                <Offset x="1" y="1" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
                                     </Layer>
-                                </Layers>
 
-                                <Frames>
-                                    <Slider name="RPS_CharScaleSlider" inherits="OptionsSliderTemplate">
-                                        <Size x="20" y="350"/>
-                                        <Anchors>
-                                             <Anchor point="TOPLEFT" x="-35" y="-14"/>
-                                        </Anchors>
-
-                                        <Layers>
-                                            <Layer>
-                                                <FontString name="ScaleLarge" font="Fonts\FRIZQT___CYR.TTF" text="Огромный" justifyH="LEFT" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-70" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-
-                                            <Layer>
-                                                <FontString name="ScaleHigh" font="Fonts\FRIZQT___CYR.TTF" text="Высокий" justifyH="LEFT" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-130" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-
-                                            <Layer>
-                                                <FontString name="ScaleNormal" font="Fonts\FRIZQT___CYR.TTF" text="Нормальный" justifyH="LEFT" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-226" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-
-                                            <Layer>
-                                                <FontString name="ScaleTall" font="Fonts\FRIZQT___CYR.TTF" text="Невысокий" justifyH="LEFT" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-324" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-
-                                            <Layer>
-                                                <FontString name="ScaleSmall" font="Fonts\FRIZQT___CYR.TTF" text="Низкий" justifyH="LEFT" justifyV="TOP">
-                                                    <Color r="1" g="1" b="1" a="1"/>
-                                                    <FontHeight val="12"/>
-                                                    <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrame" x="98" y="-386" />
-                                                    </Anchors>
-                                                    <Shadow>
-                                                        <Offset x="1" y="1" />
-                                                        <Color r="0" g="0" b="0"/>
-                                                    </Shadow>
-                                                </FontString>
-                                            </Layer>
-
-                                        </Layers>
-                                        <Scripts>
-                                            <OnShow>
-                                                if RPSCoreFramework.MyScale == -1 then
-                                                    self:Disable();
-                                                end
-                                            </OnShow>
-                                        </Scripts>
-                                    </Slider>
-
-                                    <PlayerModel name="DarkmoonPlayerModel" inherits="ModelWithControlsTemplate">
-                                        <Size x="150" y="60"/>
-                                        <Scripts>
-                                            <OnEnter>
-                                                self:SetAnimation(66);
-                                            </OnEnter>
-                                            <OnLeave>
-                                                self:SetAnimation(0);
-                                            </OnLeave>
-                                            <OnShow>
-                                                DarkmoonPlayerModel:SetUnit("player");
-                                                DarkmoonPlayerModel:SetAllPoints();
-                                            </OnShow>
-                                        </Scripts>
-                                    </PlayerModel>
-
-                                    <Button name="RPS_BTNAcceptScale" inherits="UIPanelButtonTemplate" text=" ">
-                                        <Size x="114" y="28"/>
-                                        <Anchors>
-                                            <Anchor relativeTo="DarkmoonCharacterFrame" relativePoint="CENTER" x="-102" y="-150"/>
-                                        </Anchors>
-                                        <NormalFont style="GameFontNormal"/>
-
-                                        <Scripts>
-                                            <OnLoad>
-                                                self:SetFrameStrata("DIALOG");
-                                                self:SetText("Применить");
-                                            </OnLoad>
-
-                                            <OnShow>
-                                                RPSCoreFramework:UpdateScaleApplyButton();
-                                            </OnShow>
-
-                                            <OnClick>
-                                                -- hookskript
-                                            </OnClick>
-                                        </Scripts>
-                                    </Button>
-
-                                    <Button name="RPS_BTNReScale" inherits="UIPanelButtonTemplate" text=" ">
-                                        <Size x="122" y="28"/>
-                                        <Anchors>
-                                            <Anchor relativeTo="DarkmoonCharacterFrame" relativePoint="CENTER" x="15" y="-150"/>
-                                        </Anchors>
-                                        <Scripts>
-                                            <OnLoad>
-                                                self:SetFrameStrata("DIALOG");
-                                                self:SetText("Сброс "..GetCoinTextureString(500000));
-                                            </OnLoad>
-
-                                            <OnShow>
-                                                RPSCoreFramework:UpdateScaleReset();
-                                            </OnShow>
-                                        </Scripts>
-                                    </Button>
-
-                                </Frames>
-                            </Frame>
-
-                            <Frame name="DrakmoonCharacterFrameSettings" inherits="RPS_InnerFrame" hidden="true">
-                                <Size x="350" y="375" />
-                                <Anchors>
-                                    <Anchor point="CENTER" x="0" y="0"/>
-                                </Anchors>
-                                <Layers>
                                     <Layer level="BACKGROUND">
                                         <Texture name="SettingsBackground" file="Interface\Artifacts\ArtifactUIPriestShadow">
                                             <Anchors>
@@ -431,7 +351,7 @@
                                 <Frames>
                                     <CheckButton name="RPS_RTXCheckBox" inherits="OptionsCheckButtonTemplate" checked="true">
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-125"/> -- *1.1
+                                            <Anchor relativeTo="$parent" relativePoint="TOPLEFT" x="163" y="-125"/> -- *1.1
                                         </Anchors>
                                         <Layers>
                                             <Layer>
@@ -470,7 +390,7 @@
 
                                     <CheckButton name="RPS_ACTIONCAMCheckBox" inherits="OptionsCheckButtonTemplate">
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-165"/>
+                                            <Anchor relativeTo="$parent" relativePoint="TOPLEFT" x="163" y="-165"/>
                                         </Anchors>
                                         <Layers>
                                             <Layer>
@@ -528,7 +448,7 @@
 
                                     <CheckButton name="RPS_POIPinsCheckBox" inherits="OptionsCheckButtonTemplate">
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="TOPLEFT" x="163" y="-200"/>
+                                            <Anchor relativeTo="$parent" relativePoint="TOPLEFT" x="163" y="-200"/>
                                         </Anchors>
                                         <Layers>
                                             <Layer>
@@ -579,64 +499,570 @@
                                             </OnClick>
                                         </Scripts>
                                     </CheckButton>
+                                </Frames>
+                            </Frame>
+                        </Frames>
+                    </Frame>
 
-                                    <Button name="RPS_BARBERSHOPBUTTON" inherits="GameMenuButtonTemplate" text="Парикмахерская">
-                                        <Size x="120" y="34"/>
+                    <Frame name="DarkmoonCharacterFrameInfo" inherits="RPS_StandardParchmentFrame" hidden="true">
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
+                        </Anchors>
+
+                        <Frames>
+                            <Frame name="$parentBody">
+                                <Size x="350" y="375" />
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" x="15" y="-13"/>
+                                    <Anchor point="BOTTOMRIGHT" x="-15" y="13"/>
+                                </Anchors>
+
+                                <Layers>
+                                    <Layer>
+                                        <Texture name="$parentPortrait" file="Interface\Calendar\MeetingIcon">
+                                            <Size x="64" y="64" />
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="45" y="-35"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                    <Layer level="BORDER">
+                                        <Texture name="$parentPortraitFrame" atlas="honorsystem-prestige-laurel">
+                                            <Size x="140" y="120" />
+                                            <Anchors>
+                                                <Anchor relativeTo="$parentPortrait" point="CENTER" x="0" y="-4" />
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                    <Layer>
+                                        <FontString name="$parentAvaGraduate" font="Fonts\FRIZQT___CYR.TTF" text="2" justifyH="CENTER" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="11"/>
+                                            <Anchors>
+                                                <Anchor point="BOTTOM" relativeTo="$parentPortraitFrame" x="0.1" y="19" />
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="1" y="1" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                    <Layer>
+                                        <FontString name="$parentTextName" font="Fonts\FRIZQT___CYR.TTF" text="[NAME]" justifyH="CENTER" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="16"/>
+                                            <Anchors>
+                                                <Anchor point="LEFT" relativeTo="$parentPortrait" relativePoint="RIGHT" x="25" y="25"/>
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="2" y="2" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="$parentTextNameBackground" atlas="BossBanner-BgBanner-Mid">
+                                            <Size x="504" y="168" /> <!--467,141-->
+                                            <Anchors>
+                                                <Anchor relativeTo="$parentTextName" point="TOPLEFT" x="-15" y="3" />
+                                                <Anchor relativeTo="$parentTextName" point="BOTTOMRIGHT" x="25" y="-3" />
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Scripts>
+                                    <OnShow>
+                                        DarkmoonCharacterFrameInfoBodyTextName:SetText(UnitName("player"))
+                                        SetPortraitTexture(DarkmoonCharacterFrameInfoBodyPortrait, "player")
+                                    </OnShow>
+                                </Scripts>
+                            </Frame>
+
+                            <Frame name="$parentTRBody">
+                                <Anchors>
+                                    <Anchor point="TOP" x="67" y="-30"/>
+                                    <Anchor point="RIGHT" x="-23" y="80"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="$parentBackground" atlas="NzothScenario-TitleBG">
+                                            <Size x="504" y="168" /> <!--467,141-->
+                                            <Anchors>
+                                                <Anchor point="TOPRIGHT" x="65" y="10" />
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                   <Button name="DarkmoonDropSpecChoose" inherits="RPS_EasyDropDownTemplate">
                                         <Anchors>
-                                            <Anchor relativeTo="DrakmoonCharacterFrameSettings" relativePoint="CENTER" x="-60" y="-50"/> -- *1.1
+                                            <Anchor point="LEFT" x="-130" y="-30" />
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="OVERLAY">
+                                                <FontString inherits="GameFontNormal" text="Визуальный стиль ездовых животных" justifyH="CENTER" parentKey="rankLabel">
+                                                    <Size  x="0" y="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOP" relativeTo="$parent" relativePoint="TOPRIGHT" x="85" y="15"/>
+                                                    </Anchors>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                if not RPSCharSpec then
+                                                    RPSCharSpec = tonumber(1);
+                                                    DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[1]);
+                                                else
+                                                    DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]);
+                                                end
+                                            </OnShow>
+                                            <OnLoad>
+                                                DarkmoonDropSpecChoose.Button:SetScript("OnClick", function()
+                                                    RPSCoreFramework:ShowCharSpecChooseDropDownMenu();
+                                                end);
+                                            </OnLoad>
+                                        </Scripts>
+                                   </Button>
+                                    <Button name="$parentSpecInfo">
+                                        <Size x="21" y="21" />
+                                        <Anchors>
+                                            <Anchor relativeTo="DarkmoonDropSpecChooseButton" point="LEFT" relativePoint="RIGHT" x="3" y="0"/>
+                                        </Anchors>
+                                        <NormalTexture atlas="worldquest-tracker-questmarker" />
+                                        <PushedTexture atlas="worldquest-tracker-questmarker" />
+                                        <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
+                                            <Size x="24" y="24"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
+                                        </HighlightTexture>
+                                        <Scripts>
+                                            <OnEnter>
+                                                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                                                GameTooltip:AddLine("|cFFFFFFFFСтиль ездовых животных|r");
+                                                GameTooltip:AddLine(" ");
+                                                GameTooltip:AddLine("Выбор визуального стиля ездового животного согласно специализации, если такой выбор поддерживается ездовым животным.");
+                                                GameTooltip:Show();
+                                            </OnEnter>
+                                            <OnLeave>
+                                                GameTooltip:Hide();
+                                            </OnLeave>
+                                        </Scripts>
+                                    </Button>
+                                    <Button name="$parentDaystreakInfo">
+                                        <Size x="21" y="21" />
+                                        <Anchors>
+                                            <Anchor point="TOPRIGHT" x="-24" y="-8"/>
+                                        </Anchors>
+                                        <NormalTexture atlas="worldquest-tracker-questmarker" />
+                                        <PushedTexture atlas="worldquest-tracker-questmarker" />
+                                        <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
+                                            <Size x="24" y="24"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
+                                        </HighlightTexture>
+                                        <Scripts>
+                                            <OnEnter>
+                                                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                                                GameTooltip:AddLine("|cFFFFFFFFБонус ежедневной игры|r");
+                                                GameTooltip:AddLine(" ");
+                                                GameTooltip:AddLine("Отыгрывайте 5 дней подряд и получите бонус в ".. GetCoinTextureString(30000) .. " монеты.");
+                                                GameTooltip:Show();
+                                            </OnEnter>
+                                            <OnLeave>
+                                                GameTooltip:Hide();
+                                            </OnLeave>
+                                        </Scripts>
+                                    </Button>
+                                    <Button name="$parentDay1" inherits="DaystrikeButton">
+                                        <Anchors>
+                                            <Anchor point="TOP" x="-148" y="-38"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentDay2" inherits="DaystrikeButton">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentDay1" relativePoint="RIGHT" point="LEFT" x="-12"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentDay3" inherits="DaystrikeButton">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentDay2" relativePoint="RIGHT" point="LEFT" x="-12"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentDay4" inherits="DaystrikeButton">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentDay3" relativePoint="RIGHT" point="LEFT" x="-12"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentDay5" inherits="DaystrikeButton">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentDay4" relativePoint="RIGHT" point="LEFT" x="-12"/>
+                                        </Anchors>
+                                    </Button>
+
+                                </Frames>
+                            </Frame>
+                            <Frame name="$parentMainContent" inherits="RPS_InnerFrame">
+                                <Anchors>
+                                    <Anchor point="LEFT" x="42" y="-110"/>
+                                    <Anchor point="BOTTOMRIGHT" x="-42" y="35"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer>                                       
+                                        <FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Мои точки интереса (POI)" justifyH="CENTER" justifyV="TOP">
+                                            <Color r="1" g="1" b="1" a="1"/>
+                                            <FontHeight val="16"/>
+                                            <Shadow>
+                                                <Offset x="3" y="3" />
+                                                <Color r="0" g="0" b="0"/>
+                                            </Shadow>
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="0" y="25"/>
+                                            </Anchors>
+                                        </FontString>
+                                    </Layer>
+                                    <Layer level="BACKGROUND">
+                                        <Texture name="$parentTitleBackground" atlas="BossBanner-BgBanner-Mid">
+                                            <Size x="504" y="168" /> <!--467,141-->
+                                            <Anchors>
+                                                <Anchor relativeTo="$parentTitle" point="TOPLEFT" x="-15" y="3" />
+                                                <Anchor relativeTo="$parentTitle" point="BOTTOMRIGHT" x="35" y="-3" />
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                    <Frame parentKey="BlockOnLoad" frameStrata="TOOLTIP" inherits="WIPFrame">
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="-10" y="5"/>
+                                            <Anchor point="BOTTOMRIGHT" x="10" y="-5"/>
                                         </Anchors>
                                         <Scripts>
-                                            <OnClick>
-                                                RPSCoreFramework:SendCoreMessage("rps act barber");
-                                                PlaySound(624, "SFX");
-                                            </OnClick>
+                                            <OnLoad>
+                                                self.Text:SetText("Дождитесь загрузки точек интереса (POI)");
+                                            </OnLoad>
+                                            <OnShow>
+                                                if RPSCoreFramework.CharcterPOILoaded then
+                                                    DarkmoonCharacterFrameInfoMainContent.BlockOnLoad:Hide();
+                                                else
+                                                    DarkmoonCharacterFrameInfoMainContent.BlockOnLoad:Show();
+                                                    RPSCoreFramework:playAnimation(DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content);
+                                                end
+                                            </OnShow>
                                         </Scripts>
-                                        <Frames>
-                                            <SimpleHTML name="RPS_DarkmoonBARBERSHOPBUTTONText">
-                                                <Size x="280" y="200"/>
+                                    </Frame>
+                                    <ScrollFrame name="POISearchContent" inherits="UIPanelScrollFrameTemplate">
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="2" y="0" />
+                                            <Anchor point="BOTTOMRIGHT" x="-20" y="0" />
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="BACKGROUND">
+                                                <Texture name="$parentBackground" atlas="BFA-mission-complete-background-Alliance">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" x="-2" y="-3" />
+                                                        <Anchor point="BOTTOMRIGHT" x="19" y="0" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                        </Layers>
+                                        <ScrollChild>
+                                            <Frame name="$parentChild">
+                                                <Size x="240" y="230"/>
                                                 <Anchors>
-                                                    <Anchor relativeTo="RPS_BARBERSHOPBUTTON" relativePoint="BOTTOM" x="-125" y="-10"/>
+                                                    <Anchor point="TOPLEFT" x="0" y="0" />
+                                                    <Anchor point="BOTTOMRIGHT" x="0" y="0" />
                                                 </Anchors>
-                                            </SimpleHTML>
-                                        </Frames>
+                                                <Frames>
+                                                    <Button name="$parentbtn1" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor point="TOPLEFT" x="2" y="-10"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn2" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn1" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn3" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn1" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn4" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn3" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn5" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn3" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn6" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn5" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn7" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn5" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn8" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn7" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <!--<Button name="$parentbtn9" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn7" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn10" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn9" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>-->
+                                                </Frames>
+                                            </Frame>
+                                        </ScrollChild>
+                                        <Scripts>
+                                            <OnShow>
+                                                RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);
+                                                RPSCoreFramework:OwnPOIListShow();
+                                            </OnShow>
+                                            ScrollFrame_OnLoad(self);
+                                            ScrollFrame_OnScrollRangeChanged(self);
+                                        </Scripts>
+                                    </ScrollFrame>
+                                    <Button name="$parentSpecInfo">
+                                        <Size x="21" y="21" />
+                                        <Anchors>
+                                            <Anchor relativeTo="POISearchContent" point="TOPRIGHT" x="25" y="25"/>
+                                        </Anchors>
+                                        <NormalTexture atlas="worldquest-tracker-questmarker" />
+                                        <PushedTexture atlas="worldquest-tracker-questmarker" />
+                                        <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
+                                            <Size x="24" y="24"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
+                                        </HighlightTexture>
+                                        <Scripts>
+                                            <OnEnter>
+                                                GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                                                GameTooltip:AddLine("|cFFFFFFFFМои точки интереса (POI)|r");
+                                                GameTooltip:AddLine(" ");
+                                                GameTooltip:AddLine("Точки интереса, которые принадлежат или имеют отношение к вашему персонажу.");
+                                                GameTooltip:Show();
+                                            </OnEnter>
+                                            <OnLeave>
+                                                GameTooltip:Hide();
+                                            </OnLeave>
+                                        </Scripts>
                                     </Button>
                                 </Frames>
                             </Frame>
 
-                            <Button name="RPS_CHRBTN1" inherits="RPS_TabBar_Tab" text="Рост">
-                                <Size x="100" y="24"/>
-                                <Anchors>
-                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-98" y="24"/> -- *1.1
-                                </Anchors>
-                                <Scripts>
-                                    <OnClick>
-                                        DrakmoonCharacterFrameMain:Show();
-                                        DrakmoonCharacterFrameSettings:Hide();
-                                        self:LockHighlight();
-                                        RPS_CHRBTN2:UnlockHighlight();
-                                        PlaySound(21968, "SFX");
-                                    </OnClick>
-                                </Scripts>
-                            </Button>
-
-                            <Button name="RPS_CHRBTN2" inherits="RPS_TabBar_Tab" text="Настройки">
-                                <Size x="108" y="24"/>
-                                <Anchors>
-                                    <Anchor relativeTo="DrakmoonCharacterFrameMain" relativePoint="TOP" x="-10" y="24"/> -- *1.1
-                                </Anchors>
-                                <Scripts>
-                                    <OnClick>
-                                        DrakmoonCharacterFrameMain:Hide();
-                                        DrakmoonCharacterFrameSettings:Show();
-                                        self:LockHighlight();
-                                        RPS_CHRBTN1:UnlockHighlight();
-                                        PlaySound(21968, "SFX");
-                                    </OnClick>
-                                </Scripts>
-                            </Button>
-
                         </Frames>
+                        <Scripts>
+                            <OnShow>
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
                     </Frame>
+
+                    <Frame name="DarkmoonCharacterFrameScale" inherits="RPS_StandardParchmentFrame" hidden="true">
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
+                        </Anchors>
+
+                        <Frames>
+                            <Frame name="$parentBody" inherits="RPS_InnerFrame">
+                                <Size x="350" y="375" />
+                                <Anchors>
+                                    <Anchor point="CENTER" x="0" y="0"/>
+                                </Anchors>
+
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                        <!--Interface\BankFrame\Bank-Background-->
+                                        <!--Interface\Collections\CollectionsBackgroundTile-->
+                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                        <Texture name="DarkmoonCharacterBackground" horizTile="true" vertTile="true">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="0" y="0"/>
+                                                <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+
+                                <Frames>
+                                    <Slider name="RPS_CharScaleSlider" inherits="OptionsSliderTemplate">
+                                        <Size x="20" y="350"/>
+                                        <Anchors>
+                                             <Anchor point="TOPLEFT" x="-35" y="-14"/>
+                                        </Anchors>
+
+                                        <Layers>
+                                            <Layer>
+                                                <FontString name="ScaleLarge" font="Fonts\FRIZQT___CYR.TTF" text="Огромный" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-70" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleHigh" font="Fonts\FRIZQT___CYR.TTF" text="Высокий" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-130" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleNormal" font="Fonts\FRIZQT___CYR.TTF" text="Нормальный" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-226" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleTall" font="Fonts\FRIZQT___CYR.TTF" text="Невысокий" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-324" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer>
+                                                <FontString name="ScaleSmall" font="Fonts\FRIZQT___CYR.TTF" text="Низкий" justifyH="LEFT" justifyV="TOP">
+                                                    <Color r="1" g="1" b="1" a="1"/>
+                                                    <FontHeight val="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeTo="DarkmoonCharacterFrameScale" x="98" y="-386" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                if RPSCoreFramework.MyScale == -1 then
+                                                    self:Disable();
+                                                end
+                                            </OnShow>
+                                        </Scripts>
+                                    </Slider>
+
+                                    <PlayerModel name="DarkmoonPlayerModel" inherits="ModelWithControlsTemplate">
+                                        <Size x="150" y="60"/>
+                                        <Scripts>
+                                            <OnEnter>
+                                                self:SetAnimation(66);
+                                            </OnEnter>
+                                            <OnLeave>
+                                                self:SetAnimation(0);
+                                            </OnLeave>
+                                            <OnShow>
+                                                DarkmoonPlayerModel:SetUnit("player");
+                                                DarkmoonPlayerModel:SetAllPoints();
+                                            </OnShow>
+                                        </Scripts>
+                                    </PlayerModel>
+
+                                    <Button name="RPS_BTNAcceptScale" inherits="UIPanelButtonTemplate" text=" ">
+                                        <Size x="114" y="28"/>
+                                        <Anchors>
+                                            <Anchor relativeTo="DarkmoonCharacterFrameScale" relativePoint="CENTER" x="-102" y="-150"/>
+                                        </Anchors>
+                                        <NormalFont style="GameFontNormal"/>
+
+                                        <Scripts>
+                                            <OnLoad>
+                                                self:SetFrameStrata("DIALOG");
+                                                self:SetText("Применить");
+                                            </OnLoad>
+
+                                            <OnShow>
+                                                RPSCoreFramework:UpdateScaleApplyButton();
+                                            </OnShow>
+
+                                            <OnClick>
+                                                -- hookskript
+                                            </OnClick>
+                                        </Scripts>
+                                    </Button>
+
+                                    <Button name="RPS_BTNReScale" inherits="UIPanelButtonTemplate" text=" ">
+                                        <Size x="122" y="28"/>
+                                        <Anchors>
+                                            <Anchor relativeTo="DarkmoonCharacterFrameScale" relativePoint="CENTER" x="15" y="-150"/>
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnLoad>
+                                                self:SetFrameStrata("DIALOG");
+                                                self:SetText("Сброс "..GetCoinTextureString(500000));
+                                            </OnLoad>
+
+                                            <OnShow>
+                                                RPSCoreFramework:UpdateScaleReset();
+                                            </OnShow>
+                                        </Scripts>
+                                    </Button>
+                                </Frames>
+                            </Frame>
+                        </Frames>
+                        <Scripts>
+                            <OnShow>
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
+                    </Frame>
+
+
 
                     <Frame name="DarkmoonAurasFrame" hidden="true">
                         <Size x="500" y="450"/>
@@ -646,12 +1072,6 @@
                         <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
                             <EdgeSize val="24"/>
                         </Backdrop>
-                        <Anchors>
-                            <Anchor point="TOPLEFT" x="0" y="-30" />
-                            <Anchor point="TOPRIGHT" x="2" y="-30" />
-                            <Anchor point="BOTTOMLEFT" x="0" y="2" />
-                            <Anchor point="BOTTOMRIGHT" x="2" y="2" />
-                        </Anchors>
                         <Layers>
                             <Layer level="BACKGROUND">
                                 <Texture file="Interface\ACHIEVEMENTFRAME\UI-Achievement-StatsBackground">
@@ -676,8 +1096,6 @@
                                     </Shadow>
                                 </FontString>
                             </Layer>
-
-
                         </Layers>
 
                         <Frames>
@@ -927,8 +1345,286 @@
                             </Button>
 
                         </Frames>
+                        <Scripts>
+                            <OnShow>
+                                RPSCoreFramework:MenstrelOnShow(self);
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
                     </Frame>
 
+                    <Frame name="DarkmoonDisplayPresetFrame" hidden="true">
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="24"/>
+                        </Backdrop>
+                        <Layers>
+                            <Layer>
+                                <Texture parentKey="Background" atlas="UI-Frame-Horde-CardParchmentWider">
+                                    <Anchors>
+                                        <Anchor point="TOPLEFT" x="0" y="0"/>
+                                        <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Anchors>
+                            <Anchor point="TOPLEFT" x="0" y="0" />
+                            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                        </Anchors>
+                        <Frames>
+                            <Frame name="$parentMenu">
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <Texture parentKey="Background" frameStrata="HIGH" atlas="GarrLanding-FollowerScrollFrame">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="2" y="0"/>
+                                                <Anchor point="BOTTOMRIGHT" x="6" y="0"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonDisplayPresetFrame" point="TOPLEFT" x="0" y="0" />
+                                    <Anchor relativeTo="DarkmoonDisplayPresetFrame" point="BOTTOM" x="-150" y="0" />
+                                </Anchors>
+                                <Frames>
+                                    <ScrollFrame name="$parentSlider" inherits="UIPanelScrollFrameTemplate">
+                                        <Size x="240" y="245"/>
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="4" y="-7" />
+                                            <Anchor point="BOTTOMRIGHT" x="-19" y="5" />
+                                        </Anchors>
+                                        <ScrollChild>
+                                            <Frame name="$parentBody">
+                                                <Size x="240" y="230"/>
+                                                <Anchors>
+                                                    <Anchor point="TOPLEFT" x="0" y="0" />
+                                                    <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                                                </Anchors>
+                                                <Scripts>
+                                                    <OnShow>
+                                                        if RPSCoreFramework.DispButtonsInitialize then
+                                                            RPSCoreFramework.DispButtonsInitialize = false;
+                                                            RPSCoreFramework:InitializeDispButtons();
+                                                        end
+                                                    </OnShow>
+                                                </Scripts>
+                                            </Frame>
+                                        </ScrollChild>
+                                        <Scripts>
+                                            ScrollFrame_OnLoad(self);
+                                            ScrollFrame_OnScrollRangeChanged(self);
+                                        </Scripts>
+                                    </ScrollFrame>
+                                </Frames>
+                            </Frame>
+                            <Frame name="$parentRight">
+                                <Anchors>
+                                    <Anchor relativeTo="$parent" point="TOP" x="117" y="0" />
+                                    <Anchor relativeTo="$parent" point="BOTTOMRIGHT" x="0" y="0" />
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="OVERLAY">
+                                        <FontString name="$parentTitle" frameStrata="DIALOG" text="[Обычный]" justifyH="CENTER" inherits="GameFontNormal" wordwrap="false">
+                                            <Anchors>
+                                                <Anchor point="TOP" x="0" y="-25"/>
+                                            </Anchors>
+                                            <Color r="0.95" g="0.95" b="0.95"/>
+                                        </FontString>
+                                    </Layer>
+                                    <Layer level="BACKGROUND">
+                                        <Texture parentKey="Background" atlas="transmog-set-border-collected">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="-20" y="10"/>
+                                                <Anchor point="BOTTOMRIGHT" x="27" y="-40"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                    <Frame name="$parentItems" frameStrata="DIALOG">
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="0" />
+                                            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                                        </Anchors>
+                                        <Frames>
+                                            <Frame name="$parentHead" frameStrata="DIALOG" id="1" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor point="TOPLEFT" x="15" y="-60"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "head";
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentShoulder" frameStrata="DIALOG" id="3" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentHead" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "shoulder"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentBack" frameStrata="DIALOG" id="15" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentShoulder" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "back"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentChest" frameStrata="DIALOG" id="5" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentBack" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "chest"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentShirt" frameStrata="DIALOG" id="4" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentChest" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "shirt"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentTabard" frameStrata="DIALOG" id="19" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentShirt" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "tabard"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentWrist" frameStrata="DIALOG" id="9" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentTabard" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "wrist"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+
+                                            <Frame name="$parentHand" frameStrata="DIALOG" id="10" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor point="TOPRIGHT" x="-15" y="-60"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "hands"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentWaist" frameStrata="DIALOG" id="6" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentHand" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "waist"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentLegs" frameStrata="DIALOG" id="7" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentWaist" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "legs"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentFeet" frameStrata="DIALOG" id="8" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentLegs" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "feet"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            
+                                            <Frame name="$parentMainhand" frameStrata="DIALOG" id="16" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentFeet" point="BOTTOM" x="0" y="-70"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "mainhand"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            <Frame name="$parentSecondaryhand" frameStrata="DIALOG" id="17" inherits="DarkmoonTransmogButton">
+                                                <Size x="35" y="37"/>
+                                                <Anchors><Anchor relativeTo="$parentMainhand" point="BOTTOM" x="0" y="-35"/></Anchors>
+                                                <Scripts>
+                                                    <OnLoad>self.InvSlot = "secondaryhand"
+                                                        self.SlotID = self:GetID();</OnLoad>
+                                                </Scripts>
+                                            </Frame>
+                                            
+                                        </Frames>
+                                    </Frame>
+                                    <Button name="$parentClearButton" frameStrata="DIALOG" inherits="UIPanelButtonTemplate" text="Очистить">
+                                        <Size x="124" y="28"/>
+                                        <Anchors><Anchor point="BOTTOM" x="-65" y="25"/></Anchors>
+                                        <NormalFont style="GameFontNormal"/>
+                                        <Scripts>
+                                            <OnClick>
+                                                RPSCoreFramework:ClearDispModel(0);
+                                                RPSCoreFramework:DispSetClearAllItemTextures();
+                                                PlaySound(624, "SFX");
+                                            </OnClick>
+                                        </Scripts>
+                                    </Button>
+                                    <Button name="$paretnAcceptButton" frameStrata="DIALOG" inherits="UIPanelButtonTemplate" text="Применить">
+                                        <Size x="124" y="28"/>
+                                        <Anchors><Anchor point="BOTTOM" x="65" y="25"/></Anchors>
+                                        <NormalFont style="GameFontNormal"/>
+
+                                        <Scripts>
+                                            <OnClick>
+                                                RPSCoreFramework:DispListAcceptDisp();
+                                                PlaySound(624, "SFX");
+                                            </OnClick>
+                                        </Scripts>
+                                    </Button>
+                                    <DressUpModel name="$parentModel" inherits="ModelWithControlsTemplate">
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="0" />
+                                            <Anchor point="BOTTOMRIGHT" x="0" y="0" />
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnEnter>
+                                                --self:ApplySpellVisualKit(124661)
+                                                --self:SetAnimation(66);
+                                            </OnEnter>
+                                            <OnLeave>
+                                                --self:SetAnimation(0);
+                                            </OnLeave>
+                                            <OnShow>
+                                                self:SetUnit("player");
+                                                self:SetAllPoints();
+                                            </OnShow>
+                                        </Scripts>
+                                    </DressUpModel>
+                                </Frames>
+                            </Frame>
+                        </Frames>
+                        <Scripts>
+                            <OnShow>
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
+                    </Frame>
 
                     <Frame name="DarkmoonPasswordChangeFrame" hidden="true">
                         <Size x="500" y="430"/>
@@ -1119,7 +1815,7 @@
 							    <FontString inherits="ChatFontNormal" />
 							</EditBox>
 
-                            <Button name="RPS_DispUpdateButton" inherits="UIPanelButtonTemplate" text="Изменить пароль">
+                            <Button name="RPS_PasswordUpdateButton" inherits="UIPanelButtonTemplate" text="Изменить пароль">
                                 <Size x="124" y="28"/>
                                 <Anchors><Anchor relativeTo="DarkmoonPasswordChangeFrame" point="BOTTOM" x="0" y="41"/></Anchors>
                                 <NormalFont style="GameFontNormal"/>
@@ -1280,12 +1976,237 @@
                                         </Scripts>
                                     </Button>
                                 </Frames>
+                                <Scripts>
+                                    <OnShow>
+                                        RPSCoreFramework:MenstrelOnShow(self);
+                                        if not RPSCoreFramework.FrameUpdate then
+                                            DarkmoonWIPFrame:Hide();
+                                        else
+                                            DarkmoonWIPFrame:Show();
+                                            RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                        end
+                                    </OnShow>
+                                    <OnHide>
+                                        DarkmoonWIPFrame:Hide();
+                                    </OnHide>
+                                </Scripts>
                             </Frame>
                         </Frames>
                         <Size x="120" y="40"/>
                         <Anchors>
                             <Anchor relativeTo="DarkmoonPasswordChangeFrame" x="185" y="-280" relativePoint="TOPLEFT"/>
                         </Anchors>
+                    </Frame>
+
+                    <Frame name="DarkmoonSocialStatsFrame" hidden="true">
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" point="TOPLEFT" x="0" y="0"/>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" point="BOTTOMRIGHT" x="0" y="0"/>
+                        </Anchors>
+                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                            <EdgeSize val="16"/>
+                        </Backdrop>
+                        <Layers>
+                            <Layer level="BACKGROUND">
+                                <Texture file="Interface\ACHIEVEMENTFRAME\UI-GuildAchievement-Parchment-Horizontal-Desaturated">
+                                    <Anchors>
+                                        <Anchor point="TOPRIGHT" x="-5" y="-3"/>
+                                        <Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+                                        <Anchor point="LEFT" x="5" y="0"/>
+                                    </Anchors>
+                                </Texture>
+                            </Layer>
+                        </Layers>
+                        <Frames>
+                            <Frame parentKey="Curse" frameStrata="DIALOG">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" x="0" y="0"/>
+                                    <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="TOOLTIP">
+                                        <Texture atlas="bfa-threats-mapborder">
+                                            <Anchors>
+                                                <Anchor relativeTo="RPS_MainFrame" point="TOPLEFT" x="0" y="0"/>
+                                                <Anchor relativeTo="RPS_MainFrame" point="BOTTOMRIGHT" x="0" y="0"/>
+                                            </Anchors>
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+                            </Frame>
+                            <Frame parentKey="Block" inherits="WIPFrame" frameStrata="HIGH">
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonSocialStatsFrame" point="TOPLEFT" x="0" y="0"/>
+                                    <Anchor relativeTo="DarkmoonSocialStatsFrame" point="BOTTOMRIGHT" x="0" y="0"/>
+                                </Anchors>
+                                <Scripts>
+                                    <OnLoad>
+                                        self.Text:SetText("В разработке");
+                                    </OnLoad>
+                                </Scripts>
+                            </Frame> 
+                            <Frame parentKey="Stats" frameStrata="MEDIUM">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT"/>
+                                    <Anchor point="BOTTOMRIGHT"/>
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="BACKGROUND">
+                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                        <!--Interface\BankFrame\Bank-Background-->
+                                        <!--Interface\Collections\CollectionsBackgroundTile-->
+                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                        <FontString name="$parentFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="Свободные очки:" justifyH="LEFT" justifyV="TOP">
+                                            <FontHeight val="15"/>
+                                            <Anchors>
+                                                <Anchor point="BOTTOM" x="0" y="60" />
+                                            </Anchors>
+                                            <Shadow>
+                                                <Offset x="1" y="-1" />
+                                                <Color a="0.9" r="0.2" g="0.2" b="0.2"/>
+                                            </Shadow>
+                                        </FontString>
+                                    </Layer>
+                                </Layers>
+                                <Frames>
+                                    <Frame name="$parentStat1" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" x="0" y="0" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat2" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat1" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat3" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat2" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>                                   
+                                    <Frame name="$parentStat4" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat3" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>                                    
+                                    <Frame name="$parentStat5" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat4" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat6" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat5" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat7" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat6" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat8" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat7" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    
+                                    
+                                    <Frame name="$parentStat9" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat1" relativePoint="RIGHT" point="LEFT" x="220" y="0" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat10" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat9" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat11" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat10" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>                                   
+                                    <Frame name="$parentStat12" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat11" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>                                    
+                                    <Frame name="$parentStat13" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat12" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat14" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat13" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat15" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat14" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    <Frame name="$parentStat16" inherits="RPS_SkillCompact">
+                                        <Size x="30" y="30" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStat15" point="BOTTOM" x="0" y="-45" />
+                                        </Anchors>
+                                    </Frame>
+                                    
+                                    
+                                    <Button name="$parentReset" inherits="UIPanelButtonTemplate" text="Сброс">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor point="BOTTOM" x="0" y="20"/>
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnShow>
+                                                self:Disable();
+                                            </OnShow>
+                                        </Scripts>
+                                    </Button>
+
+                                    <Button name="$parentSubmit" inherits="UIPanelButtonTemplate" text="Выучить">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentReset" relativePoint="RIGHT" point="LEFT" x="0" y="0"/>
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnShow>
+                                                self:Disable();
+                                            </OnShow>
+                                        </Scripts>
+                                    </Button>
+
+                                    <Button name="$parentUnlearn" inherits="UIPanelButtonTemplate" text="Разучить">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentReset" relativePoint="LEFT" point="RIGHT" x="0" y="0"/>
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnShow>
+                                                self:Disable();
+                                            </OnShow>
+                                        </Scripts>
+                                    </Button>
+                                </Frames>
+                            </Frame>               
+                        </Frames>
                     </Frame>
 
                     <Frame name="DarkmoonMinstrelFrame" hidden="true">
@@ -1520,6 +2441,26 @@
                                                             <Anchor point="TOP" relativeTo="$parentbtn23" x="0" y="-42"/>
                                                         </Anchors>
                                                     </Button>
+                                                    <Button name="$parentbtn25" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn24" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn26" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn25" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn27" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn26" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn28" inherits="MinstrelButton" hidden="false">
+                                                        <Anchors>
+                                                            <Anchor point="TOP" relativeTo="$parentbtn27" x="0" y="-42"/>
+                                                        </Anchors>
+                                                    </Button>
                                                 </Frames>
                                             </Frame>
                                         </ScrollChild>
@@ -1530,6 +2471,20 @@
                                     </ScrollFrame>
                                 </Frames>
                             </Frame>
+
+                            <!--
+                            <Frame name="RPS_TextMinstrel" inherits="RPS_TextArea">
+                                <Size x="455" y="240"/>
+                                <Anchors>
+                                    <Anchor relativeTo="DarkmoonMinstrelFrame" point="TOPLEFT" x="20" y="-90" />
+                                    <Anchor point="BOTTOMRIGHT" x="-10" y="10" />
+                                </Anchors>
+                                <Scripts>
+                                    <OnShow>
+                                        RPSCoreFramework:MinstrelSetTextOnShow(RPS_TextMinstrelScrollText)
+                                    </OnShow>
+                                </Scripts>
+                            </Frame>-->
 
                             <SimpleHTML name="RPS_DescriptionMinstrel">
                                 <Size x="460" y="340"/>
@@ -1556,6 +2511,7 @@
                                     </OnLoad>
 
                                     <OnClick>
+                                        --RPS_TextMinstrel:Show();
                                         RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
                                     </OnClick>
 
@@ -1595,7 +2551,16 @@
                         <Scripts>
                             <OnShow>
                                 RPSCoreFramework:MenstrelOnShow(self);
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
                             </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
                         </Scripts>
                     </Frame>
                 </Frames>
@@ -1677,6 +2642,21 @@
                     </Layer>
                 </Layers>
             </Frame>
+            <PlayerModel name="CurrencyFrameMoneyModel" inherits="MouseDisabledModelTemplate">
+                <Size x="300" y="100"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="CurrencyFrame" x="0" y="0" />
+                </Anchors>
+
+                <Scripts>
+                    <OnShow>
+                        self:SetModel(918931);
+                        self:SetCamDistanceScale(2.6);
+                        self:SetAnimation(153);
+                        self:SetAllPoints();
+                    </OnShow>
+                </Scripts>
+            </PlayerModel>
         </Frames>
     </Frame>
 

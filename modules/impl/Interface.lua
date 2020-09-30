@@ -163,20 +163,6 @@ function RPSCoreFramework:MinstrelCheckLock()
 		DarkmoonMinstrelFrameBuy:SetText("Активировать");
 	end
 end
---[[
-function RPSCoreFramework:MinstrelSetTextOnShow(self)
-	if (self == nil) then
-		self = _G["RPS_TextMinstrelScrollText"];
-	end
-	if (RPSCoreFramework.MinstrelStatus == 0) then -- Заблокировано
-		self:SetText(RPSCoreFramework.Literature.DarkmoonMinstrel1);
-	elseif (RPSCoreFramework.MinstrelStatus == 2) then -- Куплено
-		self:SetText(RPSCoreFramework.Literature.DarkmoonMinstrel2);	
-	elseif (RPSCoreFramework.MinstrelStatus == 3) then -- Активировать
-		self:SetText(RPSCoreFramework.Literature.DarkmoonMinstrel1);
-	end
-	self:Disable();
-end]]--
 
 function RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self)
 	if (GetItemCount(1000207) ~= 0) then
@@ -202,4 +188,224 @@ function RPSCoreFramework:ShowBattleSpellGameTooltip(name)
 	--GameTooltip:AddDoubleLine(" ", "Клик ЛКМ: Взять боевой спелл\nКлик ПКМ: Взять ролевой спелл", 1, 0, 0, 1.0, 0.82, 0.0);
 	GameTooltip:AddLine("ЛКМ: Выбрать боевую способность\nПКМ: Выбрать ролевую способность")
 	GameTooltip:Show();
+end
+
+function RPSCoreFramework:GOB_OnMouseWheel(self, delta, maxZoom, minZoom)
+	maxZoom = maxZoom or self.maxZoom;
+	minZoom = minZoom or self.minZoom;
+	local zoomLevel = self.zoomLevel or minZoom;
+	zoomLevel = zoomLevel + delta * 0.01;
+	zoomLevel = min(zoomLevel, maxZoom);
+	zoomLevel = max(zoomLevel, minZoom);
+	self:SetModelScale(zoomLevel);
+	self.zoomLevel = zoomLevel;
+end
+
+function RPSCoreFramework:GOBModelSceneZoomIn()
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, 10, 1, 0.1)
+end
+
+function RPSCoreFramework:GOBModelSceneZoomOut()
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, -10, 1, 0.1)
+end
+
+function RPSCoreFramework:AddGuildSalaryTab()
+	local TabName="Зарплата";
+	 
+	local TabID=GuildInfoFrame.numTabs+1;
+	local Tab=CreateFrame("Button","$parentTab"..TabID,GuildInfoFrame,"GuildInfoSalaryTemplate",TabID);
+	PanelTemplates_SetNumTabs(GuildInfoFrame,TabID);
+	Tab:SetPoint("LEFT","$parentTab"..(TabID-1),"RIGHT",0,0);
+	Tab:SetText(TabName);
+	PanelTemplates_TabResize(GuildInfoFrameTab4, 0);
+
+	local d,p,a,x,y = GuildInfoFrameTab1:GetPoint();
+	GuildInfoFrameTab1:SetPoint(d,p,a,x-16,y);
+
+	local Panel=CreateFrame("Frame",nil,GuildInfoFrame);
+	Panel:SetAllPoints(GuildInfoFrame);
+end
+
+function RPSCoreFramework:GuildSalaryFrameLink()
+	GuildInfoFrameTab1:Show();
+	if(GuildInfoFrameTab3:IsShown()) then
+		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..3,"RIGHT",0,0);
+	elseif(GuildInfoFrameTab2:IsShown()) then
+		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..2,"RIGHT",0,0);
+	else
+		GuildInfoFrameTab4:SetPoint("LEFT","$parentTab"..1,"RIGHT",0,0);
+	end
+end
+
+-- DarkmoonCharacterFrameInfoTRBody
+-- DarkmoonDisplayPresetFrameRightItemsHead
+
+local sepModificator, buttonItemString;
+local slots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Secondaryhand"}
+local dispSlots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Offhand"}
+local slotsID = {1,3,15,5,4,19,9,10,6,7,8,16,17};
+
+function RPSCoreFramework:InitializeDispButtons()
+	local number, name, description;
+	local mainframe = _G["DarkmoonDisplayPresetFrameMenuSliderBody"];
+	for i = 1, #RPSDispTable do
+        local button = CreateFrame("Button", "DarkmoonDispButton"..i, mainframe, "CharDispButton");
+        if i == 1 then
+        	button:SetPoint("TOPLEFT", mainframe, 6, 0);
+    	else
+    		button:SetPoint("BOTTOM", _G["DarkmoonDispButton"..i-1], 0, -40);
+    	end
+    	button.IDLabel:SetText(i);
+    	button.TitleLabel:SetText(RPSDispTable[i][2]);
+    	button.DescriptionLabel:SetText(RPSDispTable[i][3]);
+    	button.Mod:SetAtlas(RPSDispTableColors[math.random(#RPSDispTableColors)]);
+    	button.Title = RPSDispTable[i][2];
+    	button.Description = RPSDispTable[i][3];
+    	button.Items = RPSDispTable[i];
+    	button:Show();
+	end
+end
+
+function RPSCoreFramework:DispListAcceptDisp()
+	local frame;
+	for i=1, #slots do
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+		if frame.DispID == nil then frame.DispID = "0"; end
+		SendChatMessage(".disp "..dispSlots[i].." "..frame.DispID);
+	end
+end
+
+function RPSCoreFramework:DispSetItemTexture(slotID, itemID)
+	local frame;
+	local name, _, _, _, _, _, _, _, _, texture = GetItemInfo(itemID)
+	if not slotID then return; end
+	frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[tonumber(slotID)]];
+	frame.Normal:SetTexture(nil);
+	frame.Normal:SetMask(nil);
+	frame.Normal:SetMask("Interface\\COMMON\\Indicator-Gray");
+	frame.Normal:SetTexture(nil);
+	frame.Normal:SetTexture(texture);
+	frame.DispID = itemID;
+	frame.TooltipItemID = itemID;
+	frame.Normal:Show();
+end
+
+function RPSCoreFramework:DispSetClearItemTexture(self)
+	self.Normal:SetTexture(nil);
+	self.Normal:SetMask(nil);
+	self.Normal:SetMask("Interface\\COMMON\\Indicator-Gray");
+	self.Normal:SetTexture(nil);
+	self.Normal:SetTexture("transmog-nav-slot-"..self.InvSlot);
+	self.TooltipItemID = 0;
+	self.Normal:Show();
+end
+
+function RPSCoreFramework:DispSetClearAllItemTextures()
+	local frame;
+	for i=1, #slots do
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+		frame.Normal:SetTexture(nil);
+		frame.Normal:SetMask(nil);
+		frame.Normal:SetMask("Interface\\COMMON\\Indicator-Gray");
+		frame.Normal:SetTexture(nil);
+		frame.Normal:SetTexture("transmog-nav-slot-"..frame.InvSlot);
+		frame.TooltipItemID = 0;
+		frame.Normal:Show();
+	end
+end
+
+function RPSCoreFramework:DispRemoveItemTexture(slotID, clearAll)
+	local frame;
+	if not slotID then return; end
+	if not clearAll then
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[slotID]];
+		frame.Normal:SetTexture(nil);
+		frame.Normal:Hide();
+	else
+		for i = 1, 13 do
+			frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+			frame.Normal:SetTexture(nil);
+			frame.Normal:Hide();
+		end
+	end
+end
+
+function RPSCoreFramework:ClearDispModel(slotID)
+	if slotID == nil then return; end
+	if slotID == 0 then
+		DarkmoonDisplayPresetFrameRightModel:Undress();
+	else
+		DarkmoonDisplayPresetFrameRightModel:UndressSlot(slotID);
+	end
+end
+
+function RPSCoreFramework:DressUpDispModel(itemID)
+	if RPSCoreFramework.DressUpOnLoad then
+		RPSCoreFramework:ClearDispModel(0);
+		RPSCoreFramework.DressUpOnLoad = false;
+	end
+	local __, itemLink, itemRarity = GetItemInfo(itemID);
+	-- itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+	-- itemEquipLoc, itemIcon, itemSellPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, 
+	-- isCraftingReagent = GetItemInfo(itemID or "itemString" or "itemName" or "itemLink") 
+	DarkmoonDisplayPresetFrameRightModel:TryOn(itemLink);
+end
+
+function RPSCoreFramework:ShowDispalyItemTooltip(self)
+	GameTooltip:ClearLines();
+	GameTooltip:SetOwner(self, "ANCHOR_LEFT");
+	if self.TooltipItemID == nil or self.TooltipItemID == 0 then
+		GameTooltip:AddLine("Пустой слот");
+	else
+		local __, itemLink = GetItemInfo(self.TooltipItemID)
+		GameTooltip:SetHyperlink(itemLink)
+	end
+	GameTooltip:Show();
+end
+
+function RPSCoreFramework:CharacterInfoPOIBlock(duration)
+	local frame = DarkmoonCharacterFrameInfoMainContent.BlockOnLoad
+	frame.content.flash1Rotation:SetDuration(duration);
+end
+
+function RPSCoreFramework:ApplyTransmogSet(button)
+	local sepModificator;
+	local buttonItemID;
+	DarkmoonDisplayPresetFrameRightTitle:SetText("["..button.Title.."]")
+	for i = 4, 16 do
+		if button.Items[i] == nil then button.Items[i] = 0 end;
+		sepModificator = string.find(button.Items[i], ":") or 0;
+		if sepModificator > 0 then
+			buttonItemID = string.sub(button.Items[i], 1, sepModificator-1);
+			RPSCoreFramework:DressUpDispModel(buttonItemID);
+		else
+			buttonItemID = button.Items[i];
+			RPSCoreFramework:DressUpDispModel(button.Items[i]);
+		end
+		RPSCoreFramework:DispSetItemTexture(i-3, tonumber(buttonItemID));
+	end
+end
+
+function RPSCoreFramework:ApplyDispTimer()
+	RPSCoreFramework:ApplyTransmogSet(RPSCoreFramework.DispButtonFrame);
+end
+
+function RPSCoreFramework:InitializeDisplayButtons()
+	local frame;
+	for i=1, #slots do
+		frame = _G["DarkmoonDisplayPresetFrameRightItems"..slots[i]];
+		frame.Normal:SetAtlas("transmog-nav-slot-"..frame.InvSlot);
+		frame.Main:SetAtlas("transmog-nav-slot-"..frame.InvSlot);
+		frame.TooltipItemID = 0;
+	end
+end
+
+function RPSCoreFramework:ConfirmedAddonLoading()
+	RPSCoreFramework:InitializeDisplayButtons();
+	RPSCoreFramework:playAnimation(DarkmoonWIPFrame.fadeOut);
+end
+
+function RPSCoreFramework:DispInsertItemLink(itemID)
+	local _, itemLink = GetItemInfo(itemID)
+	ChatEdit_InsertLink(itemLink);
 end
