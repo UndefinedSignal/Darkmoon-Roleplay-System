@@ -221,7 +221,7 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 	if RPSCoreFramework.DailyCipherShow > 2 then
 		if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
 			print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
-		else
+		elseif RPSCoreFramework.DailyCipher[tonumber(str)] ~= 0 then
 			print("|cFFFF8040Ура! Вы были с нами |cFFFFFF005|r|cFFFF8040 дней подряд и получаете награду|cFFFFFF00 "..GetCoinTextureString(30000).."|r|cFFFF8040!|r");
 		end
 	end
