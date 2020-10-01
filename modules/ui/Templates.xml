@@ -1316,14 +1316,6 @@
         </Scripts>
     </GameTooltip>
 
-	<GameTooltip name="ContainerGameTooltip" inherits="GameTooltipTemplate">
-        <Scripts>
-            <Onload>
-                self:SetOwner(WorldFrame, "ANCHOR_NONE");
-            </Onload>
-        </Scripts>
-    </GameTooltip>
-
     <Button name="RPS_POIButton" virtual="true">
         <Size x="15" y="15"/>
         <Scripts>

@@ -112,14 +112,6 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 
---[[
-	minstrel activate
-	RPS.Minstrel 1 - Менестрель есть
-	RPS.Minstrel 0 - Менестрель заблочена(например, потому-что у человека ГМка)
-	RPS.Minstrel 2 - Менестрели нет.
-]]--
-
-
 function RPSCoreFramework:UpdateMinstrelStatus(str)
 	if (tonumber(str) == 0 or str == nil) then
 		RPSCoreFramework.MinstrelStatus = tonumber(str);
@@ -237,21 +229,6 @@ function MountModelStatusUpdate(str)
 	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]);
 end
 
-
---function RPSCoreFramework:AddPOIPins(str)
---	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
---	local lines = decom:splitstr('\r\n');
---
---	for i=1, #lines do
---		print(lines[i]);
---
---		local values = {strsplit("#",lines[i])}
---		if values[1] ~= "" then
---			RPSCorePOIPins[values[1]] = values;
---		end
---	end
---end
-
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};
 	if RPSCoreFramework.Map.POIWorkflow then
@@ -345,60 +322,6 @@ function RPSCoreFramework:ThreeTimesUpdate()
 	end
 	RPSCoreFramework:PeriodicallyAurasUpdate();
 	RPSCoreFramework:ScrollMenuUpdater();
-end
-
---"RPS.CON.i"
-function RPSCoreFramework:InitializeContainer(msg)
-	local values = {strsplit('#',msg)};	
-	if RPSCoreFramework.ContainerDataFlow then
-		print("InitializeContainer: ".. msg);
-		--[[name(title)
-		--	type
-		--	size]]
-		RPSCoreFramework.ContainerDataFlow = false;
-		RPSCoreFramework.Container.title = values[1];
-		RPSCoreFramework.Container.type = values[2];
-		RPSCoreFramework.Container.size = tonumber(values[3]);
-		RPSCoreFramework:SetUpContainerFrame();
-		return;
-	end
-	--[[slot
-	--	itemID
-	--	count]]
-	print("Add new item in to container: ".. msg);
-	RPSCoreFramework:PushContainerItem(tonumber(values[1]), {isVirtual = true, itemID = tonumber(values[2]), count = tonumber(values[3]), locked = false});
-end
-
---"RPS.CON.c"
-function RPSCoreFramework:InvokeContainerComamnd(msg)
-	print("InvokeContainerComamnd: ".. msg);
-	if ( msg == "done" ) then
-		RPSCoreFramework.ContainerDataFlow = true
-		RPSCoreFramework:ContainerFrameGenerateFrame(_G["RPS_ContainerFrame"], RPSCoreFramework.Container.size, RPSCoreFramework.Container.title)
-	end
-end
-
---"RPS.CON.upd"
-function RPSCoreFramework:UpdateContainer(msg)
-	print("UpdateContainer: ".. msg);
-	values = {strsplit('#',msg)};
-	if values ~= nil then
-		if tonumber(values[1]) == 0 then
-			RPSCoreFramework:ClearItemByID(tonumber(values[2]));
-		elseif tonumber(values[1]) == 1 then
-			RPSCoreFramework:PushContainerItem(tonumber(values[2]), {isVirtual = true, itemID = tonumber(values[3]), count = tonumber(values[4]), locked = false})
-		end
-	end
-
-	if ( RPSCoreFramework.PlayerCursorInformation ~= nil ) then
-		if (RPSCoreFramework:GetContainerItem(RPSCoreFramework.PlayerCursorInformation.slotID) == nil) then
-			RPSCoreFramework:ClearCursor();
-			RPSCoreFramework.PlayerCursorInformation = nil;
-		end
-	end
-
-	RPSCoreFramework:ContainerFrameUpdate();
-
 end
 
 function RPSCoreFramework:SalaryIndicator(msg)

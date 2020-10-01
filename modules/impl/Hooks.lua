@@ -61,8 +61,6 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
 
-	RPSCoreFramework:HookAllPlayerBagButtons();
-
 	--self:RawHook(MapCanvasMixin, "OnLoad()", RPSCoreFramework:AcquirePin(), true);
 end
 --[[
@@ -74,23 +72,6 @@ end
 function RPSCoreFramework:AcquirePin()
 	print("Meme succesful")
 end]]--
-
-function RPSCoreFramework:HookAllPlayerBagButtons()
-	local bagButton = nil;
-	local num = nil;
-	for i = 0, NUM_BAG_SLOTS do -- Пробег по всем сумкам, существуют ли они?
-		local slots = GetContainerNumSlots(i) or 0;
-		if slots > 0 then -- Пробег по всем слотам и прикручивание к ним нашего кода
-			for j = 1, slots do
-				num = i + 1;
-				bagButton = _G["ContainerFrame"..num.."Item"..j]
-				if (not RPSCoreFramework:IsHooked(bagButton, "OnClick")) then
-					self:SecureHookScript(bagButton, "OnClick", "HookPlayerContainerClick");
-				end
-			end
-		end
-	end
-end
 
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
@@ -126,12 +107,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdateDisplayMacrosInfo("RPS.Display "..msg);
 		elseif (prefix == "RPS.AuraRefresh") then
 			RPSCoreFramework:RefreshActiveAuras("RPS.AuraRefresh "..msg);
-		elseif (prefix == "RPS.CON.i") then
-			RPSCoreFramework:InitializeContainer(msg);
-		elseif (prefix == "RPS.CON.c") then
-			RPSCoreFramework:InvokeContainerComamnd(msg);
-		elseif (prefix == "RPS.CON.u") then
-			RPSCoreFramework:UpdateContainer(msg);
 		elseif (prefix == "RPS.ECO.ti" or prefix == "RPS.ECO.qi") then
 			RPSCoreFramework:SalaryIndicator(msg);
 		elseif (prefix == "RPS.AuraOff") then
@@ -151,10 +126,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.mdS") then
 			RPSCoreFramework:MountModelStatusUpdate(msg);
 		end
-	elseif (event == "BAG_UPDATE") then
-		RPSCoreFramework:HookAllPlayerBagButtons();
---[[	elseif (event == "RPS.POLL") then
-		RPSCoreFramework:InitializePool(msg);]]
 	elseif (event == "GUILD_RANKS_UPDATE") then
 		RPSCoreFramework:ProcessGuildSalaryInterface();
 	elseif(event == "PLAYER_TALENT_UPDATE") then
@@ -193,32 +164,6 @@ function RPSCoreFramework:ItemTooltip(self)
 		sType == "Оружие" or sType == "Weapon" or
 		((sType == "Разное" or sType == "Miscellaneous") and sEquipLoc == "INVTYPE_HOLDABLE")) then
 		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality));		
-	end
-end
-
-function RPSCoreFramework:HookPlayerContainerClick(self)
-	RPSCoreFramework.Container.ClickedBag = tonumber(self:GetParent():GetID());
-	RPSCoreFramework.Container.ClickedSlot = tonumber(self:GetID());
-	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
-	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
-	if (itemID and (RPSCoreFramework.PlayerCursorInformation == nil or not RPSCoreFramework:GetCursorItem())) then
-		local temp = {}
-		temp.isVirtual = false;
-		temp.itemID = itemID;
-		temp.count = itemCount;
-		temp.slotID = 0;
-		RPSCoreFramework.PlayerCursorInformation = temp;
-	elseif (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
-		if (not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
-			RPSCoreFramework.PlayerCursorInformation = nil;
-		end
-	end
-
-	if RPSCoreFramework.PlayerCursorInformation then
-		if RPSCoreFramework.PlayerCursorInformation.isVirtual then
-			RPSCoreFramework:ContainerToInventory(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
-			return
-		end
 	end
 end
 
