@@ -37,18 +37,18 @@ function RPSCoreFramework:POISearchTable(key)
 	RPSCoreFramework.POISearch = {};
 	local i = 1;
     for k, v in pairs(RPSCorePOIPins) do
-    	if string.find(strlower(v[8]),strlower("^Владел.+("..UnitName("player")..")[%s\.,].+$")) ~= nil then
+    	if string.find(strlower(v[8]),strlower("^.+ладел.+("..UnitName("player")..")[%s\.,].+$")) ~= nil then
     		table.insert(RPSCoreFramework.POISearch, {v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]})
 	    end
     end
 end
 
 function RPSCoreFramework:OwnPOIListShow()
-	for i = 1, 7 do
+	for i = 1, 16 do
 		_G["POISearchContentChildbtn"..i]:Hide();
 	end
 	for i = 1, #RPSCoreFramework.POISearch do
-		if i <= 8 then
+		if i <= 16 then
 			_G["POISearchContentChildbtn"..i.."ID"]:SetText("|cFFFF8040"..RPSCoreFramework.POISearch[i][1])
 			_G["POISearchContentChildbtn"..i.."Title"]:SetText(RPSCoreFramework.POISearch[i][7]);
 			_G["POISearchContentChildbtn"..i.."Description"]:SetText(RPSCoreFramework.POISearch[i][8]);

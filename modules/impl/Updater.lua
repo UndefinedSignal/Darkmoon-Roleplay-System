@@ -210,18 +210,20 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 	local int = tonumber(5 - RPSCoreFramework.DailyCipher[tonumber(str)]);
 	local text;
 	RPSDailyStreak = str;
+	local days = tonumber(RPSCoreFramework.DailyCipher[tonumber(str)]);
 	if int == 1 then text = "остался"; else text = "осталось"; end
 	_G["DarkmoonCharacterFrameInfoBodyAvaGraduate"]:SetText(int);
 	for i = 1, 5 do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Hide();
 	end
-	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
+	for i = 1, days do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
 	end
+	
 	if RPSCoreFramework.DailyCipherShow > 2 then
-		if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
-			print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
-		elseif RPSCoreFramework.DailyCipher[tonumber(str)] ~= 0 then
+		if (days < 5) and (days ~= 0) then
+			print("|TInterface\\ICONS\\Pet_Type_Magical:16|t|r|cFFFF8040 Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду!|r|cff00ff00|TInterface\\ICONS\\Pet_Type_Magical:16|t|r");
+		elseif (days ~= 0) then
 			print("|cFFFF8040Ура! Вы были с нами |cFFFFFF005|r|cFFFF8040 дней подряд и получаете награду|cFFFFFF00 "..GetCoinTextureString(30000).."|r|cFFFF8040!|r");
 		end
 	end

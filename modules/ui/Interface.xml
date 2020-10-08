@@ -810,7 +810,7 @@
                                                             <Anchor relativeTo="$parentbtn7" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
                                                         </Anchors>
                                                     </Button>
-                                                    <!--<Button name="$parentbtn9" inherits="POIInfoButton" hidden="true">
+                                                    <Button name="$parentbtn9" inherits="POIInfoButton" hidden="true">
                                                         <Anchors>
                                                             <Anchor relativeTo="$parentbtn7" point="BOTTOM" y="-50" />
                                                         </Anchors>
@@ -819,7 +819,37 @@
                                                         <Anchors>
                                                             <Anchor relativeTo="$parentbtn9" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
                                                         </Anchors>
-                                                    </Button>-->
+                                                    </Button>
+                                                    <Button name="$parentbtn11" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn9" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn12" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn11" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn13" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn11" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn14" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn13" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn15" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn13" point="BOTTOM" y="-50" />
+                                                        </Anchors>
+                                                    </Button>
+                                                    <Button name="$parentbtn16" inherits="POIInfoButton" hidden="true">
+                                                        <Anchors>
+                                                            <Anchor relativeTo="$parentbtn15" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
+                                                        </Anchors>
+                                                    </Button>
                                                 </Frames>
                                             </Frame>
                                         </ScrollChild>
