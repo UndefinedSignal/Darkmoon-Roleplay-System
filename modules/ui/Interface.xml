@@ -578,9 +578,86 @@
                                 </Scripts>
                             </Frame>
 
+                            <Frame name="$parentPrestigePlate">
+                                <Size x="120" y="32"/>
+                                <Anchors>
+                                    <Anchor relativeTo="$parentBodyPortraitFrame" point="BOTTOMLEFT" x="7" y="-10" />
+                                    <Anchor relativeTo="$parentBodyPortraitFrame" point="BOTTOMRIGHT" x="-9" y="-5" />
+                                </Anchors>
+                                <Layers>
+                                    <Layer level="OVERLAY">
+                                        <Texture name="$parentBackground" atlas="GarrMission_RewardsBox_Shadow">
+                                            <Anchor point="TOPLEFT" />
+                                            <Anchor point="BOTTOMRIGHT" />
+                                        </Texture>
+                                    </Layer>
+                                </Layers>
+
+                                <Frames>
+                                    <Frame name="$parentStar1">
+                                        <Size x="20" y="19" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parent" relativePoint="TOPLEFT" x="13" y="-10" />
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="OVERLAY">
+                                                <Texture name="$parentStar" atlas="tradeskills-star"/>
+                                            </Layer>
+                                        </Layers>
+                                    </Frame>
+                                    <Frame name="$parentStar2">
+                                        <Size x="20" y="19" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStar1" relativePoint="TOPRIGHT" x="0" y="0" />
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="OVERLAY">
+                                                <Texture name="$parentStar" atlas="tradeskills-star-off"/>
+                                            </Layer>
+                                        </Layers>
+                                    </Frame>
+                                    <Frame name="$parentStar3">
+                                        <Size x="20" y="19" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStar2" relativePoint="TOPRIGHT" x="0" y="0" />
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="OVERLAY">
+                                                <Texture name="$parentStar" atlas="tradeskills-star-off"/>
+                                            </Layer>
+                                        </Layers>
+                                    </Frame>
+                                    <Frame name="$parentStar4">
+                                        <Size x="20" y="19" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStar3" relativePoint="TOPRIGHT" x="0" y="0" />
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="OVERLAY">
+                                                <Texture name="$parentStar" atlas="tradeskills-star-off"/>
+                                            </Layer>
+                                        </Layers>
+                                    </Frame>
+                                    <Frame name="$parentStar5">
+                                        <Size x="20" y="19" />
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentStar4" relativePoint="TOPRIGHT" x="0" y="0" />
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="OVERLAY">
+                                                <Texture name="$parentStar" atlas="tradeskills-star-off"/>
+                                            </Layer>
+                                        </Layers>
+                                    </Frame>
+
+                                </Frames>
+
+                            </Frame>
+
+
                             <Frame name="$parentTRBody">
                                 <Anchors>
-                                    <Anchor point="TOP" x="67" y="-30"/>
+                                    <Anchor point="TOP" x="70" y="-30"/>
                                     <Anchor point="RIGHT" x="-23" y="80"/>
                                 </Anchors>
                                 <Layers>
@@ -596,7 +673,7 @@
                                 <Frames>
                                    <Button name="DarkmoonDropSpecChoose" inherits="RPS_EasyDropDownTemplate">
                                         <Anchors>
-                                            <Anchor point="LEFT" x="-130" y="-30" />
+                                            <Anchor point="LEFT" x="-130" y="-35" />
                                         </Anchors>
                                         <Layers>
                                             <Layer level="OVERLAY">
@@ -623,7 +700,7 @@
                                                 end);
                                             </OnLoad>
                                         </Scripts>
-                                   </Button>
+                                    </Button>
                                     <Button name="$parentSpecInfo">
                                         <Size x="21" y="21" />
                                         <Anchors>

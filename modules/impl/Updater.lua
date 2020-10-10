@@ -199,6 +199,7 @@ end
 function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
 	if tonumber(values[1]) ~= 0 then
+		RPSCoreFramework.CharcterPOILoaded = false;
 		RPSCorePOIPins[values[1]] = values;
 		RPSCoreFramework.Map.POICounter = RPSCoreFramework.Map.POICounter + 1;
 		RPSCoreFramework:POIStreamingProcess();
