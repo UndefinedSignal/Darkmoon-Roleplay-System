@@ -105,9 +105,6 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 	elseif (event == "CHAT_MSG_ADDON" and sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
 		if (prefix == "RPS.POI.i") then
 			RPSCoreFramework:AddPOIPins(msg)
---[[		if (prefix == "RPS.POI.i2") then
-			--.poi requestdeb
-			RPSCoreFramework:AddPOIPins(msg)]]--
 		elseif (prefix == "RPS.POI.u") then
 			RPSCoreFramework:UpdatePOIPins(msg)
 		elseif (prefix == "RPS.POI.r") then

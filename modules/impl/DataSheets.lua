@@ -985,6 +985,8 @@ RPSCoreFramework.Interface.Auras = {
 	{519,"Крылья-хранители", "У персонажа за спиной появляются крылья из света", 15000, 0, 0}
 }
 
+RPSCoreFramework.Interface.Auras.Bought = false;
+
 RPSCoreFramework.Interface.Auras.Show = {}
 
 RPSCoreFramework.Interface.ActiveAuraCounter = 0

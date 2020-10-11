@@ -584,15 +584,15 @@
                                     <Anchor relativeTo="$parentBodyPortraitFrame" point="BOTTOMLEFT" x="7" y="-10" />
                                     <Anchor relativeTo="$parentBodyPortraitFrame" point="BOTTOMRIGHT" x="-9" y="-5" />
                                 </Anchors>
-                                <Layers>
+                                <!--<Layers>
                                     <Layer level="OVERLAY">
                                         <Texture name="$parentBackground" atlas="GarrMission_RewardsBox_Shadow">
                                             <Anchor point="TOPLEFT" />
                                             <Anchor point="BOTTOMRIGHT" />
                                         </Texture>
                                     </Layer>
-                                </Layers>
-
+                                </Layers>-->
+                                
                                 <Frames>
                                     <Frame name="$parentStar1">
                                         <Size x="20" y="19" />
@@ -1313,6 +1313,36 @@
                                     </Anchors>
                                 </CheckedTexture>
                             </CheckButton>
+
+                            <Button parentKey="Owned" inherits="UIMenuButtonStretchTemplate" text="">
+                                <Size x="25" y="25"/>
+                                <Anchors>
+                                    <Anchor point="RIGHT" relativeTo="$parentFavCheckBox" relativePoint="LEFT" x="0" y="1"/>
+                                </Anchors>
+                                <Scripts>
+                                    <OnShow>
+                                        if RPSCoreFramework.Interface.Auras.Bought then
+                                            self:LockHighlight();
+                                        else
+                                            self:UnlockHighlight();
+                                        end
+                                    </OnShow>
+                                    <OnClick>
+                                        if RPSCoreFramework.Interface.Auras.Bought then
+                                            RPSCoreFramework.Interface.Auras.Bought = false;
+                                            RPSCoreFramework:PreGenerateShowAuras();
+                                            RPSCoreFramework:GenerateScrollMenu();
+                                            self:UnlockHighlight();
+                                        else
+                                            RPSCoreFramework.Interface.Auras.Bought = true;
+                                            RPSCoreFramework:BoughtAurasSearch(RPSCoreFramework.Interface.Auras);
+                                            RPSCoreFramework:GenerateScrollMenu();
+                                            self:LockHighlight();
+                                        end                                                                               
+                                    </OnClick>
+                                </Scripts>
+                                <HighlightTexture atlas="communities-icon-addchannelplus" alphaMode="ADD"/>
+                            </Button>
 
                             <ScrollFrame name="DarkmoonAurasScrollFrame" inherits="FauxScrollFrameTemplate">
                                 <Anchors>

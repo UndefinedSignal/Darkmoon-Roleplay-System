@@ -4,6 +4,16 @@ function RPSCoreFramework:PreGenerateShowAuras()
         for i=1, #RPSCoreFavourites do
             table.insert(RPSCoreFramework.Interface.Auras.Show, RPSCoreFavourites[i]);
         end
+
+        if RPSCoreFramework.Interface.Auras.Bought then
+        	RPSCoreFramework.Interface.Auras.Bought = true;
+            RPSCoreFramework:BoughtAurasSearch(RPSCoreFramework.Interface.Auras);
+            RPSCoreFramework:GenerateScrollMenu();
+            DarkmoonAurasFrame.Owned:LockHighlight();
+        else
+        	RPSCoreFramework.Interface.Auras.Bought = false;
+            DarkmoonAurasFrame.Owned:UnlockHighlight();
+        end
     else
 		for i=1, #RPSCoreFramework.Interface.Auras do
 			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
@@ -19,6 +29,15 @@ function RPSCoreFramework:AurasSearch(input, key)
 		elseif string.find(strlower(input[i][3]),strlower(key)) ~= nil then
 			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
 		elseif string.find(strlower(input[i][1]), strlower(key)) ~= nil then
+			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
+		end
+	end
+end
+
+function RPSCoreFramework:BoughtAurasSearch(input)
+	RPSCoreFramework.Interface.Auras.Show = {}
+	for i=1, #input do
+		if input[i][5] > 0 then
 			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
 		end
 	end
