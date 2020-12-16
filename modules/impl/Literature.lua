@@ -196,6 +196,8 @@ function RPSCoreFramework:ChangeDefaultWords()
 
 	VOICE_CHAT_ERROR_CODE_FORMATTER = "";
 	ERR_VOICE_CHAT_GENERIC_UNABLE_TO_CONNECT = "Добро пожаловать на Darkmoon!";
+	
+	SLURRED_SPEECH = "%s";
 end
 
 function RPSCoreFramework:LiteratureTextFormatting()
