@@ -2002,24 +2002,6 @@
                                 <Anchors>
                                     <Anchor relativeTo="DarkmoonBattleStatsFrame" x="50" y="15" relativePoint="TOPLEFT"/>
                                 </Anchors>
-                                <Layers>
-                                    <Layer level="BACKGROUND">
-                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
-                                        <!--Interface\BankFrame\Bank-Background-->
-                                        <!--Interface\Collections\CollectionsBackgroundTile-->
-                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
-                                        <FontString name="$parentFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="Свободные очки:" justifyH="LEFT" justifyV="TOP">
-                                            <FontHeight val="15"/>
-                                            <Anchors>
-                                                <Anchor point="CENTER" x="-50" y="-182" />
-                                            </Anchors>
-                                            <Shadow>
-                                                <Offset x="1" y="1" />
-                                                <Color r="0" g="0" b="0"/>
-                                            </Shadow>
-                                        </FontString>
-                                    </Layer>
-                                </Layers>
                                 <Frames>
                                     <Frame name="Strength" inherits="RPS_Skill">
                                         <Size x="30" y="30" />
@@ -2070,24 +2052,91 @@
                                             <Anchor point="TOPLEFT" x="35" y="-335" />
                                         </Anchors>
                                     </Frame>
-                                    <Button name="$parentSubmit" inherits="UIPanelButtonTemplate" text="Выучить">
-                                        <Size x="96" y="32"/>
-                                        <Anchors>
-                                            <Anchor point="CENTER" x="-156" y="-210"/>
-                                        </Anchors>
-                                    </Button>
                                     <Button name="$parentReset" inherits="UIPanelButtonTemplate" text="Сброс">
                                         <Size x="96" y="32"/>
                                         <Anchors>
-                                            <Anchor point="CENTER" x="-50" y="-210"/>
+                                            <Anchor point="CENTER" x="-135" y="-205"/>
+                                        </Anchors>
+                                    </Button>
+                                    <Button name="$parentSubmit" inherits="UIPanelButtonTemplate" text="Выучить">
+                                        <Size x="96" y="32"/>
+                                        <Anchors>
+                                            <Anchor  relativeTo="$parentReset" relativePoint="RIGHT" point="LEFT" x="0" y="0"/>
                                         </Anchors>
                                     </Button>
                                     <Button name="$parentUnlearn" inherits="UIPanelButtonTemplate" text="Разучить">
                                         <Size x="96" y="32"/>
                                         <Anchors>
-                                            <Anchor point="CENTER" x="56" y="-210"/>
+                                            <Anchor relativeTo="$parentReset" relativePoint="LEFT" point="RIGHT" x="0" y="0"/>
                                         </Anchors>
                                     </Button>
+
+                                    <Frame name="$parentSkillPoints">
+                                        
+                                        <Anchors>
+                                            <Anchor relativeTo="DarkmoonBattleStatsFrame" point="CENTER" x="165" y="-189"/>
+                                            <Anchor relativeTo="DarkmoonBattleStatsFrame" point="BOTTOMRIGHT" x="-10" y="10"/>
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="BACKGROUND">
+                                                <Texture atlas="Garr_CostBar" name="$parentCharacterLevel">
+                                                    <Size x="154" y="50"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOP" y="3"/>
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer>
+                                                <Texture name="$parentClassImg">
+                                                    <Size x="42" y="42" />
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" x="0" y="-2" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="LOW" name="$parentClassBorder">
+                                                <Texture atlas="hud-PlayerFrame-portraitring-large">
+                                                    <Size x="40" y="40" />
+                                                    <Anchors>
+                                                        <Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsClassImg" point="CENTER" x="0" y="0" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="BACKGROUND">
+                                                <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                                <!--Interface\BankFrame\Bank-Background-->
+                                                <!--Interface\Collections\CollectionsBackgroundTile-->
+                                                <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                                <FontString name="DarkmoonCharStatsInfoFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="[INTEGER]" justifyH="LEFT" justifyV="TOP">
+                                                    <FontHeight val="13"/>
+                                                    <Anchors>
+                                                        <Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsCharacterLevel" point="CENTER" x="2" y="0" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                                <FontString name="DarkmoonCharStatsInfoFreeStatText" font="Fonts\FRIZQT___CYR.TTF" text="Свободный опыт" justifyH="LEFT" justifyV="TOP">
+                                                    <FontHeight val="13"/>
+                                                    <Anchors>
+                                                        <Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsCharacterLevel" point="BOTTOM" x="8" y="-2" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                local _, classFilename = UnitClass("player");
+                                                DarkmoonCharStatsInfoSkillPointsClassImg:SetMask("Interface\\COMMON\\Indicator-Gray");
+                                                DarkmoonCharStatsInfoSkillPointsClassImg:SetTexture("Interface/ICONS/ClassIcon_"..classFilename);
+                                            </OnShow>
+                                        </Scripts>
+                                    </Frame>
 
                                     <Button name="RPS_STATSBTN1" inherits="RPS_TabBar_Tab" text="Информация" hidden="true">
                                         <Size x="128" y="24"/>
@@ -2187,24 +2236,6 @@
                                     <Anchor point="TOPLEFT"/>
                                     <Anchor point="BOTTOMRIGHT"/>
                                 </Anchors>
-                                <Layers>
-                                    <Layer level="BACKGROUND">
-                                        <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
-                                        <!--Interface\BankFrame\Bank-Background-->
-                                        <!--Interface\Collections\CollectionsBackgroundTile-->
-                                        <!--Interface\GuildBankFrame\GuildVaultBG-->
-                                        <FontString name="$parentFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="Свободные очки:" justifyH="LEFT" justifyV="TOP">
-                                            <FontHeight val="15"/>
-                                            <Anchors>
-                                                <Anchor point="BOTTOM" x="0" y="60" />
-                                            </Anchors>
-                                            <Shadow>
-                                                <Offset x="1" y="-1" />
-                                                <Color a="0.9" r="0.2" g="0.2" b="0.2"/>
-                                            </Shadow>
-                                        </FontString>
-                                    </Layer>
-                                </Layers>
                                 <Frames>
                                     <Frame name="$parentStat1" inherits="RPS_SkillCompact">
                                         <Size x="30" y="30" />
@@ -2305,11 +2336,77 @@
                                         </Anchors>
                                     </Frame>
                                     
+                                    <Frame name="$parentSkillPoints">
+                                        
+                                        <Anchors>
+                                            <Anchor relativeTo="DarkmoonSocialStatsFrame" point="CENTER" x="165" y="-190"/>
+                                            <Anchor relativeTo="DarkmoonSocialStatsFrame" point="BOTTOMRIGHT" x="-10" y="10"/>
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer level="BACKGROUND">
+                                                <Texture atlas="Garr_CostBar" name="$parentCharacterLevel">
+                                                    <Size x="154" y="50"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOP" y="3"/>
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer>
+                                                <Texture name="$parentClassImg">
+                                                    <Size x="42" y="42" />
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" x="0" y="-2" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="LOW" name="$parentClassBorder">
+                                                <Texture atlas="hud-PlayerFrame-portraitring-large">
+                                                    <Size x="40" y="40" />
+                                                    <Anchors>
+                                                        <Anchor relativeTo="DarkmoonSocialStatsFrameSkillPointsClassImg" point="CENTER" x="0" y="0" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="BACKGROUND">
+                                                <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
+                                                <!--Interface\BankFrame\Bank-Background-->
+                                                <!--Interface\Collections\CollectionsBackgroundTile-->
+                                                <!--Interface\GuildBankFrame\GuildVaultBG-->
+                                                <FontString name="DarkmoonSocialStatsFrameFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="0" justifyH="LEFT" justifyV="TOP">
+                                                    <FontHeight val="13"/>
+                                                    <Anchors>
+                                                        <Anchor relativeTo="DarkmoonSocialStatsFrameSkillPointsCharacterLevel" point="CENTER" x="2" y="0" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                                <FontString name="DarkmoonSocialStatsFrameFreeStatText" font="Fonts\FRIZQT___CYR.TTF" text="Свободный опыт" justifyH="LEFT" justifyV="TOP">
+                                                    <FontHeight val="13"/>
+                                                    <Anchors>
+                                                        <Anchor relativeTo="DarkmoonSocialStatsFrameSkillPointsCharacterLevel" point="BOTTOM" x="8" y="-2" />
+                                                    </Anchors>
+                                                    <Shadow>
+                                                        <Offset x="1" y="1" />
+                                                        <Color r="0" g="0" b="0"/>
+                                                    </Shadow>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Scripts>
+                                            <OnShow>
+                                                local _, classFilename = UnitClass("player");
+                                                DarkmoonSocialStatsFrameSkillPointsClassImg:SetMask("Interface\\COMMON\\Indicator-Gray");
+                                                DarkmoonSocialStatsFrameSkillPointsClassImg:SetTexture("Interface/ICONS/ClassIcon_"..classFilename);
+                                            </OnShow>
+                                        </Scripts>
+                                    </Frame>
                                     
                                     <Button name="$parentReset" inherits="UIPanelButtonTemplate" text="Сброс">
                                         <Size x="96" y="32"/>
                                         <Anchors>
-                                            <Anchor point="BOTTOM" x="0" y="20"/>
+                                            <Anchor point="BOTTOM" x="-95" y="25"/>
                                         </Anchors>
                                         <Scripts>
                                             <OnShow>

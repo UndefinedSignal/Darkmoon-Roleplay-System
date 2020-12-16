@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
 
-	<Frame name="GameObjectPreview" toplevel="true" enableMouse="true" parent="UIParent" hidden="true" movable="true">
+	<Frame name="GameObjectPreview" toplevel="true" enableMouse="true" parent="UIParent" hidden="false" movable="true">
 		<Size x="325" y="400"/>
 		<Anchors>
 			<Anchor point="TOPLEFT" x="70" y="-104"/>
@@ -20,11 +20,12 @@
 					<Anchor point="BOTTOMRIGHT" x="-35" y="20"/>
 				</Anchors>
 
-				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border-Corrupted">
-					<EdgeSize>
-						<AbsValue val="26"/>
-					</EdgeSize>
-				</Backdrop>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture name="$parentBackground" atlas="adventureguide-pane-small">
+                        </Texture>
+                    </Layer>
+                </Layers>
 
 				<Frames>
 					<Button name="$parentBackwardButton" inherits="RPSObjectControlButtonTemplate">
@@ -185,20 +186,7 @@
 					</OnEnterPressed>
 				</Scripts>
 		    </EditBox>
-			<PlayerModel name="$parentModelScenePlatform" inherits="MouseDisabledModelTemplate">
-				<Anchors>
-					<Anchor point="TOPLEFT" x="20" y="-20"/>
-					<Anchor point="BOTTOMRIGHT" x="-20" y="85"/>
-				</Anchors>
-				<Scripts>
-					<OnShow>
-						self:SetModel(1416747);
-						GameObjectPreviewModelScenePlatform:SetCamDistanceScale(5);
-						GameObjectPreviewModelScenePlatform:SetFacing(math.pi);
-						self:SetAllPoints();
-					</OnShow>
-				</Scripts>
-			</PlayerModel>
+
 			<PlayerModel name="$parentModelSceneLightray" inherits="MouseDisabledModelTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT" x="20" y="-20"/>
@@ -232,9 +220,36 @@
 					</OnMouseWheel>
 				</Scripts>
 			</PlayerModel>
-			<Button parentKey="Close" inherits="UIPanelCloseButton">
+			<Button parentKey="Close" name="$parentClose" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="RIGHT" x="-35" y="-90"/>
+				</Anchors>
+			</Button>
+			<Button parentKey="Light">
+				<Size x="20" y="20"/>
+				<NormalTexture atlas="DruidEclipse-BaseMoon"/>
+				<PushedTexture atlas="DruidEclipse-BaseMoon"/>
+				<HighlightTexture atlas="AftLevelup-WhiteStarBurst" alphaMode="ADD"/>
+				<Scripts>
+					<OnClick>
+						if self.mode == nil then
+							self.mode = 1;
+						end
+						if self.mode == 1 then
+							self.mode = 0;
+							self:SetNormalAtlas("DruidEclipse-SolarMoon");
+							self:SetPushedAtlas("DruidEclipse-SolarMoon");
+							GameObjectPreviewModelSceneLightray:Hide();
+						else
+							self.mode = 1;
+							self:SetNormalAtlas("DruidEclipse-BaseMoon");
+							self:SetPushedAtlas("DruidEclipse-BaseMoon");
+							GameObjectPreviewModelSceneLightray:Show();
+						end						
+					</OnClick>
+				</Scripts>
+				<Anchors>
+					<Anchor relativeTo="GameObjectPreviewBackground" point="TOPLEFT" x="12" y="-10"/>
 				</Anchors>
 			</Button>
 		</Frames>

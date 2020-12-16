@@ -53,6 +53,7 @@ RPSCoreFramework.DraggingContainerFrame = nil;
 
 RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
 RPSCoreFramework.DropDownClassChooseMenu = CreateFrame("Frame", "DropDownClassChooseMenu", UIParent, "UIDropDownMenuTemplate");
+SendAddonMessage = C_ChatInfo.SendAddonMessage;
 
 RPSCoreFramework.MinstrelStatus = 2;
 
@@ -94,7 +95,12 @@ RPSDispTable = { {1, "Горожанин","Обычный горожанин","1
 				{20, "Чернокнижник/некромант", "Культист", "0", "0", "114829", "0", "0", "0", "0", "0", "165765", "163264",  "103157", "39427", "59547"},
 				{21, "Стрелок Кул-Тираса", "Карабинер/Снайпер/Gunslinger", "0", "159163", "155168", "0", "165010", "0", "18525", "160465", "1000284", "158042", "154183", "168644", "0"},
 				{22, "Наемник","Опытный наемник. Для мужчин и женщин.","0", "53596", "0", "142802", "0", "0", "0", "126125", "126083", "142854", "65774", "0", "0"},
-				{23, "Воин","Опытный воин с оружием и броней. Для мужчин и женщин.","0", "40960", "0", "35588", "4333", "0", "0", "55034", "128068", "82521", "35866", "59550", "57452"}
+				{23, "Воин","Опытный воин с оружием и броней. Для мужчин и женщин.","0", "40960", "0", "35588", "4333", "0", "0", "55034", "128068", "82521", "35866", "59550", "57452"},
+				{24, "Официантка", "Типичная женская форма разносчицы напитков и иных заказов", "0", "0", "0", "0", "10034", "0", "59422", "0", "5975", "139298", "32981", "0", "0"},
+				{25, "Аристократ", "Опрятный костюм под выход на улицу или на благоприятное мероприятие", "1000140", "0", "152062", "116052", "0", "0", "0", "40952", "95208", "116133", "116134", "0", "0"},
+				{26, "Щитоносец", "Боевое облачение воина из Кул-Тираса", "0", "36887", "0", "159448", "16060", "0", "152091", "159457", "32805", "159456", "147600", "159475", "159666"},
+				{27, "Повседневное", "Костюм на выход из дорогой ткани, сделанный в Кул-Тирасе", "0", "0", "0", "161557", "98093", "0", "0", "1314", "165075", "165073", "164805", "0", "0"},
+				{28, "Утеплённый костюм", "Мрачное одеяние под мрачную погоду", "134424", "0", "166671", "162936", "2576", "0", "0", "164659", "164661", "164660", "164658", "0", "0"}
 }
 RPSDispTableColors = { "Garr_FollowerToast-Epic", "Garr_FollowerToast-Rare", "Garr_FollowerToast-Uncommon", "Garr_MissionToast-Blank" }
 
@@ -400,7 +406,7 @@ RPSCoreFramework.Minstrel = {
 
 
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Green.blp", ".minstrel possess", "|cffffffff.minstrel possess|r - Взять под контроль выделенного NPC менестреля."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unposess", "|cffffffff.minstrel unposess|r - Прекратить контролировать NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unpossess", "|cffffffff.minstrel unpossess|r - Прекратить контролировать NPC."},
 
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <display id>|r - установить на себя морф под номером <display id>."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel demorph", "|cffffffff.minstrel demorph <id>|r - снять с себя морф."},
