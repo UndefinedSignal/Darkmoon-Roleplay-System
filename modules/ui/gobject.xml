@@ -37,6 +37,9 @@
 								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\down');
 								self.icon:SetVertexColor(1, 0.91, 0, 1);
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"back")
+							</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="$parentForwardButton" inherits="RPSObjectControlButtonTemplate">
@@ -48,6 +51,9 @@
 								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\up');
 								self.icon:SetVertexColor(1, 0.91, 0, 1);
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"front")
+							</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="$parentRotateRightButton" inherits="RPSObjectControlButtonTemplate">
@@ -59,6 +65,9 @@
 								self.icon:SetTexture('Interface\\AddOns\\RPSDarkmoon\\resources\\Control\\rotater');
 								self.icon:SetVertexColor(1, 0.91, 0, 1);
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"rright")
+							</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="$parentRotateLeftButton" inherits="RPSObjectControlButtonTemplate">
@@ -71,6 +80,9 @@
 								self.icon:SetVertexColor(1, 0.91, 0, 1);
 								--self.icon:SetRotation(-0.9, 0.5)
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"rleft")
+							</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="$parentLeftButton" inherits="RPSObjectControlButtonTemplate">
@@ -84,6 +96,9 @@
 								--self.icon:SetRotation(1.55, 0.55)
 								--GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"left")
+							</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="$parentRightButton" inherits="RPSObjectControlButtonTemplate">
@@ -97,6 +112,9 @@
 								--self.icon:SetRotation(-1.55, 0.55)
 								--self.icon:SetAllPoints();
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"right")
+							</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="$parentDownButton" inherits="RPSObjectControlButtonTemplate">
@@ -110,6 +128,9 @@
 								--self.icon:SetRotation(3.141593, 0.52);
 								--GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"down")
+							</OnClick>
 						</Scripts>
 					</Button>
 					<Button name="$parentUpButton" inherits="RPSObjectControlButtonTemplate">
@@ -123,6 +144,9 @@
 								--self.icon:SetRotation(-0.5, -0.5)
 								--GameObjectPreviewLeftButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"top")
+							</OnClick>
 						</Scripts>
 					</Button>
 
@@ -136,6 +160,9 @@
 								self.icon:SetVertexColor(1, 0.91, 0, 1);
 								--GameObjectPreviewCancelButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"cancel")
+							</OnClick>
 						</Scripts>
 					</Button>
 
@@ -149,6 +176,9 @@
 								self.icon:SetVertexColor(1, 0.91, 0, 1);
 								--GameObjectPreviewAcceptButtonIcon:SetTexCoord(0.57812500, 0.82812500, 0.14843750, 0.27343750)
 							</OnShow>
+							<OnClick>
+								RPSCoreFramework:GobPreviewAction(211135851,"accept")
+							</OnClick>
 						</Scripts>
 					</Button>
 				</Frames>
@@ -172,7 +202,7 @@
 			    	</OnEnterPressed>
 			    	<OnTextChanged>
 			    		if self:GetText() == "" then
-			    			self:SetText("0.1");
+			    			self:SetText("5");
 			    		end
 			    	</OnTextChanged>
 					<OnEscapePressed>
@@ -200,26 +230,35 @@
 					</OnShow>
 				</Scripts>
 			</PlayerModel>
-			<PlayerModel name="$parentModelScene" inherits="ModelWithControlsTemplate">
+			<Frame name="$parentBorder">
 				<Anchors>
-					<Anchor point="TOPLEFT" x="0" y="-20"/>
-					<Anchor point="BOTTOMRIGHT" x="0" y="115"/>
+					<Anchor point="TOPLEFT" x="35" y="-20"/>
+					<Anchor point="BOTTOMRIGHT" x="-35" y="125"/>
 				</Anchors>
-				<!--<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-					<EdgeSize val="1"/>
-					<TileSize val="10" />
-					<BackgroundInsets left="3" right="3" top="3" bottom="3" />
-				</Backdrop>-->
-				<Scripts>
-					<OnShow>
-						self:SetModel(526868);
-						--self:SetAllPoints();
-					</OnShow>
-					<OnMouseWheel>
-						RPSCoreFramework:GOB_OnMouseWheel(self, delta, 1, 0.1)
-					</OnMouseWheel>
-				</Scripts>
-			</PlayerModel>
+				<Frames>
+					<PlayerModel name="$parentModel" inherits="ModelWithControlsTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" x="0" y="0"/>
+							<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+						</Anchors>
+						<!--<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+							<EdgeSize val="1"/>
+							<TileSize val="10" />
+							<BackgroundInsets left="3" right="3" top="3" bottom="3" />
+						</Backdrop>-->
+						<Scripts>
+							<OnShow>
+								self:SetModel(1602427);
+								--self:SetAllPoints();
+							</OnShow>
+							<OnMouseWheel>
+								RPSCoreFramework:GOB_OnMouseWheel(self, delta, 1, 0.1)
+							</OnMouseWheel>
+						</Scripts>
+					</PlayerModel>
+				</Frames>
+			</Frame>
+
 			<Button parentKey="Close" name="$parentClose" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="RIGHT" x="-35" y="-90"/>

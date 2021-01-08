@@ -27,6 +27,9 @@ RPSCoreFramework.Map.POICounter = 0;
 RPSCoreFramework.Map.POICountLow = 0;
 RPSCoreFramework.Map.POICountMid = 0;
 
+RPSCoreFramework.GObject = {};
+RPSCoreFramework.GObject.Guid = 210680404;
+
 RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
@@ -52,6 +55,7 @@ RPSCoreFramework.PlayerCursorInformation = nil;
 RPSCoreFramework.DraggingContainerFrame = nil;
 
 RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
+RPSCoreFramework.DropDownDisplayEnchantMenuFrame = CreateFrame("Frame", "DisplayEnchantMenuFrame", UIParent, "UIDropDownMenuTemplate")
 RPSCoreFramework.DropDownClassChooseMenu = CreateFrame("Frame", "DropDownClassChooseMenu", UIParent, "UIDropDownMenuTemplate");
 SendAddonMessage = C_ChatInfo.SendAddonMessage;
 
@@ -355,6 +359,15 @@ RPSCoreFramework.DropDownDisplayMenu = {
 	{ text = "Display", isTitle = true, notCheckable = true},
 	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
 	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end }
+}
+
+RPSCoreFramework.DropDownDisplayEnchantMenu = {
+	{ text = "Display", isTitle = true, notCheckable = true},
+	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Enchant", isTitle = true, notCheckable = true},
+	{ text = "Изменить", notCheckable = true, func = function() print("Enchant on"); end },
+	{ text = "Сбросить", notCheckable = true, func = function() print("Enchant off"); end }
 }
 
 RPSCoreFramework.DropDownCharSpecChooseMenu = {

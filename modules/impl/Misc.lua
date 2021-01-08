@@ -1,6 +1,8 @@
-function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
-	if (GetInventoryItemID("player", inventorySlotId)) then
+function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId, weapon)
+	if (GetInventoryItemID("player", inventorySlotId) and not weapon) then
 		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, RPSCoreFramework.DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
+	elseif(GetInventoryItemID("player", inventorySlotId)) then
+		EasyMenu(RPSCoreFramework.DropDownDisplayEnchantMenu, RPSCoreFramework.DropDownDisplayEnchantMenuFrame, "cursor", 5, -15, "MENU", 5);
 	end
 end
 
@@ -43,10 +45,10 @@ function RPSCoreFramework:PaperdollDispInit()
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_FEET)
 	 end end)
 	RPSCoreFramework:HookScript(CharacterMainHandSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "mainhand"
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_MAINHAND)
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_MAINHAND, true)
 	 end end)
 	RPSCoreFramework:HookScript(CharacterSecondaryHandSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "offhand"
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND)
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND, true)
 	 end end)
 end
 

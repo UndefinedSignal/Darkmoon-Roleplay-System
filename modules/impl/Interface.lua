@@ -202,11 +202,11 @@ function RPSCoreFramework:GOB_OnMouseWheel(self, delta, maxZoom, minZoom)
 end
 
 function RPSCoreFramework:GOBModelSceneZoomIn()
-	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, 10, 1, 0.1)
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewBorderModel, 10, 1, 0.1)
 end
 
 function RPSCoreFramework:GOBModelSceneZoomOut()
-	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, -10, 1, 0.1)
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewBorderModel, -10, 1, 0.1)
 end
 
 function RPSCoreFramework:AddGuildSalaryTab()

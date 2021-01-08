@@ -51,8 +51,8 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
 	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
 
-	GameObjectPreviewModelSceneControlFrameZoomInButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomIn() end)
-	GameObjectPreviewModelSceneControlFrameZoomOutButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomOut() end)
+	GameObjectPreviewBorderModelControlFrameZoomInButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomIn() end)
+	GameObjectPreviewBorderModelControlFrameZoomOutButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomOut() end)
 
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
