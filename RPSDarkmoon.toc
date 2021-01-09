@@ -7,6 +7,6 @@
 ## LoadWith: Blizzard_GuildUI
 ## Dependencies: Blizzard_GuildUI
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam, RPSCorePOIPins, RPSCoreShowPOIPins, RPSCoreFavourites, RPSDailyStreak
-## SavedVariablesPerCharacter: RPSCharEntersFirstTime, RPSCoreAdvancedCharacterCheckShown, RPSMOTDDate, RPSCharSpec
+## SavedVariablesPerCharacter: RPSCharEntersFirstTime, RPSCoreAdvancedCharacterCheckShown, RPSMOTDDate, RPSCharSpec, RPSMEMESAVE
 
 RPSDarkmoon.xml

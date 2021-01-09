@@ -216,7 +216,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -249,7 +249,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -338,7 +338,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -371,7 +371,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -404,7 +404,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -437,7 +437,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -540,24 +540,24 @@ function RPSCoreFramework:OnInitialize()
 		preferredIndex = 3, 
 	}
 
-	local DistanceFrame = CreateFrame("Frame", "RPS_DistanceFrame", WorldMapFrame.ScrollContainer)
-	RPSCoreFramework.DistanceText = DistanceFrame:CreateFontString("DistanceText", "OVERLAY")
-	RPSCoreFramework.DistanceText:SetTextColor(1, 1, 1)
-	RPSCoreFramework.DistanceText:SetPoint("TOPLEFT", WorldMapFrame.ScrollContainer, "BOTTOM", -60, 25)
-	RPSCoreFramework.DistanceText:SetFont(GameFontNormal:GetFont(), 11, "OUTLINE")
-	RPSCoreFramework.DistanceText:SetText("")
-	DistanceFrame:SetScript("OnUpdate", DistanceFrameOnUpdate)
-	DistanceFrame:Show()
+	local DistanceFrame = CreateFrame("Frame", "RPS_DistanceFrame", WorldMapFrame.ScrollContainer);
+	RPSCoreFramework.DistanceText = DistanceFrame:CreateFontString("DistanceText", "OVERLAY");
+	RPSCoreFramework.DistanceText:SetTextColor(1, 1, 1);
+	RPSCoreFramework.DistanceText:SetPoint("TOPLEFT", WorldMapFrame.ScrollContainer, "BOTTOM", -60, 25);
+	RPSCoreFramework.DistanceText:SetFont(GameFontNormal:GetFont(), 11, "OUTLINE");
+	RPSCoreFramework.DistanceText:SetText("");
+	DistanceFrame:SetScript("OnUpdate", DistanceFrameOnUpdate);
+	DistanceFrame:Show();
 end
 
 function MouseXY()
-	local left, top = RPSCoreFramework.WorldMapScrollChild:GetLeft(), RPSCoreFramework.WorldMapScrollChild:GetTop()
-	local width, height = RPSCoreFramework.WorldMapScrollChild:GetWidth(), RPSCoreFramework.WorldMapScrollChild:GetHeight()
-	local scale = RPSCoreFramework.WorldMapScrollChild:GetEffectiveScale()
+	local left, top = RPSCoreFramework.WorldMapScrollChild:GetLeft(), RPSCoreFramework.WorldMapScrollChild:GetTop();
+	local width, height = RPSCoreFramework.WorldMapScrollChild:GetWidth(), RPSCoreFramework.WorldMapScrollChild:GetHeight();
+	local scale = RPSCoreFramework.WorldMapScrollChild:GetEffectiveScale();
 
-	local x, y = GetCursorPosition()
-	local cx = (x/scale - left) / width
-	local cy = (top - y/scale) / height
+	local x, y = GetCursorPosition();
+	local cx = (x/scale - left) / width;
+	local cy = (top - y/scale) / height;
 
 	if cx < 0 or cx > 1 or cy < 0 or cy > 1 then
 		return
@@ -567,20 +567,20 @@ function MouseXY()
 end
 
 function DistanceFrameOnUpdate()
-	local cx, cy = MouseXY()
-	local px, py
-	local xy = C_Map.GetPlayerMapPosition(WorldMapFrame:GetMapID(), "player")
+	local cx, cy = MouseXY();
+	local px, py;
+	local xy = C_Map.GetPlayerMapPosition(WorldMapFrame:GetMapID(), "player");
 
 	if xy then
-		px, py = xy:GetXY()
+		px, py = xy:GetXY();
 	end
 
 	if cx and xy then
 		local distance, _, _ = RPSCoreFramework.HBD:GetWorldDistance(0, px, py, cx, cy);
 		distance = distance * 2000;
-		RPSCoreFramework.DistanceText:SetFormattedText("|cffFF8040Расстояние|r: "..tonumber(string.format("%.3f", distance)).." юнитов", "", 100 * cx, 100 * cy)
+		RPSCoreFramework.DistanceText:SetFormattedText("|cffFF8040Расстояние|r: "..tonumber(string.format("%.3f", distance)).." юнитов", "", 100 * cx, 100 * cy);
 	else
-		RPSCoreFramework.DistanceText:SetText("")
+		RPSCoreFramework.DistanceText:SetText("");
 	end
 end
 

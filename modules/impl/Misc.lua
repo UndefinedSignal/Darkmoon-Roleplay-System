@@ -52,18 +52,26 @@ function RPSCoreFramework:PaperdollDispInit()
 	 end end)
 end
 
+function RPSCoreFramework:HideDialogPopup()
+	StaticPopup_Hide("DispSlotEditMenu");
+	StaticPopup_Hide("removeDisp");
+	StaticPopup_Hide("removeWeaponEnchant");
+	StaticPopup_Hide("EnchantOffHand");
+	StaticPopup_Hide("EnchantMainHand");
+end
+
 function RPSCoreFramework:RemoveDisplay(slotname)
-	local removeDispSlot
-	local menuTitle = "Вы действительно хотите убрать дисп?"
+	local removeDispSlot;
+	local menuTitle = "Вы действительно хотите убрать дисп?";
 	for v,h in pairs(RPSCoreFramework.SlotnameListPresets) do
 		if (v == slotname) then
-			removeDispSlot = h .. "0"
+			removeDispSlot = h .. "0";
 			break
 		end
 	end
 	for v,h in pairs(RPSCoreFramework.SlotnameListNames) do
 		if (v == slotname) then
-			menuTitle = "Вы действительно хотите убрать дисп для " .. h .. "?"
+			menuTitle = "Вы действительно хотите убрать дисп для " .. h .. "?";
 			break
 		end
 	end
@@ -80,9 +88,74 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-	StaticPopup_Hide("DipsSlotEditMenu")
-	StaticPopup_Hide("removeDisp")
-	StaticPopup_Show("removeDisp")
+	RPSCoreFramework:HideDialogPopup();
+	StaticPopup_Show("removeDisp");
+end
+
+function RPSCoreFramework:ShowDisEnchantDialog(slotname)
+
+	StaticPopupDialogs["removeWeaponEnchant"] = {
+		text = "Убрать зачарование с выбранного предмета?",
+		button1 = YES,
+		button2 = NO,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("enchant "..slotname.." 0") end,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = true,
+		enterClicksFirstButton = true,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
+	}
+	RPSCoreFramework:HideDialogPopup();
+	StaticPopup_Show("removeWeaponEnchant");
+end
+
+function RPSCoreFramework:ShowEnchantDialog(slotname)
+	if (slotname == "mainhand") then
+		StaticPopupDialogs["EnchantMainHand"] = {
+			text = "Введите ID зачарования в пределах 1 - 197",
+			button1 = "Применить",
+			button2 = "Выйти",
+			OnShow = function (self, data)
+
+			end,
+			OnAccept = function (self, data, data2)
+				RPSCoreFramework:SendCoreMessage("enchant mainhand "..self.editBox:GetText());
+			end,
+		  	OnCancel = function (_,reason)
+		  	end,
+			hasEditBox = true,
+		  	timeout = 15,
+		  	whileDead = true,
+		  	hideOnEscape = true,
+		  	enterClicksFirstButton = true,
+		}
+		RPSCoreFramework:HideDialogPopup();
+		StaticPopup_Show("EnchantMainHand");
+	elseif(slotname == "offhand") then
+		StaticPopupDialogs["EnchantOffHand"] = {
+			text = "Введите ID зачарования в пределах 1 - 197",
+			button1 = "Применить",
+			button2 = "Выйти",
+			OnShow = function (self, data)
+
+			end,
+			OnAccept = function (self, data, data2)
+				RPSCoreFramework:SendCoreMessage("enchant offhand "..self.editBox:GetText());
+			end,
+		  	OnCancel = function (_,reason)
+		  	end,
+			hasEditBox = true,
+		  	timeout = 15,
+		  	whileDead = true,
+		  	hideOnEscape = true,
+		  	enterClicksFirstButton = true,
+		}
+		RPSCoreFramework:HideDialogPopup();
+		StaticPopup_Show("EnchantOffHand");
+	end
+	assert("Некорректное значение slotname - "..slotname);
 end
 
 function RPSCoreFramework:ShowDisplayInfo(slotname)
@@ -120,7 +193,7 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 	  	enterClicksFirstButton = true,
 	}
 	StaticPopup_Hide("removeDisp");
-	StaticPopup_Hide("DipsSlotEditMenu");
+	StaticPopup_Hide("DispSlotEditMenu");
 	StaticPopup_Show("DipsSlotEditMenu");
 end
 

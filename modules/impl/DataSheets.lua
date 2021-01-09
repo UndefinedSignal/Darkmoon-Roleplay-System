@@ -366,9 +366,10 @@ RPSCoreFramework.DropDownDisplayEnchantMenu = {
 	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
 	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end },
 	{ text = "Enchant", isTitle = true, notCheckable = true},
-	{ text = "Изменить", notCheckable = true, func = function() print("Enchant on"); end },
-	{ text = "Сбросить", notCheckable = true, func = function() print("Enchant off"); end }
+	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowEnchantDialog(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:ShowDisEnchantDialog(RPSCoreFramework.GetLastClickedSlot); end }
 }
+
 
 RPSCoreFramework.DropDownCharSpecChooseMenu = {
 	{ text = "Сделайте выбор", isTitle = true, notCheckable = true},
