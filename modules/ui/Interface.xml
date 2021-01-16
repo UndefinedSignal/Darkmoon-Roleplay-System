@@ -981,6 +981,201 @@
                         </Scripts>
                     </Frame>
 
+
+                    <Frame name="DarkmoonCharacterEXPFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
+                        <Anchors>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" point="TOPLEFT" x="0" y="0"/>
+                            <Anchor relativeTo="RPS_MainFramePageContainer" point="BOTTOMRIGHT" x="0" y="0"/>
+                        </Anchors>
+
+                        <Frames>
+                            <Frame name="$parentContent">
+                                <Anchors>
+                                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="2" y="-2"/>
+                                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-2" y="2"/>
+                                </Anchors>
+
+                                <Frames>
+                                    <Frame name="$parentTop">
+                                        <Anchors>
+                                            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="25" y="-25"/>
+                                            <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-25" y="-40"/>
+                                        </Anchors>
+                                        <Layers>
+                                            <Layer>
+                                                <Texture parentKey="tHead" atlas="TalkingHeads-Neutral-TextBackground">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="5" y="-5"/>
+                                                        <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="5"/>
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="OVERLAY">
+                                                <FontString inherits="GameFontBlack" text="85 уровень" justifyH="CENTER" parentKey="lvlLabel">
+                                                    <Size  x="0" y="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="TOPLEFT" x="25" y="-20"/>
+                                                    </Anchors>
+                                                </FontString>
+                                                <FontString inherits="GameFontBlack" text="Выдающийся персонаж" justifyH="CENTER" parentKey="rankLabel">
+                                                    <Size  x="0" y="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="LEFT" relativeKey="$parent.lvlLabel" relativePoint="RIGHT" x="30" y="0"/>
+                                                    </Anchors>
+                                                </FontString>
+
+                                                <Texture parentKey="LevelLine" atlas="BossBanner-BgBanner-Bottom">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="TOPLEFT" x="15" y="-15"/>
+                                                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="TOPRIGHT" x="-15" y="-45"/>
+                                                    </Anchors>
+                                                </Texture>  
+
+                                                <FontString inherits="GameFontBlackSmall" text="Выдающиеся персонажи достигли высот, недоступных многим. По силам такой персонаж может претендовать на ветерана воины, начинающего представителя героического класса. Он может быть известен не в одной деревне. Выдающиеся персонажи могут претендовать на создание редких предметов." justifyH="LEFT" justifyV="MIDDLE" parentKey="descrLabel">
+                                                    <Size x="0" y="8"/>
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.lvlLabel" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
+                                                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-25" y="20"/>
+                                                    </Anchors>
+                                                </FontString>
+                                            </Layer>
+
+                                            <Layer level="BACKGROUND">                                              
+                                                <Texture parentKey="ExpTitle" atlas="AdventureMapLabel-Large">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="BOTTOMLEFT" x="15" y="0"/>
+                                                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-15" y="-30"/>
+                                                    </Anchors>
+                                                </Texture>
+                                                <FontString inherits="GameFontNormalLarge" text="Опыт" justifyH="CENTER">
+                                                    <Size  x="0" y="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="CENTER" relativeKey="$parent.ExpTitle" relativePoint="CENTER" x="0" y="0"/>
+                                                    </Anchors>
+                                                </FontString>
+                                            </Layer>
+                                            <Layer level="BORDER">
+                                                <Texture parentKey="EXP" atlas="hud-MainMenuBar-experiencebar-small-single">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
+                                                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMRIGHT" x="-21" y="-22"/>
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="BACKGROUND">
+                                                <Texture parentKey="EXPback" atlas="nameplates-playerhealth-background">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.EXP" relativePoint="TOPLEFT" x="0" y="0"/>
+                                                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.EXP" relativePoint="BOTTOMRIGHT" x="0" y="0"/>
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="OVERLAY">
+                                                <Texture parentKey="EXPCircleIMG">
+                                                    <Size x="37" y="37" />
+                                                    <Anchors>
+                                                        <Anchor relativeKey="$parent.EXP" point="LEFT" relativePoint="RIGHT" x="-2" y="-2" />
+                                                    </Anchors>
+                                                </Texture>
+                                                <Texture atlas="hud-PlayerFrame-portraitring-large">
+                                                    <Size x="37" y="37" />
+                                                    <Anchors>
+                                                        <Anchor relativeKey="$parent.EXPCircleIMG" point="CENTER" x="0" y="2" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="BACKGROUND">
+                                                <Texture parentKey="EXPCircleBackground" atlas="AdventureMapQuest-PortraitBG">
+                                                    <Size x="34" y="34" />
+                                                    <Anchors>
+                                                        <Anchor relativeKey="$parent.EXPCircleIMG" point="CENTER" relativePoint="CENTER" x="0" y="0" />
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                            <Layer level="OVERLAY">
+                                                <FontString inherits="GameFontNormalMed1" text="88%" justifyH="CENTER" parentKey="percentLabel">
+                                                    <Size  x="0" y="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="CENTER" relativeKey="$parent.EXP" relativePoint="CENTER" x="14" y="0"/>
+                                                    </Anchors>
+                                                </FontString>
+                                                <FontString inherits="GameFontNormalMed1" text="До следующего уровня: 12%" justifyH="CENTER" parentKey="percentLeftLabel">
+                                                    <Size  x="0" y="12"/>
+                                                    <Anchors>
+                                                        <Anchor point="BOTTOM" relativeKey="$parent.percentLabel" relativePoint="CENTER" x="0" y="-25"/>
+                                                    </Anchors>
+                                                </FontString>
+                                            </Layer>
+                                        </Layers>
+                                        <Frames>
+                                            <Button name="$parentExpInfo">
+                                                <Size x="21" y="21" />
+                                                <Anchors>
+                                                    <Anchor point="RIGHT" relativeKey="$parent.ExpTitle" relativePoint="RIGHT" x="0" y="2"/>
+                                                </Anchors>
+                                                <NormalTexture atlas="worldquest-tracker-questmarker" />
+                                                <PushedTexture atlas="worldquest-tracker-questmarker" />
+                                                <HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
+                                                    <Size x="24" y="24"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
+                                                </HighlightTexture>
+                                                <Scripts>
+                                                    <OnEnter>
+                                                        GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+                                                        GameTooltip:AddLine("|cFFFFFFFFОпыт персонажа|r");
+                                                        GameTooltip:Show();
+                                                    </OnEnter>
+                                                    <OnLeave>
+                                                        GameTooltip:Hide();
+                                                    </OnLeave>
+                                                </Scripts>
+                                            </Button>
+                                        </Frames>
+                                        <Scripts>
+                                            <OnLoad>
+                                                local _, classFilename = UnitClass("player");
+                                                DarkmoonCharacterEXPFrameContentTop.EXPCircleIMG:SetMask("Interface\\COMMON\\Indicator-Gray");
+                                                DarkmoonCharacterEXPFrameContentTop.EXPCircleIMG:SetTexture("Interface/ICONS/UI_Promotion_CharacterBoost");
+                                            </OnLoad>
+                                        </Scripts>
+                                    </Frame>
+                                    <Frame name="$parentBottom">
+                                        <Anchors>
+                                            <Anchor relativeTo="$parentTop" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="7"/>
+                                            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-25" y="25"/>
+                                        </Anchors>
+                                        <Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+                                            <EdgeSize val="24"/>
+                                        </Backdrop>
+                                        <Layers>
+                                            <Layer>
+                                                <Texture parentKey="Background" atlas="_GarrMissionLocation-Drustvar-Mid">
+                                                    <Anchors>
+                                                        <Anchor point="TOPLEFT" x="5" y="-5"/>
+                                                        <Anchor point="BOTTOMRIGHT" x="-5" y="5"/>
+                                                    </Anchors>
+                                                </Texture>
+                                            </Layer>
+                                        </Layers>
+                                    </Frame>
+                                </Frames>
+
+                            </Frame>
+                        </Frames>
+                        <Scripts>
+                            <OnShow>
+                                if not RPSCoreFramework.FrameUpdate then
+                                    DarkmoonWIPFrame:Hide();
+                                else
+                                    DarkmoonWIPFrame:Show();
+                                    RPSCoreFramework:playAnimation(DarkmoonWIPFrame.content);
+                                end
+                            </OnShow>
+                            <OnHide>
+                                DarkmoonWIPFrame:Hide();
+                            </OnHide>
+                        </Scripts>
+                    </Frame>
+
                     <Frame name="DarkmoonCharacterFrameScale" inherits="RPS_StandardParchmentFrame" hidden="true">
                         <Anchors>
                             <Anchor relativeTo="RPS_MainFramePageContainer" x="0" y="0" relativePoint="TOPLEFT"/>
@@ -2090,15 +2285,15 @@
                                                 <Texture name="$parentClassImg">
                                                     <Size x="42" y="42" />
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" x="0" y="-2" />
+                                                        <Anchor point="TOPLEFT" x="0" y="-4" />
                                                     </Anchors>
                                                 </Texture>
                                             </Layer>
                                             <Layer level="LOW" name="$parentClassBorder">
                                                 <Texture atlas="hud-PlayerFrame-portraitring-large">
-                                                    <Size x="40" y="40" />
+                                                    <Size x="36" y="36" />
                                                     <Anchors>
-                                                        <Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsClassImg" point="CENTER" x="0" y="0" />
+                                                        <Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsClassImg" point="CENTER" x="0" y="2" />
                                                     </Anchors>
                                                 </Texture>
                                             </Layer>
@@ -2120,7 +2315,7 @@
                                                 <FontString name="DarkmoonCharStatsInfoFreeStatText" font="Fonts\FRIZQT___CYR.TTF" text="Свободный опыт" justifyH="LEFT" justifyV="TOP">
                                                     <FontHeight val="13"/>
                                                     <Anchors>
-                                                        <Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsCharacterLevel" point="BOTTOM" x="8" y="-2" />
+                                                        <Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsCharacterLevel" point="BOTTOM" x="8" y="-5" />
                                                     </Anchors>
                                                     <Shadow>
                                                         <Offset x="1" y="1" />
@@ -2178,10 +2373,6 @@
                                 </Scripts>
                             </Frame>
                         </Frames>
-                        <Size x="120" y="40"/>
-                        <Anchors>
-                            <Anchor relativeTo="DarkmoonPasswordChangeFrame" x="185" y="-280" relativePoint="TOPLEFT"/>
-                        </Anchors>
                     </Frame>
 
                     <Frame name="DarkmoonSocialStatsFrame" hidden="true">
@@ -2361,7 +2552,7 @@
                                             </Layer>
                                             <Layer level="LOW" name="$parentClassBorder">
                                                 <Texture atlas="hud-PlayerFrame-portraitring-large">
-                                                    <Size x="40" y="40" />
+                                                    <Size x="36" y="36" />
                                                     <Anchors>
                                                         <Anchor relativeTo="DarkmoonSocialStatsFrameSkillPointsClassImg" point="CENTER" x="0" y="0" />
                                                     </Anchors>
@@ -2385,7 +2576,7 @@
                                                 <FontString name="DarkmoonSocialStatsFrameFreeStatText" font="Fonts\FRIZQT___CYR.TTF" text="Свободный опыт" justifyH="LEFT" justifyV="TOP">
                                                     <FontHeight val="13"/>
                                                     <Anchors>
-                                                        <Anchor relativeTo="DarkmoonSocialStatsFrameSkillPointsCharacterLevel" point="BOTTOM" x="8" y="-2" />
+                                                        <Anchor relativeTo="DarkmoonSocialStatsFrameSkillPointsCharacterLevel" point="BOTTOM" x="8" y="-5" />
                                                     </Anchors>
                                                     <Shadow>
                                                         <Offset x="1" y="1" />
@@ -2739,16 +2930,13 @@
                                     <OnShow>
                                         RPSCoreFramework:MinstrelCheckLock();
                                     </OnShow>
-
                                     <OnLoad>
                                         self:SetFrameStrata("DIALOG");
                                     </OnLoad>
-
                                     <OnClick>
                                         --RPS_TextMinstrel:Show();
                                         RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self);
                                     </OnClick>
-
                                 </Scripts>
                             </Button>
 
