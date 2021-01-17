@@ -1014,7 +1014,7 @@
                                                 <FontString inherits="GameFontBlack" text="85 уровень" justifyH="CENTER" parentKey="lvlLabel">
                                                     <Size  x="0" y="12"/>
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="TOPLEFT" x="25" y="-20"/>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="TOPLEFT" x="45" y="-20"/>
                                                     </Anchors>
                                                 </FontString>
                                                 <FontString inherits="GameFontBlack" text="Выдающийся персонаж" justifyH="CENTER" parentKey="rankLabel">
@@ -1024,17 +1024,17 @@
                                                     </Anchors>
                                                 </FontString>
 
-                                                <Texture parentKey="LevelLine" atlas="BossBanner-BgBanner-Bottom">
+                                                <Texture parentKey="LevelLine" atlas="ChallengeMode-RankLineDivider">
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="TOPLEFT" x="15" y="-15"/>
-                                                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="TOPRIGHT" x="-15" y="-45"/>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="LEFT" x="20" y="25"/>
+                                                        <Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="RIGHT" x="-20" y="15"/>
                                                     </Anchors>
                                                 </Texture>  
 
                                                 <FontString inherits="GameFontBlackSmall" text="Выдающиеся персонажи достигли высот, недоступных многим. По силам такой персонаж может претендовать на ветерана воины, начинающего представителя героического класса. Он может быть известен не в одной деревне. Выдающиеся персонажи могут претендовать на создание редких предметов." justifyH="LEFT" justifyV="MIDDLE" parentKey="descrLabel">
                                                     <Size x="0" y="8"/>
                                                     <Anchors>
-                                                        <Anchor point="TOPLEFT" relativeKey="$parent.lvlLabel" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
+                                                        <Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="LEFT" x="25" y="20"/>
                                                         <Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-25" y="20"/>
                                                     </Anchors>
                                                 </FontString>
@@ -1134,7 +1134,7 @@
                                             <OnLoad>
                                                 local _, classFilename = UnitClass("player");
                                                 DarkmoonCharacterEXPFrameContentTop.EXPCircleIMG:SetMask("Interface\\COMMON\\Indicator-Gray");
-                                                DarkmoonCharacterEXPFrameContentTop.EXPCircleIMG:SetTexture("Interface/ICONS/UI_Promotion_CharacterBoost");
+                                                DarkmoonCharacterEXPFrameContentTop.EXPCircleIMG:SetTexture("Interface/ICONS/Achievement_guildperk_fasttrack_rank2");
                                             </OnLoad>
                                         </Scripts>
                                     </Frame>
