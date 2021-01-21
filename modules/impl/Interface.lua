@@ -409,3 +409,14 @@ function RPSCoreFramework:DispInsertItemLink(itemID)
 	local _, itemLink = GetItemInfo(itemID)
 	ChatEdit_InsertLink(itemLink);
 end
+
+function RPSCoreFramework:CharacterEXPBarUpdate(int)
+	int = tonumber(int);
+	DarkmoonCharacterEXPFrameContentTopEXPProgress:SetValue(int);
+	DarkmoonCharacterEXPFrameContentTopEXPProgress.CurrentPercent:SetText(tostring(int).."%");
+	DarkmoonCharacterEXPFrameContentTopEXPProgress.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
+end
+
+function RPSCoreFramework:UpdateCharacterEXPDescription()
+	print("Meme");
+end
