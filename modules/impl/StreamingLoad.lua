@@ -62,7 +62,7 @@ function RPSCoreFramework:StreamingLoad_UpdateIcon(status)
 end
 
 function RPSCoreFramework:StreamingLoadRecheck()
-	if tonumber(ceil(RPSCoreFramework.Map.POICounter*100/tonumber(RPSCoreFramework.Map.POICount))) >= 100 then
+	if tonumber(ceil(RPSCoreFramework.Map.POICounter*100/tonumber(RPSCoreFramework.Map.POICount))) >= 99 then
 		RPSCoreFramework:CharacterInfoPOIBlock(2);
 		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 	end

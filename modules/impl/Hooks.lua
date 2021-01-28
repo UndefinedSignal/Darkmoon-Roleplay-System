@@ -92,6 +92,33 @@ function RPSCoreFramework:HookAllPlayerBagButtons()
 	end
 end
 
+RPSCoreFramework.HookEXP = CreateFrame("FRAME");
+RPSCoreFramework.HookEXP:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookEXP:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix=="RPS.XP") then
+			RPSCoreFramework:CharacterEXPBarUpdate(tonumber(msg));
+			RPSCoreFramework:UpdateCharacterXPInfo();
+		end
+	end
+end)
+
+RPSCoreFramework.HookPOI = CreateFrame("FRAME");
+RPSCoreFramework.HookPOI:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookPOI:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix == "RPS.POI.i") then
+			RPSCoreFramework:AddPOIPins(msg);
+		elseif (prefix == "RPS.POI.u") then
+			RPSCoreFramework:UpdatePOIPins(msg);
+		elseif (prefix == "RPS.POI.r") then
+			RPSCoreFramework:RemovePOIPins(msg);
+		elseif (prefix == "RPS.POI.c") then
+			RPSCoreFramework:GetCommandPOIPins(msg);
+		end
+	end
+end)
+
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
 		self:UpdatePlayerModel();
@@ -103,15 +130,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		self:UpdateScaleReset();
 		self:PeriodicallyScrollMenuUpdater();
 	elseif (event == "CHAT_MSG_ADDON" and sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
-		if (prefix == "RPS.POI.i") then
-			RPSCoreFramework:AddPOIPins(msg)
-		elseif (prefix == "RPS.POI.u") then
-			RPSCoreFramework:UpdatePOIPins(msg)
-		elseif (prefix == "RPS.POI.r") then
-			RPSCoreFramework:RemovePOIPins(msg)
-		elseif (prefix == "RPS.POI.c") then
-			RPSCoreFramework:GetCommandPOIPins(msg)
-		elseif (prefix == "RPS.StatMe") then
+		if (prefix == "RPS.StatMe") then
 			RPSCoreFramework:UpdateInfo("RPS.StatMe "..msg);
 		elseif (prefix == "RPS.Scale") then
 			RPSCoreFramework:UpdateScaleInfo("RPS.Scale "..msg);

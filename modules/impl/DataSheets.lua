@@ -3,6 +3,7 @@ RPSCoreFramework.HBD = LibStub("HereBeDragons-2.0.1");
 RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-2.0");
 RPSCoreFramework.LualZW = LibStub("LualZW");
 RPSCoreFramework.Version = 2.31;
+
 if RPSDailyStreak == nil then
 	RPSDailyStreak = 0;
 end
@@ -54,15 +55,15 @@ RPSCoreFramework.ContainerDataFlow = true;
 RPSCoreFramework.PlayerCursorInformation = nil;
 RPSCoreFramework.DraggingContainerFrame = nil;
 
-RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
-RPSCoreFramework.DropDownDisplayEnchantMenuFrame = CreateFrame("Frame", "DisplayEnchantMenuFrame", UIParent, "UIDropDownMenuTemplate")
+RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate");
+RPSCoreFramework.DropDownDisplayEnchantMenuFrame = CreateFrame("Frame", "DisplayEnchantMenuFrame", UIParent, "UIDropDownMenuTemplate");
 RPSCoreFramework.DropDownClassChooseMenu = CreateFrame("Frame", "DropDownClassChooseMenu", UIParent, "UIDropDownMenuTemplate");
 SendAddonMessage = C_ChatInfo.SendAddonMessage;
 
 RPSCoreFramework.MinstrelStatus = 2;
 
 RPSCoreFramework.DistanceText = nil;
-RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
+RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child;
 
 RPSCoreFramework.POIDesc = {};
 RPSCoreFramework.POISearch = {};
@@ -134,7 +135,7 @@ if RPSCoreShowPOIPins == nil then
 	RPSCoreShowPOIPins = true;
 end
 if RPSCoreFavourites == nil then
-	RPSCoreFavourites = {}
+	RPSCoreFavourites = {};
 end
 
 RPSCoreFramework.AdvancedRaces = {
@@ -273,11 +274,11 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 
 }
 
-RPSCoreFramework.CharChooseSpec = {}
-RPSCoreFramework.CharChooseSpec[1] = "Случайный"
-RPSCoreFramework.CharChooseSpec[2] = "Первый"
-RPSCoreFramework.CharChooseSpec[3] = "Второй"
-RPSCoreFramework.CharChooseSpec[4] = "Третий"
+RPSCoreFramework.CharChooseSpec = {};
+RPSCoreFramework.CharChooseSpec[1] = "Случайный";
+RPSCoreFramework.CharChooseSpec[2] = "Первый";
+RPSCoreFramework.CharChooseSpec[3] = "Второй";
+RPSCoreFramework.CharChooseSpec[4] = "Третий";
 
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -1014,9 +1015,9 @@ RPSCoreFramework.Interface.Auras = {
 
 RPSCoreFramework.Interface.Auras.Bought = false;
 
-RPSCoreFramework.Interface.Auras.Show = {}
+RPSCoreFramework.Interface.Auras.Show = {};
 
-RPSCoreFramework.Interface.ActiveAuraCounter = 0
+RPSCoreFramework.Interface.ActiveAuraCounter = 0;
 
 RPSCoreFramework.Interface.Auras.Message = {
 	{" ", 0},
@@ -1027,9 +1028,9 @@ RPSCoreFramework.Interface.Auras.Message = {
 	{" ", 0}
 }
 
-RPSCoreFramework.Interface.Auras.Initialized = false
-RPSCoreFramework.Interface.Auras.GhostClick = false
-RPSCoreFramework.Interface.Auras.AllowUpdate = true
+RPSCoreFramework.Interface.Auras.Initialized = false;
+RPSCoreFramework.Interface.Auras.GhostClick = false;
+RPSCoreFramework.Interface.Auras.AllowUpdate = true;
 
 DarkmoonWIPFrame.content.flash1Rotation:SetDuration(8);
 DarkmoonWIPFrame.content.flash2Rotation:SetDuration(8);

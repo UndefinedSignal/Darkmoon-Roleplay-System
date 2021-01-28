@@ -1051,7 +1051,7 @@
 											</Layer>
 										</Layers>
 										<Frames>
-											<StatusBar name="$parentEXPProgress" minValue="1" maxValue="100" defaultValue="87" orientation="HORIZONTAL">
+											<StatusBar name="$parentEXPProgress" minValue="1" maxValue="100" defaultValue="0" orientation="HORIZONTAL">
 												<Anchors>
 													<Anchor point="TOPLEFT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
 													<Anchor point="BOTTOMRIGHT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMRIGHT" x="-21" y="-22"/>
@@ -1081,13 +1081,13 @@
 															</Anchors>
 														</Texture>
 
-														<FontString inherits="GameFontNormalMed1" text="88%" justifyH="CENTER" parentKey="CurrentPercent">
+														<FontString inherits="GameFontNormalMed1" text="0%" justifyH="CENTER" parentKey="CurrentPercent">
 															<Size  x="0" y="12"/>
 															<Anchors>
 																<Anchor point="CENTER" realtiveTo="$parent" relativePoint="CENTER" x="14" y="0"/>
 															</Anchors>
 														</FontString>
-														<FontString inherits="GameFontNormalMed1" text="До следующего уровня: 12%" justifyH="CENTER" parentKey="PercentLeft">
+														<FontString inherits="GameFontNormalMed1" text="До следующего уровня: 100%" justifyH="CENTER" parentKey="PercentLeft">
 															<Size  x="0" y="12"/>
 															<Anchors>
 																<Anchor point="BOTTOM" relativeKey="$parent.CurrentPercent" relativePoint="CENTER" x="0" y="-25"/>
@@ -1142,6 +1142,9 @@
 												DarkmoonCharacterEXPFrameContentTopEXPProgress.EXPCircleIMG:SetMask("Interface\\COMMON\\Indicator-Gray");
 												DarkmoonCharacterEXPFrameContentTopEXPProgress.EXPCircleIMG:SetTexture("Interface/ICONS/Achievement_guildperk_fasttrack_rank2");
 											</OnLoad>
+											<OnShow>
+												RPSCoreFramework:UpdateCharacterXPInfo();
+											</OnShow>
 										</Scripts>
 									</Frame>
 									<Frame name="$parentBottom">

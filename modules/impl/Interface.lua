@@ -417,6 +417,37 @@ function RPSCoreFramework:CharacterEXPBarUpdate(int)
 	DarkmoonCharacterEXPFrameContentTopEXPProgress.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
 end
 
-function RPSCoreFramework:UpdateCharacterEXPDescription()
-	print("Meme");
+function RPSCoreFramework:UpdateCharacterXPInfo()
+	local level = UnitLevel("player");
+	DarkmoonCharacterEXPFrameContentTop.lvlLabel:SetText(level .. " уровень");
+	DarkmoonCharacterEXPFrameContentTop.rankLabel:SetText(tostring(RPSCoreFramework:GetCharStrengthLevel(level)));
+	DarkmoonCharacterEXPFrameContentTop.descrLabel:SetText(tostring(RPSCoreFramework:GetChatStrengthDesc(level)));
 end
+
+function RPSCoreFramework:GetCharStrengthLevel(level)
+	if (level >= 110) then
+		return "Великий героический персонаж";
+	elseif (level >= 90) then
+		return "Героический персонаж";
+	elseif (level >= 70) then
+		return "Выдающийся персонаж";
+	elseif (level >= 50) then
+		return "Умелый персонаж";
+	end
+	return "Обычный персонаж";
+end
+
+function RPSCoreFramework:GetChatStrengthDesc(level)
+	if (level >= 110) then
+		return RPSCoreFramework.Literature.CharPowerDescr["5"];
+	elseif (level >= 90) then
+		return RPSCoreFramework.Literature.CharPowerDescr["4"];
+	elseif (level >= 70) then
+		return RPSCoreFramework.Literature.CharPowerDescr["3"];
+	elseif (level >= 50) then
+		return RPSCoreFramework.Literature.CharPowerDescr["2"];
+	end
+	return RPSCoreFramework.Literature.CharPowerDescr["1"];
+end
+
+
