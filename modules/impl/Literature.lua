@@ -9,11 +9,11 @@ RPSCoreFramework.Literature.CharacterForce = [[
 <html><body>
 <p align="left">На Darkmoon абсолютную силу персонажа характеризует уровень. Начальный уровень - 30, максимальный - 120. Он повышается автоматически за отыгрыш сервером, а также дополнительно за творчество (отчеты, анкеты, квенты) и прочее.</p><br/>
 
-<h3 align="center">|cFF7f7f7f30-49 уровень - обычный персонаж.|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["1"]..[[</p><br/><h3 align="center">|cFF76923c50-69 уровень - умелый персонаж.|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["2"]..[[</p><br/><h3 align="center">|cFF1f497d70-89 уровень - выдающийся персонаж.|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["3"]..[[</p><br/><h3 align="center">|cFF5f497a90-109 уровень - героический персонаж.|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["4"]..[[</p><br/><h3 align="center">|cFFe36c09110+ уровень - великий героический персонаж.|r</h3>
+<h3 align="center">|cFF7f7f7fОбычный персонаж</h3><h3 align="center">30-49 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["1"]..[[</p><br/><h3 align="center">|cFF76923cУмелый персонаж</h3><h3 align="center">50-69 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["2"]..[[</p><br/><h3 align="center">|cFF1f497dВыдающийся персонаж</h3><h3 align="center">70-89 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["3"]..[[</p><br/><h3 align="center">|cFF5f497aГероический персонаж</h3><h3 align="center">90-109 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["4"]..[[</p><br/><h3 align="center">|cFFe36c09Великий героический персонаж</h3><h3 align="center">110+ уровень|r</h3>
 <p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["5"]..[[</p><br/><p align="left">Что если ваш персонаж является, например, известным архимагом, но его уровень всего 55ый? В таком случае владельцу персонажа рекомендуется придумать персонажу причину, по которой он временно не соответствует заявленной планке. Например, после последнего тяжелого боя еще не пришёл в себя. Или был проклят. Или потерял память. </p><br/>
 
 <p align="left">Также таблица величия лишь приблизительно отображает степень величия персонажа. Допустима ситуация, что великий герой остается практически безызвестным, и наоборот, обычный персонаж может прославиться экстравагантным поступком.</p><br/>
