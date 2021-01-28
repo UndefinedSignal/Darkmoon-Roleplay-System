@@ -228,7 +228,7 @@ function RPSCoreFramework:AddMinimapIcon()
 	})
 
 	if (RPSCoreIconData == nil) then
-		RPSCoreIconData = { hide = false }	
+		RPSCoreIconData = { hide = false, minimapPos = 140.35 }	
 	end
 
 	icon = LibStub("LibDBIcon-1.0");
