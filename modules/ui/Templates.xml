@@ -2378,10 +2378,11 @@
 			</OnLeave>
         	<OnClick>
         		RPSCoreFramework.DispButtonFrame = self;
-        		RPSCoreFramework:DispRemoveItemTexture(0, true)
+        		RPSCoreFramework:DispRemoveItemTexture(0, true);
         		RPSCoreFramework:ClearDispModel(0);
         		RPSCoreFramework:ScheduleTimer("ApplyDispTimer",0.5);
         		RPSCoreFramework:ApplyTransmogSet(self);
+        		SetCursor("Interface/CURSOR/Interact");
         	</OnClick>
         </Scripts>
     </Button>

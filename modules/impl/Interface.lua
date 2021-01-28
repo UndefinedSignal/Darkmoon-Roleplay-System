@@ -384,6 +384,7 @@ function RPSCoreFramework:ApplyTransmogSet(button)
 		end
 		RPSCoreFramework:DispSetItemTexture(i-3, tonumber(buttonItemID));
 	end
+	SetCursor(nil);
 end
 
 function RPSCoreFramework:ApplyDispTimer()
