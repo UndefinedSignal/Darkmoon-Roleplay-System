@@ -1,12 +1,12 @@
 ## Interface: 80300
 ## Title: RPS Darkmoon
 ## Author: TestUnit, -SeMGa!
-## Version: 2.31
+## Version: 2.32
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## LoadWith: Blizzard_GuildUI
 ## Dependencies: Blizzard_GuildUI
 ## SavedVariables: RPSCoreIconData, RPSCoreScaleData, RPSCoreRTXData, RPSCoreActionCam, RPSCorePOIPins, RPSCoreShowPOIPins, RPSCoreFavourites, RPSDailyStreak
-## SavedVariablesPerCharacter: RPSCharEntersFirstTime, RPSCoreAdvancedCharacterCheckShown, RPSMOTDDate, RPSCharSpec, RPSMEMESAVE
+## SavedVariablesPerCharacter: RPSCharEntersFirstTime, RPSCoreAdvancedCharacterCheckShown, RPSMOTDDate, RPSCharSpec
 
 RPSDarkmoon.xml

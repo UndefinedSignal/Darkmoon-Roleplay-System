@@ -2,7 +2,7 @@ RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCo
 RPSCoreFramework.HBD = LibStub("HereBeDragons-2.0.1");
 RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-2.0");
 RPSCoreFramework.LualZW = LibStub("LualZW");
-RPSCoreFramework.Version = 2.31;
+RPSCoreFramework.Version = 2.32;
 
 if RPSDailyStreak == nil then
 	RPSDailyStreak = 0;

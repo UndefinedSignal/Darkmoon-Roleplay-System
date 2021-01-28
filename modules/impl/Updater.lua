@@ -184,7 +184,6 @@ function RPSCoreFramework:UpdateInfo(str)
 end
 
 function RPSCoreFramework:POIUpdateIntoMainMassive()
-    RPSMEMESAVE = {RPSCoreFramework.Map.UpdatePins};
     for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
         if not (pcall(RPSCorePOIPins[k](v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]))) then
             print("Error "..k);
