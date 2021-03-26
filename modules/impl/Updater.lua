@@ -178,8 +178,8 @@ function RPSCoreFramework:UpdateInfo(str)
     self.ItemsStats.Dexterity = values[15];
     self.ItemsStats.Will = values[16];
 	self.ItemsStats.CriticalChance = values[18];
+	self:ResetDiff();
 	self:UpdateNormal();
-	self:UpdateDiff();
 	self:UpdateUnlearn();	
 end
 
