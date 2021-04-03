@@ -62,6 +62,7 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
 
 	RPSCoreFramework:HookAllPlayerBagButtons();
+	RPSCoreFramework:NumeriseAllPlayerBagButtons();
 
 	--self:RawHook(MapCanvasMixin, "OnLoad()", RPSCoreFramework:AcquirePin(), true);
 end
@@ -87,6 +88,25 @@ function RPSCoreFramework:HookAllPlayerBagButtons()
 				if (not RPSCoreFramework:IsHooked(bagButton, "OnClick")) then
 					self:SecureHookScript(bagButton, "OnClick", "HookPlayerContainerClick");
 				end
+			end
+		end
+	end
+end
+
+function RPSCoreFramework:NumeriseAllPlayerBagButtons()
+	local bagButton = nil;
+	local num = 0;
+	for i = 0, NUM_BAG_SLOTS do -- Пробег по всем сумкам, существуют ли они?
+		local slots = GetContainerNumSlots(i) or 0;
+		if slots > 0 then -- Пробег по всем слотам и прикручивание к ним нашего кода
+			for j = 1, slots do
+				num = i + 1;
+				bagButton = _G["ContainerFrame"..num.."Item"..j];
+				bagButton.text = bagButton:CreateFontString();
+				bagButton.text:SetPoint("CENTER");
+				bagButton.text:SetSize(200, 20);
+				bagButton.text:SetFont("Fonts\\FRIZQT__.TTF", 12, "OUTLINE");
+				bagButton.text:SetFormattedText("%d-%d", num, j);
 			end
 		end
 	end
