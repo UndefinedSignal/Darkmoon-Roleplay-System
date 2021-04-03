@@ -244,6 +244,14 @@ function RPSCoreFramework:ContainerFrameOnDragStop()
 	end
 end
 
+function RPSCoreFramework:ContainerUpdateCursor()
+	if (not CursorHasItem() and RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
+		if (not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
+			RPSCoreFramework.PlayerCursorInformation = nil;
+		end
+	end
+end
+
 function RPSCoreFramework:ClearCursor()
 	ClearCursor(); -- Clears player cursor icon
 end

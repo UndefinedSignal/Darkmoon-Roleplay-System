@@ -9,6 +9,7 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("GUILD_RANKS_UPDATE");
 	self:RegisterEvent("ADDON_LOADED");
 	self:RegisterEvent("PLAYER_TALENT_UPDATE");
+	self:RegisterEvent("CURSOR_UPDATE");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -195,6 +196,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		RPSCoreFramework:ProcessGuildSalaryInterface();
 	elseif(event == "PLAYER_TALENT_UPDATE") then
 		MicroButtonPulseStop(TalentMicroButton);
+	elseif (event == "CURSOR_UPDATE") then
+		RPSCoreFramework:ContainerUpdateCursor();
 	end
 end
 
@@ -232,7 +235,9 @@ function RPSCoreFramework:ItemTooltip(self)
 	end
 end
 
-function RPSCoreFramework:HookPlayerContainerClick(self)
+function RPSCoreFramework:HookPlayerContainerClick(self, button)
+	if (button ~= "LeftButton") then return; end
+	
 	RPSCoreFramework.Container.ClickedBag = tonumber(self:GetParent():GetID());
 	RPSCoreFramework.Container.ClickedSlot = tonumber(self:GetID());
 	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
