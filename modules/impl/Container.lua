@@ -1,6 +1,8 @@
 containerFrame = nil;
 
 local ALLOWED_SIZES = {1,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34}
+local BAG_SOUND = 862;
+local BAG_DEFAULT_NAME = "Контейнер";
 
 function RPSCoreFramework:SetUpContainerFrame()
 	if (not containerFrame) then
@@ -14,7 +16,7 @@ end
 function RPSCoreFramework:ContainerFrameGenerateFrame(frame, size, title, icon, specialTexture)
 	frame.size = size;
 	local name = frame:GetName();
-	local containerName = title or "Контейнер";
+	local containerName = title or BAG_DEFAULT_NAME;
 	local bgTextureTop = _G[name .. "BackgroundTop"];
 	local bgTextureMiddle = _G[name .. "BackgroundMiddle1"];
 	local bgTextureBottom = _G[name .. "BackgroundBottom"];
@@ -222,7 +224,7 @@ function RPSCoreFramework:ContainerFrameOnLoad()
 end
 
 function RPSCoreFramework:ContainerFrameOnShow(self)
-	PlaySound(862);
+	PlaySound(BAG_SOUND);
 	--RPSCoreFramework:ContainerFrameUpdate(self)
 end
 
@@ -237,7 +239,7 @@ function RPSCoreFramework:ContainerFrameOnDragStop()
 		RPSCoreFramework:PlaceContainerItem(RPSCoreFramework.DraggingContainerFrame);
 	else
 		RPSCoreFramework:ClearCursor();
-		RPSCoreFramework:UlockContainerItem(self);
+		RPSCoreFramework:UnlockContainerItem(self);
 		RPSCoreFramework:ContainerFrameUpdate();
 	end
 end
@@ -325,16 +327,9 @@ function RPSCoreFramework:PickupContainerItem(self)
 
 	if item == nil or item.locked then return; end
 
-	local temp = {};
-	temp.isVirtual = item.isVirtual;
-	temp.itemID = item.itemID;
-	temp.count = item.count;
-	temp.slotID = id;
-
 	item.locked = true;
-	RPSCoreFramework.PlayerCursorInformation = temp;
+	RPSCoreFramework.PlayerCursorInformation = {isVirtual = item.isVirtual, itemID = item.itemID, count = item.count, slotID = id};
 	PickupItem(item.itemID)
-
 
 
 	RPSCoreFramework:ContainerFrameUpdate();
@@ -363,7 +358,7 @@ function RPSCoreFramework:ContainerMouseItemChecker()
 	end
 end
 
-function RPSCoreFramework:UlockContainerItem(arg1, itemID)
+function RPSCoreFramework:UnlockContainerItem(arg1, itemID)
 	local id = nil;
 	if arg1 ~= nil then
 		id = arg1:GetID()
@@ -442,11 +437,11 @@ function RPSCoreFramework:ContainerToInventory(bag, bagSlot)
 			RPSCoreFramework:SendCoreMessage(msg);
 
 			containerFrame.items[RPSCoreFramework.PlayerCursorInformation.slotID] = nil
-			RPSCoreFramework:UlockContainerItem(nil, RPSCoreFramework.PlayerCursorInformation.slotID)
+			RPSCoreFramework:UnlockContainerItem(nil, RPSCoreFramework.PlayerCursorInformation.slotID)
 			RPSCoreFramework.PlayerCursorInformation = nil;
 			RPSCoreFramework:ClearCursor()
 		else
-			RPSCoreFramework:UlockContainerItem(nil, RPSCoreFramework.PlayerCursorInformation.slotID)
+			RPSCoreFramework:UnlockContainerItem(nil, RPSCoreFramework.PlayerCursorInformation.slotID)
 		end
 	end
 end

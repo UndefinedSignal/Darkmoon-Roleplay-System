@@ -238,12 +238,7 @@ function RPSCoreFramework:HookPlayerContainerClick(self)
 	local itemID = GetContainerItemID(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot);
 	local __, itemCount = GetContainerItemInfo(RPSCoreFramework.Container.ClickedBag, RPSCoreFramework.Container.ClickedSlot)
 	if (itemID and (RPSCoreFramework.PlayerCursorInformation == nil or not RPSCoreFramework:GetCursorItem())) then
-		local temp = {}
-		temp.isVirtual = false;
-		temp.itemID = itemID;
-		temp.count = itemCount;
-		temp.slotID = 0;
-		RPSCoreFramework.PlayerCursorInformation = temp;
+		RPSCoreFramework.PlayerCursorInformation = {isVurtual = false, itemID = itemID, count = itemCount, slotID = 0};
 	elseif (RPSCoreFramework:GetCursorItem() and RPSCoreFramework.PlayerCursorInformation) then
 		if (not RPSCoreFramework.PlayerCursorInformation.isVirtual) then
 			RPSCoreFramework.PlayerCursorInformation = nil;
