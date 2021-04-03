@@ -256,7 +256,7 @@ RPSCoreFramework.Interface.MenuButtons = {
 	{"Характеристики", "RPS_StatsInfo", nil, true, 1, true},
 	{"Персонаж", "RPS_ScaleInfo", nil, true, 2, false},
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
-	{"Display", "RPS_DisplayInfo", nil, true, 3, false},
+	{"Внешний вид", "RPS_DisplayInfo", nil, true, 3, false},
 	{"Менестрель", "RPS_Minstrel", "DarkmoonMinstrelFrame", false, 0, false},
 
 	{"Настройки", "RPS_CharSettings", "DarkmoonSettingsFrame", false, 0, true},

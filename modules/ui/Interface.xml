@@ -1027,7 +1027,7 @@
 												</Texture>  
 
 												<FontString inherits="GameFontBlackSmall" text="Выдающиеся персонажи достигли высот, недоступных многим. По силам такой персонаж может претендовать на ветерана воины, начинающего представителя героического класса. Он может быть известен не в одной деревне. Выдающиеся персонажи могут претендовать на создание редких предметов." justifyH="LEFT" justifyV="MIDDLE" parentKey="descrLabel">
-													<Size x="0" y="8"/>
+													<Size x="0" y="9"/>
 													<Anchors>
 														<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="LEFT" x="25" y="20"/>
 														<Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-25" y="20"/>
