@@ -106,7 +106,7 @@ function RPSCoreFramework:NumeriseAllPlayerBagButtons()
 				bagButton.text:SetPoint("CENTER");
 				bagButton.text:SetSize(200, 20);
 				bagButton.text:SetFont("Fonts\\FRIZQT__.TTF", 12, "OUTLINE");
-				bagButton.text:SetFormattedText("%d-%d", num, j);
+				bagButton.text:SetFormattedText("%d-%d", i, slots-j+1);
 			end
 		end
 	end
@@ -165,7 +165,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		elseif (prefix == "RPS.CON.i") then
 			RPSCoreFramework:InitializeContainer(msg);
 		elseif (prefix == "RPS.CON.c") then
-			RPSCoreFramework:InvokeContainerComamnd(msg);
+			RPSCoreFramework:InvokeContainerCommand(msg);
 		elseif (prefix == "RPS.CON.u") then
 			RPSCoreFramework:UpdateContainer(msg);
 		elseif (prefix == "RPS.ECO.ti" or prefix == "RPS.ECO.qi") then

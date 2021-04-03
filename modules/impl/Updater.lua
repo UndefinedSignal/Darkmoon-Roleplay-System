@@ -381,8 +381,8 @@ function RPSCoreFramework:InitializeContainer(msg)
 end
 
 --"RPS.CON.c"
-function RPSCoreFramework:InvokeContainerComamnd(msg)
-	print("InvokeContainerComamnd: ".. msg);
+function RPSCoreFramework:InvokeContainerCommand(msg)
+	print("InvokeContainerCommand: ".. msg);
 	if ( msg == "done" ) then
 		RPSCoreFramework.ContainerDataFlow = true
 		RPSCoreFramework:ContainerFrameGenerateFrame(_G["RPS_ContainerFrame"], RPSCoreFramework.Container.size, RPSCoreFramework.Container.title)
