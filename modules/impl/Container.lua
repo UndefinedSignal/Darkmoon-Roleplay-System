@@ -308,12 +308,19 @@ function RPSCoreFramework:ContainerFrameOnLeave(self)
 end
 
 function RPSCoreFramework:ContainerFrameItemButtonOnClick(self, button)
-	if button == "LeftButton" then
+	if (button == "LeftButton") then
 		local infoType = GetCursorInfo()
 		if (RPSCoreFramework:GetCursorItem()) then
+			print("has item -> place")
 			RPSCoreFramework:PlaceContainerItem(self)
 		else
-			RPSCoreFramework:PickupContainerItem(self)
+			if (IsShiftKeyDown()) then
+				print("shift");
+				-- todo do the real paste in chatbox
+			else
+				print("no item -> pick")
+				RPSCoreFramework:PickupContainerItem(self)
+			end
 		end
 	--elseif button == "RightButton" then
 	--	print("click right");
