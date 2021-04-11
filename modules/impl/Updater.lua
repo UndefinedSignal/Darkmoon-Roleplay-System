@@ -185,8 +185,8 @@ end
 
 function RPSCoreFramework:POIUpdateIntoMainMassive()
     for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
-        if not (pcall(RPSCorePOIPins[k](v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]))) then
-            print("Error "..k);
+    	if RPSCorePOIPins[k] ~= nil then
+        	RPSCorePOIPins[k] = {v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]};
         end
     end
 end
@@ -275,6 +275,9 @@ function RPSCoreFramework:UpdatePOIPins(str)
 end
 
 function RPSCoreFramework:RemovePOIPins(str)
+	if RPSCoreFramework.Map.UpdatePins[str] ~= nil then
+		RPSCoreFramework.Map.UpdatePins[str] = nil;
+	end
 	RPSCorePOIPins[str] = nil;
 	RPSCoreFramework:GeneratePOIPlaces();
 end
