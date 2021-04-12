@@ -2560,12 +2560,22 @@
 				<Anchors>
 					<Anchor relativePoint="CENTER" point="CENTER" x="-40" y="-10"/>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RPSCoreFramework:SendCoreMessage("enchant mainhand "..self:GetParent().IDLabel:GetText());
+					</OnClick>
+				</Scripts>
 			</Button>
 			<Button name="$parentOffhand" inherits="UIPanelButtonTemplate" text="Offhand">
 				<Size x="70" y="20"/>
 				<Anchors>
 					<Anchor relativePoint="CENTER" point="CENTER" x="40" y="-10"/>
 				</Anchors>
+				<Scripts>
+					<OnClick>
+						RPSCoreFramework:SendCoreMessage("enchant offhand "..self:GetParent().IDLabel:GetText());
+					</OnClick>
+				</Scripts>
 			</Button>
 		</Frames>
 	</Button>
