@@ -1,7 +1,7 @@
 ## Interface: 80300
 ## Title: RPS Darkmoon
-## Author: TestUnit, -SeMGa!
-## Version: 2.32
+## Author: TestUnit, -SeMGa!, Hlebes
+## Version: 2.33
 ## URL: https://rp-wow.ru/
 ## DefaultState: Enabled
 ## LoadWith: Blizzard_GuildUI
