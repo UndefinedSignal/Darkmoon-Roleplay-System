@@ -1373,8 +1373,6 @@
 						</Scripts>
 					</Frame>
 
-
-
 					<Frame name="DarkmoonAurasFrame" hidden="true">
 						<Size x="500" y="450"/>
 						<Anchors>
@@ -2168,6 +2166,104 @@
 									</OnClick>
 								</Scripts>
 							</Button>
+						</Frames>
+					</Frame>
+
+					<Frame name="DarkmoonWeaponEnchantsFrame" hidden="true">
+						<Anchors>
+							<Anchor relativeTo="RPS_MainFramePageContainer" point="TOPLEFT" x="0" y="0"/>
+							<Anchor relativeTo="RPS_MainFramePageContainer" point="BOTTOMRIGHT" x="0" y="0"/>
+						</Anchors>
+						<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+							<EdgeSize val="16"/>
+						</Backdrop>
+						<Layers>
+							<Layer level="BACKGROUND">
+								<Texture file="Interface\ACHIEVEMENTFRAME\UI-GuildAchievement-Parchment-Horizontal-Desaturated">
+									<Anchors>
+										<Anchor point="TOPRIGHT" x="-5" y="-3"/>
+										<Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+										<Anchor point="LEFT" x="5" y="0"/>
+									</Anchors>
+								</Texture>
+							</Layer>
+						</Layers>
+						<Frames>
+
+							<Frame name="$parentControls">
+								<Anchors>
+									<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0"/>
+									<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" x="0" y="-84"/>
+								</Anchors>
+								<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+									<EdgeSize val="16"/>
+								</Backdrop>
+								<Layers>
+									<Layer level="BACKGROUND">
+										<Texture file="Interface\ACHIEVEMENTFRAME\UI-GuildAchievement-Parchment-Horizontal-Desaturated">
+											<Anchors>
+												<Anchor point="TOPRIGHT" x="-5" y="-3"/>
+												<Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+												<Anchor point="LEFT" x="5" y="0"/>
+											</Anchors>
+										</Texture>
+									</Layer>
+								</Layers>
+							</Frame>
+
+							<Frame name="$parentContent">
+								<Anchors>
+									<Anchor relativeTo="$parentControls" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="0"/>
+									<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0"/>
+								</Anchors>
+								<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
+									<EdgeSize val="16"/>
+								</Backdrop>
+								<Layers>
+									<Layer level="BACKGROUND">
+										<Texture file="Interface\ACHIEVEMENTFRAME\UI-GuildAchievement-Parchment-Horizontal-Desaturated">
+											<Anchors>
+												<Anchor point="TOPRIGHT" x="-5" y="-3"/>
+												<Anchor point="BOTTOMRIGHT" x="-5" y="3"/>
+												<Anchor point="LEFT" x="5" y="0"/>
+											</Anchors>
+										</Texture>
+									</Layer>
+								</Layers>
+								<Frames>
+									<Frame name="$parentCommands">
+										<Anchors>
+											<Anchor point="TOPLEFT" x="0" y="0" />
+											<Anchor point="BOTTOMRIGHT" x="0" y="0"/>
+										</Anchors>
+										<Frames>
+											<ScrollFrame name="$parentSlider1" inherits="UIPanelScrollFrameTemplate">
+												<Anchors>
+													<Anchor point="TOPLEFT" x="0" y="-8" />
+													<Anchor point="BOTTOMRIGHT" x="-20" y="0"/>
+												</Anchors>
+
+												<ScrollChild>
+													<Frame name="$parentChild">
+														<Size x="520" y="370"/>
+														<Anchors>
+															<Anchor relativeTo="$parent" point="TOPLEFT" relativePoint="TOPLEFT" x="7" y="0" />
+															<Anchor relativeTo="$parent" point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+														</Anchors>
+														<Frames>
+														</Frames>
+													</Frame>
+												</ScrollChild>
+												<Scripts>
+													ScrollFrame_OnLoad(self);
+													ScrollFrame_OnScrollRangeChanged(self);
+												</Scripts>
+											</ScrollFrame>
+										</Frames>
+									</Frame>
+								</Frames>
+							</Frame>
+
 						</Frames>
 					</Frame>
 

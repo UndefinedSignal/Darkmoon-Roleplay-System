@@ -192,6 +192,8 @@ function RPSCoreFramework:OnInitialize()
 	
 	RPSCoreFramework:TalentAlertMessageHide();
 
+	RPSCoreFramework:InitializeEnchantButtons();
+
 --	UIErrorsFrame:Hide();
 --	UIErrorsFrame:ClearAllPoints();
 --	UIErrorsFrame:SetPoint("TOP", UIParent, "BOTTOM", 0, -100);

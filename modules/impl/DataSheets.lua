@@ -270,8 +270,8 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 	{2, "Опыт", "RPS_EXPInfo", "DarkmoonCharacterEXPFrame"},
 	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
 	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
-	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"}
-
+	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
+	{3, "Энчанты", "RPS_DisplayWeaponEnchants", "DarkmoonWeaponEnchantsFrame"}
 }
 
 RPSCoreFramework.CharChooseSpec = {};

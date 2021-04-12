@@ -2505,4 +2505,69 @@
         </Animations>
     </Frame>
 
+	<Button name="RPSEnchantButton" virtual="true">
+		<Size x="256" y="64"/>
+		<NormalTexture atlas="auctionhouse-nav-button"/>
+		<PushedTexture atlas="auctionhouse-nav-button">
+            <Size x="256" y="64"/>
+            <Anchors>
+                <Anchor point="CENTER">
+                    <Offset>
+                        <AbsDimension x="-1" y="-1"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+        </PushedTexture>
+		<HighlightTexture atlas="128-RedButton-Highlight">
+		    <Size x="256" y="64"/>
+            <Anchors>
+                <Anchor point="CENTER">
+                    <Offset>
+                        <AbsDimension x="0" y="7"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+		</HighlightTexture>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture parentKey="Background">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="3" y="-2"/>
+						<Anchor point="BOTTOMRIGHT" x="-3" y="10"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString parentKey="IDLabel" text="[ID]" inherits="GameFontNormal" wordwrap="false">
+					<Anchors>
+						<Anchor relativePoint="LEFT" point="LEFT" x="10" y="8"/>
+					</Anchors>
+					<Color r="0.95" g="0.95" b="0.95"/>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString parentKey="TitleLabel" text="[TEXT]" inherits="GameFontNormal" wordwrap="false">
+					<Anchors>
+						<Anchor relativeKey="$parent.IDLabel" relativePoint="TOPRIGHT" point="TOPLEFT" x="10" y="0"/>
+					</Anchors>
+					<Color r="0.95" g="0.95" b="0.95"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentMainhand" inherits="UIPanelButtonTemplate" text="Mainhand">
+				<Size x="70" y="20"/>
+				<Anchors>
+					<Anchor relativePoint="CENTER" point="CENTER" x="-40" y="-10"/>
+				</Anchors>
+			</Button>
+			<Button name="$parentOffhand" inherits="UIPanelButtonTemplate" text="Offhand">
+				<Size x="70" y="20"/>
+				<Anchors>
+					<Anchor relativePoint="CENTER" point="CENTER" x="40" y="-10"/>
+				</Anchors>
+			</Button>
+		</Frames>
+	</Button>
+
 </Ui>
