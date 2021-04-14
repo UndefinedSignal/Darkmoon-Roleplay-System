@@ -976,7 +976,6 @@
 						</Scripts>
 					</Frame>
 
-
 					<Frame name="DarkmoonCharacterEXPFrame" inherits="RPS_StandardParchmentFrame" hidden="true">
 						<Anchors>
 							<Anchor relativeTo="RPS_MainFramePageContainer" point="TOPLEFT" x="0" y="0"/>
@@ -2193,7 +2192,7 @@
 							<Frame name="$parentControls">
 								<Anchors>
 									<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0"/>
-									<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" x="0" y="-84"/>
+									<Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" x="0" y="-62"/>
 								</Anchors>
 								<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border">
 									<EdgeSize val="16"/>
@@ -2208,7 +2207,43 @@
 											</Anchors>
 										</Texture>
 									</Layer>
+									<Layer level="OVERLAY">
+										<FontString parentKey="Title" font="Fonts\FRIZQT___CYR.TTF" text="Энчанты оружия" justifyH="CENTER" justifyV="TOP">
+											<FontHeight val="16"/>
+											<Anchors>
+												<Anchor point="TOP" x="0" y="-6" />
+											</Anchors>
+											<Shadow>
+												<Offset x="1" y="1" />
+												<Color r="0" g="0" b="0"/>
+											</Shadow>
+										</FontString>
+									</Layer>
 								</Layers>
+								<Frames>
+									<Button parentKey="Mainhand" inherits="UIPanelButtonTemplate" text="Снять энчант с правой руки">
+										<Size x="200" y="30"/>
+										<Anchors>
+											<Anchor relativePoint="BOTTOMLEFT" point="BOTTOMLEFT" x="20" y="8"/>
+										</Anchors>
+										<Scripts>
+											<OnClick>
+												RPSCoreFramework:SendCoreMessage("enchant mainhand 0");
+											</OnClick>
+										</Scripts>
+									</Button>
+									<Button parentKey="Offhand" inherits="UIPanelButtonTemplate" text="Снять энчант с левой руки">
+										<Size x="200" y="30"/>
+										<Anchors>
+											<Anchor relativePoint="BOTTOMRIGHT" point="BOTTOMRIGHT" x="-20" y="8"/>
+										</Anchors>
+										<Scripts>
+											<OnClick>
+												RPSCoreFramework:SendCoreMessage("enchant offhand 0");
+											</OnClick>
+										</Scripts>
+									</Button>
+								</Frames>
 							</Frame>
 
 							<Frame name="$parentContent">

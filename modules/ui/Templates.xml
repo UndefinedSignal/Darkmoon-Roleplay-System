@@ -2540,13 +2540,13 @@
 			<Layer level="OVERLAY">
 				<FontString parentKey="IDLabel" text="[ID]" inherits="GameFontNormal" wordwrap="false">
 					<Anchors>
-						<Anchor relativePoint="LEFT" point="LEFT" x="10" y="8"/>
+						<Anchor relativePoint="LEFT" point="LEFT" x="10" y="9"/>
 					</Anchors>
 					<Color r="0.95" g="0.95" b="0.95"/>
 				</FontString>
 			</Layer>
 			<Layer level="OVERLAY">
-				<FontString parentKey="TitleLabel" text="[TEXT]" inherits="GameFontNormal" wordwrap="false">
+				<FontString parentKey="TitleLabel" text="[TEXT]" inherits="GameFontNormal" wordwrap="false" hidden="true">
 					<Anchors>
 						<Anchor relativeKey="$parent.IDLabel" relativePoint="TOPRIGHT" point="TOPLEFT" x="10" y="0"/>
 					</Anchors>
@@ -2578,6 +2578,29 @@
 				</Scripts>
 			</Button>
 		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+			</OnLoad>
+			<OnEnter>
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine(self.Title);
+			    GameTooltip:AddLine(" ");
+			    GameTooltip:AddLine(self.Description, 1,1,1, true);
+			    GameTooltip:AddLine("ЛКМ\\ПКМ наложить энчант на оружие в левой\\правой руке", 1,0.61,0, true);
+			    GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnClick>
+				if (button == "RightButton") then
+					RPSCoreFramework:SendCoreMessage("enchant mainhand "..self.IDLabel:GetText());
+				elseif (button == "LeftButton") then
+					RPSCoreFramework:SendCoreMessage("enchant offhand "..self.IDLabel:GetText());
+				end
+			</OnClick>
+		</Scripts>
 	</Button>
 
 </Ui>

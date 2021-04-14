@@ -129,6 +129,34 @@ RPSCoreFramework.HookPOI:SetScript("OnEvent", function(self, event, prefix, msg,
 	end
 end)
 
+RPSCoreFramework.HookQuiz = CreateFrame("FRAME");
+RPSCoreFramework.HookQuiz:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookQuiz:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix == "RPS.Quiz.s") then
+			RPSCoreFramework:QuizSetQuestion(msg);
+		elseif (prefix == "RPS.Quiz.v") then
+			RPSCoreFramework:QuizAddAnswer(msg)
+		elseif (prefix == "RPS.Quiz.c") then
+			RPSCoreFramework:QuizCloseReload();
+		end
+	end
+end)
+
+RPSCoreFramework.HookContainer = CreateFrame("FRAME");
+RPSCoreFramework.HookContainer:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookContainer:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix == "RPS.CON.i") then
+			RPSCoreFramework:InitializeContainer(msg);
+		elseif (prefix == "RPS.CON.c") then
+			RPSCoreFramework:InvokeContainerCommand(msg);
+		elseif (prefix == "RPS.CON.u") then
+			RPSCoreFramework:UpdateContainer(msg);
+		end
+	end
+end)
+
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
 		self:UpdatePlayerModel();
@@ -152,24 +180,12 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdateDisplayMacrosInfo("RPS.Display "..msg);
 		elseif (prefix == "RPS.AuraRefresh") then
 			RPSCoreFramework:RefreshActiveAuras("RPS.AuraRefresh "..msg);
-		elseif (prefix == "RPS.CON.i") then
-			RPSCoreFramework:InitializeContainer(msg);
-		elseif (prefix == "RPS.CON.c") then
-			RPSCoreFramework:InvokeContainerCommand(msg);
-		elseif (prefix == "RPS.CON.u") then
-			RPSCoreFramework:UpdateContainer(msg);
 		elseif (prefix == "RPS.ECO.ti" or prefix == "RPS.ECO.qi") then
 			RPSCoreFramework:SalaryIndicator(msg);
 		elseif (prefix == "RPS.AuraOff") then
 			RPSCoreFramework:UpdatePLayerAuraList(msg)
 		elseif (prefix == "RPS.Minstrel") then
 			RPSCoreFramework:UpdateMinstrelStatus(msg);
-		elseif (prefix == "RPS.Quiz.s") then
-			RPSCoreFramework:QuizSetQuestion(msg);
-		elseif (prefix == "RPS.Quiz.v") then
-			RPSCoreFramework:QuizAddAnswer(msg)
-		elseif (prefix == "RPS.Quiz.c") then
-			RPSCoreFramework:QuizCloseReload();
 		elseif (prefix == "RPS.Guild.s") then
 			RPSCoreFramework:UpdateGuildSalary(msg);
 		elseif (prefix == "RPS.DLS") then
