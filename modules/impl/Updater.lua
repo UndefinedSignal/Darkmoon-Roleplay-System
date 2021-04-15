@@ -9,6 +9,12 @@ function RPSCoreFramework:ReloadDispList()
 	        end
 	    end
 	end
+	if RPSCoreFramework.Display.Enchants[1][2] ~= "-1" then
+		dispstring = dispstring .. ".enchant mainh ".. RPSCoreFramework.Display.Enchants[1][2].."\n"
+	end
+	if RPSCoreFramework.Display.Enchants[2][2] ~= "-1" then
+		dispstring = dispstring .. ".enchant offh ".. RPSCoreFramework.Display.Enchants[2][2].."\n"
+	end
 	RPS_TextMacrosScrollText:SetText(dispstring)
 	RPS_DispUpdateButton:Enable()
 end
@@ -238,7 +244,7 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 	end
 end
 
-function MountModelStatusUpdate(str)
+function RPSCoreFramework:MountModelStatusUpdate(str)
 	local values = {strsplit(' ',str)}
 	if tonumber(values[1]) ~= nil then
 		RPSCharSpec = tonumber(values[1]) + 1;
@@ -248,6 +254,31 @@ function MountModelStatusUpdate(str)
 	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]);
 end
 
+function RPSCoreFramework:EnchantButtonTextUpdate(button, text)
+	if button == "main" then
+		_G["DarkmoonWeaponEnchantsFrameControls"].Mainhand:SetText(text);
+	elseif button == "off" then
+		_G["DarkmoonWeaponEnchantsFrameControls"].Offhand:SetText(text);
+	end
+end
+
+function RPSCoreFramework:EnchantStatusUpdate(str)
+	local values = {strsplit(' ',str)};
+	if tostring(values[1]) == "-1" then
+		RPSCoreFramework.Display.Enchants[1][2] = "-1";
+		RPSCoreFramework:EnchantButtonTextUpdate("main", "Снять зачарование с главной руки")
+	else
+		RPSCoreFramework.Display.Enchants[1][2] = tostring(values[1]);
+		RPSCoreFramework:EnchantButtonTextUpdate("main", "Снять зачарование №"..tostring(values[1]).." с главной руки");
+	end
+	if tostring(values[2]) == "-1" then
+		RPSCoreFramework.Display.Enchants[2][2] = "-1"
+		RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование с второй руки");
+	else
+		RPSCoreFramework.Display.Enchants[2][2] = tostring(values[2]);
+		RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование №"..tostring(values[2]).." с второй руки");
+	end
+end
 
 --function RPSCoreFramework:AddPOIPins(str)
 --	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
@@ -304,7 +335,7 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 	end
 end
 
-function RPSCoreFramework:InitializePool(str)
+function RPSCoreFramework:InitializePoll(str)
 	local values = {strsplit('#',str)};
 	if values[1] == nil then
 		return;
@@ -324,6 +355,7 @@ function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage("rps action scale info");
 	RPSCoreFramework:SendCoreMessage("rps action aura list known");
 	RPSCoreFramework:SendCoreMessage("rps action aura list active");
+	RPSCoreFramework:SendCoreMessage("enchant list");
 end
 
 function RPSCoreFramework:PeriodicallyAurasUpdate()

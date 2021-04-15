@@ -2562,6 +2562,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
+						RPSCoreFramework.Display.Enchants[1][2] = tostring(self:GetParent().IDLabel:GetText());
 						RPSCoreFramework:SendCoreMessage("enchant mainhand "..self:GetParent().IDLabel:GetText());
 					</OnClick>
 				</Scripts>
@@ -2573,6 +2574,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
+						RPSCoreFramework.Display.Enchants[2][2] = tostring(self:GetParent().IDLabel:GetText());
 						RPSCoreFramework:SendCoreMessage("enchant offhand "..self:GetParent().IDLabel:GetText());
 					</OnClick>
 				</Scripts>
@@ -2587,7 +2589,7 @@
 			    GameTooltip:AddLine(self.Title);
 			    GameTooltip:AddLine(" ");
 			    GameTooltip:AddLine(self.Description, 1,1,1, true);
-			    GameTooltip:AddLine("ЛКМ\\ПКМ наложить энчант на оружие в левой\\правой руке", 1,0.61,0, true);
+			    GameTooltip:AddLine("ЛКМ\\ПКМ наложить энчант на оружие в главной\\второй руке", 1,0.61,0, true);
 			    GameTooltip:Show();
 			</OnEnter>
 			<OnLeave>
@@ -2595,9 +2597,13 @@
 			</OnLeave>
 			<OnClick>
 				if (button == "RightButton") then
-					RPSCoreFramework:SendCoreMessage("enchant mainhand "..self.IDLabel:GetText());
-				elseif (button == "LeftButton") then
+					RPSCoreFramework.Display.Enchants[2][2] = tostring(self.IDLabel:GetText());
 					RPSCoreFramework:SendCoreMessage("enchant offhand "..self.IDLabel:GetText());
+					RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование №"..tostring(self.IDLabel:GetText()).." с второй руки");
+				elseif (button == "LeftButton") then
+					RPSCoreFramework.Display.Enchants[1][2] = tostring(self.IDLabel:GetText());
+					RPSCoreFramework:SendCoreMessage("enchant mainhand "..self.IDLabel:GetText());
+					RPSCoreFramework:EnchantButtonTextUpdate("main", "Снять зачарование №"..tostring(self.IDLabel:GetText()).." с главной руки");
 				end
 			</OnClick>
 		</Scripts>

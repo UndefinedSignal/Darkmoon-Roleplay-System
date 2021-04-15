@@ -192,11 +192,13 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:DailyStatusUpdate(msg);
 		elseif (prefix == "RPS.mdS") then
 			RPSCoreFramework:MountModelStatusUpdate(msg);
+		elseif (prefix == "RPS.Enchant") then
+			RPSCoreFramework:EnchantStatusUpdate(msg);
 		end
 	elseif (event == "BAG_UPDATE") then
 		RPSCoreFramework:HookAllPlayerBagButtons();
 --[[	elseif (event == "RPS.POLL") then
-		RPSCoreFramework:InitializePool(msg);]]
+		RPSCoreFramework:InitializePoll(msg);]]
 	elseif (event == "GUILD_RANKS_UPDATE") then
 		RPSCoreFramework:ProcessGuildSalaryInterface();
 	elseif(event == "PLAYER_TALENT_UPDATE") then

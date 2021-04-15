@@ -2208,7 +2208,7 @@
 										</Texture>
 									</Layer>
 									<Layer level="OVERLAY">
-										<FontString parentKey="Title" font="Fonts\FRIZQT___CYR.TTF" text="Энчанты оружия" justifyH="CENTER" justifyV="TOP">
+										<FontString parentKey="Title" font="Fonts\FRIZQT___CYR.TTF" text="Зачарование оружия" justifyH="CENTER" justifyV="TOP">
 											<FontHeight val="16"/>
 											<Anchors>
 												<Anchor point="TOP" x="0" y="-6" />
@@ -2221,25 +2221,29 @@
 									</Layer>
 								</Layers>
 								<Frames>
-									<Button parentKey="Mainhand" inherits="UIPanelButtonTemplate" text="Снять энчант с правой руки">
-										<Size x="200" y="30"/>
+									<Button parentKey="Mainhand" inherits="UIPanelButtonTemplate" text="Снять зачарование с главной руки">
+										<Size x="255" y="30"/>
 										<Anchors>
-											<Anchor relativePoint="BOTTOMLEFT" point="BOTTOMLEFT" x="20" y="8"/>
+											<Anchor relativePoint="BOTTOMLEFT" point="BOTTOMLEFT" x="10" y="8"/>
 										</Anchors>
 										<Scripts>
 											<OnClick>
+												RPSCoreFramework.Display.Enchants[1][2] = "-1";
 												RPSCoreFramework:SendCoreMessage("enchant mainhand 0");
+												RPSCoreFramework:EnchantButtonTextUpdate("main", "Снять зачарование с главной руки");
 											</OnClick>
 										</Scripts>
 									</Button>
-									<Button parentKey="Offhand" inherits="UIPanelButtonTemplate" text="Снять энчант с левой руки">
-										<Size x="200" y="30"/>
+									<Button parentKey="Offhand" inherits="UIPanelButtonTemplate" text="Снять зачарование с второй руки">
+										<Size x="255" y="30"/>
 										<Anchors>
-											<Anchor relativePoint="BOTTOMRIGHT" point="BOTTOMRIGHT" x="-20" y="8"/>
+											<Anchor relativePoint="BOTTOMRIGHT" point="BOTTOMRIGHT" x="-10" y="8"/>
 										</Anchors>
 										<Scripts>
 											<OnClick>
+												RPSCoreFramework.Display.Enchants[2][2] = "-1";
 												RPSCoreFramework:SendCoreMessage("enchant offhand 0");
+												RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование с второй руки");
 											</OnClick>
 										</Scripts>
 									</Button>

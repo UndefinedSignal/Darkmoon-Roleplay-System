@@ -271,7 +271,7 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
 	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
 	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
-	{3, "Энчанты", "RPS_DisplayWeaponEnchants", "DarkmoonWeaponEnchantsFrame"}
+	{3, "Зачарование", "RPS_DisplayWeaponEnchants", "DarkmoonWeaponEnchantsFrame"}
 }
 
 RPSCoreFramework.CharChooseSpec = {};
@@ -392,24 +392,28 @@ RPSCoreFramework.Scroller.lineplusoffset = {
 
 RPSCoreFramework.Display.Scroll = {
 	{".disp hea ", -1, 0},
-	{".disp neck ", -1, 0},
-	{".disp shoul ", -1, 0},
+	{".disp nec ", -1, 0},
+	{".disp sho ", -1, 0},
 	{".disp shi ", -1, 0},
 	{".disp che ", -1, 0},
 	{".disp wai ", -1, 0},
 	{".disp leg ", -1, 0},
 	{".disp fee ", -1, 0},
 	{".disp wri ", -1, 0},
-	{".disp hand ", -1, 0},
+	{".disp han ", -1, 0},
 	{".disp finger1 ", -1, 0},
 	{".disp finger2 ", -1, 0},
 	{".disp trinket1 ", -1, 0},
 	{".disp trinket2 ", -1, 0},
-	{".disp back ", -1, 0},
-	{".disp main ", -1, 0},
-	{".disp offh ", -1, 0},
-	{".disp ranged ", -1, 0},
-	{".disp tabard ", -1, 0}	
+	{".disp bac ", -1, 0},
+	{".disp mai ", -1, 0},
+	{".disp off ", -1, 0},
+	{".disp ran ", -1, 0},
+	{".disp tab ", -1, 0}	
+}
+RPSCoreFramework.Display.Enchants = {
+	{"mainhand", -1},
+	{"offhand", -1}
 }
 
 RPSCoreFramework.Minstrel = {
