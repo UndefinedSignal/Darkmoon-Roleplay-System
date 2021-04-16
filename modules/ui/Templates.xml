@@ -2518,12 +2518,12 @@
                 </Anchor>
             </Anchors>
         </PushedTexture>
-		<HighlightTexture atlas="128-RedButton-Highlight">
-		    <Size x="256" y="64"/>
+		<HighlightTexture atlas="auctionhouse-nav-button-select">
+		    <Size x="253" y="44"/>
             <Anchors>
                 <Anchor point="CENTER">
                     <Offset>
-                        <AbsDimension x="0" y="7"/>
+                        <AbsDimension x="0" y="10"/>
                     </Offset>
                 </Anchor>
             </Anchors>
