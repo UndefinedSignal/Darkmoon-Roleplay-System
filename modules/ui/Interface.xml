@@ -2221,6 +2221,29 @@
 									</Layer>
 								</Layers>
 								<Frames>
+									<Button name="$parentDaystreakInfo">
+										<Size x="18" y="18" />
+										<Anchors>
+											<Anchor point="TOPRIGHT" x="-5" y="-5"/>
+										</Anchors>
+										<NormalTexture atlas="worldquest-tracker-questmarker" />
+										<PushedTexture atlas="worldquest-tracker-questmarker" />
+										<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
+											<Size x="24" y="24"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
+										</HighlightTexture>
+										<Scripts>
+											<OnEnter>
+												GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+												GameTooltip:AddLine("|cFFFFFFFFЗачарования оружия|r");
+												GameTooltip:AddLine(" ");
+												GameTooltip:AddLine();
+												GameTooltip:Show();
+											</OnEnter>
+											<OnLeave>
+												GameTooltip:Hide();
+											</OnLeave>
+										</Scripts>
+									</Button>
 									<Button parentKey="Mainhand" inherits="UIPanelButtonTemplate" text="Снять зачарование с главной руки">
 										<Size x="255" y="30"/>
 										<Anchors>

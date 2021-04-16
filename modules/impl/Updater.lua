@@ -9,10 +9,10 @@ function RPSCoreFramework:ReloadDispList()
 	        end
 	    end
 	end
-	if RPSCoreFramework.Display.Enchants[1][2] ~= "-1" then
+	if tostring(RPSCoreFramework.Display.Enchants[1][2]) ~= "-1" then
 		dispstring = dispstring .. ".enchant mainh ".. RPSCoreFramework.Display.Enchants[1][2].."\n"
 	end
-	if RPSCoreFramework.Display.Enchants[2][2] ~= "-1" then
+	if tostring(RPSCoreFramework.Display.Enchants[2][2]) ~= "-1" then
 		dispstring = dispstring .. ".enchant offh ".. RPSCoreFramework.Display.Enchants[2][2].."\n"
 	end
 	RPS_TextMacrosScrollText:SetText(dispstring)

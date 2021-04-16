@@ -269,8 +269,8 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 	{2, UnitName("player"), "RPS_CharInfo", "DarkmoonCharacterFrameInfo"},
 	{2, "Опыт", "RPS_EXPInfo", "DarkmoonCharacterEXPFrame"},
 	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
-	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
-	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
+	{3, "Комплекты", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
+	{3, "Экипировка", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
 	{3, "Зачарование", "RPS_DisplayWeaponEnchants", "DarkmoonWeaponEnchantsFrame"}
 }
 

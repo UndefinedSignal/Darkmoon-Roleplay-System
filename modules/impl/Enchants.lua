@@ -1,7 +1,4 @@
-RPSCoreFramework.Enchants = {};
-
 --							id, enchant, name, desc, comm
-
 RPSCoreFramework.Enchants = { 
 								{ 1, 1, "Энчант № 1", "Применяет к оружию энчант № 1", ""},
 								{ 2, 2, "Энчант № 2", "Применяет к оружию энчант № 2", ""},
@@ -199,7 +196,7 @@ RPSCoreFramework.Enchants = {
 								{ 194, 194, "Энчант № 194", "Применяет к оружию энчант № 194", ""},
 								{ 195, 195, "Энчант № 195", "Применяет к оружию энчант № 195", ""},
 								{ 196, 196, "Энчант № 196", "Применяет к оружию энчант № 196", ""}
-							}
+							};
 
 function RPSCoreFramework:SetEnchTexture(frame, i)
 	local EnchTexture = frame:CreateTexture("texture", "OVERLAY");
@@ -214,8 +211,6 @@ end
 
 
 function RPSCoreFramework:InitializeEnchantButtons()
-	local number, name, description;
-
 	local mainframe = _G["DarkmoonWeaponEnchantsFrameContentCommandsSlider1Child"];
 	for i = 1, #RPSCoreFramework.Enchants do
         local button = CreateFrame("Button", "DarkmoonEnchantButton"..i, mainframe, "RPSEnchantButton");
