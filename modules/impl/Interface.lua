@@ -413,6 +413,11 @@ end
 
 function RPSCoreFramework:CharacterEXPBarUpdate(int)
 	int = tonumber(int);
+	if (int < 0) then
+		int = 0;
+	elseif (int > 100) then
+		int = 100
+	end
 	DarkmoonCharacterEXPFrameContentTopEXPProgress:SetValue(int);
 	DarkmoonCharacterEXPFrameContentTopEXPProgress.CurrentPercent:SetText(tostring(int).."%");
 	DarkmoonCharacterEXPFrameContentTopEXPProgress.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
