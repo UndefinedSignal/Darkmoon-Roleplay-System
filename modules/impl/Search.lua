@@ -23,13 +23,21 @@ end
 
 function RPSCoreFramework:AurasSearch(input, key)
 	RPSCoreFramework.Interface.Auras.Show = {}
+	
+	if (_G["DarkmoonAurasFrameFavCheckBox"]:GetChecked()) then
+		input = {};
+		for i = 1, #RPSCoreFavourites do
+			table.insert(input, RPSCoreFramework.Interface.Auras[RPSCoreFavourites[i]]);
+		end
+	end
+
 	for i=1, #input do
 		if string.find(strlower(input[i][2]),strlower(key)) ~= nil then
-			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
+			table.insert(RPSCoreFramework.Interface.Auras.Show, input[i][1]);
 		elseif string.find(strlower(input[i][3]),strlower(key)) ~= nil then
-			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
+			table.insert(RPSCoreFramework.Interface.Auras.Show, input[i][1]);
 		elseif string.find(strlower(input[i][1]), strlower(key)) ~= nil then
-			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
+			table.insert(RPSCoreFramework.Interface.Auras.Show, input[i][1]);
 		end
 	end
 end
