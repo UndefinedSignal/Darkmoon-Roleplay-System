@@ -2332,7 +2332,8 @@
 					<Frame name="DarkmoonBattleStatsFrame" hidden="true">
 						<Size x="525" y="450"/>
 						<Anchors>
-							<Anchor relativeTo="RPS_MainFramePageContainer" x="5" y="-5" relativePoint="TOPLEFT"/>
+							<Anchor point="TOPLEFT" relativeTo="RPS_MainFramePageContainer" relativePoint="TOPLEFT" x="0" y="0"/>
+							<Anchor point="BOTTOMRIGHT" relativeTo="RPS_MainFramePageContainer" relativePoint="BOTTOMRIGHT" x="0" y="0" />
 						</Anchors>
 
 
@@ -2362,62 +2363,63 @@
 							<Frame name="DarkmoonCharStatsInfo">
 								<Size x="525" y="450"/>
 								<Anchors>
-									<Anchor relativeTo="DarkmoonBattleStatsFrame" x="50" y="15" relativePoint="TOPLEFT"/>
+									<Anchor point="TOPLEFT" relativeTo="DarkmoonBattleStatsFrame" relativePoint="TOPLEFT" x="0" y="0" />
+									<Anchor point="BOTTOMRIGHT" relativeTo="DarkmoonBattleStatsFrame" relativePoint="BOTTOMRIGHT" x="0" y="0" />
 								</Anchors>
 								<Frames>
 									<Frame name="Strength" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-13" />
+											<Anchor point="TOPLEFT" x="0" y="0" />
 										</Anchors>
 									</Frame>
 									<Frame name="Agility" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-59" />
+											<Anchor relativeTo="Strength" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
 									<Frame name="Intellect" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-105" />
+											<Anchor relativeTo="Agility" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
 									
 									<Frame name="CriticalChance" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-151" />
+											<Anchor relativeTo="Intellect" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>                                    
 									<Frame name="Spirit" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-197" />
+											<Anchor relativeTo="CriticalChance" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
 									<Frame name="Endurance" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-243" />
+											<Anchor relativeTo="Spirit" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
 									<Frame name="Dexterity" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-289" />
+											<Anchor relativeTo="Endurance" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
 									<Frame name="Will" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="35" y="-335" />
+											<Anchor relativeTo="Dexterity" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
 									<Button name="$parentReset" inherits="UIPanelButtonTemplate" text="Сброс">
 										<Size x="96" y="32"/>
 										<Anchors>
-											<Anchor point="CENTER" x="-135" y="-205"/>
+											<Anchor point="BOTTOM" x="-96" y="25"/>
 										</Anchors>
 									</Button>
 									<Button name="$parentSubmit" inherits="UIPanelButtonTemplate" text="Выучить">
