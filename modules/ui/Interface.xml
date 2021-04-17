@@ -2370,7 +2370,7 @@
 									<Frame name="Strength" inherits="RPS_Skill">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="0" y="0" />
+											<Anchor point="TOPLEFT" x="2" y="0" />
 										</Anchors>
 									</Frame>
 									<Frame name="Agility" inherits="RPS_Skill">
@@ -2438,8 +2438,8 @@
 									<Frame name="$parentSkillPoints">
 										
 										<Anchors>
-											<Anchor relativeTo="DarkmoonBattleStatsFrame" point="CENTER" x="165" y="-189"/>
-											<Anchor relativeTo="DarkmoonBattleStatsFrame" point="BOTTOMRIGHT" x="-10" y="10"/>
+											<Anchor relativeTo="DarkmoonBattleStatsFrame" point="CENTER" x="165" y="-197"/>
+											<Anchor relativeTo="DarkmoonBattleStatsFrame" point="BOTTOMRIGHT" x="-10" y="3"/>
 										</Anchors>
 										<Layers>
 											<Layer level="BACKGROUND">
@@ -2462,7 +2462,7 @@
 												<Texture atlas="hud-PlayerFrame-portraitring-large">
 													<Size x="36" y="36" />
 													<Anchors>
-														<Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsClassImg" point="CENTER" x="0" y="2" />
+														<Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsClassImg" point="CENTER" x="0" y="0" />
 													</Anchors>
 												</Texture>
 											</Layer>
@@ -2600,7 +2600,7 @@
 									<Frame name="$parentStat1" inherits="RPS_SkillCompact">
 										<Size x="30" y="30" />
 										<Anchors>
-											<Anchor point="TOPLEFT" x="0" y="0" />
+											<Anchor point="TOPLEFT" x="2" y="0" />
 										</Anchors>
 									</Frame>
 									<Frame name="$parentStat2" inherits="RPS_SkillCompact">
@@ -2699,8 +2699,8 @@
 									<Frame name="$parentSkillPoints">
 										
 										<Anchors>
-											<Anchor relativeTo="DarkmoonSocialStatsFrame" point="CENTER" x="165" y="-190"/>
-											<Anchor relativeTo="DarkmoonSocialStatsFrame" point="BOTTOMRIGHT" x="-10" y="10"/>
+											<Anchor relativeTo="DarkmoonSocialStatsFrame" point="CENTER" x="165" y="-197"/>
+											<Anchor relativeTo="DarkmoonSocialStatsFrame" point="BOTTOMRIGHT" x="-10" y="3"/>
 										</Anchors>
 										<Layers>
 											<Layer level="BACKGROUND">
@@ -2715,7 +2715,7 @@
 												<Texture name="$parentClassImg">
 													<Size x="42" y="42" />
 													<Anchors>
-														<Anchor point="TOPLEFT" x="0" y="-2" />
+														<Anchor point="TOPLEFT" x="0" y="-4" />
 													</Anchors>
 												</Texture>
 											</Layer>
@@ -2766,7 +2766,7 @@
 									<Button name="$parentReset" inherits="UIPanelButtonTemplate" text="Сброс">
 										<Size x="96" y="32"/>
 										<Anchors>
-											<Anchor point="BOTTOM" x="-95" y="25"/>
+											<Anchor point="BOTTOM" x="-96" y="25"/>
 										</Anchors>
 										<Scripts>
 											<OnShow>
