@@ -36,74 +36,16 @@ local tconcat = table.concat
 
 local basedictcompress = {}
 local basedictdecompress = {}
-for i = 0, 126 do
+for i = 1, 255 do
     local ic, iic = char(i), char(i, 1)
     basedictcompress[ic] = iic
     basedictdecompress[iic] = ic
 end
 
-local function dictAddA(str, dict, a, b)
-    if a >= 127 then
+function dictAddB(str, dict, a, b)
+    if a >= 256 then
         a, b = 1, b+1
-        if b >= 127 then
-            dict = {}
-            b = 2
-        end
-    end
-    dict[str] = char(a,b)
-    a = a+1
-    return dict, a, b
-end
-
-function LualZW:compress(input)
-    if type(input) ~= "string" then
-        return nil, "string expected, got "..type(input)
-    end
-    local len = #input
-    if len <= 1 then
-        return "u"..input
-    end
-
-    local dict = {}
-    local a, b = 1, 2
-
-    local result = {"c"}
-    local resultlen = 1
-    local n = 2
-    local word = ""
-    for i = 1, len do
-        local c = sub(input, i, i)
-        local wc = word..c
-        if not (basedictcompress[wc] or dict[wc]) then
-            local write = basedictcompress[word] or dict[word]
-            if not write then
-                return nil, "algorithm error, could not fetch word"
-            end
-            result[n] = write
-            resultlen = resultlen + #write
-            n = n+1
-            if  len <= resultlen then
-                return "u"..input
-            end
-            dict, a, b = dictAddA(wc, dict, a, b)
-            word = c
-        else
-            word = wc
-        end
-    end
-    result[n] = basedictcompress[word] or dict[word]
-    resultlen = resultlen+#result[n]
-    n = n+1
-    if  len <= resultlen then
-        return "u"..input
-    end
-    return tconcat(result)
-end
-
-local function dictAddB(str, dict, a, b)
-    if a >= 127 then
-        a, b = 1, b+1
-        if b >= 127 then
+        if b >= 256 then
             dict = {}
             b = 2
         end
