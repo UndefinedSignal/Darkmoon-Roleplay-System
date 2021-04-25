@@ -2446,7 +2446,7 @@
 												<Texture atlas="Garr_CostBar" name="$parentCharacterLevel">
 													<Size x="154" y="50"/>
 													<Anchors>
-														<Anchor point="TOP" y="3"/>
+														<Anchor point="TOP" y="0"/>
 													</Anchors>
 												</Texture>
 											</Layer>
@@ -2707,7 +2707,7 @@
 												<Texture atlas="Garr_CostBar" name="$parentCharacterLevel">
 													<Size x="154" y="50"/>
 													<Anchors>
-														<Anchor point="TOP" y="3"/>
+														<Anchor point="TOP" y="0"/>
 													</Anchors>
 												</Texture>
 											</Layer>
