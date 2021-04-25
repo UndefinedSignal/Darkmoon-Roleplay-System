@@ -169,6 +169,8 @@ RPSCoreFramework.Literature.AdvancedRaceOrClassMessage = "Выходя за пр
 RPSCoreFramework.Literature.CharsheetRequiredMessage = "|cFFFF0000Требуется наличие одобренной анкеты.|r";
 RPSCoreFramework.Literature.CharsheetRecommendedMessage = "|cFF00FF00Рекомендуется наличие анкеты.|r";
 
+RPSCoreFramework.Literature.EnchantsRule = "Не допускается злоупотребление визуальными\nчарами оружия. Все визуальные чары оружия имеют\nролевой контекст и обязаны иметь ролевое\nобоснование их наличия.";
+
 function RPSCoreFramework:ChangeDefaultWords()
 	AFK = "Вне роли";
 	CHAT_AFK_GET = "%s <Вне роли>:\32";

@@ -2234,9 +2234,9 @@
 										<Scripts>
 											<OnEnter>
 												GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-												GameTooltip:AddLine("|cFFFFFFFFЗачарования оружия|r");
+												GameTooltip:AddLine("|cFFFFFFFFЗачарование оружия|r");
 												GameTooltip:AddLine(" ");
-												GameTooltip:AddLine();
+												GameTooltip:AddLine("|cff808080"..RPSCoreFramework.Literature.EnchantsRule.."|r");
 												GameTooltip:Show();
 											</OnEnter>
 											<OnLeave>
