@@ -267,7 +267,7 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Боевые", "RPS_BattleStatsInfo", "DarkmoonBattleStatsFrame"},
 	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
 	{2, UnitName("player"), "RPS_CharInfo", "DarkmoonCharacterFrameInfo"},
-	{2, "Опыт", "RPS_EXPInfo", "DarkmoonCharacterEXPFrame"},
+	--{2, "Опыт", "RPS_EXPInfo", "DarkmoonCharacterEXPFrame"},
 	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
 	{3, "Комплекты", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
 	{3, "Экипировка", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
@@ -1038,6 +1038,6 @@ RPSCoreFramework.Interface.Auras.AllowUpdate = true;
 
 DarkmoonWIPFrame.content.flash1Rotation:SetDuration(8);
 DarkmoonWIPFrame.content.flash2Rotation:SetDuration(8);
-DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
-DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
+--DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
+--DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
 --DarkmoonWIPFrame.content.GearRotation:SetDuration(8);

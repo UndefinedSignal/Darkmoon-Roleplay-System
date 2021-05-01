@@ -418,16 +418,16 @@ function RPSCoreFramework:CharacterEXPBarUpdate(int)
 	elseif (int > 100) then
 		int = 100
 	end
-	DarkmoonCharacterEXPFrameContentTopEXPProgress:SetValue(int);
-	DarkmoonCharacterEXPFrameContentTopEXPProgress.CurrentPercent:SetText(tostring(int).."%");
-	DarkmoonCharacterEXPFrameContentTopEXPProgress.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
+	DarkmoonCharacterFrameInfoBottom:SetValue(int);
+	DarkmoonCharacterFrameInfoBottom.CurrentPercent:SetText(tostring(int).."%");
+	DarkmoonCharacterFrameInfoBottom.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
 end
 
 function RPSCoreFramework:UpdateCharacterXPInfo()
 	local level = UnitLevel("player");
-	DarkmoonCharacterEXPFrameContentTop.lvlLabel:SetText(level .. " уровень");
-	DarkmoonCharacterEXPFrameContentTop.rankLabel:SetText(tostring(RPSCoreFramework:GetCharStrengthLevel(level)));
-	DarkmoonCharacterEXPFrameContentTop.descrLabel:SetText(tostring(RPSCoreFramework:GetChatStrengthDesc(level)));
+	DarkmoonCharacterFrameInfoBottom.lvlLabel:SetText(level .. " уровень");
+	DarkmoonCharacterFrameInfoBottom.rankLabel:SetText(tostring(RPSCoreFramework:GetCharStrengthLevel(level)));
+	DarkmoonCharacterFrameInfoBottom.descrLabel:SetText(tostring(RPSCoreFramework:GetChatStrengthDesc(level)));
 end
 
 function RPSCoreFramework:GetCharStrengthLevel(level)

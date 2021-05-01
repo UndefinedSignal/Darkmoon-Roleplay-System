@@ -328,7 +328,7 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 		if (RPSCoreFramework.Map.POIUpdateQueque) then
 			RPSCoreFramework:POIUpdateIntoMainMassive();
 		end
-		RPSCoreFramework:CharacterInfoPOIBlock(2);
+		--RPSCoreFramework:CharacterInfoPOIBlock(2);
 		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 		RPSCoreFramework:GeneratePOIPlaces();
 		RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);

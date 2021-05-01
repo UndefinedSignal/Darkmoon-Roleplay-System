@@ -767,177 +767,136 @@
 											<Anchor relativeTo="$parentDay4" relativePoint="RIGHT" point="LEFT" x="-12"/>
 										</Anchors>
 									</Button>
-
 								</Frames>
 							</Frame>
-							<Frame name="$parentMainContent" inherits="RPS_InnerFrame">
+
+							<Frame name="$parentBottom">
 								<Anchors>
-									<Anchor point="LEFT" x="42" y="-110"/>
-									<Anchor point="BOTTOMRIGHT" x="-42" y="35"/>
+									<Anchor relativeTo="DarkmoonDropSpecChoose" relativePoint="BOTTMLEFT" point="TOPLEFT"  x="-15" y="-35"/>
+									<Anchor relativeTo="$parent" point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-25" y="0"/>
 								</Anchors>
 								<Layers>
-									<Layer>                                       
-										<FontString name="$parentTitle" font="Fonts\FRIZQT___CYR.TTF" text="Мои точки интереса (POI)" justifyH="CENTER" justifyV="TOP">
-											<Color r="1" g="1" b="1" a="1"/>
-											<FontHeight val="16"/>
-											<Shadow>
-												<Offset x="3" y="3" />
-												<Color r="0" g="0" b="0"/>
-											</Shadow>
+									<Layer>
+										<Texture parentKey="tHead" atlas="TalkingHeads-Neutral-TextBackground">
 											<Anchors>
-												<Anchor point="TOPLEFT" x="0" y="25"/>
-											</Anchors>
-										</FontString>
-									</Layer>
-									<Layer level="BACKGROUND">
-										<Texture name="$parentTitleBackground" atlas="BossBanner-BgBanner-Mid">
-											<Size x="504" y="168" /> <!--467,141-->
-											<Anchors>
-												<Anchor relativeTo="$parentTitle" point="TOPLEFT" x="-15" y="3" />
-												<Anchor relativeTo="$parentTitle" point="BOTTOMRIGHT" x="35" y="-3" />
+												<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="5" y="-5"/>
+												<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="5"/>
 											</Anchors>
 										</Texture>
 									</Layer>
+									<Layer level="OVERLAY">
+										<FontString inherits="GameFontBlack" text="85 уровень" justifyH="CENTER" parentKey="lvlLabel">
+											<Size  x="0" y="12"/>
+											<Anchors>
+												<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="TOPLEFT" x="45" y="-20"/>
+											</Anchors>
+										</FontString>
+										<FontString inherits="GameFontBlack" text="Выдающийся персонаж" justifyH="CENTER" parentKey="rankLabel">
+											<Size  x="0" y="12"/>
+											<Anchors>
+												<Anchor point="LEFT" relativeKey="$parent.lvlLabel" relativePoint="RIGHT" x="30" y="0"/>
+											</Anchors>
+										</FontString>
+
+										<Texture parentKey="LevelLine" atlas="ChallengeMode-RankLineDivider">
+											<Anchors>
+												<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="LEFT" x="20" y="25"/>
+												<Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="RIGHT" x="-20" y="15"/>
+											</Anchors>
+										</Texture>  
+
+										<FontString inherits="GameFontBlackSmall" text="Выдающиеся персонажи достигли высот, недоступных многим. По силам такой персонаж может претендовать на ветерана воины, начинающего представителя героического класса. Он может быть известен не в одной деревне. Выдающиеся персонажи могут претендовать на создание редких предметов." justifyH="LEFT" justifyV="MIDDLE" parentKey="descrLabel">
+											<Size x="0" y="9"/>
+											<Anchors>
+												<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="LEFT" x="25" y="20"/>
+												<Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-25" y="20"/>
+											</Anchors>
+										</FontString>
+									</Layer>
+
+									<Layer level="BACKGROUND">                                              
+										<Texture parentKey="ExpTitle" atlas="AdventureMapLabel-Large">
+											<Anchors>
+												<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="BOTTOMLEFT" x="15" y="0"/>
+												<Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-15" y="-30"/>
+											</Anchors>
+										</Texture>
+										<FontString inherits="GameFontNormalLarge" text="Опыт" justifyH="CENTER">
+											<Size  x="0" y="12"/>
+											<Anchors>
+												<Anchor point="CENTER" relativeKey="$parent.ExpTitle" relativePoint="CENTER" x="0" y="0"/>
+											</Anchors>
+										</FontString>
+									</Layer>
 								</Layers>
 								<Frames>
-									<Frame parentKey="BlockOnLoad" frameStrata="TOOLTIP" inherits="WIPFrame">
+									<StatusBar name="$parentEXPProgress" minValue="1" maxValue="100" defaultValue="0" orientation="HORIZONTAL">
 										<Anchors>
-											<Anchor point="TOPLEFT" x="-10" y="5"/>
-											<Anchor point="BOTTOMRIGHT" x="10" y="-5"/>
+											<Anchor point="TOPLEFT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
+											<Anchor point="BOTTOMRIGHT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMRIGHT" x="-21" y="-22"/>
 										</Anchors>
-										<Scripts>
-											<OnLoad>
-												self.Text:SetText("Дождитесь загрузки точек интереса (POI)");
-											</OnLoad>
-											<OnShow>
-												if (RPSCoreFramework.CharcterPOILoaded) then
-													DarkmoonCharacterFrameInfoMainContent.BlockOnLoad:Hide();
-												else
-													DarkmoonCharacterFrameInfoMainContent.BlockOnLoad:Show();
-													RPSCoreFramework:playAnimation(DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content);
-												end
-											</OnShow>
-										</Scripts>
-									</Frame>
-									<ScrollFrame name="POISearchContent" inherits="UIPanelScrollFrameTemplate">
-										<Anchors>
-											<Anchor point="TOPLEFT" x="2" y="0" />
-											<Anchor point="BOTTOMRIGHT" x="-20" y="0" />
-										</Anchors>
+										<BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>
 										<Layers>
-											<Layer level="BACKGROUND">
-												<Texture name="$parentBackground" atlas="BFA-mission-complete-background-Alliance">
+											<Layer level="OVERLAY">
+												<Texture parentKey="EXPBorder" atlas="hud-MainMenuBar-experiencebar-small-single">
 													<Anchors>
-														<Anchor point="TOPLEFT" x="-2" y="-3" />
-														<Anchor point="BOTTOMRIGHT" x="19" y="0" />
+														<Anchor relativeTo="$parent" point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0"/>
+														<Anchor relativeTo="$parent" point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0"/>
+													</Anchors>
+												</Texture>
+											</Layer>
+
+											<Layer level="OVERLAY">
+												<Texture parentKey="EXPCircleIMG">
+													<Size x="37" y="37" />
+													<Anchors>
+														<Anchor realtiveTo="$parent" point="LEFT" relativePoint="RIGHT" x="-2" y="-2" />
+													</Anchors>
+												</Texture>
+												<Texture atlas="hud-PlayerFrame-portraitring-large">
+													<Size x="37" y="37" />
+													<Anchors>
+														<Anchor relativeKey="$parent.EXPCircleIMG" point="CENTER" x="0" y="2" />
+													</Anchors>
+												</Texture>
+
+												<FontString inherits="GameFontNormalMed1" text="0%" justifyH="CENTER" parentKey="CurrentPercent">
+													<Size  x="0" y="12"/>
+													<Anchors>
+														<Anchor point="CENTER" realtiveTo="$parent" relativePoint="CENTER" x="14" y="0"/>
+													</Anchors>
+												</FontString>
+												<FontString inherits="GameFontNormalMed1" text="До следующего уровня: 100%" justifyH="CENTER" parentKey="PercentLeft">
+													<Size  x="0" y="12"/>
+													<Anchors>
+														<Anchor point="BOTTOM" relativeKey="$parent.CurrentPercent" relativePoint="CENTER" x="0" y="-25"/>
+													</Anchors>
+												</FontString>
+											</Layer>
+
+											<Layer level="BACKGROUND">
+												<Texture parentKey="bg" atlas="nameplates-playerhealth-background">
+													<Anchors>
+														<Anchor point="TOPLEFT" realtiveTo="$parent" relativePoint="TOPLEFT" x="0" y="0"/>
+														<Anchor point="BOTTOMRIGHT" realtiveTo="$parent" relativePoint="BOTTOMRIGHT" x="0" y="0"/>
+													</Anchors>
+												</Texture>
+
+												<Texture parentKey="EXPCircleBackground" atlas="AdventureMapQuest-PortraitBG">
+													<Size x="34" y="34" />
+													<Anchors>
+														<Anchor relativeKey="$parent.EXPCircleIMG" point="CENTER" relativePoint="CENTER" x="0" y="0" />
 													</Anchors>
 												</Texture>
 											</Layer>
 										</Layers>
-										<ScrollChild>
-											<Frame name="$parentChild">
-												<Size x="240" y="230"/>
-												<Anchors>
-													<Anchor point="TOPLEFT" x="0" y="0" />
-													<Anchor point="BOTTOMRIGHT" x="0" y="0" />
-												</Anchors>
-												<Frames>
-													<Button name="$parentbtn1" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor point="TOPLEFT" x="2" y="-10"/>
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn2" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn1" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn3" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn1" point="BOTTOM" y="-50" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn4" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn3" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn5" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn3" point="BOTTOM" y="-50" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn6" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn5" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn7" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn5" point="BOTTOM" y="-50" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn8" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn7" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn9" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn7" point="BOTTOM" y="-50" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn10" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn9" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn11" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn9" point="BOTTOM" y="-50" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn12" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn11" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn13" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn11" point="BOTTOM" y="-50" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn14" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn13" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn15" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn13" point="BOTTOM" y="-50" />
-														</Anchors>
-													</Button>
-													<Button name="$parentbtn16" inherits="POIInfoButton" hidden="true">
-														<Anchors>
-															<Anchor relativeTo="$parentbtn15" point="LEFT" relativePoint="RIGHT" x="5" y="0" />
-														</Anchors>
-													</Button>
-												</Frames>
-											</Frame>
-										</ScrollChild>
-										<Scripts>
-											<OnShow>
-												RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);
-												RPSCoreFramework:OwnPOIListShow();
-											</OnShow>
-											ScrollFrame_OnLoad(self);
-											ScrollFrame_OnScrollRangeChanged(self);
-										</Scripts>
-									</ScrollFrame>
-									<Button name="$parentSpecInfo">
+										<BarColor r="0" g="0.5" b="1"/>
+									</StatusBar>
+
+									<Button name="$parentExpInfo">
 										<Size x="21" y="21" />
 										<Anchors>
-											<Anchor relativeTo="POISearchContent" point="TOPRIGHT" x="25" y="25"/>
+											<Anchor point="RIGHT" relativeKey="$parent.ExpTitle" relativePoint="RIGHT" x="0" y="2"/>
 										</Anchors>
 										<NormalTexture atlas="worldquest-tracker-questmarker" />
 										<PushedTexture atlas="worldquest-tracker-questmarker" />
@@ -947,9 +906,7 @@
 										<Scripts>
 											<OnEnter>
 												GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-												GameTooltip:AddLine("|cFFFFFFFFМои точки интереса (POI)|r");
-												GameTooltip:AddLine(" ");
-												GameTooltip:AddLine("Точки интереса, которые принадлежат или имеют отношение к вашему персонажу.");
+												GameTooltip:AddLine("|cFFFFFFFFОпыт персонажа|r");
 												GameTooltip:Show();
 											</OnEnter>
 											<OnLeave>
@@ -958,6 +915,16 @@
 										</Scripts>
 									</Button>
 								</Frames>
+								<Scripts>
+									<OnLoad>
+										local _, classFilename = UnitClass("player");
+										DarkmoonCharacterFrameInfoBottomEXPProgress.EXPCircleIMG:SetMask("Interface\\COMMON\\Indicator-Gray");
+										DarkmoonCharacterFrameInfoBottomEXPProgress.EXPCircleIMG:SetTexture("Interface/ICONS/Achievement_guildperk_fasttrack_rank2");
+									</OnLoad>
+									<OnShow>
+										RPSCoreFramework:UpdateCharacterXPInfo();
+									</OnShow>
+								</Scripts>
 							</Frame>
 
 						</Frames>
@@ -995,156 +962,6 @@
 											<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="25" y="-25"/>
 											<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-25" y="-40"/>
 										</Anchors>
-										<Layers>
-											<Layer>
-												<Texture parentKey="tHead" atlas="TalkingHeads-Neutral-TextBackground">
-													<Anchors>
-														<Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="5" y="-5"/>
-														<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="5"/>
-													</Anchors>
-												</Texture>
-											</Layer>
-											<Layer level="OVERLAY">
-												<FontString inherits="GameFontBlack" text="85 уровень" justifyH="CENTER" parentKey="lvlLabel">
-													<Size  x="0" y="12"/>
-													<Anchors>
-														<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="TOPLEFT" x="45" y="-20"/>
-													</Anchors>
-												</FontString>
-												<FontString inherits="GameFontBlack" text="Выдающийся персонаж" justifyH="CENTER" parentKey="rankLabel">
-													<Size  x="0" y="12"/>
-													<Anchors>
-														<Anchor point="LEFT" relativeKey="$parent.lvlLabel" relativePoint="RIGHT" x="30" y="0"/>
-													</Anchors>
-												</FontString>
-
-												<Texture parentKey="LevelLine" atlas="ChallengeMode-RankLineDivider">
-													<Anchors>
-														<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="LEFT" x="20" y="25"/>
-														<Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="RIGHT" x="-20" y="15"/>
-													</Anchors>
-												</Texture>  
-
-												<FontString inherits="GameFontBlackSmall" text="Выдающиеся персонажи достигли высот, недоступных многим. По силам такой персонаж может претендовать на ветерана воины, начинающего представителя героического класса. Он может быть известен не в одной деревне. Выдающиеся персонажи могут претендовать на создание редких предметов." justifyH="LEFT" justifyV="MIDDLE" parentKey="descrLabel">
-													<Size x="0" y="9"/>
-													<Anchors>
-														<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="LEFT" x="25" y="20"/>
-														<Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-25" y="20"/>
-													</Anchors>
-												</FontString>
-											</Layer>
-
-											<Layer level="BACKGROUND">                                              
-												<Texture parentKey="ExpTitle" atlas="AdventureMapLabel-Large">
-													<Anchors>
-														<Anchor point="TOPLEFT" relativeKey="$parent.tHead" relativePoint="BOTTOMLEFT" x="15" y="0"/>
-														<Anchor point="BOTTOMRIGHT" relativeKey="$parent.tHead" relativePoint="BOTTOMRIGHT" x="-15" y="-30"/>
-													</Anchors>
-												</Texture>
-												<FontString inherits="GameFontNormalLarge" text="Опыт" justifyH="CENTER">
-													<Size  x="0" y="12"/>
-													<Anchors>
-														<Anchor point="CENTER" relativeKey="$parent.ExpTitle" relativePoint="CENTER" x="0" y="0"/>
-													</Anchors>
-												</FontString>
-											</Layer>
-										</Layers>
-										<Frames>
-											<StatusBar name="$parentEXPProgress" minValue="1" maxValue="100" defaultValue="0" orientation="HORIZONTAL">
-												<Anchors>
-													<Anchor point="TOPLEFT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMLEFT" x="0" y="-5"/>
-													<Anchor point="BOTTOMRIGHT" relativeKey="$parent.ExpTitle" relativePoint="BOTTOMRIGHT" x="-21" y="-22"/>
-												</Anchors>
-												<BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>
-												<Layers>
-													<Layer level="OVERLAY">
-														<Texture parentKey="EXPBorder" atlas="hud-MainMenuBar-experiencebar-small-single">
-															<Anchors>
-																<Anchor relativeTo="$parent" point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0"/>
-																<Anchor relativeTo="$parent" point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0"/>
-															</Anchors>
-														</Texture>
-													</Layer>
-
-													<Layer level="OVERLAY">
-														<Texture parentKey="EXPCircleIMG">
-															<Size x="37" y="37" />
-															<Anchors>
-																<Anchor realtiveTo="$parent" point="LEFT" relativePoint="RIGHT" x="-2" y="-2" />
-															</Anchors>
-														</Texture>
-														<Texture atlas="hud-PlayerFrame-portraitring-large">
-															<Size x="37" y="37" />
-															<Anchors>
-																<Anchor relativeKey="$parent.EXPCircleIMG" point="CENTER" x="0" y="2" />
-															</Anchors>
-														</Texture>
-
-														<FontString inherits="GameFontNormalMed1" text="0%" justifyH="CENTER" parentKey="CurrentPercent">
-															<Size  x="0" y="12"/>
-															<Anchors>
-																<Anchor point="CENTER" realtiveTo="$parent" relativePoint="CENTER" x="14" y="0"/>
-															</Anchors>
-														</FontString>
-														<FontString inherits="GameFontNormalMed1" text="До следующего уровня: 100%" justifyH="CENTER" parentKey="PercentLeft">
-															<Size  x="0" y="12"/>
-															<Anchors>
-																<Anchor point="BOTTOM" relativeKey="$parent.CurrentPercent" relativePoint="CENTER" x="0" y="-25"/>
-															</Anchors>
-														</FontString>
-													</Layer>
-
-													<Layer level="BACKGROUND">
-														<Texture parentKey="bg" atlas="nameplates-playerhealth-background">
-															<Anchors>
-																<Anchor point="TOPLEFT" realtiveTo="$parent" relativePoint="TOPLEFT" x="0" y="0"/>
-																<Anchor point="BOTTOMRIGHT" realtiveTo="$parent" relativePoint="BOTTOMRIGHT" x="0" y="0"/>
-															</Anchors>
-														</Texture>
-
-														<Texture parentKey="EXPCircleBackground" atlas="AdventureMapQuest-PortraitBG">
-															<Size x="34" y="34" />
-															<Anchors>
-																<Anchor relativeKey="$parent.EXPCircleIMG" point="CENTER" relativePoint="CENTER" x="0" y="0" />
-															</Anchors>
-														</Texture>
-													</Layer>
-												</Layers>
-												<BarColor r="0" g="0.5" b="1"/>
-											</StatusBar>
-
-											<Button name="$parentExpInfo">
-												<Size x="21" y="21" />
-												<Anchors>
-													<Anchor point="RIGHT" relativeKey="$parent.ExpTitle" relativePoint="RIGHT" x="0" y="2"/>
-												</Anchors>
-												<NormalTexture atlas="worldquest-tracker-questmarker" />
-												<PushedTexture atlas="worldquest-tracker-questmarker" />
-												<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight">
-													<Size x="24" y="24"/><Anchors><Anchor point="CENTER" x="-1" y="1"/></Anchors>
-												</HighlightTexture>
-												<Scripts>
-													<OnEnter>
-														GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-														GameTooltip:AddLine("|cFFFFFFFFОпыт персонажа|r");
-														GameTooltip:Show();
-													</OnEnter>
-													<OnLeave>
-														GameTooltip:Hide();
-													</OnLeave>
-												</Scripts>
-											</Button>
-										</Frames>
-										<Scripts>
-											<OnLoad>
-												local _, classFilename = UnitClass("player");
-												DarkmoonCharacterEXPFrameContentTopEXPProgress.EXPCircleIMG:SetMask("Interface\\COMMON\\Indicator-Gray");
-												DarkmoonCharacterEXPFrameContentTopEXPProgress.EXPCircleIMG:SetTexture("Interface/ICONS/Achievement_guildperk_fasttrack_rank2");
-											</OnLoad>
-											<OnShow>
-												RPSCoreFramework:UpdateCharacterXPInfo();
-											</OnShow>
-										</Scripts>
 									</Frame>
 									<Frame name="$parentBottom">
 										<Anchors>
