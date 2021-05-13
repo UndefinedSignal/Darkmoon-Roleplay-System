@@ -27,7 +27,7 @@ function RPSCoreFramework:HasAura(id, target)
 	end;
 
 	local counter = 1;
-	local aura = UnitAura(target, counter)
+	local aura = UnitAura(target, counter);
 	while aura do
 		aura, _, _, _, _, _, _, _, _, spellId = UnitAura(target, counter);
 		counter = counter + 1;

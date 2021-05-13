@@ -45,6 +45,7 @@ function RPSCoreFramework:StreamingLoad_UpdateIcon(status)
 		RPSStreamingLoad.Loop:Play();
 		RPSStreamingLoad:Show();
 		RPSStreamingLoad.tooltip = "Загрузка точек интереса(POI): ".. ceil(RPSCoreFramework.Map.POICounter*100/tonumber(RPSCoreFramework.Map.POICount)) .. "%";
+		RPSCoreFramework:StreamingLoadRecheck();
 	elseif(STREAMING_CURRENT_STATUS > 0) then
 		RPSStreamingLoadSpinSpinner:SetVertexColor(0,1,0);
 		RPSStreamingLoadFrameBackground:SetVertexColor(0,1,0);
@@ -56,7 +57,15 @@ function RPSCoreFramework:StreamingLoad_UpdateIcon(status)
 		RPSStreamingLoad.tooltip = "Загрузка точек интереса(POI) завершена, приятной игры!";
 		RPSStreamingLoad.FadeOUT:Play();
 	end
+
 	STREAMING_CURRENT_STATUS = status;
+end
+
+function RPSCoreFramework:StreamingLoadRecheck()
+	if tonumber(ceil(RPSCoreFramework.Map.POICounter*100/tonumber(RPSCoreFramework.Map.POICount))) >= 99 then
+		--RPSCoreFramework:CharacterInfoPOIBlock(2);
+		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
+	end
 end
 
 function RPSCoreFramework:StreamingLoad_FadeIN_OnFinished()

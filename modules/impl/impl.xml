@@ -18,4 +18,5 @@
 	<Script file="Search.lua"/>
 	<Script file="Quiz.lua"/>
 	<Script file="StreamingLoad.lua"/>
+	<Script file="Enchants.lua"/>
 </Ui>

@@ -4,6 +4,16 @@ function RPSCoreFramework:PreGenerateShowAuras()
         for i=1, #RPSCoreFavourites do
             table.insert(RPSCoreFramework.Interface.Auras.Show, RPSCoreFavourites[i]);
         end
+
+        if RPSCoreFramework.Interface.Auras.Bought then
+        	RPSCoreFramework.Interface.Auras.Bought = true;
+            RPSCoreFramework:BoughtAurasSearch(RPSCoreFramework.Interface.Auras);
+            RPSCoreFramework:GenerateScrollMenu();
+            DarkmoonAurasFrame.Owned:LockHighlight();
+        else
+        	RPSCoreFramework.Interface.Auras.Bought = false;
+            DarkmoonAurasFrame.Owned:UnlockHighlight();
+        end
     else
 		for i=1, #RPSCoreFramework.Interface.Auras do
 			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
@@ -13,12 +23,29 @@ end
 
 function RPSCoreFramework:AurasSearch(input, key)
 	RPSCoreFramework.Interface.Auras.Show = {}
+	
+	if (_G["DarkmoonAurasFrameFavCheckBox"]:GetChecked()) then
+		input = {};
+		for i = 1, #RPSCoreFavourites do
+			table.insert(input, RPSCoreFramework.Interface.Auras[RPSCoreFavourites[i]]);
+		end
+	end
+
 	for i=1, #input do
 		if string.find(strlower(input[i][2]),strlower(key)) ~= nil then
-			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
+			table.insert(RPSCoreFramework.Interface.Auras.Show, input[i][1]);
 		elseif string.find(strlower(input[i][3]),strlower(key)) ~= nil then
-			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
+			table.insert(RPSCoreFramework.Interface.Auras.Show, input[i][1]);
 		elseif string.find(strlower(input[i][1]), strlower(key)) ~= nil then
+			table.insert(RPSCoreFramework.Interface.Auras.Show, input[i][1]);
+		end
+	end
+end
+
+function RPSCoreFramework:BoughtAurasSearch(input)
+	RPSCoreFramework.Interface.Auras.Show = {}
+	for i=1, #input do
+		if input[i][5] > 0 then
 			table.insert(RPSCoreFramework.Interface.Auras.Show, i);
 		end
 	end
@@ -37,18 +64,18 @@ function RPSCoreFramework:POISearchTable(key)
 	RPSCoreFramework.POISearch = {};
 	local i = 1;
     for k, v in pairs(RPSCorePOIPins) do
-    	if string.find(strlower(v[8]),strlower("^Владел.+("..UnitName("player")..")[%s\.,].+$")) ~= nil then
+    	if string.find(strlower(v[8]),strlower("^.+ладел.+("..UnitName("player")..")[%s\.,].+$")) ~= nil then
     		table.insert(RPSCoreFramework.POISearch, {v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]})
 	    end
     end
 end
 
 function RPSCoreFramework:OwnPOIListShow()
-	for i = 1, 7 do
+	for i = 1, 16 do
 		_G["POISearchContentChildbtn"..i]:Hide();
 	end
 	for i = 1, #RPSCoreFramework.POISearch do
-		if i <= 8 then
+		if i <= 16 then
 			_G["POISearchContentChildbtn"..i.."ID"]:SetText("|cFFFF8040"..RPSCoreFramework.POISearch[i][1])
 			_G["POISearchContentChildbtn"..i.."Title"]:SetText(RPSCoreFramework.POISearch[i][7]);
 			_G["POISearchContentChildbtn"..i.."Description"]:SetText(RPSCoreFramework.POISearch[i][8]);

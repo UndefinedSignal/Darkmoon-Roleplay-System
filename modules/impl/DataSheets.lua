@@ -2,7 +2,8 @@ RPSCoreFramework = LibStub("AceAddon-3.0"):NewAddon(CreateFrame("Frame"), "RPSCo
 RPSCoreFramework.HBD = LibStub("HereBeDragons-2.0.1");
 RPSCoreFramework.HBD.Pins = LibStub("HereBeDragons-Pins-2.0");
 RPSCoreFramework.LualZW = LibStub("LualZW");
-RPSCoreFramework.Version = 2.4;
+RPSCoreFramework.Version = 3.0;
+
 if RPSDailyStreak == nil then
 	RPSDailyStreak = 0;
 end
@@ -27,10 +28,13 @@ RPSCoreFramework.Map.POICounter = 0;
 RPSCoreFramework.Map.POICountLow = 0;
 RPSCoreFramework.Map.POICountMid = 0;
 
+RPSCoreFramework.GObject = {};
+RPSCoreFramework.GObject.Guid = 210680404;
+
 RPSCoreFramework.Map.UpdatePins = {};
 RPSCoreFramework.Map.POIWorkflow = true;
 RPSCoreFramework.Map.POIUpdateQueque = false;
-RPSCoreFramework.CharcterPOILoaded = false;
+RPSCoreFramework.CharcterPOILoaded = true;
 RPSCoreFramework.SalaryTimer = nil;
 RPSCoreFramework.PollTimer = {};
 RPSCoreFramework.PollTimer.Timer = nil;
@@ -41,13 +45,17 @@ RPSCoreFramework.PrintGarbageCollector = false;
 RPSCoreFramework.GBCounter = nil;
 RPSCoreFramework.CanScroll = true;
 
-RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate")
+RPSCoreFramework.PlayerCursorInformation = nil;
+
+RPSCoreFramework.DropDownDisplayMenuFrame = CreateFrame("Frame", "DisplayMenuFrame", UIParent, "UIDropDownMenuTemplate");
+RPSCoreFramework.DropDownDisplayEnchantMenuFrame = CreateFrame("Frame", "DisplayEnchantMenuFrame", UIParent, "UIDropDownMenuTemplate");
 RPSCoreFramework.DropDownClassChooseMenu = CreateFrame("Frame", "DropDownClassChooseMenu", UIParent, "UIDropDownMenuTemplate");
+SendAddonMessage = C_ChatInfo.SendAddonMessage;
 
 RPSCoreFramework.MinstrelStatus = 2;
 
 RPSCoreFramework.DistanceText = nil;
-RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child
+RPSCoreFramework.WorldMapScrollChild = WorldMapFrame.ScrollContainer.Child;
 
 RPSCoreFramework.POIDesc = {};
 RPSCoreFramework.POISearch = {};
@@ -82,9 +90,20 @@ RPSDispTable = { {1, "Горожанин","Обычный горожанин","1
 				{18, "Лучник", "Обычный лучник в лёгкой броне", "151971", "0", "158583", "63866", "0", "0", "152087:1", "146878", "125445", "63783", "61553", "134665", "0"},
 				{19, "Разбойник", "Парень с большой дороги/тяжелорабочий", "1000231", "131659", "64511", "0", "0", "0", "152087:1", "55738", "151990:1", "64589", "75130", "816", "0"},
 				{20, "Чернокнижник/некромант", "Культист", "0", "0", "114829", "0", "0", "0", "0", "0", "165765", "163264",  "103157", "39427", "59547"},
-				{21, "Стрелок Кул-Тираса", "Карабинер/Снайпер/Gunslinger", "0", "159163", "155168", "0", "165010", "0", "18525", "160465", "1000284", "158042", "154183", "168644", "0"},
+				{21, "Стрелок Кул-Тираса", "Карабинер/Снайпер/Gunslinger", "0", "159163", "0", "155168", "0", "165010", "18525", "160465", "1000284", "158042", "154183", "168644", "0"},
 				{22, "Наемник","Опытный наемник. Для мужчин и женщин.","0", "53596", "0", "142802", "0", "0", "0", "126125", "126083", "142854", "65774", "0", "0"},
-				{23, "Воин","Опытный воин с оружием и броней. Для мужчин и женщин.","0", "40960", "0", "35588", "4333", "0", "0", "55034", "128068", "82521", "35866", "59550", "57452"}
+				{23, "Воин","Опытный воин с оружием и броней. Для мужчин и женщин.","0", "40960", "0", "35588", "4333", "0", "0", "55034", "128068", "82521", "35866", "59550", "57452"},
+				{24, "Официантка", "Типичная женская форма разносчицы напитков и иных заказов", "0", "0", "0", "0", "10034", "0", "59422", "0", "5975", "139298", "32981", "0", "0"},
+				{25, "Аристократ", "Опрятный костюм под выход на улицу или на благоприятное мероприятие", "1000140", "0", "152062", "116052", "0", "0", "0", "40952", "95208", "116133", "116134", "0", "0"},
+				{26, "Щитоносец", "Боевое облачение воина из Кул-Тираса", "0", "36887", "0", "159448", "16060", "0", "152091", "159457", "32805", "159456", "147600", "159475", "159666"},
+				{27, "Повседневное", "Костюм на выход из дорогой ткани, сделанный в Кул-Тирасе", "0", "0", "0", "161557", "98093", "0", "0", "1314", "165075", "165073", "164805", "0", "0"},
+				{28, "Утеплённый костюм", "Мрачное одеяние под мрачную погоду", "134424", "0", "166671", "162936", "2576", "0", "0", "164659", "164661", "164660", "164658", "0", "0"},
+				{29, "Зелёный новогодний", "Новогодний наряд для новогоднего настроения!", "139300", "0", "0", "139294", "0", "0", "0", "0", "139305", "139296", "139303", "0", "0"},
+				{31, "Красный новогодний", "Новогодний наряд для новогоднего настроения!", "139299", "0", "0", "139293", "0", "0", "0", "0", "139304", "139295", "139301", "0", "0"},
+				{32, "Вульгарно новогодний", "Новогодний наряд для новогоднего настроения!", "0", "0", "0", "139293", "118819", "0", "0", "0", "139304", "144056", "39254", "0", "0"},
+				{33, "Разведка", "Стильно, удобно, со вкусом!", "122310", "0", "165925", "142616", "1000336", "0", "0", "167833", "126103", "142620", "124754", "0", "0"},
+				{34, "Корсарский", "Корсарский!", "0", "0", "0", "62953", "6795", "0", "0", "0", "164570", "157978", "6092", "0", "0"},
+				{35, "Корсар разведчик", "Корсарский!", "0", "0", "0", "127421", "11840", "0", "0", "0", "164570", "62972", "62944", "0", "0"}
 }
 RPSDispTableColors = { "Garr_FollowerToast-Epic", "Garr_FollowerToast-Rare", "Garr_FollowerToast-Uncommon", "Garr_MissionToast-Blank" }
 
@@ -108,7 +127,7 @@ if RPSCoreShowPOIPins == nil then
 	RPSCoreShowPOIPins = true;
 end
 if RPSCoreFavourites == nil then
-	RPSCoreFavourites = {}
+	RPSCoreFavourites = {};
 end
 
 RPSCoreFramework.AdvancedRaces = {
@@ -126,7 +145,6 @@ RPSCoreFramework.AdvancedClasses = { 2, 6, 7, 9, 10, 11, 12};
 RPSCoreFramework.AdvancedClassesCharsheetRequired = {6, 12};
 
 RPSCoreFramework.Timers = {};
-
 RPSCoreFramework.itemsQuality = {}
 RPSCoreFramework.itemsQuality["Голова +1"] = 1;
 RPSCoreFramework.itemsQuality["Голова +2"] = 2;
@@ -228,7 +246,7 @@ RPSCoreFramework.Interface.MenuButtons = {
 	{"Характеристики", "RPS_StatsInfo", nil, true, 1, true},
 	{"Персонаж", "RPS_ScaleInfo", nil, true, 2, false},
 	{"Ауры", "RPS_AurasInfo", "DarkmoonAurasFrame", false, 0, false},
-	{"Display", "RPS_DisplayInfo", nil, true, 3, false},
+	{"Внешний вид", "RPS_DisplayInfo", nil, true, 3, false},
 	{"Менестрель", "RPS_Minstrel", "DarkmoonMinstrelFrame", false, 0, false},
 
 	{"Настройки", "RPS_CharSettings", "DarkmoonSettingsFrame", false, 0, true},
@@ -239,17 +257,18 @@ RPSCoreFramework.Interface.SubMenuButtons = {
 	{1, "Боевые", "RPS_BattleStatsInfo", "DarkmoonBattleStatsFrame"},
 	{1, "Социальные", "RPS_SocialStatsInfo", "DarkmoonSocialStatsFrame"},
 	{2, UnitName("player"), "RPS_CharInfo", "DarkmoonCharacterFrameInfo"},
+	--{2, "Опыт", "RPS_EXPInfo", "DarkmoonCharacterEXPFrame"},
 	{2, "Рост", "RPS_CharScaleInfo", "DarkmoonCharacterFrameScale"},
-	{3, "Коллекция", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
-	{3, "Текущий", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"}
-
+	{3, "Комплекты", "RPS_DisplayCharacterCollection", "DarkmoonDisplayPresetFrame"},
+	{3, "Экипировка", "RPS_DisplayCharacterInfo", "DarkmoonDisplayInfoFrame"},
+	{3, "Зачарование", "RPS_DisplayWeaponEnchants", "DarkmoonWeaponEnchantsFrame"}
 }
 
-RPSCoreFramework.CharChooseSpec = {}
-RPSCoreFramework.CharChooseSpec[1] = "Случайный"
-RPSCoreFramework.CharChooseSpec[2] = "Первый"
-RPSCoreFramework.CharChooseSpec[3] = "Второй"
-RPSCoreFramework.CharChooseSpec[4] = "Третий"
+RPSCoreFramework.CharChooseSpec = {};
+RPSCoreFramework.CharChooseSpec[1] = "Случайный";
+RPSCoreFramework.CharChooseSpec[2] = "Первый";
+RPSCoreFramework.CharChooseSpec[3] = "Второй";
+RPSCoreFramework.CharChooseSpec[4] = "Третий";
 
 RPSCoreFramework.StatsDiff = {
 	Strength = 0,
@@ -334,6 +353,16 @@ RPSCoreFramework.DropDownDisplayMenu = {
 	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end }
 }
 
+RPSCoreFramework.DropDownDisplayEnchantMenu = {
+	{ text = "Display", isTitle = true, notCheckable = true},
+	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowDisplayInfo(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:RemoveDisplay(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Enchant", isTitle = true, notCheckable = true},
+	{ text = "Изменить", notCheckable = true, func = function() RPSCoreFramework:ShowEnchantDialog(RPSCoreFramework.GetLastClickedSlot); end },
+	{ text = "Сбросить", notCheckable = true, func = function() RPSCoreFramework:ShowDisEnchantDialog(RPSCoreFramework.GetLastClickedSlot); end }
+}
+
+
 RPSCoreFramework.DropDownCharSpecChooseMenu = {
 	{ text = "Сделайте выбор", isTitle = true, notCheckable = true},
 	{ text = "Случайный", notCheckable = true, func = function() RPSCharSpec = 1;	RPSCoreFramework:SendCoreMessage("rps mountdisplay 0");	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]); end },	
@@ -353,24 +382,28 @@ RPSCoreFramework.Scroller.lineplusoffset = {
 
 RPSCoreFramework.Display.Scroll = {
 	{".disp hea ", -1, 0},
-	{".disp neck ", -1, 0},
-	{".disp shoul ", -1, 0},
+	{".disp nec ", -1, 0},
+	{".disp sho ", -1, 0},
 	{".disp shi ", -1, 0},
 	{".disp che ", -1, 0},
 	{".disp wai ", -1, 0},
 	{".disp leg ", -1, 0},
 	{".disp fee ", -1, 0},
 	{".disp wri ", -1, 0},
-	{".disp hand ", -1, 0},
+	{".disp han ", -1, 0},
 	{".disp finger1 ", -1, 0},
 	{".disp finger2 ", -1, 0},
 	{".disp trinket1 ", -1, 0},
 	{".disp trinket2 ", -1, 0},
-	{".disp back ", -1, 0},
-	{".disp main ", -1, 0},
-	{".disp offh ", -1, 0},
-	{".disp ranged ", -1, 0},
-	{".disp tabard ", -1, 0}	
+	{".disp bac ", -1, 0},
+	{".disp mai ", -1, 0},
+	{".disp off ", -1, 0},
+	{".disp ran ", -1, 0},
+	{".disp tab ", -1, 0}	
+}
+RPSCoreFramework.Display.Enchants = {
+	{"mainhand", -1},
+	{"offhand", -1}
 }
 
 RPSCoreFramework.Minstrel = {
@@ -389,7 +422,7 @@ RPSCoreFramework.Minstrel = {
 
 
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn12"] = {"Interface\\ICONS\\Ability_Iyyokuk_Mantid_Green.blp", ".minstrel possess", "|cffffffff.minstrel possess|r - Взять под контроль выделенного NPC менестреля."},
-	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unposess", "|cffffffff.minstrel unposess|r - Прекратить контролировать NPC."},
+	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn13"] = {"Interface\\ICONS\\Ability_Iyyokuk_Drum_Red.blp", ".minstrel unpossess", "|cffffffff.minstrel unpossess|r - Прекратить контролировать NPC."},
 
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn14"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel morph", "|cffffffff.minstrel morph <display id>|r - установить на себя морф под номером <display id>."},
 	["DarkmoonMinstrelFrameBackgroundSlider1Childbtn15"] = {"Interface\\ICONS\\Ability_Iyyokuk_Sword_Blue.blp", ".minstrel demorph", "|cffffffff.minstrel demorph <id>|r - снять с себя морф."},
@@ -968,12 +1001,17 @@ RPSCoreFramework.Interface.Auras = {
 	{513,"Красное окаймление", "Персонаж окаймляется красным цветом", 30000, 0, 0},
 	{514,"Опутывающие лозы", "Персонажа опутывают друидские лозы", 2500, 0, 0},
 	{515,"Опутывающие лозы кошмара", "Персонажа опутывают кошмарные лозы", 5000, 0, 0},
-	{516,"Жреческая левитация", "Персонаж левитирует", 10000, 0, 0}
+	{516,"Жреческая левитация", "Персонаж левитирует", 10000, 0, 0},
+	{517,"Призрак валарьяр", "Персонаж становится полупрозрачным с золотистым окаймлением", 5000, 0, 0},
+	{518,"Аура света 2", "Аура. Под ногами у персонажа регулярно появляются символы света", 15000, 0, 0},
+	{519,"Крылья-хранители", "У персонажа за спиной появляются крылья из света", 15000, 0, 0}
 }
 
-RPSCoreFramework.Interface.Auras.Show = {}
+RPSCoreFramework.Interface.Auras.Bought = false;
 
-RPSCoreFramework.Interface.ActiveAuraCounter = 0
+RPSCoreFramework.Interface.Auras.Show = {};
+
+RPSCoreFramework.Interface.ActiveAuraCounter = 0;
 
 RPSCoreFramework.Interface.Auras.Message = {
 	{" ", 0},
@@ -984,12 +1022,12 @@ RPSCoreFramework.Interface.Auras.Message = {
 	{" ", 0}
 }
 
-RPSCoreFramework.Interface.Auras.Initialized = false
-RPSCoreFramework.Interface.Auras.GhostClick = false
-RPSCoreFramework.Interface.Auras.AllowUpdate = true
+RPSCoreFramework.Interface.Auras.Initialized = false;
+RPSCoreFramework.Interface.Auras.GhostClick = false;
+RPSCoreFramework.Interface.Auras.AllowUpdate = true;
 
 DarkmoonWIPFrame.content.flash1Rotation:SetDuration(8);
 DarkmoonWIPFrame.content.flash2Rotation:SetDuration(8);
-DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
-DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
+--DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
+--DarkmoonCharacterFrameInfoMainContent.BlockOnLoad.content.flash2Rotation:SetDuration(50);
 --DarkmoonWIPFrame.content.GearRotation:SetDuration(8);

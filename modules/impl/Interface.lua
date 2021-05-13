@@ -202,11 +202,11 @@ function RPSCoreFramework:GOB_OnMouseWheel(self, delta, maxZoom, minZoom)
 end
 
 function RPSCoreFramework:GOBModelSceneZoomIn()
-	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, 10, 1, 0.1)
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewBorderModel, 10, 1, 0.1)
 end
 
 function RPSCoreFramework:GOBModelSceneZoomOut()
-	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewModelScene, -10, 1, 0.1)
+	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewBorderModel, -10, 1, 0.1)
 end
 
 function RPSCoreFramework:AddGuildSalaryTab()
@@ -384,6 +384,7 @@ function RPSCoreFramework:ApplyTransmogSet(button)
 		end
 		RPSCoreFramework:DispSetItemTexture(i-3, tonumber(buttonItemID));
 	end
+	SetCursor(nil);
 end
 
 function RPSCoreFramework:ApplyDispTimer()
@@ -409,3 +410,50 @@ function RPSCoreFramework:DispInsertItemLink(itemID)
 	local _, itemLink = GetItemInfo(itemID)
 	ChatEdit_InsertLink(itemLink);
 end
+
+function RPSCoreFramework:CharacterEXPBarUpdate(int)
+	int = tonumber(int);
+	if (int < 0) then
+		int = 0;
+	elseif (int > 100) then
+		int = 100
+	end
+	DarkmoonCharacterFrameInfoBottom:SetValue(int);
+	DarkmoonCharacterFrameInfoBottom.CurrentPercent:SetText(tostring(int).."%");
+	DarkmoonCharacterFrameInfoBottom.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
+end
+
+function RPSCoreFramework:UpdateCharacterXPInfo()
+	local level = UnitLevel("player");
+	DarkmoonCharacterFrameInfoBottom.lvlLabel:SetText(level .. " уровень");
+	DarkmoonCharacterFrameInfoBottom.rankLabel:SetText(tostring(RPSCoreFramework:GetCharStrengthLevel(level)));
+	DarkmoonCharacterFrameInfoBottom.descrLabel:SetText(tostring(RPSCoreFramework:GetChatStrengthDesc(level)));
+end
+
+function RPSCoreFramework:GetCharStrengthLevel(level)
+	if (level >= 110) then
+		return "Великий героический персонаж";
+	elseif (level >= 90) then
+		return "Героический персонаж";
+	elseif (level >= 70) then
+		return "Выдающийся персонаж";
+	elseif (level >= 50) then
+		return "Умелый персонаж";
+	end
+	return "Обычный персонаж";
+end
+
+function RPSCoreFramework:GetChatStrengthDesc(level)
+	if (level >= 110) then
+		return RPSCoreFramework.Literature.CharPowerDescr["5"];
+	elseif (level >= 90) then
+		return RPSCoreFramework.Literature.CharPowerDescr["4"];
+	elseif (level >= 70) then
+		return RPSCoreFramework.Literature.CharPowerDescr["3"];
+	elseif (level >= 50) then
+		return RPSCoreFramework.Literature.CharPowerDescr["2"];
+	end
+	return RPSCoreFramework.Literature.CharPowerDescr["1"];
+end
+
+

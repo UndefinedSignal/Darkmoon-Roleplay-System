@@ -1,6 +1,8 @@
-function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId)
-	if (GetInventoryItemID("player", inventorySlotId)) then
+function RPSCoreFramework:ShowDisplayDropDownMenu(inventorySlotId, weapon)
+	if (GetInventoryItemID("player", inventorySlotId) and not weapon) then
 		EasyMenu(RPSCoreFramework.DropDownDisplayMenu, RPSCoreFramework.DropDownDisplayMenuFrame, "cursor", 5, -15, "MENU", 5);
+	elseif(GetInventoryItemID("player", inventorySlotId)) then
+		EasyMenu(RPSCoreFramework.DropDownDisplayEnchantMenu, RPSCoreFramework.DropDownDisplayEnchantMenuFrame, "cursor", 5, -15, "MENU", 5);
 	end
 end
 
@@ -43,25 +45,33 @@ function RPSCoreFramework:PaperdollDispInit()
 		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_FEET)
 	 end end)
 	RPSCoreFramework:HookScript(CharacterMainHandSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "mainhand"
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_MAINHAND)
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_MAINHAND, true)
 	 end end)
 	RPSCoreFramework:HookScript(CharacterSecondaryHandSlot, "OnClick", function() if (GetMouseButtonClicked() == "RightButton") then RPSCoreFramework.GetLastClickedSlot = "offhand"
-		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND)
+		RPSCoreFramework:ShowDisplayDropDownMenu(INVSLOT_OFFHAND, true)
 	 end end)
 end
 
+function RPSCoreFramework:HideDialogPopup()
+	StaticPopup_Hide("DispSlotEditMenu");
+	StaticPopup_Hide("removeDisp");
+	StaticPopup_Hide("removeWeaponEnchant");
+	StaticPopup_Hide("EnchantOffHand");
+	StaticPopup_Hide("EnchantMainHand");
+end
+
 function RPSCoreFramework:RemoveDisplay(slotname)
-	local removeDispSlot
-	local menuTitle = "Вы действительно хотите убрать дисп?"
+	local removeDispSlot;
+	local menuTitle = "Вы действительно хотите убрать дисп?";
 	for v,h in pairs(RPSCoreFramework.SlotnameListPresets) do
 		if (v == slotname) then
-			removeDispSlot = h .. "0"
+			removeDispSlot = h .. "0";
 			break
 		end
 	end
 	for v,h in pairs(RPSCoreFramework.SlotnameListNames) do
 		if (v == slotname) then
-			menuTitle = "Вы действительно хотите убрать дисп для " .. h .. "?"
+			menuTitle = "Вы действительно хотите убрать дисп для " .. h .. "?";
 			break
 		end
 	end
@@ -78,9 +88,74 @@ function RPSCoreFramework:RemoveDisplay(slotname)
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-	StaticPopup_Hide("DipsSlotEditMenu")
-	StaticPopup_Hide("removeDisp")
-	StaticPopup_Show("removeDisp")
+	RPSCoreFramework:HideDialogPopup();
+	StaticPopup_Show("removeDisp");
+end
+
+function RPSCoreFramework:ShowDisEnchantDialog(slotname)
+
+	StaticPopupDialogs["removeWeaponEnchant"] = {
+		text = "Убрать зачарование с выбранного предмета?",
+		button1 = YES,
+		button2 = NO,
+		OnAccept = function() RPSCoreFramework:SendCoreMessage("enchant "..slotname.." 0") end,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = true,
+		enterClicksFirstButton = true,
+		exclusive = true,
+		showAlert = 1,
+		preferredIndex = 3, 
+	}
+	RPSCoreFramework:HideDialogPopup();
+	StaticPopup_Show("removeWeaponEnchant");
+end
+
+function RPSCoreFramework:ShowEnchantDialog(slotname)
+	if (slotname == "mainhand") then
+		StaticPopupDialogs["EnchantMainHand"] = {
+			text = "Введите ID зачарования в пределах 1 - 197",
+			button1 = "Применить",
+			button2 = "Выйти",
+			OnShow = function (self, data)
+
+			end,
+			OnAccept = function (self, data, data2)
+				RPSCoreFramework:SendCoreMessage("enchant mainhand "..self.editBox:GetText());
+			end,
+		  	OnCancel = function (_,reason)
+		  	end,
+			hasEditBox = true,
+		  	timeout = 15,
+		  	whileDead = true,
+		  	hideOnEscape = true,
+		  	enterClicksFirstButton = true,
+		}
+		RPSCoreFramework:HideDialogPopup();
+		StaticPopup_Show("EnchantMainHand");
+	elseif(slotname == "offhand") then
+		StaticPopupDialogs["EnchantOffHand"] = {
+			text = "Введите ID зачарования в пределах 1 - 197",
+			button1 = "Применить",
+			button2 = "Выйти",
+			OnShow = function (self, data)
+
+			end,
+			OnAccept = function (self, data, data2)
+				RPSCoreFramework:SendCoreMessage("enchant offhand "..self.editBox:GetText());
+			end,
+		  	OnCancel = function (_,reason)
+		  	end,
+			hasEditBox = true,
+		  	timeout = 15,
+		  	whileDead = true,
+		  	hideOnEscape = true,
+		  	enterClicksFirstButton = true,
+		}
+		RPSCoreFramework:HideDialogPopup();
+		StaticPopup_Show("EnchantOffHand");
+	end
+	assert("Некорректное значение slotname - "..slotname);
 end
 
 function RPSCoreFramework:ShowDisplayInfo(slotname)
@@ -118,7 +193,7 @@ function RPSCoreFramework:ShowDisplayInfo(slotname)
 	  	enterClicksFirstButton = true,
 	}
 	StaticPopup_Hide("removeDisp");
-	StaticPopup_Hide("DipsSlotEditMenu");
+	StaticPopup_Hide("DispSlotEditMenu");
 	StaticPopup_Show("DipsSlotEditMenu");
 end
 
@@ -153,7 +228,7 @@ function RPSCoreFramework:AddMinimapIcon()
 	})
 
 	if (RPSCoreIconData == nil) then
-		RPSCoreIconData = { hide = false }	
+		RPSCoreIconData = { hide = false, minimapPos = 140.35 }	
 	end
 
 	icon = LibStub("LibDBIcon-1.0");
@@ -363,17 +438,17 @@ function RPSCoreFramework:WordWrap(str, limit)
     local Lines, here, limit, found = {}, 1, limit or 80, str:find("(%s+)()(%S+)()")
 
     if found then
-        Lines[1] = string.sub(str,1,found-1)
+        Lines[1] = string.sub(str,1,found-1)  -- Put the first word of the string in the first index of the table.
     else Lines[1] = str end
 
     str:gsub("(%s+)()(%S+)()",
-        function(sp, st, word, fi)
+        function(sp, st, word, fi)  -- Function gets called once for every space found.
             splitWords(Lines, limit)
 
             if fi-here > limit then
                 here = st
-                Lines[#Lines+1] = word
-            else Lines[#Lines] = Lines[#Lines].." "..word end
+                Lines[#Lines+1] = word                                             -- If at the end of a line, start a new table index...
+            else Lines[#Lines] = Lines[#Lines].." "..word end  -- ... otherwise add to the current table index.
         end)
 
     splitWords(Lines, limit)
@@ -487,8 +562,6 @@ function RPSCoreFramework:TalentAlertMessageHide()
 	TalentMicroButtonAlert:Hide();
 end
 
-
-
 function RPSCoreFramework:AddGuildPOIInfo()
 	RPSCoreFramework.GuildInfoPOIFrame = CreateFrame("Frame","GuildInfoPOIFrame",GuildFrame)
 	RPSCoreFramework.GuildInfoPOIFrame:SetFrameStrata("HIGH")
@@ -503,12 +576,3 @@ function RPSCoreFramework:AddGuildPOIInfo()
 
 	RPSCoreFramework.GuildInfoPOIFrame:Show()
 end
-
---[[
-function putInChatBox(name)
-  name = type(name) ~= "string" and "" or name
-  local e = DEFAULT_CHAT_FRAME.editBox
-  ChatEdit_ActivateChat(e)
-  e:SetText("/tdps whisper "..name)
-end
-]]--

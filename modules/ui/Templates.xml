@@ -1347,7 +1347,7 @@
             </OnLeave>
         </Scripts>
     </Button>
-
+	
 	<Button name="RPSPoll_CloseButton" inherits="UIPanelCloseButton" virtual="true">
 		<Scripts>
 			<OnEnter>
@@ -2089,10 +2089,11 @@
 			</OnLeave>
         	<OnClick>
         		RPSCoreFramework.DispButtonFrame = self;
-        		RPSCoreFramework:DispRemoveItemTexture(0, true)
+        		RPSCoreFramework:DispRemoveItemTexture(0, true);
         		RPSCoreFramework:ClearDispModel(0);
         		RPSCoreFramework:ScheduleTimer("ApplyDispTimer",0.5);
         		RPSCoreFramework:ApplyTransmogSet(self);
+        		SetCursor("Interface/CURSOR/Interact");
         	</OnClick>
         </Scripts>
     </Button>
@@ -2214,5 +2215,109 @@
             </AnimationGroup>
         </Animations>
     </Frame>
+
+	<Button name="RPSEnchantButton" virtual="true">
+		<Size x="256" y="64"/>
+		<NormalTexture atlas="auctionhouse-nav-button"/>
+		<PushedTexture atlas="auctionhouse-nav-button">
+            <Size x="256" y="64"/>
+            <Anchors>
+                <Anchor point="CENTER">
+                    <Offset>
+                        <AbsDimension x="-1" y="-1"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+        </PushedTexture>
+		<HighlightTexture atlas="auctionhouse-nav-button-select">
+		    <Size x="253" y="44"/>
+            <Anchors>
+                <Anchor point="CENTER">
+                    <Offset>
+                        <AbsDimension x="0" y="10"/>
+                    </Offset>
+                </Anchor>
+            </Anchors>
+		</HighlightTexture>
+		<Layers>
+			<Layer level="OVERLAY">
+				<Texture parentKey="Background">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="3" y="-2"/>
+						<Anchor point="BOTTOMRIGHT" x="-3" y="10"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString parentKey="IDLabel" text="[ID]" inherits="GameFontNormal" wordwrap="false">
+					<Anchors>
+						<Anchor relativePoint="LEFT" point="LEFT" x="10" y="9"/>
+					</Anchors>
+					<Color r="0.95" g="0.95" b="0.95"/>
+				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString parentKey="TitleLabel" text="[TEXT]" inherits="GameFontNormal" wordwrap="false" hidden="true">
+					<Anchors>
+						<Anchor relativeKey="$parent.IDLabel" relativePoint="TOPRIGHT" point="TOPLEFT" x="10" y="0"/>
+					</Anchors>
+					<Color r="0.95" g="0.95" b="0.95"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button name="$parentMainhand" inherits="UIPanelButtonTemplate" text="Mainhand">
+				<Size x="70" y="20"/>
+				<Anchors>
+					<Anchor relativePoint="CENTER" point="CENTER" x="-40" y="-10"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RPSCoreFramework.Display.Enchants[1][2] = tostring(self:GetParent().IDLabel:GetText());
+						RPSCoreFramework:SendCoreMessage("enchant mainhand "..self:GetParent().IDLabel:GetText());
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentOffhand" inherits="UIPanelButtonTemplate" text="Offhand">
+				<Size x="70" y="20"/>
+				<Anchors>
+					<Anchor relativePoint="CENTER" point="CENTER" x="40" y="-10"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RPSCoreFramework.Display.Enchants[2][2] = tostring(self:GetParent().IDLabel:GetText());
+						RPSCoreFramework:SendCoreMessage("enchant offhand "..self:GetParent().IDLabel:GetText());
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+			</OnLoad>
+			<OnEnter>
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine(self.Title);
+			    GameTooltip:AddLine(" ");
+			    GameTooltip:AddLine(self.Description, 1,1,1, true);
+			    GameTooltip:AddLine("ЛКМ\\ПКМ наложить чары на оружие в главной\\второй руке", 1,0.61,0, true);
+			    GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
+			<OnClick>
+				if (button == "RightButton") then
+					RPSCoreFramework.Display.Enchants[2][2] = tostring(self.IDLabel:GetText());
+					RPSCoreFramework:SendCoreMessage("enchant offhand "..self.IDLabel:GetText());
+					RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование №"..tostring(self.IDLabel:GetText()).." с второй руки");
+				elseif (button == "LeftButton") then
+					RPSCoreFramework.Display.Enchants[1][2] = tostring(self.IDLabel:GetText());
+					RPSCoreFramework:SendCoreMessage("enchant mainhand "..self.IDLabel:GetText());
+					RPSCoreFramework:EnchantButtonTextUpdate("main", "Снять зачарование №"..tostring(self.IDLabel:GetText()).." с главной руки");
+				end
+			</OnClick>
+		</Scripts>
+	</Button>
 
 </Ui>

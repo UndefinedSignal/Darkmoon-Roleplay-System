@@ -9,6 +9,12 @@ function RPSCoreFramework:ReloadDispList()
 	        end
 	    end
 	end
+	if tostring(RPSCoreFramework.Display.Enchants[1][2]) ~= "-1" then
+		dispstring = dispstring .. ".enchant mainh ".. RPSCoreFramework.Display.Enchants[1][2].."\n"
+	end
+	if tostring(RPSCoreFramework.Display.Enchants[2][2]) ~= "-1" then
+		dispstring = dispstring .. ".enchant offh ".. RPSCoreFramework.Display.Enchants[2][2].."\n"
+	end
 	RPS_TextMacrosScrollText:SetText(dispstring)
 	RPS_DispUpdateButton:Enable()
 end
@@ -112,6 +118,14 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 
+--[[
+	minstrel activate
+	RPS.Minstrel 1 - Менестрель есть
+	RPS.Minstrel 0 - Менестрель заблочена(например, потому-что у человека ГМка)
+	RPS.Minstrel 2 - Менестрели нет.
+]]--
+
+
 function RPSCoreFramework:UpdateMinstrelStatus(str)
 	if (tonumber(str) == 0 or str == nil) then
 		RPSCoreFramework.MinstrelStatus = tonumber(str);
@@ -170,14 +184,22 @@ function RPSCoreFramework:UpdateInfo(str)
     self.ItemsStats.Dexterity = values[15];
     self.ItemsStats.Will = values[16];
 	self.ItemsStats.CriticalChance = values[18];
+	self:ResetDiff();
 	self:UpdateNormal();
-	self:UpdateDiff();
 	self:UpdateUnlearn();	
 end
 
 function RPSCoreFramework:POIUpdateIntoMainMassive()
     for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
-        RPSCorePOIPins[k](v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]);
+    	if RPSCorePOIPins[k] ~= nil then
+        	RPSCorePOIPins[k] = {v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]};
+        end
+    end
+end
+
+function MEMEPOI()
+    for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
+        print("for: "..k.." "..v[1].." "..v[2].." "..v[3].." "..v[4].." "..v[5].." "..v[6].." "..v[7].." "..v[8]);
     end
 end
 
@@ -191,6 +213,7 @@ end
 function RPSCoreFramework:AddPOIPins(str)
 	local values = {strsplit("#",str)}
 	if tonumber(values[1]) ~= 0 then
+		RPSCoreFramework.CharcterPOILoaded = false;
 		RPSCorePOIPins[values[1]] = values;
 		RPSCoreFramework.Map.POICounter = RPSCoreFramework.Map.POICounter + 1;
 		RPSCoreFramework:POIStreamingProcess();
@@ -202,24 +225,26 @@ function RPSCoreFramework:DailyStatusUpdate(str)
 	local int = tonumber(5 - RPSCoreFramework.DailyCipher[tonumber(str)]);
 	local text;
 	RPSDailyStreak = str;
+	local days = tonumber(RPSCoreFramework.DailyCipher[tonumber(str)]);
 	if int == 1 then text = "остался"; else text = "осталось"; end
 	_G["DarkmoonCharacterFrameInfoBodyAvaGraduate"]:SetText(int);
 	for i = 1, 5 do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Hide();
 	end
-	for i = 1, RPSCoreFramework.DailyCipher[tonumber(str)] do
+	for i = 1, days do
 		_G["DarkmoonCharacterFrameInfoTRBodyDay"..i.."Seal"]:Show();
 	end
+	
 	if RPSCoreFramework.DailyCipherShow > 2 then
-		if RPSCoreFramework.DailyCipher[tonumber(str)] < 5 then
-			print("|cFFFF8040♥♥♥ Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду! ♥♥♥|r");
-		elseif RPSCoreFramework.DailyCipher[tonumber(str)] ~= 0 then
+		if (days < 5) and (days ~= 0) then
+			print("|TInterface\\ICONS\\Pet_Type_Magical:16|t|r|cFFFF8040 Поздравляем с |cFFFFFF00"..RPSCoreFramework.DailyCipher[tonumber(str)].."\'м |cFFFF8040днём Вашей ролевой активности! Вам "..text.." всего |cFFFFFF00"..int.."|cFFFF8040 дн. активности, чтобы получить награду!|r|cff00ff00|TInterface\\ICONS\\Pet_Type_Magical:16|t|r");
+		elseif (days ~= 0) then
 			print("|cFFFF8040Ура! Вы были с нами |cFFFFFF005|r|cFFFF8040 дней подряд и получаете награду|cFFFFFF00 "..GetCoinTextureString(30000).."|r|cFFFF8040!|r");
 		end
 	end
 end
 
-function MountModelStatusUpdate(str)
+function RPSCoreFramework:MountModelStatusUpdate(str)
 	local values = {strsplit(' ',str)}
 	if tonumber(values[1]) ~= nil then
 		RPSCharSpec = tonumber(values[1]) + 1;
@@ -228,6 +253,46 @@ function MountModelStatusUpdate(str)
 	end
 	DarkmoonDropSpecChoose.Text:SetText(RPSCoreFramework.CharChooseSpec[tonumber(RPSCharSpec)]);
 end
+
+function RPSCoreFramework:EnchantButtonTextUpdate(button, text)
+	if button == "main" then
+		_G["DarkmoonWeaponEnchantsFrameControls"].Mainhand:SetText(text);
+	elseif button == "off" then
+		_G["DarkmoonWeaponEnchantsFrameControls"].Offhand:SetText(text);
+	end
+end
+
+function RPSCoreFramework:EnchantStatusUpdate(str)
+	local values = {strsplit(' ',str)};
+	if tostring(values[1]) == "-1" then
+		RPSCoreFramework.Display.Enchants[1][2] = "-1";
+		RPSCoreFramework:EnchantButtonTextUpdate("main", "Снять зачарование с главной руки")
+	else
+		RPSCoreFramework.Display.Enchants[1][2] = tostring(values[1]);
+		RPSCoreFramework:EnchantButtonTextUpdate("main", "Снять зачарование №"..tostring(values[1]).." с главной руки");
+	end
+	if tostring(values[2]) == "-1" then
+		RPSCoreFramework.Display.Enchants[2][2] = "-1"
+		RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование с второй руки");
+	else
+		RPSCoreFramework.Display.Enchants[2][2] = tostring(values[2]);
+		RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование №"..tostring(values[2]).." с второй руки");
+	end
+end
+
+--function RPSCoreFramework:AddPOIPins(str)
+--	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
+--	local lines = decom:splitstr('\r\n');
+--
+--	for i=1, #lines do
+--		print(lines[i]);
+--
+--		local values = {strsplit("#",lines[i])}
+--		if values[1] ~= "" then
+--			RPSCorePOIPins[values[1]] = values;
+--		end
+--	end
+--end
 
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};
@@ -241,6 +306,9 @@ function RPSCoreFramework:UpdatePOIPins(str)
 end
 
 function RPSCoreFramework:RemovePOIPins(str)
+	if RPSCoreFramework.Map.UpdatePins[str] ~= nil then
+		RPSCoreFramework.Map.UpdatePins[str] = nil;
+	end
 	RPSCorePOIPins[str] = nil;
 	RPSCoreFramework:GeneratePOIPlaces();
 end
@@ -260,14 +328,14 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 		if (RPSCoreFramework.Map.POIUpdateQueque) then
 			RPSCoreFramework:POIUpdateIntoMainMassive();
 		end
-		RPSCoreFramework:CharacterInfoPOIBlock(2);
+		--RPSCoreFramework:CharacterInfoPOIBlock(2);
 		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 		RPSCoreFramework:GeneratePOIPlaces();
 		RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);
 	end
 end
 
-function RPSCoreFramework:InitializePool(str)
+function RPSCoreFramework:InitializePoll(str)
 	local values = {strsplit('#',str)};
 	if values[1] == nil then
 		return;
@@ -287,6 +355,7 @@ function RPSCoreFramework:OneShotUpdater()
 	RPSCoreFramework:SendCoreMessage("rps action scale info");
 	RPSCoreFramework:SendCoreMessage("rps action aura list known");
 	RPSCoreFramework:SendCoreMessage("rps action aura list active");
+	RPSCoreFramework:SendCoreMessage("enchant list");
 end
 
 function RPSCoreFramework:PeriodicallyAurasUpdate()

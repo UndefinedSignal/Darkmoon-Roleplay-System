@@ -5,10 +5,10 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
-	self:RegisterEvent("BAG_UPDATE");
 	self:RegisterEvent("GUILD_RANKS_UPDATE");
 	self:RegisterEvent("ADDON_LOADED");
 	self:RegisterEvent("PLAYER_TALENT_UPDATE");
+	self:RegisterEvent("CURSOR_UPDATE");
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -26,21 +26,13 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 
-
 	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end);
-	--self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
 	self:RawHook("GuildInfoFrame_Update", true);
-
---PlayerZoneChanged(currentPlayerUiMapID, currentPlayerUiMapType)
---Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
 
 	WorldMapFrame.ScrollContainer:HookScript("OnMouseDown", function(self, button)
 		RPSCoreFramework:ProcessMapClick(button);
 	end)
-	--self:SecureHook("PlayerZoneChanged", function() 	if IsOutdoors() then RPSCoreFramework:GeneratePOIPlaces(); end	end)
-	--self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
-	--self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
 	self:SecureHook("ToggleWorldMap", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
@@ -51,27 +43,68 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_MainFrame.Close:SetScript("OnClick", function() RPSCoreFramework:switchMainFrame() end);
 	DarkmoonCharStatsInfoReset:SetScript("OnClick", function() RPSCoreFramework:ResetDiff() end);	
 
-	GameObjectPreviewModelSceneControlFrameZoomInButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomIn() end)
-	GameObjectPreviewModelSceneControlFrameZoomOutButton:SetScript("OnClick", function() RPSCoreFramework:GOBModelSceneZoomOut() end)
-
 	DarkmoonCharStatsInfoSubmit:SetScript("OnClick", function() StaticPopup_Show("LearnStats") end);	
 	DarkmoonCharStatsInfoUnlearn:SetScript("OnClick", function() StaticPopup_Show("UnlearnStats") end);
 
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
-
-	--self:RawHook(MapCanvasMixin, "OnLoad()", RPSCoreFramework:AcquirePin(), true);
-end
---[[
-function RPSCoreFramework:OnErrorMessage()
-	print("Check!");
 end
 
+function RPSCoreFramework:NumeriseAllPlayerBagButtons()
+	for i = 0, NUM_BAG_SLOTS do
+		local slots = GetContainerNumSlots(i);
+		for j = 1, MAX_CONTAINER_ITEMS do
+			local bagButton = _G["ContainerFrame"..(i+1).."Item"..j];
+			bagButton.text = bagButton:CreateFontString();
+			bagButton.text:SetPoint("CENTER");
+			bagButton.text:SetSize(200, 20);
+			bagButton.text:SetFont("Fonts\\FRIZQT__.TTF", 12, "OUTLINE");
+			bagButton.text:SetFormattedText("%d-%d", i, j);
+		end
+	end
+end
 
-function RPSCoreFramework:AcquirePin()
-	print("Meme succesful")
-end]]--
+RPSCoreFramework.HookEXP = CreateFrame("FRAME");
+RPSCoreFramework.HookEXP:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookEXP:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix=="RPS.XP") then
+			RPSCoreFramework:CharacterEXPBarUpdate(tonumber(msg));
+			RPSCoreFramework:UpdateCharacterXPInfo();
+		end
+	end
+end)
+
+RPSCoreFramework.HookPOI = CreateFrame("FRAME");
+RPSCoreFramework.HookPOI:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookPOI:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix == "RPS.POI.i") then
+			RPSCoreFramework:AddPOIPins(msg);
+		elseif (prefix == "RPS.POI.u") then
+			RPSCoreFramework:UpdatePOIPins(msg);
+		elseif (prefix == "RPS.POI.r") then
+			RPSCoreFramework:RemovePOIPins(msg);
+		elseif (prefix == "RPS.POI.c") then
+			RPSCoreFramework:GetCommandPOIPins(msg);
+		end
+	end
+end)
+
+RPSCoreFramework.HookQuiz = CreateFrame("FRAME");
+RPSCoreFramework.HookQuiz:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookQuiz:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix == "RPS.Quiz.s") then
+			RPSCoreFramework:QuizSetQuestion(msg);
+		elseif (prefix == "RPS.Quiz.v") then
+			RPSCoreFramework:QuizAddAnswer(msg)
+		elseif (prefix == "RPS.Quiz.c") then
+			RPSCoreFramework:QuizCloseReload();
+		end
+	end
+end)
 
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
@@ -84,18 +117,7 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 		self:UpdateScaleReset();
 		self:PeriodicallyScrollMenuUpdater();
 	elseif (event == "CHAT_MSG_ADDON" and sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
-		if (prefix == "RPS.POI.i") then
-			RPSCoreFramework:AddPOIPins(msg)
---[[		if (prefix == "RPS.POI.i2") then
-			--.poi requestdeb
-			RPSCoreFramework:AddPOIPins(msg)]]--
-		elseif (prefix == "RPS.POI.u") then
-			RPSCoreFramework:UpdatePOIPins(msg)
-		elseif (prefix == "RPS.POI.r") then
-			RPSCoreFramework:RemovePOIPins(msg)
-		elseif (prefix == "RPS.POI.c") then
-			RPSCoreFramework:GetCommandPOIPins(msg)
-		elseif (prefix == "RPS.StatMe") then
+		if (prefix == "RPS.StatMe") then
 			RPSCoreFramework:UpdateInfo("RPS.StatMe "..msg);
 		elseif (prefix == "RPS.Scale") then
 			RPSCoreFramework:UpdateScaleInfo("RPS.Scale "..msg);
@@ -113,18 +135,14 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdatePLayerAuraList(msg)
 		elseif (prefix == "RPS.Minstrel") then
 			RPSCoreFramework:UpdateMinstrelStatus(msg);
-		elseif (prefix == "RPS.Quiz.s") then
-			RPSCoreFramework:QuizSetQuestion(msg);
-		elseif (prefix == "RPS.Quiz.v") then
-			RPSCoreFramework:QuizAddAnswer(msg)
-		elseif (prefix == "RPS.Quiz.c") then
-			RPSCoreFramework:QuizCloseReload();
 		elseif (prefix == "RPS.Guild.s") then
 			RPSCoreFramework:UpdateGuildSalary(msg);
 		elseif (prefix == "RPS.DLS") then
 			RPSCoreFramework:DailyStatusUpdate(msg);
 		elseif (prefix == "RPS.mdS") then
 			RPSCoreFramework:MountModelStatusUpdate(msg);
+		elseif (prefix == "RPS.Enchant") then
+			RPSCoreFramework:EnchantStatusUpdate(msg);
 		end
 	elseif (event == "GUILD_RANKS_UPDATE") then
 		RPSCoreFramework:ProcessGuildSalaryInterface();

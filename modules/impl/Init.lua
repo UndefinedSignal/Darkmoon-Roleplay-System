@@ -23,13 +23,10 @@ function RPSCoreFramework:OnInitialize()
 	
 	table.insert(UISpecialFrames, PollFrame);
 	table.insert(UISpecialFrames, RPS_MainFrame);
-	table.insert(UISpecialFrames, GameObjectPreview);
 
 	self:EnableDrag(RPS_MainFrame);
 	self:EnableDrag(RPS_InteractFrame);
 	self:EnableDrag(PollFrame);
-	self:EnableDrag(GameObjectPreview);
-	--GameObjectPreview:Show();
 
 	self:InitializeHooks();
 
@@ -192,6 +189,8 @@ function RPSCoreFramework:OnInitialize()
 	
 	RPSCoreFramework:TalentAlertMessageHide();
 
+	RPSCoreFramework:InitializeEnchantButtons();
+
 --	UIErrorsFrame:Hide();
 --	UIErrorsFrame:ClearAllPoints();
 --	UIErrorsFrame:SetPoint("TOP", UIParent, "BOTTOM", 0, -100);
@@ -216,7 +215,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -249,7 +248,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -338,7 +337,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -371,7 +370,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -404,7 +403,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;
@@ -437,7 +436,7 @@ function RPSCoreFramework:OnInitialize()
 			self.ticker = C_Timer.NewTicker(1, function()
 				self.declineTimeLeft = self.declineTimeLeft - 1;
 				if (self.declineTimeLeft <= 0) then
-					self.button1:SetText(YES)
+					self.button1:SetText(YES);
 					self.button1:Enable();
 					self.ticker:Cancel();
 					return;

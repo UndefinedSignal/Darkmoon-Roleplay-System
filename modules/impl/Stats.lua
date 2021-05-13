@@ -164,9 +164,11 @@ end
 function RPSCoreFramework:UpdateFreeStat()
 	local level = UnitLevel("player");
 	if (level >= RPSCoreFramework.StatsLevel) then
-		DarkmoonCharStatsInfoFreeStat:SetText("Свободный опыт: "..RPSCoreFramework.FreeStats)
+		DarkmoonCharStatsInfoFreeStat:SetText(RPSCoreFramework.FreeStats);
+		DarkmoonCharStatsInfoFreeStatText:SetText("Свободный опыт");
 	else
-		DarkmoonCharStatsInfoFreeStat:SetText("|cFFFF0000Требуется "..RPSCoreFramework.StatsLevel.." уровень.|r")
+		DarkmoonCharStatsInfoFreeStat:SetText("0");
+		DarkmoonCharStatsInfoFreeStatText:SetText("|cFFFF0000Требуется "..RPSCoreFramework.StatsLevel.." уровень.|r");
 	end	
 end
 function RPSCoreFramework:DecStrength()
