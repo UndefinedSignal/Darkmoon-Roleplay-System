@@ -3107,8 +3107,8 @@
 					</Layers>
 					<Scripts>
 						<OnLoad>
-							self:SetBackdropBorderColor(255, 255, 255, 0.1)
-							self:SetBackdropColor(0.102, 0.102, 0.102, 0.45)
+							--self:SetBackdropBorderColor(255, 255, 255, 0.1)
+							--self:SetBackdropColor(0.102, 0.102, 0.102, 0.45)
 						</OnLoad>
 					</Scripts>
 			</Frame>
