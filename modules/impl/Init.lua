@@ -190,7 +190,7 @@ function RPSCoreFramework:OnInitialize()
 
 	RPSCoreFramework:GeneratePOIPlaces();
 	
-	RPSCoreFramework:TalentAlertMessageHide();
+--	RPSCoreFramework:TalentAlertMessageHide(); WIP
 
 	RPSCoreFramework:InitializeEnchantButtons();
 

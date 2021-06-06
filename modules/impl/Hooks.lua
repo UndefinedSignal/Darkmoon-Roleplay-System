@@ -76,6 +76,7 @@ end
 function RPSCoreFramework:AcquirePin()
 	print("Meme succesful")
 end]]--
+local MAX_CONTAINER_ITEMS = 32
 
 function RPSCoreFramework:HookAllPlayerBagButtons()
 	for i = 0, NUM_BAG_SLOTS do

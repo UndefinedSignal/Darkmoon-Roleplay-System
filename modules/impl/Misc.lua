@@ -578,14 +578,14 @@ function RPSCoreFramework:playAnimation(animationGroup, callback)
 		callback();
 	end
 end
-
+--[[
 function RPSCoreFramework:TalentAlertMessageHide()
 	function TalentMicroButtonAlert:Show()
 		TalentMicroButtonAlert:Hide();
 	end
 	TalentMicroButtonAlert:Hide();
 end
-
+]]--
 
 
 function RPSCoreFramework:AddGuildPOIInfo()

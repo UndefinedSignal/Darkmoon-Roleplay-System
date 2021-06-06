@@ -3013,10 +3013,10 @@
 				<Scripts>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-						GameTooltip:AddDoubleLine("RPS Darkmoon:", "TestUnit", 1, 1, 1, 1, 0.96, 0.41);
+						GameTooltip:AddDoubleLine(RPSCoreFramework.Title..":", "TestUnit", 1, 1, 1, 1, 0.96, 0.41);
 						GameTooltip:AddDoubleLine(" ", "-SeMGa!", 1, 1, 1, 1, 0.96, 0.41);
 						GameTooltip:AddDoubleLine(" ", "Hlebes", 1, 1, 1, 1, 0.96, 0.41);
-						GameTooltip:AddDoubleLine("Версия:", RPSCoreFramework.Version.." BFA", 1, 1, 1, 1, 0.96, 0.41);
+						GameTooltip:AddDoubleLine("Версия:", RPSCoreFramework.Version, 1, 1, 1, 1, 0.96, 0.41);
 						GameTooltip:Show();
 					</OnEnter>
 					<OnLeave>
