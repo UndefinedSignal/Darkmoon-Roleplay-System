@@ -236,6 +236,9 @@ RPSCoreFramework.MyScale = 0;
 RPSCoreFramework.ChoosedScale = 0;
 RPSCoreFramework.FrameUpdate = true;
 
+RPSCoreFramework.ChatMaxLetters = 255;
+RPSCoreFramework.TabSpaces = "    ";
+
 RPSCoreFramework.Poll = {};
 RPSCoreFramework.Poll.Question = nil;
 RPSCoreFramework.Poll.ScheduleTimer = nil;

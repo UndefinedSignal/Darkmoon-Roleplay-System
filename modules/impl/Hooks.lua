@@ -10,6 +10,9 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("ADDON_LOADED");
 	self:RegisterEvent("PLAYER_TALENT_UPDATE");
 	self:RegisterEvent("CURSOR_UPDATE");
+	
+	self:RawHook("SendChatMessage", "SendLongChatMessage", true)
+	self:SecureHook("ChatEdit_OnShow", "UpdateChatEdit")
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
@@ -18,6 +21,12 @@ function RPSCoreFramework:InitializeHooks()
 		self:SecureHookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnHide",          "UpdateTypingStatus");
+				
+		editbox:SetMaxLetters(0);
+		editbox:SetMaxBytes(0);
+		if (editbox.SetVisibleTextByteLimit) then
+			editbox:SetVisibleTextByteLimit(0);
+		end	
 	end	
 	self:HookScript(self, "OnEvent", "OnEventFrame");
 	self:HookScript(GameTooltip, "OnTooltipSetItem", "ItemTooltip");
