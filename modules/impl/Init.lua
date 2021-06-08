@@ -5,73 +5,40 @@ function RPSCoreFramework:OnEnable()
 	self:ScheduleTimer("ConfirmedAddonLoading", 10);
 	self:ScheduleRepeatingTimer("PeriodicallyScrollMenuUpdater", 5);
 	self:ScheduleRepeatingTimer("StartGarbageCollection", 3600);
-	
 	if (not RPSCharEntersFirstTime) then
 		RPSCoreFramework:switchMainFrame();
 		RPSCharEntersFirstTime = true;
 	end
-	
 	self:AdvancedCharacterMessageCheck();
 end
-
 function RPSCoreFramework:OnInitialize()
-
 	LoggingChat(1);
 	SetCVar("autoClearAFK", 0);
-
 	self.isTypingMessage = false
-	
 	table.insert(UISpecialFrames, PollFrame);
 	table.insert(UISpecialFrames, RPS_MainFrame);
-
 	self:EnableDrag(RPS_MainFrame);
 	self:EnableDrag(RPS_InteractFrame);
 	self:EnableDrag(PollFrame);
-
 	self:InitializeHooks();
-
 	self:PaperdollDispInit();
 	self:AddMinimapIcon();
 	self:ChangeDefaultWords();
-
 	self:PreGenerateDMButtons();
 	self:FormatDMButtons();
-
 	self:GenerateCharScaleSlider();
 	self:GenerateClassBackground();
 	self:UpdateScaleReset();
-
 	self:PreGenerateShowAuras();
-
 	self:AddGuildSalaryTab();
-
-	--RPSCoreFramework:AddGuildPOIInfo();
-
-	-- Disp & Scale
-
 	self:SendCoreMessage("disp list");
 	self:SendCoreMessage("rps action aura list known");
 	self:SendCoreMessage("rps action aura list active");
 	self:SendCoreMessage("rps action scale info");
-
-	-- Guild Salary
 	if (GetGuildInfo("player") ~= "0") then
 		self:SendCoreMessage("rps guild infosalary");
 	end
-
 	RPSCoreFramework:DailyStatusUpdate(RPSDailyStreak);
-
-	-- Guild goals
-
-	--[[GuildInfoFrameInfoChallenge1:Hide();
-	GuildInfoFrameInfoChallenge2:Hide();
-	GuildInfoFrameInfoChallenge3:Hide();
-	GuildInfoFrameInfoChallenge4:Hide();
-	GuildInfoFrameInfoChallenge5:Hide();
-	GuildInfoFrameInfoHeader1Label:SetText("Гильдейские точки интереса (POI)");]]--
-
-	-- Stats
-
 	self:UpdateDiff();
 	StrengthStatName:SetText("Сила");
 	AgilityStatName:SetText("Ловкость");
@@ -81,36 +48,29 @@ function RPSCoreFramework:OnInitialize()
 	EnduranceStatName:SetText("Стойкость");
 	DexterityStatName:SetText("Сноровка");
 	WillStatName:SetText("Воля");
-
-	DarkmoonSocialStatsFrameStat1StatName:SetText("Харизма"); -- INV_BandofBrothers
-	DarkmoonSocialStatsFrameStat2StatName:SetText("Лидерство"); -- Achievement_PVP_Legion08
-	DarkmoonSocialStatsFrameStat3StatName:SetText("Дипломатия"); -- Achievement_Reputation_08
-	DarkmoonSocialStatsFrameStat4StatName:SetText("Торговля"); -- TimelessCoin
-	DarkmoonSocialStatsFrameStat5StatName:SetText("Устрашение"); -- Ability_Warrior_Revenge
-	DarkmoonSocialStatsFrameStat6StatName:SetText("Эрудиция"); -- INV_Misc_ScrollRolled04
-	DarkmoonSocialStatsFrameStat7StatName:SetText("Искусство"); -- Achievement_Faction_GoldenLotus
-	DarkmoonSocialStatsFrameStat8StatName:SetText("Выживание"); -- Ability_Hunter_ImprovedTracking
-	DarkmoonSocialStatsFrameStat9StatName:SetText("Внимательность"); -- Ability_Hunter_MarkedForDeath
-	DarkmoonSocialStatsFrameStat10StatName:SetText("Реакция"); -- Ability_Hunter_MarkedShot
-	DarkmoonSocialStatsFrameStat11StatName:SetText("Поиск"); -- TRADE_ARCHAEOLOGY
-	DarkmoonSocialStatsFrameStat12StatName:SetText("Слух"); -- Ability_Hunter_BeastCall
-	DarkmoonSocialStatsFrameStat13StatName:SetText("Скрытность"); -- Ability_Hunter_Camouflage
-	DarkmoonSocialStatsFrameStat14StatName:SetText("Ловкость рук"); -- Ability_Hunter_BeastSoothe
-	DarkmoonSocialStatsFrameStat15StatName:SetText("Верховая езда"); -- ACHIEVEMENT_GUILDPERK_MOUNTUP
-	DarkmoonSocialStatsFrameStat16StatName:SetText("Удача"); -- Achievement_Boss_CThun
-
-
+	DarkmoonSocialStatsFrameStat1StatName:SetText("Харизма"); 
+	DarkmoonSocialStatsFrameStat2StatName:SetText("Лидерство");
+	DarkmoonSocialStatsFrameStat3StatName:SetText("Дипломатия");
+	DarkmoonSocialStatsFrameStat4StatName:SetText("Торговля");
+	DarkmoonSocialStatsFrameStat5StatName:SetText("Устрашение");
+	DarkmoonSocialStatsFrameStat6StatName:SetText("Эрудиция");
+	DarkmoonSocialStatsFrameStat7StatName:SetText("Искусство");
+	DarkmoonSocialStatsFrameStat8StatName:SetText("Выживание");
+	DarkmoonSocialStatsFrameStat9StatName:SetText("Внимательность");
+	DarkmoonSocialStatsFrameStat10StatName:SetText("Реакция");
+	DarkmoonSocialStatsFrameStat11StatName:SetText("Поиск");
+	DarkmoonSocialStatsFrameStat12StatName:SetText("Слух");
+	DarkmoonSocialStatsFrameStat13StatName:SetText("Скрытность");
+	DarkmoonSocialStatsFrameStat14StatName:SetText("Ловкость рук");
+	DarkmoonSocialStatsFrameStat15StatName:SetText("Верховая езда");
+	DarkmoonSocialStatsFrameStat16StatName:SetText("Удача");
 	DarkmoonCharStatsInfoUnlearn:SetText("Разучить "..GetCoinTextureString(RPSCoreFramework.RequestUnlearn));
-
 	DarkmoonCharStatsInfoReset:Disable();
 	DarkmoonCharStatsInfoSubmit:Disable();
 	DarkmoonCharStatsInfoUnlearn:Disable();
-
 	RPS_BTNReScale:Disable();
 	RPS_BTNAcceptScale:Disable();
-
 	self:StatsIncDecFunc();
-	
 	StrengthIcon:SetTexture("Interface\\ICONS\\achievement_bg_most_damage_killingblow_dieleast");
     AgilityIcon:SetTexture("Interface\\ICONS\\ability_rogue_quickrecovery");
     IntellectIcon:SetTexture("Interface\\ICONS\\spell_shadow_brainwash");
@@ -119,7 +79,6 @@ function RPSCoreFramework:OnInitialize()
     EnduranceIcon:SetTexture("Interface\\ICONS\\ability_warrior_intensifyrage");
     DexterityIcon:SetTexture("Interface\\ICONS\\ability_rogue_cheatdeath");
     WillIcon:SetTexture("Interface\\ICONS\\ability_shaman_astralshift");
-
 	DarkmoonSocialStatsFrameStat1Icon:SetTexture("Interface\\ICONS\\INV_BandofBrothers");
 	DarkmoonSocialStatsFrameStat2Icon:SetTexture("Interface\\ICONS\\Achievement_PVP_Legion08");
 	DarkmoonSocialStatsFrameStat3Icon:SetTexture("Interface\\ICONS\\Achievement_Reputation_08");
@@ -136,7 +95,6 @@ function RPSCoreFramework:OnInitialize()
 	DarkmoonSocialStatsFrameStat14Icon:SetTexture("Interface\\ICONS\\Ability_Hunter_BeastSoothe");
 	DarkmoonSocialStatsFrameStat15Icon:SetTexture("Interface\\ICONS\\ACHIEVEMENT_GUILDPERK_MOUNTUP");
 	DarkmoonSocialStatsFrameStat16Icon:SetTexture("Interface\\ICONS\\Achievement_Boss_CThun");
-
 	DarkmoonSocialStatsFrameStat1Minus:Disable();
 	DarkmoonSocialStatsFrameStat1Plus:Disable();
 	DarkmoonSocialStatsFrameStat2Minus:Disable();
@@ -169,36 +127,15 @@ function RPSCoreFramework:OnInitialize()
 	DarkmoonSocialStatsFrameStat15Plus:Disable();
 	DarkmoonSocialStatsFrameStat16Minus:Disable();
 	DarkmoonSocialStatsFrameStat16Plus:Disable();
-
-	-- RPSLiterature.lua text formatting
-
 	self:LiteratureTextFormatting();
-
-	-- Button extensions
-
-	--RPS_CharInfoLabel:SetText(UnitName("player"));
 	self:OnClickCosmeticTabs(RPS_FSBTN1);
 	RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
-
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN1);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN4);
-
 	RPSCoreFramework:GeneratePOIPlaces();
-	
-	RPSCoreFramework:TalentAlertMessageHide();
-
 	RPSCoreFramework:InitializeEnchantButtons();
-
---	UIErrorsFrame:Hide();
---	UIErrorsFrame:ClearAllPoints();
---	UIErrorsFrame:SetPoint("TOP", UIParent, "BOTTOM", 0, -100);
-
---	WorldMapPOIFrame:Hide();
-
-	-- Popup's
-	
 	StaticPopupDialogs["ActionHelp"] = {
 		text = "Вы действительно желаете помочь выбранному персонажу?",
 		button1 = YES,
@@ -354,7 +291,6 @@ function RPSCoreFramework:OnInitialize()
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-
 	StaticPopupDialogs["LearnStats"] = {
 		text = "Вы действительно желаете изучить выбранные характеристики?",
 		button1 = YES,
@@ -387,7 +323,6 @@ function RPSCoreFramework:OnInitialize()
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-
 	StaticPopupDialogs["setCharacterReScale"] = {
 		text = "Вы действительно желаете сбросить рост?",
 		button1 = YES,
@@ -420,7 +355,6 @@ function RPSCoreFramework:OnInitialize()
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-
 	StaticPopupDialogs["setCharacterScale"] = {
 		text = "Вы действительно уверены в выбранном росте?",
 		button1 = YES,
@@ -453,7 +387,6 @@ function RPSCoreFramework:OnInitialize()
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-
 	StaticPopupDialogs["MakeMacros"] = {
 	    text = "Выберите имя для макроса",
 	    button1 = "Применить",
@@ -473,7 +406,6 @@ function RPSCoreFramework:OnInitialize()
 	    whileDead = true,
 	    hideOnEscape = true,
 	}
-	
 	StaticPopupDialogs["AdvancedCharacterMessage"] = {
 		text = "|cFFFFFF00ВНИМАНИЕ!|r\n%s",	
 		button1 = OKAY,
@@ -505,7 +437,6 @@ function RPSCoreFramework:OnInitialize()
 		showAlert = 1,
 		preferredIndex = 3, 
 	}
-
 	StaticPopupDialogs["buyMinstrel"] = {
 		text = "Вы действительно хотите активировать Менестрель?",
 		button1 = YES,

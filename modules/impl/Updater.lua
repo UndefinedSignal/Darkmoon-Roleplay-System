@@ -118,14 +118,6 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 
---[[
-	minstrel activate
-	RPS.Minstrel 1 - Менестрель есть
-	RPS.Minstrel 0 - Менестрель заблочена(например, потому-что у человека ГМка)
-	RPS.Minstrel 2 - Менестрели нет.
-]]--
-
-
 function RPSCoreFramework:UpdateMinstrelStatus(str)
 	if (tonumber(str) == 0 or str == nil) then
 		RPSCoreFramework.MinstrelStatus = tonumber(str);
@@ -194,12 +186,6 @@ function RPSCoreFramework:POIUpdateIntoMainMassive()
     	if RPSCorePOIPins[k] ~= nil then
         	RPSCorePOIPins[k] = {v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8]};
         end
-    end
-end
-
-function MEMEPOI()
-    for k, v in pairs(RPSCoreFramework.Map.UpdatePins) do
-        print("for: "..k.." "..v[1].." "..v[2].." "..v[3].." "..v[4].." "..v[5].." "..v[6].." "..v[7].." "..v[8]);
     end
 end
 
@@ -279,20 +265,6 @@ function RPSCoreFramework:EnchantStatusUpdate(str)
 		RPSCoreFramework:EnchantButtonTextUpdate("off", "Снять зачарование №"..tostring(values[2]).." с второй руки");
 	end
 end
-
---function RPSCoreFramework:AddPOIPins(str)
---	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
---	local lines = decom:splitstr('\r\n');
---
---	for i=1, #lines do
---		print(lines[i]);
---
---		local values = {strsplit("#",lines[i])}
---		if values[1] ~= "" then
---			RPSCorePOIPins[values[1]] = values;
---		end
---	end
---end
 
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};

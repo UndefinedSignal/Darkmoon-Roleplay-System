@@ -339,7 +339,7 @@ function RPSCoreFramework:FormatDMButtons(button)
 					if RPSCoreFramework.Interface.SubMenuButtons[j][1] ~= selectedSubButtons then
 						_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Hide();
 					end
-				end -- Привет от Николая из прошлого
+				end -- Привет из прошлого (+ из будущего \Test)
 			end
 		end
 	end
@@ -402,9 +402,7 @@ function RPSCoreFramework:PreGenerateDMButtons()
 					RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 				end
 		end)
---[[	MenuButton:SetScript('OnLeave', function()
-			GameTooltip:Hide();
-	    end);]]--
+
 		if RPSCoreFramework.Interface.MenuButtons[i][3] ~= nil then
 			table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 			table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
@@ -450,9 +448,7 @@ function RPSCoreFramework:WordWrap(str, limit)
                 Lines[#Lines+1] = word                                             -- If at the end of a line, start a new table index...
             else Lines[#Lines] = Lines[#Lines].." "..word end  -- ... otherwise add to the current table index.
         end)
-
     splitWords(Lines, limit)
-
     return Lines
 end
 
@@ -553,13 +549,6 @@ function RPSCoreFramework:playAnimation(animationGroup, callback)
 	elseif callback then
 		callback();
 	end
-end
-
-function RPSCoreFramework:TalentAlertMessageHide()
-	function TalentMicroButtonAlert:Show()
-		TalentMicroButtonAlert:Hide();
-	end
-	TalentMicroButtonAlert:Hide();
 end
 
 function RPSCoreFramework:AddGuildPOIInfo()

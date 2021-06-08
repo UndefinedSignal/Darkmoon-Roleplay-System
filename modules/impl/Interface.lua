@@ -237,9 +237,6 @@ function RPSCoreFramework:GuildSalaryFrameLink()
 	end
 end
 
--- DarkmoonCharacterFrameInfoTRBody
--- DarkmoonDisplayPresetFrameRightItemsHead
-
 local sepModificator, buttonItemString;
 local slots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Secondaryhand"}
 local dispSlots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Offhand"}
@@ -345,9 +342,6 @@ function RPSCoreFramework:DressUpDispModel(itemID)
 		RPSCoreFramework.DressUpOnLoad = false;
 	end
 	local __, itemLink, itemRarity = GetItemInfo(itemID);
-	-- itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
-	-- itemEquipLoc, itemIcon, itemSellPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, 
-	-- isCraftingReagent = GetItemInfo(itemID or "itemString" or "itemName" or "itemLink") 
 	DarkmoonDisplayPresetFrameRightModel:TryOn(itemLink);
 end
 

@@ -5,18 +5,27 @@ function RPSCoreFramework:InitializeHooks()
 	self:RegisterEvent("PLAYER_EQUIPMENT_CHANGED");
 	self:RegisterEvent("PLAYER_MONEY");
 	self:RegisterEvent("CHAT_MSG_ADDON");
+	self:RegisterEvent("BAG_UPDATE");
 	self:RegisterEvent("GUILD_RANKS_UPDATE");
 	self:RegisterEvent("ADDON_LOADED");
 	self:RegisterEvent("PLAYER_TALENT_UPDATE");
 	self:RegisterEvent("CURSOR_UPDATE");
+	
+	self:RawHook("SendChatMessage", "SendLongChatMessage", true)
+	self:SecureHook("ChatEdit_OnShow", "UpdateChatEdit")
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
-		--local chatframe = _G["ChatFrame"..index];
 		self:SecureHookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnHide",          "UpdateTypingStatus");
+
+		editbox:SetMaxLetters(0);
+		editbox:SetMaxBytes(0);
+		if (editbox.SetVisibleTextByteLimit) then
+			editbox:SetVisibleTextByteLimit(0);
+		end	
 	end	
 	self:HookScript(self, "OnEvent", "OnEventFrame");
 	self:HookScript(GameTooltip, "OnTooltipSetItem", "ItemTooltip");
@@ -49,20 +58,6 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
-end
-
-function RPSCoreFramework:NumeriseAllPlayerBagButtons()
-	for i = 0, NUM_BAG_SLOTS do
-		local slots = GetContainerNumSlots(i);
-		for j = 1, MAX_CONTAINER_ITEMS do
-			local bagButton = _G["ContainerFrame"..(i+1).."Item"..j];
-			bagButton.text = bagButton:CreateFontString();
-			bagButton.text:SetPoint("CENTER");
-			bagButton.text:SetSize(200, 20);
-			bagButton.text:SetFont("Fonts\\FRIZQT__.TTF", 12, "OUTLINE");
-			bagButton.text:SetFormattedText("%d-%d", i, j);
-		end
-	end
 end
 
 RPSCoreFramework.HookEXP = CreateFrame("FRAME");
@@ -190,11 +185,5 @@ function RPSCoreFramework:ProcessMapClick(button)
 		RPSCoreFramework:GeneratePOIPlaces();
 	elseif button == "LeftButton" then
 		RPSCoreFramework:GeneratePOIPlaces();
---[[	elseif button == "MiddleButton" then
-		print("Middle button!");
-	elseif button == "Button4" then
-		print("Button4 button!");
-	elseif button == "Button5" then
-		print("Button5 button!");]]--
 	end
 end

@@ -1323,23 +1323,23 @@
                 self:SetFrameStrata("TOOLTIP");
             </OnLoad>
             <OnEnter>
-				RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				RPSPOIGameTooltip:AddLine("|T"..self.ntex:GetTexture()..":0|t ".."|cffFFC125"..self.dataName.."|r");
-				if (string.len(self.dataDescription) > 0) then
-					if (string.len(self.dataDescription) > 80) then
-						RPSCoreFramework.POIDesc = RPSCoreFramework:WordWrap(self.dataDescription, 90);
-						for i=1, #RPSCoreFramework.POIDesc do
-							RPSPOIGameTooltip:AddLine("|cff808080"..RPSCoreFramework.POIDesc[i].."|r");
-						end
-					else
-						RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
+			RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			RPSPOIGameTooltip:AddLine("|T"..self.ntex:GetTexture()..":0|t ".."|cffFFC125"..self.dataName.."|r");
+			if (string.len(self.dataDescription) > 0) then
+				if (string.len(self.dataDescription) > 80) then
+					RPSCoreFramework.POIDesc = RPSCoreFramework:WordWrap(self.dataDescription, 90);
+					for i=1, #RPSCoreFramework.POIDesc do
+						RPSPOIGameTooltip:AddLine("|cff808080"..RPSCoreFramework.POIDesc[i].."|r");
 					end
+				else
+					RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
 				end
-				if true then
-					RPSPOIGameTooltip:AppendText(" |cff80528C("..self.debugGuid..")");
-				end
-				RPSPOIGameTooltip:Show();
-				RPSCoreFramework.POIDesc = {};
+			end
+			if true then
+				RPSPOIGameTooltip:AppendText(" |cff80528C("..self.debugGuid..")");
+			end
+			RPSPOIGameTooltip:Show();
+			RPSCoreFramework.POIDesc = {};
             </OnEnter>
             <OnLeave>
                 RPSPOIGameTooltip:ClearLines();
@@ -1347,7 +1347,7 @@
             </OnLeave>
         </Scripts>
     </Button>
-	
+
 	<Button name="RPSPoll_CloseButton" inherits="UIPanelCloseButton" virtual="true">
 		<Scripts>
 			<OnEnter>
@@ -1841,19 +1841,19 @@
 			--	ChatFrame1EditBox:HighlightText();
         	</OnClick>
         	<OnShow>
-        		self.icon:SetTexture(RPSCoreFramework.Minstrel[self:GetName()][1]);
-				self.Text:SetText(RPSCoreFramework.Minstrel[self:GetName()][3]);
+			self.icon:SetTexture(RPSCoreFramework.Minstrel[self:GetName()][1]);
+			self.Text:SetText(RPSCoreFramework.Minstrel[self:GetName()][3]);
         	</OnShow>
-			<OnEnter>
-	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			    GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][2]);
-			    GameTooltip:AddLine(" ");
-			    GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][3], 1,1,1, true);
-			    GameTooltip:Show();
-			</OnEnter>
-			<OnLeave>
-				GameTooltip:Hide();
-			</OnLeave>
+		<OnEnter>
+			GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][2]);
+			GameTooltip:AddLine(" ");
+			GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][3], 1,1,1, true);
+			GameTooltip:Show();
+		</OnEnter>
+		<OnLeave>
+			GameTooltip:Hide();
+		</OnLeave>
         </Scripts>
 
 		<HighlightTexture file="Interface\Buttons\UI-Silver-Button-Highlight" alphaMode="ADD">
@@ -1868,9 +1868,9 @@
     <Button name="GuildInfoSalaryTemplate" inherits="TabButtonTemplate" virtual="true">
         <Scripts>
         	<OnClick>
-				PanelTemplates_Tab_OnClick(self, GuildInfoFrame);
-				GuildInfoFrame_Update();
-				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+			PanelTemplates_Tab_OnClick(self, GuildInfoFrame);
+			GuildInfoFrame_Update();
+			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
         	</OnClick>
         </Scripts>
     </Button>
@@ -2016,16 +2016,16 @@
 			</Layer>
         </Layers>
         <Scripts> 
-			<OnEnter>
-	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			    GameTooltip:AddLine("|TInterface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..self.FuncTable[5]..":0|t "..self.FuncTable[7]);
-			    GameTooltip:AddLine(self.FuncTable[8], 1,1,1, true);
-			    GameTooltip:AddLine("|cFFFF8040Локация:|r "..GetRealZoneText(self.FuncTable[2]), 1,1,1, true);
-			    GameTooltip:Show();
-			</OnEnter>
-			<OnLeave>
-				GameTooltip:Hide();
-			</OnLeave>
+		<OnEnter>
+			GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			GameTooltip:AddLine("|TInterface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..self.FuncTable[5]..":0|t "..self.FuncTable[7]);
+			GameTooltip:AddLine(self.FuncTable[8], 1,1,1, true);
+			GameTooltip:AddLine("|cFFFF8040Локация:|r "..GetRealZoneText(self.FuncTable[2]), 1,1,1, true);
+			GameTooltip:Show();
+		</OnEnter>
+		<OnLeave>
+			GameTooltip:Hide();
+		</OnLeave>
         </Scripts>
     </Button>
 
@@ -2078,15 +2078,15 @@
 			</Layer>
         </Layers>
         <Scripts>
-			<OnEnter>
-	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			    GameTooltip:AddLine(self.Title);
-			    GameTooltip:AddLine(self.Description, 1,1,1, true);
-			    GameTooltip:Show();
-			</OnEnter>
-			<OnLeave>
-				GameTooltip:Hide();
-			</OnLeave>
+		<OnEnter>
+			GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			GameTooltip:AddLine(self.Title);
+			GameTooltip:AddLine(self.Description, 1,1,1, true);
+			GameTooltip:Show();
+		</OnEnter>
+		<OnLeave>
+			GameTooltip:Hide();
+		</OnLeave>
         	<OnClick>
         		RPSCoreFramework.DispButtonFrame = self;
         		RPSCoreFramework:DispRemoveItemTexture(0, true);
@@ -2296,12 +2296,12 @@
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
 			<OnEnter>
-	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			    GameTooltip:AddLine(self.Title);
-			    GameTooltip:AddLine(" ");
-			    GameTooltip:AddLine(self.Description, 1,1,1, true);
-			    GameTooltip:AddLine("ЛКМ\\ПКМ наложить чары на оружие в главной\\второй руке", 1,0.61,0, true);
-			    GameTooltip:Show();
+				GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				GameTooltip:AddLine(self.Title);
+				GameTooltip:AddLine(" ");
+				GameTooltip:AddLine(self.Description, 1,1,1, true);
+				GameTooltip:AddLine("ЛКМ\\ПКМ наложить чары на оружие в главной\\второй руке", 1,0.61,0, true);
+				GameTooltip:Show();
 			</OnEnter>
 			<OnLeave>
 				GameTooltip:Hide();

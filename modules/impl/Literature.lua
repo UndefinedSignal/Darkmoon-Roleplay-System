@@ -210,29 +210,23 @@ function RPSCoreFramework:LiteratureTextFormatting()
 	RPS_DarkmoonInfoFrameContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DarkmoonInfoFrameContent:SetFontObject("h3", GameFontNormalLarge);
 	RPS_DarkmoonInfoFrameContent:SetText(RPSCoreFramework.Literature.DarkmoonInfo);
-
 	RPS_DashboardBottomContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_DashboardBottomContent:SetFontObject("p", GameFontNormal);
 	RPS_DashboardBottomContent:SetFontObject("h1", GameFontNormalHuge3);
 	RPS_DashboardBottomContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DashboardBottomContent:SetFontObject("h3", GameFontNormalLarge);
-
-	
 	RPS_RulesScrollContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_RulesScrollContent:SetFontObject("p", GameFontNormal);
 	RPS_RulesScrollContent:SetFontObject("h1", GameFontNormalHuge3);
 	RPS_RulesScrollContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_RulesScrollContent:SetFontObject("h3", GameFontNormalLarge);
 	RPS_RulesScrollContent:SetText(RPSCoreFramework.Literature.DarkmoonRules);
-
-	
 	RPS_DarkmoonDispFrameContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_DarkmoonDispFrameContent:SetFontObject("p", GameFontNormal);
 	RPS_DarkmoonDispFrameContent:SetFontObject("h1", GameFontNormalHuge3);
 	RPS_DarkmoonDispFrameContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DarkmoonDispFrameContent:SetFontObject("h3", GameFontNormalLarge);
 	RPS_DarkmoonDispFrameContent:SetText(RPSCoreFramework.Literature.DarkmoonDispDesc);
-
 	RPS_DescriptionMinstrel:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_DescriptionMinstrel:SetFontObject("p", GameFontNormal);
 	RPS_DescriptionMinstrel:SetFontObject("h1", GameFontNormalHuge3);
