@@ -182,7 +182,8 @@ function RPSCoreFramework:OnInitialize()
 	--RPS_CharInfoLabel:SetText(UnitName("player"));
 	self:OnClickCosmeticTabs(RPS_FSBTN1);
 	RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
-
+	--Release
+	--RPSCoreFramework.Literature.CharPowerDescr[""..RPSCoreFramework.AdvancedClasses[RPSCoreFramework.itemsQuality["Голова +2"]]]();
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN1);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3);

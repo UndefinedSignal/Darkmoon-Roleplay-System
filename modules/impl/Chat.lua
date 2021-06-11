@@ -1,3 +1,4 @@
+--https://www.browserling.com/tools/text-to-ascii
 function RPSCoreFramework:UpdateTypingStatus(editbox)
 	local chatType = editbox:GetAttribute("chatType")
 	local text = editbox:GetText()
@@ -180,6 +181,8 @@ function RPSCoreFramework:SendLongChatMessage(...)
 		local chunks = SplitIntoChunks(msg);
 		for i=1, table_getn(chunks) do 
 			RPSCoreFramework.hooks.SendChatMessage(chunks[i], chatType ,language ,channel)
+			--Release
+			--_G.ChatThrottle.SendChatMessage("ALERT", "UCM", chunks[i], chatType ,language ,channel);
 			end
 		return;
 	end
