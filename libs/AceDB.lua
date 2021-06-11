@@ -423,7 +423,6 @@ function DBObjectLib:RegisterDefaults(defaults)
 		end
 	end
 end
-
 --- Changes the profile of the database and all of it's namespaces to the
 -- supplied named profile
 -- @param name The name of the profile to set as the current profile

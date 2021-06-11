@@ -1,3 +1,4 @@
+
 function RPSCoreFramework:UpdateTypingStatus(editbox)
 	local chatType = editbox:GetAttribute("chatType")
 	local text = editbox:GetText()
@@ -178,11 +179,10 @@ function RPSCoreFramework:SendLongChatMessage(...)
 
 	if (string.len(msg) > RPSCoreFramework.ChatMaxLetters) then
 		local chunks = SplitIntoChunks(msg);
-		for i=1, table_getn(chunks) do 
-			RPSCoreFramework.hooks.SendChatMessage(chunks[i], chatType ,language ,channel)
-			end
+		for i=1, table_getn(chunks) do
+			_G.ChatThrottle.SendChatMessage("ALERT", "UCM", chunks[i], chatType ,language ,channel);
+		end
 		return;
 	end
-	
 	RPSCoreFramework.hooks.SendChatMessage(msg, chatType ,language ,channel);
 end

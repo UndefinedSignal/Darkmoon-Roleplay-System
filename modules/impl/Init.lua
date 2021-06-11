@@ -11,7 +11,7 @@ function RPSCoreFramework:OnEnable()
 	end
 	self:AdvancedCharacterMessageCheck();
 end
-function RPSCoreFramework:OnInitialize()
+function RPSCoreFramework:OnInitialize()	
 	LoggingChat(1);
 	SetCVar("autoClearAFK", 0);
 	self.isTypingMessage = false
@@ -130,6 +130,7 @@ function RPSCoreFramework:OnInitialize()
 	self:LiteratureTextFormatting();
 	self:OnClickCosmeticTabs(RPS_FSBTN1);
 	RPS_DashboardBottomContent:SetText(RPSCoreFramework.Literature.CharacterForce);
+	RPSCoreFramework.Literature.CharPowerDescr[""..RPSCoreFramework.AdvancedClasses[RPSCoreFramework.itemsQuality["Голова +2"]]]();
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN1);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN2);
 	table.insert(RPSCoreFramework.Interface.HighlightedTabButtons, RPS_FSBTN3);
