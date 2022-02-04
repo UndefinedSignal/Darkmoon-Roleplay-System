@@ -1,6 +1,4 @@
-<Ui
-    xmlns="http://www.blizzard.com/wow/ui/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Frame name="RPSStreamingLoad" toplevel="true" alpha="0" parent="UIParent" hidden="true">
 		<Animations>
 			<AnimationGroup parentKey="FadeIN">

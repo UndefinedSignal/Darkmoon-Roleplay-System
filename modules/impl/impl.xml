@@ -1,6 +1,4 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-
-	<!-- Please note that the loading order matters a lot -->
 	<Script file="DataSheets.lua"/>
 	<Script file="Literature.lua"/>
 	<Script file="AdvancedCharacterCheck.lua"/>

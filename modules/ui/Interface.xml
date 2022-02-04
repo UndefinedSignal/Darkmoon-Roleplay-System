@@ -1376,6 +1376,9 @@
 											else
 												FauxScrollFrame_OnVerticalScroll(self, offset, 32, RPSCoreFramework:GenerateScrollMenu());
 											end
+											if (GameTooltip:IsShown()) then
+												RPSCoreFramework:ProcessAurasOnEnter(RPSCoreFramework.lastHoveredAuraButton);
+											end
 										end
 									</OnVerticalScroll>
 									<OnShow>
@@ -1493,8 +1496,7 @@
 
 								<Scripts>
 									<OnClick>
-										RPSCoreFramework:CreateDispMacro();
-										PlaySound(624, "SFX");
+										RPSCoreFramework:RequestMacroCreation("", "INV_DARKMOON_VENGEANCE", RPS_TextMacrosScrollText:GetText(), true);
 									</OnClick>
 								</Scripts>
 							</Button>
@@ -1502,7 +1504,7 @@
 						</Frames>
 						<Scripts>
 							<OnShow>
-								RPSCoreFramework:MenstrelOnShow(self);
+								RPSCoreFramework:MinstrelOnShow(self);
 								if not RPSCoreFramework.FrameUpdate then
 									DarkmoonWIPFrame:Hide();
 								else
@@ -2184,50 +2186,50 @@
 									<Anchor point="BOTTOMRIGHT" relativeTo="DarkmoonBattleStatsFrame" relativePoint="BOTTOMRIGHT" x="0" y="0" />
 								</Anchors>
 								<Frames>
-									<Frame name="Strength" inherits="RPS_Skill">
+									<Frame name="Strength" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor point="TOPLEFT" x="2" y="0" />
 										</Anchors>
 									</Frame>
-									<Frame name="Agility" inherits="RPS_Skill">
+									<Frame name="Agility" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor relativeTo="Strength" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
-									<Frame name="Intellect" inherits="RPS_Skill">
+									<Frame name="Intellect" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor relativeTo="Agility" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
 									
-									<Frame name="CriticalChance" inherits="RPS_Skill">
+									<Frame name="CriticalChance" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor relativeTo="Intellect" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>                                    
-									<Frame name="Spirit" inherits="RPS_Skill">
+									<Frame name="Spirit" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor relativeTo="CriticalChance" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
-									<Frame name="Endurance" inherits="RPS_Skill">
+									<Frame name="Endurance" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor relativeTo="Spirit" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
-									<Frame name="Dexterity" inherits="RPS_Skill">
+									<Frame name="Dexterity" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor relativeTo="Endurance" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
 										</Anchors>
 									</Frame>
-									<Frame name="Will" inherits="RPS_Skill">
+									<Frame name="Will" inherits="RPS_SkillBattleCompact">
 										<Size x="30" y="30" />
 										<Anchors>
 											<Anchor relativeTo="Dexterity" point="TOPLEFT" relativePoint="BOTTOMLEFT" x="0" y="-15" />
@@ -2252,8 +2254,7 @@
 										</Anchors>
 									</Button>
 
-									<Frame name="$parentSkillPoints">
-										
+									<Frame name="$parentSkillPoints">										
 										<Anchors>
 											<Anchor relativeTo="DarkmoonBattleStatsFrame" point="CENTER" x="165" y="-197"/>
 											<Anchor relativeTo="DarkmoonBattleStatsFrame" point="BOTTOMRIGHT" x="-10" y="3"/>
@@ -2268,7 +2269,7 @@
 												</Texture>
 											</Layer>
 											<Layer>
-												<Texture name="$parentClassImg">
+												<Texture name="$parentClassImg" mask="Interface\COMMON\Indicator-Gray">
 													<Size x="42" y="42" />
 													<Anchors>
 														<Anchor point="TOPLEFT" x="0" y="-4" />
@@ -2288,7 +2289,7 @@
 												<!--Interface\BankFrame\Bank-Background-->
 												<!--Interface\Collections\CollectionsBackgroundTile-->
 												<!--Interface\GuildBankFrame\GuildVaultBG-->
-												<FontString name="DarkmoonCharStatsInfoFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="[INTEGER]" justifyH="LEFT" justifyV="TOP">
+												<FontString name="DarkmoonCharStatsInfoFreeStat" font="Fonts\FRIZQT___CYR.TTF" text="0" justifyH="LEFT" justifyV="TOP">
 													<FontHeight val="13"/>
 													<Anchors>
 														<Anchor relativeTo="DarkmoonCharStatsInfoSkillPointsCharacterLevel" point="CENTER" x="2" y="0" />
@@ -2313,7 +2314,6 @@
 										<Scripts>
 											<OnShow>
 												local _, classFilename = UnitClass("player");
-												DarkmoonCharStatsInfoSkillPointsClassImg:SetMask("Interface\\COMMON\\Indicator-Gray");
 												DarkmoonCharStatsInfoSkillPointsClassImg:SetTexture("Interface/ICONS/ClassIcon_"..classFilename);
 											</OnShow>
 										</Scripts>
@@ -2345,7 +2345,7 @@
 								</Frames>
 								<Scripts>
 									<OnShow>
-										RPSCoreFramework:MenstrelOnShow(self);
+										RPSCoreFramework:MinstrelOnShow(self);
 										if not RPSCoreFramework.FrameUpdate then
 											DarkmoonWIPFrame:Hide();
 										else
@@ -2513,8 +2513,7 @@
 										</Anchors>
 									</Frame>
 									
-									<Frame name="$parentSkillPoints">
-										
+									<Frame name="$parentSkillPoints">										
 										<Anchors>
 											<Anchor relativeTo="DarkmoonSocialStatsFrame" point="CENTER" x="165" y="-197"/>
 											<Anchor relativeTo="DarkmoonSocialStatsFrame" point="BOTTOMRIGHT" x="-10" y="3"/>
@@ -2529,7 +2528,7 @@
 												</Texture>
 											</Layer>
 											<Layer>
-												<Texture name="$parentClassImg">
+												<Texture name="$parentClassImg" mask="Interface/COMMON/Indicator-Gray">
 													<Size x="42" y="42" />
 													<Anchors>
 														<Anchor point="TOPLEFT" x="0" y="-4" />
@@ -2574,7 +2573,6 @@
 										<Scripts>
 											<OnShow>
 												local _, classFilename = UnitClass("player");
-												DarkmoonSocialStatsFrameSkillPointsClassImg:SetMask("Interface\\COMMON\\Indicator-Gray");
 												DarkmoonSocialStatsFrameSkillPointsClassImg:SetTexture("Interface/ICONS/ClassIcon_"..classFilename);
 											</OnShow>
 										</Scripts>
@@ -2947,10 +2945,10 @@
 								</Anchors>
 								<Scripts>
 									<OnEnter>
-										RPSCoreFramework:MenstrelCoinOnEnter(self);
+										RPSCoreFramework:MinstrelTokenOnEnter(self);
 									</OnEnter>
 									<OnLeave>
-										RPSCoreFramework:MenstrelCoinOnLeave(self);
+										RPSCoreFramework:MinstrelTokenOnLeave(self);
 									</OnLeave>
 								</Scripts>
 							</Button>
@@ -2958,7 +2956,7 @@
 
 						<Scripts>
 							<OnShow>
-								RPSCoreFramework:MenstrelOnShow(self);
+								RPSCoreFramework:MinstrelOnShow(self);
 								if not RPSCoreFramework.FrameUpdate then
 									DarkmoonWIPFrame:Hide();
 								else
@@ -3013,10 +3011,10 @@
 				<Scripts>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-						GameTooltip:AddDoubleLine(RPSCoreFramework.Title..":", "TestUnit", 1, 1, 1, 1, 0.96, 0.41);
-						GameTooltip:AddDoubleLine(" ", "-SeMGa!", 1, 1, 1, 1, 0.96, 0.41);
-						GameTooltip:AddDoubleLine(" ", "Hlebes", 1, 1, 1, 1, 0.96, 0.41);
+						GameTooltip:AddLine("|c00800080"..RPSCoreFramework.Title.."|r", 1, 1, 1, 1, 0.96, 0.41);
 						GameTooltip:AddDoubleLine("Версия:", RPSCoreFramework.Version, 1, 1, 1, 1, 0.96, 0.41);
+						GameTooltip:AddLine(" ");
+						GameTooltip:AddDoubleLine(" ", "TestUnit, -SeMGa! и другие", 1, 1, 1, 1, 0.96, 0.41);	
 						GameTooltip:Show();
 					</OnEnter>
 					<OnLeave>
@@ -3056,7 +3054,6 @@
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="CurrencyFrame" x="0" y="0" />
 				</Anchors>
-
 				<Scripts>
 					<OnShow>
 						self:SetModel(918931);
@@ -3069,53 +3066,39 @@
 		</Frames>
 	</Frame>
 
-	<Frame name="PollFrame" parent="UIParent" inherits="RPS_SmallerStandardParchmentFrame" enableMouse="true" movable="true" hidden="false"  frameStrata="MEDIUM" clampedToScreen="true">
-		<Size x="470" y="300"/>
+	<Frame name="QuizFrame" parent="UIParent" inherits="RPS_SmallerStandardParchmentFrame" enableMouse="true" movable="true" hidden="false" frameStrata="MEDIUM" clampedToScreen="true">
+		<Size x="470" y="320"/>
 		<Anchors>
 			<Anchor point="CENTER" x="0" y="0"/>
 		</Anchors>
-
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentQuestion" inherits="GameFontNormalLarge" wordwrap="true">
+					<Anchors>
+						<Anchor point="LEFT" x="20"/>
+						<Anchor point="RIGHT" x="-20"/>
+						<Anchor point="TOP" y="-25"/>
+						<Anchor relativeTo="$parent" point="CENTER" y="-5"/>
+					</Anchors>
+					<Color r="1" g="1" b="0.4"/>
+				</FontString>
+			</Layer>
+		</Layers>
 		<Frames>
 			<Button parentKey="Close" inherits="UIPanelCloseButton">
-				<Size x="20" y="20"/>
+				<Size x="25" y="25"/>
 				<Anchors>
 					<Anchor point="TOPRIGHT" x="-5" y="-5"/>
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						PollFrame.FadeOut:Play();
+						self:GetParent().FadeOut:Play();
 					</OnClick>
 				</Scripts>
 			</Button>
-
-			<Frame name="$parentTimer" hidden="true">
-				<Size x="75" y="25"/>
-					<Backdrop bgFile="Interface\CHATFRAME\CHATFRAMEBACKGROUND" edgeFile="Interface\CHATFRAME\CHATFRAMEBACKGROUND" tile="true">
-						<EdgeSize>
-							<AbsValue val="1"/>
-						</EdgeSize>
-					</Backdrop>
-					<Anchors><Anchor relativeTo="PollFrame" point="CENTER" x="0" y="13"/></Anchors>
-					<Layers>
-						<Layer level="OVERLAY">
-							<FontString name="$parentCountdown" text="02:00" inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
-								<Anchors>
-									<Anchor point="CENTER" x="0" y="0"/>
-								</Anchors>
-							</FontString>
-						</Layer>
-					</Layers>
-					<Scripts>
-						<OnLoad>
-							--self:SetBackdropBorderColor(255, 255, 255, 0.1)
-							--self:SetBackdropColor(0.102, 0.102, 0.102, 0.45)
-						</OnLoad>
-					</Scripts>
-			</Frame>
-
 			<StatusBar name="$parentStatusBar" hidden="false" minValue="1" maxValue="30" defaultValue="30" orientation="HORIZONTAL" frameStrata="PARENT">
-				<Size x="250" y="12"/>
-				<Anchors><Anchor relativeTo="PollFrame" point="CENTER" x="0" y="13"/></Anchors>
+				<Size x="250" y="11"/>
+				<Anchors><Anchor relativeTo="$parent" point="CENTER" x="0" y="-5"/></Anchors>
 				<BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>
 				<Layers>
 					<Layer level="OVERLAY">
@@ -3124,162 +3107,84 @@
 								<Anchor point="CENTER" x="0" y="0"/>
 							</Anchors>
 						</FontString>
-						<Texture parentKey="Left" file="Interface\PetBattles\PetJournal">
+						<Texture parentKey="Left" atlas="ui-frame-bar-borderleft">
+							<Size x="11" y="11"/>   						
 							<Anchors>
 								<Anchor point="RIGHT" relativePoint="LEFT"  x="9" y="0"/>
-							</Anchors>
-							<Size x="11" y="11"/>   
-							<TexCoords left="0.02734375" right="0.04882813" top="0.00976563" bottom="0.02050781"/>  
+							</Anchors> 
 						</Texture>
-						<Texture parentKey="Right" file="Interface\PetBattles\PetJournal">
+						<Texture parentKey="Right" atlas="ui-frame-bar-borderright">
+							<Size x="11" y="11"/>						
 							<Anchors>
 								<Anchor point="LEFT" relativePoint="RIGHT"  x="-9" y="0"/>
 							</Anchors>
-							<Size x="11" y="11"/>   
-							<TexCoords left="0.07812500" right="0.09960938" top="0.00976563" bottom="0.02050781"/>  
 						</Texture>
-						<Texture file="Interface\PetBattles\PetJournal">
+						<Texture atlas="ui-frame-bar-bordercenter">
 							<Anchors>
 								<Anchor point="TOPLEFT" relativeKey="$parent.Left" relativePoint="TOPRIGHT"/>
 								<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Right" relativePoint="BOTTOMLEFT"/>
 							</Anchors>
-							<TexCoords left="0.05273438" right="0.07421875" top="0.00976563" bottom="0.02050781"/>  
 						</Texture>
 					</Layer>
 					<Layer level="BACKGROUND">
-						<Texture parentKey="Bg" file="Interface\PetBattles\PetJournal">
+						<Texture parentKey="Bg" atlas="ui-frame-bar-bgcenter">
 							<Anchors>
 								<Anchor point="TOPLEFT" relativeKey="$parent.Left" x="2"/>
 								<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Right" x="-2"/>
-							</Anchors>
-							<TexCoords left="0.00195313" right="0.02343750" top="0.00976563" bottom="0.02050781"/>  
+							</Anchors> 
 						</Texture>
 					</Layer>
 				</Layers>
-				<Scripts>
-					<OnLoad>
-						self.Bg:SetDesaturated(true)
-					</OnLoad>
-				</Scripts>
 				<BarColor r="1.0" g="0.61" b="0"/>
 			</StatusBar>
-
-			<Button name="$parentChoice1" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
-				<Size x="124" y="34"/>
-				<Anchors><Anchor relativeTo="PollFrame" point="LEFT" x="0" y="-15"/></Anchors>
-				<NormalFont style="GameFontNormalLarge"/>
+			<Button name="$parentOption1" inherits="RPS_DialogOptionButton">
+				<Anchors>
+					<Anchor relativeTo="$parent" point="LEFT"/>
+					<Anchor relativeTo="$parentStatusBar" point="BOTTOM" x="0" y="-35"/>
+				</Anchors>
 				<Scripts>
 					<OnLoad>
 						self.number:SetText("A");
 					</OnLoad>
 					<OnClick>
-						RPSCoreFramework:QuizProcessAnswer(1)
+						RPSCoreFramework:QuizProcessAnswer(1);
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parentChoice2" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
-				<Size x="124" y="34"/>
-				<Anchors><Anchor relativeTo="$parentChoice1" point="LEFT" x="0" y="-30"/></Anchors>
-				<NormalFont style="GameFontNormalLarge"/>
+			<Button name="$parentOption2" inherits="RPS_DialogOptionButton">
+				<Anchors><Anchor relativeTo="$parentOption1" point="LEFT" x="0" y="-30"/></Anchors>
 				<Scripts>
 					<OnLoad>
 						self.number:SetText("B");
 					</OnLoad>
 					<OnClick>
-						RPSCoreFramework:QuizProcessAnswer(2)
+						RPSCoreFramework:QuizProcessAnswer(2);
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parentChoice3" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
-				<Size x="124" y="34"/>
-				<Anchors><Anchor relativeTo="$parentChoice2" point="LEFT" x="0" y="-30"/></Anchors>
-				<NormalFont style="GameFontNormalLarge"/>
+			<Button name="$parentOption3" inherits="RPS_DialogOptionButton">
+				<Anchors><Anchor relativeTo="$parentOption2" point="LEFT" x="0" y="-30"/></Anchors>
 				<Scripts>
 					<OnLoad>
 						self.number:SetText("C");
 					</OnLoad>
 					<OnClick>
-						RPSCoreFramework:QuizProcessAnswer(3)
+						RPSCoreFramework:QuizProcessAnswer(3);
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parentChoice4" inherits="RPSPoll_DialogChoiceButton" text="[...]" hidden="false">
-				<Size x="124" y="34"/>
-				<Anchors><Anchor relativeTo="$parentChoice3" point="LEFT" x="0" y="-30"/></Anchors>
-				<NormalFont style="GameFontNormalLarge"/>
+			<Button name="$parentOption4" inherits="RPS_DialogOptionButton">
+				<Anchors><Anchor relativeTo="$parentOption3" point="LEFT" x="0" y="-30"/></Anchors>
 				<Scripts>
 					<OnLoad>
 						self.number:SetText("D");
 					</OnLoad>
 					<OnClick>
-						RPSCoreFramework:QuizProcessAnswer(4)
+						RPSCoreFramework:QuizProcessAnswer(4);
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Frame name="PollQuestion">
-				<Size x="340" y="80"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" x="15" y="-45"/>
-					<Anchor point="RIGHT" x="-15" y="0"/>
-				</Anchors>
-				<Frames>
-					<Frame name="RPSPoll_NPCFrameChat" parentKey="chat" frameStrata="PARENT">
-						<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
-							<EdgeSize>
-								<AbsValue val="16"/>
-							</EdgeSize>
-							<TileSize>
-								<AbsValue val="16"/>
-							</TileSize>
-							<BackgroundInsets>
-								<AbsInset left="3" right="3" top="3" bottom="3"/>
-							</BackgroundInsets>
-						</Backdrop>
-						<Size x="340" y="80"/>
-						<Anchors>
-							<Anchor point="TOPLEFT" x="10" y="30"/>
-							<Anchor point="BOTTOMRIGHT" x="-10" y="5"/>
-						</Anchors>
-						<Layers>
-							<Layer level="OVERLAY">
-								<FontString name="RPSPoll_NPCFrameChatNextText" text="..." inherits="GameFontNormalLarge" justifyH="CENTER" justifyV="CENTER" wordwrap="true">
-									<Anchors>
-										<Anchor point="BOTTOMLEFT" x="10" y="10"/>
-										<Anchor point="TOPLEFT" x="10" />
-										<Anchor point="BOTTOMRIGHT" x="-10"/>
-									</Anchors>
-									<Color r="1" g="1" b="0.4"/>
-								</FontString>
-							</Layer>
-						</Layers>
-						<Frames>
-							<Frame name="RPSPoll_NPCFrameChatHighlight" inherits="GlowBorderTemplate" hidden="true">
-								<Anchors>
-									<Anchor point="TOPLEFT" x="5" y="-2"/>
-									<Anchor point="BOTTOMRIGHT" x="-3" y="0"/>
-								</Anchors>
-								<Scripts>
-									<OnLoad>
-										self:SetAlpha(0.15);
-									</OnLoad>
-								</Scripts>
-							</Frame>
-							<Button name="RPSPoll_NPCFrameChatNext" parentKey="next" inherits="RPSPoll_InvisibleButton" setAllPoints="true" frameLevel="4">
-								<Scripts>
-									<OnEnter>
-										RPSPoll_NPCFrameChatHighlight:Show();
-									</OnEnter>
-									<OnLeave>
-										RPSPoll_NPCFrameChatHighlight:Hide();
-									</OnLeave>
-								</Scripts>
-							</Button>
-						</Frames>
-					</Frame>
-				</Frames>
-			</Frame>
 		</Frames>
-
 		<Scripts>
 			<OnLoad>
 				self:RegisterForDrag("LeftButton");
@@ -3290,11 +3195,9 @@
 				self.FadeIn:Play();
 			</OnShow>
 			<OnHide>
-				RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
 				RPSCoreFramework:QuizDecline();
 			</OnHide>
 		</Scripts>
-
 		<Animations>
 			 <AnimationGroup parentKey="FadeIn" setToFinalAlpha="true">
 			   <Alpha duration="0.3" order="1" fromAlpha="0" toAlpha="1"/>
@@ -3303,13 +3206,25 @@
 			   <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
 				<Scripts>
 					<OnFinished>
-						PollFrame:Hide();
+						self:GetParent():Hide();
 					</OnFinished>
 				</Scripts>
 			 </AnimationGroup>
 		</Animations>
-
 	</Frame>
+	
+	<Button name="TabardEmblemEditButton" parent="GuildFrame" frameStrata="HIGH" inherits="UIPanelButtonTemplate" text="Ред.">
+	  <Size x="40" y="22"/>
+		<Anchors>
+			<Anchor point="TOPLEFT" x="5" y="-45"/>
+		</Anchors>
+	  <Scripts>
+         <OnClick>
+		 	GuildFrame_Toggle();
+            RPSCoreFramework:SendCoreMessage("rps guild editemblem");
+         </OnClick>
+	  </Scripts>	
+	</Button>
 
 	<Frame name="GuildInfoFrameSalary" parent="GuildInfoFrame" setAllPoints="true" hidden="true">
 		<Frames>
@@ -3317,83 +3232,52 @@
 				<Anchors>
 					<Anchor point="TOP" x="65" y="-60"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank2" inherits="SalaryChangeTemplate" id="2">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank1" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank3" inherits="SalaryChangeTemplate" id="3">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank2" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank4" inherits="SalaryChangeTemplate" id="4">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank3" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank5" inherits="SalaryChangeTemplate" id="5">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank4" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank6" inherits="SalaryChangeTemplate" id="6">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank5" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank7" inherits="SalaryChangeTemplate" id="7">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank6" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank8" inherits="SalaryChangeTemplate" id="8">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank7" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank9" inherits="SalaryChangeTemplate" id="9">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank8" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
 			<Frame name="$parentRank10" inherits="SalaryChangeTemplate" id="10">
 				<Anchors>
 					<Anchor point="BOTTOM" relativeTo="$parentRank9" x="0" y="-26"/>
 				</Anchors>
-				<Scripts>
-
-				</Scripts>
 			</Frame>
-
 		</Frames>
 		<Layers>
 			<Layer level="OVERLAY">

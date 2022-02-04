@@ -16,11 +16,12 @@ function RPSCoreFramework:InitializeHooks()
 
 	for index = 1, NUM_CHAT_WINDOWS do
 		local editbox = _G["ChatFrame" .. index .. "EditBox"];
+		--local chatframe = _G["ChatFrame"..index];
 		self:SecureHookScript(editbox, "OnTextChanged",   "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEscapePressed", "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnEnterPressed",  "UpdateTypingStatus");
 		self:SecureHookScript(editbox, "OnHide",          "UpdateTypingStatus");
-
+				
 		editbox:SetMaxLetters(0);
 		editbox:SetMaxBytes(0);
 		if (editbox.SetVisibleTextByteLimit) then
@@ -35,13 +36,27 @@ function RPSCoreFramework:InitializeHooks()
 	self:HookScript(ShoppingTooltip1, "OnTooltipSetItem", "ItemTooltip");
 	self:HookScript(ShoppingTooltip2, "OnTooltipSetItem", "ItemTooltip");
 
-	self:SecureHook("GuildInfoFrame_UpdatePermissions", function()	RPSCoreFramework:GuildSalaryFrameLink();	end);
+
+	self:SecureHook("GuildInfoFrame_UpdatePermissions", function() RPSCoreFramework:GuildSalaryFrameLink(); end);
+	--self:SecureHook("ZoomOut", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
 	self:RawHook("GuildInfoFrame_Update", true);
+	
+	self:HookScript(TabardFrame, "OnShow", function()
+		MoneyFrame_Update("TabardFrameCostMoneyFrame", 0, true);
+		TabardFrameCostFrame:Hide();
+		TabardFrameCostMoneyFrame:Hide();
+	end);
+
+--PlayerZoneChanged(currentPlayerUiMapID, currentPlayerUiMapType)
+--Fires when the active zone map changes, passes the same arguments as calling HBD:GetPlayerZone() would return
 
 	WorldMapFrame.ScrollContainer:HookScript("OnMouseDown", function(self, button)
 		RPSCoreFramework:ProcessMapClick(button);
 	end)
+	--self:SecureHook("PlayerZoneChanged", function() 	if IsOutdoors() then RPSCoreFramework:GeneratePOIPlaces(); end	end)
+	--self:SecureHook("ProcessMapClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
+	--self:SecureHook("SetMapZoom", function() 	RPSCoreFramework:FlushAllPinsOnMap();	end);
 	self:SecureHook("ToggleWorldMap", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
 
 	WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton:HookScript("OnClick", function()	RPSCoreFramework:GeneratePOIPlaces();	end);
@@ -58,18 +73,32 @@ function RPSCoreFramework:InitializeHooks()
 	RPS_InteractFrameHelp:SetScript("OnClick", function() StaticPopup_Show("ActionHelp"); end);
 	RPS_InteractFrameKill:SetScript("OnClick", function() StaticPopup_Show("ActionKill"); end);
 	RPS_InteractFramePillage:SetScript("OnClick", function() StaticPopup_Show("ActionPillageLoot"); end);
+
+	self:RawHook("MainMenuMicroButton_ShowAlert", true)
+	--self:RawHook(MapCanvasMixin, "OnLoad()", RPSCoreFramework:AcquirePin(), true);
+	self:RawHookScript(DarkmoonAurasScrollFrame, "OnMouseWheel", function (frame, delta)
+		if (RPSCoreFramework.CanScroll) then
+			DarkmoonAurasScrollFrameScrollBar:Enable();
+			ScrollFrameTemplate_OnMouseWheel(frame, delta);
+		else
+			DarkmoonAurasScrollFrameScrollBar:Disable();
+		end
+	end);
 end
 
-RPSCoreFramework.HookEXP = CreateFrame("FRAME");
-RPSCoreFramework.HookEXP:RegisterEvent("CHAT_MSG_ADDON");
-RPSCoreFramework.HookEXP:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
-	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
-		if (prefix=="RPS.XP") then
-			RPSCoreFramework:CharacterEXPBarUpdate(tonumber(msg));
-			RPSCoreFramework:UpdateCharacterXPInfo();
-		end
-	end
-end)
+function RPSCoreFramework:MainMenuMicroButton_ShowAlert(microButton, text, tutorialIndex, cvarBitfield)
+    return false;
+end
+
+--[[
+function RPSCoreFramework:OnErrorMessage()
+	print("Check!");
+end
+
+
+function RPSCoreFramework:AcquirePin()
+	print("Meme succesful")
+end]]--
 
 RPSCoreFramework.HookPOI = CreateFrame("FRAME");
 RPSCoreFramework.HookPOI:RegisterEvent("CHAT_MSG_ADDON");
@@ -101,12 +130,25 @@ RPSCoreFramework.HookQuiz:SetScript("OnEvent", function(self, event, prefix, msg
 	end
 end)
 
+RPSCoreFramework.HookBBoard = CreateFrame("FRAME");
+RPSCoreFramework.HookBBoard:RegisterEvent("CHAT_MSG_ADDON");
+RPSCoreFramework.HookBBoard:SetScript("OnEvent", function(self, event, prefix, msg, channel, sender)
+	if (sender == (GetUnitName("player").."-"..string.gsub(GetRealmName(), " ", ""))) then
+		if (prefix == "RPS.BB.i") then
+			RPSCoreFramework:BBoardShow(msg);
+		elseif (prefix == "RPS.BB.c") then
+			RPSCoreFramework:BBoardClose();
+		end
+	end
+end)
+
 function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender)
 	if (event == "PLAYER_TARGET_CHANGED") then
 		self:UpdatePlayerModel();
 		self:UpdateInteractionFrame();
 	elseif (event == "PLAYER_ENTERING_WORLD" or event == "PLAYER_LEVEL_UP" or event == "PLAYER_EQUIPMENT_CHANGED") then
 		RPSCoreFramework:SendCoreMessage("rps stat self");
+		RPSCoreFramework:SendCoreMessage("rps xp");
 	elseif (event == "PLAYER_MONEY") then
 		self:UpdateUnlearn();
 		self:UpdateScaleReset();
@@ -130,6 +172,8 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:UpdatePLayerAuraList(msg)
 		elseif (prefix == "RPS.Minstrel") then
 			RPSCoreFramework:UpdateMinstrelStatus(msg);
+		elseif (prefix == "RPS.MSummon") then
+			RPSCoreFramework:UpdateMinstrelSummon(msg);	
 		elseif (prefix == "RPS.Guild.s") then
 			RPSCoreFramework:UpdateGuildSalary(msg);
 		elseif (prefix == "RPS.DLS") then
@@ -138,9 +182,13 @@ function RPSCoreFramework:OnEventFrame(self, event, prefix, msg, channel, sender
 			RPSCoreFramework:MountModelStatusUpdate(msg);
 		elseif (prefix == "RPS.Enchant") then
 			RPSCoreFramework:EnchantStatusUpdate(msg);
+		elseif (prefix == "RPS.XP") then
+			RPSCoreFramework:CharacterEXPBarUpdate(tonumber(msg));
+			RPSCoreFramework:UpdateCharacterXPInfo();
 		end
 	elseif (event == "GUILD_RANKS_UPDATE") then
 		RPSCoreFramework:ProcessGuildSalaryInterface();
+		RPSCoreFramework:UpdateGuildRanks();
 	elseif(event == "PLAYER_TALENT_UPDATE") then
 		MicroButtonPulseStop(TalentMicroButton);
 	end
@@ -150,7 +198,7 @@ function RPSCoreFramework:ItemTooltip(self)
 	local itemName, link = self:GetItem();
 	if not link then return end;
 	local _, _, itemQuality, _, _, sType, _, _, sEquipLoc = GetItemInfo(link);
-	if (sType == "Доспехи" or sType == "Armor") then		
+	if (sType == AUCTION_CATEGORY_ARMOR) then		
 		local name = self:GetName()
 		for i = 1, self:NumLines() do
 			local left = _G[name .. "TextLeft" .. i]
@@ -167,15 +215,15 @@ function RPSCoreFramework:ItemTooltip(self)
 				end
 			end
 			if (right:GetText() ~= nil) then
-				if (string.find(right:GetText(), "Декоративный предмет") or string.find(right:GetText(), "Cosmetic")) then
+				if (string.find(right:GetText(), ITEM_COSMETIC)) then
 					right:SetText("Предмет");
 				end
 			end
 		end	
 	end
-	if (sType == "Доспехи" or sType == "Armor" or
-		sType == "Оружие" or sType == "Weapon" or
-		((sType == "Разное" or sType == "Miscellaneous") and sEquipLoc == "INVTYPE_HOLDABLE")) then
+	if (sType == AUCTION_CATEGORY_ARMOR or
+		sType == AUCTION_CATEGORY_WEAPONS or
+		((sType == AUCTION_CATEGORY_MISCELLANEOUS) and sEquipLoc == "INVTYPE_HOLDABLE")) then
 		self:AddLine("Качество: "..RPSCoreFramework:FormatQualityName(itemName, itemQuality));		
 	end
 end
@@ -185,5 +233,11 @@ function RPSCoreFramework:ProcessMapClick(button)
 		RPSCoreFramework:GeneratePOIPlaces();
 	elseif button == "LeftButton" then
 		RPSCoreFramework:GeneratePOIPlaces();
+--[[	elseif button == "MiddleButton" then
+		print("Middle button!");
+	elseif button == "Button4" then
+		print("Button4 button!");
+	elseif button == "Button5" then
+		print("Button5 button!");]]--
 	end
 end

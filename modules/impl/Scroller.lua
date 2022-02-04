@@ -75,10 +75,10 @@ function RPSCoreFramework:ProcessAurasOnEnter(name)
         GameTooltip:AddLine("Не хватает денег.")
     elseif (tonumber(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][4]) < tonumber(GetMoney()) and RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][5] == 0) then
         GameTooltip:AddLine("Цена покупки: "..GetCoinTextureString(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][4]))
-        GameTooltip:AddLine("Клик: Приобрести")
+        GameTooltip:AddLine("|cFFFF8040ЛКМ|r: Приобрести.");
     end
     if RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][5] > 0 then
-        GameTooltip:AddLine("Клик: Использовать")
+        GameTooltip:AddLine("|cFFFF8040ЛКМ|r: Активировать.");
     end
     GameTooltip:Show()
 end
@@ -88,12 +88,7 @@ function RPSCoreFramework:ProcessAurasOnLeave()
 end
 
 function RPSCoreFramework:ProcessAurasMacrosOnClick(name)
-    if (GetNumMacros() <= 120) then
-        CreateMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][2], "INV_DARKMOON_EYE", ".rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][1], 1);
-        PickupMacro(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][2]);
-    else
-        Utils.message.displayMessage(loc("QE_MACRO_MAX"), 4);
-    end
+	RPSCoreFramework:RequestMacroCreation(RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][2], "INV_DARKMOON_EYE",  ".rps action aura toggle "..RPSCoreFramework.Interface.Auras[RPSCoreFramework.DB[name][1]][1], true);
 end
 
 function RPSCoreFramework:ProcessFavourites(arg1)
@@ -222,6 +217,8 @@ function RPSCoreFramework:ToggleOrBuyAuraMessage(button, arg1)
 	else
 		if (GetMoney() >= tonumber(RPSCoreFramework.Interface.Auras[id][4])) then
 			StaticPopup_Show("LearnAura");
+		else
+			RPSCoreFramework.CanScroll = true;
 		end
 	end
 	_G["ActiveAura"]:SetText(RPSCoreFramework.Interface.ActiveAuraCounter.."/3", 0.5, 0.5);

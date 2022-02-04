@@ -1,5 +1,4 @@
- <Ui xmlns="http://www.blizzard.com/wow/ui/"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Frame name="RPS_SimpleIcon" virtual="true">
 		<Size x="35" y="35"/>
 		<Layers>
@@ -460,7 +459,7 @@
 						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.InsetBorderBottomRight" relativePoint="TOPRIGHT"/>
 					</Anchors>
 				</Texture>
-				<Texture name="$parentInsetTopBorder" inherits="_UI-Frame-InnerTopTile" parentKey="InsetBorderBottom">
+				<Texture name="$parentInsetTopBorder" inherits="_UI-Frame-InnerTopTile" parentKey="InsetBorderTop">
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeKey="$parent.InsetBorderLeft" relativePoint="TOPLEFT"/>
 						<Anchor point="TOPRIGHT" relativeKey="$parent.InsetBorderRight" relativePoint="TOPRIGHT"/>
@@ -469,77 +468,6 @@
 			</Layer>
 		</Layers>
 	</Frame>
-
-	<Button name="RPS_QuestPageTemplate" virtual="true" inherits="RPS_SmallerStandardParchmentFrame">
-		<Size x="0" y="158"/>
-		<Layers>
-			<Layer level="ARTWORK" textureSubLevel="2">
-				<Texture parentKey="IconBorder" file="Interface\ExtraButton\GarrZoneAbility-BarracksAlliance">
-					<Size x="175" y="85"/>
-					<Anchors>
-						<Anchor point="TOP" x="0" y="15"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-			<Layer level="ARTWORK" textureSubLevel="1">
-				<Texture name="$parentIcon" parentKey="Icon">
-					<Size x="35" y="35"/>
-					<Anchors>
-						<Anchor point="CENTER" relativeKey="$parent.IconBorder" x="1" y="0"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-			<Layer level="OVERLAY">
-				<Texture parentKey="Completed" file="Interface\RAIDFRAME\ReadyCheck-Ready" hidden="true">
-					<Size x="38" y="38"/>
-					<Anchors>
-						<Anchor point="CENTER" relativeKey="$parent.Icon" x="0" y="0"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="banner" file="Interface\QuestionFrame\TitleBanner" alpha="0.85">
-					<Size x="256" y="64"/>
-					<Anchors>
-						<Anchor point="CENTER" relativeKey="$parent.IconBorder" x="1" y="-60"/>
-					</Anchors>
-				</Texture>
-				<FontString name="$parentName" inherits="SystemFont_Med1" parentKey="name" text="TEXT">
-					<Size x="150" y="0"/>
-					<Anchors>
-						<Anchor point="CENTER" relativeKey="$parent.banner" x="0" y="18"/>
-					</Anchors>
-					<Color r="0.2824" g="0.0157" b="0.0157"/>
-				</FontString>
-
-				<FontString name="$parentRange" font="SystemFont_Med1" justifyH="LEFT" parentKey="range" text="[LVL]">
-					<Size x="120" y="12"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" x="30" y="-25"/>
-					</Anchors>
-					<Color r="0.2824" g="0.0157" b="0.0157"/>
-				</FontString>
-
-				<FontString font="SystemFont_Med1" justifyH="LEFT" justifyV="TOP" wordwrap="true" parentKey="Desc">
-					<Size x="0" y="55"/>
-					<Anchors>
-						<Anchor point="TOP" relativePoint="BOTTOM" relativeKey="$parent.banner" x="0" y="15"/>
-						<Anchor point="RIGHT" x="-35" y="0"/>
-						<Anchor point="LEFT" x="35" y="0"/>
-					</Anchors>
-					<Color r="0.2824" g="0.0157" b="0.0157"/>
-				</FontString>
-			</Layer>
-		</Layers>
-		<Frames>
-			<Button parentKey="switchButton">
-				<Size x="25" y="25"/>
-				<Anchors>
-					<Anchor point="TOPRIGHT" x="-20" y="-20"/>
-				</Anchors>
-				<NormalTexture file="Interface\TIMEMANAGER\PauseButton"/>
-				<HighlightTexture file="Interface\Buttons\CheckButtonGlow"/>
-			</Button>
-		</Frames>
-	</Button>
 
 	<Button name="RPS_CampaignButtonTemplate" virtual="true" inherits="RPS_AltHoveredFrame">
 		<Size x="440" y="60"/>
@@ -677,6 +605,7 @@
 		</HighlightTexture>
 		<Scripts>
 			<OnEnter>
+				RPSCoreFramework.lastHoveredAuraButton = self:GetName();
 				RPSCoreFramework:ProcessAurasOnEnter(self:GetName())
 			</OnEnter>
 			<OnClick>
@@ -968,7 +897,7 @@
 				<Texture file="Interface\AchievementFrame\UI-Achievement-MetalBorder-Left">
 					<Size x="16" y="0"/>
 					<Anchors>
-						<Anchor point="TOPLEFT" x="14" y="0"/>
+						<Anchor point="TOPLEFT" x="14" y="-10"/>
 						<Anchor point="BOTTOMLEFT" x="14" y="10"/>
 					</Anchors>
 					<TexCoords left="0" right="1" top="0" bottom=".87"/>
@@ -1139,15 +1068,13 @@
 						GameTooltip:Hide();
 					</OnLeave>
 				</Scripts>
-			</Button>
-			
+			</Button>	
 			<Button name="$parentMinus" inherits="UIPanelButtonTemplate" text="-">
 				 <Size x="24" y="24"/>
 				 <Anchors>
 					<Anchor point="TOPLEFT" x="235" y="-30"/>
 				 </Anchors>
-			</Button>
-			
+			</Button>	
 			<Button name="$parentPlus" inherits="UIPanelButtonTemplate" text="+">
 				 <Size x="24" y="24"/>
 				 <Anchors>
@@ -1191,7 +1118,7 @@
 						<FontString name="$parentStatValue" font="Fonts\FRIZQT___CYR.TTF" text="10" justifyH="LEFT" justifyV="TOP">
 						  <FontHeight val="12"/>
 						  <Anchors>
-						   <Anchor point="TOPLEFT" x="185" y="-13" />
+						   <Anchor point="TOPLEFT" x="185" y="-23" />
 						  </Anchors>
 						  <Shadow>
 							<Offset x="1" y="1" />
@@ -1206,14 +1133,104 @@
 			<Button name="$parentMinus" inherits="UIPanelButtonTemplate" text="-">
 				 <Size x="24" y="24"/>
 				 <Anchors>
-					<Anchor point="TOPLEFT" x="180" y="-30"/>
+					<Anchor point="TOPLEFT" x="180" y="-40"/>
 				 </Anchors>
 			</Button>
 			
 			<Button name="$parentPlus" inherits="UIPanelButtonTemplate" text="+">
 				 <Size x="24" y="24"/>
 				 <Anchors>
-					<Anchor point="TOPLEFT" x="235" y="-30"/>
+					<Anchor point="TOPLEFT" x="235" y="-40"/>
+				 </Anchors>
+			</Button>
+		</Frames>
+	</Frame>
+
+	<Frame name="RPS_SkillBattleCompact" virtual="true">
+		<Frames>
+			<Frame name="$parent" inherits="RPS_SimpleIcon">
+				<Size x="35" y="35" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="25" y="-25" />
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<FontString name="$parentStatName" font="Fonts\FRIZQT___CYR.TTF" text="Характеристика" justifyH="LEFT" justifyV="TOP">
+						  <FontHeight val="14"/>
+						  <Anchors>
+						   <Anchor point="TOPLEFT" x="40" y="0" />
+						  </Anchors>
+						  <Shadow>
+							<Offset x="1" y="1" />
+							<Color r="0" g="0" b="0"/>
+						  </Shadow>
+						</FontString>
+						
+						<FontString name="$parentStatRoll" font="Fonts\FRIZQT___CYR.TTF" text="1 - 20" justifyH="LEFT" justifyV="TOP">
+						  <FontHeight val="12"/>
+						  <Anchors>
+						   <Anchor point="TOPLEFT" x="40" y="-20" />
+						  </Anchors>
+						  <Shadow>
+							<Offset x="1" y="1" />
+							<Color r="0" g="0" b="0"/>
+						  </Shadow>
+						</FontString>
+						
+						<FontString name="$parentStatValue" font="Fonts\FRIZQT___CYR.TTF" text="10" justifyH="LEFT" justifyV="TOP">
+						  <FontHeight val="12"/>
+						  <Anchors>
+						   <Anchor point="TOPLEFT" x="185" y="-23" />
+						  </Anchors>
+						  <Shadow>
+							<Offset x="1" y="1" />
+							<Color r="0" g="0" b="0"/>
+						  </Shadow>
+						</FontString>
+						
+					</Layer>
+				</Layers>
+			</Frame>
+			
+			<Button name="$parentdummy">
+				 <Anchors>
+					<Anchor point="TOPLEFT" x="22" y="-22"/>
+					<Anchor point="BOTTOMRIGHT" x="34" y="-34"/>
+				 </Anchors>
+				<HighlightTexture file="Interface\BUTTONS\ButtonHilight-Square" alphaMode="ADD">
+					<Anchors>
+						<Anchor point="TOPLEFT" x="0" y="0"/>
+						<Anchor point="BOTTOMRIGHT" x="-1" y="0"/>
+					</Anchors>
+					<TexCoords left="0.03125" right="0.984375" top="0.03125" bottom="0.984375"/>
+				</HighlightTexture>
+				<Scripts>
+				    <OnLoad>
+				    	self:RegisterForClicks("LeftButtonUp", "RightButtonDown");
+				    </OnLoad>
+					<PostClick>
+						RPSCoreFramework:PickupBattleSpell(self:GetParent():GetName(), button);
+					</PostClick>
+					<OnEnter>
+						RPSCoreFramework:ShowBattleSpellGameTooltip(self:GetParent():GetName())
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>				
+			
+			<Button name="$parentMinus" inherits="UIPanelButtonTemplate" text="-">
+				 <Size x="24" y="24"/>
+				 <Anchors>
+					<Anchor point="TOPLEFT" x="180" y="-40"/>
+				 </Anchors>
+			</Button>
+			
+			<Button name="$parentPlus" inherits="UIPanelButtonTemplate" text="+">
+				 <Size x="24" y="24"/>
+				 <Anchors>
+					<Anchor point="TOPLEFT" x="235" y="-40"/>
 				 </Anchors>
 			</Button>
 		</Frames>
@@ -1316,6 +1333,30 @@
         </Scripts>
     </GameTooltip>
 
+	<GameTooltip name="ContainerGameTooltip" inherits="GameTooltipTemplate">
+        <Scripts>
+            <Onload>
+            --	ContainerGameTooltipTextRight1:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft1:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight2:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft2:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight3:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft3:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight4:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft4:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight5:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft5:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight6:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft6:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight7:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft7:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextRight8:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+            --	ContainerGameTooltipTextLeft8:SetFont("Fonts\\FRIZQT___CYR.TTF", 10)
+                self:SetOwner(WorldFrame, "ANCHOR_NONE");
+            </Onload>
+        </Scripts>
+    </GameTooltip>
+
     <Button name="RPS_POIButton" virtual="true">
         <Size x="15" y="15"/>
         <Scripts>
@@ -1323,23 +1364,23 @@
                 self:SetFrameStrata("TOOLTIP");
             </OnLoad>
             <OnEnter>
-			RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			RPSPOIGameTooltip:AddLine("|T"..self.ntex:GetTexture()..":0|t ".."|cffFFC125"..self.dataName.."|r");
-			if (string.len(self.dataDescription) > 0) then
-				if (string.len(self.dataDescription) > 80) then
-					RPSCoreFramework.POIDesc = RPSCoreFramework:WordWrap(self.dataDescription, 90);
-					for i=1, #RPSCoreFramework.POIDesc do
-						RPSPOIGameTooltip:AddLine("|cff808080"..RPSCoreFramework.POIDesc[i].."|r");
+				RPSPOIGameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				RPSPOIGameTooltip:AddLine("|T"..self.ntex:GetTexture()..":0|t ".."|cffFFC125"..self.dataName.."|r");
+				if (string.len(self.dataDescription) > 0) then
+					if (string.len(self.dataDescription) > 80) then
+						RPSCoreFramework.POIDesc = RPSCoreFramework:WordWrap(self.dataDescription, 90);
+						for i=1, #RPSCoreFramework.POIDesc do
+							RPSPOIGameTooltip:AddLine("|cff808080"..RPSCoreFramework.POIDesc[i].."|r");
+						end
+					else
+						RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
 					end
-				else
-					RPSPOIGameTooltip:AddLine("|cff808080"..self.dataDescription.."|r");
 				end
-			end
-			if true then
-				RPSPOIGameTooltip:AppendText(" |cff80528C("..self.debugGuid..")");
-			end
-			RPSPOIGameTooltip:Show();
-			RPSCoreFramework.POIDesc = {};
+				if true then
+					RPSPOIGameTooltip:AppendText(" |cff80528C("..self.debugGuid..")");
+				end
+				RPSPOIGameTooltip:Show();
+				RPSCoreFramework.POIDesc = {};
             </OnEnter>
             <OnLeave>
                 RPSPOIGameTooltip:ClearLines();
@@ -1347,272 +1388,14 @@
             </OnLeave>
         </Scripts>
     </Button>
-
-	<Button name="RPSPoll_CloseButton" inherits="UIPanelCloseButton" virtual="true">
-		<Scripts>
-			<OnEnter>
-			--	RPSPoll_RefreshTooltipForFrame(self);
-			</OnEnter>
-			<OnLeave>
-			--	RPSPoll_MainTooltip:Hide();
-			</OnLeave>
-			<PostClick>
-			--	RPSPoll_API.PlaySound("igMainMenuOptionCheckBoxOn","SFX");
-			</PostClick>
-		</Scripts>
-	</Button>
-
-	<!-- Common red Wow button template  -->
-	<Button name="RPSPoll_CommonButton" inherits="UIPanelButtonTemplate" virtual="true">
-		<Size x="90" y="20"/>
-		<Scripts>
-			<OnEnter>
-			--	RPSPoll_RefreshTooltipForFrame(self);
-			</OnEnter>
-			<OnLeave>
-			--	RPSPoll_MainTooltip:Hide();
-			</OnLeave>
-			<PostClick>
-			--	RPSPoll_API.PlaySound("igMainMenuOptionCheckBoxOn","SFX");
-			</PostClick>
-		</Scripts>
-	</Button>
-
-	<!-- Checkbox with small label and TT compatible -->
-	<CheckButton name="RPSPoll_CheckBox" inherits="OptionsCheckButtonTemplate" virtual="true" checked="false">
-		<Scripts>
-			<OnLoad>
-				getglobal(self:GetName().."Text"):SetFontObject(GameFontNormalSmall);
-			--	self.Text = getglobal(self:GetName().."Text");
-			</OnLoad>
-			<OnEnter>
-			--	RPSPoll_RefreshTooltipForFrame(self);
-			</OnEnter>
-			<OnLeave>
-			--	RPSPoll_MainTooltip:Hide();
-			</OnLeave>
-			<PostClick>
-			--	RPSPoll_API.PlaySound("igMainMenuOptionCheckBoxOn","SFX");
-			</PostClick>
-		</Scripts>
-	</CheckButton>
-
-	<!-- Common icon button  -->
-	<Button name="RPSPoll_IconButton" virtual="true">
-		<Size x="26" y="26"/>
-		<Layers>
-			<Layer level="OVERLAY">
-				<Texture name="$parentIcon" file="Interface\ICONS\INV_Misc_QuestionMark">
-					<Size x="26" y="26"/>
-					<Anchors>
-						<Anchor point="CENTER" x="0" y="0"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-		</Layers>
-		<NormalTexture file="Interface\AchievementFrame\UI-Achievement-IconFrame">
-			<Size x="65" y="65"/>
-			<Anchors>
-				<Anchor point="CENTER" x="14" y="-14"/>
-			</Anchors>
-		</NormalTexture>
-		<PushedTexture file="Interface\Buttons\UI-EmptySlot">
-			<Size x="50" y="50"/>
-			<Anchors>
-				<Anchor point="CENTER" x="0" y="0"/>
-			</Anchors>
-		</PushedTexture>
-		<DisabledTexture file="Interface\Buttons\UI-EmptySlot-Disabled">
-			<Size x="47" y="47"/>
-			<Anchors>
-				<Anchor point="CENTER" x="0" y="0"/>
-			</Anchors>
-		</DisabledTexture>
-		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\UI-Quickslot-Depress"/>
-		<Scripts>
-			<OnEnter>
-			--	RPSPoll_RefreshTooltipForFrame(self);
-			</OnEnter>
-			<OnLeave>
-			--	RPSPoll_MainTooltip:Hide();
-			</OnLeave>
-			<PostClick>
-			--	RPSPoll_API.PlaySound("igMainMenuOptionCheckBoxOn","SFX");
-			</PostClick>
-		</Scripts>
-	</Button>
-
-	<Slider name="RPSPoll_Slider" inherits="OptionsSliderTemplate" virtual="true">
-		<Size x="140" y="15"/>
-		<Layers>
-			<Layer level="OVERLAY">
-				<FontString name="$parentValText" inherits="GameFontNormal" justifyH="CENTER" text="[value]">
-					<Size x="0" y="10"/>
-					<Anchors>
-						<Anchor point="LEFT"/>
-						<Anchor point="RIGHT"/>
-					</Anchors>
-					<Color r="0.95" g="0.95" b="0.95"/>
-				</FontString>
-			</Layer>
-		</Layers>
-		<Scripts>
-			<OnEnter>
-			--	RPSPoll_RefreshTooltipForFrame(self);
-			</OnEnter>
-			<OnLeave>
-			--	RPSPoll_MainTooltip:Hide();
-			</OnLeave>
-		</Scripts>
-	</Slider>
-
-	<!-- Invisible button  -->
-	<Button name="RPSPoll_InvisibleButton" virtual="true">
-		<Size x="90" y="20"/>
-		<Scripts>
-			<OnEnter>
-			--	RPSPoll_RefreshTooltipForFrame(self);
-			</OnEnter>
-			<OnLeave>
-			--	RPSPoll_MainTooltip:Hide();
-			</OnLeave>
-		</Scripts>
-	</Button>
-
-	<!-- Titled edit box, TRP2 style -->
-	<EditBox name="RPSPoll_TitledEditBox" letters="0" hiRPSPolls="10" autoFocus="false" virtual="true">
-		<Size x="100" y="18"/>
-		<Layers>
-			<Layer level="BACKGROUND">
-				<Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
-					<Size x="12" y="28"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" x="-5" y="0"/>
-					</Anchors>
-					<TexCoords left="0" right="0.09375" top="0" bottom="1.0"/>
-				</Texture>
-				<Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
-					<Size x="12" y="28"/>
-					<Anchors>
-						<Anchor point="TOPRIGHT" x="5" y="0"/>
-					</Anchors>
-					<TexCoords left="0.90625" right="1.0" top="0" bottom="1.0"/>
-				</Texture>
-				<Texture name="$parentCenter" file="Interface\Common\Common-Input-Border">
-					<Size x="0" y="28"/>
-					<Anchors>
-						<Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
-						<Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>
-					</Anchors>
-					<TexCoords left="0.09375" right="0.90625" top="0" bottom="1.0"/>
-				</Texture>
-			</Layer>
-			<Layer level="OVERLAY">
-				<FontString name="$parentText" text="[title]" inherits="GameFontNormalSmall" justifyH="LEFT">
-					<Anchors>
-						<Anchor point="TOPLEFT" x="5" y="5"/>
-						<Anchor point="TOPRIGHT" x="0" y="5"/>
-					</Anchors>
-					<Color r="0.95" g="0.75" b="0.1"/>
-				</FontString>
-			</Layer>
-		</Layers>
-		<FontString inherits="GameFontWhite"/>
-		<Scripts>
-			<OnEscapePressed>
-				self:ClearFocus()
-			</OnEscapePressed>
-			<OnEditFocusGained>
-				if self.disabled then
-					self:ClearFocus();
-				else
-					self:HighlightText();
-				end
-			</OnEditFocusGained>
-			<OnEditFocusLost>
-				self:HighlightText(0,0);
-			</OnEditFocusLost>
-			<OnEnter>
-			--	RPSPoll_RefreshTooltipForFrame(self);
-			</OnEnter>
-			<OnLeave>
-			--	RPSPoll_MainTooltip:Hide();
-			</OnLeave>
-		</Scripts>
-	</EditBox>
-
-	<!-- Tutorial style hovered frame -->
-	<Frame name="RPSPoll_HoveredFrame" inherits="GlowBoxTemplate" enableMouse="true" virtual="true">
-		<Size x="220" y="100"/>
-		<Layers>
-			<Layer level="ARTWORK">
-				<Texture parentKey="ArrowUP" inherits="HelpPlateArrowDOWN" hidden="true">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="TOP" relativePoint="BOTTOM" x="0" y="3"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="ArrowDOWN" inherits="HelpPlateArrowUP" hidden="true">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="BOTTOM" relativePoint="TOP" x="0" y="-3"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="ArrowRIGHT" inherits="HelpPlateArrowDOWN" hidden="true">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="RIGHT" relativePoint="LEFT" x="3" y="0"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="ArrowLEFT" inherits="HelpPlateArrowDOWN" hidden="true">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="LEFT" relativePoint="RIGHT" x="-3" y="0"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-			<Layer level="BORDER">
-				<Texture parentKey="ArrowGlowUP" inherits="HelpPlateArrow-GlowDOWN" hidden="true" alphaMode="ADD" alpha="0.5">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="TOP" relativePoint="BOTTOM" x="0" y="3"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="ArrowGlowDOWN" inherits="HelpPlateArrow-GlowUP" hidden="true" alphaMode="ADD" alpha="0.5">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="BOTTOM" relativePoint="TOP" x="0" y="-3"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="ArrowGlowRIGHT" inherits="HelpPlateArrow-GlowDOWN" hidden="true" alphaMode="ADD" alpha="0.5">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="RIGHT" relativePoint="LEFT" x="3" y="0"/>
-					</Anchors>
-				</Texture>
-				<Texture parentKey="ArrowGlowLEFT" inherits="HelpPlateArrow-GlowDOWN" hidden="true" alphaMode="ADD" alpha="0.5">
-					<Size x="53" y="21"/>
-					<Anchors>
-						<Anchor point="LEFT" relativePoint="RIGHT" x="-3" y="0"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-		</Layers>
-		<Scripts>
-			<OnLoad>
-				SetClampedTextureRotation(self.ArrowLEFT, 270);
-				SetClampedTextureRotation(self.ArrowRIGHT, 90);
-				SetClampedTextureRotation(self.ArrowGlowLEFT, 270);
-				SetClampedTextureRotation(self.ArrowGlowRIGHT, 90);
-			</OnLoad>
-		</Scripts>
-	</Frame>
-
-    <Button name="RPSPoll_DialogChoiceButton" virtual="true" hidden="true">
+	
+	<Button name="RPS_DialogOptionButton" virtual="true" text="[...]">
+		<Size x="124" y="34"/>	
         <Anchors>
             <Anchor point="LEFT" relativePoint="LEFT" relativeKey="$parent" />
             <Anchor point="RIGHT" relativePoint="RIGHT" relativeKey="$parent" />
         </Anchors>
+		<NormalFont style="GameFontNormalLarge"/>		
         <Layers>
             <Layer level="BACKGROUND">
                 <!-- TOP BORDER -->
@@ -1647,16 +1430,16 @@
                 </Texture>
             </Layer>
             <Layer>
-                <Texture parentKey="icon" file="Interface/GOSSIPFRAME/ChatBubbleGossipIcon" >
-                    <Size x="23" y="23"/>
+				<Texture parentKey="icon" atlas="communities-guildbanner-background">
+				    <Size x="23" y="23"/>
                     <Anchors>
-                        <Anchor point="LEFT" relativeKey="$parent" relativePoint="LEFT" x="50"/>
+                        <Anchor point="LEFT" relativeKey="$parent" relativePoint="LEFT" x="20"/>
                     </Anchors>
-                </Texture>
+				</Texture>
                 <FontString parentKey="number" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" wordwrap="true" text="">
                 	<Color r="0.80" g="0.60" b="0"/>
                     <Anchors>
-                        <Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.icon" x="-17" y="0"/>
+                        <Anchor point="LEFT" relativePoint="RIGHT" relativeKey="$parent.icon" x="-16" y="2"/>
                         <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent" x="0"/>
                     </Anchors>
 					<Shadow>
@@ -1706,7 +1489,7 @@
 --				self:PlayPlayerModelAnimation();
             </OnEnter>
             <OnLeave>
-                    self.onLeaveAnimation:Play();
+                self.onLeaveAnimation:Play();
             </OnLeave>
             <PreClick>
                 self.onClickedAnimation:Stop();
@@ -1714,102 +1497,6 @@
             </PreClick>
         </Scripts>
     </Button>
-
-	<!-- Resize button -->
-	<Button name="RPSPoll_ResizeButton" virtual="true">
-		<Size x="32" y="32"/>
-		<Scripts>
-			<OnLoad>
-			--	RPSPoll_API.lib.initResize(self);
-			</OnLoad>
-		</Scripts>
-		<NormalTexture file="Interface\Buttons\UI-Panel-SmallerButton-Up">
-			<TexCoords left="1" right="0" top="0" bottom="1"/>
-		</NormalTexture>
-		<PushedTexture file="Interface\Buttons\UI-Panel-SmallerButton-Down">
-			<TexCoords left="1" right="0" top="0" bottom="1"/>
-		</PushedTexture>
-		<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-	</Button>
-
-	<Frame name="RPSPoll_ResizeShadowFrame" parent="UIParent" frameStrata="FULLSCREEN" hidden="true" resizable="true">
-		<Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true" bgFile="Interface\DialogFrame\UI-DialogBox-Background">
-			<EdgeSize><AbsValue val="32"/></EdgeSize><TileSize><AbsValue val="400"/></TileSize>
-			<BackgroundInsets><AbsInset left="5" right="5" top="5" bottom="5"/></BackgroundInsets>
-		</Backdrop>
-		<Layers>
-			<Layer level="OVERLAY">
-				<FontString name="RPSPoll_ResizeShadowFrameText" inherits="GameFontNormal" justifyH="CENTER" justifyV="MIDDLE" setAllPoints="true">
-					<Color b="1.0" r="1.0" g="1.0"/>
-				</FontString>
-			</Layer>
-		</Layers>
-	</Frame>
-
-	<!-- Text area -->
-	<Frame name="RPSPoll_TextArea" virtual="true" enableMouse="true">
-		<Backdrop edgeFile="Interface\GLUES\COMMON\TextPanel-Border" bgFile="Interface\DialogFrame\UI-DialogBox-Background" tile="true">
-			<EdgeSize>
-				<AbsValue val="20"/>
-			</EdgeSize>
-			<TileSize>
-				<AbsValue val="200"/>
-			</TileSize>
-			<BackgroundInsets>
-				<AbsInset left="5" right="5" top="5" bottom="5"/>
-			</BackgroundInsets>
-		</Backdrop>
-		<Frames>
-			<ScrollFrame parentKey="scroll" name="$parentScroll" inherits="UIPanelScrollFrameTemplate">
-				<Anchors>
-					<Anchor point="TOP" x="0" y="-10"/>
-					<Anchor point="BOTTOM" x="0" y="10"/>
-					<Anchor point="LEFT" x="15" y="0"/>
-					<Anchor point="RIGHT" x="-18" y="0"/>
-				</Anchors>
-				<ScrollChild>
-					<EditBox name="$parentText" parentKey="text" multiLine="true" enableMouse="false" autoFocus="false">
-						<Scripts>
-							<OnShow>
-								self:SetWidth(self:GetParent():GetParent():GetWidth() - 40);
-							</OnShow>
-							<OnTextChanged>
-								if self:IsVisible() and self:GetCursorPosition() == string.len(self:GetText()) then
-								self:GetParent():SetVerticalScroll(self:GetParent():GetVerticalScrollRange());
-								end
-							</OnTextChanged>
-							<OnEscapePressed>
-								self:ClearFocus();
-							</OnEscapePressed>
-							<OnEditFocusGained>
-								self:HighlightText();
-								self:GetParent():GetParent().dummy:Hide();
-							</OnEditFocusGained>
-							<OnEditFocusLost>
-								self:HighlightText(0,0);
-								self:GetParent():GetParent().dummy:Show();
-							</OnEditFocusLost>
-						</Scripts>
-						<FontString inherits="ChatFontNormal"/>
-					</EditBox>
-				</ScrollChild>
-			</ScrollFrame>
-
-			<Button name="$parentFocusDummy" parentKey="dummy">
-				<Anchors>
-					<Anchor point="TOP" x="0" y="5"/>
-					<Anchor point="BOTTOM" x="0" y="-5"/>
-					<Anchor point="LEFT" x="0" y="0"/>
-					<Anchor point="RIGHT" x="-10" y="0"/>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						self:GetParent().scroll.text:SetFocus();
-					</OnClick>
-				</Scripts>
-			</Button>
-		</Frames>
-	</Frame>
 
     <Button name="MinstrelButton" inherits="UIMenuButtonStretchTemplate" virtual="true">
         <Size x="475" y="42"/>
@@ -1841,19 +1528,19 @@
 			--	ChatFrame1EditBox:HighlightText();
         	</OnClick>
         	<OnShow>
-			self.icon:SetTexture(RPSCoreFramework.Minstrel[self:GetName()][1]);
-			self.Text:SetText(RPSCoreFramework.Minstrel[self:GetName()][3]);
+        		self.icon:SetTexture(RPSCoreFramework.Minstrel[self:GetName()][1]);
+				self.Text:SetText(RPSCoreFramework.Minstrel[self:GetName()][3]);
         	</OnShow>
-		<OnEnter>
-			GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][2]);
-			GameTooltip:AddLine(" ");
-			GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][3], 1,1,1, true);
-			GameTooltip:Show();
-		</OnEnter>
-		<OnLeave>
-			GameTooltip:Hide();
-		</OnLeave>
+			<OnEnter>
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][2]);
+			    GameTooltip:AddLine(" ");
+			    GameTooltip:AddLine(RPSCoreFramework.Minstrel[self:GetName()][3], 1,1,1, true);
+			    GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
         </Scripts>
 
 		<HighlightTexture file="Interface\Buttons\UI-Silver-Button-Highlight" alphaMode="ADD">
@@ -1868,9 +1555,9 @@
     <Button name="GuildInfoSalaryTemplate" inherits="TabButtonTemplate" virtual="true">
         <Scripts>
         	<OnClick>
-			PanelTemplates_Tab_OnClick(self, GuildInfoFrame);
-			GuildInfoFrame_Update();
-			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+				PanelTemplates_Tab_OnClick(self, GuildInfoFrame);
+				GuildInfoFrame_Update();
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
         	</OnClick>
         </Scripts>
     </Button>
@@ -1957,12 +1644,9 @@
 
     <Button name="DaystrikeButton" virtual="true">
         <Size x="80" y="80"/>
-        <NormalTexture atlas="mountequipment-slot-background">
-        </NormalTexture>
-        <PushedTexture atlas="mountequipment-slot-background">
-        </PushedTexture>
-        <!--<HighlightTexture atlas="mountequipment-slot-corners" alphaMode="ADD">
-        </HighlightTexture>-->
+        <NormalTexture atlas="mountequipment-slot-background"/>
+        <PushedTexture atlas="mountequipment-slot-background"/>
+        <!-- <HighlightTexture atlas="mountequipment-slot-corners" alphaMode="ADD"/> -->
         <Layers>
         	<Layer level="OVERLAY">
                 <Texture name="$parentSeal" atlas="Quest-Legionfall-WaxSeal" hidden="true">
@@ -2016,59 +1700,48 @@
 			</Layer>
         </Layers>
         <Scripts> 
-		<OnEnter>
-			GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			GameTooltip:AddLine("|TInterface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..self.FuncTable[5]..":0|t "..self.FuncTable[7]);
-			GameTooltip:AddLine(self.FuncTable[8], 1,1,1, true);
-			GameTooltip:AddLine("|cFFFF8040Локация:|r "..GetRealZoneText(self.FuncTable[2]), 1,1,1, true);
-			GameTooltip:Show();
-		</OnEnter>
-		<OnLeave>
-			GameTooltip:Hide();
-		</OnLeave>
+			<OnEnter>
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine("|TInterface\\AddOns\\RPSDarkmoon\\resources\\POI\\"..self.FuncTable[5]..":0|t "..self.FuncTable[7]);
+			    GameTooltip:AddLine(self.FuncTable[8], 1,1,1, true);
+			    GameTooltip:AddLine("|cFFFF8040Локация:|r "..GetRealZoneText(self.FuncTable[2]), 1,1,1, true);
+			    GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
         </Scripts>
     </Button>
 
     <Button name="CharDispButton" virtual="true">
         <Size x="198" y="36"/>
-        <NormalTexture atlas="Garr_MissionToast-Blank">
-        </NormalTexture>
-        <PushedTexture atlas="Garr_MissionToast-Blank">
-        </PushedTexture>
-        <HighlightTexture atlas="128-RedButton-Highlight" alphaMode="ADD">
-        </HighlightTexture>
+        <NormalTexture atlas="garrlanding-shipmission-inprogress"/>
+        <PushedTexture atlas="PetList-ButtonSelect" alphaMode="ADD"/>
+        <HighlightTexture atlas="PetList-ButtonHighlight" alphaMode="ADD"/>
         <Layers>
-        	<Layer level="OVERLAY">
-                <Texture name="$parentMod" atlas="Garr_FollowerToast-Epic" alphaMode="ALPHAKEY" parentKey="Mod">
+        	<Layer level="BACKGROUND">
+                <Texture name="$parentMod" atlas="garrlanding-shipmission-inprogress" alphaMode="ALPHAKEY" parentKey="Mod">
                     <Anchors>
                         <Anchor point="TOPLEFT" x="0" y="0"/>
                         <Anchor point="BOTTOMRIGHT" x="0" y="0"/>
                     </Anchors>
                 </Texture>
         	</Layer>
-        	<Layer level="OVERLAY">
-                <Texture name="$parentPOITex" file="Interface\AddOns\RPSDarkmoon\resources\POI\inn" parentKey="Tex">
-                	<Size x="20" y="20"/>
-                    <Anchors>
-                        <Anchor point="LEFT" x="10" y="7"/>
-                    </Anchors>
-                </Texture>
-        	</Layer>
 			<Layer level="OVERLAY">
-				<FontString name="$parentID" inherits="GameFontNormal" text="99" justifyH="CENTER" parentKey="IDLabel">
+				<FontString name="$parentID" inherits="GameFontNormal" justifyH="CENTER" parentKey="IDLabel">
 					<FontHeight val="6"/>
 					<Anchors>
-						<Anchor point="CENTER" relativePoint="BOTTOMLEFT" x="19" y="10"/>
+                        <Anchor point="CENTER" relativePoint="LEFT" x="14" y="0"/>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentTitle" inherits="GameFontNormal" text="Slutmog" justifyH="LEFT" parentKey="TitleLabel">
+				<FontString name="$parentTitle" inherits="GameFontNormal" justifyH="LEFT" parentKey="TitleLabel">
 					<FontHeight val="6"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" relativePoint="LEFT" x="40" y="15"/>
 						<Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" x="-5" y="0"/>
 					</Anchors>
 				</FontString>
-				<FontString name="$parentDescription" inherits="GameFontNormal" text="For real man" justifyH="LEFT" parentKey="DescriptionLabel">
+				<FontString name="$parentDescription" inherits="GameFontNormal" justifyH="LEFT" parentKey="DescriptionLabel">
 					<FontHeight val="5"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" relativePoint="LEFT" x="40" y="-15"/>
@@ -2078,15 +1751,17 @@
 			</Layer>
         </Layers>
         <Scripts>
-		<OnEnter>
-			GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-			GameTooltip:AddLine(self.Title);
-			GameTooltip:AddLine(self.Description, 1,1,1, true);
-			GameTooltip:Show();
-		</OnEnter>
-		<OnLeave>
-			GameTooltip:Hide();
-		</OnLeave>
+			<OnEnter>
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine(self.Title);
+			    GameTooltip:AddLine(self.Description, 1,1,1, true);
+				GameTooltip:AddLine(" ");
+				GameTooltip:AddLine("|cFFFF8040ЛКМ|r: Предпросмотр.");
+			    GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide();
+			</OnLeave>
         	<OnClick>
         		RPSCoreFramework.DispButtonFrame = self;
         		RPSCoreFramework:DispRemoveItemTexture(0, true);
@@ -2249,7 +1924,7 @@
 				</Texture>
 			</Layer>
 			<Layer level="OVERLAY">
-				<FontString parentKey="IDLabel" text="[ID]" inherits="GameFontNormal" wordwrap="false">
+				<FontString parentKey="IDLabel" inherits="GameFontNormal" wordwrap="false">
 					<Anchors>
 						<Anchor relativePoint="LEFT" point="LEFT" x="10" y="9"/>
 					</Anchors>
@@ -2257,12 +1932,22 @@
 				</FontString>
 			</Layer>
 			<Layer level="OVERLAY">
-				<FontString parentKey="TitleLabel" text="[TEXT]" inherits="GameFontNormal" wordwrap="false" hidden="true">
+				<FontString parentKey="TitleLabel" inherits="GameFontNormal" wordwrap="false" hidden="true">
 					<Anchors>
 						<Anchor relativeKey="$parent.IDLabel" relativePoint="TOPRIGHT" point="TOPLEFT" x="10" y="0"/>
 					</Anchors>
 					<Color r="0.95" g="0.95" b="0.95"/>
 				</FontString>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture parentKey="EnchantTexture">
+					<Anchors>
+						<Anchor point="CENTER"/>
+						<Anchor point="BOTTOMRIGHT" x="-3" y="10"/>
+						<Anchor relativeKey="$parent.IDLabel" relativePoint="TOPRIGHT" point="TOPLEFT" x="8" y="12"/>
+						<Anchor relativeKey="$parent" relativePoint="RIGHT" point="BOTTOMRIGHT" x="-15" y="-4"/>
+					</Anchors>
+				</Texture>
 			</Layer>
 		</Layers>
 		<Frames>
@@ -2296,12 +1981,12 @@
 				self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
 			</OnLoad>
 			<OnEnter>
-				GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-				GameTooltip:AddLine(self.Title);
-				GameTooltip:AddLine(" ");
-				GameTooltip:AddLine(self.Description, 1,1,1, true);
-				GameTooltip:AddLine("ЛКМ\\ПКМ наложить чары на оружие в главной\\второй руке", 1,0.61,0, true);
-				GameTooltip:Show();
+	        	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+			    GameTooltip:AddLine(self.Title);
+			    GameTooltip:AddLine(" ");
+			    GameTooltip:AddLine(self.Description, 1,1,1, true);
+			    GameTooltip:AddLine("ЛКМ\\ПКМ наложить чары на оружие в главной\\второй руке", 1,0.61,0, true);
+			    GameTooltip:Show();
 			</OnEnter>
 			<OnLeave>
 				GameTooltip:Hide();

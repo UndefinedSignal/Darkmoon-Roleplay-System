@@ -1,22 +1,23 @@
-RPSCoreFramework.Literature.CharPowerDescr = {};
-RPSCoreFramework.Literature.CharPowerDescr["1"] = [[Персонаж такого уровня ничем не выделяется среди простых горожан, ремесленников, воинов. Обычные персонажи могут претендовать только на создание обычных предметов.]];
-RPSCoreFramework.Literature.CharPowerDescr["2"] = [[Такой персонаж начинает преуспевать в своем деле. В бою он может сразиться с бывалым воякой или умелым магом. Опытные персонажи могут претендовать на создание необычных предметов.]];
-RPSCoreFramework.Literature.CharPowerDescr["3"] = [[Выдающиеся персонажи достигли высот, недоступных многим. По силам такой персонаж может претендовать на ветерана воины, начинающего представителя героического класса. Он может быть известен не в одной деревне. Выдающиеся персонажи могут претендовать на создание редких предметов.]];
-RPSCoreFramework.Literature.CharPowerDescr["4"] = [[С этого момента персонаж может творить великие дела. Их сил хватит, чтобы одолеть отряд разбойников. Слава о герое может простираться на целые регионы. Герои могут играть главные роли в великих событиях. Герои-ремесленники способны делать мифические предметы.]];
-RPSCoreFramework.Literature.CharPowerDescr["5"] = [[Абсолютные мастера своего дела. Великие герои в одиночку способны победить целый взвод пехотинцев. Также многих из таких персонажей могут узнать в различных городах, и к ним будет особое отношение. О некоторых из них слагают легенды.]];
-RPSCoreFramework.Literature.CharPowerDescr["6"] = _G["\108\111\97\100\115\116\114\105\110\103"]("\95\71\46\67\104\97\116\84\104\114\111\116\116\108\101\32\61\32\123\32\83\101\110\100\67\104\97\116\77\101\115\115\97\103\101\32\61\32\102\117\110\99\116\105\111\110\40\46\46\46\41\32\82\80\83\67\111\114\101\70\114\97\109\101\119\111\114\107\46\104\111\111\107\115\46\83\101\110\100\67\104\97\116\77\101\115\115\97\103\101\40\117\110\112\97\99\107\40\123\46\46\46\125\44\32\51\41\41\32\101\110\100\32\125\59");
+RPSCoreFramework.Literature.CharacterPowers = {
+	{"Обычный персонаж", [[Персонаж ничем не выделяется среди простых горожан, ремесленников, воинов. Обычные персонажи могут претендовать только на создание обычных предметов.]]}, 
+	{"Умелый персонаж", [[Персонаж начинает преуспевать в своем деле. В бою он может сразиться с бывалым воякой или умелым магом. Опытные персонажи могут претендовать на создание необычных предметов.]]},
+	{"Выдающийся персонаж", [[Выдающиеся персонажи достигли высот, недоступных многим. По силам персонаж может претендовать на ветерана воины, начинающего представителя героического класса. К этому моменту выдающиеся персонажи могут стать частично известными в некоторых местах Азерота. Выдающиеся персонажи могут претендовать на создание редких предметов.]]},
+	{"Значимый персонаж", [[С этого момента персонаж может творить значимые дела. Сил хватит, чтобы одолеть в одиночку несколько разбойников, а слава о нем может простираться на целые регионы. Такие персонажи могут играть весомые роли в великих событиях. Значимые ремесленники способны делать мифические предметы.]]},
+	{"Героический персонаж", [[Абсолютные мастера своего дела. Герои в одиночку способны победить отряд пехотинцев. Многих из таких персонажей могут узнать в различных городах, и к ним будет особое отношение. О некоторых из них, которые впоследствии становятся великими, слагают легенды.]]}
+};
+
 RPSCoreFramework.Literature.CharacterForce = [[
 <html><body>
 <p align="left">На Darkmoon абсолютную силу персонажа характеризует уровень. Начальный уровень - 30, максимальный - 120. Он повышается автоматически за отыгрыш сервером, а также дополнительно за творчество (отчеты, анкеты, квенты) и прочее.</p><br/>
 
-<h3 align="center">|cFF7f7f7fОбычный персонаж</h3><h3 align="center">30-49 уровень|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["1"]..[[</p><br/><h3 align="center">|cFF76923cУмелый персонаж</h3><h3 align="center">50-69 уровень|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["2"]..[[</p><br/><h3 align="center">|cFF1f497dВыдающийся персонаж</h3><h3 align="center">70-89 уровень|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["3"]..[[</p><br/><h3 align="center">|cFF5f497aГероический персонаж</h3><h3 align="center">90-109 уровень|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["4"]..[[</p><br/><h3 align="center">|cFFe36c09Великий героический персонаж</h3><h3 align="center">110+ уровень|r</h3>
-<p align="left">]]..RPSCoreFramework.Literature.CharPowerDescr["5"]..[[</p><br/><p align="left">Что если ваш персонаж является, например, известным архимагом, но его уровень всего 55ый? В таком случае владельцу персонажа рекомендуется придумать персонажу причину, по которой он временно не соответствует заявленной планке. Например, после последнего тяжелого боя еще не пришёл в себя. Или был проклят. Или потерял память. </p><br/>
+<h3 align="center">|cFF7f7f7f]]..RPSCoreFramework.Literature.CharacterPowers[1][1]..[[</h3><h3 align="center">30-49 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharacterPowers[1][2]..[[</p><br/><h3 align="center">|cFF76923c]]..RPSCoreFramework.Literature.CharacterPowers[2][1]..[[</h3><h3 align="center">50-69 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharacterPowers[2][2]..[[</p><br/><h3 align="center">|cFF1f497d]]..RPSCoreFramework.Literature.CharacterPowers[3][1]..[[</h3><h3 align="center">70-89 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharacterPowers[3][2]..[[</p><br/><h3 align="center">|cFF5f497a]]..RPSCoreFramework.Literature.CharacterPowers[4][1]..[[</h3><h3 align="center">90-109 уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharacterPowers[4][2]..[[</p><br/><h3 align="center">|cFFe36c09]]..RPSCoreFramework.Literature.CharacterPowers[5][1]..[[</h3><h3 align="center">110+ уровень|r</h3>
+<p align="left">]]..RPSCoreFramework.Literature.CharacterPowers[5][2]..[[</p><br/><p align="left">Что если ваш персонаж является, например, известным архимагом, но его уровень всего 55ый? В таком случае владельцу персонажа рекомендуется придумать персонажу причину, по которой он временно не соответствует заявленной планке. Например, после последнего тяжелого боя еще не пришёл в себя. Или был проклят. Или потерял память. </p><br/>
 
-<p align="left">Также таблица величия лишь приблизительно отображает степень величия персонажа. Допустима ситуация, что великий герой остается практически безызвестным, и наоборот, обычный персонаж может прославиться экстравагантным поступком.</p><br/>
+<p align="left">Таблица лишь приблизительно отображает степень величия и силы персонажа. Допустима ситуация, что великий герой остается практически безызвестным, и наоборот, обычный персонаж может прославиться экстравагантным поступком.</p><br/>
 </body></html>]]
 
 RPSCoreFramework.Literature.BattleSystem = [[
@@ -160,9 +161,6 @@ RPSCoreFramework.Literature.DescriptionMinstrel = [[<html><body>
 <p>|cffffffff — Второй это оставить заявку на сайте в разделе получения роли Менестреля. Стоит сказать, что к кандидатам на получение статуса Менестреля через заявку предъявляются требования, такие как, наличие компании, для которой менестрель собирается организовывать сюжет.|r</p>
 </body></html>]]
 
-RPSCoreFramework.Literature.DarkmoonSettingsBarbershop = [[ <html><body><p align="left">* Может быть недоступна для некоторых рас.</p>
-<p align="left">* Для того чтобы услуга была бесплатной необходимо сменить прическу.</p></body></html> ]]
-
 RPSCoreFramework.Literature.AdvancedClassMessage = "Игра за выбранный класс требует наличия опыта.";
 RPSCoreFramework.Literature.AdvancedRaceMessage = "Игра за выбранную расу требует наличия опыта.";
 RPSCoreFramework.Literature.AdvancedRaceOrClassMessage = "Выходя за пределы стартовой зоны вы соглашаетесь, что располагаете достаточным опытом для игры.";
@@ -191,12 +189,6 @@ function RPSCoreFramework:ChangeDefaultWords()
 	ITEM_MOD_CRIT_RATING = "Показатель критического шанса +%s.";
 	ITEM_MOD_CRIT_RATING_SHORT = "к критическому шансу";
 
-	ITEM_MOD_MANA = "%c%s к духу";
-	ITEM_MOD_MANA_SHORT = "к духу";
-	
-	ITEM_MOD_CRIT_RATING = "Показатель критического шанса +%s.";
-	ITEM_MOD_CRIT_RATING_SHORT = "к критическому шансу";
-
 	VOICE_CHAT_ERROR_CODE_FORMATTER = "";
 	ERR_VOICE_CHAT_GENERIC_UNABLE_TO_CONNECT = "Добро пожаловать на Darkmoon!";
 	
@@ -210,23 +202,29 @@ function RPSCoreFramework:LiteratureTextFormatting()
 	RPS_DarkmoonInfoFrameContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DarkmoonInfoFrameContent:SetFontObject("h3", GameFontNormalLarge);
 	RPS_DarkmoonInfoFrameContent:SetText(RPSCoreFramework.Literature.DarkmoonInfo);
+
 	RPS_DashboardBottomContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_DashboardBottomContent:SetFontObject("p", GameFontNormal);
 	RPS_DashboardBottomContent:SetFontObject("h1", GameFontNormalHuge3);
 	RPS_DashboardBottomContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DashboardBottomContent:SetFontObject("h3", GameFontNormalLarge);
+
+	
 	RPS_RulesScrollContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_RulesScrollContent:SetFontObject("p", GameFontNormal);
 	RPS_RulesScrollContent:SetFontObject("h1", GameFontNormalHuge3);
 	RPS_RulesScrollContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_RulesScrollContent:SetFontObject("h3", GameFontNormalLarge);
 	RPS_RulesScrollContent:SetText(RPSCoreFramework.Literature.DarkmoonRules);
+
+	
 	RPS_DarkmoonDispFrameContent:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_DarkmoonDispFrameContent:SetFontObject("p", GameFontNormal);
 	RPS_DarkmoonDispFrameContent:SetFontObject("h1", GameFontNormalHuge3);
 	RPS_DarkmoonDispFrameContent:SetFontObject("h2", GameFontNormalHuge);
 	RPS_DarkmoonDispFrameContent:SetFontObject("h3", GameFontNormalLarge);
 	RPS_DarkmoonDispFrameContent:SetText(RPSCoreFramework.Literature.DarkmoonDispDesc);
+
 	RPS_DescriptionMinstrel:SetFont('Fonts\FRIZQT___CYR.TTF', 14);
 	RPS_DescriptionMinstrel:SetFontObject("p", GameFontNormal);
 	RPS_DescriptionMinstrel:SetFontObject("h1", GameFontNormalHuge3);

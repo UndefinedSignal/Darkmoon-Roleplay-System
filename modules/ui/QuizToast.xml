@@ -1,0 +1,169 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Frame name="QuizToastTemplate" parent="UIParent" enableMouse="true" movable="true" hidden="true" clampedToScreen="true" virtual="true">
+		<Size x="298" y="86"/>
+	    <Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="ToastBG" atlas="LootToast-LessAwesome">
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+            <Layer level="OVERLAY">
+	            <Texture name="$parentIcon" parentKey="Icon" file="Interface\ICONS\INV_Scroll_11">
+	                <Size x="45" y="45" />
+	                <Anchors>
+	                    <Anchor point="LEFT">
+	                        <Offset x="27" y="1" />
+	                    </Anchor>
+	                </Anchors>
+	            </Texture>
+            </Layer>
+			<Layer>
+                <FontString parentKey="text" inherits="GameFontNormalMed2" justifyH="CENTER" justifyV="MIDDLE" wordwrap="true" text="Доступен новый вопрос!">
+                	<Color r="0.80" g="0.60" b="0"/>
+                    <Anchors>
+                        <Anchor point="TOPLEFT" x="70" y="-8"/>
+                        <Anchor point="BOTTOMRIGHT" x="-10" y="15"/>
+                    </Anchors>
+					<Shadow>
+						<Offset x="1" y="1" />
+						<Color r="0" g="0" b="0"/>
+					</Shadow>
+                </FontString>
+			</Layer>
+            <Layer level="HIGHLIGHT">
+	            <Texture parentKey="highlight" atlas="loottoast-glow" alphaMode="ADD" frameStrata="HIGH">
+	                <Anchors>
+	                    <Anchor point="TOPLEFT" x="-20" y="10"/>
+	                    <Anchor point="BOTTOMRIGHT" x="20" y="-10"/>
+	                </Anchors>
+	            </Texture>
+            </Layer>			
+	    </Layers>		
+		<Frames>
+			<StatusBar name="$parentStatusBar" hidden="false" minValue="1" maxValue="120" defaultValue="120" orientation="HORIZONTAL" frameStrata="PARENT">
+				<Size x="160" y="2"/>
+				<Anchors>
+					<Anchor point="BOTTOM" x="29" y="30"/>
+				</Anchors>
+				<BarTexture file="Interface/TargetingFrame/UI-StatusBar"/>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString parentKey="Text" inherits="TextStatusBarText">
+							<Anchors>
+								<Anchor point="CENTER" x="0" y="0"/>
+							</Anchors>
+						</FontString>
+						<Texture parentKey="Left" atlas="ui-frame-bar-borderleft">
+							<Size x="11" y="11"/>							
+							<Anchors>
+								<Anchor point="RIGHT" relativePoint="LEFT"  x="9" y="0"/>
+							</Anchors>
+						</Texture>
+						<Texture parentKey="Right" atlas="ui-frame-bar-borderright">
+							<Size x="11" y="11"/>	
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT"  x="-9" y="0"/>
+							</Anchors>
+						</Texture>
+						<Texture atlas="ui-frame-bar-bordercenter">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeKey="$parent.Left" relativePoint="TOPRIGHT"/>
+								<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Right" relativePoint="BOTTOMLEFT"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="BACKGROUND">
+						<Texture parentKey="Bg" atlas="ui-frame-bar-bgcenter">
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeKey="$parent.Left" x="2"/>
+								<Anchor point="BOTTOMRIGHT" relativeKey="$parent.Right" x="-2"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+				</Layers>
+				<BarColor r="1.0" g="0.61" b="0"/>
+			</StatusBar>
+		</Frames>
+		<Scripts>
+			<OnLoad>self:RegisterForDrag("LeftButton");</OnLoad>
+			<OnDragStart>self:StartMoving();</OnDragStart>
+			<OnDragStop>self:StopMovingOrSizing();</OnDragStop>
+			<OnEnter>
+				GameTooltip:ClearLines();
+				GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
+				GameTooltip:AddLine("Новый вопрос викторины!");
+				GameTooltip:AddLine("Правильный ответ на вопрос викторины|nпозволит получить в награду "..GetCoinTextureString(RPSCoreFramework.QuizReward)..".");
+				GameTooltip:AddLine("|cFFFF8040ЛКМ|r: Перейти к вопросу.");
+				GameTooltip:AddLine("|cFFFF8040ПКМ|r: Отказаться от вопроса.");
+				GameTooltip:Show();
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:ClearLines();
+				GameTooltip:Hide();
+			</OnLeave>			
+		</Scripts>
+	</Frame>
+
+	<Button name="QuizToast" inherits="QuizToastTemplate">
+		<Anchors>
+			<Anchor point="BOTTOM" x="0" y="150"/>
+		</Anchors>
+		<Frames>
+			<Button parentKey="Close" inherits="UIPanelCloseButton" frameStrata="PARENT">
+                <Size x="25" y="25"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="-5" y="-5"/>
+                </Anchors>
+                <Scripts>
+                	<OnClick>
+				        RPSCoreFramework:QuizDecline();
+				        self:GetParent():Hide();
+                	</OnClick>
+                </Scripts>
+            </Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				self.FadeIn:Play()
+				self:RegisterForClicks("AnyUp");				
+				RPSCoreFramework:CancelTimer(RPSCoreFramework.QuizTimer.Timer)
+				RPSCoreFramework.QuizTimer.Counter = 120;
+				RPSCoreFramework.QuizTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("ScheduleQuizTimer", 1);
+			</OnShow>
+			<OnClick>
+				self:EnableMouse(false);
+				if (button == "RightButton") then
+					self.FadeOut:Play();
+					RPSCoreFramework:CancelTimer(RPSCoreFramework.QuizTimer.Timer);
+					RPSCoreFramework:QuizDecline();
+				elseif (button == "LeftButton") then
+					self.FadeOut:Play();
+					RPSCoreFramework:CancelTimer(RPSCoreFramework.QuizTimer.Timer);
+					RPSCoreFramework:QuizAccept();
+				end
+			</OnClick>
+		</Scripts>
+		<Animations>
+		     <AnimationGroup parentKey="FadeIn" setToFinalAlpha="true">
+		       <Alpha duration="1.3" order="1" fromAlpha="0" toAlpha="1"/>
+		       <Scripts>
+		       	<OnFinished>
+		       		self:GetParent():EnableMouse(true);
+		       	</OnFinished>
+		       </Scripts>
+		     </AnimationGroup>
+		     <AnimationGroup parentKey="FadeOut" setToFinalAlpha="true">
+		       <Alpha duration="0.5" order="1" fromAlpha="1" toAlpha="0"/>
+				<Scripts>
+					<OnFinished>
+						self:GetParent():Hide();
+					</OnFinished>
+				</Scripts>
+		     </AnimationGroup>
+		</Animations>
+	</Button>
+
+</Ui>

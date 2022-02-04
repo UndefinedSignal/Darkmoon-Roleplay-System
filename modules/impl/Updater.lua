@@ -118,6 +118,14 @@ function RPSCoreFramework:UpdateAuraActiveInfo(str)
 	RPSCoreFramework:UpdateActiveAurasCounter()
 end
 
+--[[
+	minstrel activate
+	RPS.Minstrel 1 - Менестрель есть
+	RPS.Minstrel 0 - Менестрель заблочена(например, потому-что у человека ГМка)
+	RPS.Minstrel 2 - Менестрели нет.
+]]--
+
+
 function RPSCoreFramework:UpdateMinstrelStatus(str)
 	if (tonumber(str) == 0 or str == nil) then
 		RPSCoreFramework.MinstrelStatus = tonumber(str);
@@ -126,6 +134,15 @@ function RPSCoreFramework:UpdateMinstrelStatus(str)
 		RPSCoreFramework.MinstrelStatus = tonumber(str);
 		RPSCoreFramework:MinstrelCheckLock();
 	end
+end
+
+function RPSCoreFramework:UpdateMinstrelSummon(str)
+	if (str == "hide") then
+		StaticPopup_Hide("MINSTREL_SUMMON");
+	else
+		local values = {strsplit("#",str)};	
+		StaticPopup_Show("MINSTREL_SUMMON", values[2], values[3]);
+	end;
 end
 
 function RPSCoreFramework:UpdateDisplayMacrosInfo(str)
@@ -266,6 +283,20 @@ function RPSCoreFramework:EnchantStatusUpdate(str)
 	end
 end
 
+--function RPSCoreFramework:AddPOIPins(str)
+--	local decom = assert(RPSCoreFramework.LualZW:decompress(str));
+--	local lines = decom:splitstr('\r\n');
+--
+--	for i=1, #lines do
+--		print(lines[i]);
+--
+--		local values = {strsplit("#",lines[i])}
+--		if values[1] ~= "" then
+--			RPSCorePOIPins[values[1]] = values;
+--		end
+--	end
+--end
+
 function RPSCoreFramework:UpdatePOIPins(str)
 	local values = {strsplit('#',str)};
 	if RPSCoreFramework.Map.POIWorkflow then
@@ -304,13 +335,6 @@ function RPSCoreFramework:GetCommandPOIPins(str)
 		RPSCoreFramework:StreamingLoad_UpdateIcon(0);
 		RPSCoreFramework:GeneratePOIPlaces();
 		RPSCoreFramework:POISearchTable(UnitName("player"), RPSCoreFramework.POISearch);
-	end
-end
-
-function RPSCoreFramework:InitializePoll(str)
-	local values = {strsplit('#',str)};
-	if values[1] == nil then
-		return;
 	end
 end
 

@@ -222,8 +222,8 @@ function RPSCoreFramework:AddMinimapIcon()
 			RPSCoreFramework:switchMainFrame();
 		end,
 		OnTooltipShow = function(tooltip)
-			tooltip:AddLine("|cffCD661DDarkmoon|r");
-			tooltip:AddLine("|cffffcc00ПКМ\\ЛКМ: |cffFFC125открыть\\закрыть меню Darkmoon|r");
+			tooltip:AddLine("|c00800080Darkmoon|r");
+			tooltip:AddLine("|cFFFF8040ЛКМ\\ПКМ|r: Открыть\\закрыть меню Darkmoon.");
 		end,
 	})
 
@@ -339,7 +339,7 @@ function RPSCoreFramework:FormatDMButtons(button)
 					if RPSCoreFramework.Interface.SubMenuButtons[j][1] ~= selectedSubButtons then
 						_G[RPSCoreFramework.Interface.SubMenuButtons[j][3]]:Hide();
 					end
-				end -- Привет из прошлого (+ из будущего \Test)
+				end -- Привет от Николая из прошлого
 			end
 		end
 	end
@@ -402,7 +402,9 @@ function RPSCoreFramework:PreGenerateDMButtons()
 					RPSCoreFramework:OnClickFrameShowing(_G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 				end
 		end)
-
+--[[	MenuButton:SetScript('OnLeave', function()
+			GameTooltip:Hide();
+	    end);]]--
 		if RPSCoreFramework.Interface.MenuButtons[i][3] ~= nil then
 			table.insert(RPSCoreFramework.Interface.HidingFrames, _G[RPSCoreFramework.Interface.MenuButtons[i][3]]);
 			table.insert(RPSCoreFramework.Interface.HighlightedButtons, _G[RPSCoreFramework.Interface.MenuButtons[i][2]]);
@@ -448,7 +450,9 @@ function RPSCoreFramework:WordWrap(str, limit)
                 Lines[#Lines+1] = word                                             -- If at the end of a line, start a new table index...
             else Lines[#Lines] = Lines[#Lines].." "..word end  -- ... otherwise add to the current table index.
         end)
+
     splitWords(Lines, limit)
+
     return Lines
 end
 
@@ -481,7 +485,40 @@ function RPSCoreFramework:GuildInfoFrame_Update()
 	end
 end
 
+--[[ Полезные ништяки по гильдии
+
+self:RegisterEvent("GUILD_RANKS_UPDATE");
+	NUM_RANK_FLAGS = 20;
+	local buttonText;
+	for i=1, NUM_RANK_FLAGS do
+		buttonText = _G["GuildControlUIRankSettingsFrameCheckbox"..i.."Text"];
+		if ( buttonText ) then
+			buttonText:SetText(_G["GUILDCONTROL_OPTION"..i]);
+		end
+	end
+
+	--hide removed ransk	
+	for i=numRanks+1, MAX_GUILDRANKS do
+		local rankFrame = _G[prefix..i];
+		if rankFrame then
+			rankFrame:Hide()
+		end
+	end
+/dump 
+GuildControlGetNumRanks();
+]] --
+
+function RPSCoreFramework:UpdateGuildRanks()
+	local _, _, rank = GetGuildInfo("player");
+	if (rank == 0) then
+		TabardEmblemEditButton:Enable();
+	else
+		TabardEmblemEditButton:Disable();
+	end
+end
+
 function RPSCoreFramework:ProcessGuildSalaryInterface()
+	--local numRanks = GuildControlGetNumRanks();
 	local gname, grankname, granknum = GetGuildInfo("player");
 	for i = 1, 10 do
 		local rankFrame = _G["GuildInfoFrameSalaryRank"..i];
@@ -564,4 +601,30 @@ function RPSCoreFramework:AddGuildPOIInfo()
 	RPSCoreFramework.GuildInfoPOIFrame:SetPoint("BOTTOMRIGHT",GuildInfoFrameInfo,-5,200)
 
 	RPSCoreFramework.GuildInfoPOIFrame:Show()
+end
+
+function RPSCoreFramework:BBoardUpdate(id, title, text)
+	RPS_BBoard.id:SetText("#"..id);
+	
+	if (title == "" or title == nil) then
+		RPS_BBoard.title:Hide();
+		RPS_BBoard.titleBG:Hide();
+	else
+		RPS_BBoard.title:Show();
+		RPS_BBoard.titleBG:Show();
+		RPS_BBoard.title:SetText(title);	
+	end
+	
+	RPS_BBoard.text.scroll.text:SetText(text);
+end
+
+function RPSCoreFramework:BBoardShow(str)
+	local values = {strsplit('#', str)};
+	self:BBoardUpdate(values[1], values[2], values[3]);
+	RPS_BBoard:Show();
+end
+
+function RPSCoreFramework:BBoardClose()
+	self:BBoardUpdate(0, "", "");
+	RPS_BBoard:Hide();
 end

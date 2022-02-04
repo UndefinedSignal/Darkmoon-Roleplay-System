@@ -1,64 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
 
-	<Frame name="PollToastTemplate" parent="UIParent" enableMouse="true" movable="true" hidden="true" clampedToScreen="true" virtual="true">
-		<Size x="278" y="98"/>
-	    <!--Interface\BlackMarket\BlackMarketBackground-Tile-->
-	    <!--Interface\BankFrame\Bank-Background-->
-	    <!--Interface\Collections\CollectionsBackgroundTile-->
-	    <!--Interface\GuildBankFrame\GuildVaultBG-->
-	    <!--<Backdrop bgFile="Interface\GuildBankFrame\GuildVaultBG" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-			<EdgeSize val="16"/>
-			<TileSize val="60"/>
-		 	<BackgroundInsets left="5" right="5" top="5" bottom="5"/>
-	    </Backdrop>-->
-	    <Layers>
-			<Layer level="BACKGROUND">
-				<Texture parentKey="ToastBG" atlas="LootToast-LessAwesome" useAtlasSize="true">
-					<Anchors>
-						<Anchor point="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-            <Layer level="OVERLAY">
-	            <Texture name="$parentIcon" parentKey="Icon" file="Interface\ICONS\INV_Scroll_11">
-	                <Size x="45" y="45" />
-	                <Anchors>
-	                    <Anchor point="LEFT">
-	                        <Offset x="27" y="1" />
-	                    </Anchor>
-	                </Anchors>
-	            </Texture>
-            </Layer>
-            <Layer level="OVERLAY">
-	            <Texture parentKey="iconglow" file="Interface\TUTORIALFRAME\minimap-glow" alphaMode="ADD" hidden="true">
-	                <Size x="64" y="64" />
-	                <Anchors>
-	                    <Anchor point="CENTER" relativeTo="$parentIcon">
-	                        <Offset x="7" y="-7" />
-	                    </Anchor>
-	                </Anchors>
-	            </Texture>
-            </Layer>
-            <Layer level="HIGHLIGHT">
-	            <Texture parentKey="highlight" file="Interface\BUTTONS\UI-Panel-Button-Glow" alphaMode="ADD" frameStrata="HIGH">
-	            	<TexCoords top="0.6" left="0.76" bottom="0" right="0"/>
-	                <Anchors>
-	                    <Anchor point="TOPLEFT" x="-20" y="10"/>
-	                    <Anchor point="BOTTOMRIGHT" x="20" y="-10"/>
-	                </Anchors>
-	            </Texture>
-            </Layer>
-	    </Layers>
-
-		<Scripts>
-			<OnLoad>self:RegisterForDrag("LeftButton");</OnLoad>
-			<OnDragStart>self:StartMoving();</OnDragStart>
-			<OnDragStop>self:StopMovingOrSizing();</OnDragStop>
-		</Scripts>
-	</Frame>
-
 	<Frame name="RPSCoreFrameworkWorldMapPinTemplate" hidden="true" enableMouse="true" mixin="RPSCoreFrameworkWorldMapPinMixin" virtual="true">
 		<Size x="30" y="30"/>
 		<Layers>
@@ -369,6 +311,140 @@
           </Anchors>
         </HighlightTexture>
       </DropDownToggleButton>
+    </Frames>
+  </Frame>
+
+  <Frame name="RPS_BBoard" parent="UIParent" frameStrata="MEDIUM" enableMouse="true" toplevel="true" movable="true" hidden="true">
+    <Size x="500" y="300"/>
+    <Anchors>
+        <Anchor point="CENTER"/>
+    </Anchors>
+    <Layers>
+      <Layer level="BACKGROUND" textureSubLevel="1">
+        <Texture parentKey="boardImage" atlas="warboard-background">
+          <Size x="500" y="300"/>
+          <Anchors>
+            <Anchor point="CENTER"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+        <Layer level="BACKGROUND" textureSubLevel="2">
+          <Texture parentKey="paperImage" atlas="UI-Frame-Neutral-CardParchmentWider">
+            <Size x="700" y="500"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" x="10" y="-10"/>
+              <Anchor point="BOTTOMRIGHT" x="-10" y="10"/>
+            </Anchors>
+          </Texture>
+        </Layer>
+        <Layer>
+            <Texture parentKey="titleBG" atlas="UI-Frame-Neutral-Ribbon">
+              <Size x="400" y="84"/>
+              <Anchors>
+                <Anchor point="TOP" y="35"/>
+              </Anchors>
+            </Texture>
+            <FontString parentKey="title" font="Fonts\FRIZQT___CYR.TTF">
+                <Size x="300"/>
+			    <FontHeight val="14"/>
+                <Anchors>
+                    <Anchor point="CENTER" relativeKey="$parent.titleBG" y="0"/>
+                </Anchors>
+			    <Color r="0" g="0" b="0"/>
+            </FontString>
+            <Texture parentKey="idBG" atlas="UI-Frame-Mechagon-Ribbon">
+              <Size x="120" y="32"/>
+              <Anchors>
+                <Anchor point="BOTTOMRIGHT" x="-4" y="-8"/>
+              </Anchors>
+            </Texture>
+            <FontString parentKey="id" justifyH="RIGHT" font="Fonts\FRIZQT___CYR.TTF" text="#101010101">
+              <FontHeight val="12"/>
+              <Anchors>
+                <Anchor point="CENTER" relativeKey="$parent.idBG"/>
+              </Anchors>
+            </FontString>
+        </Layer>
+        <Layer level="BORDER">
+          <Texture atlas="!UI-Frame-DiamondMetal-EdgeLeft-8x">
+            <Size x="64" y="206"/>
+            <Anchors>
+              <Anchor point="LEFT" x="-12"/>
+            </Anchors>
+          </Texture>
+          <Texture atlas="UI-Frame-DiamondMetal-CornerTopLeft-8x">
+              <Size x="64" y="64"/>
+              <Anchors>
+                  <Anchor point="TOPLEFT" x="-12" y="12"/>
+              </Anchors>
+          </Texture>
+          <Texture atlas="UI-Frame-DiamondMetal-CornerBottomLeft-8x">
+              <Size x="64" y="64"/>
+              <Anchors>
+                  <Anchor point="BOTTOMLEFT" x="-12" y="-12"/>
+              </Anchors>
+          </Texture>
+          <Texture atlas="_UI-Frame-DiamondMetal-EdgeTop-8x">
+              <Size x="406" y="64"/>
+              <Anchors>
+                  <Anchor point="TOP" y="12"/>
+              </Anchors>
+          </Texture>
+          <Texture atlas="UI-Frame-DiamondMetal-CornerTopRight-8x">
+              <Size x="64" y="64"/>
+              <Anchors>
+                  <Anchor point="TOPRIGHT" x="12" y="12"/>
+              </Anchors>
+          </Texture>
+          <Texture atlas="!UI-Frame-DiamondMetal-EdgeRight-8x">
+              <Size x="64" y="206"/>
+              <Anchors>
+                  <Anchor point="RIGHT" x="12"/>
+              </Anchors>
+          </Texture>
+          <Texture atlas="UI-Frame-DiamondMetal-CornerBottomRight-8x">
+              <Size x="64" y="64"/>
+              <Anchors>
+                  <Anchor point="BOTTOMRIGHT" x="12" y="-12"/>
+              </Anchors>
+          </Texture>
+          <Texture atlas="_UI-Frame-DiamondMetal-EdgeBottom-8x">
+              <Size x="406" y="64"/>
+              <Anchors>
+                  <Anchor point="BOTTOM" y="-12"/>
+              </Anchors>
+          </Texture>
+        </Layer>
+    </Layers>
+    <Frames>
+      <Button parentKey="Close" inherits="UIPanelCloseButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT" x="-4" y="-4"/>
+        </Anchors>
+        <Scripts>
+          <OnClick>
+            RPSCoreFramework:BBoardClose();
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Frame parentKey="text" inherits="RPS_TextAreaBase">
+        <Size x="450" y="300"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativeKey="$parent.paperImage" x="5" y="-25"/>
+          <Anchor point="BOTTOMRIGHT" relativeKey="$parent.paperImage" x="-20" y="20"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>
+            self.scroll.text:Disable();
+            self.scroll.text:SetFont("Fonts\\FRIZQT___CYR.TTF", 16);
+            self.scroll.text:SetTextColor(0, 0, 0);
+            self.scroll.text:SetShadowOffset(0, 0);
+            self.scroll.text:SetScript("OnEditFocusGained", function() end);
+            self.scroll.text:SetScript("OnEditFocusLost", function() end);
+            self.scroll.text:SetScript("OnTextChanged", function() end);
+          </OnLoad>
+        </Scripts>
+      </Frame>
     </Frames>
   </Frame>
 </Ui>

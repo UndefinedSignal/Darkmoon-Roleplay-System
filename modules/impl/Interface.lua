@@ -127,27 +127,29 @@ end
 
 function RPSCoreFramework:OnClickFrameShowing(frame)
 	for i=1, #RPSCoreFramework.Interface.HidingFrames do
-		RPSCoreFramework.Interface.HidingFrames[i]:Hide()
+		if (RPSCoreFramework.Interface.HidingFrames[i] ~= frame) then		
+			RPSCoreFramework.Interface.HidingFrames[i]:Hide()
+		end
 	end
 	frame:Show()
 end
 
-function RPSCoreFramework:MenstrelOnShow(self)
-	if (GetItemInfo(1000207) == nil) then
-	    PickupItem(1000207);
+function RPSCoreFramework:MinstrelOnShow(self)
+	if (GetItemInfo(RPSCoreFramework.MinstrelToken) == nil) then
+	    PickupItem(RPSCoreFramework.MinstrelToken);
 	    ClearCursor();
 	end
 end
 
-function RPSCoreFramework:MenstrelCoinOnEnter(self)
+function RPSCoreFramework:MinstrelTokenOnEnter(self)
     GameTooltip:ClearLines();
     GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
-    local __, itemLink = GetItemInfo(1000207);
+    local __, itemLink = GetItemInfo(RPSCoreFramework.MinstrelToken);
     GameTooltip:SetHyperlink(itemLink);
     GameTooltip:Show();
 end
 
-function RPSCoreFramework:MenstrelCoinOnLeave(self)
+function RPSCoreFramework:MinstrelTokenOnLeave(self)
 	GameTooltip:Hide();
 end
 
@@ -165,7 +167,7 @@ function RPSCoreFramework:MinstrelCheckLock()
 end
 
 function RPSCoreFramework:RPS_TextMinstrelBuyOnClick(self)
-	if (GetItemCount(1000207) ~= 0) then
+	if (GetItemCount(RPSCoreFramework.MinstrelToken) ~= 0) then
 		StaticPopup_Show("buyMinstrel");
 	else
 		message("Недостаточно предметов для активации Менестрели");
@@ -185,44 +187,23 @@ function RPSCoreFramework:ShowBattleSpellGameTooltip(name)
 	GameTooltip:SetOwner(self, "ANCHOR_CURSOR");
 	GameTooltip:SetHyperlink(GetSpellLink(RPSCoreFramework.DB["CharStatsSpellID"][name][1]));
 	GameTooltip:AddLine(" ")
-	--GameTooltip:AddDoubleLine(" ", "Клик ЛКМ: Взять боевой спелл\nКлик ПКМ: Взять ролевой спелл", 1, 0, 0, 1.0, 0.82, 0.0);
-	GameTooltip:AddLine("ЛКМ: Выбрать боевую способность\nПКМ: Выбрать ролевую способность")
+	GameTooltip:AddLine("|cFFFF8040ЛКМ|r: Выбрать боевую способность.");
+	GameTooltip:AddLine("|cFFFF8040ПКМ|r: Выбрать ролевую способность.");
 	GameTooltip:Show();
 end
 
-function RPSCoreFramework:GOB_OnMouseWheel(self, delta, maxZoom, minZoom)
-	maxZoom = maxZoom or self.maxZoom;
-	minZoom = minZoom or self.minZoom;
-	local zoomLevel = self.zoomLevel or minZoom;
-	zoomLevel = zoomLevel + delta * 0.01;
-	zoomLevel = min(zoomLevel, maxZoom);
-	zoomLevel = max(zoomLevel, minZoom);
-	self:SetModelScale(zoomLevel);
-	self.zoomLevel = zoomLevel;
-end
-
-function RPSCoreFramework:GOBModelSceneZoomIn()
-	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewBorderModel, 10, 1, 0.1)
-end
-
-function RPSCoreFramework:GOBModelSceneZoomOut()
-	RPSCoreFramework:GOB_OnMouseWheel(GameObjectPreviewBorderModel, -10, 1, 0.1)
-end
-
 function RPSCoreFramework:AddGuildSalaryTab()
-	local TabName="Зарплата";
-	 
-	local TabID=GuildInfoFrame.numTabs+1;
-	local Tab=CreateFrame("Button","$parentTab"..TabID,GuildInfoFrame,"GuildInfoSalaryTemplate",TabID);
-	PanelTemplates_SetNumTabs(GuildInfoFrame,TabID);
-	Tab:SetPoint("LEFT","$parentTab"..(TabID-1),"RIGHT",0,0);
-	Tab:SetText(TabName);
+	local TabID = GuildInfoFrame.numTabs+1;
+	local Tab = CreateFrame("Button", "$parentTab"..TabID,GuildInfoFrame, "GuildInfoSalaryTemplate", TabID);
+	PanelTemplates_SetNumTabs(GuildInfoFrame, TabID);
+	Tab:SetPoint("LEFT", "$parentTab"..(TabID-1), "RIGHT", 0, 0);
+	Tab:SetText("Зарплата");
 	PanelTemplates_TabResize(GuildInfoFrameTab4, 0);
 
-	local d,p,a,x,y = GuildInfoFrameTab1:GetPoint();
-	GuildInfoFrameTab1:SetPoint(d,p,a,x-16,y);
+	local d, p, a, x, y = GuildInfoFrameTab1:GetPoint();
+	GuildInfoFrameTab1:SetPoint(d, p, a, x-16, y);
 
-	local Panel=CreateFrame("Frame",nil,GuildInfoFrame);
+	local Panel = CreateFrame("Frame", nil, GuildInfoFrame);
 	Panel:SetAllPoints(GuildInfoFrame);
 end
 
@@ -237,15 +218,17 @@ function RPSCoreFramework:GuildSalaryFrameLink()
 	end
 end
 
+-- DarkmoonCharacterFrameInfoTRBody
+-- DarkmoonDisplayPresetFrameRightItemsHead
+
 local sepModificator, buttonItemString;
 local slots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Secondaryhand"}
 local dispSlots = {"Head","Shoulder","Back","Chest","Shirt","Tabard","Wrist","Hand","Waist","Legs","Feet","Mainhand","Offhand"}
 local slotsID = {1,3,15,5,4,19,9,10,6,7,8,16,17};
 
 function RPSCoreFramework:InitializeDispButtons()
-	local number, name, description;
 	local mainframe = _G["DarkmoonDisplayPresetFrameMenuSliderBody"];
-	for i = 1, #RPSDispTable do
+	for i = 1, #RPSCoreFramework.DisplaySets do
         local button = CreateFrame("Button", "DarkmoonDispButton"..i, mainframe, "CharDispButton");
         if i == 1 then
         	button:SetPoint("TOPLEFT", mainframe, 6, 0);
@@ -253,12 +236,11 @@ function RPSCoreFramework:InitializeDispButtons()
     		button:SetPoint("BOTTOM", _G["DarkmoonDispButton"..i-1], 0, -40);
     	end
     	button.IDLabel:SetText(i);
-    	button.TitleLabel:SetText(RPSDispTable[i][2]);
-    	button.DescriptionLabel:SetText(RPSDispTable[i][3]);
-    	button.Mod:SetAtlas(RPSDispTableColors[math.random(#RPSDispTableColors)]);
-    	button.Title = RPSDispTable[i][2];
-    	button.Description = RPSDispTable[i][3];
-    	button.Items = RPSDispTable[i];
+    	button.TitleLabel:SetText(RPSCoreFramework.DisplaySets[i][1]);
+    	button.DescriptionLabel:SetText(RPSCoreFramework.DisplaySets[i][2]);
+    	button.Title = RPSCoreFramework.DisplaySets[i][1];
+    	button.Description = RPSCoreFramework.DisplaySets[i][2];
+    	button.Items = {unpack(RPSCoreFramework.DisplaySets[i], RPSCoreFramework.DisplaySetsItemsIndex)};
     	button:Show();
 	end
 end
@@ -342,6 +324,9 @@ function RPSCoreFramework:DressUpDispModel(itemID)
 		RPSCoreFramework.DressUpOnLoad = false;
 	end
 	local __, itemLink, itemRarity = GetItemInfo(itemID);
+	-- itemName, itemLink, itemRarity, itemLevel, itemMinLevel, itemType, itemSubType, itemStackCount,
+	-- itemEquipLoc, itemIcon, itemSellPrice, itemClassID, itemSubClassID, bindType, expacID, itemSetID, 
+	-- isCraftingReagent = GetItemInfo(itemID or "itemString" or "itemName" or "itemLink") 
 	DarkmoonDisplayPresetFrameRightModel:TryOn(itemLink);
 end
 
@@ -366,7 +351,7 @@ function RPSCoreFramework:ApplyTransmogSet(button)
 	local sepModificator;
 	local buttonItemID;
 	DarkmoonDisplayPresetFrameRightTitle:SetText("["..button.Title.."]")
-	for i = 4, 16 do
+	for i = 1, #button.Items do
 		if button.Items[i] == nil then button.Items[i] = 0 end;
 		sepModificator = string.find(button.Items[i], ":") or 0;
 		if sepModificator > 0 then
@@ -376,7 +361,7 @@ function RPSCoreFramework:ApplyTransmogSet(button)
 			buttonItemID = button.Items[i];
 			RPSCoreFramework:DressUpDispModel(button.Items[i]);
 		end
-		RPSCoreFramework:DispSetItemTexture(i-3, tonumber(buttonItemID));
+		RPSCoreFramework:DispSetItemTexture(i, tonumber(buttonItemID));
 	end
 	SetCursor(nil);
 end
@@ -412,42 +397,42 @@ function RPSCoreFramework:CharacterEXPBarUpdate(int)
 	elseif (int > 100) then
 		int = 100
 	end
-	DarkmoonCharacterFrameInfoBottom:SetValue(int);
-	DarkmoonCharacterFrameInfoBottom.CurrentPercent:SetText(tostring(int).."%");
-	DarkmoonCharacterFrameInfoBottom.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
+	DarkmoonCharacterFrameInfoBottomEXPProgress:SetValue(int);
+	DarkmoonCharacterFrameInfoBottomEXPProgress.CurrentPercent:SetText(tostring(int).."%");
+	DarkmoonCharacterFrameInfoBottomEXPProgress.PercentLeft:SetText("До следующего уровня: "..tonumber(100-int).."%");
 end
 
 function RPSCoreFramework:UpdateCharacterXPInfo()
 	local level = UnitLevel("player");
 	DarkmoonCharacterFrameInfoBottom.lvlLabel:SetText(level .. " уровень");
-	DarkmoonCharacterFrameInfoBottom.rankLabel:SetText(tostring(RPSCoreFramework:GetCharStrengthLevel(level)));
-	DarkmoonCharacterFrameInfoBottom.descrLabel:SetText(tostring(RPSCoreFramework:GetChatStrengthDesc(level)));
+	DarkmoonCharacterFrameInfoBottom.rankLabel:SetText(self:GetCharPowerTitle(level));
+	DarkmoonCharacterFrameInfoBottom.descrLabel:SetText(self:GetCharPowerDescription(level));
 end
 
-function RPSCoreFramework:GetCharStrengthLevel(level)
+function RPSCoreFramework:GetCharPowerTitle(level)
 	if (level >= 110) then
-		return "Великий героический персонаж";
+		return self.Literature.CharacterPowers[5][1];
 	elseif (level >= 90) then
-		return "Героический персонаж";
+		return self.Literature.CharacterPowers[4][1];
 	elseif (level >= 70) then
-		return "Выдающийся персонаж";
+		return self.Literature.CharacterPowers[3][1];
 	elseif (level >= 50) then
-		return "Умелый персонаж";
+		return self.Literature.CharacterPowers[2][1];
 	end
-	return "Обычный персонаж";
+	
+	return self.Literature.CharacterPowers[1][1];
 end
 
-function RPSCoreFramework:GetChatStrengthDesc(level)
+function RPSCoreFramework:GetCharPowerDescription(level)
 	if (level >= 110) then
-		return RPSCoreFramework.Literature.CharPowerDescr["5"];
+		return RPSCoreFramework.Literature.CharacterPowers[5][2];
 	elseif (level >= 90) then
-		return RPSCoreFramework.Literature.CharPowerDescr["4"];
+		return RPSCoreFramework.Literature.CharacterPowers[4][2];
 	elseif (level >= 70) then
-		return RPSCoreFramework.Literature.CharPowerDescr["3"];
+		return RPSCoreFramework.Literature.CharacterPowers[3][2];
 	elseif (level >= 50) then
-		return RPSCoreFramework.Literature.CharPowerDescr["2"];
+		return RPSCoreFramework.Literature.CharacterPowers[2][2];
 	end
-	return RPSCoreFramework.Literature.CharPowerDescr["1"];
+	
+	return RPSCoreFramework.Literature.CharacterPowers[1][2];
 end
-
-

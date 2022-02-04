@@ -1,7 +1,3 @@
-
-local QuizzAnswerCounter = 1;
-
-
 local function QuizShuffles(tInput)
 	local tReturn = {}
 	for i = #tInput, 1, -1 do
@@ -12,36 +8,41 @@ local function QuizShuffles(tInput)
 	return tReturn
 end
 
-function RPSCoreFramework:SchedulePollTimer()
-	PollToastStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
-	PollFrameStatusBar:SetValue(RPSCoreFramework.PollTimer.Counter);
+function RPSCoreFramework:ScheduleQuizTimer()
+	QuizToastStatusBar:SetValue(RPSCoreFramework.QuizTimer.Counter);
+	QuizFrameStatusBar:SetValue(RPSCoreFramework.QuizTimer.Counter);
 
-	RPSCoreFramework.PollTimer.Counter = RPSCoreFramework.PollTimer.Counter - 1;
-	if (RPSCoreFramework.PollTimer.Counter == 0) then
-		RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
-		if PollToast:IsShown() then
-			PollToast.FadeOut:Play();
+	RPSCoreFramework.QuizTimer.Counter = RPSCoreFramework.QuizTimer.Counter - 1;
+	if (RPSCoreFramework.QuizTimer.Counter == 0) then
+		RPSCoreFramework:CancelTimer(RPSCoreFramework.QuizTimer.Timer);
+		if (QuizToast:IsShown()) then
+			QuizToast.FadeOut:Play();
 		else
-			PollFrame.FadeOut:Play();
+			QuizFrame.FadeOut:Play();
 		end
 		RPSCoreFramework:QuizCloseReload();
 	end
 end
 
 function RPSCoreFramework:QuizShowToast()
-	PollToast:Show();
-	RPSCoreFramework.Quiz.PollToast = true;
+	QuizToast:Show();
+	RPSCoreFramework.Quiz.Toast = true;
 end
 
 function RPSCoreFramework:QuizProcess() --> RPSCoreFramework:GlobalTimer()
-	if (RPSCoreFramework:HasAura(1000041, "player") and not RPSCoreFramework.Quiz.PollToast) then
+	if (RPSCoreFramework:HasAura(RPSCoreFramework.QuizAura) and not RPSCoreFramework.Quiz.Toast) then
 		RPSCoreFramework:QuizShowToast();
 	end
 end
 
 function RPSCoreFramework:QuizStart()
-	RPSCoreFramework:QuizSetTexts();
-	PollFrame:Show();
+	QuizFrameQuestion:SetText(RPSCoreFramework.Quiz.Question);
+	QuizFrameOption1:SetText(RPSCoreFramework.Quiz.Answers[1][1]);
+	QuizFrameOption2:SetText(RPSCoreFramework.Quiz.Answers[2][1]);
+	QuizFrameOption3:SetText(RPSCoreFramework.Quiz.Answers[3][1]);
+	QuizFrameOption4:SetText(RPSCoreFramework.Quiz.Answers[4][1]);
+	
+	QuizFrame:Show();
 end
 
 function RPSCoreFramework:QuizAccept()
@@ -49,52 +50,41 @@ function RPSCoreFramework:QuizAccept()
 end
 
 function RPSCoreFramework:QuizDecline()
+	RPSCoreFramework:CancelTimer(RPSCoreFramework.QuizTimer.Timer);
 	RPSCoreFramework:SendCoreMessage("quiz end");
 	RPSCoreFramework:QuizCloseReload();
 end
 
 function RPSCoreFramework:QuizSetQuestion(msg)
 	RPSCoreFramework.Quiz.Question = msg;
-	RPSCoreFramework.PollTimer.Counter = 30;
+	RPSCoreFramework.QuizTimer.Counter = 30;
 end
 
 function RPSCoreFramework:QuizAddAnswer(msg)
-	if (QuizzAnswerCounter ~= 4) then
-		table.insert(RPSCoreFramework.Quiz.Answers, {msg, QuizzAnswerCounter});
-		QuizzAnswerCounter = QuizzAnswerCounter + 1;
+	if (#RPSCoreFramework.Quiz.Answers ~= 3) then
+		table.insert(RPSCoreFramework.Quiz.Answers, {msg, #RPSCoreFramework.Quiz.Answers+1});
 	else
-		table.insert(RPSCoreFramework.Quiz.Answers, {msg, QuizzAnswerCounter});
-		QuizzAnswerCounter = 1;
-		RPSCoreFramework.PollTimer.Counter = 30;
+		table.insert(RPSCoreFramework.Quiz.Answers, {msg, #RPSCoreFramework.Quiz.Answers+1});
+		RPSCoreFramework.QuizTimer.Counter = 30;
 
-		--PollFrameStatusBar:SetMinMaxValues(1,RPSCoreFramework.PollTimer.Counter);
-		RPSCoreFramework.PollTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("SchedulePollTimer", 1);
+		--QuizFrameStatusBar:SetMinMaxValues(1,RPSCoreFramework.QuizTimer.Counter);
+		RPSCoreFramework.QuizTimer.Timer = RPSCoreFramework:ScheduleRepeatingTimer("ScheduleQuizTimer", 1);
 		
 		RPSCoreFramework.Quiz.Answers = QuizShuffles(RPSCoreFramework.Quiz.Answers);
 		RPSCoreFramework:QuizStart();
 	end
 end
 
-function RPSCoreFramework:QuizSetTexts()
-	RPSPoll_NPCFrameChatNextText:SetText(RPSCoreFramework.Quiz.Question);
-	PollFrameChoice1:SetText(RPSCoreFramework.Quiz.Answers[1][1]);
-	PollFrameChoice2:SetText(RPSCoreFramework.Quiz.Answers[2][1]);
-	PollFrameChoice3:SetText(RPSCoreFramework.Quiz.Answers[3][1]);
-	PollFrameChoice4:SetText(RPSCoreFramework.Quiz.Answers[4][1]);
-end
-
 function RPSCoreFramework:QuizProcessAnswer(num)
+	QuizFrame.FadeOut:Play();
 	RPSCoreFramework:SendCoreMessage("quiz select "..RPSCoreFramework.Quiz.Answers[num][2]);
-	PollFrame.FadeOut:Play();
 	RPSCoreFramework:QuizCloseReload();
 end
 
 function RPSCoreFramework:QuizCloseReload()
-	--PollFrame:Hide();
-	--PollToast:Hide();
-	RPSCoreFramework.Quiz.PollToast = false;
-	PollFrameStatusBar:SetValue(30);
-	PollToastStatusBar:SetValue(120);
+	RPSCoreFramework.Quiz.Toast = false;
+	QuizFrameStatusBar:SetValue(30);
+	QuizToastStatusBar:SetValue(120);
 	RPSCoreFramework.Quiz.Answers = {};
-	RPSCoreFramework:CancelTimer(RPSCoreFramework.PollTimer.Timer);
+	RPSCoreFramework:CancelTimer(RPSCoreFramework.QuizTimer.Timer);
 end
